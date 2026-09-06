@@ -89,10 +89,18 @@ def build_notebook(project_ref: str) -> dict:
             "if str(torch.__version__) != torch_before:\n"
             "    raise RuntimeError(\"The notebook must not replace Kaggle's CUDA-enabled PyTorch build.\")\n"
             "os.chdir(PROJECT_DIR)\n"
+            "# Make imports deterministic even when Kaggle reuses or restarts the kernel.\n"
+            "src_path = str(PROJECT_DIR / 'src')\n"
+            "if src_path not in sys.path:\n"
+            "    sys.path.insert(0, src_path)\n"
+            "import importlib\n"
+            "importlib.invalidate_caches()\n"
             "STAGE1_OUTPUT.mkdir(parents=True, exist_ok=False)\n"
         ),
         markdown("## 3. Strict runtime and real-data gates"),
         code(
+            "import EncDecPipeline\n"
+            "print('Project import root:', EncDecPipeline.__file__)\n"
             "from EncDecPipeline.Models.SwinJSCC.stage1_runner import (\n"
             "    evaluate_jpeg_over_digital_awgn,\n"
             "    evaluate_native_swinjscc,\n"
