@@ -1,0 +1,18 @@
+extends: default.yaml
+stage: stage1a
+model:
+  name: swinjscc_base_sa_ra
+  image_size: [1024, 1024]
+  batch_size_per_gpu: 8
+  base_epochs: 200
+  sara_epochs: 300
+  base_fixed_c: 96
+  base_fixed_snr_db: 10
+  early_stopping_patience: 30
+data:
+  train_hr: /kaggle/input/notebooks/jagan028/div2k-dataset-generation-for-isr/Training/HR/hr_images
+  validation_hr: /kaggle/input/notebooks/jagan028/div2k-dataset-generation-for-isr/Validation/HR/hr_images
+  kodak: /kaggle/input/datasets/sherylmehta/kodak-dataset
+evaluation:
+  jpeg_quality_grid: [20, 30, 40, 50, 60, 70, 80, 90]
+  shared_snr_metric: Es/N0_dB

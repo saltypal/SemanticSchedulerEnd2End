@@ -1,0 +1,12 @@
+runtime:
+  seed: 20260906
+  output_root: results/runs
+  device: auto
+
+stage1a:
+  channel: awgn
+  snr_db_grid: [1, 4, 7, 10, 13]
+  rate_grid: [32, 64, 96, 128, 192]
+  objective: mse
+  codebook_size: 256
+  source_commit: a6d0e6da53548976acbe9317839a077ef31f190f
