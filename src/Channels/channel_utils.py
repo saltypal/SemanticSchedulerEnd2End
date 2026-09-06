@@ -44,7 +44,13 @@ def real_to_complex_per_image(real_features: Any) -> tuple[Any, Any]:
     batch_size = int(real_features.shape[0])
     flattened = real_features.reshape(batch_size, -1)
     split = flattened.shape[1] // 2
-    complex_symbols = torch.complex(flattened[:, :split], flattened[:, split:])
+    # Explicitly promote each half before complex construction.  AMP can make
+    # the latent tensor float16; constructing ComplexHalf triggers incomplete
+    # operator coverage in current PyTorch releases.  Complex64 is supported
+    # by the channel and decoder path and preserves the intended values.
+    real_part = flattened[:, :split].float()
+    imaginary_part = flattened[:, split:].float()
+    complex_symbols = torch.complex(real_part, imaginary_part)
     return complex_symbols, real_features.shape
 
 
