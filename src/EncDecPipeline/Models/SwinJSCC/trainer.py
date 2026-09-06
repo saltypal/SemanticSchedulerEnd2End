@@ -4,6 +4,10 @@ from __future__ import annotations
 
 import json
 import random
+try:
+    from tqdm.auto import tqdm
+except ImportError:  # pragma: no cover - Kaggle normally provides tqdm
+    tqdm = None
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -141,7 +145,15 @@ def train_phase(
     best_epoch = start_epoch - 1
     no_improvement = 0
     history: list[dict[str, float]] = []
-    for epoch in range(start_epoch, phase.epochs):
+    epoch_iterator = range(start_epoch, phase.epochs)
+    if tqdm is not None:
+        epoch_iterator = tqdm(
+            epoch_iterator,
+            desc=f"Training {phase.name}",
+            unit="epoch",
+            dynamic_ncols=True,
+        )
+    for epoch in epoch_iterator:
         train_data.set_epoch(epoch)
         module.train()
         train_losses: list[float] = []
@@ -176,6 +188,12 @@ def train_phase(
             "train_mse": sum(train_losses) / len(train_losses),
             "validation_mse": validation_mse,
         }
+        if tqdm is not None:
+            epoch_iterator.set_postfix(
+                train_mse=f"{row['train_mse']:.6f}",
+                val_mse=f"{row['validation_mse']:.6f}",
+                lr=f"{optimizer.param_groups[0]['lr']:.2e}",
+            )
         history.append(row)
         if validation_mse < best_value:
             best_value = validation_mse
