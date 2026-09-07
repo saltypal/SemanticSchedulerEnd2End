@@ -29,7 +29,9 @@ class SwinJSCCConfig:
     decoder_depths: tuple[int, ...] = (2, 6, 2, 2)
     decoder_heads: tuple[int, ...] = (10, 8, 6, 4)
     upstream_commit: str = UPSTREAM_COMMIT
-    patch_version: str = "stage1a-per-image-symbols-v1"
+    # v2 fixes the DataParallel-safe attention-mask device lookup in addition
+    # to the original per-image complex-symbol correction.
+    patch_version: str = "stage1a-per-image-symbols-v2"
     objective: str = "mse"
     metadata: dict[str, Any] = field(default_factory=dict)
 
