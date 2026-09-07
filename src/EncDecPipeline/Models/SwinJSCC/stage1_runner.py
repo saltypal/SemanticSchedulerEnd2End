@@ -121,7 +121,11 @@ def run_base_then_sara_training(
 def _image_artifact(path: Path, device: str = "cuda:0") -> tuple[ImageArtifact, Any]:
     from PIL import Image
 
-    image = center_crop_to_multiple(Image.open(path).convert("RGB"), divisor=16)
+    # Swin window partitioning is applied after four downsampling stages.  A
+    # multiple of 16 is sufficient for the latent stride, but not for the
+    # window-size-8 attention blocks at every intermediate resolution.  Using
+    # 128 keeps all stage resolutions divisible by the attention window.
+    image = center_crop_to_multiple(Image.open(path).convert("RGB"), divisor=128)
     tensor = pil_to_tensor(image).unsqueeze(0).to(device)
     return ImageArtifact(tensor=tensor, sample_ids=[path.name], source=str(path)), image
 
