@@ -15,7 +15,7 @@ from pathlib import Path
 
 UPSTREAM_URL = "https://github.com/semcomm/SwinJSCC.git"
 UPSTREAM_COMMIT = "a6d0e6da53548976acbe9317839a077ef31f190f"
-PATCH_VERSION = "stage1a-per-image-symbols-v1"
+PATCH_VERSION = "stage1a-per-image-symbols-v2"
 
 
 def repository_root() -> Path:
@@ -99,11 +99,15 @@ def apply_patch(upstream: Path) -> dict[str, str]:
             "        input_shape = channel_tx.shape\n        batch_size = channel_tx.shape[0]\n        channel_in = channel_tx.reshape(batch_size, -1)\n        L = channel_in.shape[1]\n        if L % 2 != 0:\n            raise ValueError('Each image must expose an even number of real channel values.')\n        # Keep real/imaginary pairing inside each image. Flattening the full batch\n        # mixes samples once DataParallel assigns more than one local image.\n        channel_in = channel_in[:, :L // 2] + channel_in[:, L // 2:] * 1j\n        channel_output = self.complex_forward(channel_in, chan_param)\n        channel_output = torch.cat([torch.real(channel_output), torch.imag(channel_output)], dim=1)\n        channel_output = channel_output.reshape(input_shape)\n",
         )
 
-    replace_once(
-        encoder,
-        "            self.attn_mask = attn_mask.cuda()\n",
-        "            self.attn_mask = attn_mask.to(next(self.parameters()).device)\n",
-    )
+    mask_old_cuda = "            self.attn_mask = attn_mask.cuda()\n"
+    mask_old_empty_module = "            self.attn_mask = attn_mask.to(next(self.parameters()).device)\n"
+    mask_new = "            self.attn_mask = attn_mask.to(self.attn.relative_position_bias_table.device)\n"
+    encoder_source = encoder.read_text(encoding="utf-8")
+    if mask_new not in encoder_source:
+        if mask_old_empty_module in encoder_source:
+            encoder.write_text(encoder_source.replace(mask_old_empty_module, mask_new, 1), encoding="utf-8")
+        else:
+            replace_once(encoder, mask_old_cuda, mask_new)
     replace_once(encoder, "        device = x.get_device()\n", "        device = x.device\n")
     replace_expected(
         encoder,
