@@ -1,245 +1,206 @@
-"""Generate the single Stage 1A Kaggle runner notebook from a stable template."""
-
+"""Generate the one safe-to-rerun Kaggle Stage 1A notebook."""
 from __future__ import annotations
-
 import argparse
 import uuid
 from pathlib import Path
 
+def cell(kind: str, source: str) -> dict:
+    result = {"cell_type": kind, "metadata": {}, "source": source.splitlines(keepends=True)}
+    if kind == "code":
+        result.update({"execution_count": None, "outputs": []})
+    return result
 
-def markdown(text: str) -> dict:
-    return {"cell_type": "markdown", "metadata": {}, "source": text.splitlines(keepends=True)}
-
-
-def code(text: str) -> dict:
-    return {
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": text.splitlines(keepends=True),
-    }
-
-
-def build_notebook(project_ref: str) -> dict:
+def build(project_ref: str) -> dict:
+    md = lambda source: cell("markdown", source)
+    py = lambda source: cell("code", source)
     cells = [
-        markdown(
-            "# Stage 1A: corrected modern SwinJSCC port, K=256 VQ, and AWGN evaluation\n\n"
-            "This is the only active Stage 1A notebook. It clones a pinned project revision and invokes the "
-            "modular repository implementation. It is a runner, not a second source of truth.\n\n"
-            "Research status: this is a corrected modern PyTorch port of the pinned SwinJSCC source, not a paper-exact replication."
-        ),
-        markdown(
-            "## 1. Run controls and pinned inputs\n\n"
-            "Set `PROJECT_GIT_URL` after pushing the local Git history. Keep `PROJECT_REF` unchanged: it is the "
-            "exact source revision the experiment uses. Kaggle Internet must be enabled for the two Git clones."
-        ),
-        code(
-            "from __future__ import annotations\n\n"
-            "import json\n"
-            "import os\n"
-            "import platform\n"
-            "import subprocess\n"
-            "import sys\n"
-            "from datetime import datetime, timezone\n"
-            "from pathlib import Path\n\n"
-            "PROJECT_GIT_URL = 'https://github.com/REPLACE_WITH_YOUR_ACCOUNT/SemanticSchedulerEnd2End.git'\n"
-            f"PROJECT_REF = '{project_ref}'\n"
-            "UPSTREAM_SWINJSCC_COMMIT = 'a6d0e6da53548976acbe9317839a077ef31f190f'\n"
-            "RUN_TRAINING = True\n"
-            "RUN_EVALUATION = True\n"
-            "RUN_FULL_JPEG_QUALITY_SWEEP = True\n"
-            "STAGE1_OUTPUT = Path('/kaggle/working/stage1a_complete_output')\n"
-            "PROJECT_DIR = Path('/kaggle/working/SemanticSchedulerEnd2End')\n"
-            "TRAIN_ROOT = Path('/kaggle/input/notebooks/jagan028/div2k-dataset-generation-for-isr/Training/HR/hr_images')\n"
-            "VALIDATION_ROOT = Path('/kaggle/input/notebooks/jagan028/div2k-dataset-generation-for-isr/Validation/HR/hr_images')\n"
-            "KODAK_ROOT = Path('/kaggle/input/datasets/sherylmehta/kodak-dataset')\n"
-            "BASE_EPOCHS = 200\n"
-            "SARA_EPOCHS = 300\n"
-            "BATCH_SIZE_PER_GPU = 8\n"
-            "EARLY_STOPPING_PATIENCE = 30\n"
-            "KMEANS_FIT_IMAGES = 512\n"
-            "VQ_EVALUATION_RATE = 96\n"
-            "JPEG_QUALITY_GRID = (20, 30, 40, 50, 60, 70, 80, 90)\n\n"
-            "def run_command(*arguments: str, cwd: Path | None = None) -> None:\n"
-            "    print('+', ' '.join(arguments))\n"
-            "    subprocess.run(list(arguments), cwd=cwd, check=True)\n\n"
-            "if 'REPLACE_WITH_YOUR_ACCOUNT' in PROJECT_GIT_URL:\n"
-            "    raise RuntimeError('Set PROJECT_GIT_URL to the pushed repository remote before running this notebook.')\n"
-            "if PROJECT_REF.startswith('SET_'):\n"
-            "    raise RuntimeError('PROJECT_REF must be a real immutable Git commit before running this notebook.')\n"
-        ),
-        markdown("## 2. Clone the pinned project and install dependencies without replacing Kaggle PyTorch"),
-        code(
-            "import torch\n\n"
-            "torch_before = str(torch.__version__)\n"
-            "if PROJECT_DIR.exists():\n"
-            "    raise RuntimeError(f'Refusing to reuse an old project directory: {PROJECT_DIR}')\n"
-            "run_command('git', 'clone', '--no-checkout', PROJECT_GIT_URL, str(PROJECT_DIR))\n"
-            "run_command('git', 'checkout', '--detach', PROJECT_REF, cwd=PROJECT_DIR)\n"
-            "resolved_ref = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=PROJECT_DIR, text=True).strip()\n"
-            "if resolved_ref != PROJECT_REF:\n"
-            "    raise RuntimeError(f'Pinned project mismatch: expected {PROJECT_REF}, got {resolved_ref}')\n"
-            "run_command(sys.executable, 'scripts/bootstrap_swinjscc.py', cwd=PROJECT_DIR)\n"
-            "upstream_ref = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=PROJECT_DIR / 'external' / 'SwinJSCC', text=True).strip()\n"
-            "if upstream_ref != UPSTREAM_SWINJSCC_COMMIT:\n"
-            "    raise RuntimeError(f'Pinned SwinJSCC mismatch: expected {UPSTREAM_SWINJSCC_COMMIT}, got {upstream_ref}')\n"
-            "run_command(sys.executable, '-m', 'pip', 'install', '--no-deps', '-r', 'environment/requirements-kaggle.lock', cwd=PROJECT_DIR)\n"
-            "run_command(sys.executable, '-m', 'pip', 'install', '--no-deps', '-e', '.[metrics]', cwd=PROJECT_DIR)\n"
-            "if str(torch.__version__) != torch_before:\n"
-            "    raise RuntimeError(\"The notebook must not replace Kaggle's CUDA-enabled PyTorch build.\")\n"
-            "os.chdir(PROJECT_DIR)\n"
-            "STAGE1_OUTPUT.mkdir(parents=True, exist_ok=False)\n"
-        ),
-        markdown("## 3. Strict runtime and real-data gates"),
-        code(
-            "from EncDecPipeline.Models.SwinJSCC.stage1_runner import (\n"
-            "    evaluate_jpeg_over_digital_awgn,\n"
-            "    evaluate_native_swinjscc,\n"
-            "    evaluate_vq_noiseless_ablation,\n"
-            "    evaluate_vq_over_digital_awgn,\n"
-            "    export_final_stage1_artifacts,\n"
-            "    fit_k256_codebook,\n"
-            "    resolve_required_datasets,\n"
-            "    run_base_then_sara_training,\n"
-            "    verify_kaggle_stage1a_runtime,\n"
-            ")\n"
-            "from EncDecPipeline.Models.SwinJSCC.swin_config import SwinJSCCConfig\n"
-            "from EncDecPipeline.Models.SwinJSCC.trainer import RealImageDataset\n"
-            "from EncDecPipeline.Models.SwinJSCC.training_utils import mse_loss, wrap_data_parallel\n"
-            "from Evaluation.Reporting.plotting import plot_quality_vs_channel_uses\n"
-            "from Evaluation.Reporting.report_builder import write_run_report\n"
-            "from Evaluation.Reporting.result_table import write_result_table\n"
-            "from utils.seed import set_seed\n\n"
-            "set_seed(20260906)\n"
-            "runtime = verify_kaggle_stage1a_runtime()\n"
-            "data_provenance = resolve_required_datasets(TRAIN_ROOT, VALIDATION_ROOT, KODAK_ROOT)\n"
-            "config = SwinJSCCConfig()\n"
-            "assert config.rate_grid == (32, 64, 96, 128, 192)\n"
-            "assert config.snr_db_grid == (1, 4, 7, 10, 13)\n"
-            "assert config.channel_type == 'awgn' and config.objective == 'mse'\n"
-            "(STAGE1_OUTPUT / 'startup.json').write_text(json.dumps({'runtime': runtime, 'data_provenance': data_provenance}, indent=2), encoding='utf-8')\n"
-            "print(json.dumps(runtime, indent=2))\n"
-        ),
-        markdown("## 4. Two-T4 preflight: one real batch forward/backward and one-image overfit sanity check"),
-        code(
-            "from EncDecPipeline.Models.SwinJSCC.trainer import build_base_then_sara\n"
-            "from EncDecPipeline.Models.SwinJSCC.training_utils import verify_two_t4_data_parallel\n\n"
-            "plan = verify_two_t4_data_parallel()\n"
-            "preflight_adapter, _ = build_base_then_sara(config, 'external/SwinJSCC')\n"
-            "preflight_model = wrap_data_parallel(preflight_adapter.build_training_module(), plan)\n"
-            "preflight_optimizer = torch.optim.AdamW(preflight_model.parameters(), lr=1e-4)\n"
-            "preflight_dataset = RealImageDataset(TRAIN_ROOT, crop_size=256, training=True, seed=20260906)\n"
-            "real_image = preflight_dataset[0].unsqueeze(0).cuda()\n"
-            "preflight_model.train()\n"
-            "losses = []\n"
-            "for step in range(8):\n"
-            "    preflight_optimizer.zero_grad(set_to_none=True)\n"
-            "    reconstruction, _ = preflight_model(real_image, 10, config.base_fixed_c)\n"
-            "    loss = mse_loss(real_image, reconstruction)\n"
-            "    loss.backward()\n"
-            "    preflight_optimizer.step()\n"
-            "    losses.append(float(loss.detach().cpu()))\n"
-            "if not all(torch.isfinite(torch.tensor(losses))):\n"
-            "    raise RuntimeError(f'Non-finite real-image preflight loss: {losses}')\n"
-            "(STAGE1_OUTPUT / 'preflight.json').write_text(json.dumps({'losses': losses, 'note': 'finite-loss and two-GPU forward/backward check; not a training-quality claim'}, indent=2), encoding='utf-8')\n"
-            "del preflight_model, preflight_adapter, preflight_optimizer\n"
-            "torch.cuda.empty_cache()\n"
-        ),
-        markdown("## 5. Train Base SwinJSCC then transfer to SA+RA, checkpoint/resume, and export tensor-state artifacts"),
-        code(
-            "if RUN_TRAINING:\n"
-            "    adapter, training_summary = run_base_then_sara_training(\n"
-            "        config=config,\n"
-            "        upstream_root='external/SwinJSCC',\n"
-            "        train_root=TRAIN_ROOT,\n"
-            "        validation_root=VALIDATION_ROOT,\n"
-            "        output_dir=STAGE1_OUTPUT,\n"
-            "        base_epochs=BASE_EPOCHS,\n"
-            "        sara_epochs=SARA_EPOCHS,\n"
-            "        batch_size_per_gpu=BATCH_SIZE_PER_GPU,\n"
-            "        early_stopping_patience=EARLY_STOPPING_PATIENCE,\n"
-            "    )\n"
-            "    export_final_stage1_artifacts(\n"
-            "        adapter,\n"
-            "        STAGE1_OUTPUT / 'models' / 'SwinJSCC',\n"
-            "        data_provenance=data_provenance,\n"
-            "        training_summary=training_summary,\n"
-            "    )\n"
-            "else:\n"
-            "    raise RuntimeError('Stage 1A evaluation requires a model trained in this notebook or explicitly loaded through the manifest.')\n"
-        ),
-        markdown("## 6. Fit and save the K=256 MiniBatchKMeans codebook from real SA+RA latents"),
-        code(
-            "vq = fit_k256_codebook(adapter, TRAIN_ROOT, rate=VQ_EVALUATION_RATE, max_images=KMEANS_FIT_IMAGES)\n"
-            "codebook_path = vq.save(STAGE1_OUTPUT / 'models' / 'Codebooks' / 'swinjscc_tx_k256.joblib')\n"
-            "print({'codebook': str(codebook_path), 'codebook_hash': vq.content_hash()})\n"
-        ),
-        markdown("## 7. Evaluate native JSCC, the separate no-channel VQ ablation, VQ packet transport, and JPEG/5G-LDPC/QPSK over AWGN"),
-        code(
-            "if RUN_EVALUATION:\n"
-            "    rows = []\n"
-            "    rows.extend(evaluate_native_swinjscc(adapter, KODAK_ROOT, STAGE1_OUTPUT, config.snr_db_grid, config.rate_grid))\n"
-            "    rows.extend(evaluate_vq_noiseless_ablation(adapter, vq, KODAK_ROOT, STAGE1_OUTPUT, rate=VQ_EVALUATION_RATE))\n"
-            "    rows.extend(evaluate_vq_over_digital_awgn(adapter, vq, KODAK_ROOT, STAGE1_OUTPUT, config.snr_db_grid, rate=VQ_EVALUATION_RATE))\n"
-            "    jpeg_qualities = JPEG_QUALITY_GRID if RUN_FULL_JPEG_QUALITY_SWEEP else (50,)\n"
-            "    for quality in jpeg_qualities:\n"
-            "        rows.extend(evaluate_jpeg_over_digital_awgn(KODAK_ROOT, STAGE1_OUTPUT, config.snr_db_grid, quality))\n"
-            "    metrics_path = write_result_table(rows, STAGE1_OUTPUT / 'metrics' / 'stage1a_metrics.csv')\n"
-            "    successful_rows = [row for row in rows if row.get('psnr') is not None and row['method'] != 'vq_noiseless_ablation']\n"
-            "    plot_quality_vs_channel_uses(successful_rows, STAGE1_OUTPUT / 'plots' / 'quality_vs_channel_uses.png')\n"
-            "    write_run_report(\n"
-            "        {'project_ref': PROJECT_REF, 'upstream_commit': UPSTREAM_SWINJSCC_COMMIT, 'metrics_csv': str(metrics_path), 'rows': len(rows), 'corrected_port': True},\n"
-            "        STAGE1_OUTPUT / 'reports' / 'stage1a_report.md',\n"
-            "    )\n"
-        ),
-        markdown("## 8. Final output audit\n\nThe expected output directory contains tensor-state artifacts, a manifest, K=256 codebook, real-data provenance, training/checkpoint summaries, metrics, plots, reconstructions, and report. Failed digital frames remain in the table with null PSNR/SSIM."),
-        code(
-            "expected = [\n"
-            "    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_swinjscc_full.pt',\n"
-            "    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_swinjscc_encoder.pt',\n"
-            "    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_swinjscc_decoder.pt',\n"
-            "    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_manifest.json',\n"
-            "    STAGE1_OUTPUT / 'models' / 'Codebooks' / 'swinjscc_tx_k256.joblib',\n"
-            "    STAGE1_OUTPUT / 'metrics' / 'stage1a_metrics.csv',\n"
-            "]\n"
-            "missing = [str(path) for path in expected if not path.exists()]\n"
-            "if missing:\n"
-            "    raise RuntimeError(f'Stage 1A output audit failed: {missing}')\n"
-            "print('Stage 1A Kaggle run complete:', STAGE1_OUTPUT)\n"
-        ),
-    ]
-    return {
-        "cells": cells,
-        "metadata": {
-            "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
-            "language_info": {"name": "python", "version": "3.12"},
-        },
-        "nbformat": 4,
-        "nbformat_minor": 5,
-    }
+        md("# Stage 1A: corrected SwinJSCC, K=256 VQ, and AWGN evaluation\n\nOne Kaggle runner for the modular repository. It does not install or upgrade Kaggle's shared scientific stack.\n"),
+        md("## 1. Clean a previous attempt\n"),
+        py("""from pathlib import Path
+import os
+import shutil
 
+os.chdir('/kaggle/working')
+PROJECT_DIR = Path('/kaggle/working/SemanticSchedulerEnd2End')
+STAGE1_OUTPUT = Path('/kaggle/working/stage1a_complete_output')
+for target in (PROJECT_DIR, STAGE1_OUTPUT):
+    if target.exists():
+        print(f'Removing previous run: {target}')
+        shutil.rmtree(target)
+os.chdir('/kaggle/working')
+print('Fresh working directory:', os.getcwd())
+"""),
+        md("## 2. Controls\n"),
+        py(f"""from __future__ import annotations
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+PROJECT_GIT_URL = 'https://github.com/saltypal/SemanticSchedulerEnd2End.git'
+PROJECT_REF = '{project_ref}'
+UPSTREAM_SWINJSCC_COMMIT = 'a6d0e6da53548976acbe9317839a077ef31f190f'
+BASE_EPOCHS = 200
+SARA_EPOCHS = 300
+BATCH_SIZE_PER_GPU = 8
+EARLY_STOPPING_PATIENCE = 30
+KMEANS_FIT_IMAGES = 512
+VQ_EVALUATION_RATE = 96
+JPEG_QUALITY_GRID = (20, 30, 40, 50, 60, 70, 80, 90)
+TRAIN_ROOT = Path('/kaggle/input/notebooks/jagan028/div2k-dataset-generation-for-isr/Training/HR/hr_images')
+VALIDATION_ROOT = Path('/kaggle/input/notebooks/jagan028/div2k-dataset-generation-for-isr/Validation/HR/hr_images')
+KODAK_ROOT = Path('/kaggle/input/datasets/sherylmehta/kodak-dataset')
+
+def run_command(*arguments: str, cwd: Path | None = None) -> None:
+    print('+', ' '.join(arguments))
+    subprocess.run(list(arguments), cwd=cwd, check=True)
+"""),
+        md("## 3. Clone source and audit the stock Kaggle runtime\n"),
+        py("""import importlib
+import torch
+
+run_command('git', 'clone', '--no-checkout', PROJECT_GIT_URL, str(PROJECT_DIR), cwd=Path('/kaggle/working'))
+run_command('git', 'checkout', '--detach', PROJECT_REF, cwd=PROJECT_DIR)
+resolved_ref = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=PROJECT_DIR, text=True).strip()
+if resolved_ref != PROJECT_REF:
+    raise RuntimeError(f'Project pin mismatch: expected {PROJECT_REF}, got {resolved_ref}')
+run_command(sys.executable, 'scripts/bootstrap_swinjscc.py', cwd=PROJECT_DIR)
+upstream_root = PROJECT_DIR / 'external' / 'SwinJSCC'
+upstream_ref = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=upstream_root, text=True).strip()
+if upstream_ref != UPSTREAM_SWINJSCC_COMMIT:
+    raise RuntimeError(f'Upstream pin mismatch: expected {UPSTREAM_SWINJSCC_COMMIT}, got {upstream_ref}')
+
+src_path = str(PROJECT_DIR / 'src')
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+importlib.invalidate_caches()
+os.chdir(PROJECT_DIR)
+STAGE1_OUTPUT.mkdir(parents=True, exist_ok=True)
+
+# Do not run pip here. Kaggle provides compiled NumPy, SciPy, and sklearn.
+import numpy
+import scipy
+import sklearn
+import timm
+from sklearn.cluster import MiniBatchKMeans
+
+runtime = {
+    'python': sys.version, 'torch': torch.__version__,
+    'cuda_available': torch.cuda.is_available(), 'gpu_count': torch.cuda.device_count(),
+    'numpy': numpy.__version__, 'scipy': scipy.__version__,
+    'sklearn': sklearn.__version__, 'timm': timm.__version__,
+}
+print(json.dumps(runtime, indent=2))
+if torch.cuda.device_count() < 2:
+    raise RuntimeError('Enable Kaggle GPU x2 before running Stage 1A.')
+print('Runtime audit passed; no global packages were changed.')
+"""),
+        md("## 4. Import project and validate inputs\n"),
+        py("""import EncDecPipeline
+from EncDecPipeline.Models.SwinJSCC.stage1_runner import (
+    evaluate_jpeg_over_digital_awgn, evaluate_native_swinjscc,
+    evaluate_vq_noiseless_ablation, evaluate_vq_over_digital_awgn,
+    export_final_stage1_artifacts, fit_k256_codebook,
+    resolve_required_datasets, run_base_then_sara_training,
+    verify_kaggle_stage1a_runtime,
+)
+from EncDecPipeline.Models.SwinJSCC.swin_config import SwinJSCCConfig
+from EncDecPipeline.Models.SwinJSCC.trainer import RealImageDataset, build_base_then_sara
+from EncDecPipeline.Models.SwinJSCC.training_utils import mse_loss, verify_two_t4_data_parallel, wrap_data_parallel
+from Evaluation.Reporting.plotting import plot_quality_vs_channel_uses
+from Evaluation.Reporting.report_builder import write_run_report
+from Evaluation.Reporting.result_table import write_result_table
+from utils.seed import set_seed
+
+set_seed(20260906)
+verify_kaggle_stage1a_runtime()
+data_provenance = resolve_required_datasets(TRAIN_ROOT, VALIDATION_ROOT, KODAK_ROOT)
+config = SwinJSCCConfig()
+(STAGE1_OUTPUT / 'startup.json').write_text(json.dumps({'runtime': runtime, 'data_provenance': data_provenance}, indent=2), encoding='utf-8')
+print('Project import:', EncDecPipeline.__file__)
+"""),
+        md("## 5. Two-T4 preflight\n"),
+        py("""plan = verify_two_t4_data_parallel()
+preflight_adapter, _ = build_base_then_sara(config, 'external/SwinJSCC')
+preflight_model = wrap_data_parallel(preflight_adapter.build_training_module(), plan)
+preflight_optimizer = torch.optim.AdamW(preflight_model.parameters(), lr=1e-4)
+preflight_dataset = RealImageDataset(TRAIN_ROOT, crop_size=256, training=True, seed=20260906)
+real_images = torch.stack([preflight_dataset[0], preflight_dataset[1]]).cuda(non_blocking=True)
+losses = []
+for step in range(8):
+    preflight_optimizer.zero_grad(set_to_none=True)
+    reconstruction, _ = preflight_model(real_images, 10, config.base_fixed_c)
+    loss = mse_loss(real_images, reconstruction)
+    loss.backward()
+    preflight_optimizer.step()
+    loss_value = float(loss.detach().cpu())
+    losses.append(loss_value)
+    print(f'Preflight {step + 1}/8 | MSE={loss_value:.6f}')
+if not all(torch.isfinite(torch.tensor(losses))):
+    raise RuntimeError(f'Non-finite preflight loss: {losses}')
+del preflight_model, preflight_adapter, preflight_optimizer
+torch.cuda.empty_cache()
+"""),
+        md("## 6. Train and export\n"),
+        py("""adapter, training_summary = run_base_then_sara_training(
+    config=config, upstream_root='external/SwinJSCC',
+    train_root=TRAIN_ROOT, validation_root=VALIDATION_ROOT,
+    output_dir=STAGE1_OUTPUT, base_epochs=BASE_EPOCHS,
+    sara_epochs=SARA_EPOCHS, batch_size_per_gpu=BATCH_SIZE_PER_GPU,
+    early_stopping_patience=EARLY_STOPPING_PATIENCE,
+)
+print(json.dumps(training_summary, indent=2))
+export_final_stage1_artifacts(adapter, STAGE1_OUTPUT / 'models' / 'SwinJSCC', data_provenance, training_summary)
+"""),
+        md("## 7. Fit K=256 latent VQ\n"),
+        py("""vq = fit_k256_codebook(adapter, TRAIN_ROOT, rate=VQ_EVALUATION_RATE, max_images=KMEANS_FIT_IMAGES)
+codebook_path = vq.save(STAGE1_OUTPUT / 'models' / 'Codebooks' / 'swinjscc_tx_k256.joblib')
+print({'codebook': str(codebook_path), 'hash': vq.content_hash()})
+"""),
+        md("## 8. Evaluate\n"),
+        py("""rows = []
+rows.extend(evaluate_native_swinjscc(adapter, KODAK_ROOT, STAGE1_OUTPUT, config.snr_db_grid, config.rate_grid))
+rows.extend(evaluate_vq_noiseless_ablation(adapter, vq, KODAK_ROOT, STAGE1_OUTPUT, rate=VQ_EVALUATION_RATE))
+rows.extend(evaluate_vq_over_digital_awgn(adapter, vq, KODAK_ROOT, STAGE1_OUTPUT, config.snr_db_grid, rate=VQ_EVALUATION_RATE))
+for quality in JPEG_QUALITY_GRID:
+    rows.extend(evaluate_jpeg_over_digital_awgn(KODAK_ROOT, STAGE1_OUTPUT, config.snr_db_grid, quality))
+metrics_path = write_result_table(rows, STAGE1_OUTPUT / 'metrics' / 'stage1a_metrics.csv')
+successful_rows = [row for row in rows if row.get('psnr') is not None and row['method'] != 'vq_noiseless_ablation']
+plot_quality_vs_channel_uses(successful_rows, STAGE1_OUTPUT / 'plots' / 'quality_vs_channel_uses.png')
+write_run_report({'project_ref': PROJECT_REF, 'upstream_commit': UPSTREAM_SWINJSCC_COMMIT, 'metrics_csv': str(metrics_path), 'rows': len(rows), 'corrected_port': True}, STAGE1_OUTPUT / 'reports' / 'stage1a_report.md')
+print('Evaluation complete:', metrics_path)
+"""),
+        md("## 9. Artifact audit\n"),
+        py("""expected = [
+    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_swinjscc_full.pt',
+    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_swinjscc_encoder.pt',
+    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_swinjscc_decoder.pt',
+    STAGE1_OUTPUT / 'models' / 'SwinJSCC' / 'stage1_manifest.json',
+    STAGE1_OUTPUT / 'models' / 'Codebooks' / 'swinjscc_tx_k256.joblib',
+    STAGE1_OUTPUT / 'metrics' / 'stage1a_metrics.csv',
+]
+missing = [str(path) for path in expected if not path.exists()]
+if missing:
+    raise RuntimeError(f'Stage 1A output audit failed: {missing}')
+print('Stage 1A complete:', STAGE1_OUTPUT)
+"""),
+    ]
+    return {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python", "version": "3.12"}}, "nbformat": 4, "nbformat_minor": 5}
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project-ref", default="SET_TO_COMMITTED_SOURCE_REVISION")
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path(__file__).resolve().parents[1] / "notebooks" / "Stage1A" / "01_stage1a_complete_kaggle.ipynb",
-    )
+    parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1] / "notebooks" / "Stage1A" / "01_stage1a_complete_kaggle.ipynb")
     arguments = parser.parse_args()
-    try:
-        import nbformat
-    except ImportError as error:
-        raise RuntimeError("Notebook generation needs nbformat.") from error
-    notebook = nbformat.from_dict(build_notebook(arguments.project_ref))
-    for cell in notebook.cells:
-        cell["id"] = uuid.uuid4().hex[:12]
+    import nbformat
+    notebook = nbformat.from_dict(build(arguments.project_ref))
+    for notebook_cell in notebook.cells:
+        notebook_cell["id"] = uuid.uuid4().hex[:12]
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     nbformat.write(notebook, arguments.output)
     print(arguments.output)
 
-
 if __name__ == "__main__":
     main()
+
