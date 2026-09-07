@@ -78,18 +78,14 @@ importlib.invalidate_caches()
 os.chdir(PROJECT_DIR)
 STAGE1_OUTPUT.mkdir(parents=True, exist_ok=True)
 
-# Do not run pip here. Kaggle provides compiled NumPy, SciPy, and sklearn.
+# Do not run pip here. Kaggle provides the compiled scientific stack.
 import numpy
-import scipy
-import sklearn
 import timm
-from sklearn.cluster import MiniBatchKMeans
 
 runtime = {
     'python': sys.version, 'torch': torch.__version__,
     'cuda_available': torch.cuda.is_available(), 'gpu_count': torch.cuda.device_count(),
-    'numpy': numpy.__version__, 'scipy': scipy.__version__,
-    'sklearn': sklearn.__version__, 'timm': timm.__version__,
+    'numpy': numpy.__version__, 'timm': timm.__version__,
 }
 print(json.dumps(runtime, indent=2))
 if torch.cuda.device_count() < 2:
@@ -203,4 +199,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

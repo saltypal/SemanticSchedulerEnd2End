@@ -14,6 +14,29 @@ from INFRA.Interfaces import CodebookInterface
 from INFRA.Registries import CODEBOOK_REGISTRY
 
 
+class _TorchMiniBatchKMeans:
+    """Small dependency-free MiniBatch K-means state used by Stage 1A.
+
+    The implementation deliberately exposes the same two attributes the codec
+    needs from scikit-learn: ``cluster_centers_`` and ``predict``.  This keeps
+    Kaggle's compiled scientific stack out of the training-critical path.
+    """
+
+    def __init__(self, centers: Any, counts: Any) -> None:
+        self.centers = centers
+        self.counts = counts
+
+    @property
+    def cluster_centers_(self) -> np.ndarray:
+        return self.centers.detach().cpu().numpy()
+
+    def predict(self, tokens: np.ndarray) -> np.ndarray:
+        torch = __import__("torch")
+        values = torch.as_tensor(tokens, dtype=torch.float32, device=self.centers.device)
+        distances = torch.cdist(values, self.centers)
+        return distances.argmin(dim=1).cpu().numpy()
+
+
 class MiniBatchKMeansVQ(CodebookInterface):
     """A shared K=256 codebook over latent tokens, not a fake compressed tensor."""
 
@@ -32,19 +55,6 @@ class MiniBatchKMeansVQ(CodebookInterface):
         self.codebook_id = codebook_id
         self.model: Any | None = None
 
-    def _new_model(self) -> Any:
-        try:
-            from sklearn.cluster import MiniBatchKMeans
-        except ImportError as error:
-            raise RuntimeError("MiniBatchKMeans VQ requires scikit-learn in the Stage 1A environment.") from error
-        return MiniBatchKMeans(
-            n_clusters=self.codebook_size,
-            batch_size=self.batch_size,
-            n_init="auto",
-            reassignment_ratio=0.01,
-            random_state=self.random_state,
-        )
-
     @staticmethod
     def _tokens(latent: LatentArtifact) -> np.ndarray:
         values = latent.tensor.detach().float().cpu().numpy()
@@ -55,15 +65,37 @@ class MiniBatchKMeansVQ(CodebookInterface):
         return values.reshape(-1, values.shape[-1])
 
     def fit(self, latent_batches: Iterable[LatentArtifact]) -> None:
-        model = self._new_model()
+        torch = __import__("torch")
+        generator = torch.Generator(device="cpu")
+        generator.manual_seed(self.random_state)
+        model: _TorchMiniBatchKMeans | None = None
         batches_seen = 0
         for latent in latent_batches:
             tokens = self._tokens(latent)
             if tokens.shape[0] < self.codebook_size:
                 continue
-            model.partial_fit(tokens)
+            values = torch.as_tensor(tokens, dtype=torch.float32, device="cpu")
+            if model is None:
+                initial_indices = torch.randperm(values.shape[0], generator=generator)[: self.codebook_size]
+                model = _TorchMiniBatchKMeans(
+                    centers=values[initial_indices].clone(),
+                    counts=torch.ones(self.codebook_size, dtype=torch.float32),
+                )
+            for start in range(0, values.shape[0], self.batch_size):
+                batch = values[start : start + self.batch_size]
+                nearest = torch.cdist(batch, model.centers).argmin(dim=1)
+                sums = torch.zeros_like(model.centers)
+                sums.index_add_(0, nearest, batch)
+                counts = torch.bincount(nearest, minlength=self.codebook_size).to(torch.float32)
+                updated = counts > 0
+                total_counts = model.counts[updated] + counts[updated]
+                model.centers[updated] = (
+                    model.centers[updated] * model.counts[updated].unsqueeze(1)
+                    + sums[updated]
+                ) / total_counts.unsqueeze(1)
+                model.counts[updated] = total_counts
             batches_seen += 1
-        if batches_seen == 0:
+        if batches_seen == 0 or model is None:
             raise ValueError("No real latent batch contained at least K=256 tokens; codebook was not trained.")
         self.model = model
 
