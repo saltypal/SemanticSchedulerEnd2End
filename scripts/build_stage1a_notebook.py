@@ -39,7 +39,9 @@ import sys
 from pathlib import Path
 
 PROJECT_GIT_URL = 'https://github.com/saltypal/SemanticSchedulerEnd2End.git'
-PROJECT_REF = '{project_ref}'
+PROJECT_BRANCH = 'main'
+# The notebook resolves this branch to an immutable commit immediately before cloning.
+PROJECT_REF = None
 UPSTREAM_SWINJSCC_COMMIT = 'a6d0e6da53548976acbe9317839a077ef31f190f'
 BASE_EPOCHS = 200
 SARA_EPOCHS = 300
@@ -59,6 +61,15 @@ def run_command(*arguments: str, cwd: Path | None = None) -> None:
         md("## 3. Clone source and audit the stock Kaggle runtime\n"),
         py("""import importlib
 import torch
+
+latest_ref_output = subprocess.check_output(
+    ['git', 'ls-remote', PROJECT_GIT_URL, f'refs/heads/{PROJECT_BRANCH}'],
+    text=True,
+).strip()
+if not latest_ref_output:
+    raise RuntimeError(f'Could not resolve remote branch {PROJECT_BRANCH!r} from {PROJECT_GIT_URL}')
+PROJECT_REF = latest_ref_output.split()[0]
+print(f'Latest {PROJECT_BRANCH} commit: {PROJECT_REF}')
 
 run_command('git', 'clone', '--no-checkout', PROJECT_GIT_URL, str(PROJECT_DIR), cwd=Path('/kaggle/working'))
 run_command('git', 'checkout', '--detach', PROJECT_REF, cwd=PROJECT_DIR)
