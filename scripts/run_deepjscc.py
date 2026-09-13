@@ -1,9 +1,11 @@
-"""Run DeepJSCC on a real image through the existing communication pipeline."""
+"""Run the verified DeepJSCC implementation through the existing pipeline."""
 
 from __future__ import annotations
 
 import sys
 from pathlib import Path
+
+from PIL import Image
 
 from Channels.awgn import AWGNChannel
 from EncDecPipeline.Models.DeepJSCC.adapter import DeepJSCCAdapter
@@ -24,30 +26,80 @@ SOURCE_ROOT = Path(
     r"\Deep-JSCC-PyTorch"
 )
 
+DEFAULT_IMAGE = Path(
+    r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom"
+    r"\Deep-JSCC-PyTorch\demo\kodim08.png"
+)
+
 
 def main() -> None:
-    from PIL import Image
+    # ---------------------------------------------------------
+    # Command-line arguments
+    #
+    # Usage:
+    # python scripts\run_deepjscc.py
+    #
+    # Or:
+    # python scripts\run_deepjscc.py "path\to\image.png" 10
+    # ---------------------------------------------------------
 
-    if len(sys.argv) < 2:
-        raise SystemExit(
-            "Usage:\n"
-            "python scripts\\run_deepjscc.py <image_path> [snr_db]\n\n"
-            "Example:\n"
-            "python scripts\\run_deepjscc.py "
-            '"D:\\path\\to\\image.jpg" 10'
+    image_path = (
+        Path(sys.argv[1])
+        if len(sys.argv) >= 2
+        else DEFAULT_IMAGE
+    )
+
+    snr_db = (
+        float(sys.argv[2])
+        if len(sys.argv) >= 3
+        else 10.0
+    )
+
+    if not CHECKPOINT.exists():
+        raise FileNotFoundError(
+            f"DeepJSCC checkpoint not found:\n{CHECKPOINT}"
         )
 
-    image_path = Path(sys.argv[1])
+    if not SOURCE_ROOT.exists():
+        raise FileNotFoundError(
+            f"DeepJSCC source directory not found:\n{SOURCE_ROOT}"
+        )
 
     if not image_path.exists():
         raise FileNotFoundError(
-            f"Input image not found: {image_path}"
+            f"Input image not found:\n{image_path}"
         )
 
-    snr_db = float(sys.argv[2]) if len(sys.argv) >= 3 else 10.0
+    # ---------------------------------------------------------
+    # Load the original image.
+    # ---------------------------------------------------------
+
+    image = Image.open(image_path).convert("RGB")
+
+    # This follows the repo preprocessing convention:
+    # RGB uint8 image -> float tensor in [0, 1].
+    tensor = pil_to_tensor(image).unsqueeze(0)
 
     # ---------------------------------------------------------
-    # Build DeepJSCC
+    # Create the ImageArtifact expected by the existing
+    # semantic communication pipeline.
+    # ---------------------------------------------------------
+
+    artifact = ImageArtifact(
+        tensor=tensor,
+        sample_ids=[image_path.stem],
+        source="DeepJSCC",
+    )
+
+    # ---------------------------------------------------------
+    # Build the verified DeepJSCC implementation.
+    #
+    # The adapter internally uses:
+    #   old_model_6.py
+    #   c=19
+    #   checkpoint from the original DeepJSCC implementation
+    #
+    # We keep the original notebook's model configuration.
     # ---------------------------------------------------------
 
     encdec = DeepJSCCAdapter(
@@ -55,10 +107,15 @@ def main() -> None:
         source_root=SOURCE_ROOT,
         c=19,
         device="cpu",
+        channel_type="AWGN",
+        snr=200,
     ).build()
 
     # ---------------------------------------------------------
-    # Build the existing AWGN channel through our wrapper
+    # Reuse the EXISTING repository AWGN implementation.
+    #
+    # DeepJSCCChannelWrapper only handles the odd number of
+    # latent real values. AWGN itself is not modified.
     # ---------------------------------------------------------
 
     channel = DeepJSCCChannelWrapper(
@@ -66,84 +123,65 @@ def main() -> None:
     )
 
     # ---------------------------------------------------------
-    # Load the real image
-    # ---------------------------------------------------------
-
-    image = Image.open(image_path).convert("RGB")
-
-    tensor = pil_to_tensor(image).unsqueeze(0)
-
-    artifact = ImageArtifact(
-        tensor=tensor,
-        sample_ids=[image_path.stem],
-        source=str(image_path),
-    )
-
-    # ---------------------------------------------------------
-    # Explicitly execute the communication stages.
-    #
-    # This uses the SAME components as PipelineManager,
-    # but lets this runner retain the actual transmission
-    # artifact for communication accounting.
-    # ---------------------------------------------------------
-
-    latent = encdec.encode(
-        artifact
-    )
-
-    transmission = channel.transmit(
-        latent,
-        snr_db,
-    )
-
-    reconstruction = encdec.reconstruct_received(
-        transmission,
-        latent,
-    )
-
-    # ---------------------------------------------------------
-    # Existing evaluator
+    # Reuse the EXISTING repository evaluator.
     # ---------------------------------------------------------
 
     evaluator = ImageQualityEvaluator()
 
-    evaluation = evaluator.evaluate(
-        artifact,
-        reconstruction,
+    # ---------------------------------------------------------
+    # Use the existing PipelineManager.
+    # ---------------------------------------------------------
+
+    pipeline = PipelineManager(
+        encdec=encdec,
+        channel=channel,
+        evaluators=[evaluator],
     )
 
     # ---------------------------------------------------------
-    # Actual communication metrics
+    # Run the complete pipeline.
     # ---------------------------------------------------------
 
-    latent_values = latent.tensor[0].numel()
-
-    padding_values = int(
-        transmission.metadata.get(
-            "deepjscc_padding_values",
-            0,
-        )
-    )
-
-    channel_uses = transmission.channel_uses_per_image[0]
-
-    height = tensor.shape[-2]
-    width = tensor.shape[-1]
-
-    cbr = channel_uses / (
-        3 * height * width
+    result = pipeline.run_image(
+        image=artifact,
+        snr_db=snr_db,
     )
 
     # ---------------------------------------------------------
-    # Output
+    # Extract communication information.
+    # ---------------------------------------------------------
+
+    latent = encdec.encode(artifact)
+
+    latent_values = int(
+        latent.tensor.reshape(latent.tensor.shape[0], -1).shape[1]
+    )
+
+    padding_values = latent_values % 2
+
+    padded_values = latent_values + padding_values
+
+    complex_channel_uses = padded_values // 2
+
+    original_pixels = (
+        tensor.shape[2] * tensor.shape[3]
+    )
+
+    # Notebook-style CBR:
+    # latent real-valued elements / RGB source elements.
+    notebook_cbr = latent_values / (
+        3 * original_pixels
+    )
+
+    # ---------------------------------------------------------
+    # Print results.
     # ---------------------------------------------------------
 
     print()
     print("DEEPJSCC REAL IMAGE EVALUATION")
     print("--------------------------------")
-
-    print("Image:", image_path)
-    print("Input shape:", tuple(tensor.shape))
+    print(f"Image: {image_path}")
+    print(f"Input shape: {tuple(tensor.shape)}")
     print(
         "Input range:",
         float(tensor.min()),
@@ -158,65 +196,70 @@ def main() -> None:
 
     print(
         "Reconstruction shape:",
-        tuple(reconstruction.tensor.shape),
+        tuple(result.reconstruction.tensor.shape),
     )
 
     print(
         "Reconstruction range:",
-        float(reconstruction.tensor.min()),
+        float(result.reconstruction.tensor.min()),
         "to",
-        float(reconstruction.tensor.max()),
+        float(result.reconstruction.tensor.max()),
     )
 
     print()
     print("CHANNEL")
     print("-------")
-    print("Channel:", transmission.channel_name)
-    print("SNR (dB):", transmission.snr_db)
+    print("Channel: awgn")
+    print(f"SNR (dB): {snr_db}")
 
     print()
     print("COMMUNICATION METRICS")
     print("---------------------")
     print(
-        "Latent real values per image:",
-        latent_values,
+        f"Latent real values per image: {latent_values:,}"
     )
     print(
-        "Padding values:",
-        padding_values,
+        f"Padding values: {padding_values}"
     )
     print(
-        "Actual complex channel uses:",
-        channel_uses,
+        f"Padded real values: {padded_values:,}"
     )
     print(
-        "CBR:",
-        cbr,
+        f"Actual complex channel uses: {complex_channel_uses:,}"
+    )
+    print(
+        f"Notebook-style CBR: {notebook_cbr:.6f}"
     )
 
     print()
     print("IMAGE QUALITY METRICS")
     print("---------------------")
-    print(
-        "PSNR (dB):",
-        evaluation.metrics["psnr_db"],
-    )
-    print(
-        "SSIM:",
-        evaluation.metrics["ssim"],
-    )
+
+    if result.evaluations:
+        metrics = result.evaluations[0].metrics
+
+        print(
+            f"PSNR (dB): {metrics['psnr_db']:.6f}"
+        )
+        print(
+            f"SSIM: {metrics['ssim']:.6f}"
+        )
 
     print()
     print("RESULT SUMMARY")
     print("--------------")
-    print(
-        f"DeepJSCC | "
-        f"SNR={transmission.snr_db:.1f} dB | "
-        f"Channel Uses={channel_uses} | "
-        f"CBR={cbr:.6f} | "
-        f"PSNR={evaluation.metrics['psnr_db']:.4f} dB | "
-        f"SSIM={evaluation.metrics['ssim']:.4f}"
-    )
+
+    if result.evaluations:
+        metrics = result.evaluations[0].metrics
+
+        print(
+            f"DeepJSCC | "
+            f"SNR={snr_db} dB | "
+            f"Channel Uses={complex_channel_uses:,} | "
+            f"CBR={notebook_cbr:.6f} | "
+            f"PSNR={metrics['psnr_db']:.4f} dB | "
+            f"SSIM={metrics['ssim']:.4f}"
+        )
 
     print()
     print("DeepJSCC evaluation OK")
