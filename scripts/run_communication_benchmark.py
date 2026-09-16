@@ -1,764 +1,275 @@
-"""Compare RAW+LDPC, JPEG+LDPC, and DeepJSCC on one image.
+"""Matched-resource DeepJSCC/NTSCC/digital communication benchmark.
 
-This is an evaluation wrapper around the existing repository components.
+Run NTSCC in WSL first, then pass its JSON result to this script.  Every CBR
+in the output uses the repository definition:
 
-Existing teammate implementations are not modified.
-
-Comparison:
-    RAW      -> framing -> LDPC -> QPSK -> AWGN -> RAW image
-    JPEG     -> JPEG -> framing -> LDPC -> QPSK -> AWGN -> JPEG image
-    DeepJSCC -> neural encoder -> repository AWGN -> neural decoder
-
-Metrics:
-    - channel uses
-    - source/transmitted bits where applicable
-    - CBR
-    - PSNR
-    - SSIM
+    complex channel uses / (3 * image height * image width)
 """
 
 from __future__ import annotations
 
+import argparse
+import csv
+import io
+import json
+import math
+import os
+import random
 import sys
 from pathlib import Path
 
 import numpy as np
 from PIL import Image
 
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
 from Baselines.DigitalPHY.channel_coding import LDPCQPSKAWGN
+from Baselines.JPEG.jpeg_bitstream import bits_to_bytes
 from Baselines.JPEG.jpeg_codec import JPEGCodec
 from Baselines.JPEG.jpeg_pipeline import encode_jpeg_for_transport
-from EncDecPipeline.Models.DeepJSCC.adapter import DeepJSCCAdapter
-from EncDecPipeline.Models.DeepJSCC.channel_wrapper import (
-    DeepJSCCChannelWrapper,
-)
 from EncDecPipeline.Preprocessing.image_loader import pil_to_tensor
 from Evaluation.Image.psnr import psnr
 from Evaluation.Image.ssim import ssim
-from INFRA.Artifacts import ImageArtifact
+from run_deepjscc import evaluate_deepjscc
 
 
-# ============================================================================
-# Compatibility helper
-# ============================================================================
-
-def bytes_to_bits(payload: bytes) -> np.ndarray:
-    """Convert bytes to a big-endian bit array.
-
-    The current repository's bit_utils.py does not expose this helper,
-    although jpeg_pipeline.py imports it. We keep the helper local to this
-    benchmark rather than modifying the existing teammate implementation.
-    """
-    return np.unpackbits(
-        np.frombuffer(payload, dtype=np.uint8),
-        bitorder="big",
+def default_semcom_root() -> Path:
+    return Path(
+        os.environ.get(
+            "SEMCOM_ROOT",
+            r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom",
+        )
     )
 
 
-# ============================================================================
-# Paths
-# ============================================================================
+def seed_everything(seed: int) -> None:
+    import torch
 
-CHECKPOINT = Path(
-    r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom"
-    r"\Deep-JSCC-PyTorch\out\imagenet_10_0.33_200.00_32_19.pth"
-)
-
-SOURCE_ROOT = Path(
-    r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom"
-    r"\Deep-JSCC-PyTorch"
-)
-
-DEFAULT_IMAGE = Path(
-    r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom"
-    r"\Deep-JSCC-PyTorch\demo\kodim08.png"
-)
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
 
-# ============================================================================
-# Configuration
-# ============================================================================
-
-DEFAULT_SNR_DB = 10.0
-DEFAULT_JPEG_QUALITY = 75
-
-LDPC_INFORMATION_BITS = 1024
-LDPC_CODEWORD_BITS = 2048
-LDPC_ITERATIONS = 20
+def metric_pair(reference: Image.Image, reconstruction: Image.Image) -> tuple[float, float]:
+    a = pil_to_tensor(reference).unsqueeze(0)
+    b = pil_to_tensor(reconstruction).unsqueeze(0)
+    if a.shape != b.shape:
+        raise ValueError(f"Metric shape mismatch: {tuple(a.shape)} versus {tuple(b.shape)}")
+    return float(psnr(a, b)), float(ssim(a, b))
 
 
-# ============================================================================
-# Image / metric helpers
-# ============================================================================
+def digital_trials(
+    image: Image.Image,
+    method: str,
+    source_bits: np.ndarray,
+    quality: int | None,
+    snr_db: float,
+    trials: int,
+    device: str,
+    seed: int,
+) -> dict:
+    digital = LDPCQPSKAWGN(
+        information_block_bits=1024, codeword_bits=2048, iterations=20
+    )
+    trial_rows = []
+    for trial in range(trials):
+        seed_everything(seed + trial)
+        physical = digital.transmit(source_bits, esn0_db=snr_db, device=device)
+        row = {
+            "frame_success": bool(physical.frame_success),
+            "failure_reason": physical.failure_reason,
+            "psnr_db": None,
+            "ssim": None,
+        }
+        if physical.frame_success and physical.recovered_bits is not None:
+            try:
+                if quality is None:
+                    payload = np.packbits(physical.recovered_bits, bitorder="big")
+                    reconstruction = Image.fromarray(
+                        payload.reshape(image.height, image.width, 3), mode="RGB"
+                    )
+                else:
+                    reconstruction = JPEGCodec.decode(bits_to_bytes(physical.recovered_bits))
+                row["psnr_db"], row["ssim"] = metric_pair(image, reconstruction)
+            except Exception as error:
+                row["frame_success"] = False
+                row["failure_reason"] = f"decode failure: {error}"
+        trial_rows.append(row)
 
-def image_to_raw_bytes(image: Image.Image) -> bytes:
-    """Convert an RGB image to raw RGB bytes."""
-    rgb = image.convert("RGB")
-    return np.asarray(
-        rgb,
-        dtype=np.uint8,
-    ).tobytes()
+    successes = [row for row in trial_rows if row["frame_success"]]
+    uses = physical.channel_uses
+    source_values = 3 * image.height * image.width
+    return {
+        "Method": method,
+        "SNR_dB": snr_db,
+        "Complex_channel_uses": uses,
+        "CBR": uses / source_values,
+        "Information_bits": physical.information_bits,
+        "Coded_bits": physical.coded_bits,
+        "Frame_success_rate": len(successes) / trials,
+        "PSNR_dB_mean": float(np.mean([row["psnr_db"] for row in successes]))
+        if successes
+        else None,
+        "SSIM_mean": float(np.mean([row["ssim"] for row in successes]))
+        if successes
+        else None,
+        "Qualification": "Quality is reported only for CRC-valid frames.",
+        "trials": trial_rows,
+    }
 
 
-def raw_bytes_to_image(
-    payload: bytes,
-    size: tuple[int, int],
-) -> Image.Image:
-    """Reconstruct an RGB image from raw RGB bytes."""
-    width, height = size
-
-    expected_bytes = width * height * 3
-
-    if len(payload) != expected_bytes:
+def load_ntscc_result(path: Path, image: Image.Image, snr_db: float) -> dict:
+    result = json.loads(path.read_text(encoding="utf-8"))
+    required = {
+        "input_size_hw",
+        "snr_db",
+        "complex_channel_uses",
+        "cbr",
+        "psnr_db_mean",
+        "ssim_mean",
+    }
+    missing = required.difference(result)
+    if missing:
+        raise ValueError(f"NTSCC result is missing fields: {sorted(missing)}")
+    expected_size = [image.height, image.width]
+    if result["input_size_hw"] != expected_size:
         raise ValueError(
-            f"RAW payload has {len(payload)} bytes; "
-            f"expected {expected_bytes} bytes for "
-            f"{width}x{height} RGB."
+            f"NTSCC evaluated {result['input_size_hw']}, but benchmark image is {expected_size}. "
+            "Use the exact NTSCC reference image or rerun both models at one resolution."
         )
-
-    array = np.frombuffer(
-        payload,
-        dtype=np.uint8,
-    ).reshape(
-        height,
-        width,
-        3,
-    )
-
-    return Image.fromarray(
-        array,
-        mode="RGB",
-    )
-
-
-def evaluate_images(
-    reference: Image.Image,
-    reconstruction: Image.Image,
-) -> tuple[float, float]:
-    """Evaluate PSNR and SSIM using the repository implementations."""
-
-    reference_tensor = pil_to_tensor(
-        reference,
-    ).unsqueeze(0)
-
-    reconstruction_tensor = pil_to_tensor(
-        reconstruction,
-    ).unsqueeze(0)
-
-    psnr_value = float(
-        psnr(
-            reference_tensor,
-            reconstruction_tensor,
-        )
-    )
-
-    ssim_value = float(
-        ssim(
-            reference_tensor,
-            reconstruction_tensor,
-        )
-    )
-
-    return psnr_value, ssim_value
-
-
-def print_result(result: dict) -> None:
-    """Print one normalized benchmark result."""
-
-    print()
-    print(result["name"])
-    print("-" * len(result["name"]))
-
-    print(
-        f"Success:          {result['success']}"
-    )
-
-    if result.get("source_bits") is not None:
-        print(
-            f"Source bits:      "
-            f"{result['source_bits']:,}"
-        )
-
-    if result.get("transmitted_bits") is not None:
-        print(
-            f"Transmitted bits: "
-            f"{result['transmitted_bits']:,}"
-        )
-
-    if result.get("channel_uses") is not None:
-        print(
-            f"Channel uses:     "
-            f"{result['channel_uses']:,}"
-        )
-
-    if result.get("cbr") is not None:
-        print(
-            f"CBR:              "
-            f"{result['cbr']:.6f}"
-        )
-
-    if result.get("psnr_db") is not None:
-        print(
-            f"PSNR (dB):        "
-            f"{result['psnr_db']:.6f}"
-        )
-
-    if result.get("ssim") is not None:
-        print(
-            f"SSIM:             "
-            f"{result['ssim']:.6f}"
-        )
-
-    if result.get("reason"):
-        print(
-            f"Reason:           "
-            f"{result['reason']}"
-        )
-
-
-# ============================================================================
-# RAW + LDPC + QPSK + AWGN
-# ============================================================================
-
-def evaluate_raw(
-    image: Image.Image,
-    digital: LDPCQPSKAWGN,
-    snr_db: float,
-    device: str,
-) -> dict:
-    """Evaluate RAW RGB bytes through the existing digital baseline."""
-
-    raw_payload = image_to_raw_bytes(
-        image,
-    )
-
-    source_bits = bytes_to_bits(
-        raw_payload,
-    )
-
-    result = digital.transmit(
-        source_bits=source_bits,
-        esn0_db=snr_db,
-        device=device,
-    )
-
-    cbr = result.information_bits / (
-        image.width
-        * image.height
-        * 24
-    )
-
-    if (
-        not result.frame_success
-        or result.recovered_bits is None
-    ):
-        return {
-            "name": "RAW + LDPC + QPSK",
-            "success": False,
-            "channel_uses": result.channel_uses,
-            "source_bits": result.information_bits,
-            "transmitted_bits": result.coded_bits,
-            "cbr": cbr,
-            "psnr_db": None,
-            "ssim": None,
-            "reason": result.failure_reason,
-        }
-
-    recovered_bytes = np.packbits(
-        result.recovered_bits,
-        bitorder="big",
-    ).tobytes()
-
-    reconstructed = raw_bytes_to_image(
-        recovered_bytes,
-        size=(
-            image.width,
-            image.height,
-        ),
-    )
-
-    psnr_value, ssim_value = evaluate_images(
-        image,
-        reconstructed,
-    )
-
+    if not math.isclose(float(result["snr_db"]), snr_db, abs_tol=1e-9):
+        raise ValueError("NTSCC and benchmark SNR values do not match.")
+    expected_cbr = result["complex_channel_uses"] / (3 * image.height * image.width)
+    if not math.isclose(float(result["cbr"]), expected_cbr, rel_tol=2e-4, abs_tol=1e-8):
+        raise ValueError("NTSCC JSON has inconsistent channel-use/CBR accounting.")
     return {
-        "name": "RAW + LDPC + QPSK",
-        "success": True,
-        "channel_uses": result.channel_uses,
-        "source_bits": result.information_bits,
-        "transmitted_bits": result.coded_bits,
-        "cbr": cbr,
-        "psnr_db": psnr_value,
-        "ssim": ssim_value,
-        "reason": "",
+        "Method": "NTSCC Hyperprior",
+        "SNR_dB": snr_db,
+        "Complex_channel_uses": int(result["complex_channel_uses"]),
+        "CBR": float(result["cbr"]),
+        "Information_bits": None,
+        "Coded_bits": None,
+        "Frame_success_rate": 1.0,
+        "PSNR_dB_mean": result["psnr_db_mean"],
+        "SSIM_mean": result["ssim_mean"],
+        "Qualification": (
+            "Native cbr_y; rate-map side information is reported separately and is not "
+            "included in the official model's cbr_y."
+        ),
+        "Rate_map_bits_not_in_CBR": result.get("rate_map_bits_not_in_native_cbr"),
     }
 
 
-# ============================================================================
-# JPEG + LDPC + QPSK + AWGN
-# ============================================================================
-
-def evaluate_jpeg(
-    image: Image.Image,
-    digital: LDPCQPSKAWGN,
-    snr_db: float,
-    device: str,
-    quality: int,
-) -> dict:
-    """Evaluate JPEG bytes through the existing digital baseline."""
-
-    jpeg_stream = encode_jpeg_for_transport(
-        image=image,
-        quality=quality,
+def parse_args() -> argparse.Namespace:
+    semcom = default_semcom_root()
+    deep_root = semcom / "Deep-JSCC-PyTorch"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--image", type=Path, default=deep_root / "demo" / "kodim08.png")
+    parser.add_argument(
+        "--deep-checkpoint",
+        type=Path,
+        default=deep_root / "out" / "imagenet_10_0.33_200.00_32_19.pth",
     )
+    parser.add_argument("--deep-source-root", type=Path, default=deep_root)
+    parser.add_argument("--ntscc-result", type=Path, default=None)
+    parser.add_argument("--snr-db", type=float, default=10.0)
+    parser.add_argument("--trials", type=int, default=5)
+    parser.add_argument("--tile-size", type=int, default=128)
+    parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--jpeg-qualities", type=int, nargs="+", default=[90, 75, 50, 25])
+    parser.add_argument("--output-dir", type=Path, default=ROOT / "results" / "runs")
+    return parser.parse_args()
 
-    source_bits = np.asarray(
-        jpeg_stream.bits,
-        dtype=np.uint8,
-    ).reshape(-1)
-
-    result = digital.transmit(
-        source_bits=source_bits,
-        esn0_db=snr_db,
-        device=device,
-    )
-
-    original_image_bits = (
-        image.width
-        * image.height
-        * 24
-    )
-
-    cbr = result.information_bits / original_image_bits
-
-    if (
-        not result.frame_success
-        or result.recovered_bits is None
-    ):
-        return {
-            "name": (
-                f"JPEG Q{quality} + LDPC + QPSK"
-            ),
-            "success": False,
-            "channel_uses": result.channel_uses,
-            "source_bits": result.information_bits,
-            "transmitted_bits": result.coded_bits,
-            "cbr": cbr,
-            "psnr_db": None,
-            "ssim": None,
-            "reason": result.failure_reason,
-        }
-
-    recovered_bytes = np.packbits(
-        result.recovered_bits,
-        bitorder="big",
-    ).tobytes()
-
-    reconstructed = JPEGCodec.decode(
-        recovered_bytes,
-    )
-
-    psnr_value, ssim_value = evaluate_images(
-        image,
-        reconstructed,
-    )
-
-    return {
-        "name": (
-            f"JPEG Q{quality} + LDPC + QPSK"
-        ),
-        "success": True,
-        "channel_uses": result.channel_uses,
-        "source_bits": result.information_bits,
-        "transmitted_bits": result.coded_bits,
-        "cbr": cbr,
-        "psnr_db": psnr_value,
-        "ssim": ssim_value,
-        "reason": "",
-    }
-
-
-# ============================================================================
-# DeepJSCC
-# ============================================================================
-
-def evaluate_deepjscc(
-    image: Image.Image,
-    snr_db: float,
-) -> dict:
-    """Evaluate the verified historical DeepJSCC implementation."""
-
-    tensor = pil_to_tensor(
-        image,
-    ).unsqueeze(0)
-
-    artifact = ImageArtifact(
-        tensor=tensor,
-        sample_ids=["benchmark"],
-        source="DeepJSCCBenchmark",
-    )
-
-    # This is the exact historical model/checkpoint configuration.
-    #
-    # The model's internal channel object is required by old_model_6.py
-    # during construction, but the actual transmission in this repository
-    # is performed by the injected repository channel below.
-    encdec = DeepJSCCAdapter(
-        checkpoint_path=CHECKPOINT,
-        source_root=SOURCE_ROOT,
-        c=19,
-        device="cpu",
-        channel_type="AWGN",
-        snr=200,
-    ).build()
-
-    # Encode using the verified notebook model.
-    latent = encdec.encode(
-        artifact,
-    )
-
-    # Use the repository's existing AWGN implementation.
-    channel = DeepJSCCChannelWrapper()
-    transmission = channel.transmit(
-        latent,
-        snr_db=snr_db,
-    )
-
-    # Decode the received latent using the verified notebook decoder.
-    reconstruction = encdec.reconstruct_received(
-        transmission,
-        latent,
-    )
-
-    psnr_value = float(
-        psnr(
-            artifact.tensor,
-            reconstruction.tensor,
-        )
-    )
-
-    ssim_value = float(
-        ssim(
-            artifact.tensor,
-            reconstruction.tensor,
-        )
-    )
-
-    latent_values = int(
-        latent.tensor.reshape(
-            latent.tensor.shape[0],
-            -1,
-        ).shape[1]
-    )
-
-    padding_values = latent_values % 2
-
-    padded_values = (
-        latent_values
-        + padding_values
-    )
-
-    complex_channel_uses = (
-        padded_values // 2
-    )
-
-    source_values = int(
-        tensor.shape[1]
-        * tensor.shape[2]
-        * tensor.shape[3]
-    )
-
-    notebook_style_cbr = (
-        latent_values / source_values
-    )
-
-    return {
-        "name": "DeepJSCC",
-        "success": True,
-        "channel_uses": complex_channel_uses,
-        "source_bits": None,
-        "transmitted_bits": None,
-        "cbr": notebook_style_cbr,
-        "psnr_db": psnr_value,
-        "ssim": ssim_value,
-        "reason": "",
-        "latent_real_values": latent_values,
-        "padding_values": padding_values,
-        "latent_shape": tuple(
-            latent.tensor.shape
-        ),
-    }
-
-
-# ============================================================================
-# Summary
-# ============================================================================
-
-def print_summary(
-    results: list[dict],
-) -> None:
-    """Print a compact comparison table."""
-
-    print()
-    print("=" * 82)
-    print("COMMUNICATION COMPARISON")
-    print("=" * 82)
-
-    header = (
-        f"{'Method':<30}"
-        f"{'Success':<10}"
-        f"{'Channel Uses':>16}"
-        f"{'CBR':>12}"
-        f"{'PSNR':>10}"
-        f"{'SSIM':>10}"
-    )
-
-    print(header)
-    print("-" * 82)
-
-    for result in results:
-        channel_uses = result.get(
-            "channel_uses"
-        )
-
-        cbr = result.get("cbr")
-        psnr_value = result.get(
-            "psnr_db"
-        )
-        ssim_value = result.get(
-            "ssim"
-        )
-
-        channel_text = (
-            f"{channel_uses:,}"
-            if channel_uses is not None
-            else "-"
-        )
-
-        cbr_text = (
-            f"{cbr:.6f}"
-            if cbr is not None
-            else "-"
-        )
-
-        psnr_text = (
-            f"{psnr_value:.4f}"
-            if psnr_value is not None
-            else "-"
-        )
-
-        ssim_text = (
-            f"{ssim_value:.4f}"
-            if ssim_value is not None
-            else "-"
-        )
-
-        print(
-            f"{result['name']:<30}"
-            f"{str(result['success']):<10}"
-            f"{channel_text:>16}"
-            f"{cbr_text:>12}"
-            f"{psnr_text:>10}"
-            f"{ssim_text:>10}"
-        )
-
-    print("=" * 82)
-
-
-# ============================================================================
-# Main
-# ============================================================================
 
 def main() -> None:
-    """Run the benchmark."""
+    args = parse_args()
+    image = Image.open(args.image).convert("RGB")
+    rows = []
 
-    image_path = (
-        Path(sys.argv[1])
-        if len(sys.argv) >= 2
-        else DEFAULT_IMAGE
+    deep, _ = evaluate_deepjscc(
+        args.image,
+        args.deep_checkpoint,
+        args.deep_source_root,
+        snr_db=args.snr_db,
+        trials=args.trials,
+        tile_size=args.tile_size,
+        seed=args.seed,
     )
-
-    snr_db = (
-        float(sys.argv[2])
-        if len(sys.argv) >= 3
-        else DEFAULT_SNR_DB
+    rows.append(
+        {
+            "Method": "DeepJSCC",
+            "SNR_dB": args.snr_db,
+            "Complex_channel_uses": deep["complex_channel_uses"],
+            "CBR": deep["cbr"],
+            "Information_bits": None,
+            "Coded_bits": None,
+            "Frame_success_rate": 1.0,
+            "PSNR_dB_mean": deep["psnr_db_mean"],
+            "SSIM_mean": deep["ssim_mean"],
+            "Qualification": "Continuous JSCC symbols; no transmitted bitstream.",
+        }
     )
+    if args.ntscc_result is not None:
+        rows.append(load_ntscc_result(args.ntscc_result, image, args.snr_db))
 
-    jpeg_quality = (
-        int(sys.argv[3])
-        if len(sys.argv) >= 4
-        else DEFAULT_JPEG_QUALITY
+    raw = np.unpackbits(
+        np.frombuffer(np.asarray(image, dtype=np.uint8).tobytes(), dtype=np.uint8),
+        bitorder="big",
     )
-
-    digital_device = (
-        sys.argv[4]
-        if len(sys.argv) >= 5
-        else "cuda:0"
-    )
-
-    # ------------------------------------------------------------------
-    # Validate paths
-    # ------------------------------------------------------------------
-
-    if not image_path.exists():
-        raise FileNotFoundError(
-            f"Input image not found:\n{image_path}"
+    payloads = [("RAW + 5G-LDPC/QPSK/AWGN", raw, None)]
+    for quality in args.jpeg_qualities:
+        stream = encode_jpeg_for_transport(image, quality)
+        payloads.append(
+            (f"JPEG Q{quality} + 5G-LDPC/QPSK/AWGN", np.asarray(stream.bits), quality)
+        )
+    for method, bits, quality in payloads:
+        rows.append(
+            digital_trials(
+                image,
+                method,
+                bits.reshape(-1).astype(np.uint8),
+                quality,
+                args.snr_db,
+                args.trials,
+                args.device,
+                args.seed,
+            )
         )
 
-    if not CHECKPOINT.exists():
-        raise FileNotFoundError(
-            f"DeepJSCC checkpoint not found:\n{CHECKPOINT}"
-        )
-
-    if not SOURCE_ROOT.exists():
-        raise FileNotFoundError(
-            f"DeepJSCC source directory not found:\n{SOURCE_ROOT}"
-        )
-
-    image = Image.open(
-        image_path,
-    ).convert("RGB")
-
-    # ------------------------------------------------------------------
-    # Header
-    # ------------------------------------------------------------------
-
-    print()
-    print("=" * 82)
-    print("SEMANTIC COMMUNICATION BENCHMARK")
-    print("=" * 82)
-    print(
-        f"Image:            {image_path}"
-    )
-    print(
-        f"Resolution:       "
-        f"{image.width} x {image.height}"
-    )
-    print(
-        f"SNR / EsN0:       "
-        f"{snr_db} dB"
-    )
-    print(
-        f"JPEG quality:     "
-        f"{jpeg_quality}"
-    )
-    print(
-        f"Digital device:   "
-        f"{digital_device}"
-    )
-    print("=" * 82)
-
-    results: list[dict] = []
-
-    # ------------------------------------------------------------------
-    # DeepJSCC
-    # ------------------------------------------------------------------
-
-    print()
-    print("Running DeepJSCC...")
-
-    deepjscc_result = evaluate_deepjscc(
-        image=image,
-        snr_db=snr_db,
-    )
-
-    results.append(
-        deepjscc_result
-    )
-
-    print_result(
-        deepjscc_result,
-    )
-
-    print(
-        f"Latent shape:     "
-        f"{deepjscc_result['latent_shape']}"
-    )
-
-    print(
-        f"Latent real vals: "
-        f"{deepjscc_result['latent_real_values']:,}"
-    )
-
-    print(
-        f"Padding values:   "
-        f"{deepjscc_result['padding_values']}"
-    )
-
-    # ------------------------------------------------------------------
-    # RAW + JPEG
-    # ------------------------------------------------------------------
-
-    print()
-    print("Running RAW/JPEG digital baselines...")
-
-    try:
-        digital = LDPCQPSKAWGN(
-            information_block_bits=(
-                LDPC_INFORMATION_BITS
-            ),
-            codeword_bits=(
-                LDPC_CODEWORD_BITS
-            ),
-            iterations=(
-                LDPC_ITERATIONS
-            ),
-        )
-
-        raw_result = evaluate_raw(
-            image=image,
-            digital=digital,
-            snr_db=snr_db,
-            device=digital_device,
-        )
-
-        results.append(
-            raw_result
-        )
-
-        print_result(
-            raw_result,
-        )
-
-        jpeg_result = evaluate_jpeg(
-            image=image,
-            digital=digital,
-            snr_db=snr_db,
-            device=digital_device,
-            quality=jpeg_quality,
-        )
-
-        results.append(
-            jpeg_result
-        )
-
-        print_result(
-            jpeg_result,
-        )
-
-    except RuntimeError as error:
-        print()
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    json_path = args.output_dir / f"communication_comparison_{args.snr_db:g}db.json"
+    csv_path = args.output_dir / f"communication_comparison_{args.snr_db:g}db.csv"
+    json_path.write_text(json.dumps(rows, indent=2, allow_nan=True), encoding="utf-8")
+    columns = [
+        "Method",
+        "SNR_dB",
+        "Complex_channel_uses",
+        "CBR",
+        "Information_bits",
+        "Coded_bits",
+        "Frame_success_rate",
+        "PSNR_dB_mean",
+        "SSIM_mean",
+        "Qualification",
+    ]
+    with csv_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+    for row in rows:
         print(
-            "RAW/JPEG digital baselines unavailable."
+            f"{row['Method']}: uses={row['Complex_channel_uses']:,}, "
+            f"CBR={row['CBR']:.6f}, PSNR={row['PSNR_dB_mean']}, "
+            f"SSIM={row['SSIM_mean']}"
         )
-        print(
-            f"Reason: {error}"
-        )
-        print(
-            "DeepJSCC result above is still valid."
-        )
-
-    # ------------------------------------------------------------------
-    # Final comparison
-    # ------------------------------------------------------------------
-
-    print_summary(
-        results,
-    )
-
-    print()
-    print("Benchmark completed.")
+    print(f"Saved: {csv_path}")
+    print(f"Saved: {json_path}")
 
 
 if __name__ == "__main__":
