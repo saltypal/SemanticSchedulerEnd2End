@@ -54,3 +54,21 @@ encoder/decoder time, memory and model complexity, PSNR/SSIM/LPIPS, exact source
 payload compression, and complex-channel-use CBR where the method defines it.
 JPEG quality points and lossless RAW RGB24 are built in. See
 `docs/KODAK24_BENCHMARK.md` for the metric and team CSV contract.
+
+To reproduce the repaired DeepJSCC/NTSCC notebook methods on Windows, point
+`SEMCOM_EXPERIMENT_ROOT` at the local experiment directory that contains its
+`.venv`, `semcom_benchmark`, official source trees, checkpoints, and calibration
+cache. The universal notebook then adds native DeepJSCC, native NTSCC,
+DeepJSCC K=256 codebook, and rate-conditioned NTSCC PQ4 K=256 automatically.
+The NTSCC codebook excludes every Kodak calibration record for an unbiased
+24-image test. Its width-2 fallback codebook is derived only from active values
+in those same CIFAR-10 training latents. From this repository, the reproducible
+local command is:
+
+```powershell
+.\scripts\run_repaired_kodak24_notebook.ps1
+```
+
+The runner uses one deterministic channel seed per image, one timed pass, all
+24 images, LPIPS, and atomic CSV append. Override `-ExperimentRoot`,
+`-Contributor`, or `-RunId` when needed.

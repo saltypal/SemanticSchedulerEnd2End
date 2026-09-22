@@ -468,7 +468,9 @@ def benchmark_codec(
                 reference.to(lpips_device), reconstruction.to(lpips_device)
             ) if lpips_metric else None,
             "timing_repetitions": timing_repetitions,
-            "notes": notes,
+            "notes": "; ".join(
+                value for value in (notes, str(getattr(codec, "notes", ""))) if value
+            ),
         }
         rows.append(row)
         print(

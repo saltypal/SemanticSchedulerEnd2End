@@ -37,6 +37,29 @@ shows per-image and aggregate tables, and atomically appends measurements to
 6. Commit the notebook/model integration and `results/kodak24_benchmark.csv`.
    The downloaded `data/Kodak24/` directory stays local and is ignored by Git.
 
+### Repaired DeepJSCC/NTSCC notebook assets
+
+Set `SEMCOM_EXPERIMENT_ROOT` to the external experiment directory before
+opening the universal notebook. When present, the notebook loads the two strict
+official checkpoints and adds native DeepJSCC, native NTSCC, DeepJSCC K=256,
+and rate-conditioned NTSCC PQ4 K=256. The digital codebook packets use the
+team's CRC, rate-1/2 LDPC, QPSK and AWGN path. For the full Kodak benchmark,
+the NTSCC quantizer uses only its cached CIFAR-10 training calibration records;
+Kodak calibration records from the one-image research notebook are excluded.
+Because those CIFAR records contain only rate widths divisible by four, the
+wrapper also fits the required exact-width-2 global fallback from adjacent
+active values in the same CIFAR latents. No Kodak image is used for fitting.
+
+On Nandini's Windows experiment layout, run:
+
+```powershell
+.\scripts\run_repaired_kodak24_notebook.ps1
+```
+
+The wrapper supplies the experiment root, contributor, unique run ID, a single
+timed reconstruction per image, and the explicit append switch. Teammates can
+use the same command with `-ExperimentRoot` and `-Contributor` overrides.
+
 The append function de-duplicates by `(run_id, method, operating_point,
 image_id)`, uses an exclusive lock, validates the fixed schema, and replaces the
 CSV atomically. It does not solve Git conflicts between branches, so always pull
