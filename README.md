@@ -1,12 +1,12 @@
 # SemanticSchedulerEnd2End
 
-This repository is the single source of truth for the Stage 1A semantic-communication experiment. The only active Stage 1A notebook is [01_stage1a_complete_kaggle.ipynb](notebooks/Stage1A/01_stage1a_complete_kaggle.ipynb). It clones this repository at a pinned revision and invokes the repository code; the notebook does not duplicate a second implementation.
+This repository is the single source of truth for the Stage 1A communication experiment and the modular Stage 1B semantic-header prototype. Stage 1A remains isolated in [01_stage1a_complete_kaggle.ipynb](Notebooks/Stage1A/01_stage1a_complete_kaggle.ipynb); Stage 1B/1C notebooks import repository modules rather than duplicating their implementation.
 
 ## Stage 1A boundary
 
 `INFRA` owns interfaces, typed artifacts, registries, orchestration and runtime state only. Encoders, codebooks, channels, classical baselines and evaluation live in their independent top-level packages. `TransformerPipeline/TransformerParam` and `TransformerPipeline/KnowledgeBases` are siblings: current-input evidence and historical/context evidence remain separate.
 
-Operational Stage 1A components are SwinJSCC, AWGN/Rayleigh channel primitives, K=256 MiniBatchKMeans VQ, JPEG plus optional Sionna 5G-LDPC/QPSK, and image/compression/communication/report evaluation. Semantic extraction, knowledge stores, semantic/RL schedulers, NS-3, Sionna system-level and O-RAN adapters fail explicitly. They do not return fake output.
+Operational Stage 1A components are SwinJSCC, AWGN/Rayleigh channel primitives, K=256 MiniBatchKMeans VQ, JPEG plus optional Sionna 5G-LDPC/QPSK, and image/compression/communication/report evaluation. Stage 1B adds a CLIP-backed image semantic extractor, a local NetworkX knowledge-base baseline, and a compact logical semantic-header sidecar. Semantic/RL scheduling, NS-3, Sionna system-level, O-RAN generation, Redis, vector-store, global-memory, and richer-KG adapters remain explicit unavailable placeholders.
 
 ## Reproducible local checks
 
@@ -17,10 +17,11 @@ cd D:\Bunker\BaseCamp\WirelessCommunication\SemanticComms\SemanticSchedulerEnd2E
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r environment\requirements-local-inference.lock
-pip install -e .[benchmark,metrics,test]
+pip install -e .[benchmark,metrics,test,stage1b,notebook]
 python scripts\bootstrap_swinjscc.py
 python -m pytest Test\tests
 python E2EMain.py --config config\stage1a.yaml --action validate
+python E2EMain.py --config config\stage1b.yaml --action semantic-validate
 ```
 
 `bootstrap_swinjscc.py` checks out exactly `a6d0e6da53548976acbe9317839a077ef31f190f` and applies a narrow, version-checked correction: complex real/imaginary halves are paired inside each image rather than across a flattened minibatch. This is required for valid multi-sample `DataParallel` shards.
@@ -55,6 +56,7 @@ payload compression, and complex-channel-use CBR where the method defines it.
 JPEG quality points and lossless RAW RGB24 are built in. See
 `docs/KODAK24_BENCHMARK.md` for the metric and team CSV contract.
 
+<<<<<<< HEAD
 To reproduce the repaired DeepJSCC/NTSCC notebook methods on Windows, point
 `SEMCOM_EXPERIMENT_ROOT` at the local experiment directory that contains its
 `.venv`, `semcom_benchmark`, official source trees, checkpoints, and calibration
@@ -72,3 +74,40 @@ local command is:
 The runner uses one deterministic channel seed per image, one timed pass, all
 24 images, LPIPS, and atomic CSV append. Override `-ExperimentRoot`,
 `-Contributor`, or `-RunId` when needed.
+=======
+## Stage 1B semantic-header prototype
+
+Stage 1B uses exactly seven configurable fields: `AoI_seconds`, `freshness`, `novelty`, `relevance`, `reliability`, `urgency`, and `task_importance`. Every field is a `ParameterValue` with value, raw evidence, availability, method, source, version, producer level, and provenance. Missing evidence stays unavailable; it is never replaced with a random or zero score.
+
+The Transformer path runs CLIP once per image, caches task/concept text embeddings, queries the knowledge base before recording the image, and emits a `SemanticParameterBundle`. `reliability` is specifically a visual semantic-confidence proxy, not an independently verified source-trust score. `urgency` is derived only from a deadline/context and is unavailable when no deadline is supplied.
+
+The compact semantic header is a versioned TLV sidecar paired with, but not injected into, Stage 1A's native latent or communication VQ packet. It must therefore be measured separately from existing Stage 1A VQ bit accounting.
+
+To run the fixed demonstration sequence in `Test/images`, first supply a manifest-validated Stage 1A model directory and an optional pre-trained Stage 1A communication-VQ artifact:
+
+```powershell
+python E2EMain.py --config config\stage1b.yaml --action semantic-run --param-extractor transformer --model-dir models\SwinJSCC --communication-codebook models\Codebooks\swinjscc_tx_k256.joblib --output-plot results\stage1b_transformer_showcase.png
+```
+
+The CLI prints `SEMANTIC HEADER`, then `NATIVE LATENT PAYLOAD`, then `COMMUNICATION VQ PAYLOAD` for each image. Omit `--communication-codebook` only when the existing Stage 1A VQ artifact is unavailable; the result explicitly labels that payload as unavailable.
+
+## Stage 1C demonstration codebook
+
+`CodebookParam` is a semantic-parameter codebook and is completely separate from `EncDecPipeline/Codebooks`. Offline training pairs a pre-modulation SwinJSCC representation with CLIP teacher targets. At runtime it consumes only pooled Swin semantic features plus metadata/knowledge-base evidence; it never invokes CLIP.
+
+The local codebook training corpus must contain at least ten distinct images outside `Test/images`. The training notebook hard-fails on SHA-256 overlap and saves an artifact marked `demo_only=true`; it is not generalization evidence.
+
+```powershell
+python scripts\build_stage1b_notebooks.py
+jupyter lab Notebooks\Stage1C\01_train_parameter_codebook_local.ipynb
+jupyter lab Notebooks\Stage1B\02_transformer_vs_codebook_semantic_header.ipynb
+```
+
+After the demo artifact exists, select the same downstream bundle API through:
+
+```powershell
+python E2EMain.py --config config\stage1b.yaml --action semantic-run --param-extractor codebook --model-dir models\SwinJSCC --semantic-codebook models\SemanticCodebooks\emergency_building_fire_demo.npz
+```
+
+The codebook rejects a missing or mismatched task-profile artifact rather than silently invoking CLIP or fabricating values. No scheduler behavior is implemented in this stage.
+>>>>>>> cd021d8 (changes)

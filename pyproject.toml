@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "semantic-scheduler-end2end"
-version = "0.1.0"
-description = "Corrected modern PyTorch Stage 1A semantic communication research port"
+version = "0.2.0"
+description = "Corrected Stage 1A communication and modular Stage 1B semantic-header research prototype"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
@@ -25,6 +25,18 @@ benchmark = [
     "psutil>=6,<8",
 ]
 test = ["pytest>=8,<9"]
+stage1b = [
+    "networkx>=3.3,<4",
+    "transformers>=4.46,<5",
+    "psutil>=5.9,<7",
+]
+notebook = [
+    "ipykernel>=6.29,<8",
+    "nbformat>=5.10,<6",
+    "nbclient>=0.10,<1",
+    "jupyterlab>=4.3,<5",
+    "pandas>=2.2,<3",
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}

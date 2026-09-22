@@ -1,0 +1,15 @@
+extends: stage1b.yaml
+
+# Local engineering demonstration only. This is not a research training split.
+parameter_codebook:
+  task_profile_id: emergency_building_fire
+  training_image_root: data/parameter_codebook/train
+  artifact_path: models/SemanticCodebooks/emergency_building_fire_demo.npz
+  minimum_distinct_images: 10
+  codebook_size: 4
+  random_state: 20260906
+  demo_only: true
+  training_dataset:
+    name: Kodak image suite
+    source: https://r0k.us/graphics/kodak/kodak/
+    image_count: 24

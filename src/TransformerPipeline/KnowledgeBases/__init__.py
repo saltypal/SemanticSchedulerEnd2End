@@ -1,12 +1,29 @@
-"""Historical/context evidence contract. This is a sibling, not a child, of TransformerParam."""
+"""Historical/context evidence stores; separate from current-input extraction."""
 
-from INFRA.errors import ComponentUnavailableError
+from INFRA.Registries import KNOWLEDGE_REGISTRY
+from TransformerPipeline.KnowledgeBases.networkx_baseline import NetworkXKnowledgeBase
+from TransformerPipeline.KnowledgeBases.scalable_placeholders import (
+    GlobalMemoryKnowledgeBase,
+    RedisKnowledgeBase,
+    RichKnowledgeGraph,
+    VectorStoreKnowledgeBase,
+)
 
 
-class Stage1BKnowledgeBase:
-    def __init__(self) -> None:
-        raise ComponentUnavailableError(
-            "KnowledgeBases subsystem",
-            "Stage 1A",
-            "Redis, graph, vector and event-history stores are deferred to Stage 1B.",
-        )
+def register_networkx_knowledge_base() -> None:
+    if not KNOWLEDGE_REGISTRY.contains("networkx_local"):
+        KNOWLEDGE_REGISTRY.register("networkx_local", NetworkXKnowledgeBase)
+
+
+# Preserve the original public name while making Stage 1B genuinely usable.
+Stage1BKnowledgeBase = NetworkXKnowledgeBase
+
+__all__ = [
+    "GlobalMemoryKnowledgeBase",
+    "NetworkXKnowledgeBase",
+    "RedisKnowledgeBase",
+    "RichKnowledgeGraph",
+    "Stage1BKnowledgeBase",
+    "VectorStoreKnowledgeBase",
+    "register_networkx_knowledge_base",
+]

@@ -6,7 +6,6 @@ from EncDecPipeline.Models.SwinJSCC.adapter import register_swinjscc
 from Evaluation.image_evaluator import register_image_quality_evaluator
 from INFRA.Core.stage_controller import StageController
 from INFRA.Registries import CHANNEL_REGISTRY, CODEBOOK_REGISTRY, ENCDEC_REGISTRY, EVALUATOR_REGISTRY
-from INFRA.errors import ComponentUnavailableError
 from TransformerPipeline.KnowledgeBases import Stage1BKnowledgeBase
 
 
@@ -22,8 +21,8 @@ def test_stage1a_concrete_components_are_registered_without_importing_torch() ->
     assert create_channel("awgn").name == "awgn"
 
 
-def test_stage1b_is_explicitly_unavailable() -> None:
-    with pytest.raises(ComponentUnavailableError, match="Stage 1A"):
-        Stage1BKnowledgeBase()
-    with pytest.raises(ComponentUnavailableError):
-        StageController().require_available("stage1b")
+def test_stage1b_networkx_baseline_is_available_without_touching_stage1a_registries() -> None:
+    pytest.importorskip("networkx")
+    knowledge_base = Stage1BKnowledgeBase()
+    assert knowledge_base.name == "networkx_local"
+    StageController().require_available("stage1b")

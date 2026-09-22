@@ -1,12 +1,8 @@
-"""Current-input semantic evidence contract. Stage 1B implementation is deferred."""
+"""Current-input Transformer semantic extraction public boundary."""
 
-from INFRA.errors import ComponentUnavailableError
+from TransformerPipeline.pipeline import TransformerParameterPipeline
 
 
-class Stage1BParameterExtractor:
-    def __init__(self) -> None:
-        raise ComponentUnavailableError(
-            "TransformerParam extractor",
-            "Stage 1A",
-            "Current-input semantic parameter inference begins in Stage 1B.",
-        )
+Stage1BParameterExtractor = TransformerParameterPipeline
+
+__all__ = ["Stage1BParameterExtractor", "TransformerParameterPipeline"]

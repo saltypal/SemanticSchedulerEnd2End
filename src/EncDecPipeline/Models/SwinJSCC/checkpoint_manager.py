@@ -125,7 +125,20 @@ class Stage1ArtifactManifest:
             raise RuntimeError("Loaded upstream commit does not match the exported artifact.")
         if source_info.get("patch_version") != expected["patch_version"]:
             raise RuntimeError("Loaded upstream patch version does not match the exported artifact.")
-        if source_info.get("source_hashes") != expected["source_hashes"]:
+        actual_hashes = {}
+        for relative_path in expected["source_hashes"]:
+            source_path = self.upstream_root / relative_path
+            if not source_path.exists():
+                raise FileNotFoundError(f"Patched upstream source file is unavailable: {source_path}")
+
+            # The artifact manifest was exported on Linux, where source files use
+            # LF line endings. Git may materialize the same audited source with
+            # CRLF on Windows. Hash a canonical LF form so this validation checks
+            # source content rather than the checkout platform's line endings.
+            canonical_source = source_path.read_bytes().replace(b"\r\n", b"\n")
+            actual_hashes[relative_path] = hashlib.sha256(canonical_source).hexdigest()
+
+        if actual_hashes != expected["source_hashes"]:
             raise RuntimeError("Patched upstream source hashes do not match the exported artifact.")
 
     def load_tensor_states(self, adapter: Any) -> None:
