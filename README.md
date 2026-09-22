@@ -17,7 +17,7 @@ cd D:\Bunker\BaseCamp\WirelessCommunication\SemanticComms\SemanticSchedulerEnd2E
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r environment\requirements-local-inference.lock
-pip install -e .[metrics,test]
+pip install -e .[benchmark,metrics,test]
 python scripts\bootstrap_swinjscc.py
 python -m pytest Test\tests
 python E2EMain.py --config config\stage1a.yaml --action validate
@@ -45,3 +45,12 @@ This is a corrected modern PyTorch port, **not** a claim of paper-exact replicat
 ## Kaggle
 
 Set `PROJECT_GIT_URL` in the active notebook after this local Git repository is pushed to a remote, retain its `PROJECT_REF`, and enable Kaggle Internet for the initial clone. The notebook verifies Kaggle's CUDA-enabled PyTorch environment; it never replaces the supplied torch wheel. It hard-fails if DIV2K/Kodak paths are absent and never trains on synthetic fallback images.
+
+## Shared Kodak-24 benchmark
+
+`Notebooks/Kodak24_All_Model_Benchmark.ipynb` is the model-agnostic local
+evaluation entry point. It evaluates all 24 native-resolution images, records
+encoder/decoder time, memory and model complexity, PSNR/SSIM/LPIPS, exact source
+payload compression, and complex-channel-use CBR where the method defines it.
+JPEG quality points and lossless RAW RGB24 are built in. See
+`docs/KODAK24_BENCHMARK.md` for the metric and team CSV contract.
