@@ -25,8 +25,9 @@ LFS collection while excluding existing local Swin and codebook artifacts.
 ## Model availability and limits
 
 The incoming `.pt` and `.pkl` files are Git LFS assets. A checkout with only
-pointer files cannot load them. Run `git lfs pull` when network and storage are
-available, then check actual hashes against `models/MANIFEST.sha256`. The two
+pointer files cannot load them. During the local `main` fast-forward, Git LFS
+hydrated all 32 assets; their actual SHA-256 hashes match
+`models/MANIFEST.sha256`. Other clones may still need `git lfs pull`. The two
 production `.pth` checkpoints used by the repaired four-method comparison are
 not in this Git repository: their expected locations and original hashes are
 documented in `models/DeepJSCC/README.md` and `models/NTSCC/README.md`. The

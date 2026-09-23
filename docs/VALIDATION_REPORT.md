@@ -101,9 +101,10 @@ Graph refresh: `python scripts/refresh_graph.py --semantic docs/architecture_sem
   evaluator factory imports successfully. Focused worker/factory tests pass.
 - Both incoming notebooks pass `nbformat` structural validation. Their full
   execution was not attempted because the production model checkpoints are absent.
-- The 32 entries in `models/MANIFEST.sha256` are present as Git LFS pointers;
-  each pointer SHA-256 object ID matches the manifest. **None is hydrated in
-  this checkout.** This checks tracked object identity, not the model bytes.
+- The 32 entries in `models/MANIFEST.sha256` initially arrived as Git LFS
+  pointers, each with an object ID matching the manifest. Local `main`
+  fast-forward hydrated all 32; **actual asset bytes** now match their
+  recorded SHA-256 hashes. This validates storage integrity, not inference.
 - The two production `.pth` checkpoints for the repaired DeepJSCC/NTSCC
   comparison are not present in this repository. No post-merge real inference
   result is claimed for those methods.
