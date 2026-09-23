@@ -110,7 +110,9 @@ def resolve_config(path=None, overrides=None):
     for dependency in config.get('dependencies', {}).values():
         if not isinstance(dependency, dict):
             raise ValueError('Each dependency must be a mapping')
-        for key in ('python','source_root','checkpoint','experiment_root','team_root'):
+        for key in ('python','source_root','checkpoint','experiment_root','team_root',
+                    'deep_checkpoint','ntscc_checkpoint','cifar_root','calibration_cache',
+                    'deep_source_root','ntscc_source_root'):
             if key in dependency:
                 candidate = Path(os.path.expandvars(os.path.expanduser(str(dependency[key]))))
                 dependency[key] = str((candidate if candidate.is_absolute() else path.parent/candidate).resolve())

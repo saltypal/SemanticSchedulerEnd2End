@@ -1,12 +1,18 @@
 param(
-    [string]$ExperimentRoot = "D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom",
+    [string]$ExperimentRoot = "",
     [string]$Contributor = "Nandini.P",
     [string]$RunId = ""
 )
 
 $ErrorActionPreference = "Stop"
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+if ([string]::IsNullOrWhiteSpace($ExperimentRoot)) {
+    $ExperimentRoot = $projectRoot
+}
 $python = Join-Path $ExperimentRoot ".venv\Scripts\python.exe"
+if (-not (Test-Path -LiteralPath $python)) {
+    $python = Join-Path (Split-Path $ExperimentRoot -Parent) ".venv\Scripts\python.exe"
+}
 if (-not (Test-Path -LiteralPath $python)) {
     throw "Required repaired-notebook environment not found: $python"
 }

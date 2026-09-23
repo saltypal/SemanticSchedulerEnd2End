@@ -27,8 +27,14 @@ def main():
     files = dataset_files(Path(config['paths']['kodak']))
     if config['action']=='smoke':
         files=files[:1]
+    produced = factory(config)
+    if isinstance(produced, tuple) and len(produced) == 2 and isinstance(produced[1], dict):
+        codecs, factory_provenance = produced
+        write_json(output/'factory_provenance.json',factory_provenance)
+    else:
+        codecs = produced
     outcomes=[]
-    for codec in factory(config):
+    for codec in codecs:
         rows, status = benchmark_with_outcomes(codec,files,run_id=request['run_id'],project_root=Path(__file__).resolve().parents[1],
             timing_repetitions=config['benchmark']['timing_repetitions'],compute_lpips=config['benchmark']['compute_lpips'])
         append_rows_csv(output/'benchmark.csv',rows)

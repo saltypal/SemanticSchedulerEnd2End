@@ -2,6 +2,8 @@
 
 Legacy imports are compatibility aliases to canonical implementations.
 
+Teammate consolidation from `origin/main` commit `1e44baa` adds `semcom_benchmark/*.py` → `EncDec/Research/*.py`. The original `semcom_benchmark` imports remain aliases for the repaired notebooks. The teammate's updated `src/Evaluation/repaired_notebook_models.py` asset paths and calibration exclusion are implemented in `EncDec/Evaluation/repaired_notebook_models.py`; the `src/` path remains a thin alias. `references/` and `models/` preserve source/checkpoint artifacts rather than becoming executable modules.
+
 - `src\Baselines\__init__.py` -> `EncDec\Baselines\__init__.py`
 - `src\Baselines\DigitalPHY\__init__.py` -> `INFRA\Transport\DigitalPHY\__init__.py`
 - `src\Baselines\DigitalPHY\bit_utils.py` -> `INFRA\Transport\DigitalPHY\bit_utils.py`

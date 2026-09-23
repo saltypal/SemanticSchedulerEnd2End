@@ -6,3 +6,15 @@ From the repository root: `python E2EMain.py --module EncDec --action validate`.
 Tests: `python -m pytest EncDec/tests -q`.
 Outputs: configured results directory / `EncDec` / unique run ID.
 Environment: install `environment/requirements.txt` from the repository root.
+
+The teammate's consolidated DeepJSCC/NTSCC benchmark code lives in `Research/`.
+`semcom_benchmark/` and `src/Evaluation/repaired_notebook_models.py` preserve
+historical notebook imports. The canonical factory is
+`EncDec.Evaluation.repaired_notebook_models:build_team_benchmark_codecs`.
+Configure it through `dependencies.deepjscc`, `dependencies.ntscc`, or
+`dependencies.external_worker`; the first two run one native model each, while
+`external_worker` can run the native and codebook methods together. The
+checkpoint-compatible source snapshots are under `references/`, and the
+production `.pth` files remain explicit external inputs. `models/` also has
+Git LFS assets that must be hydrated before use. See `README.md` section 14
+and `docs/MAIN_MERGE_1E44BAA.md` for setup and validation limits.

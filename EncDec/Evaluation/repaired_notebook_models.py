@@ -1,14 +1,13 @@
-"""Adapters for the repaired DeepJSCC/NTSCC Windows benchmark assets.
+"""Benchmark adapters for the team's DeepJSCC and NTSCC research methods.
 
-The external research repositories and checkpoints remain outside this Git
-repository.  Set ``SEMCOM_EXPERIMENT_ROOT`` to the directory containing
-``semcom_benchmark/``, ``Deep-JSCC-PyTorch/``, ``NTSCC_JSAC22/`` and ``data/``.
+The source snapshots and optional LFS assets live in this repository. The two
+production ``.pth`` checkpoints and CIFAR calibration data remain configurable
+external inputs. Historical notebooks import this module through ``src/``.
 """
 
 from __future__ import annotations
 
 import math
-import sys
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Mapping
@@ -37,6 +36,16 @@ def _module_with_storage(module: Any, extra_bytes: int = 0) -> dict[str, int | f
     result = module_complexity([module])
     result["model_size_mb"] = float(result["model_size_mb"] or 0.0) + extra_bytes / (1024**2)
     return result
+
+
+def _require_assets(paths: tuple[Path, ...], serialized: tuple[Path, ...]) -> None:
+    missing = [str(path) for path in paths if not path.exists()]
+    if missing:
+        raise FileNotFoundError("Repaired-notebook experiment root is incomplete: " + ", ".join(missing))
+    for path in serialized:
+        with path.open("rb") as stream:
+            if stream.read(64).startswith(b"version https://git-lfs.github.com/spec/v1"):
+                raise RuntimeError(f"Git LFS asset has not been downloaded: {path}")
 
 
 def _add_cifar_partial_block_fallbacks(quantizer: Any, calibration: list[Any]) -> list[int]:
@@ -263,46 +272,57 @@ def build_repaired_notebook_codecs(
     *,
     snr_db: float = 10.0,
     base_seed: int = 42,
+    deep_checkpoint: str | Path | None = None,
+    ntscc_checkpoint: str | Path | None = None,
+    cifar_root: str | Path | None = None,
+    calibration_cache: str | Path | None = None,
+    deep_source_root: str | Path | None = None,
+    ntscc_source_root: str | Path | None = None,
 ) -> tuple[list[Any], dict[str, Any]]:
-    """Load the repaired notebook assets and build its four benchmark methods."""
+    """Build four methods with explicit, validated source and data locations."""
+    experiment_root = Path(experiment_root).resolve()
+    team_root = Path(team_root).resolve()
+    deep_source = Path(deep_source_root or experiment_root / "references" / "DeepJSCC_checkpoint_source").resolve()
+    ntscc_source = Path(ntscc_source_root or experiment_root / "references" / "NTSCC_JSAC22_official").resolve()
+    deep_weights = Path(deep_checkpoint or experiment_root.parent / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth").resolve()
+    ntscc_weights = Path(ntscc_checkpoint or experiment_root.parent / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth").resolve()
+    cifar_data = Path(cifar_root or experiment_root.parent / "data").resolve()
+    cache = Path(calibration_cache or experiment_root / "models" / "NTSCC" / "calibration" / "calibration_500_cifar_plus_23_kodak.pt").resolve()
+    required = (
+        deep_source,
+        ntscc_source,
+        deep_weights,
+        ntscc_weights,
+        cache,
+        cifar_data,
+    )
+    _require_assets(required, (deep_weights, ntscc_weights, cache))
+
     import torch
     from PIL import Image
     from torchvision.datasets import CIFAR10
 
-    experiment_root = Path(experiment_root).resolve()
-    team_root = Path(team_root).resolve()
-    required = (
-        experiment_root / "semcom_benchmark",
-        experiment_root / "Deep-JSCC-PyTorch",
-        experiment_root / "NTSCC_JSAC22",
-    )
-    missing = [str(path) for path in required if not path.exists()]
-    if missing:
-        raise FileNotFoundError(f"Repaired-notebook experiment root is incomplete: {missing}")
-    if str(experiment_root) not in sys.path:
-        sys.path.insert(0, str(experiment_root))
-
-    from semcom_benchmark.codebooks import K256LatentCodebook
-    from semcom_benchmark.digital_phy import TeamDigitalPHY
-    from semcom_benchmark.metrics import as_bchw01
-    from semcom_benchmark.model_wrappers import DeepJSCCAdapter, NTSCCWindowsAdapter
-    from semcom_benchmark.ntscc_rate_conditioned_vq import RateConditionedConfig, RateConditionedPQ
+    from EncDec.Research.codebooks import K256LatentCodebook
+    from EncDec.Research.digital_phy import TeamDigitalPHY
+    from EncDec.Research.metrics import as_bchw01
+    from EncDec.Research.model_wrappers import DeepJSCCAdapter, NTSCCWindowsAdapter
+    from EncDec.Research.ntscc_rate_conditioned_vq import RateConditionedConfig, RateConditionedPQ
 
     device = torch.device("cpu")
     deep = DeepJSCCAdapter(
-        experiment_root / "references" / "DeepJSCC_checkpoint_source",
-        experiment_root / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth",
+        deep_source,
+        deep_weights,
         device,
         snr_db,
     )
     ntscc = NTSCCWindowsAdapter(
-        experiment_root / "references" / "NTSCC_JSAC22_official",
-        experiment_root / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth",
+        ntscc_source,
+        ntscc_weights,
         device,
         snr_db,
     )
 
-    cifar = CIFAR10(root=str(experiment_root / "data"), train=True, download=False)
+    cifar = CIFAR10(root=str(cifar_data), train=True, download=False)
     calibration_latents = []
     for index in range(8):
         image = cifar[index][0].convert("RGB").resize((128, 128), Image.Resampling.BICUBIC)
@@ -310,7 +330,6 @@ def build_repaired_notebook_codecs(
         calibration_latents.append(records[0][2])
     deep_codebook = K256LatentCodebook("deepjscc_k256", team_root).fit(calibration_latents)
 
-    cache = experiment_root / "benchmark_outputs" / "ntscc_rate_conditioned_sweep" / "calibration_500_cifar_plus_23_kodak.pt"
     cached = torch.load(cache, map_location="cpu", weights_only=False)
     # The cache contains 16 CIFAR batches followed by 23 Kodak records. Only
     # CIFAR is retained so no Kodak test image contributes to codebook fitting.
@@ -329,6 +348,10 @@ def build_repaired_notebook_codecs(
     ]
     provenance = {
         "experiment_root": str(experiment_root),
+        "deepjscc_source": str(deep_source),
+        "ntscc_source": str(ntscc_source),
+        "cifar_root": str(cifar_data),
+        "calibration_cache": str(cache),
         "deepjscc_checkpoint_sha256": deep.validation["checkpoint_sha256"],
         "ntscc_checkpoint_sha256": ntscc.validation["checkpoint_sha256"],
         "deepjscc_codebook_sha256": deep_codebook.content_hash(),
@@ -342,4 +365,52 @@ def build_repaired_notebook_codecs(
         "snr_definition": "Es/N0_dB",
         "base_seed": int(base_seed),
     }
+    return methods, provenance
+
+
+def build_team_benchmark_codecs(config: dict[str, Any]) -> tuple[list[Any], dict[str, Any]]:
+    """Build a native codec independently, or all four team benchmark methods."""
+    project_root = Path(__file__).resolve().parents[2]
+    dependency = config.get("dependencies", {}).get(config["implementation"], {})
+    if config["device"] not in ("auto", "cpu"):
+        raise ValueError("The repaired team benchmark factory currently supports CPU only")
+    selected = config["implementation"]
+    if selected in ("deepjscc", "ntscc"):
+        if selected == "deepjscc":
+            source = Path(dependency.get("deep_source_root") or project_root / "references" / "DeepJSCC_checkpoint_source").resolve()
+            checkpoint = Path(dependency.get("deep_checkpoint") or dependency.get("checkpoint") or project_root.parent / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth").resolve()
+            _require_assets((source, checkpoint), (checkpoint,))
+            from EncDec.Research.model_wrappers import DeepJSCCAdapter
+            import torch
+            adapter = DeepJSCCAdapter(source, checkpoint, torch.device("cpu"), config["benchmark"]["snr_db"])
+            codec = RepairedDeepJSCCCodec(adapter, config["benchmark"]["snr_db"], config["seed"])
+        else:
+            source = Path(dependency.get("ntscc_source_root") or project_root / "references" / "NTSCC_JSAC22_official").resolve()
+            checkpoint = Path(dependency.get("ntscc_checkpoint") or dependency.get("checkpoint") or project_root.parent / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth").resolve()
+            _require_assets((source, checkpoint), (checkpoint,))
+            from EncDec.Research.model_wrappers import NTSCCWindowsAdapter
+            import torch
+            adapter = NTSCCWindowsAdapter(source, checkpoint, torch.device("cpu"), config["benchmark"]["snr_db"])
+            codec = RepairedNTSCCCodec(adapter, config["benchmark"]["snr_db"], config["seed"])
+        return [codec], {
+            "source": str(source), "checkpoint": str(checkpoint),
+            "checkpoint_sha256": adapter.validation["checkpoint_sha256"],
+            "selected_methods": [codec.name],
+            "snr_db": float(config["benchmark"]["snr_db"]),
+            "base_seed": int(config["seed"]),
+        }
+
+    methods, provenance = build_repaired_notebook_codecs(
+        project_root,
+        project_root,
+        snr_db=float(config["benchmark"]["snr_db"]),
+        base_seed=int(config["seed"]),
+        deep_checkpoint=dependency.get("deep_checkpoint"),
+        ntscc_checkpoint=dependency.get("ntscc_checkpoint"),
+        cifar_root=dependency.get("cifar_root"),
+        calibration_cache=dependency.get("calibration_cache"),
+        deep_source_root=dependency.get("deep_source_root"),
+        ntscc_source_root=dependency.get("ntscc_source_root"),
+    )
+    provenance["selected_methods"] = [codec.name for codec in methods]
     return methods, provenance

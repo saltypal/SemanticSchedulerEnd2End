@@ -6,12 +6,14 @@ This rebuild replaces stage-based implementation ownership. Existing stage impor
 
 | Module | Inputs → outputs | Important files | Boundary / acceptance |
 |---|---|---|---|
-| EncDec | RGB tensor/image → encoded representation → reconstructed image; benchmark rows | `runtime.py`, `catalog.py`, `Evaluation/kodak_benchmark.py`, `Models/`, `Codebooks/`, `training.py` | Owns codecs and communication VQ; Kodak keeps 24 images, schema and append dedup |
+| EncDec | RGB tensor/image → encoded representation → reconstructed image; benchmark rows | `runtime.py`, `catalog.py`, `Evaluation/kodak_benchmark.py`, `Models/`, `Research/`, `Codebooks/`, `training.py` | Owns codecs and communication VQ; Kodak keeps 24 images, schema and append dedup |
 | SemParam | image or explicit feature provider + task/context → provenanced ParameterValue bundle | `runtime.py`, `pipeline.py`, `Codebooks/pipeline.py`, `clip_backbone.py`, `evaluation/coverage.py` | Image path loads no codec; missing values remain unavailable |
 | Scheduler | immutable QueueSnapshot + ResourceBudget → Decision | `policies.py`, `fixtures.py`, `evaluation/report.py` | No neural imports; deterministic selection; no queue mutation |
 | INFRA | root config + jobs/modules → simulation traces + run artifacts | `configuration.py`, `contracts.py`, `simulation.py`, `runs.py`, `cli.py`, `workers.py` | Owns arrivals, clock, deadlines, queues, transport and persistence |
 
 Each module owns its README, config defaults, environment requirements, tests, evaluation and active notebooks. Modules have maintainers by responsibility, not hardcoded personal names. Coordinate changes to INFRA contracts with consumers and add integration tests.
+
+The teammate's `1e44baa` consolidation adds checkpoint-compatible DeepJSCC/NTSCC source snapshots under `references/`, Git LFS assets under `models/`, and benchmark code now owned by `EncDec/Research/`. `semcom_benchmark/` keeps historical notebook imports and `src/Evaluation/repaired_notebook_models.py` aliases the canonical EncDec evaluator. Production `.pth` checkpoints are configured external inputs, not files in this Git repository. See `docs/MAIN_MERGE_1E44BAA.md` for asset and validation status.
 
 ## Control and data flow
 

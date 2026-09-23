@@ -3,9 +3,11 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import pytest
 
 
-def test_isolated_worker_produces_benchmark_and_environment(tmp_path):
+@pytest.mark.parametrize('factory_provenance', [False, True])
+def test_isolated_worker_produces_benchmark_and_environment(tmp_path, factory_provenance):
     from PIL import Image
     from INFRA.configuration import resolve_config
     from INFRA.runs import Run
@@ -13,7 +15,8 @@ def test_isolated_worker_produces_benchmark_and_environment(tmp_path):
 
     source = tmp_path/'external'
     source.mkdir()
-    (source/'factory.py').write_text('from EncDec.Evaluation.kodak_benchmark import JPEGCodec\ndef build(config):\n    return [JPEGCodec(20)]\n')
+    produced = '([JPEGCodec(20)], {"calibration": "fixture"})' if factory_provenance else '[JPEGCodec(20)]'
+    (source/'factory.py').write_text(f'from EncDec.Evaluation.kodak_benchmark import JPEGCodec\ndef build(config):\n    return {produced}\n')
     (source/'.gitignore').write_text('__pycache__/\n')
     def git(*args):
         return subprocess.check_output(['git','-c',f'safe.directory={source.as_posix()}',
@@ -36,3 +39,4 @@ def test_isolated_worker_produces_benchmark_and_environment(tmp_path):
     assert len(result['outcomes']) == 1
     assert (run.path/'benchmark.csv').is_file()
     assert json.loads((run.path/'worker_provenance.json').read_text())['executable'] == sys.executable
+    assert (run.path/'factory_provenance.json').exists() == factory_provenance

@@ -96,6 +96,7 @@ SemanticSchedulerEnd2End/
 ├── PROJECT_MAP.md              # Concise architecture map
 ├── EncDec/
 │   ├── Models/                 # SwinJSCC and DeepJSCC adapters
+│   ├── Research/               # Teammate DeepJSCC/NTSCC benchmark methods
 │   ├── Codebooks/              # Communication VQ, indices and packets
 │   ├── Baselines/              # Codec baselines
 │   ├── Evaluation/             # Kodak contract, CSVs, reports and plots
@@ -130,6 +131,8 @@ SemanticSchedulerEnd2End/
 ├── models/                     # Shared saved assets; configurable elsewhere
 ├── results/                    # Historical and new module/run outputs
 ├── external/                   # Pinned upstream implementations
+├── references/                 # Teammate DeepJSCC/NTSCC source snapshots
+├── semcom_benchmark/           # Historical notebook import compatibility
 ├── docs/                       # Migration, operation and validation records
 ├── scripts/                    # Setup, reporting and architecture utilities
 ├── Test/tests/                 # Preserved regression tests
@@ -137,7 +140,7 @@ SemanticSchedulerEnd2End/
 └── Notebooks/                  # Preserved historical experiments
 ```
 
-Canonical implementation lives in the four root modules. `src/` forwards old imports such as `EncDecPipeline`, `TransformerPipeline`, and `CodebookParam`; edit the canonical module, not the wrapper. See the [migration map](docs/MIGRATION_MAP.md) and [historical team guide](docs/HISTORICAL_STAGE_GUIDE.md).
+Canonical implementation lives in the four root modules. `src/` forwards old imports such as `EncDecPipeline`, `TransformerPipeline`, and `CodebookParam`; `semcom_benchmark/` forwards the teammate's benchmark imports to `EncDec/Research/`. Edit the canonical module, not a wrapper. See the [migration map](docs/MIGRATION_MAP.md), [team consolidation inventory](ORGANIZATION.md), and [historical team guide](docs/HISTORICAL_STAGE_GUIDE.md).
 
 ## 4. Installation and first run
 
@@ -550,6 +553,8 @@ Exact reruns require source revision, checkpoint/source manifests, dataset ident
 
 Active guides import reusable source; model/training logic does not live only in notebook cells.
 
+The fetched team commit also preserves `Notebooks/DeepJSCC_NTSCC_Final_Repaired.ipynb` and `Notebooks/Stage1A/01_stage1a_complete_kaggle.ipynb` as research references. Their imports remain supported, but the numbered notebooks below are the active modular entry points.
+
 | Notebook | Purpose |
 |---|---|
 | [EncDec validation](EncDec/notebooks/01_validate_and_demo.ipynb) | Codec/module setup |
@@ -597,9 +602,32 @@ Evaluate against data independent of the training/calibration corpus before clai
 
 ## 14. External model environments
 
-DeepJSCC/NTSCC integrations remain available, but external source/checkpoints must be supplied. Missing assets must not be replaced by an unrelated model.
+The teammate's consolidation commit `1e44baa` supplies checkpoint-compatible DeepJSCC/NTSCC source snapshots in `references/`, a calibration cache and CIFAR-trained model files in `models/`, and four benchmark methods now owned by `EncDec/Research/`. `semcom_benchmark/` retains the old notebook import path. The two production `.pth` checkpoints used in the repaired Kodak comparison remain **outside** this Git repository. This checkout does not currently contain those production files, so real DeepJSCC/NTSCC inference has not been validated here.
+
+The newly tracked `.pt` and `.pkl` assets use Git LFS. After cloning, install Git LFS and hydrate the files before attempting to load them:
+
+```powershell
+git lfs install
+git lfs pull
+```
+
+`models/MANIFEST.sha256` records the expected asset hashes. A small text file beginning with `version https://git-lfs.github.com/spec/v1` is an unhydrated pointer, not a model. The ADJSCC checkpoint is preserved, but no compatible ADJSCC adapter is implemented.
 
 Direct DeepJSCC loading uses `dependencies.deepjscc` with `source_root`, `revision`, and `checkpoint`. Source must match a clean pinned Git revision. Use a subprocess worker for incompatible dependencies.
+
+For the teammate's native DeepJSCC or NTSCC method, configure the worker under that implementation name. It validates and loads only the selected model. The example uses paths relative to the selected root YAML; replace the production checkpoint and exact revision:
+
+```yaml
+dependencies:
+  ntscc:
+    python: .venv-models/Scripts/python.exe
+    source_root: .
+    revision: EXACT_MERGED_GIT_COMMIT
+    factory: EncDec.Evaluation.repaired_notebook_models:build_team_benchmark_codecs
+    ntscc_checkpoint: ../NTSCC_JSAC22/checkpoints/ntscc_hyperprior_quality_1_psnr.pth
+```
+
+Run with `python E2EMain.py --module EncDec --action smoke --implementation ntscc --device cpu`. For DeepJSCC, use `dependencies.deepjscc`, `deep_checkpoint`, and `--implementation deepjscc`. The full four-method research comparison, including both codebook methods, uses `implementation: external_worker` with the same factory plus **both** production checkpoints, CIFAR-10 training data, and the hydrated NTSCC calibration cache. Codebook transport also needs its optional digital PHY dependencies. The repaired comparison excludes Kodak records from NTSCC codebook fitting; do not train a codebook on its benchmark images.
 
 Example fragment; replace placeholders with real dependencies:
 
@@ -614,7 +642,7 @@ dependencies:
     factory: your_package.benchmark_factory:build_codecs
 ```
 
-The factory receives resolved config and returns a sequence of `BenchmarkCodec` instances. INFRA verifies source identity, launches the selected interpreter, and retains logs, outcomes and environment information. For NTSCC use `dependencies.ntscc` and `implementation: ntscc`.
+The factory receives resolved config and returns a sequence of `BenchmarkCodec` instances, optionally paired with method provenance. INFRA verifies source identity, launches the selected interpreter, and retains logs, outcomes and environment information. See [team merge details](docs/MAIN_MERGE_1E44BAA.md) for exact asset boundaries.
 
 [`repaired_notebook_models.py`](EncDec/Evaluation/repaired_notebook_models.py) retains teammate wrappers and calibration-exclusion logic. It is an integration starting point, not an automatically available checkpoint. Each model needs a compatible preprocessing contract and real smoke test.
 

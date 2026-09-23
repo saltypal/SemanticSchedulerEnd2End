@@ -50,6 +50,8 @@ Configure `dependencies.external_worker` (or `dependencies.ntscc`) with absolute
 
 Existing `EncDec.Evaluation.repaired_notebook_models.build_repaired_notebook_codecs` preserves teammate DeepJSCC/NTSCC/native/codebook methods and their calibration exclusion logic. Run it in the owning environment; see historical team notes. The worker factory is the adapter seam, not a fabricated replacement checkpoint. Validate that external source is clean and pinned before comparing its results.
 
+After merging team commit `1e44baa`, `EncDec/Research/` owns the teammate implementation and `semcom_benchmark/` keeps notebook imports working. Use `EncDec.Evaluation.repaired_notebook_models:build_team_benchmark_codecs` as the factory. With `implementation=deepjscc` or `ntscc`, it loads only that native model; with `external_worker`, it builds the four-method comparison and records `factory_provenance.json`. The two production `.pth` files remain external and the `.pt`/`.pkl` model files need Git LFS hydration. See `docs/MAIN_MERGE_1E44BAA.md` for configured paths and limitations.
+
 ## Notebooks and training
 
 Active notebooks are the numbered files directly inside each module's `notebooks/`. Their first cell offers clean Git sync into a new disposable checkout, a specified revision, and persistent output outside checkout. Local mode validates current work; remote mode requires the rebuild commit to be pushed first. Kaggle output must be saved with a notebook version; Colab mounts Drive.

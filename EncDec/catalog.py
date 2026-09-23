@@ -19,7 +19,7 @@ def availability(config):
     result['swinjscc'].update(available=not missing, missing=missing, validation='assets present; runtime validation required' if not missing else 'missing assets')
     for name in ('deepjscc','ntscc'):
         dependency = config.get('dependencies',{}).get(name,{})
-        checkpoint = dependency.get('checkpoint')
+        checkpoint = dependency.get('checkpoint') or dependency.get(f'{name}_checkpoint')
         result[name].update(available=bool(checkpoint and Path(checkpoint).is_file()),
                             validation='external dependency not configured' if not dependency else 'configured; worker smoke required')
     return result

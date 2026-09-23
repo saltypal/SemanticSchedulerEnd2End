@@ -2,7 +2,9 @@
 
 Repository: `D:\Bunker\BaseCamp\WirelessCommunication\SemanticComms\SemanticSchedulerEnd2End`
 Base Git commit: `fc243207bbc08934628eccb31e2c6168b878522c`
-The rebuild is local and uncommitted. The existing remote is retained; remote notebook sync requires publishing the reviewed rebuild commit.
+This report records the original modular rebuild before the later team-main merge.
+For the current integration, see `docs/MAIN_MERGE_1E44BAA.md` and the post-merge
+checks below. Git is the source of truth for the current branch and remote state.
 
 ## Delivered
 
@@ -87,7 +89,24 @@ Graph refresh: `python scripts/refresh_graph.py --semantic docs/architecture_sem
 - **Training:** portable CPU/CUDA path implemented; a test-only tiny model verified a real CPU optimization/checkpoint cycle. Full model training, dual GPU execution, T4/P100/A100 performance and hosted clean-sync execution are not validated. TPU/XLA is unsupported.
 - **Research deferred:** AIDER labeling/classifier training, a finalized faculty urgency rubric, RL scheduling and full multi-UE wireless system simulation. Current simulation is nonpreemptive slotted service; it does not infer PHY delivery success or reconstructed quality.
 - **Metrics:** LPIPS disabled in this run. Missing timings/metrics are null. No claim of model accuracy, research novelty or scheduler superiority follows from the rebuild.
-- **Repository state:** local changes are ready for review; no commit/push was performed, preserving the user's existing uncommitted work. Active remote notebooks require a published rebuild revision.
+- **Repository state at this snapshot:** the rebuild was local when these
+  original measurements were made. The later team-main merge has separate
+  validation below.
+
+## Post-merge validation (teammate `main` at `1e44baa`)
+
+- Compatible model environment: **62 passed, 1 skipped**. The skip requires
+  two CUDA GPUs. The three warnings are existing dependency/runtime warnings.
+- New team compatibility imports resolve to `EncDec/Research/`; the four-method
+  evaluator factory imports successfully. Focused worker/factory tests pass.
+- Both incoming notebooks pass `nbformat` structural validation. Their full
+  execution was not attempted because the production model checkpoints are absent.
+- The 32 entries in `models/MANIFEST.sha256` are present as Git LFS pointers;
+  each pointer SHA-256 object ID matches the manifest. **None is hydrated in
+  this checkout.** This checks tracked object identity, not the model bytes.
+- The two production `.pth` checkpoints for the repaired DeepJSCC/NTSCC
+  comparison are not present in this repository. No post-merge real inference
+  result is claimed for those methods.
 
 ## Artifact index
 

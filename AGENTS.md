@@ -5,6 +5,7 @@ Read `PROJECT_MAP.md` before changing this repository. Then read the owning modu
 ## Boundaries
 
 - Implement codecs and communication codebooks in EncDec; extraction and semantic codebooks in SemParam; policies in Scheduler; shared contracts, channels, simulation and orchestration in INFRA.
+- Team DeepJSCC/NTSCC benchmark implementation lives in `EncDec/Research/`; `semcom_benchmark/` and old notebooks are compatibility surfaces. Preserve the checkpoint source snapshots under `references/` and Git LFS asset identities under `models/`.
 - Policies receive immutable snapshots and budgets. Only INFRA mutates UE queues/clock/job lifecycle. Lower class integer means higher priority. Do not infer class labels from images or names.
 - Do not import EncDec or neural frameworks from Scheduler. Image-only SemParam methods must run without a codec checkpoint. Inject `INFRA.features.FeatureProvider` for codec-dependent methods.
 - `src/` is compatibility only. Edit canonical implementations, never introduce duplicate logic into wrappers. Preserve alias class identity.

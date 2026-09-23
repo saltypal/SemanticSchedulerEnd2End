@@ -37,12 +37,7 @@ from run_deepjscc import evaluate_deepjscc
 
 
 def default_semcom_root() -> Path:
-    return Path(
-        os.environ.get(
-            "SEMCOM_ROOT",
-            r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom",
-        )
-    )
+    return Path(os.environ.get("SEMCOM_ROOT", ROOT))
 
 
 def seed_everything(seed: int) -> None:
@@ -167,13 +162,13 @@ def load_ntscc_result(path: Path, image: Image.Image, snr_db: float) -> dict:
 
 def parse_args() -> argparse.Namespace:
     semcom = default_semcom_root()
-    deep_root = semcom / "Deep-JSCC-PyTorch"
+    deep_root = semcom / "references" / "DeepJSCC_checkpoint_source"
     parser = argparse.ArgumentParser()
-    parser.add_argument("--image", type=Path, default=deep_root / "demo" / "kodim08.png")
+    parser.add_argument("--image", type=Path, default=semcom / "data" / "Kodak24" / "kodim08.png")
     parser.add_argument(
         "--deep-checkpoint",
         type=Path,
-        default=deep_root / "out" / "imagenet_10_0.33_200.00_32_19.pth",
+        default=semcom.parent / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth",
     )
     parser.add_argument("--deep-source-root", type=Path, default=deep_root)
     parser.add_argument("--ntscc-result", type=Path, default=None)

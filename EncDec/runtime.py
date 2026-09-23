@@ -49,7 +49,9 @@ def execute(config, run):
     from EncDec.catalog import availability, CATALOG
     if config['action'] in ('validate','availability'):
         return {'catalog':availability(config),'contract':'BenchmarkCodec encode/decode/complexity', 'model_inference_tested':False}
-    if config['implementation'] in ('external_worker','ntscc'):
+    implementation = config['implementation']
+    dependency = config.get('dependencies',{}).get(implementation,{})
+    if implementation in ('external_worker','ntscc') or (implementation == 'deepjscc' and dependency.get('factory')):
         from INFRA.workers import run_benchmark_worker
         return run_benchmark_worker(config,run)
     from INFRA.runs import seed_models, write_json
