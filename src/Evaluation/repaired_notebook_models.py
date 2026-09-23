@@ -1,8 +1,8 @@
 """Adapters for the repaired DeepJSCC/NTSCC Windows benchmark assets.
 
 The external research repositories and checkpoints remain outside this Git
-repository.  Set ``SEMCOM_EXPERIMENT_ROOT`` to the directory containing
-``semcom_benchmark/``, ``Deep-JSCC-PyTorch/``, ``NTSCC_JSAC22/`` and ``data/``.
+repository. ``SEMCOM_EXPERIMENT_ROOT`` points to this project directory;
+the two validated ``.pth`` checkpoints stay in sibling directories.
 """
 
 from __future__ import annotations
@@ -273,8 +273,10 @@ def build_repaired_notebook_codecs(
     team_root = Path(team_root).resolve()
     required = (
         experiment_root / "semcom_benchmark",
-        experiment_root / "Deep-JSCC-PyTorch",
-        experiment_root / "NTSCC_JSAC22",
+        experiment_root / "references" / "DeepJSCC_checkpoint_source",
+        experiment_root / "references" / "NTSCC_JSAC22_official",
+        experiment_root.parent / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth",
+        experiment_root.parent / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth",
     )
     missing = [str(path) for path in required if not path.exists()]
     if missing:
@@ -291,18 +293,18 @@ def build_repaired_notebook_codecs(
     device = torch.device("cpu")
     deep = DeepJSCCAdapter(
         experiment_root / "references" / "DeepJSCC_checkpoint_source",
-        experiment_root / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth",
+        experiment_root.parent / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth",
         device,
         snr_db,
     )
     ntscc = NTSCCWindowsAdapter(
         experiment_root / "references" / "NTSCC_JSAC22_official",
-        experiment_root / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth",
+        experiment_root.parent / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth",
         device,
         snr_db,
     )
 
-    cifar = CIFAR10(root=str(experiment_root / "data"), train=True, download=False)
+    cifar = CIFAR10(root=str(experiment_root.parent / "data"), train=True, download=False)
     calibration_latents = []
     for index in range(8):
         image = cifar[index][0].convert("RGB").resize((128, 128), Image.Resampling.BICUBIC)
@@ -310,7 +312,7 @@ def build_repaired_notebook_codecs(
         calibration_latents.append(records[0][2])
     deep_codebook = K256LatentCodebook("deepjscc_k256", team_root).fit(calibration_latents)
 
-    cache = experiment_root / "benchmark_outputs" / "ntscc_rate_conditioned_sweep" / "calibration_500_cifar_plus_23_kodak.pt"
+    cache = experiment_root / "models" / "NTSCC" / "calibration" / "calibration_500_cifar_plus_23_kodak.pt"
     cached = torch.load(cache, map_location="cpu", weights_only=False)
     # The cache contains 16 CIFAR batches followed by 23 Kodak records. Only
     # CIFAR is retained so no Kodak test image contributes to codebook fitting.

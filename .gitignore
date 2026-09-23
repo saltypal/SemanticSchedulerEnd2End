@@ -1,8 +1,7 @@
-# Upstream source and runtime outputs are intentionally not tracked by this repository.
+# Runtime outputs and the external SwinJSCC checkout are not tracked.
 Archived/
 external/SwinJSCC/
-models/**
-!models/**/.gitkeep
+*.pth
 results/**
 !results/**/.gitkeep
 data/Kodak24/
@@ -16,8 +15,6 @@ graphify-out/.chunk-*.json
 graphify-out/.graphify_*
 graphify-out/
 Notebooks/Stage1A/*.pt
-Notebooks/Stage1A/*.pt
-Notebooks/Stage1A/01_stage1a_complete_kaggle.ipynb
 Notebooks/Stage1A/stage1_manifest.json
 Notebooks/Stage1A/stage1a_metrics.csv
 Notebooks/Stage1A/startup.json

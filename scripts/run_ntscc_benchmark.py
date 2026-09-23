@@ -91,24 +91,19 @@ def load_model(repo_dir: Path, checkpoint: Path, device: torch.device, snr_db: f
 
 
 def parse_args() -> argparse.Namespace:
-    default_root = Path(
-        os.environ.get(
-            "SEMCOM_ROOT",
-            "/mnt/d/OneDrive - Amrita vishwa vidyapeetham/Desktop/image_semcom",
-        )
-    )
-    ntscc_root = default_root / "NTSCC_JSAC22"
+    default_root = Path(os.environ.get("SEMCOM_ROOT", Path(__file__).resolve().parents[1]))
+    ntscc_root = default_root / "references" / "NTSCC_JSAC22_official"
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--image",
         type=Path,
-        default=default_root / "Deep-JSCC-PyTorch" / "demo" / "kodim08.png",
+        default=default_root / "data" / "Kodak24" / "kodim08.png",
     )
     parser.add_argument("--repo-dir", type=Path, default=ntscc_root)
     parser.add_argument(
         "--checkpoint",
         type=Path,
-        default=ntscc_root / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth",
+        default=default_root.parent / "NTSCC_JSAC22" / "checkpoints" / "ntscc_hyperprior_quality_1_psnr.pth",
     )
     parser.add_argument("--snr-db", type=float, default=10.0)
     parser.add_argument("--trials", type=int, default=5)

@@ -29,7 +29,7 @@ def default_semcom_root() -> Path:
     configured = os.environ.get("SEMCOM_ROOT")
     if configured:
         return Path(configured)
-    return Path(r"D:\OneDrive - Amrita vishwa vidyapeetham\Desktop\image_semcom")
+    return ROOT
 
 
 def seed_everything(seed: int) -> None:
@@ -183,13 +183,13 @@ def _save_tensor_png(tensor, path: Path) -> None:
 
 def parse_args() -> argparse.Namespace:
     semcom = default_semcom_root()
-    deep_root = semcom / "Deep-JSCC-PyTorch"
+    deep_root = semcom / "references" / "DeepJSCC_checkpoint_source"
     parser = argparse.ArgumentParser()
-    parser.add_argument("--image", type=Path, default=deep_root / "demo" / "kodim08.png")
+    parser.add_argument("--image", type=Path, default=semcom / "data" / "Kodak24" / "kodim08.png")
     parser.add_argument(
         "--checkpoint",
         type=Path,
-        default=deep_root / "out" / "imagenet_10_0.33_200.00_32_19.pth",
+        default=semcom.parent / "Deep-JSCC-PyTorch" / "out" / "imagenet_10_0.33_200.00_32_19.pth",
     )
     parser.add_argument("--source-root", type=Path, default=deep_root)
     parser.add_argument("--snr-db", type=float, default=10.0)

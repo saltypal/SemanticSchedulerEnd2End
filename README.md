@@ -1,6 +1,6 @@
 # SemanticSchedulerEnd2End
 
-This repository is the single source of truth for the Stage 1A communication experiment and the modular Stage 1B semantic-header prototype. Stage 1A remains isolated in [01_stage1a_complete_kaggle.ipynb](Notebooks/Stage1A/01_stage1a_complete_kaggle.ipynb); Stage 1B/1C notebooks import repository modules rather than duplicating their implementation.
+This repository is the team workspace for Stage 1A communication, Stage 1B semantic headers, and the Stage 1C parameter-codebook demonstration. Stage 1A remains isolated in [01_stage1a_complete_kaggle.ipynb](Notebooks/Stage1A/01_stage1a_complete_kaggle.ipynb); Stage 1B/1C notebooks import repository modules rather than duplicating their implementation. See [ORGANIZATION.md](ORGANIZATION.md) for the current file layout.
 
 ## Stage 1A boundary
 
@@ -13,7 +13,7 @@ Operational Stage 1A components are SwinJSCC, AWGN/Rayleigh channel primitives, 
 Use a dedicated Python 3.12 environment. The workstation's Python 3.14 runtime is not a supported model runtime.
 
 ```powershell
-cd D:\Bunker\BaseCamp\WirelessCommunication\SemanticComms\SemanticSchedulerEnd2End
+cd path\to\image_semcom\SemanticSchedulerEnd2End_team
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r environment\requirements-local-inference.lock
@@ -56,15 +56,15 @@ payload compression, and complex-channel-use CBR where the method defines it.
 JPEG quality points and lossless RAW RGB24 are built in. See
 `docs/KODAK24_BENCHMARK.md` for the metric and team CSV contract.
 
-<<<<<<< HEAD
-To reproduce the repaired DeepJSCC/NTSCC notebook methods on Windows, point
-`SEMCOM_EXPERIMENT_ROOT` at the local experiment directory that contains its
-`.venv`, `semcom_benchmark`, official source trees, checkpoints, and calibration
-cache. The universal notebook then adds native DeepJSCC, native NTSCC,
+To reproduce the repaired DeepJSCC/NTSCC notebook methods on Windows, run from
+this repository, with `SEMCOM_EXPERIMENT_ROOT` pointing here. The two validated
+`.pth` checkpoints stay in the sibling `Deep-JSCC-PyTorch` and `NTSCC_JSAC22`
+folders. The universal notebook then adds native DeepJSCC, native NTSCC,
 DeepJSCC K=256 codebook, and rate-conditioned NTSCC PQ4 K=256 automatically.
 The NTSCC codebook excludes every Kodak calibration record for an unbiased
 24-image test. Its width-2 fallback codebook is derived only from active values
-in those same CIFAR-10 training latents. From this repository, the reproducible
+in those same CIFAR-10 training latents. The repaired one-image notebook is
+`Notebooks/DeepJSCC_NTSCC_Final_Repaired.ipynb`. From this repository, the reproducible
 local command is:
 
 ```powershell
@@ -74,7 +74,6 @@ local command is:
 The runner uses one deterministic channel seed per image, one timed pass, all
 24 images, LPIPS, and atomic CSV append. Override `-ExperimentRoot`,
 `-Contributor`, or `-RunId` when needed.
-=======
 ## Stage 1B semantic-header prototype
 
 Stage 1B uses exactly seven configurable fields: `AoI_seconds`, `freshness`, `novelty`, `relevance`, `reliability`, `urgency`, and `task_importance`. Every field is a `ParameterValue` with value, raw evidence, availability, method, source, version, producer level, and provenance. Missing evidence stays unavailable; it is never replaced with a random or zero score.
@@ -110,4 +109,3 @@ python E2EMain.py --config config\stage1b.yaml --action semantic-run --param-ext
 ```
 
 The codebook rejects a missing or mismatched task-profile artifact rather than silently invoking CLIP or fabricating values. No scheduler behavior is implemented in this stage.
->>>>>>> cd021d8 (changes)
