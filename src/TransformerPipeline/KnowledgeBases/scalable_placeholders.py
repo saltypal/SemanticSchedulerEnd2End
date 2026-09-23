@@ -1,32 +1,10 @@
-"""Named future stores that fail explicitly until their infrastructure exists."""
+"""Compatibility import; use SemParam.KnowledgeBases.scalable_placeholders."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('SemParam.KnowledgeBases.scalable_placeholders')
 
-from __future__ import annotations
-
-from INFRA.errors import ComponentUnavailableError
-
-
-class _UnavailableKnowledgeBase:
-    component_name = "knowledge base"
-
-    def __init__(self) -> None:
-        raise ComponentUnavailableError(
-            self.component_name,
-            "Stage 1B",
-            "Only the local NetworkX demonstration knowledge base is implemented.",
-        )
-
-
-class VectorStoreKnowledgeBase(_UnavailableKnowledgeBase):
-    component_name = "vector-store knowledge base"
-
-
-class RedisKnowledgeBase(_UnavailableKnowledgeBase):
-    component_name = "Redis knowledge base"
-
-
-class GlobalMemoryKnowledgeBase(_UnavailableKnowledgeBase):
-    component_name = "global/cross-UE knowledge base"
-
-
-class RichKnowledgeGraph(_UnavailableKnowledgeBase):
-    component_name = "rich knowledge graph"
+_sys.modules[__name__] = _target

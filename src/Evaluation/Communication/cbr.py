@@ -1,9 +1,10 @@
-"""Communication bandwidth ratio based on complex channel uses."""
+"""Compatibility import; use EncDec.Evaluation.Communication.cbr."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Communication.cbr')
 
-from INFRA.Artifacts import ImageArtifact, TransmissionArtifact
-
-
-def native_cbr(image: ImageArtifact, transmission: TransmissionArtifact, index: int = 0) -> float:
-    height, width = image.spatial_shape()
-    channel_uses = transmission.channel_uses_per_image[index]
-    return channel_uses / (3.0 * height * width)
+_sys.modules[__name__] = _target

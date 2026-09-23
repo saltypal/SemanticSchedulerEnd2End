@@ -1,29 +1,13 @@
-"""Historical/context evidence stores; separate from current-input extraction."""
+"""Compatibility import; use SemParam.KnowledgeBases."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('SemParam.KnowledgeBases')
 
-from INFRA.Registries import KNOWLEDGE_REGISTRY
-from TransformerPipeline.KnowledgeBases.networkx_baseline import NetworkXKnowledgeBase
-from TransformerPipeline.KnowledgeBases.scalable_placeholders import (
-    GlobalMemoryKnowledgeBase,
-    RedisKnowledgeBase,
-    RichKnowledgeGraph,
-    VectorStoreKnowledgeBase,
-)
+def __getattr__(name):
+    return getattr(_target, name)
 
-
-def register_networkx_knowledge_base() -> None:
-    if not KNOWLEDGE_REGISTRY.contains("networkx_local"):
-        KNOWLEDGE_REGISTRY.register("networkx_local", NetworkXKnowledgeBase)
-
-
-# Preserve the original public name while making Stage 1B genuinely usable.
-Stage1BKnowledgeBase = NetworkXKnowledgeBase
-
-__all__ = [
-    "GlobalMemoryKnowledgeBase",
-    "NetworkXKnowledgeBase",
-    "RedisKnowledgeBase",
-    "RichKnowledgeGraph",
-    "Stage1BKnowledgeBase",
-    "VectorStoreKnowledgeBase",
-    "register_networkx_knowledge_base",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

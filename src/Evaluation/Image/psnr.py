@@ -1,12 +1,10 @@
-"""PSNR with explicit [0, 1] image-value assumption."""
+"""Compatibility import; use EncDec.Evaluation.Image.psnr."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Image.psnr')
 
-from typing import Any
-
-
-def psnr(reference: Any, reconstruction: Any, data_range: float = 1.0) -> float:
-    import torch
-
-    mse = torch.mean((reference.detach().float() - reconstruction.detach().float().clamp(0.0, data_range)) ** 2)
-    if float(mse) == 0.0:
-        return float("inf")
-    return float(10.0 * torch.log10(torch.tensor(data_range**2, device=mse.device) / mse).cpu())
+_sys.modules[__name__] = _target

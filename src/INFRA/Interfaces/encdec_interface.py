@@ -1,21 +1,10 @@
-"""Contract that keeps model internals out of downstream components."""
+"""Compatibility import; use INFRA.Interfaces.encdec_interface."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Interfaces.encdec_interface')
 
-from abc import ABC, abstractmethod
-
-from INFRA.Artifacts import ImageArtifact, LatentArtifact, TransmissionArtifact
-
-
-class EncDecInterface(ABC):
-    """Communication encoder/decoder contract."""
-
-    @abstractmethod
-    def encode(self, image: ImageArtifact, **options: object) -> LatentArtifact:
-        raise NotImplementedError
-
-    @abstractmethod
-    def decode(self, latent: LatentArtifact, **options: object) -> ImageArtifact:
-        raise NotImplementedError
-
-    @abstractmethod
-    def reconstruct_received(self, transmission: TransmissionArtifact, latent: LatentArtifact) -> ImageArtifact:
-        raise NotImplementedError
+_sys.modules[__name__] = _target

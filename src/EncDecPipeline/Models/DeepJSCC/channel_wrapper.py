@@ -1,31 +1,10 @@
-"""DeepJSCC channel adapter using the repository's canonical AWGN semantics."""
+"""Compatibility import; use EncDec.Models.DeepJSCC.channel_wrapper."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[4]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Models.DeepJSCC.channel_wrapper')
 
-from __future__ import annotations
-
-from Channels.awgn import AWGNChannel
-from INFRA.Artifacts import LatentArtifact, TransmissionArtifact
-from INFRA.Interfaces import ChannelInterface
-
-
-class DeepJSCCChannelWrapper(ChannelInterface):
-    """Delegate I/Q pairing, power normalization and Es/N0 AWGN to AWGNChannel.
-
-    Channel uses are complex symbols.  Pairing is performed independently for
-    every image, so values from two different batch items can never form one
-    complex symbol.
-    """
-
-    def __init__(self, channel: ChannelInterface | None = None):
-        self.channel = channel or AWGNChannel()
-
-    def transmit(
-        self, latent: LatentArtifact, snr_db: float, **options: object
-    ) -> TransmissionArtifact:
-        transmission = self.channel.transmit(latent, snr_db, **options)
-        transmission.channel_name = "deepjscc_awgn"
-        transmission.metadata = {
-            **transmission.metadata,
-            "model": "DeepJSCC",
-            "channel_use_unit": "complex_symbol",
-        }
-        return transmission
+_sys.modules[__name__] = _target

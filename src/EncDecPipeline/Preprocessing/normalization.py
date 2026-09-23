@@ -1,5 +1,10 @@
-"""Stage 1A uses RGB tensors in [0, 1], explicitly without ImageNet normalization."""
+"""Compatibility import; use EncDec.Preprocessing.normalization."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Preprocessing.normalization')
 
-
-def identity_normalize(tensor: object) -> object:
-    return tensor
+_sys.modules[__name__] = _target

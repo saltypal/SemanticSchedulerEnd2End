@@ -1,18 +1,10 @@
-"""Concrete channel factory; no channel implementation is hosted inside INFRA."""
+"""Compatibility import; use INFRA.Channels.channel_factory."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Channels.channel_factory')
 
-from Channels.awgn import AWGNChannel
-from Channels.rayleigh import RayleighChannel
-from Channels.rician import RicianChannel
-from INFRA.Registries import CHANNEL_REGISTRY
-
-
-def register_builtin_channels() -> None:
-    entries = {"awgn": AWGNChannel, "rayleigh_perfect_csi": RayleighChannel, "rician": RicianChannel}
-    for name, constructor in entries.items():
-        if not CHANNEL_REGISTRY.contains(name):
-            CHANNEL_REGISTRY.register(name, constructor)
-
-
-def create_channel(name: str):
-    register_builtin_channels()
-    return CHANNEL_REGISTRY.create(name)
+_sys.modules[__name__] = _target

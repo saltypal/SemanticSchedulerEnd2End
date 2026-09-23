@@ -1,7 +1,10 @@
-"""Effective source bits per complex channel use."""
+"""Compatibility import; use EncDec.Evaluation.Communication.bandwidth."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Communication.bandwidth')
 
-
-def source_bits_per_channel_use(source_bits: int, channel_uses: int) -> float:
-    if channel_uses <= 0:
-        raise ValueError("Channel uses must be positive.")
-    return source_bits / channel_uses
+_sys.modules[__name__] = _target

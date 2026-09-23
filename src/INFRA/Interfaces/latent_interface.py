@@ -1,11 +1,10 @@
-"""Minimal behavior expected from a latent transformer such as a codebook."""
+"""Compatibility import; use INFRA.Interfaces.latent_interface."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Interfaces.latent_interface')
 
-from abc import ABC, abstractmethod
-
-from INFRA.Artifacts import LatentArtifact
-
-
-class LatentTransformInterface(ABC):
-    @abstractmethod
-    def transform(self, latent: LatentArtifact) -> LatentArtifact:
-        raise NotImplementedError
+_sys.modules[__name__] = _target

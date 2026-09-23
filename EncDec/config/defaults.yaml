@@ -1,0 +1,21 @@
+action: validate
+implementation: jpeg
+seed: 42
+device: auto
+paths:
+  results: results
+transport:
+  resource_unit: complex_channel_uses
+benchmark:
+  jpeg_quality: 20
+  timing_repetitions: 1
+  compute_lpips: false
+  snr_db: 10
+  rate: 96
+dependencies: {}
+training:
+  base_epochs: 1
+  sa_ra_epochs: 1
+  batch_size_per_device: 1
+  crop_size: 256
+  patience: 30

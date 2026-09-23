@@ -1,5 +1,10 @@
-"""Stage 1A selects MiniBatchKMeans because full K-means is not GPU-notebook friendly."""
+"""Compatibility import; use EncDec.Codebooks.kmeans_vq."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Codebooks.kmeans_vq')
 
-from EncDecPipeline.Codebooks.minibatch_kmeans_vq import MiniBatchKMeansVQ
-
-KMeansVQ = MiniBatchKMeansVQ
+_sys.modules[__name__] = _target

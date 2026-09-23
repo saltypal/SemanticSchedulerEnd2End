@@ -1,7 +1,10 @@
-"""Storage diagnostic for a float latent; explicitly not an over-air bit count."""
+"""Compatibility import; use EncDec.Evaluation.Compression.latent_size."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Compression.latent_size')
 
-from INFRA.Artifacts import LatentArtifact
-
-
-def fp32_latent_storage_bits(latent: LatentArtifact) -> int:
-    return int(latent.tensor[0].numel()) * 32
+_sys.modules[__name__] = _target

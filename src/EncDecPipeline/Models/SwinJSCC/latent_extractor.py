@@ -1,7 +1,10 @@
-"""Named semantic boundary for consumers that need latent tensors only."""
+"""Compatibility import; use EncDec.Models.SwinJSCC.latent_extractor."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[4]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Models.SwinJSCC.latent_extractor')
 
-from INFRA.Artifacts import ImageArtifact, LatentArtifact
-
-
-def extract_latent(adapter: object, image: ImageArtifact, snr_db: float, rate: int) -> LatentArtifact:
-    return adapter.encode(image, snr_db=snr_db, rate=rate)
+_sys.modules[__name__] = _target

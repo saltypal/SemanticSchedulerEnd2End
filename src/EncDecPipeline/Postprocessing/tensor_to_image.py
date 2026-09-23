@@ -1,10 +1,10 @@
-"""Tensor-to-PIL conversion for saved reconstructions."""
+"""Compatibility import; use EncDec.Postprocessing.tensor_to_image."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Postprocessing.tensor_to_image')
 
-from typing import Any
-
-
-def tensor_to_pil(tensor: Any) -> Any:
-    from PIL import Image
-
-    array = tensor.detach().cpu().clamp(0.0, 1.0).permute(1, 2, 0).numpy()
-    return Image.fromarray((array * 255.0 + 0.5).astype("uint8"))
+_sys.modules[__name__] = _target

@@ -1,5 +1,10 @@
-"""No-op paired with the Stage 1A identity normalization contract."""
+"""Compatibility import; use EncDec.Postprocessing.denormalization."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Postprocessing.denormalization')
 
-
-def identity_denormalize(tensor: object) -> object:
-    return tensor
+_sys.modules[__name__] = _target

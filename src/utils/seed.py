@@ -1,15 +1,10 @@
-"""Cross-library deterministic seeding used in real-data training runs."""
+"""Compatibility import; use INFRA.utils.seed."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.utils.seed')
 
-
-def set_seed(seed: int) -> None:
-    import random
-
-    import numpy as np
-    import torch
-
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.benchmark = False
-    torch.backends.cudnn.deterministic = True
+_sys.modules[__name__] = _target

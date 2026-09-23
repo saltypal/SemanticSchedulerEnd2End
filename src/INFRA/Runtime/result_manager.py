@@ -1,21 +1,10 @@
-"""Stable location and schema for aggregate metrics."""
+"""Compatibility import; use INFRA.Runtime.result_manager."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Runtime.result_manager')
 
-import csv
-from pathlib import Path
-from typing import Any
-
-
-class ResultManager:
-    def __init__(self, output_dir: str | Path) -> None:
-        self.output_dir = Path(output_dir)
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-
-    def append_metrics(self, filename: str, row: dict[str, Any]) -> Path:
-        target = self.output_dir / filename
-        new_file = not target.exists()
-        with target.open("a", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(row))
-            if new_file:
-                writer.writeheader()
-            writer.writerow(row)
-        return target
+_sys.modules[__name__] = _target

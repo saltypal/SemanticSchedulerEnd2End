@@ -1,21 +1,13 @@
-"""Named component registries. Registration happens in concrete package modules."""
+"""Compatibility import; use INFRA.Registries."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Registries')
 
-from INFRA.Registries.channel_registry import CHANNEL_REGISTRY
-from INFRA.Registries.codebook_registry import CODEBOOK_REGISTRY
-from INFRA.Registries.encdec_registry import ENCDEC_REGISTRY
-from INFRA.Registries.evaluator_registry import EVALUATOR_REGISTRY
-from INFRA.Registries.knowledge_registry import KNOWLEDGE_REGISTRY
-from INFRA.Registries.parameter_codebook_registry import PARAMETER_CODEBOOK_REGISTRY
-from INFRA.Registries.scheduler_registry import SCHEDULER_REGISTRY
-from INFRA.Registries.transformer_registry import TRANSFORMER_REGISTRY
+def __getattr__(name):
+    return getattr(_target, name)
 
-__all__ = [
-    "CHANNEL_REGISTRY",
-    "CODEBOOK_REGISTRY",
-    "ENCDEC_REGISTRY",
-    "EVALUATOR_REGISTRY",
-    "KNOWLEDGE_REGISTRY",
-    "PARAMETER_CODEBOOK_REGISTRY",
-    "SCHEDULER_REGISTRY",
-    "TRANSFORMER_REGISTRY",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

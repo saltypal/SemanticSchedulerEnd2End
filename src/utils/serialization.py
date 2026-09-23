@@ -1,12 +1,10 @@
-"""JSON serialization with deterministic key ordering for run metadata."""
+"""Compatibility import; use INFRA.utils.serialization."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.utils.serialization')
 
-import json
-from pathlib import Path
-from typing import Any
-
-
-def write_json(path: str | Path, value: dict[str, Any]) -> Path:
-    target = Path(path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(value, indent=2, sort_keys=True), encoding="utf-8")
-    return target
+_sys.modules[__name__] = _target

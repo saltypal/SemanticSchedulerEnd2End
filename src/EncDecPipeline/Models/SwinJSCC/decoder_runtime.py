@@ -1,11 +1,10 @@
-"""Explicit decoder-only inference facade."""
+"""Compatibility import; use EncDec.Models.SwinJSCC.decoder_runtime."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[4]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Models.SwinJSCC.decoder_runtime')
 
-from INFRA.Artifacts import ImageArtifact, LatentArtifact
-
-
-class DecoderRuntime:
-    def __init__(self, adapter: object) -> None:
-        self.adapter = adapter
-
-    def __call__(self, latent: LatentArtifact, snr_db: float) -> ImageArtifact:
-        return self.adapter.decode(latent, snr_db=snr_db)
+_sys.modules[__name__] = _target

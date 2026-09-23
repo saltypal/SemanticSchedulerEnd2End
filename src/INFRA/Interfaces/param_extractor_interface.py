@@ -1,19 +1,10 @@
-"""Contract for independent current-input semantic parameter extractors."""
+"""Compatibility import; use INFRA.Interfaces.param_extractor_interface."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Interfaces.param_extractor_interface')
 
-from abc import ABC, abstractmethod
-
-from datetime import datetime
-
-from INFRA.Artifacts import KnowledgeArtifact, ObservationArtifact, ParameterValue, TaskContext
-
-
-class ParameterExtractorInterface(ABC):
-    @abstractmethod
-    def extract(
-        self,
-        observation: ObservationArtifact,
-        task: TaskContext,
-        knowledge: KnowledgeArtifact,
-        now: datetime,
-    ) -> ParameterValue:
-        raise NotImplementedError
+_sys.modules[__name__] = _target

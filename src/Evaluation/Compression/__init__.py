@@ -1,4 +1,13 @@
-from Evaluation.Compression.compression_ratio import compression_ratio
-from Evaluation.Compression.raw_size import raw_rgb_bits
+"""Compatibility import; use EncDec.Evaluation.Compression."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Compression')
 
-__all__ = ["compression_ratio", "raw_rgb_bits"]
+def __getattr__(name):
+    return getattr(_target, name)
+
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

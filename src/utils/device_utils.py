@@ -1,18 +1,10 @@
-"""Runtime checks are reporting utilities, not a replacement for Kaggle GPU validation."""
+"""Compatibility import; use INFRA.utils.device_utils."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.utils.device_utils')
 
-from typing import Any
-
-
-def inspect_torch_runtime() -> dict[str, Any]:
-    import torch
-
-    return {
-        "python": __import__("platform").python_version(),
-        "torch": str(torch.__version__),
-        "cuda_available": bool(torch.cuda.is_available()),
-        "cuda_runtime": torch.version.cuda,
-        "gpu_count": torch.cuda.device_count() if torch.cuda.is_available() else 0,
-        "gpu_names": [torch.cuda.get_device_name(index) for index in range(torch.cuda.device_count())]
-        if torch.cuda.is_available()
-        else [],
-    }
+_sys.modules[__name__] = _target

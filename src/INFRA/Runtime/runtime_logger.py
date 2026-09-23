@@ -1,20 +1,10 @@
-"""Consistent console and file logging for a single experiment run."""
+"""Compatibility import; use INFRA.Runtime.runtime_logger."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Runtime.runtime_logger')
 
-import logging
-from pathlib import Path
-
-
-def configure_runtime_logger(name: str, log_file: str | Path | None = None) -> logging.Logger:
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
-    logger.propagate = False
-    if not logger.handlers:
-        formatter = logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s")
-        console = logging.StreamHandler()
-        console.setFormatter(formatter)
-        logger.addHandler(console)
-        if log_file is not None:
-            file_handler = logging.FileHandler(log_file, encoding="utf-8")
-            file_handler.setFormatter(formatter)
-            logger.addHandler(file_handler)
-    return logger
+_sys.modules[__name__] = _target

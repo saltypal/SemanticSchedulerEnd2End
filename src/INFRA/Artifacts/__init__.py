@@ -1,34 +1,13 @@
-"""Typed data exchanged between independent research components."""
+"""Compatibility import; use INFRA.Artifacts."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Artifacts')
 
-from INFRA.Artifacts.evaluation_artifact import EvaluationArtifact
-from INFRA.Artifacts.image_artifact import ImageArtifact
-from INFRA.Artifacts.knowledge_artifact import KnowledgeArtifact
-from INFRA.Artifacts.latent_artifact import LatentArtifact
-from INFRA.Artifacts.observation_artifact import ObservationArtifact, TaskContext
-from INFRA.Artifacts.scheduling_artifact import SchedulingArtifact
-from INFRA.Artifacts.semantic_packet_artifact import SemanticPacketArtifact
-from INFRA.Artifacts.semantic_params_artifact import (
-    ParameterDefinition,
-    ParameterProducerLevel,
-    ParameterValue,
-    SemanticParameterBundle,
-    SemanticParametersArtifact,
-)
-from INFRA.Artifacts.transmission_artifact import TransmissionArtifact
+def __getattr__(name):
+    return getattr(_target, name)
 
-__all__ = [
-    "EvaluationArtifact",
-    "ImageArtifact",
-    "KnowledgeArtifact",
-    "LatentArtifact",
-    "ObservationArtifact",
-    "ParameterDefinition",
-    "ParameterProducerLevel",
-    "ParameterValue",
-    "SchedulingArtifact",
-    "SemanticPacketArtifact",
-    "SemanticParameterBundle",
-    "SemanticParametersArtifact",
-    "TaskContext",
-    "TransmissionArtifact",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

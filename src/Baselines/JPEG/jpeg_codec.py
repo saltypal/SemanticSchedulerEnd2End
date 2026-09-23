@@ -1,32 +1,10 @@
-"""JPEG byte codec with no hidden image resizing or quality adaptation."""
+"""Compatibility import; use EncDec.Baselines.JPEG.jpeg_codec."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Baselines.JPEG.jpeg_codec')
 
-from __future__ import annotations
-
-from io import BytesIO
-from typing import Any
-
-
-class JPEGCodec:
-    def __init__(self, quality: int) -> None:
-        if not 1 <= quality <= 100:
-            raise ValueError("JPEG quality must be in [1, 100].")
-        self.quality = quality
-
-    def encode(self, image: Any) -> bytes:
-        stream = BytesIO()
-        image.convert("RGB").save(
-            stream,
-            format="JPEG",
-            quality=self.quality,
-            optimize=False,
-            progressive=False,
-            subsampling=0,
-        )
-        return stream.getvalue()
-
-    @staticmethod
-    def decode(payload: bytes) -> Any:
-        from PIL import Image
-
-        with Image.open(BytesIO(payload)) as image:
-            return image.convert("RGB").copy()
+_sys.modules[__name__] = _target

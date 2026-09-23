@@ -1,16 +1,13 @@
-"""Stage 1B semantic evidence pipeline, intentionally isolated from communication code."""
+"""Compatibility import; use SemParam."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('SemParam')
 
-from TransformerPipeline.catalog import SEMANTIC_PARAMETER_ORDER, SemanticPipelineSettings
-from TransformerPipeline.packet_builder import build_semantic_packet, format_semantic_packet, print_semantic_packet
-from TransformerPipeline.pipeline import TransformerParameterPipeline
-from TransformerPipeline.semantic_header import SemanticHeaderCodec
+def __getattr__(name):
+    return getattr(_target, name)
 
-__all__ = [
-    "SEMANTIC_PARAMETER_ORDER",
-    "SemanticHeaderCodec",
-    "SemanticPipelineSettings",
-    "TransformerParameterPipeline",
-    "build_semantic_packet",
-    "format_semantic_packet",
-    "print_semantic_packet",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

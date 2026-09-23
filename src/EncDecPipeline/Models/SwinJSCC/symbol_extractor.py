@@ -1,11 +1,10 @@
-"""Per-image native channel-use accounting for a SwinJSCC latent."""
+"""Compatibility import; use EncDec.Models.SwinJSCC.symbol_extractor."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[4]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Models.SwinJSCC.symbol_extractor')
 
-from INFRA.Artifacts import LatentArtifact
-
-
-def native_channel_uses_per_image(latent: LatentArtifact) -> list[int]:
-    if latent.rate_mask is None:
-        uses = int(latent.tensor[0].numel()) // 2
-    else:
-        uses = int(latent.rate_mask[0].sum().item()) // 2
-    return [uses] * int(latent.tensor.shape[0])
+_sys.modules[__name__] = _target

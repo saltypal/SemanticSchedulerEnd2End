@@ -1,5 +1,10 @@
-"""QPSK modem wrappers used by digital baselines."""
+"""Compatibility import; use INFRA.Channels.qpsk."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Channels.qpsk')
 
-from Channels.channel_utils import qpsk_bits_from_symbols, qpsk_symbols_from_bits
-
-__all__ = ["qpsk_bits_from_symbols", "qpsk_symbols_from_bits"]
+_sys.modules[__name__] = _target

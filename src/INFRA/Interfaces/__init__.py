@@ -1,19 +1,13 @@
-"""Abstract component contracts. Concrete implementations live outside INFRA."""
+"""Compatibility import; use INFRA.Interfaces."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Interfaces')
 
-from INFRA.Interfaces.channel_interface import ChannelInterface
-from INFRA.Interfaces.codebook_interface import CodebookInterface
-from INFRA.Interfaces.encdec_interface import EncDecInterface
-from INFRA.Interfaces.evaluator_interface import EvaluatorInterface
-from INFRA.Interfaces.knowledge_interface import KnowledgeInterface
-from INFRA.Interfaces.param_extractor_interface import ParameterExtractorInterface
-from INFRA.Interfaces.scheduler_interface import SchedulerInterface
+def __getattr__(name):
+    return getattr(_target, name)
 
-__all__ = [
-    "ChannelInterface",
-    "CodebookInterface",
-    "EncDecInterface",
-    "EvaluatorInterface",
-    "KnowledgeInterface",
-    "ParameterExtractorInterface",
-    "SchedulerInterface",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

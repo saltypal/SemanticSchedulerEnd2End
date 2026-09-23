@@ -1,6 +1,10 @@
-from INFRA.errors import ComponentUnavailableError
+"""Compatibility import; use EncDec.Codebooks.product_vq."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Codebooks.product_vq')
 
-
-class ProductVQ:
-    def __init__(self) -> None:
-        raise ComponentUnavailableError("ProductVQ", "Stage 1A", "Only ordinary K=256 MiniBatchKMeans VQ is locked.")
+_sys.modules[__name__] = _target

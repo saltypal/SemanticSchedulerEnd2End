@@ -1,3 +1,10 @@
-from INFRA.Runtime.runtime_logger import configure_runtime_logger
+"""Compatibility import; use INFRA.utils.logging_utils."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.utils.logging_utils')
 
-__all__ = ["configure_runtime_logger"]
+_sys.modules[__name__] = _target

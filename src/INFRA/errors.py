@@ -1,11 +1,10 @@
-"""Errors used to keep deferred research components explicit."""
+"""Compatibility import; use INFRA.errors."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.errors')
 
-
-class ComponentUnavailableError(NotImplementedError):
-    """Raised instead of returning fabricated output from a deferred component."""
-
-    def __init__(self, component: str, stage: str, reason: str) -> None:
-        self.component = component
-        self.stage = stage
-        self.reason = reason
-        super().__init__(f"{component} is unavailable in {stage}: {reason}")
+_sys.modules[__name__] = _target

@@ -1,12 +1,10 @@
-"""Repository-relative paths only; runtime data paths remain configuration inputs."""
+"""Compatibility import; use INFRA.utils.path_utils."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.utils.path_utils')
 
-from pathlib import Path
-
-
-def project_root() -> Path:
-    return Path(__file__).resolve().parents[2]
-
-
-def resolve_project_path(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else project_root() / candidate
+_sys.modules[__name__] = _target

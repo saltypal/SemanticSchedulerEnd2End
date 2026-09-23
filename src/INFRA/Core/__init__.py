@@ -1,6 +1,13 @@
-from INFRA.Core.execution_plan import ExecutionPlan
-from INFRA.Core.pipeline_manager import PipelineManager, PipelineRun
-from INFRA.Core.runtime_context import RuntimeContext
-from INFRA.Core.stage_controller import StageController
+"""Compatibility import; use INFRA.Core."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Core')
 
-__all__ = ["ExecutionPlan", "PipelineManager", "PipelineRun", "RuntimeContext", "StageController"]
+def __getattr__(name):
+    return getattr(_target, name)
+
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

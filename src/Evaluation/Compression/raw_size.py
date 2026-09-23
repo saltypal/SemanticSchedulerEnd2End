@@ -1,10 +1,10 @@
-"""Raw RGB size based on the actual evaluated tensor, never a training crop constant."""
+"""Compatibility import; use EncDec.Evaluation.Compression.raw_size."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Compression.raw_size')
 
-from typing import Any
-
-
-def raw_rgb_bits(image_tensor: Any, bits_per_channel: int = 8) -> int:
-    if image_tensor.ndim != 4 or int(image_tensor.shape[1]) != 3:
-        raise ValueError(f"Expected [batch, 3, height, width] RGB tensor, got {tuple(image_tensor.shape)}.")
-    _, channels, height, width = (int(value) for value in image_tensor.shape)
-    return channels * height * width * bits_per_channel
+_sys.modules[__name__] = _target

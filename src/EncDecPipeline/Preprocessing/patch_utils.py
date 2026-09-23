@@ -1,6 +1,10 @@
-"""Dimension guards shared by training and high-resolution evaluation."""
+"""Compatibility import; use EncDec.Preprocessing.patch_utils."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Preprocessing.patch_utils')
 
-
-def validate_divisible(height: int, width: int, divisor: int = 16) -> None:
-    if height % divisor != 0 or width % divisor != 0:
-        raise ValueError(f"Image dimensions {(height, width)} must be divisible by {divisor}.")
+_sys.modules[__name__] = _target

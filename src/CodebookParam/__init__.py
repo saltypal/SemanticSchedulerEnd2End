@@ -1,32 +1,13 @@
-"""Semantic parameter codebooks; intentionally separate from Stage 1A latent VQ."""
+"""Compatibility import; use SemParam.Codebooks."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('SemParam.Codebooks')
 
-from CodebookParam.semantic_codebook import (
-    CONTENT_PARAMETER_NAMES,
-    SemanticCodebookPrediction,
-    SemanticParameterCodebook,
-    pool_swin_representation,
-    register_semantic_parameter_codebook,
-)
+def __getattr__(name):
+    return getattr(_target, name)
 
-
-SemanticCodebook = SemanticParameterCodebook
-
-
-def __getattr__(name: str):
-    """Avoid importing the runtime pipeline while its semantic-codebook module loads."""
-
-    if name == "CodebookParameterPipeline":
-        from CodebookParam.pipeline import CodebookParameterPipeline
-
-        return CodebookParameterPipeline
-    raise AttributeError(name)
-
-__all__ = [
-    "CONTENT_PARAMETER_NAMES",
-    "CodebookParameterPipeline",
-    "SemanticCodebook",
-    "SemanticCodebookPrediction",
-    "SemanticParameterCodebook",
-    "pool_swin_representation",
-    "register_semantic_parameter_codebook",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

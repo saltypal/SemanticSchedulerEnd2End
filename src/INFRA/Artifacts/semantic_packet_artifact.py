@@ -1,26 +1,10 @@
-"""Logical semantic-header sidecar paired with existing Stage 1A payload artifacts."""
+"""Compatibility import; use INFRA.Artifacts.semantic_packet_artifact."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Artifacts.semantic_packet_artifact')
 
-from __future__ import annotations
-
-from dataclasses import dataclass, field
-from typing import Any
-
-from INFRA.Artifacts.latent_artifact import LatentArtifact
-from INFRA.Artifacts.semantic_params_artifact import SemanticParameterBundle
-from INFRA.Artifacts.transmission_artifact import TransmissionArtifact
-
-
-@dataclass(slots=True)
-class SemanticPacketArtifact:
-    """A semantic sidecar; it does not alter Stage 1A latent or VQ packet framing."""
-
-    header_bytes: bytes
-    parameter_bundle: SemanticParameterBundle
-    native_latent: LatentArtifact | None = None
-    communication_vq_packet: TransmissionArtifact | None = None
-    header_schema_version: int = 1
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-    @property
-    def semantic_header_bits(self) -> int:
-        return len(self.header_bytes) * 8
+_sys.modules[__name__] = _target

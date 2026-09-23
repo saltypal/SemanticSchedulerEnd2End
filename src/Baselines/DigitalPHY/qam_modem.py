@@ -1,3 +1,10 @@
-from Channels.qam import qam_hard_demap, qam_map
+"""Compatibility import; use INFRA.Transport.DigitalPHY.qam_modem."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Transport.DigitalPHY.qam_modem')
 
-__all__ = ["qam_hard_demap", "qam_map"]
+_sys.modules[__name__] = _target

@@ -1,20 +1,10 @@
-from INFRA.errors import ComponentUnavailableError
+"""Compatibility import; use INFRA.Deployment.unavailable_adapters."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Deployment.unavailable_adapters')
 
-
-class _UnavailableDeploymentAdapter:
-    component = "Deployment adapter"
-
-    def __init__(self) -> None:
-        raise ComponentUnavailableError(self.component, "Stage 1A", "Deployment integration is explicitly deferred.")
-
-
-class NS3Adapter(_UnavailableDeploymentAdapter):
-    component = "NS-3 adapter"
-
-
-class SionnaSystemAdapter(_UnavailableDeploymentAdapter):
-    component = "Sionna system-level adapter"
-
-
-class ORANAdapter(_UnavailableDeploymentAdapter):
-    component = "O-RAN adapter"
+_sys.modules[__name__] = _target

@@ -1,14 +1,10 @@
-"""Rician support is deliberately deferred until its CSI assumptions are specified."""
+"""Compatibility import; use INFRA.Channels.rician."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Channels.rician')
 
-from INFRA.Artifacts import LatentArtifact, TransmissionArtifact
-from INFRA.Interfaces import ChannelInterface
-from INFRA.errors import ComponentUnavailableError
-
-
-class RicianChannel(ChannelInterface):
-    def transmit(self, latent: LatentArtifact, snr_db: float, **options: object) -> TransmissionArtifact:
-        raise ComponentUnavailableError(
-            component="RicianChannel",
-            stage="Stage 1A",
-            reason="Rician K-factor and receiver CSI assumptions are not locked.",
-        )
+_sys.modules[__name__] = _target

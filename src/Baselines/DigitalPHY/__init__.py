@@ -1,3 +1,13 @@
-from Baselines.DigitalPHY.channel_coding import LDPCQPSKAWGN
+"""Compatibility import; use INFRA.Transport.DigitalPHY."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Transport.DigitalPHY')
 
-__all__ = ["LDPCQPSKAWGN"]
+def __getattr__(name):
+    return getattr(_target, name)
+
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

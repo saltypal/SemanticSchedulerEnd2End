@@ -1,33 +1,10 @@
-"""Dependency-injected Stage 1A execution flow."""
+"""Compatibility import; use INFRA.Core.pipeline_manager."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Core.pipeline_manager')
 
-from dataclasses import dataclass
-
-from INFRA.Artifacts import EvaluationArtifact, ImageArtifact
-from INFRA.Interfaces import ChannelInterface, EncDecInterface, EvaluatorInterface
-
-
-@dataclass(slots=True)
-class PipelineRun:
-    reconstruction: ImageArtifact
-    evaluations: list[EvaluationArtifact]
-
-
-class PipelineManager:
-    """Runs encode -> channel -> decode -> evaluation without importing model internals."""
-
-    def __init__(
-        self,
-        encdec: EncDecInterface,
-        channel: ChannelInterface,
-        evaluators: list[EvaluatorInterface] | None = None,
-    ) -> None:
-        self.encdec = encdec
-        self.channel = channel
-        self.evaluators = evaluators or []
-
-    def run_image(self, image: ImageArtifact, snr_db: float, **options: object) -> PipelineRun:
-        latent = self.encdec.encode(image, **options)
-        transmission = self.channel.transmit(latent, snr_db, **options)
-        reconstruction = self.encdec.reconstruct_received(transmission, latent)
-        evaluations = [evaluator.evaluate(image, reconstruction) for evaluator in self.evaluators]
-        return PipelineRun(reconstruction=reconstruction, evaluations=evaluations)
+_sys.modules[__name__] = _target

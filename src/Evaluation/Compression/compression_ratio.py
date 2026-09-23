@@ -1,7 +1,10 @@
-"""Source compression ratio using only the payload actually sent per image."""
+"""Compatibility import; use EncDec.Evaluation.Compression.compression_ratio."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Compression.compression_ratio')
 
-
-def compression_ratio(raw_bits: int, transmitted_bits: int) -> float:
-    if raw_bits <= 0 or transmitted_bits <= 0:
-        raise ValueError("Raw and transmitted bits must be positive.")
-    return raw_bits / transmitted_bits
+_sys.modules[__name__] = _target

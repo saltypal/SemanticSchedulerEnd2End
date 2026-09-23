@@ -1,15 +1,13 @@
-"""DeepJSCC integration components."""
+"""Compatibility import; use EncDec.Models.DeepJSCC."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[4]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Models.DeepJSCC')
 
-from EncDecPipeline.Models.DeepJSCC.adapter import (
-    DeepJSCCAdapter,
-    register_deepjscc,
-)
-from EncDecPipeline.Models.DeepJSCC.channel_wrapper import (
-    DeepJSCCChannelWrapper,
-)
+def __getattr__(name):
+    return getattr(_target, name)
 
-__all__ = [
-    "DeepJSCCAdapter",
-    "DeepJSCCChannelWrapper",
-    "register_deepjscc",
-]
+__all__ = getattr(_target, "__all__", [name for name in vars(_target) if not name.startswith("_")])

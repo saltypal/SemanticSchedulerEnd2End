@@ -1,14 +1,10 @@
-"""Checkpoint metadata shared by training and manifest export."""
+"""Compatibility import; use INFRA.Runtime.checkpoint_context."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Runtime.checkpoint_context')
 
-from dataclasses import asdict, dataclass
-
-
-@dataclass(frozen=True, slots=True)
-class CheckpointContext:
-    epoch: int
-    phase: str
-    validation_loss: float
-    source_commit: str
-
-    def to_dict(self) -> dict[str, object]:
-        return asdict(self)
+_sys.modules[__name__] = _target

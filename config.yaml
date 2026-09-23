@@ -1,0 +1,22 @@
+# Paths resolve relative to THIS file, even when launched elsewhere.
+module: INFRA
+action: validate
+profile: default
+seed: 42
+device: auto
+paths:
+  results: results
+  kodak: data/Kodak24
+  model_dir: models/SwinJSCC
+  upstream_swin: external/SwinJSCC
+  images: Test/images
+  semantic_settings: SemParam/config/extraction.yaml
+  semantic_training: SemParam/config/codebook_training.yaml
+profiles:
+  default: {}
+  demo:
+    scheduler:
+      resource_units: 100
+      max_jobs_per_slot: 1
+  cpu:
+    device: cpu

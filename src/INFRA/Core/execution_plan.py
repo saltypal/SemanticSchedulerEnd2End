@@ -1,12 +1,10 @@
-"""Declarative descriptions of a pipeline execution."""
+"""Compatibility import; use INFRA.Core.execution_plan."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Core.execution_plan')
 
-from dataclasses import dataclass
-
-
-@dataclass(frozen=True, slots=True)
-class ExecutionPlan:
-    encdec_name: str
-    channel_name: str
-    evaluator_names: tuple[str, ...]
-    codebook_name: str | None = None
-    scheduler_name: str | None = None
+_sys.modules[__name__] = _target

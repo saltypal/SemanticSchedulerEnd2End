@@ -1,11 +1,10 @@
-"""BER evaluated before CRC interpretation."""
+"""Compatibility import; use EncDec.Evaluation.Communication.ber."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Communication.ber')
 
-import numpy as np
-
-
-def bit_error_rate(reference: np.ndarray, estimate: np.ndarray) -> float:
-    reference_array = np.asarray(reference).reshape(-1)
-    estimate_array = np.asarray(estimate).reshape(-1)
-    if reference_array.shape != estimate_array.shape:
-        raise ValueError("BER inputs must have equal shape.")
-    return float(np.mean(reference_array != estimate_array))
+_sys.modules[__name__] = _target

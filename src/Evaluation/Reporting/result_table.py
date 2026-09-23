@@ -1,22 +1,10 @@
-"""CSV output without a pandas dependency."""
+"""Compatibility import; use EncDec.Evaluation.Reporting.result_table."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('EncDec.Evaluation.Reporting.result_table')
 
-import csv
-from pathlib import Path
-from typing import Any
-
-from Evaluation.Reporting.comparison_runner import validate_comparison_row
-
-
-def write_result_table(rows: list[dict[str, Any]], path: str | Path) -> Path:
-    if not rows:
-        raise ValueError("Cannot create a result table without rows.")
-    for row in rows:
-        validate_comparison_row(row)
-    target = Path(path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = list(dict.fromkeys(key for row in rows for key in row))
-    with target.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-    return target
+_sys.modules[__name__] = _target

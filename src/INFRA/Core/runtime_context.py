@@ -1,14 +1,10 @@
-"""Per-run state shared by orchestration, never by concrete model modules."""
+"""Compatibility import; use INFRA.Core.runtime_context."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Core.runtime_context')
 
-from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Any
-
-
-@dataclass(slots=True)
-class RuntimeContext:
-    run_id: str
-    output_dir: Path
-    config: dict[str, Any]
-    device: str
-    metadata: dict[str, Any] = field(default_factory=dict)
+_sys.modules[__name__] = _target

@@ -1,20 +1,10 @@
-"""Input-image runtime artifact."""
+"""Compatibility import; use INFRA.Artifacts.image_artifact."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Artifacts.image_artifact')
 
-from dataclasses import dataclass, field
-from typing import Any
-
-
-@dataclass(slots=True)
-class ImageArtifact:
-    """A batched image tensor plus provenance that must survive a pipeline run."""
-
-    tensor: Any
-    sample_ids: list[str]
-    source: str
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-    def batch_size(self) -> int:
-        return int(self.tensor.shape[0])
-
-    def spatial_shape(self) -> tuple[int, int]:
-        return int(self.tensor.shape[-2]), int(self.tensor.shape[-1])
+_sys.modules[__name__] = _target

@@ -1,20 +1,10 @@
-"""Artifact crossing a communication channel."""
+"""Compatibility import; use INFRA.Artifacts.transmission_artifact."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Artifacts.transmission_artifact')
 
-from dataclasses import dataclass, field
-from typing import Any
-
-
-@dataclass(slots=True)
-class TransmissionArtifact:
-    """Channel input/output and accounting for one independently mapped batch."""
-
-    transmitted: Any
-    received: Any
-    channel_name: str
-    snr_db: float
-    channel_uses_per_image: list[int]
-    payload_bits_per_image: list[int] = field(default_factory=list)
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-    def channel_uses_total(self) -> int:
-        return sum(self.channel_uses_per_image)
+_sys.modules[__name__] = _target

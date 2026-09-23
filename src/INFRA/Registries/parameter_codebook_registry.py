@@ -1,6 +1,10 @@
-"""Registry for semantic parameter codebooks, separate from communication VQ."""
+"""Compatibility import; use INFRA.Registries.parameter_codebook_registry."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[3]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.Registries.parameter_codebook_registry')
 
-from INFRA.Registries.base_registry import ComponentRegistry
-
-
-PARAMETER_CODEBOOK_REGISTRY: ComponentRegistry[object] = ComponentRegistry("semantic parameter codebook")
+_sys.modules[__name__] = _target

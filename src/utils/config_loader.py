@@ -1,30 +1,10 @@
-"""Small YAML loader with explicit one-level/multi-level inheritance."""
+"""Compatibility import; use INFRA.utils.config_loader."""
+import importlib as _importlib
+import sys as _sys
+from pathlib import Path as _Path
+_root = _Path(__file__).resolve().parents[2]
+if str(_root) not in _sys.path:
+    _sys.path.insert(0, str(_root))
+_target = _importlib.import_module('INFRA.utils.config_loader')
 
-from __future__ import annotations
-
-from pathlib import Path
-from typing import Any
-
-
-def _merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
-    merged = dict(base)
-    for key, value in override.items():
-        if isinstance(value, dict) and isinstance(merged.get(key), dict):
-            merged[key] = _merge(merged[key], value)
-        else:
-            merged[key] = value
-    return merged
-
-
-def load_yaml_config(path: str | Path) -> dict[str, Any]:
-    try:
-        import yaml
-    except ImportError as error:
-        raise RuntimeError("Configuration loading requires PyYAML.") from error
-    source = Path(path)
-    values = yaml.safe_load(source.read_text(encoding="utf-8")) or {}
-    parent = values.pop("extends", None)
-    if parent is None:
-        return values
-    parent_values = load_yaml_config(source.parent / parent)
-    return _merge(parent_values, values)
+_sys.modules[__name__] = _target
