@@ -63,7 +63,12 @@ class LadiPredictionProvider:
         device = "cuda" if self.requested_device == "auto" and torch.cuda.is_available() else self.requested_device
         if device == "auto":
             device = "cpu"
-        self._processor = AutoImageProcessor.from_pretrained(self.model_name, local_files_only=self.local_files_only)
+        # Pin the preprocessing path explicitly.  The checkpoint currently
+        # ships a slow processor; leaving this unset would make a future
+        # Transformers release silently switch to the fast implementation and
+        # change feature values slightly.
+        self._processor = AutoImageProcessor.from_pretrained(
+            self.model_name, local_files_only=self.local_files_only, use_fast=False)
         self._model = AutoModelForImageClassification.from_pretrained(self.model_name, local_files_only=self.local_files_only).to(device).eval()
         self._torch = torch
         self._device = device
