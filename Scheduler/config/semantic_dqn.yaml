@@ -1,0 +1,13 @@
+gamma: 0.99
+learning_rate: 0.001
+batch_size: 64
+replay_capacity: 10000
+replay_warmup: 500
+target_update_steps: 250
+epsilon_start: 1.0
+epsilon_end: 0.05
+epsilon_fraction: 0.7
+episodes: 300
+validate_every: 25
+max_decisions: 25
+gradient_clip_norm: 10.0

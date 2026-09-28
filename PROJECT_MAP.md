@@ -2,6 +2,8 @@
 
 ## Read this first
 
+The current semantic scheduler branch schedules **whole latent jobs** from five simulated UEs. `docs/SEMANTIC_SCHEDULER_RUNBOOK.md` is its operational guide and `docs/DEMO_CLAIMS.md` states measured/simulated/proposed claims. The 2026-09-27 Phase 1 documents are historical design checkpoints; the superseded pilot remains under `Archived/image_scheduling_pilot_20260927/`.
+
 This rebuild replaces stage-based implementation ownership. Existing stage imports remain aliases for compatibility. Source is Python 3.12, local Git and the existing GitHub remote; large assets stay in configured shared storage. New work is not remotely reproducible until its commit is pushed.
 
 | Module | Inputs → outputs | Important files | Boundary / acceptance |
@@ -10,6 +12,16 @@ This rebuild replaces stage-based implementation ownership. Existing stage impor
 | SemParam | image or explicit feature provider + task/context → provenanced ParameterValue bundle | `runtime.py`, `pipeline.py`, `Codebooks/pipeline.py`, `clip_backbone.py`, `evaluation/coverage.py` | Image path loads no codec; missing values remain unavailable |
 | Scheduler | immutable QueueSnapshot + ResourceBudget → Decision | `policies.py`, `fixtures.py`, `evaluation/report.py` | No neural imports; deterministic selection; no queue mutation |
 | INFRA | root config + jobs/modules → simulation traces + run artifacts | `configuration.py`, `contracts.py`, `simulation.py`, `runs.py`, `cli.py`, `workers.py` | Owns arrivals, clock, deadlines, queues, transport and persistence |
+
+The additive Track-A path uses `SemParam/scheduler_features.py`,
+`delivered_history.py`, and V2 header code; `INFRA/semantic_contracts.py`,
+`semantic_streams.py`, `event_simulation.py`, `semantic_evaluator.py`,
+`feature_cache.py`, and `learning/`; `Scheduler/semantic_policies.py`,
+`feature_adapter.py`, and `policy_registry.py`; and
+`EncDec/integration/scheduler_replay.py`. The two active notebooks are
+`Scheduler/notebooks/01_train_semantic_scheduler.ipynb` and
+`02_evaluate_all_policies.ipynb`. Existing V1 contracts and notebook aliases
+remain independent compatibility surfaces.
 
 Each module owns its README, config defaults, environment requirements, tests, evaluation and active notebooks. Modules have maintainers by responsibility, not hardcoded personal names. Coordinate changes to INFRA contracts with consumers and add integration tests.
 
@@ -54,4 +66,10 @@ The current synthetic INFRA fixture exercises scheduling contracts. Real images 
 
 See `docs/VALIDATION_REPORT.md` for measured checks and model availability, `docs/REBUILD_GUIDE.md` for reproducible commands, `docs/MIGRATION_MAP.md` for source moves, and `docs/NOTEBOOK_MIGRATION.md` for preserved notebooks.
 
-RL, AIDER labeling, classifier training, NS-3/system-level wireless, TPU/XLA and a finalized semantic priority rule are not implemented by this rebuild. Existing explicit unavailable placeholders are retained. Training portability is implemented; full training/convergence on T4/P100/A100/dual GPU is not asserted from CPU tests.
+The Track-A branch implements DQN and classifier/ranker training code, but no
+60-image research result is claimed until the draft manifest receives human
+review and the notebooks run from a pushed commit. AIDER labeling,
+NS-3/system-level wireless, real MAC/PHY control transmission, TPU/XLA and a
+universal semantic priority rule are outside this prototype. Training
+portability is implemented; full convergence on T4/P100/A100/dual GPU is not
+asserted from CPU tests.
