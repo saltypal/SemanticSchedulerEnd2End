@@ -7,8 +7,10 @@ On 2026-09-27 the superseded `Scheduler/notebooks/01_compare_image_classifiers.i
 The current Track-A branch adds two canonical notebooks:
 `Scheduler/notebooks/01_train_semantic_scheduler.ipynb` and
 `Scheduler/notebooks/02_evaluate_all_policies.ipynb`. They import reusable
-module code, clean-clone the latest remote branch, and require a reviewed LADI
-manifest. `scripts/build_semantic_scheduler_notebooks.py` regenerates them;
+module code, clean-clone the latest remote branch, and require a prototype-fixed
+LADI manifest. Notebook 1 includes all policy evaluation cells after its
+two-hour capped DQN training; notebook 2 supports later independent reruns.
+`scripts/build_semantic_scheduler_notebooks.py` regenerates them;
 `scripts/prepare_semantic_kaggle.py` stages private Kaggle CLI copies and
 metadata. See `SEMANTIC_SCHEDULER_RUNBOOK.md` for commands and data gates.
 

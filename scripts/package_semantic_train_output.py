@@ -26,8 +26,9 @@ def main() -> None:
         raise FileNotFoundError(run_manifest)
     manifest = json.loads(run_manifest.read_text(encoding="utf-8"))
     hashes = manifest.get("artifacts_sha256", {})
-    if not hashes or manifest.get("status") != "trained_on_reviewed_manifest":
-        raise ValueError("Run manifest does not describe reviewed-data training")
+    if not hashes or manifest.get("status") not in {
+            "trained_on_reviewed_manifest", "trained_on_prototype_fixed_manifest"}:
+        raise ValueError("Run manifest does not describe accepted-manifest training")
     target.mkdir(parents=True, exist_ok=True)
     packaged_hashes = {}
     for name, expected in hashes.items():
@@ -51,7 +52,7 @@ def main() -> None:
     (target / "dataset-metadata.json").write_text(
         json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
     print(f"Private compact training-output package: {target}")
-    print(f"Create with: kaggle datasets create -p {target} --private")
+    print(f"Create privately with: kaggle datasets create -p {target}")
 
 
 if __name__ == "__main__":

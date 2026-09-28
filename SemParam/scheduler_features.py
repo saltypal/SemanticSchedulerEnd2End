@@ -73,7 +73,7 @@ class FeatureValue:
 
 @dataclass(frozen=True, slots=True)
 class SchedulerAnnotation:
-    """Human-reviewed fields used by the oracle-assisted Track-A prototype."""
+    """Rubric or reviewed fields with explicit annotation provenance."""
 
     task_impact: int
     urgency: int
@@ -203,6 +203,10 @@ class SchedulerFeatureExtractor:
             "reviewer": annotation.reviewer,
             "rationale": annotation.rationale,
         }
+        prototype = annotation.annotation_source == "prototype_default_no_human_review"
+        rubric_method = "prototype_task_rubric" if prototype else "reviewed_task_rubric"
+        sufficiency_method = ("prototype_default_sufficiency" if prototype
+                              else "reviewed_evidence_sufficiency")
         return SchedulingFeatureVectorV2(
             image_id=image_id,
             task_profile_id=self.task_profile_id,
@@ -218,16 +222,16 @@ class SchedulerFeatureExtractor:
                 reason="history_not_materialized",
             ),
             task_impact=FeatureValue.measured(
-                "task_impact", annotation.task_impact, method="reviewed_task_rubric",
+                "task_impact", annotation.task_impact, method=rubric_method,
                 source=annotation.annotation_source, version=self.version, **annotation_provenance,
             ),
             urgency=FeatureValue.measured(
-                "urgency", annotation.urgency, method="reviewed_task_rubric",
+                "urgency", annotation.urgency, method=rubric_method,
                 source=annotation.annotation_source, version=self.version, **annotation_provenance,
             ),
             evidence_sufficiency=FeatureValue.measured(
                 "evidence_sufficiency", annotation.evidence_sufficiency,
-                method="reviewed_evidence_sufficiency", source=annotation.annotation_source,
+                method=sufficiency_method, source=annotation.annotation_source,
                 version=self.version, **annotation_provenance,
             ),
             extraction_latency_ms=elapsed_ms,

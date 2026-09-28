@@ -55,3 +55,17 @@ def test_history_only_changes_once_per_successful_image():
     snapshot = history.snapshot()
     assert snapshot.history_version == 1
     assert snapshot.successful_delivery_count == 1
+
+
+def test_prototype_annotation_does_not_claim_human_review(tmp_path):
+    image = tmp_path / "image.jpg"
+    image.write_bytes(b"placeholder")
+    features = SchedulerFeatureExtractor(backend=FakeEmbeddingBackend()).extract(
+        image, image_id="prototype-image",
+        annotation=SchedulerAnnotation(
+            task_impact=2, urgency=3, evidence_sufficiency=1,
+            annotation_source="prototype_default_no_human_review"),
+    )
+    assert features.task_impact.method == "prototype_task_rubric"
+    assert features.urgency.method == "prototype_task_rubric"
+    assert features.evidence_sufficiency.method == "prototype_default_sufficiency"

@@ -49,7 +49,7 @@ def test_dqn_numpy_export_matches_torch_network(tmp_path):
         [episode] * 3, [episode], budget, tmp_path,
         config=DQNConfig(episodes=3, batch_size=2, replay_capacity=20,
                          replay_warmup=2, target_update_steps=2,
-                         validate_every=1), device="cpu",
+                         validate_every=1, max_seconds=None), device="cpu",
     )
     policy = create_semantic_policy("dqn", model_artifact=tmp_path / "dqn_seed42_best.npz")
     checkpoint = torch.load(tmp_path / "dqn_seed42_best.pt", map_location="cpu",
@@ -63,3 +63,20 @@ def test_dqn_numpy_export_matches_torch_network(tmp_path):
     actual, mask = policy.q_values(snapshot, budget)
     np.testing.assert_allclose(actual, expected, atol=1e-5)
     assert int(mask.sum()) == 4
+
+
+def test_dqn_wall_clock_limit_still_exports_valid_best_checkpoint(tmp_path):
+    from INFRA.learning.dqn_training import DQNConfig, train_dqn
+
+    items = tuple(_item(index, index % 4) for index in range(4))
+    episode = EpisodeSpec("budget-demo", "task", items, 42)
+    manifest = train_dqn(
+        [episode] * 3, [episode], ResourceBudgetSemantic(1.0), tmp_path,
+        config=DQNConfig(episodes=3, batch_size=2, replay_capacity=20,
+                         replay_warmup=2, validate_every=3, max_seconds=1e-9),
+        device="cpu",
+    )
+    assert manifest["stopped_by_time_budget"] is True
+    assert 1 <= manifest["completed_episodes"] < 3
+    assert (tmp_path / "dqn_seed42_best.npz").is_file()
+    assert (tmp_path / "dqn_seed42_last.npz").is_file()

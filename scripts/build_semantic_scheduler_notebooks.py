@@ -75,13 +75,14 @@ def train_notebook():
 
             **Experiment boundary:** 60 distinct LADI v2 images, 36/12/12 group-safe
             split, five simulated UEs, whole SwinJSCC latent jobs. P2 and P3 are
-            image-derived; P5, P6 and P7 require reviewed task annotations.
+            image-derived; P5/P6 use the fixed task rubric and P7 is a prototype
+            default. These annotations are explicitly not human reviewed.
             The DQN learns a *next-job decision*, not a one-shot permutation.
 
             This notebook starts with a disposable clean clone of the latest remote
             `semantic-aware-ai-scheduler` commit. Results go to a separate persistent
-            run directory. It refuses an unreviewed manifest or missing measured
-            payload when measured mode is selected.
+            run directory. It requires a complete experiment-ready manifest and
+            measured payload when measured mode is selected.
         '''),
         md('## 1. Clean reset and exact source revision'), BOOTSTRAP,
         md('## 2. Dependencies, hardware, and persistent output'), DEPENDENCIES,
@@ -106,8 +107,8 @@ def train_notebook():
             RUN_ID = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + SOURCE_COMMIT[:8]
             RUN_ROOT = RESULTS_ROOT / RUN_ID
             RUN_ROOT.mkdir(parents=True, exist_ok=False)
-            MANIFEST_PATH = Path(os.environ.get("SCHEDULER_REVIEWED_MANIFEST",
-                "/kaggle/input/semantic-scheduler-ladi60-reviewed/ladi60_semantic_scheduler_v1.csv"))
+            MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
+                "/kaggle/input/semantic-scheduler-ladi60-prototype/ladi60_semantic_scheduler_v1.csv"))
             PAYLOAD_MODE = os.environ.get("SCHEDULER_PAYLOAD_MODE", "measured")
             if PAYLOAD_MODE not in ("measured", "simulated_fixed"):
                 raise ValueError("SCHEDULER_PAYLOAD_MODE must be measured or simulated_fixed")
@@ -122,26 +123,25 @@ def train_notebook():
             print({"run_id": RUN_ID, "output": str(RUN_ROOT), "payload_mode": PAYLOAD_MODE})
         '''),
         md('''
-            ## 3. Reviewed dataset gate
+            ## 3. Experiment-ready prototype dataset gate
 
-            Attach the private reviewed-image dataset and set
-            `SCHEDULER_REVIEWED_MANIFEST` to its CSV path if needed. The manifest
-            must contain 60 unique images, six selection strata, 30 reviewed
-            evidence pairs, and a 36/12/12 group-safe split. The draft contact
-            sheet is a review aid, never automatic evidence-group truth.
+            Attach the private prototype dataset and set `SCHEDULER_MANIFEST` if
+            needed. It contains 60 unique images, six selection strata, 30
+            CLIP-proposed evidence pairs, and a 36/12/12 group-safe split.
+            P7=1 and the evidence pairs are prototype assumptions, not reviewed truth.
         '''),
         code(r'''
             if not MANIFEST_PATH.is_file():
                 raise FileNotFoundError(
-                    f"Reviewed manifest missing: {MANIFEST_PATH}. Attach the private reviewed LADI dataset "+
-                    "or set SCHEDULER_REVIEWED_MANIFEST before running this notebook.")
+                    f"Prototype manifest missing: {MANIFEST_PATH}. Attach the private LADI dataset "+
+                    "or set SCHEDULER_MANIFEST before running this notebook.")
             reviewed_rows = validate_ladi60_manifest(MANIFEST_PATH, require_reviewed=True)
             frame = pd.DataFrame(reviewed_rows)
             display(frame.groupby(["split", "selection_stratum"]).size().unstack(fill_value=0))
             sheet = render_contact_sheet(MANIFEST_PATH, RUN_ROOT / "ladi60_contact_sheet.png")
             from PIL import Image
             display(Image.open(sheet))
-            print("All 60 image hashes, annotations and evidence groups validated.")
+            print("All 60 hashes and fixed prototype annotations validated; no human-review claim is made.")
         '''),
         md('## 4. Extract CLIP features and cached image-classifier predictions once'),
         code(r'''
@@ -168,7 +168,9 @@ def train_notebook():
             else:
                 supplied_costs = os.environ.get("SCHEDULER_PAYLOAD_COSTS_CSV")
                 if not supplied_costs:
-                    attached_costs = Path("/kaggle/input/semantic-scheduler-measured-costs/payload_costs.csv")
+                    attached_costs = MANIFEST_PATH.parent / "payload_costs.csv"
+                    if not attached_costs.is_file():
+                        attached_costs = Path("/kaggle/input/semantic-scheduler-measured-costs/payload_costs.csv")
                     supplied_costs = str(attached_costs) if attached_costs.is_file() else None
                 if supplied_costs:
                     PAYLOAD_COSTS = Path(supplied_costs)
@@ -234,11 +236,14 @@ def train_notebook():
             print({name: str(path) for name, path in supervised.items()})
         '''),
         md('''
-            ## 8. Train three small standard DQNs
+            ## 8. Train three small standard DQNs (two-hour training cap)
 
             Each action selects one eligible whole latent. Replay uses a target
             network, masked Bellman targets, Huber loss and 459→64→32→25 layers.
             Validation uses fixed streams and normalized semantic-utility AUC.
+            Each seed has a 40-minute wall-clock cap. All three seeds together
+            therefore have a two-hour training cap; extraction and evaluation
+            run outside that training budget.
         '''),
         code(r'''
             dqn_config = DQNConfig(**DQN_SETTINGS)
@@ -290,7 +295,7 @@ def train_notebook():
                         "models/pairwise_ranker.npz"] + [f"models/dqn_seed{seed}_best.npz" for seed in (42, 43, 44)]
             artifact_hashes = {name: file_hash(RUN_ROOT / name) for name in required}
             run_manifest = {
-                **provenance, "run_id": RUN_ID, "status": "trained_on_reviewed_manifest",
+                **provenance, "run_id": RUN_ID, "status": "trained_on_prototype_fixed_manifest",
                 "payload_mode": PAYLOAD_MODE, "resource_unit": unit,
                 "service_rate_units_per_ms": service_rate,
                 "artifacts_sha256": artifact_hashes,
@@ -303,6 +308,38 @@ def train_notebook():
             print("Kaggle CLI: kaggle kernels output <username>/semantic-scheduler-train -p downloaded/train-run")
         '''),
     ]
+    # Reuse the complete evaluation workflow immediately after training. The
+    # separate evaluation notebook remains useful for later, exact-commit reruns.
+    cells.extend([
+        md('''
+            ## 10. Evaluate every policy in this training run
+
+            The remaining cells run the same comparison and faculty walkthrough
+            as notebook 2 against the artifacts just produced. They save results
+            under this run directory; no second Kaggle job is needed.
+        '''),
+        code(r'''
+            from dataclasses import asdict, replace
+            from INFRA.experiments.semantic_scheduler_experiment import (
+                load_catalog, build_suites_from_manifest, evaluate_policy_suite)
+            from INFRA.semantic_streams import with_transport_probability
+            from Scheduler.semantic_policies import NumpyDQNPolicy
+            from INFRA.event_simulation import SemanticSchedulingEnvironment
+            from SemParam.semantic_header import SemanticSchedulingHeaderV2Codec
+
+            TRAIN_ROOT = RUN_ROOT
+            EVAL_ID = RUN_ID + "-evaluation"
+            EVAL_ROOT = RUN_ROOT / "evaluation"
+            EVAL_ROOT.mkdir(parents=True, exist_ok=True)
+            training = run_manifest
+            print("Evaluation in the same run:", EVAL_ROOT)
+        '''),
+    ])
+    evaluation_cells = evaluation_notebook().cells
+    evaluation_start = next(index for index, cell in enumerate(evaluation_cells)
+                            if cell.cell_type == "markdown" and
+                            cell.source.startswith("## 3. Rebuild fixed streams"))
+    cells.extend(evaluation_cells[evaluation_start:])
     return nbformat.v4.new_notebook(cells=cells, metadata={"kernelspec": {
         "display_name": "Python 3", "language": "python", "name": "python3"}})
 
@@ -348,11 +385,11 @@ def evaluation_notebook():
             EVAL_ROOT.mkdir(parents=True, exist_ok=False)
             TRAIN_ROOT = Path(os.environ.get("SCHEDULER_TRAIN_RUN_DIR",
                 "/kaggle/input/semantic-scheduler-train-output"))
-            MANIFEST_PATH = Path(os.environ.get("SCHEDULER_REVIEWED_MANIFEST",
-                "/kaggle/input/semantic-scheduler-ladi60-reviewed/ladi60_semantic_scheduler_v1.csv"))
+            MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
+                "/kaggle/input/semantic-scheduler-ladi60-prototype/ladi60_semantic_scheduler_v1.csv"))
             run_manifest_path = TRAIN_ROOT / "run_manifest.json"
             if not run_manifest_path.is_file() or not MANIFEST_PATH.is_file():
-                raise FileNotFoundError("Attach the private training-output and reviewed LADI datasets; set SCHEDULER_TRAIN_RUN_DIR and SCHEDULER_REVIEWED_MANIFEST")
+                raise FileNotFoundError("Attach the private training-output and prototype LADI datasets; set SCHEDULER_TRAIN_RUN_DIR and SCHEDULER_MANIFEST")
             training = json.loads(run_manifest_path.read_text(encoding="utf-8"))
             if training["git_commit"] != SOURCE_COMMIT:
                 raise RuntimeError("Latest remote commit differs from trained model. Rerun notebook 1 on this commit.")
@@ -361,7 +398,7 @@ def evaluation_notebook():
                     current_source["source_digest_sha256"] != training["source_digest_sha256"]):
                 raise RuntimeError("Evaluation source digest differs from the trained run")
             if training["manifest_sha256"] != sha256(MANIFEST_PATH.read_bytes()).hexdigest():
-                raise RuntimeError("Reviewed manifest differs from the training dataset")
+                raise RuntimeError("Prototype manifest differs from the training dataset")
             if (training["feature_schema_version"] != 2
                     or training["header_schema_id"] != 0x0201
                     or training["header_version"] != 2):
@@ -408,7 +445,7 @@ def evaluation_notebook():
                 "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn",
                 "privileged_marginal_utility")
             allowed_inputs = pd.DataFrame([
-                {"policy": name, "observes_reviewed_priority": name in
+                {"policy": name, "observes_privileged_rubric_priority": name in
                  ("fixed_priority", "priority_edf", "privileged_marginal_utility"),
                  "observes_evaluator_evidence_group": name == "privileged_marginal_utility",
                  "observes_image_labels": False, "observes_semantic_features": name in
@@ -446,7 +483,14 @@ def evaluation_notebook():
                 "critical_on_time_rate", "deadline_miss_rate", "weighted_priority_inversion",
                 "jain_fairness"]].mean().round(3))
         '''),
-        md('## 5. Uncertainty, cost sensitivity, and feature ablations'),
+        md('''
+            ## 5. Uncertainty, cost sensitivity, and input-masking sensitivity
+
+            The semantic-greedy P2/P3 row is an automatic-feature comparator.
+            Masking inputs to classifier, ranker, or DQN models trained with all
+            five features is an out-of-distribution stress test. It is **not**
+            evidence for how separately retrained automatic-only models perform.
+        '''),
         code(r'''
             rng = np.random.default_rng(2026)
             def bootstrap_interval(values, repetitions=1000):
@@ -484,7 +528,7 @@ def evaluation_notebook():
             ablation = pd.DataFrame(ablation_rows)
             ablation.to_csv(EVAL_ROOT / "feature_ablation_metrics.csv", index=False)
             display(ablation.groupby(["ablation", "policy"]).normalized_utility_auc.mean().unstack().round(3))
-            print("Ablation removes policy inputs only; reward and deadlines use the same evaluator facts.")
+            print("Input masking leaves reward/deadlines fixed. Learned-policy rows are OOD stress tests, not retrained ablations.")
             sensitivity_rows = []
             for coefficient in (0.0, 0.1, 0.2):
                 _, rows = evaluate_policy_suite(suites["image_disjoint"][:30], budget,
@@ -660,7 +704,7 @@ def evaluation_notebook():
         md('## 9. Claim ledger and output persistence'),
         code(r'''
             claims = pd.DataFrame([
-                {"category":"Implemented", "component":"P2/P3 extraction, reviewed P5/P6/P7, 24-byte header, policies, DQN, metrics"},
+                {"category":"Implemented", "component":"P2/P3 extraction, prototype-rubric P5/P6 and default P7, 24-byte header, policies, DQN, metrics"},
                 {"category":"Simulated", "component":"UE arrivals, queues, deadlines, service duration, transport outcome"},
                 {"category":"Measured when available", "component":"SwinJSCC checkpoint latency, channel uses, selected PSNR/SSIM"},
                 {"category":"Proposed", "component":"Real 5G MAC/PHY control channel, RB allocation, distributed KB sync"},

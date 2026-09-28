@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import pytest
 from scripts.build_ladi_review_page import build_review_page
+from scripts.freeze_ladi60_prototype import freeze_prototype
 
 from INFRA.ladi_manifest import (
     NATIVE_LABELS, STRATA, draft_ladi60_manifest,
@@ -34,9 +35,19 @@ def test_ladi_draft_preserves_multilabel_fields_and_requires_review(tmp_path):
     reviewed_rows = validate_ladi60_manifest(manifest, require_reviewed=False)
     assert len(reviewed_rows) == 60
     assert len({row["evidence_group_id"] for row in reviewed_rows}) == 30
-    with pytest.raises(ValueError, match="Human review"):
+    with pytest.raises(ValueError, match="Experiment annotation"):
+        validate_ladi60_manifest(manifest)
+    prototype = freeze_prototype(manifest, tmp_path / "ladi60_prototype.csv")
+    frozen_rows = validate_ladi60_manifest(prototype)
+    assert [(row["image_id"], row["evidence_group_id"], row["split"])
+            for row in frozen_rows] == [
+                (row["image_id"], row["evidence_group_id"], row["split"])
+                for row in reviewed_rows]
+    assert {row["evidence_sufficiency"] for row in frozen_rows} == {"1"}
+    assert {row["review_status"] for row in frozen_rows} == {"prototype_fixed"}
+    with pytest.raises(ValueError, match="Experiment annotation"):
         validate_ladi60_manifest(manifest)
     review_page = build_review_page(manifest, tmp_path / "review.html")
     assert review_page.read_text(encoding="utf-8").count('class="group"') == 30
-    with pytest.raises(ValueError, match="Human review"):
+    with pytest.raises(ValueError, match="Experiment annotation"):
         validate_ladi60_manifest(manifest)

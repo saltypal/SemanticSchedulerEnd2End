@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass
 import json
 from pathlib import Path
 import random
+from time import monotonic
 from typing import Mapping, Sequence
 
 import numpy as np
@@ -34,6 +35,7 @@ class DQNConfig:
     validate_every: int = 25
     max_decisions: int = 25
     gradient_clip_norm: float = 10.0
+    max_seconds: float | None = 2400.0
 
     def __post_init__(self) -> None:
         if self.episodes <= 0 or self.batch_size <= 0 or self.replay_capacity < self.batch_size:
@@ -42,6 +44,8 @@ class DQNConfig:
             raise ValueError("Epsilon bounds must satisfy 0 <= end <= start <= 1")
         if not 0 < self.epsilon_fraction <= 1 or not 0 < self.gamma <= 1:
             raise ValueError("DQN epsilon fraction and discount are invalid")
+        if self.max_seconds is not None and self.max_seconds <= 0:
+            raise ValueError("DQN max_seconds must be positive or None")
 
 
 def build_q_network():
@@ -146,6 +150,7 @@ def train_dqn(
     action_histogram = [0] * MAX_CANDIDATES
     provenance_data = dict(provenance or {})
     provenance_data.setdefault("feature_schema", "track-a/v2:459-64-32-25")
+    training_started = monotonic()
 
     def save_checkpoint(stem: str, episode_index: int) -> None:
         checkpoint = {
@@ -162,6 +167,8 @@ def train_dqn(
         torch.save(checkpoint, output / f"{stem}.pt")
         _export_numpy(online, output / f"{stem}.npz")
 
+    completed_episodes = 0
+    stopped_by_time_budget = False
     for episode_index in range(settings.episodes):
         environment = SemanticSchedulingEnvironment(train_episodes[episode_index], budget)
         snapshot = environment.snapshot()
@@ -237,7 +244,18 @@ def train_dqn(
                 best_validation = validation
                 save_checkpoint(f"dqn_seed{seed}_best", episode_index + 1)
         history.append(row)
-    save_checkpoint(f"dqn_seed{seed}_last", settings.episodes)
+        completed_episodes = episode_index + 1
+        if (settings.max_seconds is not None
+                and monotonic() - training_started >= settings.max_seconds):
+            if "validation_utility_auc" not in row:
+                validation = _validate(online, validation_episodes, budget, device)
+                row["validation_utility_auc"] = validation
+                if validation > best_validation:
+                    best_validation = validation
+                    save_checkpoint(f"dqn_seed{seed}_best", completed_episodes)
+            stopped_by_time_budget = True
+            break
+    save_checkpoint(f"dqn_seed{seed}_last", completed_episodes)
     serializable_history = [
         {key: (None if isinstance(value, float) and not np.isfinite(value) else value)
          for key, value in row.items()} for row in history
@@ -249,7 +267,10 @@ def train_dqn(
         json.dumps({"seed": seed, "action_index_counts": action_histogram}, indent=2),
         encoding="utf-8")
     manifest = {
-        "seed": seed, "episodes": settings.episodes,
+        "seed": seed, "configured_episodes": settings.episodes,
+        "completed_episodes": completed_episodes,
+        "stopped_by_time_budget": stopped_by_time_budget,
+        "elapsed_seconds": monotonic() - training_started,
         "best_validation_utility_auc": best_validation,
         "config": asdict(settings), "provenance": provenance_data,
         "training_checkpoint": f"dqn_seed{seed}_best.pt",

@@ -20,7 +20,9 @@ The additive Track-A path uses `SemParam/scheduler_features.py`,
 `feature_adapter.py`, and `policy_registry.py`; and
 `EncDec/integration/scheduler_replay.py`. The two active notebooks are
 `Scheduler/notebooks/01_train_semantic_scheduler.ipynb` and
-`02_evaluate_all_policies.ipynb`. Existing V1 contracts and notebook aliases
+`02_evaluate_all_policies.ipynb`. Notebook 1 also runs the complete evaluation
+after its two-hour capped training; notebook 2 permits independent reruns.
+Existing V1 contracts and notebook aliases
 remain independent compatibility surfaces.
 
 Each module owns its README, config defaults, environment requirements, tests, evaluation and active notebooks. Modules have maintainers by responsibility, not hardcoded personal names. Coordinate changes to INFRA contracts with consumers and add integration tests.
@@ -67,8 +69,8 @@ The current synthetic INFRA fixture exercises scheduling contracts. Real images 
 See `docs/VALIDATION_REPORT.md` for measured checks and model availability, `docs/REBUILD_GUIDE.md` for reproducible commands, `docs/MIGRATION_MAP.md` for source moves, and `docs/NOTEBOOK_MIGRATION.md` for preserved notebooks.
 
 The Track-A branch implements DQN and classifier/ranker training code, but no
-60-image research result is claimed until the draft manifest receives human
-review and the notebooks run from a pushed commit. AIDER labeling,
+60-image research result is claimed until the explicitly unreviewed prototype
+manifest is run from a pushed commit. Pairing and P7 remain assumptions. AIDER labeling,
 NS-3/system-level wireless, real MAC/PHY control transmission, TPU/XLA and a
 universal semantic priority rule are outside this prototype. Training
 portability is implemented; full convergence on T4/P100/A100/dual GPU is not

@@ -1,8 +1,8 @@
-"""Curate and validate a reviewed 60-image LADI v2 scheduling manifest.
+"""Curate and validate a 60-image LADI v2 scheduling manifest.
 
 LADI labels are multi-label observations, not semantic-priority ground truth.
-The draft pairing step uses image similarity only to nominate related views;
-human review is mandatory before the manifest is accepted for evaluation.
+The draft pairing step uses image similarity only to nominate related views.
+Prototype-fixed annotations permit evaluation without claiming human review.
 """
 
 from __future__ import annotations
@@ -44,6 +44,7 @@ MANIFEST_FIELDS = (
     "task_impact", "urgency", "evidence_sufficiency",
     "annotation_source", "reviewer", "rationale", "review_status",
 )
+READY_STATUSES = frozenset({"reviewed", "prototype_fixed"})
 
 
 def selection_stratum(labels: Mapping[str, object]) -> str | None:
@@ -167,6 +168,11 @@ def draft_ladi60_manifest(
 
 
 def validate_ladi60_manifest(path: str | Path, *, require_reviewed: bool = True) -> list[dict[str, str]]:
+    """Validate structure and, when requested, experiment-ready annotations.
+
+    ``prototype_fixed`` is complete enough to run but explicitly carries no
+    human-review claim. Downstream reports must preserve that provenance.
+    """
     manifest_path = Path(path)
     with manifest_path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -198,10 +204,15 @@ def validate_ladi60_manifest(path: str | Path, *, require_reviewed: bool = True)
         if sha256(resolved_image_path.read_bytes()).hexdigest() != row["source_sha256"]:
             raise ValueError(f"Image hash differs for {row['image_id']}")
         if require_reviewed:
-            if row["review_status"] != "reviewed" or not row["reviewer"]:
+            if row["review_status"] not in READY_STATUSES:
+                raise ValueError(f"Experiment annotation is incomplete for {row['image_id']}")
+            if row["review_status"] == "reviewed" and not row["reviewer"]:
                 raise ValueError(f"Human review is incomplete for {row['image_id']}")
             if row["evidence_sufficiency"] not in ("0", "1"):
-                raise ValueError(f"Evidence sufficiency is unreviewed for {row['image_id']}")
+                raise ValueError(f"Evidence sufficiency is unavailable for {row['image_id']}")
+            if (row["review_status"] == "prototype_fixed"
+                    and row["annotation_source"] != "prototype_default_no_human_review"):
+                raise ValueError(f"Prototype provenance is invalid for {row['image_id']}")
         default = RUBRIC[row["selection_stratum"]]
         chosen = tuple(int(row[name]) for name in ("task_impact", "urgency", "base_priority"))
         if chosen != default and not (row["reviewer"] and row["rationale"]):

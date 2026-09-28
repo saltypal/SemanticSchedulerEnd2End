@@ -29,7 +29,7 @@ def kaggle_username() -> str:
     raise RuntimeError("Set KAGGLE_USERNAME or configure ~/.kaggle/kaggle.json")
 
 
-def stage_kernel(kind: str, *, reviewed_dataset: str | None = None,
+def stage_kernel(kind: str, *, manifest_dataset: str | None = None,
                  train_output_dataset: str | None = None,
                  payload_cost_dataset: str | None = None) -> Path:
     filename, slug = NOTEBOOKS[kind]
@@ -40,8 +40,8 @@ def stage_kernel(kind: str, *, reviewed_dataset: str | None = None,
     destination.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination / filename)
     sources = []
-    if reviewed_dataset:
-        sources.append(reviewed_dataset)
+    if manifest_dataset:
+        sources.append(manifest_dataset)
     if kind == "train" and payload_cost_dataset:
         sources.append(payload_cost_dataset)
     if kind == "evaluate" and train_output_dataset:
@@ -69,12 +69,12 @@ def stage_kernel(kind: str, *, reviewed_dataset: str | None = None,
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("kind", choices=("train", "evaluate", "both"))
-    parser.add_argument("--reviewed-dataset", help="username/private-reviewed-LADI-slug")
+    parser.add_argument("--manifest-dataset", help="username/private-LADI-prototype-slug")
     parser.add_argument("--train-output-dataset", help="username/private-training-output-slug")
     parser.add_argument("--payload-cost-dataset", help="username/private-measured-cost-slug")
     options = parser.parse_args()
     for kind in NOTEBOOKS if options.kind == "both" else (options.kind,):
-        print(stage_kernel(kind, reviewed_dataset=options.reviewed_dataset,
+        print(stage_kernel(kind, manifest_dataset=options.manifest_dataset,
                            train_output_dataset=options.train_output_dataset,
                            payload_cost_dataset=options.payload_cost_dataset))
 
