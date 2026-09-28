@@ -19,6 +19,8 @@ from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
 from INFRA.semantic_contracts import (
     FeatureValue, ResourceBudgetSemantic, SchedulingFeatureVectorV2,
 )
+from INFRA.learning.supervised_training import fit_supervised_models
+from INFRA.learning.dqn_training import DQNConfig, train_dqn
 
 
 class FixtureEmbedding:
@@ -90,3 +92,28 @@ def test_manifest_cache_stream_policy_and_metrics_join(tmp_path):
     assert {row["policy"] for row in metrics} == {
         "fifo", "semantic_greedy", "privileged_marginal_utility"}
     assert all(row["jobs"] == 25 for row in metrics)
+
+    train_images = {row["image_id"] for row in rows if row["split"] == "train"}
+    trained = fit_supervised_models(
+        [job for job in catalogue if job.candidate.image_id in train_images],
+        tmp_path / "models")
+    train_dqn(
+        suites["train_by_seed"][42][:1], suites["validation"][:1],
+        ResourceBudgetSemantic(1.0), tmp_path / "models",
+        config=DQNConfig(episodes=1, batch_size=2, replay_capacity=50,
+                         replay_warmup=2, validate_every=1, max_seconds=None),
+        device="cpu",
+    )
+    predictions = {row["image_id"]: {row["selection_stratum"]: 0.9}
+                   for row in rows}
+    artifacts = {
+        "feature_ordinal_classifier": trained["classifier"],
+        "pairwise_linear_ranker": trained["ranker"],
+        "dqn": tmp_path / "models" / "dqn_seed42_best.npz",
+    }
+    _, all_policy_metrics = evaluate_policy_suite(
+        suites["faculty_demo"], ResourceBudgetSemantic(1.0),
+        priority_by_image=priorities, predictions_by_image=predictions,
+        model_artifacts=artifacts)
+    assert len(all_policy_metrics) == 13
+    assert all(row["jobs"] == 25 for row in all_policy_metrics)
