@@ -109,7 +109,7 @@ def train_notebook():
             RUN_ROOT = RESULTS_ROOT / RUN_ID
             RUN_ROOT.mkdir(parents=True, exist_ok=False)
             MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
-                "/kaggle/input/semantic-scheduler-ladi60-prototype/ladi60_semantic_scheduler_v1.csv"))
+                "/kaggle/input/semantic-scheduler-ladi60-public/ladi60_semantic_scheduler_v1.csv"))
             PAYLOAD_MODE = os.environ.get("SCHEDULER_PAYLOAD_MODE", "measured")
             if PAYLOAD_MODE not in ("measured", "simulated_fixed"):
                 raise ValueError("SCHEDULER_PAYLOAD_MODE must be measured or simulated_fixed")
@@ -389,7 +389,7 @@ def evaluation_notebook():
             TRAIN_ROOT = Path(os.environ.get("SCHEDULER_TRAIN_RUN_DIR",
                 "/kaggle/input/semantic-scheduler-train-output"))
             MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
-                "/kaggle/input/semantic-scheduler-ladi60-prototype/ladi60_semantic_scheduler_v1.csv"))
+                "/kaggle/input/semantic-scheduler-ladi60-public/ladi60_semantic_scheduler_v1.csv"))
             MANIFEST_PATH = resolve_ladi_manifest(MANIFEST_PATH, EVAL_ROOT / "input_bundle")
             run_manifest_path = TRAIN_ROOT / "run_manifest.json"
             if not run_manifest_path.is_file() or not MANIFEST_PATH.is_file():
