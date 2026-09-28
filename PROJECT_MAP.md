@@ -18,7 +18,9 @@ The additive Track-A path uses `SemParam/scheduler_features.py`,
 `semantic_streams.py`, `event_simulation.py`, `semantic_evaluator.py`,
 `feature_cache.py`, and `learning/`; `Scheduler/semantic_policies.py`,
 `feature_adapter.py`, and `policy_registry.py`; and
-`EncDec/integration/scheduler_replay.py`. The two active notebooks are
+`EncDec/integration/scheduler_replay.py`. Dataset input accepts loose files
+or a flat manual-upload ZIP via
+`INFRA/kaggle_dataset_bundle.py`. The two active notebooks are
 `Scheduler/notebooks/01_train_semantic_scheduler.ipynb` and
 `02_evaluate_all_policies.ipynb`. Notebook 1 also runs the complete evaluation
 after its two-hour capped training; notebook 2 permits independent reruns.

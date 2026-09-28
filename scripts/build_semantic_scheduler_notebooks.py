@@ -92,6 +92,7 @@ def train_notebook():
             from dataclasses import asdict
             import yaml
             from INFRA.ladi_manifest import validate_ladi60_manifest, render_contact_sheet
+            from INFRA.kaggle_dataset_bundle import resolve_ladi_manifest
             from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
             from INFRA.experiments.semantic_scheduler_experiment import (
                 TASK_ID, prepare_feature_cache, load_catalog, build_suites_from_manifest,
@@ -131,6 +132,7 @@ def train_notebook():
             P7=1 and the evidence pairs are prototype assumptions, not reviewed truth.
         '''),
         code(r'''
+            MANIFEST_PATH = resolve_ladi_manifest(MANIFEST_PATH, RUN_ROOT / "input_bundle")
             if not MANIFEST_PATH.is_file():
                 raise FileNotFoundError(
                     f"Prototype manifest missing: {MANIFEST_PATH}. Attach the private LADI dataset "+
@@ -368,6 +370,7 @@ def evaluation_notebook():
             import csv
             import yaml
             from INFRA.ladi_manifest import validate_ladi60_manifest, render_contact_sheet
+            from INFRA.kaggle_dataset_bundle import resolve_ladi_manifest
             from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
             from INFRA.experiments.semantic_scheduler_experiment import (
                 load_catalog, build_suites_from_manifest, evaluate_policy_suite, git_provenance)
@@ -387,6 +390,7 @@ def evaluation_notebook():
                 "/kaggle/input/semantic-scheduler-train-output"))
             MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
                 "/kaggle/input/semantic-scheduler-ladi60-prototype/ladi60_semantic_scheduler_v1.csv"))
+            MANIFEST_PATH = resolve_ladi_manifest(MANIFEST_PATH, EVAL_ROOT / "input_bundle")
             run_manifest_path = TRAIN_ROOT / "run_manifest.json"
             if not run_manifest_path.is_file() or not MANIFEST_PATH.is_file():
                 raise FileNotFoundError("Attach the private training-output and prototype LADI datasets; set SCHEDULER_TRAIN_RUN_DIR and SCHEDULER_MANIFEST")

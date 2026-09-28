@@ -36,7 +36,9 @@ simulator objective and cannot establish real-world disaster triage quality.
 The private Kaggle bundle includes the 60 PNGs, prototype manifest and the
 checkpoint-derived `payload_costs.csv`. Its measured channel-use values are
 uniform for this fixed SwinJSCC rate; SJF consequently has no meaningful
-cost variation to exploit. Do not invent variable costs.
+cost variation to exploit. Do not invent variable costs. Both notebooks accept
+either the loose Kaggle dataset files or a manual upload that leaves the bundle
+as one ZIP; the ZIP is unpacked into the run's working directory.
 
 The class rubric is task-specific supervision, not universal disaster priority.
 P5/P6/P7 results must be called **prototype-rubric-assisted**. The evaluation cells
