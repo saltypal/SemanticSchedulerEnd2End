@@ -250,7 +250,13 @@ def build_suites_from_manifest(catalogue: Sequence[EpisodeJobSpec],
     }
     validation_episodes = generate_episode_suite(
         validation, task_id=TASK_ID, prefix="validation", episode_count=validation_count,
-        jobs_per_episode=12, seed=1001, ue_profiles=ue_profiles,
+        # Keep model-selection episodes structurally identical to deployment
+        # episodes. The validation catalogue has 12 images, so controlled
+        # reuse is required to reach the normal 25-job episode size. Without
+        # this, the DQN is selected on a different queue/action distribution
+        # from the one used for training and test evaluation.
+        jobs_per_episode=jobs_per_episode, seed=1001, allow_reuse=True,
+        ue_profiles=ue_profiles,
         queue_capacity=queue_capacity, horizon_ms=horizon_ms)
     image_disjoint = generate_episode_suite(
         test, task_id=TASK_ID, prefix="image-disjoint", episode_count=test_count,

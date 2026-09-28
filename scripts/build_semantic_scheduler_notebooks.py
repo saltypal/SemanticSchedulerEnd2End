@@ -198,7 +198,9 @@ def train_notebook():
             unit = catalogue[0].candidate.resource_unit
             service_rate = max(item.candidate.resource_units for item in catalogue) / 10.0
             budget = ResourceBudgetSemantic(service_rate, resource_unit=unit)
-            print({"train_episodes_per_seed": 300, "validation_episodes": len(suites["validation"]),
+            print({"train_episodes_per_seed": SCHEDULER_SETTINGS.train_episodes_per_seed,
+                   "validation_jobs_per_episode": len(suites["validation"][0].jobs),
+                   "validation_episodes": len(suites["validation"]),
                    "jobs_per_train_episode": len(suites["train_by_seed"][42][0].jobs),
                    "service_rate_units_per_ms": service_rate, "resource_unit": unit})
             episode_file = RUN_ROOT / "train_episodes.jsonl"

@@ -77,6 +77,7 @@ def test_manifest_cache_stream_policy_and_metrics_join(tmp_path):
     suites = build_suites_from_manifest(catalogue, draft, config=config,
                                         ue_profiles=profiles)
     assert len(suites["train_by_seed"][42]) == 300
+    assert all(len(episode.jobs) == 25 for episode in suites["validation"])
     assert len(suites["faculty_demo"][0].jobs) == 25
     assert set(Counter(job.candidate.ue_id for job in suites["faculty_demo"][0].jobs).values()) == {5}
     ue_priorities = defaultdict(set)
