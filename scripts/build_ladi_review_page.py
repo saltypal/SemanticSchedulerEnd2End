@@ -74,8 +74,10 @@ def build_review_page(manifest_path: str | Path, output_path: str | Path) -> Pat
   @media(max-width:650px) {{body {{padding:12px}} .pair {{grid-template-columns:1fr}} .image img {{height:210px}}}}
 </style></head><body>
 <h1>LADI-60 evidence review</h1>
-<p>These 30 pairs were nominated by image similarity. Confirm each pair only if it is defensibly
-related for the disaster-triage task. Set P7 sufficiency for both views. If a pair is wrong, edit
+<p>These 30 pairs were nominated by image similarity, not by verified event identity.
+Confirm a pair only if receiving its first image would materially reduce the new
+task evidence in its second image. A shared LADI label or similar scenery alone
+is insufficient. Set P7 sufficiency for both views. If a pair is wrong, edit
 its evidence-group assignment in the draft CSV, regenerate this page, and review again.</p>
 <div class="bar"><label>Reviewer name <input id="reviewer" autocomplete="name" placeholder="Your real name"></label>
 <span id="status">0 / 30 pairs confirmed</span><button id="export">Export reviewed CSV</button></div>

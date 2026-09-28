@@ -32,13 +32,17 @@ and contact sheet are in ignored local `results/ladi-curation/v1/`; no LADI imag
 bytes are committed. Training and evaluation deliberately reject this draft.
 
 Before training, review the contact sheet and each underlying image. Correct any
-evidence group that does not represent a defensible related observation; keep
+evidence group that does not represent materially redundant task evidence; keep
 groups of two within one split. For each row, set `evidence_sufficiency` to 0 or
 1, `reviewer` to a real reviewer name, and `review_status` to `reviewed`. If
 overriding impact, urgency or base priority, record the rationale. Keep the
 images in an `images/` folder next to the reviewed CSV, then upload this bundle
 as a **private** Kaggle dataset or provide a local path. The validator verifies
 every image SHA-256 and the 36/12/12 group-safe split.
+Visual inspection of the draft contact sheet found several pairs that appear to
+show different scenes. Sharing a LADI label is not enough to justify the reward's
+0.05 repeat-coverage factor. Such pairs must be regrouped or replaced before
+marking the manifest reviewed; no automatic pairing is treated as ground truth.
 
 For faster review, run `python scripts/build_ladi_review_page.py --manifest
 results/ladi-curation/v1/ladi60_semantic_scheduler_v1.csv --output
