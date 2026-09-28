@@ -7,6 +7,7 @@ from dataclasses import asdict
 import csv
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
 import platform
 import subprocess
@@ -41,11 +42,21 @@ def _sha256_file(path: str | Path) -> str:
 
 def git_provenance(repository_root: str | Path) -> dict[str, object]:
     root = Path(repository_root)
-    def git(*args: str) -> str:
-        return subprocess.check_output(("git", *args), cwd=root,
-                                       text=True, stderr=subprocess.DEVNULL).strip()
-    commit = git("rev-parse", "HEAD")
-    status = git("status", "--porcelain")
+    # Kaggle kernels may receive a source archive through a private Kaggle
+    # dataset because a private GitHub repository cannot be cloned
+    # anonymously.  The bootstrap cell records the exact originating commit
+    # in this environment variable and the archive is immutable for the run.
+    # Normal local/CI checkouts continue to use Git directly.
+    source_commit_override = os.environ.get("SEMANTIC_SOURCE_COMMIT")
+    if source_commit_override:
+        commit = source_commit_override
+        status = ""
+    else:
+        def git(*args: str) -> str:
+            return subprocess.check_output(("git", *args), cwd=root,
+                                           text=True, stderr=subprocess.DEVNULL).strip()
+        commit = git("rev-parse", "HEAD")
+        status = git("status", "--porcelain")
     source = sha256()
     for directory in ("SemParam", "Scheduler", "INFRA", "EncDec/integration"):
         for path in sorted((root / directory).rglob("*.py")):
