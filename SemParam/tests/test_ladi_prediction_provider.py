@@ -11,8 +11,8 @@ def test_ladi_mapping_uses_public_rubric_order():
     assert priority == 0
 
 
-def test_ladi_mapping_does_not_call_unknown_normal():
-    assert map_ladi_probabilities({"trees_any": 0.9}) == (None, None)
+def test_ladi_mapping_covers_normal_priority_native_labels():
+    assert map_ladi_probabilities({"trees_any": 0.9}) == ("trees_any", 3)
 
 
 def test_scene_importance_and_confidence_are_bounded_model_proxies():

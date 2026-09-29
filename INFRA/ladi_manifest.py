@@ -45,6 +45,18 @@ MANIFEST_FIELDS = (
     "annotation_source", "reviewer", "rationale", "review_status",
 )
 READY_STATUSES = frozenset({"reviewed", "prototype_fixed"})
+LADI260_STRATA = NATIVE_LABELS
+LADI260_COUNTS = {name: (22 if index < 10 else 20)
+                  for index, name in enumerate(LADI260_STRATA)}
+LADI260_RUBRIC = {
+    "bridges_any": (2, 2, 1), "buildings_any": (1, 1, 2),
+    "buildings_affected_or_greater": (3, 2, 1),
+    "buildings_minor_or_greater": (2, 1, 2), "debris_any": (2, 2, 2),
+    "flooding_any": (2, 2, 1), "flooding_structures": (3, 3, 0),
+    "roads_any": (1, 2, 2), "roads_damage": (2, 3, 1),
+    "trees_any": (1, 1, 3), "trees_damage": (1, 1, 2),
+    "water_any": (0, 0, 3),
+}
 
 
 def selection_stratum(labels: Mapping[str, object]) -> str | None:
@@ -227,19 +239,73 @@ def validate_ladi60_manifest(path: str | Path, *, require_reviewed: bool = True)
     return rows
 
 
+def validate_ladi260_manifest(path: str | Path, *, require_reviewed: bool = True) -> list[dict[str, str]]:
+    """Validate the 260-image, all-12-native-label dynamic benchmark."""
+    manifest_path = Path(path)
+    with manifest_path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        if tuple(reader.fieldnames or ()) != MANIFEST_FIELDS:
+            raise ValueError("LADI manifest columns or order do not match schema v1")
+        rows = list(reader)
+    if len(rows) != 260 or len({row["image_id"] for row in rows}) != 260:
+        raise ValueError("Expected 260 unique LADI images")
+    if len({row["source_sha256"] for row in rows}) != 260:
+        raise ValueError("LADI-260 image hashes are not unique")
+    if Counter(row["selection_stratum"] for row in rows) != Counter(LADI260_COUNTS):
+        raise ValueError("LADI-260 must cover all 12 native-label strata with 22/20 images")
+    groups: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        image_path = Path(row["image_path"])
+        resolved = image_path if image_path.is_absolute() else manifest_path.parent / image_path
+        row["image_path"] = str(resolved)
+        groups[row["evidence_group_id"]].append(row)
+        labels = json.loads(row["native_labels_json"])
+        if set(labels) != set(NATIVE_LABELS) or not bool(labels[row["selection_stratum"]]):
+            raise ValueError(f"Native labels/primary stratum disagree for {row['image_id']}")
+        if not resolved.is_file() or sha256(resolved.read_bytes()).hexdigest() != row["source_sha256"]:
+            raise ValueError(f"Missing or changed image {row['image_id']}")
+        if require_reviewed:
+            if row["review_status"] not in READY_STATUSES or row["evidence_sufficiency"] not in ("0", "1"):
+                raise ValueError(f"Prototype annotation is incomplete for {row['image_id']}")
+        expected = LADI260_RUBRIC[row["selection_stratum"]]
+        actual = tuple(int(row[name]) for name in ("task_impact", "urgency", "base_priority"))
+        if actual != expected:
+            raise ValueError(f"LADI-260 rubric disagrees for {row['image_id']}")
+    if len(groups) != 130 or any(len(items) != 2 for items in groups.values()):
+        raise ValueError("Expected 130 two-image evidence groups")
+    if any(len({item["split"] for item in items}) != 1 for items in groups.values()):
+        raise ValueError("Evidence groups must not cross splits")
+    if Counter(row["split"] for row in rows) != Counter({"train": 156, "validation": 52, "test": 52}):
+        raise ValueError("Expected a group-safe 156/52/52 split")
+    return rows
+
+
+def validate_ladi_manifest(path: str | Path, *, require_reviewed: bool = True) -> list[dict[str, str]]:
+    """Dispatch to the locked LADI-60 or LADI-260 contract."""
+    with Path(path).open(newline="", encoding="utf-8") as handle:
+        count = sum(1 for _ in csv.DictReader(handle))
+    if count == 60:
+        return validate_ladi60_manifest(path, require_reviewed=require_reviewed)
+    if count == 260:
+        return validate_ladi260_manifest(path, require_reviewed=require_reviewed)
+    raise ValueError(f"Unsupported semantic-scheduler manifest size: {count}")
+
+
 def render_contact_sheet(manifest_path: str | Path, output_path: str | Path) -> Path:
     """Render the proposed pairs side by side for required visual review."""
     from PIL import Image, ImageDraw, ImageOps
 
-    rows = validate_ladi60_manifest(manifest_path, require_reviewed=False)
+    rows = validate_ladi_manifest(manifest_path, require_reviewed=False)
+    stratum_order = LADI260_STRATA if len(rows) == 260 else STRATA
     ordered = sorted(rows, key=lambda row: (
-        STRATA.index(row["selection_stratum"]), row["evidence_group_id"], row["image_id"]))
+        stratum_order.index(row["selection_stratum"]), row["evidence_group_id"], row["image_id"]))
     tile_width, tile_height = 300, 210
-    sheet = Image.new("RGB", (6 * tile_width, 10 * tile_height), "white")
+    rows_per_column = 22 if len(rows) == 260 else 10
+    sheet = Image.new("RGB", (len(stratum_order) * tile_width, rows_per_column * tile_height), "white")
     draw = ImageDraw.Draw(sheet)
     for index, row in enumerate(ordered):
-        column = index // 10
-        line = index % 10
+        column = index // rows_per_column
+        line = index % rows_per_column
         x, y = column * tile_width, line * tile_height
         with Image.open(row["image_path"]) as opened:
             thumbnail = ImageOps.contain(opened.convert("RGB"), (tile_width - 12, tile_height - 45))

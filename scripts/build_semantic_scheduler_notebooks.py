@@ -74,7 +74,7 @@ def train_notebook():
         md('''
             # Train the semantic whole-latent scheduler
 
-            **Experiment boundary:** 60 distinct LADI v2 images, 36/12/12 group-safe
+            **Experiment boundary:** 260 distinct LADI v2 images, 156/52/52 group-safe
             split, five simulated UEs, whole SwinJSCC latent jobs. This is the
             stateful dynamic complement to the supplied 12-image static baseline.
             P1/P4 are classifier-derived proxies, P2 is CLIP task relevance, P3 is
@@ -94,7 +94,7 @@ def train_notebook():
             from hashlib import sha256
             from dataclasses import asdict
             import yaml
-            from INFRA.ladi_manifest import validate_ladi60_manifest, render_contact_sheet
+            from INFRA.ladi_manifest import validate_ladi_manifest, render_contact_sheet
             from INFRA.kaggle_dataset_bundle import resolve_ladi_manifest
             from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
             from INFRA.experiments.semantic_scheduler_experiment import (
@@ -113,13 +113,13 @@ def train_notebook():
             RUN_ROOT = RESULTS_ROOT / RUN_ID
             RUN_ROOT.mkdir(parents=True, exist_ok=False)
             MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
-                "/kaggle/input/semantic-scheduler-ladi60-public/ladi60_semantic_scheduler_v1.csv"))
+                "/kaggle/input/semantic-scheduler-ladi260-public/ladi260_semantic_scheduler_v2.csv"))
             PAYLOAD_MODE = os.environ.get("SCHEDULER_PAYLOAD_MODE", "measured")
             if PAYLOAD_MODE not in ("measured", "simulated_fixed"):
                 raise ValueError("SCHEDULER_PAYLOAD_MODE must be measured or simulated_fixed")
             MODEL_DIR = Path(os.environ.get("SCHEDULER_SWIN_MODEL_DIR", PROJECT_ROOT / "models/SwinJSCC"))
             UPSTREAM_ROOT = PROJECT_ROOT / "external/SwinJSCC"
-            SCHEDULER_SETTINGS = load_scheduler_config(PROJECT_ROOT / "INFRA/config/semantic_scheduler_demo.yaml")
+            SCHEDULER_SETTINGS = load_scheduler_config(PROJECT_ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
             UE_PROFILES = load_ue_profiles(PROJECT_ROOT / "INFRA/config/ue_profiles.yaml")
             DQN_SETTINGS = yaml.safe_load((PROJECT_ROOT / "Scheduler/config/semantic_dqn.yaml").read_text(encoding="utf-8"))
             if DQN_SETTINGS["episodes"] != SCHEDULER_SETTINGS.train_episodes_per_seed:
@@ -131,8 +131,8 @@ def train_notebook():
             ## 3. Experiment-ready prototype dataset gate
 
             Attach the private prototype dataset and set `SCHEDULER_MANIFEST` if
-            needed. It contains 60 unique images, six selection strata, 30
-            CLIP-proposed evidence pairs, and a 36/12/12 group-safe split.
+            needed. It contains 260 unique images, all 12 native-label selection
+            strata, 130 evidence pairs, and a 156/52/52 group-safe split.
             P7=1 and the evidence pairs are prototype assumptions, not reviewed truth.
         '''),
         code(r'''
@@ -141,17 +141,17 @@ def train_notebook():
                 raise FileNotFoundError(
                     f"Prototype manifest missing: {MANIFEST_PATH}. Attach the private LADI dataset "+
                     "or set SCHEDULER_MANIFEST before running this notebook.")
-            reviewed_rows = validate_ladi60_manifest(MANIFEST_PATH, require_reviewed=True)
+            reviewed_rows = validate_ladi_manifest(MANIFEST_PATH, require_reviewed=True)
             frame = pd.DataFrame(reviewed_rows)
             display(frame.groupby(["split", "selection_stratum"]).size().unstack(fill_value=0))
-            sheet = render_contact_sheet(MANIFEST_PATH, RUN_ROOT / "ladi60_contact_sheet.png")
+            sheet = render_contact_sheet(MANIFEST_PATH, RUN_ROOT / "ladi260_contact_sheet.png")
             from PIL import Image
             display(Image.open(sheet))
-            print("[1/8] All 60 hashes and fixed prototype annotations validated; no human-review claim is made.", flush=True)
+            print("[1/8] All 260 hashes and all 12 label strata validated; annotations remain prototype assumptions.", flush=True)
         '''),
         md('## 4. Extract CLIP features and cached image-classifier predictions once'),
         code(r'''
-            print("[2/8] Extracting CLIP/LADI features for 60 images...", flush=True)
+            print("[2/8] Extracting CLIP/LADI features for 260 images...", flush=True)
             cache = prepare_feature_cache(MANIFEST_PATH, RUN_ROOT / "cache",
                 include_ladi_predictions=True, device=DEVICE)
             feature_rows = [json.loads(line) for line in cache["features"].read_text(encoding="utf-8").splitlines()]
@@ -224,7 +224,7 @@ def train_notebook():
                                             for job in episode.jobs]}
                         handle.write(json.dumps(compact) + "\n")
         '''),
-        md('## 7. Fit image-only and feature-based models on 36 training images'),
+        md('## 7. Fit image-only and feature-based models on 156 training images'),
         code(r'''
             split_by_image = {row["image_id"]: row["split"] for row in reviewed_rows}
             train_jobs = [job for job in catalogue if split_by_image[job.candidate.image_id] == "train"]
@@ -371,7 +371,7 @@ def evaluation_notebook():
             This notebook is independent of in-memory training cells. It clones
             the **latest** remote branch, verifies the training artifact's exact
             Git commit, manifest hash, schema and file hashes, then evaluates
-            policies on identical immutable dynamic streams. The 60-job faculty
+            policies on identical immutable dynamic streams. The 260-job faculty
             scenario includes all curated images and a visible decision.
 
             Results are simulator results unless the final checkpoint replay
@@ -386,7 +386,7 @@ def evaluation_notebook():
             from dataclasses import asdict, replace
             import csv
             import yaml
-            from INFRA.ladi_manifest import validate_ladi60_manifest, render_contact_sheet
+            from INFRA.ladi_manifest import validate_ladi_manifest, render_contact_sheet
             from INFRA.kaggle_dataset_bundle import resolve_ladi_manifest
             from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
             from INFRA.experiments.semantic_scheduler_experiment import (
@@ -407,7 +407,7 @@ def evaluation_notebook():
             TRAIN_ROOT = Path(os.environ.get("SCHEDULER_TRAIN_RUN_DIR",
                 "/kaggle/input/semantic-scheduler-train-output"))
             MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
-                "/kaggle/input/semantic-scheduler-ladi60-public/ladi60_semantic_scheduler_v1.csv"))
+                "/kaggle/input/semantic-scheduler-ladi260-public/ladi260_semantic_scheduler_v2.csv"))
             MANIFEST_PATH = resolve_ladi_manifest(MANIFEST_PATH, EVAL_ROOT / "input_bundle")
             run_manifest_path = TRAIN_ROOT / "run_manifest.json"
             if not run_manifest_path.is_file() or not MANIFEST_PATH.is_file():
@@ -433,7 +433,7 @@ def evaluation_notebook():
             expected_config_hash = sha256(json.dumps(resolved_config, sort_keys=True).encode()).hexdigest()
             if expected_config_hash != training["config_sha256"]:
                 raise RuntimeError("Resolved training config changed")
-            reviewed_rows = validate_ladi60_manifest(MANIFEST_PATH, require_reviewed=True)
+            reviewed_rows = validate_ladi_manifest(MANIFEST_PATH, require_reviewed=True)
             print({"evaluation_id": EVAL_ID, "exact_commit": SOURCE_COMMIT,
                    "training_run": training["run_id"], "payload_mode": training["payload_mode"]})
         '''),
@@ -441,7 +441,7 @@ def evaluation_notebook():
         code(r'''
             catalogue = load_catalog(MANIFEST_PATH, TRAIN_ROOT / "feature_cache.jsonl",
                                      TRAIN_ROOT / "payload_costs.csv")
-            scheduler_settings = load_scheduler_config(PROJECT_ROOT / "INFRA/config/semantic_scheduler_demo.yaml")
+            scheduler_settings = load_scheduler_config(PROJECT_ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
             ue_profiles = load_ue_profiles(PROJECT_ROOT / "INFRA/config/ue_profiles.yaml")
             if resolved_config["scheduler"] != asdict(scheduler_settings):
                 raise RuntimeError("Latest branch scheduler config differs from the training run")
@@ -808,7 +808,7 @@ def evaluation_notebook():
             display(fig); plt.close(fig)
         '''),
         md('''
-            ## 7. Faculty scenario: 60 images, five UEs, one visible decision
+            ## 7. Faculty scenario: 260 images, five UEs, one visible decision
 
             The table exposes the complete queue snapshot at a decision point:
             seven values, availability masks, payload units, deadlines, score and
@@ -828,14 +828,14 @@ def evaluation_notebook():
             display(pd.DataFrame(demo_metrics).sort_values("normalized_utility_auc", ascending=False))
             image_paths = {row["image_id"]: row["image_path"] for row in reviewed_rows}
             from PIL import Image
-            fig, axes = plt.subplots(6, 10, figsize=(22, 14))
+            fig, axes = plt.subplots(13, 20, figsize=(30, 20))
             for axis, job in zip(axes.flat, demo.jobs):
                 with Image.open(image_paths[job.candidate.image_id]) as opened:
                     axis.imshow(opened.convert("RGB"))
                 axis.set_title(f"{job.candidate.ue_id} | {job.candidate.arrival_ms:.0f} ms", fontsize=8)
                 axis.axis("off")
-            fig.suptitle("All 60 distinct LADI images assigned to five simulated UEs")
-            fig.tight_layout(); fig.savefig(plot_dir / "faculty_60_inputs.png", dpi=130)
+            fig.suptitle("All 260 distinct LADI images assigned to five simulated UEs")
+            fig.tight_layout(); fig.savefig(plot_dir / "faculty_260_inputs.png", dpi=110)
             display(fig); plt.close(fig)
             chosen_demo = next(result for result in demo_results if result["policy"] == "dqn")
             first = next(row for row in chosen_demo["decision_trace"] if len(row["candidate_snapshot"]) > 1)

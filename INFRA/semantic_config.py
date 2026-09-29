@@ -32,8 +32,10 @@ class SemanticSchedulerConfig:
             value = getattr(self, name)
             if type(value) is not int or value <= 0:
                 raise ValueError(f"{name} must be a positive integer")
-        if self.image_count != 60 or self.ue_count != 5 or self.jobs_per_episode != 60:
-            raise ValueError("This run requires the locked 60-image, five-UE, 60-job protocol")
+        if self.image_count not in {60, 260} or self.ue_count != 5:
+            raise ValueError("This run requires 60 or 260 images and exactly five UEs")
+        if self.jobs_per_episode != self.image_count:
+            raise ValueError("The locked full-catalogue protocol requires one job per configured image")
         if self.queue_capacity > self.jobs_per_episode:
             raise ValueError("Queue capacity cannot exceed jobs per episode")
         if self.horizon_ms <= 0:

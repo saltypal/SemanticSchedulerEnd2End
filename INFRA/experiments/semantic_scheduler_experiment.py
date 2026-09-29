@@ -16,7 +16,7 @@ from typing import Mapping, Sequence
 
 from INFRA.event_simulation import run_episode
 from INFRA.feature_cache import to_policy_features
-from INFRA.ladi_manifest import validate_ladi60_manifest
+from INFRA.ladi_manifest import validate_ladi_manifest
 from INFRA.semantic_contracts import (
     FEATURE_NAMES, EpisodeJobSpec, FeatureValue, LatentJobSpec,
     ResourceBudgetSemantic, SchedulingFeatureVectorV2,
@@ -79,7 +79,7 @@ def prepare_feature_cache(
     from SemParam.ladi_prediction_provider import (
         LadiPredictionProvider, semantic_scene_features)
 
-    rows = validate_ladi60_manifest(reviewed_manifest, require_reviewed=True)
+    rows = validate_ladi_manifest(reviewed_manifest, require_reviewed=True)
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
     extractor = SchedulerFeatureExtractor(device=device, local_files_only=local_files_only)
@@ -146,7 +146,7 @@ def prepare_feature_cache(
 def simulated_fixed_payload_costs(reviewed_manifest: str | Path,
                                   output_csv: str | Path, *, units: int = 10) -> Path:
     """Create an explicitly simulated resource fixture for CPU smoke tests."""
-    rows = validate_ladi60_manifest(reviewed_manifest, require_reviewed=True)
+    rows = validate_ladi_manifest(reviewed_manifest, require_reviewed=True)
     if units <= 0:
         raise ValueError("Simulated resource units must be positive")
     output = Path(output_csv)
@@ -188,7 +188,7 @@ def _load_feature_rows(path: str | Path) -> dict[str, tuple[SchedulingFeatureVec
 def load_catalog(reviewed_manifest: str | Path, feature_cache: str | Path,
                  payload_costs: str | Path) -> tuple[EpisodeJobSpec, ...]:
     """Join reviewed image facts with cached extraction and real/simulated cost."""
-    rows = validate_ladi60_manifest(reviewed_manifest, require_reviewed=True)
+    rows = validate_ladi_manifest(reviewed_manifest, require_reviewed=True)
     features = _load_feature_rows(feature_cache)
     with Path(payload_costs).open(newline="", encoding="utf-8") as handle:
         cost_rows = {}
@@ -239,10 +239,10 @@ def build_suites_from_manifest(catalogue: Sequence[EpisodeJobSpec],
                                *, config: SemanticSchedulerConfig | None = None,
                                ue_profiles: Sequence[UEProfile] = DEFAULT_UE_PROFILES) -> dict[str, tuple]:
     """Freeze train, validation, two test tracks, and a paired faculty stream."""
-    rows = validate_ladi60_manifest(reviewed_manifest, require_reviewed=True)
+    rows = validate_ladi_manifest(reviewed_manifest, require_reviewed=True)
     if config is not None and (config.task_id != TASK_ID or len(ue_profiles) != config.ue_count):
         raise ValueError("Task or UE profiles differ from the locked scheduler config")
-    jobs_per_episode = 60 if config is None else config.jobs_per_episode
+    jobs_per_episode = len(catalogue) if config is None else config.jobs_per_episode
     queue_capacity = 25 if config is None else config.queue_capacity
     horizon_ms = 2000.0 if config is None else config.horizon_ms
     deadline_mode = "independent_network_sla" if config is None else config.deadline_mode
@@ -253,8 +253,10 @@ def build_suites_from_manifest(catalogue: Sequence[EpisodeJobSpec],
     by_split: dict[str, list[EpisodeJobSpec]] = defaultdict(list)
     for item in catalogue:
         by_split[split_by_image[item.candidate.image_id]].append(item)
-    if {name: len(by_split[name]) for name in ("train", "validation", "test")} != {
-            "train": 36, "validation": 12, "test": 12}:
+    expected_split = ({"train": 156, "validation": 52, "test": 52}
+                      if len(rows) == 260 else
+                      {"train": 36, "validation": 12, "test": 12})
+    if {name: len(by_split[name]) for name in ("train", "validation", "test")} != expected_split:
         raise ValueError("Catalogue split differs from reviewed manifest")
     train = tuple(by_split["train"])
     validation = tuple(by_split["validation"])

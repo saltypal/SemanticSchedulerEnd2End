@@ -67,17 +67,13 @@ def map_ladi_probabilities(probabilities: Mapping[str, float], threshold: float 
     """
 
     scores = {str(name).lower(): float(value) for name, value in probabilities.items()}
-    if scores.get("flooding_structures", 0.0) >= threshold:
-        return "flooding_structures", 0
-    if scores.get("buildings_affected_or_greater", 0.0) >= threshold:
-        return "buildings_affected_or_greater", 1
-    if scores.get("roads_damage", 0.0) >= threshold:
-        return "roads_damage", 1
-    if scores.get("debris_any", 0.0) >= threshold:
-        return "debris_any", 2
-    if scores.get("trees_damage", 0.0) >= threshold:
-        return "trees_damage", 2
-    return None, None
+    eligible = [(priority, -scores.get(label, 0.0), label)
+                for label, priority in SEMANTIC_PRIORITY_BY_LABEL.items()
+                if scores.get(label, 0.0) >= threshold]
+    if not eligible:
+        return None, None
+    priority, _negative_score, label = min(eligible)
+    return label, priority
 
 
 class LadiPredictionProvider:
