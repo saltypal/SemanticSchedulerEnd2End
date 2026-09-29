@@ -84,8 +84,9 @@ def train_notebook():
 
             This notebook starts with a disposable clean clone of the latest remote
             `semantic-aware-ai-scheduler` commit. Results go to a separate persistent
-            run directory. It requires a complete experiment-ready manifest and
-            measured payload when measured mode is selected.
+            run directory. It requires a complete experiment-ready manifest.
+            The Kaggle default uses explicitly labelled simulated transport
+            units; measured payload mode is opt-in when its checkpoint bundle is attached.
         '''),
         md('## 1. Clean reset and exact source revision'), BOOTSTRAP,
         md('## 2. Dependencies, hardware, and persistent output'), DEPENDENCIES,
@@ -114,7 +115,11 @@ def train_notebook():
             RUN_ROOT.mkdir(parents=True, exist_ok=False)
             MANIFEST_PATH = Path(os.environ.get("SCHEDULER_MANIFEST",
                 "/kaggle/input/semantic-scheduler-ladi260-public/ladi260_semantic_scheduler_v2.csv"))
-            PAYLOAD_MODE = os.environ.get("SCHEDULER_PAYLOAD_MODE", "measured")
+            # Kaggle does not carry the private SwinJSCC stage1 manifest. The
+            # default is therefore an explicitly labelled scheduler smoke mode;
+            # measured mode remains available when a checkpoint-cost CSV or
+            # complete checkpoint bundle is attached.
+            PAYLOAD_MODE = os.environ.get("SCHEDULER_PAYLOAD_MODE", "simulated_fixed")
             if PAYLOAD_MODE not in ("measured", "simulated_fixed"):
                 raise ValueError("SCHEDULER_PAYLOAD_MODE must be measured or simulated_fixed")
             MODEL_DIR = Path(os.environ.get("SCHEDULER_SWIN_MODEL_DIR", PROJECT_ROOT / "models/SwinJSCC"))
