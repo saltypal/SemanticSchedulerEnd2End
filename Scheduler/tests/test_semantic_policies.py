@@ -31,14 +31,16 @@ def _episode():
 
 
 @pytest.mark.parametrize("name", ("fifo", "ue_round_robin", "fixed_priority", "edf",
-                                  "priority_edf", "sjf", "aging", "semantic_greedy"))
+                                  "priority_edf", "sjf", "aging", "semantic_greedy",
+                                  "semantic_weighted", "semantic_lexicographic"))
 def test_classical_and_semantic_policies_run(name):
     episode = _episode()
     policy = create_semantic_policy(name, priority_by_image={"low": 3, "high": 0})
     result = run_episode(episode, policy, ResourceBudgetSemantic(1.0))
     assert len(result["outcomes"]) == 2
     assert len(result["decision_trace"]) == 2
-    if name in ("fixed_priority", "priority_edf", "semantic_greedy"):
+    if name in ("fixed_priority", "priority_edf", "semantic_greedy",
+                "semantic_weighted", "semantic_lexicographic"):
         assert result["decision_trace"][0]["image_id"] == "high"
 
 

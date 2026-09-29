@@ -447,7 +447,8 @@ def evaluation_notebook():
             }
             policy_names = (
                 "fifo", "ue_round_robin", "fixed_priority", "edf", "priority_edf",
-                "sjf", "aging", "semantic_greedy", "ladi_classifier_priority",
+                "sjf", "aging", "semantic_greedy", "semantic_weighted",
+                "semantic_lexicographic", "ladi_classifier_priority",
                 "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn",
                 "privileged_marginal_utility")
             allowed_inputs = pd.DataFrame([
@@ -455,7 +456,8 @@ def evaluation_notebook():
                  ("fixed_priority", "priority_edf", "privileged_marginal_utility"),
                  "observes_evaluator_evidence_group": name == "privileged_marginal_utility",
                  "observes_image_labels": False, "observes_semantic_features": name in
-                 ("semantic_greedy", "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn")}
+                 ("semantic_greedy", "semantic_weighted", "semantic_lexicographic",
+                  "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn")}
                 for name in policy_names])
             display(allowed_inputs)
             print("The privileged one-step utility policy is a reference, not an upper bound on the optimal schedule.")

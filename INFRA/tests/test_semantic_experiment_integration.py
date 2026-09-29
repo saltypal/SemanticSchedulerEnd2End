@@ -116,5 +116,5 @@ def test_manifest_cache_stream_policy_and_metrics_join(tmp_path):
         suites["faculty_demo"], ResourceBudgetSemantic(1.0),
         priority_by_image=priorities, predictions_by_image=predictions,
         model_artifacts=artifacts)
-    assert len(all_policy_metrics) == 13
+    assert len(all_policy_metrics) == 15
     assert all(row["jobs"] == 25 for row in all_policy_metrics)

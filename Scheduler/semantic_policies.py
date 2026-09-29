@@ -118,6 +118,62 @@ class SemanticGreedyPolicy(SemanticPolicyBase):
         return self._pick(snapshot, scores, "transparent semantic heuristic")
 
 
+class SemanticWeightedPolicy(SemanticPolicyBase):
+    """Observable-feature weighted-sum semantic priority comparator.
+
+    This is intentionally separate from ``SemanticGreedyPolicy``: the product
+    heuristic tests multiplicative interaction, while this policy tests a
+    standard additive multi-criteria decision rule. It never reads labels,
+    evidence groups, or evaluator-only priority facts.
+    """
+
+    name = "semantic_weighted"
+    WEIGHTS = (0.25, 0.20, 0.25, 0.20, 0.10)
+
+    def decide(self, snapshot: SemanticCandidateSnapshot,
+               budget: ResourceBudgetSemantic) -> PolicyDecision:
+        scores = {}
+        for index in snapshot.eligible_indices:
+            job = snapshot.jobs[index]
+            values = job.features.normalized_values(cold_start_novelty=1.0)
+            mask = job.features.availability_mask()
+            usable = tuple(value if available else (1.0 if pos == 1 else 0.5)
+                           for pos, (value, available) in enumerate(zip(values, mask)))
+            cost = job.resource_units / max(1.0, budget.service_rate_units_per_ms * 200.0)
+            scores[index] = float(sum(weight * value for weight, value
+                                      in zip(self.WEIGHTS, usable))
+                                  - 0.10 * min(1.0, cost))
+        return self._pick(snapshot, scores, "weighted semantic multi-criteria score")
+
+
+class SemanticLexicographicPolicy(SemanticPolicyBase):
+    """Strict semantic-priority comparator with deadline and FIFO tie-breaks."""
+
+    name = "semantic_lexicographic"
+
+    def decide(self, snapshot: SemanticCandidateSnapshot,
+               budget: ResourceBudgetSemantic) -> PolicyDecision:
+        if not snapshot.eligible_indices:
+            raise ValueError("No eligible jobs")
+
+        def key(index: int):
+            job = snapshot.jobs[index]
+            values = job.features.normalized_values(cold_start_novelty=1.0)
+            mask = job.features.availability_mask()
+            usable = tuple(value if available else (1.0 if pos == 1 else 0.5)
+                           for pos, (value, available) in enumerate(zip(values, mask)))
+            slack = (float("inf") if job.deadline_ms is None else
+                     max(0.0, job.deadline_ms - snapshot.now_ms))
+            # Higher semantic evidence wins; urgency and impact precede
+            # relevance/novelty, then the earliest deadline breaks ties.
+            return (-usable[3], -usable[2], -usable[0], -usable[1],
+                    -usable[4], slack, job.arrival_ms, job.job_id)
+
+        selected = min(snapshot.eligible_indices, key=key)
+        return PolicyDecision(self.name, snapshot.now_ms, selected, None,
+                              "lexicographic semantic priority with deadline tie-break")
+
+
 class PrivilegedMarginalUtilityPolicy(SemanticPolicyBase):
     """Evaluator-only, one-step utility reference with reviewed hidden facts.
 

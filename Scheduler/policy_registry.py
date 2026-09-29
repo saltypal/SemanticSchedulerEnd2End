@@ -8,13 +8,14 @@ from typing import Mapping
 from Scheduler.semantic_policies import (
     ClassicalSemanticPolicy, LADIClassifierPriorityPolicy, NumpyDQNPolicy,
     OrdinalClassifierPolicy, PairwiseRankerPolicy, PrivilegedMarginalUtilityPolicy,
-    SemanticGreedyPolicy,
+    SemanticGreedyPolicy, SemanticLexicographicPolicy, SemanticWeightedPolicy,
 )
 
 
 DETERMINISTIC_POLICIES = (
     "fifo", "ue_round_robin", "fixed_priority", "edf", "priority_edf",
     "sjf", "aging", "semantic_greedy",
+    "semantic_weighted", "semantic_lexicographic",
 )
 LEARNED_POLICIES = (
     "ladi_classifier_priority", "feature_ordinal_classifier",
@@ -32,6 +33,10 @@ def create_semantic_policy(
         return ClassicalSemanticPolicy(name, priority_by_image=priority_by_image)
     if name == "semantic_greedy":
         return SemanticGreedyPolicy()
+    if name == "semantic_weighted":
+        return SemanticWeightedPolicy()
+    if name == "semantic_lexicographic":
+        return SemanticLexicographicPolicy()
     if name == "privileged_marginal_utility":
         if oracle_facts_by_image is None:
             raise ValueError("Privileged utility reference requires evaluator-only facts")

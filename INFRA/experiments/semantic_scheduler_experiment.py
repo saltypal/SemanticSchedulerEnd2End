@@ -303,6 +303,7 @@ def evaluate_policy_suite(
     default_names = (
         "fifo", "ue_round_robin", "fixed_priority", "edf", "priority_edf",
         "sjf", "aging", "semantic_greedy", "ladi_classifier_priority",
+        "semantic_weighted", "semantic_lexicographic",
         "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn",
         "privileged_marginal_utility",
     )
