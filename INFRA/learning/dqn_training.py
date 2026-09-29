@@ -11,6 +11,11 @@ from time import monotonic
 from typing import Mapping, Sequence
 
 import numpy as np
+try:
+    from tqdm.auto import tqdm
+except ImportError:  # pragma: no cover - Kaggle and the project environment include tqdm
+    def tqdm(iterable, **_kwargs):
+        return iterable
 
 from INFRA.event_simulation import SemanticSchedulingEnvironment, run_episode
 from INFRA.semantic_contracts import (
@@ -176,7 +181,7 @@ def train_dqn(
 
     completed_episodes = 0
     stopped_by_time_budget = False
-    for episode_index in range(settings.episodes):
+    for episode_index in tqdm(range(settings.episodes), desc=f"DQN seed {seed}", unit="episode"):
         if episode_index == 0 or (episode_index + 1) % 10 == 0:
             print(f"[DQN seed={seed}] episode {episode_index + 1}/{settings.episodes}", flush=True)
         environment = SemanticSchedulingEnvironment(
