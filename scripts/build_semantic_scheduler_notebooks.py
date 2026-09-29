@@ -484,8 +484,26 @@ def evaluation_notebook():
             all_metrics.extend({"track": "image_disjoint_robustness", "transport_p": .9, **row}
                                for row in robust_rows)
             metrics = pd.DataFrame(all_metrics)
+            # The absolute AUC is intentionally normalized by the sum of all
+            # job weights. Image-disjoint streams reuse 12 unseen images to
+            # reach the normal 25-job queue, so repeated evidence receives a
+            # marginal gain and an absolute score near 0.25 is expected. Add
+            # a second, honest comparison metric against the same-stream
+            # privileged reference; this answers how close each policy is to
+            # the best available evaluator reference without changing raw
+            # utility or exposing labels to the policy.
+            reference = (metrics[metrics.policy == "privileged_marginal_utility"]
+                        [["track", "episode_id", "normalized_utility_auc"]]
+                        .rename(columns={"normalized_utility_auc": "reference_auc"}))
+            metrics = metrics.merge(reference, on=["track", "episode_id"], how="left",
+                                    validate="many_to_one")
+            metrics["relative_to_privileged_auc"] = np.where(
+                metrics.reference_auc > 0,
+                metrics.normalized_utility_auc / metrics.reference_auc,
+                np.nan)
             metrics.to_csv(EVAL_ROOT / "all_policy_metrics.csv", index=False)
             display(metrics.groupby(["track", "policy"])[["normalized_utility_auc",
+                "relative_to_privileged_auc",
                 "critical_on_time_rate", "deadline_miss_rate", "weighted_priority_inversion",
                 "jain_fairness"]].mean().round(3))
         '''),

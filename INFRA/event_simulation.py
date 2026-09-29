@@ -280,6 +280,10 @@ class SemanticSchedulingEnvironment:
     def result(self, *, policy_name: str, decision_trace: list[dict[str, object]] | None = None) -> dict[str, object]:
         if not self._done:
             raise RuntimeError("Episode must finish before results are exported")
+        # Utility is accumulated with normalized priority weights (critical=1,
+        # emergency=.75, moderate=.5, normal=.25). Keep the AUC denominator
+        # in the same units; using the raw 4/3/2/1 weights here would depress
+        # every normalized score by exactly a factor of four.
         upper = sum(normalized_priority_weight(item.base_priority) for item in self._ordered)
         return {
             "episode_id": self.episode.episode_id,
