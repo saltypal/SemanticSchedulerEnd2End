@@ -34,7 +34,8 @@ class SemanticSchedulingEnvironment:
 
     def __init__(self, episode: EpisodeSpec, budget: ResourceBudgetSemantic,
                  *, visible_features: tuple[str, ...] = FEATURE_NAMES,
-                 cost_coefficient: float = 0.1) -> None:
+                 cost_coefficient: float = 0.1,
+                 enable_delivered_history: bool = True) -> None:
         self.episode = episode
         self.budget = budget
         if len(set(visible_features)) != len(visible_features) or set(visible_features) - set(FEATURE_NAMES):
@@ -43,6 +44,7 @@ class SemanticSchedulingEnvironment:
         if not math.isfinite(cost_coefficient) or cost_coefficient < 0:
             raise ValueError("cost_coefficient must be finite and nonnegative")
         self.cost_coefficient = cost_coefficient
+        self.enable_delivered_history = enable_delivered_history
         self._ordered = tuple(sorted(episode.jobs, key=lambda item: (
             item.candidate.arrival_ms, item.candidate.job_id)))
         units = {item.candidate.resource_unit for item in self._ordered}
@@ -190,14 +192,17 @@ class SemanticSchedulingEnvironment:
         eligible = []
         for item in sorted(self._waiting.values(), key=lambda row: (
                 row.candidate.arrival_ms, row.candidate.job_id)):
-            novelty = novelty_from_history(
-                image_embedding=item.candidate.features.embedding, history=history)
-            updated = FeatureValue(
-                value=novelty.value, available=novelty.available,
-                provenance=f"{novelty.source}:{novelty.method}",
-                extractor_version=novelty.version,
-                latency_ms=0.0 if novelty.latency_ms is None else float(novelty.latency_ms),
-            )
+            if self.enable_delivered_history:
+                novelty = novelty_from_history(
+                    image_embedding=item.candidate.features.embedding, history=history)
+                updated = FeatureValue(
+                    value=novelty.value, available=novelty.available,
+                    provenance=f"{novelty.source}:{novelty.method}",
+                    extractor_version=novelty.version,
+                    latency_ms=0.0 if novelty.latency_ms is None else float(novelty.latency_ms),
+                )
+            else:
+                updated = FeatureValue.unavailable("history_disabled", "track-a/v2")
             visible_features = replace(
                 item.candidate.features.with_novelty(updated), embedding=())
             hidden = {name: FeatureValue.unavailable("policy_ablation", "track-a/v2")
@@ -240,19 +245,20 @@ class SemanticSchedulingEnvironment:
         self.now_ms = completion_ms
         breakdown = None
         if item.transport_success:
-            history_before = self._history.snapshot()
-            previous = history_before.best_sufficiency_by_group.get(item.evidence_group_id)
+            previous = (self._history.snapshot().best_sufficiency_by_group.get(
+                item.evidence_group_id) if self.enable_delivered_history else None)
             breakdown = delivery_utility(
                 item, wait_ms=started_ms - item.candidate.arrival_ms,
                 previous_group_sufficiency=previous)
             sufficiency = item.candidate.features.evidence_sufficiency.value
-            self._history.record_success(
-                image_id=item.candidate.image_id,
-                image_embedding=item.candidate.features.embedding,
-                delivered_at_ms=completion_ms,
-                evidence_group_id=item.evidence_group_id,
-                evidence_sufficiency=None if sufficiency is None else int(sufficiency),
-            )
+            if self.enable_delivered_history:
+                self._history.record_success(
+                    image_id=item.candidate.image_id,
+                    image_embedding=item.candidate.features.embedding,
+                    delivered_at_ms=completion_ms,
+                    evidence_group_id=item.evidence_group_id,
+                    evidence_sufficiency=None if sufficiency is None else int(sufficiency),
+                )
             self._utility += breakdown.utility_delta
             self._utility_curve.append((completion_ms, self._utility))
             status = "completed_on_time" if (item.candidate.deadline_ms is None
@@ -294,8 +300,10 @@ class SemanticSchedulingEnvironment:
             "final_utility": self._utility,
             "maximum_utility": upper,
             "horizon_ms": self.episode.horizon_ms,
+            "service_rate_units_per_ms": self.budget.service_rate_units_per_ms,
             "decision_trace": tuple(decision_trace or ()),
             "history_version": self.history_version,
+            "enable_delivered_history": self.enable_delivered_history,
             "job_facts": tuple({
                 "job_id": item.candidate.job_id,
                 "image_id": item.candidate.image_id,
@@ -313,11 +321,13 @@ class SemanticSchedulingEnvironment:
 def run_episode(episode: EpisodeSpec, policy: SemanticPolicy,
                 budget: ResourceBudgetSemantic,
                 *, visible_features: tuple[str, ...] = FEATURE_NAMES,
-                cost_coefficient: float = 0.1) -> dict[str, object]:
+                cost_coefficient: float = 0.1,
+                enable_delivered_history: bool = True) -> dict[str, object]:
     """Run one policy on an immutable episode and return complete traces."""
     environment = SemanticSchedulingEnvironment(
         episode, budget, visible_features=visible_features,
-        cost_coefficient=cost_coefficient)
+        cost_coefficient=cost_coefficient,
+        enable_delivered_history=enable_delivered_history)
     policy.reset({"episode_id": episode.episode_id, "seed": episode.seed})
     decisions: list[dict[str, object]] = []
     while not environment.done:

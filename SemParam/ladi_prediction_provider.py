@@ -5,9 +5,49 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Mapping
+import math
 
 
 LADI_REFERENCE_MODEL = "MITLL/LADI-v2-classifier-small-reference"
+
+SEMANTIC_PRIORITY_BY_LABEL = {
+    "flooding_structures": 0,
+    "buildings_minor_or_greater": 1,
+    "roads_damage": 1,
+    "buildings_affected_or_greater": 1,
+    "trees_damage": 2,
+    "debris_any": 2,
+    "flooding_any": 2,
+    "bridges_any": 2,
+    "buildings_any": 3,
+    "roads_any": 3,
+    "water_any": 3,
+    "trees_any": 3,
+}
+
+
+def semantic_scene_features(probabilities: Mapping[str, float]) -> tuple[float, float]:
+    """Return P1 scene importance and P4 interpretation confidence.
+
+    P1 is the strongest classifier probability after weighting labels by the
+    frozen task rubric. P4 is one minus mean normalized binary entropy across
+    the multi-label outputs. Both are bounded model-derived proxies in [0, 1].
+    """
+    values = {str(label).lower(): min(1.0, max(0.0, float(score)))
+              for label, score in probabilities.items()}
+    if not values:
+        raise ValueError("Classifier probabilities are empty")
+    weighted = [values.get(label, 0.0) * ((4 - priority) / 4.0)
+                for label, priority in SEMANTIC_PRIORITY_BY_LABEL.items()]
+    scene_importance = max(weighted, default=0.0)
+    entropies = []
+    for probability in values.values():
+        clipped = min(1.0 - 1e-7, max(1e-7, probability))
+        entropy = -(clipped * math.log(clipped)
+                    + (1.0 - clipped) * math.log(1.0 - clipped)) / math.log(2.0)
+        entropies.append(entropy)
+    confidence = 1.0 - sum(entropies) / len(entropies)
+    return scene_importance, confidence
 
 
 @dataclass(frozen=True, slots=True)

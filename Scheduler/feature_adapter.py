@@ -8,14 +8,14 @@ from INFRA.semantic_contracts import ResourceBudgetSemantic, SemanticCandidateSn
 
 
 MAX_CANDIDATES = 25
-CANDIDATE_DIM = 18
+CANDIDATE_DIM = 22
 GLOBAL_DIM = 9
 STATE_DIM = MAX_CANDIDATES * CANDIDATE_DIM + GLOBAL_DIM
 
 
 def model_state(snapshot: SemanticCandidateSnapshot, budget: ResourceBudgetSemantic,
                 *, max_candidates: int = MAX_CANDIDATES) -> tuple[np.ndarray, np.ndarray]:
-    """Return a 459-float observation and 25-element valid-action mask.
+    """Return a 559-float observation and 25-element valid-action mask.
 
     Dataset labels, evidence groups, outcomes and future arrivals are absent
     by construction. Candidate order is the simulator's arrival/ID order.
@@ -64,6 +64,6 @@ def model_state(snapshot: SemanticCandidateSnapshot, budget: ResourceBudgetSeman
 
 
 def static_feature_row(job) -> np.ndarray:
-    """Five values and five availability bits for supervised policies."""
+    """Seven values and seven availability bits for supervised policies."""
     return np.asarray((*job.features.normalized_values(cold_start_novelty=1.0),
                        *job.features.availability_mask()), dtype=np.float32)

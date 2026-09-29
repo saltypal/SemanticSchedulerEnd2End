@@ -77,6 +77,52 @@ def normalized_utility_auc(points: Sequence[tuple[float, float]], *, horizon_ms:
     return area / (horizon_ms * maximum_utility)
 
 
+def priority_evaluation_window_ms(result: Mapping[str, object]) -> float:
+    """Fixed per-episode window from arrivals and offered service demand.
+
+    The 2-second simulator horizon is only a safety limit. Using it for the
+    primary AUC would make schedules finishing in a few hundred milliseconds
+    all score close to one and hide meaningful ordering differences.
+    """
+    facts = tuple(result.get("job_facts", ()))
+    horizon = float(result.get("horizon_ms", 0.0))
+    rate = float(result.get("service_rate_units_per_ms", 0.0))
+    if not facts or horizon <= 0 or rate <= 0:
+        return horizon
+    service_times = [max(10.0, 10.0 * math.ceil(
+        (float(row["resource_units"]) / rate) / 10.0)) for row in facts]
+    window = (max(float(row["arrival_ms"]) for row in facts)
+              + sum(service_times) + max(service_times))
+    return min(horizon, window)
+
+
+def priority_delivery_auc(result: Mapping[str, object]) -> float | None:
+    """Area under delivered rubric priority, independent of receiver history.
+
+    Each successful job contributes its priority weight from completion until
+    a policy-independent workload window. An undelivered job contributes zero.
+    The window is based on arrivals and offered service, never a policy's
+    completion times. It is bounded by the simulator safety horizon.
+    """
+    facts = {row["job_id"]: row for row in result.get("job_facts", ())}
+    horizon = priority_evaluation_window_ms(result)
+    maximum = sum(normalized_priority_weight(int(row["base_priority"]))
+                  for row in facts.values())
+    if horizon <= 0 or maximum <= 0:
+        return None
+    area = 0.0
+    for outcome in result.get("outcomes", ()):
+        if outcome.get("status") not in {"completed_on_time", "completed_late"}:
+            continue
+        completion = outcome.get("completed_ms")
+        if completion is None:
+            continue
+        weight = normalized_priority_weight(
+            int(facts[outcome["job_id"]]["base_priority"]))
+        area += weight * max(0.0, horizon - float(completion))
+    return area / (horizon * maximum)
+
+
 def jain_fairness(counts: Iterable[int]) -> float | None:
     values = [float(value) for value in counts]
     if not values or sum(values) == 0:
@@ -120,8 +166,16 @@ def static_ranking_metrics(result: Mapping[str, object]) -> dict[str, float | No
                 discordant += 1
     comparable = concordant + discordant
     denominator = math.sqrt((comparable + truth_ties) * comparable)
+    top_five = gains[:5]
+    critical_total = sum(value >= BASE_PRIORITY_WEIGHTS[1] for value in gains)
+    critical_top_five = sum(value >= BASE_PRIORITY_WEIGHTS[1]
+                            for value in top_five)
     return {
         "ndcg": discounted(gains) / ideal if ideal else None,
+        "ndcg_at_5": discounted(top_five) /
+        discounted(sorted(gains, reverse=True)[:5]) if top_five else None,
+        "critical_recall_at_5": (critical_top_five / critical_total
+                                 if critical_total else None),
         "kendall_tau_b": (concordant - discordant) / denominator if denominator else None,
         "priority_pair_agreement": concordant / comparable if comparable else None,
     }
@@ -180,6 +234,8 @@ def aggregate_episode_metrics(result: Mapping[str, object]) -> dict[str, float |
         "final_utility": float(result.get("final_utility", 0.0)),
         "episode_reward": float(result.get("episode_reward", 0.0)),
         "normalized_utility_auc": normalized_utility_auc(utility_points, horizon_ms=horizon, maximum_utility=max_utility),
+        "priority_delivery_auc": priority_delivery_auc(result),
+        "priority_evaluation_window_ms": priority_evaluation_window_ms(result),
         "mean_wait_ms": mean(waits) if waits else None,
         "median_wait_ms": percentile(waits, 50),
         "p95_wait_ms": percentile(waits, 95),

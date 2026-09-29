@@ -45,6 +45,11 @@ def deadline_for_urgency(urgency: int, rng: random.Random) -> float:
     return float(rng.randint(lower, upper))
 
 
+def deadline_for_network_sla(rng: random.Random) -> float:
+    """Generate a packet deadline independently of semantic task urgency."""
+    return float(rng.randint(70, 170))
+
+
 def _profile_arrivals(profile: UEProfile, count: int, rng: random.Random) -> list[float]:
     values: list[float] = []
     current = 0.0
@@ -76,6 +81,7 @@ def build_episode(
     queue_capacity: int = 25,
     horizon_ms: float = 2000.0,
     require_distinct_images: bool = True,
+    deadline_mode: str = "independent_network_sla",
 ) -> EpisodeSpec:
     """Assign selected templates to balanced UE traffic without label leakage.
 
@@ -88,6 +94,8 @@ def build_episode(
         raise ValueError("at least one UE profile is required")
     if require_distinct_images and len({item.candidate.image_id for item in templates}) != len(templates):
         raise ValueError("episode requires distinct image IDs")
+    if deadline_mode not in {"independent_network_sla", "task_coupled"}:
+        raise ValueError("Unsupported deadline_mode")
     rng = random.Random(seed)
     assignments: dict[str, list[EpisodeJobSpec]] = {profile.ue_id: [] for profile in ue_profiles}
     by_stratum: dict[str, list[EpisodeJobSpec]] = defaultdict(list)
@@ -112,10 +120,16 @@ def build_episode(
     generated: list[EpisodeJobSpec] = []
     for profile in ue_profiles:
         local_jobs = assignments[profile.ue_id]
+        # Balancing visits strata in sorted order. Randomize transmission
+        # order separately so class names do not determine arrival order.
+        rng.shuffle(local_jobs)
         arrivals = _profile_arrivals(profile, len(local_jobs), rng)
         for sequence, (template, arrival) in enumerate(zip(local_jobs, arrivals)):
             candidate = template.candidate
-            deadline = arrival + deadline_for_urgency(_urgency(template), rng)
+            deadline_offset = (deadline_for_network_sla(rng)
+                               if deadline_mode == "independent_network_sla"
+                               else deadline_for_urgency(_urgency(template), rng))
+            deadline = arrival + deadline_offset
             generated_candidate = replace(
                 candidate,
                 job_id=f"{episode_id}:{profile.ue_id}:{sequence}:{candidate.image_id}",
@@ -141,6 +155,7 @@ def generate_episode_suite(
     queue_capacity: int = 25,
     horizon_ms: float = 2000.0,
     allow_reuse: bool = False,
+    deadline_mode: str = "independent_network_sla",
 ) -> tuple[EpisodeSpec, ...]:
     """Create reproducible streams from a caller-provided split catalogue."""
     if episode_count <= 0 or jobs_per_episode <= 0:
@@ -169,6 +184,7 @@ def generate_episode_suite(
             queue_capacity=queue_capacity,
             horizon_ms=horizon_ms,
             require_distinct_images=not allow_reuse,
+            deadline_mode=deadline_mode,
         ))
     return tuple(episodes)
 
@@ -183,3 +199,19 @@ def with_transport_probability(episode: EpisodeSpec, success_probability: float)
         draw = int.from_bytes(sha256(token).digest()[:8], "big") / 2**64
         jobs.append(replace(item, transport_success=draw < success_probability))
     return replace(episode, jobs=tuple(jobs))
+
+
+def with_task_coupled_deadlines(episode: EpisodeSpec) -> EpisodeSpec:
+    """Sensitivity case: preserve arrivals but derive deadlines from urgency."""
+    jobs = []
+    for item in episode.jobs:
+        token = f"{episode.seed}:{item.candidate.job_id}:task-deadline-v1".encode()
+        seed = int.from_bytes(sha256(token).digest()[:8], "big")
+        offset = deadline_for_urgency(_urgency(item), random.Random(seed))
+        candidate = replace(
+            item.candidate,
+            deadline_ms=round(item.candidate.arrival_ms + offset, 6),
+        )
+        jobs.append(replace(item, candidate=candidate))
+    return replace(episode, episode_id=f"task-coupled-{episode.episode_id}",
+                   jobs=tuple(jobs))

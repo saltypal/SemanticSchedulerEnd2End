@@ -19,7 +19,8 @@ from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
 from INFRA.semantic_contracts import (
     FeatureValue, ResourceBudgetSemantic, SchedulingFeatureVectorV2,
 )
-from INFRA.learning.supervised_training import fit_supervised_models
+from INFRA.learning.supervised_training import (
+    fit_image_priority_classifier, fit_supervised_models)
 from INFRA.learning.dqn_training import DQNConfig, train_dqn
 
 
@@ -77,9 +78,15 @@ def test_manifest_cache_stream_policy_and_metrics_join(tmp_path):
     suites = build_suites_from_manifest(catalogue, draft, config=config,
                                         ue_profiles=profiles)
     assert len(suites["train_by_seed"][42]) == 300
-    assert all(len(episode.jobs) == 25 for episode in suites["validation"])
-    assert len(suites["faculty_demo"][0].jobs) == 25
-    assert set(Counter(job.candidate.ue_id for job in suites["faculty_demo"][0].jobs).values()) == {5}
+    assert all(len(episode.jobs) == 60 for episode in suites["validation"])
+    assert len(suites["faculty_demo"][0].jobs) == 60
+    assert len(suites["static_image_disjoint"][0].jobs) == 12
+    assert len(suites["static_closed_catalogue"][0].jobs) == 60
+    assert all(item.candidate.arrival_ms == 0
+               for item in suites["static_image_disjoint"][0].jobs)
+    assert len({item.candidate.image_id for item in
+                suites["static_image_disjoint"][0].jobs}) == 12
+    assert set(Counter(job.candidate.ue_id for job in suites["faculty_demo"][0].jobs).values()) == {12}
     ue_priorities = defaultdict(set)
     for episode in suites["train_by_seed"][42][:30]:
         for job in episode.jobs:
@@ -92,12 +99,17 @@ def test_manifest_cache_stream_policy_and_metrics_join(tmp_path):
         policy_names=("fifo", "semantic_greedy", "privileged_marginal_utility"))
     assert {row["policy"] for row in metrics} == {
         "fifo", "semantic_greedy", "privileged_marginal_utility"}
-    assert all(row["jobs"] == 25 for row in metrics)
+    assert all(row["jobs"] == 60 for row in metrics)
 
     train_images = {row["image_id"] for row in rows if row["split"] == "train"}
     trained = fit_supervised_models(
         [job for job in catalogue if job.candidate.image_id in train_images],
         tmp_path / "models")
+    image_trained = fit_image_priority_classifier(
+        [job for job in catalogue if job.candidate.image_id in train_images],
+        catalogue, tmp_path / "models")
+    image_predictions = json.loads(image_trained["predictions"].read_text(encoding="utf-8"))
+    assert set(image_predictions) == {job.candidate.image_id for job in catalogue}
     train_dqn(
         suites["train_by_seed"][42][:1], suites["validation"][:1],
         ResourceBudgetSemantic(1.0), tmp_path / "models",
@@ -115,6 +127,7 @@ def test_manifest_cache_stream_policy_and_metrics_join(tmp_path):
     _, all_policy_metrics = evaluate_policy_suite(
         suites["faculty_demo"], ResourceBudgetSemantic(1.0),
         priority_by_image=priorities, predictions_by_image=predictions,
+        image_priority_predictions_by_image=image_predictions,
         model_artifacts=artifacts)
-    assert len(all_policy_metrics) == 15
-    assert all(row["jobs"] == 25 for row in all_policy_metrics)
+    assert len(all_policy_metrics) == 17
+    assert all(row["jobs"] == 60 for row in all_policy_metrics)

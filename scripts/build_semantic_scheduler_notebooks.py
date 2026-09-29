@@ -74,9 +74,11 @@ def train_notebook():
             # Train the semantic whole-latent scheduler
 
             **Experiment boundary:** 60 distinct LADI v2 images, 36/12/12 group-safe
-            split, five simulated UEs, whole SwinJSCC latent jobs. P2 and P3 are
-            image-derived; P5/P6 use the fixed task rubric and P7 is a prototype
-            default. These annotations are explicitly not human reviewed.
+            split, five simulated UEs, whole SwinJSCC latent jobs. This is the
+            stateful dynamic complement to the supplied 12-image static baseline.
+            P1/P4 are classifier-derived proxies, P2 is CLIP task relevance, P3 is
+            recomputed from successfully delivered history, and P5/P6/P7 use the
+            fixed prototype rubric. These annotations are not human reviewed.
             The DQN learns a *next-job decision*, not a one-shot permutation.
 
             This notebook starts with a disposable clean clone of the latest remote
@@ -99,7 +101,8 @@ def train_notebook():
                 run_provenance, simulated_fixed_payload_costs,
             )
             from INFRA.semantic_contracts import ResourceBudgetSemantic
-            from INFRA.learning.supervised_training import fit_supervised_models
+            from INFRA.learning.supervised_training import (
+                fit_supervised_models, fit_image_priority_classifier)
             from INFRA.learning.dqn_training import DQNConfig, train_dqn_seeds
             from EncDec.integration.scheduler_replay import cache_swinjscc_payloads
 
@@ -153,7 +156,7 @@ def train_notebook():
             extraction = pd.DataFrame({"image_id": row["image_id"],
                                        "latency_ms": row["extraction_latency_ms"]} for row in feature_rows)
             display(extraction.describe(include="all"))
-            print("Cached image embeddings are internal to INFRA; policies see five values and masks only.")
+            print("P1/P4 come from the cached image classifier; embeddings remain internal and refresh P3 at every decision.")
         '''),
         md('''
             ## 5. Cache payload cost once
@@ -217,7 +220,7 @@ def train_notebook():
                                             for job in episode.jobs]}
                         handle.write(json.dumps(compact) + "\n")
         '''),
-        md('## 7. Fit the two supervised reference policies on 36 training images'),
+        md('## 7. Fit image-only and feature-based models on 36 training images'),
         code(r'''
             split_by_image = {row["image_id"]: row["split"] for row in reviewed_rows}
             train_jobs = [job for job in catalogue if split_by_image[job.candidate.image_id] == "train"]
@@ -237,14 +240,17 @@ def train_notebook():
                 raise RuntimeError("Training checkout changed after the clean Git sync")
             models_dir = RUN_ROOT / "models"
             supervised = fit_supervised_models(train_jobs, models_dir, provenance=provenance)
-            print({name: str(path) for name, path in supervised.items()})
+            image_classifier = fit_image_priority_classifier(
+                train_jobs, catalogue, models_dir, provenance=provenance)
+            print({"feature_models": {name: str(path) for name, path in supervised.items()},
+                   "image_classifier": {name: str(path) for name, path in image_classifier.items()}})
         '''),
         md('''
             ## 8. Train three small standard DQNs (two-hour training cap)
 
             Each action selects one eligible whole latent. Replay uses a target
-            network, masked Bellman targets, Huber loss and 459→64→32→25 layers.
-            Validation uses fixed streams and normalized semantic-utility AUC.
+            network, masked Bellman targets, Huber loss and 559→64→32→25 layers.
+            Validation uses fixed streams and history-aware semantic-utility AUC.
             Each seed has a 40-minute wall-clock cap. All three seeds together
             therefore have a two-hour training cap; extraction and evaluation
             run outside that training budget.
@@ -253,7 +259,8 @@ def train_notebook():
             dqn_config = DQNConfig(**DQN_SETTINGS)
             dqn_manifests = train_dqn_seeds(
                 suites["train_by_seed"], suites["validation"], budget, models_dir,
-                config=dqn_config, provenance=provenance, device=DEVICE)
+                config=dqn_config, provenance=provenance, device=DEVICE,
+                enable_delivered_history=True)
             training_rows = []
             for seed in (42, 43, 44):
                 path = models_dir / f"dqn_seed{seed}_history.json"
@@ -270,9 +277,9 @@ def train_notebook():
             for seed, group in training_frame.groupby("seed"):
                 axes[0].plot(group.episode, group.reward, label=str(seed), alpha=.8)
                 axes[1].plot(group.episode, group.loss, label=str(seed), alpha=.8)
-                observed = group.dropna(subset=["validation_utility_auc"])
-                axes[2].plot(observed.episode, observed.validation_utility_auc, marker="o", label=str(seed))
-            for axis, title in zip(axes, ("Episode reward", "Huber loss", "Validation utility AUC")):
+                observed = group.dropna(subset=["validation_semantic_utility_auc"])
+                axes[2].plot(observed.episode, observed.validation_semantic_utility_auc, marker="o", label=str(seed))
+            for axis, title in zip(axes, ("Episode reward", "Huber loss", "Validation semantic-utility AUC")):
                 axis.set_title(title); axis.set_xlabel("Episode"); axis.grid(alpha=.2)
             axes[0].legend(title="Seed")
             fig.tight_layout(); fig.savefig(plots / "training_diagnostics.png", dpi=170)
@@ -296,14 +303,15 @@ def train_notebook():
                 return sha256(Path(path).read_bytes()).hexdigest()
             required = ["resolved_config.yaml", "dataset_manifest.csv", "payload_costs.csv", "feature_cache.jsonl",
                         "ladi_predictions.json", "models/ordinal_classifier.npz",
-                        "models/pairwise_ranker.npz"] + [f"models/dqn_seed{seed}_best.npz" for seed in (42, 43, 44)]
+                        "models/pairwise_ranker.npz", "models/clip_priority_classifier.npz",
+                        "models/clip_priority_predictions.json", "models/clip_priority_manifest.json"] + [f"models/dqn_seed{seed}_best.npz" for seed in (42, 43, 44)]
             artifact_hashes = {name: file_hash(RUN_ROOT / name) for name in required}
             run_manifest = {
                 **provenance, "run_id": RUN_ID, "status": "trained_on_prototype_fixed_manifest",
                 "payload_mode": PAYLOAD_MODE, "resource_unit": unit,
                 "service_rate_units_per_ms": service_rate,
                 "artifacts_sha256": artifact_hashes,
-                "dqn_best_validation": {str(seed): data["best_validation_utility_auc"]
+                "dqn_best_validation": {str(seed): data["best_validation_semantic_utility_auc"]
                                          for seed, data in dqn_manifests.items()},
             }
             (RUN_ROOT / "run_manifest.json").write_text(
@@ -326,7 +334,8 @@ def train_notebook():
             from dataclasses import asdict, replace
             from INFRA.experiments.semantic_scheduler_experiment import (
                 load_catalog, build_suites_from_manifest, evaluate_policy_suite)
-            from INFRA.semantic_streams import with_transport_probability
+            from INFRA.semantic_streams import (
+                with_task_coupled_deadlines, with_transport_probability)
             from Scheduler.semantic_policies import NumpyDQNPolicy
             from INFRA.event_simulation import SemanticSchedulingEnvironment
             from SemParam.semantic_header import SemanticSchedulingHeaderV2Codec
@@ -356,8 +365,8 @@ def evaluation_notebook():
             This notebook is independent of in-memory training cells. It clones
             the **latest** remote branch, verifies the training artifact's exact
             Git commit, manifest hash, schema and file hashes, then evaluates
-            policies on identical immutable streams. The 25-job faculty scenario
-            includes a visible decision and delivered-history novelty walkthrough.
+            policies on identical immutable dynamic streams. The 60-job faculty
+            scenario includes all curated images and a visible decision.
 
             Results are simulator results unless the final checkpoint replay
             succeeds. The header is a logical 24-byte control sidecar, separate
@@ -377,7 +386,8 @@ def evaluation_notebook():
             from INFRA.experiments.semantic_scheduler_experiment import (
                 load_catalog, build_suites_from_manifest, evaluate_policy_suite, git_provenance)
             from INFRA.semantic_contracts import ResourceBudgetSemantic
-            from INFRA.semantic_streams import with_transport_probability
+            from INFRA.semantic_streams import (
+                with_task_coupled_deadlines, with_transport_probability)
             from Scheduler.policy_registry import create_semantic_policy
             from Scheduler.semantic_policies import NumpyDQNPolicy
             from INFRA.event_simulation import SemanticSchedulingEnvironment, run_episode
@@ -437,30 +447,97 @@ def evaluation_notebook():
                                             resource_unit=training["resource_unit"])
             priority_by_image = {job.candidate.image_id: job.base_priority for job in catalogue}
             predictions = json.loads((TRAIN_ROOT / "ladi_predictions.json").read_text(encoding="utf-8"))
+            image_priority_predictions = json.loads(
+                (TRAIN_ROOT / "models/clip_priority_predictions.json").read_text(encoding="utf-8"))
             def model_path(filename):
                 nested = TRAIN_ROOT / "models" / filename
                 return nested if nested.is_file() else TRAIN_ROOT / filename
             artifacts = {
                 "feature_ordinal_classifier": model_path("ordinal_classifier.npz"),
                 "pairwise_linear_ranker": model_path("pairwise_ranker.npz"),
-                "dqn": model_path("dqn_seed42_best.npz"),
+                "dqn": model_path(f"dqn_seed{max(training['dqn_best_validation'], key=training['dqn_best_validation'].get)}_best.npz"),
             }
             policy_names = (
                 "fifo", "ue_round_robin", "fixed_priority", "edf", "priority_edf",
                 "sjf", "aging", "semantic_greedy", "semantic_weighted",
                 "semantic_lexicographic", "ladi_classifier_priority",
+                "clip_image_priority", "clip_image_priority_edf",
                 "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn",
                 "privileged_marginal_utility")
             allowed_inputs = pd.DataFrame([
                 {"policy": name, "observes_privileged_rubric_priority": name in
                  ("fixed_priority", "priority_edf", "privileged_marginal_utility"),
                  "observes_evaluator_evidence_group": name == "privileged_marginal_utility",
-                 "observes_image_labels": False, "observes_semantic_features": name in
+                 "observes_image_labels": False,
+                 "uses_image_only_prediction": name in
+                 ("ladi_classifier_priority", "clip_image_priority", "clip_image_priority_edf"),
+                 "observes_semantic_features": name in
                  ("semantic_greedy", "semantic_weighted", "semantic_lexicographic",
                   "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn")}
                 for name in policy_names])
             display(allowed_inputs)
             print("The privileged one-step utility policy is a reference, not an upper bound on the optimal schedule.")
+        '''),
+        md('## 3a. Held-out image classifier quality'),
+        code(r'''
+            from sklearn.metrics import balanced_accuracy_score, confusion_matrix, f1_score
+            from Scheduler.semantic_policies import (
+                ClipImagePriorityPolicy, LADIClassifierPriorityPolicy,
+                OrdinalClassifierPolicy)
+
+            split_by_image = {row["image_id"]: row["split"] for row in reviewed_rows}
+            ladi_priority_model = LADIClassifierPriorityPolicy(predictions)
+            clip_priority_model = ClipImagePriorityPolicy(image_priority_predictions)
+            feature_priority_model = OrdinalClassifierPolicy(
+                artifacts["feature_ordinal_classifier"])
+            classifier_rows = []
+            for item in catalogue:
+                image_id = item.candidate.image_id
+                if split_by_image[image_id] not in {"validation", "test"}:
+                    continue
+                classifier_rows.extend((
+                    {"split": split_by_image[image_id], "model": model,
+                     "image_id": image_id, "true_priority": item.base_priority,
+                     "predicted_priority": predicted}
+                    for model, predicted in (
+                        ("LADI_image_classifier", ladi_priority_model.predict_priority(image_id)),
+                        ("CLIP_image_priority_classifier",
+                         clip_priority_model.predict_priority(image_id)),
+                        ("feature_ordinal_oracle_assisted",
+                         feature_priority_model.predict_priority(item.candidate)),
+                    )
+                ))
+            classifier_predictions = pd.DataFrame(classifier_rows)
+            classifier_predictions.to_csv(EVAL_ROOT / "priority_classifier_predictions.csv", index=False)
+            classification_scores = []
+            for (split, model), group in classifier_predictions.groupby(["split", "model"]):
+                classification_scores.append({
+                    "split": split, "model": model, "n_images": len(group),
+                    "macro_f1": f1_score(group.true_priority, group.predicted_priority,
+                                         labels=[0, 1, 2, 3], average="macro", zero_division=0),
+                    "balanced_accuracy": balanced_accuracy_score(
+                        group.true_priority, group.predicted_priority),
+                })
+            classifier_metrics = pd.DataFrame(classification_scores)
+            classifier_metrics.to_csv(EVAL_ROOT / "priority_classifier_metrics.csv", index=False)
+            display(classifier_metrics)
+            image_test = classifier_predictions[
+                (classifier_predictions.split == "test") &
+                (classifier_predictions.model == "CLIP_image_priority_classifier")]
+            matrix = confusion_matrix(image_test.true_priority,
+                                      image_test.predicted_priority,
+                                      labels=[0, 1, 2, 3])
+            fig, axis = plt.subplots(figsize=(5, 4))
+            axis.imshow(matrix, cmap="Blues")
+            for row in range(4):
+                for col in range(4):
+                    axis.text(col, row, int(matrix[row, col]), ha="center", va="center")
+            axis.set(xticks=range(4), yticks=range(4), xlabel="Predicted priority",
+                     ylabel="Rubric priority", title="CLIP image-only classifier: held-out 12 images")
+            fig.tight_layout()
+            fig.savefig(EVAL_ROOT / "priority_classifier_confusion.png", dpi=170)
+            display(fig); plt.close(fig)
+            print("The feature ordinal model uses rubric-provided P5/P6. LADI and CLIP image classifiers use image-derived predictions.")
         '''),
         md('''
             ## 4. Fair test tracks
@@ -472,28 +549,26 @@ def evaluation_notebook():
         '''),
         code(r'''
             all_metrics = []
-            for track, episodes in (("image_disjoint", suites["image_disjoint"]),
-                                    ("closed_catalogue", suites["closed_catalogue"])):
+            for track, episodes in (("image_disjoint_distinct", suites["image_disjoint_distinct"]),
+                                    ("closed_catalogue", suites["closed_catalogue"]),
+                                    ("image_disjoint_repeated_25", suites["image_disjoint"])):
                 _, rows = evaluate_policy_suite(episodes, budget,
                     priority_by_image=priority_by_image, predictions_by_image=predictions,
+                    image_priority_predictions_by_image=image_priority_predictions,
                     model_artifacts=artifacts, policy_names=policy_names)
                 all_metrics.extend({"track": track, "transport_p": 1.0, **row} for row in rows)
             robustness = tuple(with_transport_probability(episode, .9)
-                               for episode in suites["image_disjoint"])
+                               for episode in suites["image_disjoint_distinct"])
             _, robust_rows = evaluate_policy_suite(robustness, budget,
                 priority_by_image=priority_by_image, predictions_by_image=predictions,
+                image_priority_predictions_by_image=image_priority_predictions,
                 model_artifacts=artifacts, policy_names=policy_names)
-            all_metrics.extend({"track": "image_disjoint_robustness", "transport_p": .9, **row}
+            all_metrics.extend({"track": "image_disjoint_distinct_robustness", "transport_p": .9, **row}
                                for row in robust_rows)
             metrics = pd.DataFrame(all_metrics)
-            # The absolute AUC is intentionally normalized by the sum of all
-            # job weights. Image-disjoint streams reuse 12 unseen images to
-            # reach the normal 25-job queue, so repeated evidence receives a
-            # marginal gain and an absolute score near 0.25 is expected. Add
-            # a second, honest comparison metric against the same-stream
-            # privileged reference; this answers how close each policy is to
-            # the best available evaluator reference without changing raw
-            # utility or exposing labels to the policy.
+            # The primary metric is history-aware semantic utility AUC. It rewards
+            # useful evidence delivered early and changes when successful delivery
+            # updates P3. Priority-delivery AUC remains a secondary rubric metric.
             reference = (metrics[metrics.policy == "privileged_marginal_utility"]
                         [["track", "episode_id", "normalized_utility_auc"]]
                         .rename(columns={"normalized_utility_auc": "reference_auc"}))
@@ -505,6 +580,7 @@ def evaluation_notebook():
                 np.nan)
             metrics.to_csv(EVAL_ROOT / "all_policy_metrics.csv", index=False)
             display(metrics.groupby(["track", "policy"])[["normalized_utility_auc",
+                "priority_delivery_auc",
                 "relative_to_privileged_auc",
                 "critical_on_time_rate", "deadline_miss_rate", "weighted_priority_inversion",
                 "jain_fairness"]].mean().round(3))
@@ -512,7 +588,7 @@ def evaluation_notebook():
         md('''
             ## 5. Uncertainty, cost sensitivity, and input-masking sensitivity
 
-            The semantic-greedy P2/P3 row is an automatic-feature comparator.
+            The P1/P2/P3/P4 row is the automatic semantic-feature comparator.
             Masking inputs to classifier, ranker, or DQN models trained with all
             five features is an out-of-distribution stress test. It is **not**
             evidence for how separately retrained automatic-only models perform.
@@ -532,20 +608,35 @@ def evaluation_notebook():
                                 "std_auc": float(group.normalized_utility_auc.std()),
                                 "ci95_low": lower, "ci95_high": upper})
             ci = pd.DataFrame(ci_rows)
-            ci.to_csv(EVAL_ROOT / "utility_auc_bootstrap_ci.csv", index=False)
-            display(ci[ci.track == "image_disjoint"].sort_values("mean_auc", ascending=False))
+            ci.to_csv(EVAL_ROOT / "priority_delivery_bootstrap_ci.csv", index=False)
+            display(ci[ci.track == "image_disjoint_distinct"].sort_values("mean_auc", ascending=False))
+            paired = metrics[["track", "episode_id", "policy", "normalized_utility_auc"]].copy()
+            for baseline in ("fifo", "edf"):
+                baseline_rows = (paired[paired.policy == baseline]
+                                 [["track", "episode_id", "normalized_utility_auc"]]
+                                 .rename(columns={"normalized_utility_auc": f"{baseline}_auc"}))
+                paired = paired.merge(baseline_rows, on=["track", "episode_id"],
+                                      validate="many_to_one")
+                paired[f"gain_vs_{baseline}"] = paired.normalized_utility_auc - paired[f"{baseline}_auc"]
+            paired.to_csv(EVAL_ROOT / "dynamic_paired_priority_gains.csv", index=False)
+            display(paired[paired.track == "image_disjoint_distinct"]
+                    .groupby("policy")[["gain_vs_fifo", "gain_vs_edf"]].mean().round(3))
 
             from INFRA.semantic_contracts import FEATURE_NAMES
             ablations = {
                 "full_oracle_assisted": FEATURE_NAMES,
-                "p2_p3_automatic_only": ("context_relevance", "delivered_history_novelty"),
-                "without_novelty": tuple(name for name in FEATURE_NAMES if name != "delivered_history_novelty"),
+                "automatic_p1_p2_p3_p4": ("scene_importance", "context_relevance",
+                                            "delivered_history_novelty",
+                                            "interpretation_confidence"),
+                "without_knowledge_base_p3": tuple(name for name in FEATURE_NAMES
+                                                     if name != "delivered_history_novelty"),
                 "network_only": (),
             }
             ablation_rows = []
             for label, fields in ablations.items():
-                _, rows = evaluate_policy_suite(suites["image_disjoint"][:30], budget,
+                _, rows = evaluate_policy_suite(suites["image_disjoint_distinct"][:30], budget,
                     priority_by_image=priority_by_image, predictions_by_image=predictions,
+                    image_priority_predictions_by_image=image_priority_predictions,
                     model_artifacts=artifacts,
                     policy_names=("semantic_greedy", "feature_ordinal_classifier",
                                   "pairwise_linear_ranker", "dqn"),
@@ -557,8 +648,9 @@ def evaluation_notebook():
             print("Input masking leaves reward/deadlines fixed. Learned-policy rows are OOD stress tests, not retrained ablations.")
             sensitivity_rows = []
             for coefficient in (0.0, 0.1, 0.2):
-                _, rows = evaluate_policy_suite(suites["image_disjoint"][:30], budget,
+                _, rows = evaluate_policy_suite(suites["image_disjoint_distinct"][:30], budget,
                     priority_by_image=priority_by_image, predictions_by_image=predictions,
+                    image_priority_predictions_by_image=image_priority_predictions,
                     model_artifacts=artifacts,
                     policy_names=("fifo", "semantic_greedy", "dqn"),
                     cost_coefficient=coefficient)
@@ -566,34 +658,135 @@ def evaluation_notebook():
             sensitivity = pd.DataFrame(sensitivity_rows)
             sensitivity.to_csv(EVAL_ROOT / "fixed_policy_cost_sensitivity.csv", index=False)
             display(sensitivity.groupby(["cost_coefficient", "policy"])
-                    [["episode_reward", "normalized_utility_auc"]].mean().round(3))
+                    [["episode_reward", "priority_delivery_auc"]].mean().round(3))
             print("This is fixed-policy reward sensitivity. Only the 0.1 coefficient trained the DQN; retrain to test policy adaptation.")
+
+            coupled_episodes = tuple(with_task_coupled_deadlines(episode)
+                                     for episode in suites["image_disjoint_distinct"][:30])
+            _, coupled_rows = evaluate_policy_suite(coupled_episodes, budget,
+                priority_by_image=priority_by_image, predictions_by_image=predictions,
+                image_priority_predictions_by_image=image_priority_predictions,
+                model_artifacts=artifacts,
+                policy_names=("fifo", "edf", "clip_image_priority_edf",
+                              "semantic_greedy", "dqn", "fixed_priority"))
+            deadline_sensitivity = pd.DataFrame(coupled_rows)
+            deadline_sensitivity.to_csv(EVAL_ROOT / "task_coupled_deadline_sensitivity.csv",
+                                        index=False)
+            display(deadline_sensitivity.groupby("policy")
+                    [["priority_delivery_auc", "critical_on_time_rate"]].mean().round(3))
+            print("This sensitivity uses the same images and arrivals but makes packet deadlines a proxy for semantic urgency. The main experiment keeps them independent.")
         '''),
-        md('## 5b. Ranking agreement on an all-at-once static snapshot'),
+        md('## 5b. Experiment A: semantic ordering when every image is ready'),
         code(r'''
             from INFRA.semantic_evaluator import static_ranking_metrics
-            static_demo = replace(suites["faculty_demo"][0], episode_id="static-faculty-demo",
-                jobs=tuple(replace(job, candidate=replace(job.candidate,
-                    arrival_ms=0.0, deadline_ms=1900.0))
-                    for job in suites["faculty_demo"][0].jobs))
-            static_results, _ = evaluate_policy_suite((static_demo,), budget,
-                priority_by_image=priority_by_image, predictions_by_image=predictions,
-                model_artifacts=artifacts, policy_names=policy_names, retain_results=True)
-            rank_frame = pd.DataFrame({"policy": result["policy"],
-                **static_ranking_metrics(result)} for result in static_results)
+            rank_rows = []
+            for track, episodes in (("static_image_disjoint_12", suites["static_image_disjoint"]),
+                                    ("static_closed_catalogue_25", suites["static_closed_catalogue"])):
+                for episode in episodes:
+                    static_results, _ = evaluate_policy_suite((episode,), budget,
+                        priority_by_image=priority_by_image,
+                        predictions_by_image=predictions,
+                        image_priority_predictions_by_image=image_priority_predictions,
+                        model_artifacts=artifacts,
+                        policy_names=policy_names, retain_results=True,
+                        enable_delivered_history=False)
+                    rank_rows.extend({"track": track, "episode_id": episode.episode_id,
+                                      "policy": result["policy"],
+                                      **static_ranking_metrics(result)}
+                                     for result in static_results)
+            rank_frame = pd.DataFrame(rank_rows)
             rank_frame.to_csv(EVAL_ROOT / "static_ranking_metrics.csv", index=False)
-            display(rank_frame.sort_values("ndcg", ascending=False))
-            print("These ranking metrics apply only to the static 25-job fixture, not staggered UE arrivals.")
+            display(rank_frame.groupby(["track", "policy"])[
+                ["ndcg_at_5", "critical_recall_at_5", "priority_pair_agreement"]]
+                .mean().round(3))
+            reference = (rank_frame[rank_frame.policy == "fifo"]
+                         [["track", "episode_id", "ndcg_at_5"]]
+                         .rename(columns={"ndcg_at_5": "fifo_ndcg_at_5"}))
+            paired_rank = rank_frame.merge(reference, on=["track", "episode_id"],
+                                           validate="many_to_one")
+            paired_rank["ndcg_at_5_gain_vs_fifo"] = (
+                paired_rank.ndcg_at_5 - paired_rank.fifo_ndcg_at_5)
+            paired_rank.to_csv(EVAL_ROOT / "static_paired_rank_gains.csv", index=False)
+            fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+            for axis, track in zip(axes, ("static_image_disjoint_12",
+                                          "static_closed_catalogue_25")):
+                rows = paired_rank[paired_rank.track == track]
+                means = rows.groupby("policy").ndcg_at_5_gain_vs_fifo.mean()
+                means.sort_values().plot.barh(ax=axis, color="#13678A")
+                axis.set(title=track, xlabel="Paired nDCG@5 gain versus FIFO")
+                axis.axvline(0, color="black", linewidth=1)
+                axis.grid(axis="x", alpha=.2)
+            fig.tight_layout()
+            fig.savefig(EVAL_ROOT / "static_semantic_rank_gains.png", dpi=170)
+            display(fig); plt.close(fig)
+            print("All static jobs arrive at 0 ms; same-priority ties are excluded from pair agreement.")
+        '''),
+        md('''
+            ## 5c. Evidence ladder: recognize importance, rank images, deliver early
+
+            These are three different questions. The image-only classifier is
+            evaluated on held-out images. Static nDCG@5 tests whether a policy
+            orders simultaneously ready images by the fixed task rubric.
+            Dynamic priority-delivery AUC tests whether priority survives UE
+            arrivals and deadlines. FIFO and EDF are the predeclared network
+            comparators. Rubric-assisted and privileged rows are labeled.
+        '''),
+        code(r'''
+            focused_policies = (
+                "fifo", "edf", "ladi_classifier_priority",
+                "clip_image_priority", "clip_image_priority_edf",
+                "semantic_greedy", "feature_ordinal_classifier",
+                "pairwise_linear_ranker", "dqn", "fixed_priority",
+            )
+            classifier_focus = classifier_metrics[
+                (classifier_metrics.split == "test") &
+                (classifier_metrics.model.isin(("LADI_image_classifier",
+                    "CLIP_image_priority_classifier", "feature_ordinal_oracle_assisted")))]
+            static_focus = (rank_frame[rank_frame.track == "static_image_disjoint_12"]
+                            .groupby("policy").ndcg_at_5.mean())
+            dynamic_focus = (metrics[metrics.track == "image_disjoint_distinct"]
+                             .groupby("policy").priority_delivery_auc.mean())
+            ladder = pd.DataFrame({
+                "policy": focused_policies,
+                "static_ndcg_at_5": [static_focus.get(name, np.nan) for name in focused_policies],
+                "dynamic_priority_delivery_auc": [dynamic_focus.get(name, np.nan)
+                                                  for name in focused_policies],
+                "input_type": ["network", "network", "image only", "image only",
+                               "image plus deadline", "rubric assisted", "rubric assisted",
+                               "rubric assisted", "rubric assisted", "privileged rubric"],
+            })
+            ladder.to_csv(EVAL_ROOT / "evidence_ladder.csv", index=False)
+            display(classifier_focus[["model", "n_images", "macro_f1", "balanced_accuracy"]])
+            display(ladder)
+            fig, axes = plt.subplots(1, 2, figsize=(15, 6), sharey=True)
+            palette = {"network": "#777777", "image only": "#13678A",
+                       "image plus deadline": "#11A09A", "rubric assisted": "#D98432",
+                       "privileged rubric": "#8040A0"}
+            colors = [palette[kind] for kind in ladder.input_type]
+            axes[0].barh(ladder.policy, ladder.static_ndcg_at_5, color=colors)
+            axes[0].set(xlabel="nDCG@5 on 12 held-out images", xlim=(0, 1),
+                        title="A. All images ready together")
+            axes[1].barh(ladder.policy, ladder.dynamic_priority_delivery_auc,
+                         color=colors)
+            axes[1].set(xlabel="Priority-delivery AUC on unseen images", xlim=(0, 1),
+                        title="B. Five UE queues and deadlines")
+            for axis in axes:
+                axis.invert_yaxis()
+                axis.grid(axis="x", alpha=.2)
+            fig.tight_layout()
+            fig.savefig(EVAL_ROOT / "semantic_evidence_ladder.png", dpi=180)
+            display(fig); plt.close(fig)
+            print("Bars are measured simulator outcomes on the fixed prototype rubric; compare input types before drawing claims.")
         '''),
         md('## 6. Plots for the faculty comparison'),
         code(r'''
             plot_dir = EVAL_ROOT / "plots"; plot_dir.mkdir(exist_ok=True)
-            subset = metrics[metrics.track == "image_disjoint"]
+            subset = metrics[metrics.track == "image_disjoint_distinct"]
             means = subset.groupby("policy").mean(numeric_only=True)
             order = means.normalized_utility_auc.sort_values(ascending=False).index
             fig, axes = plt.subplots(2, 2, figsize=(15, 10))
             means.loc[order, "normalized_utility_auc"].plot.bar(ax=axes[0,0], color="#13678A")
-            axes[0,0].set_title("Semantic utility over time (AUC)")
+            axes[0,0].set_title("History-aware semantic utility over time (AUC)")
             means.loc[order, "critical_on_time_rate"].plot.bar(ax=axes[0,1], color="#11A09A")
             axes[0,1].set_title("Critical/emergency delivered on time")
             means.loc[order, "weighted_priority_inversion"].plot.bar(ax=axes[1,0], color="#D98432")
@@ -602,43 +795,48 @@ def evaluation_notebook():
             for name in means.index:
                 axes[1,1].annotate(name, (means.loc[name,"mean_policy_inference_ms"],
                                            means.loc[name,"normalized_utility_auc"]), fontsize=8)
-            axes[1,1].set(xlabel="Policy inference (ms)", ylabel="Utility AUC",
-                           title="Inference cost versus utility")
+            axes[1,1].set(xlabel="Policy inference (ms)", ylabel="Semantic utility AUC",
+                           title="Inference cost versus priority delivery")
             for axis in axes.flat: axis.grid(alpha=.15)
             fig.tight_layout(); fig.savefig(plot_dir / "policy_comparison.png", dpi=170)
             display(fig); plt.close(fig)
         '''),
         md('''
-            ## 7. Faculty scenario: 25 images, five UEs, one visible decision
+            ## 7. Faculty scenario: 60 images, five UEs, one visible decision
 
             The table exposes the complete queue snapshot at a decision point:
-            five values, availability masks, payload units, deadlines, score and
-            selected action. The 24-byte header is encoded and CRC-checked here.
+            seven values, availability masks, payload units, deadlines, score and
+            selected action. The backward-compatible 24-byte V2 header carries
+            P2/P3/P5/P6/P7; P1/P4 remain in the logical scheduling envelope.
         '''),
         code(r'''
             demo = suites["faculty_demo"][0]
             _, demo_metrics = evaluate_policy_suite((demo,), budget,
                 priority_by_image=priority_by_image, predictions_by_image=predictions,
+                image_priority_predictions_by_image=image_priority_predictions,
                 model_artifacts=artifacts, policy_names=policy_names)
             demo_results, _ = evaluate_policy_suite((demo,), budget,
                 priority_by_image=priority_by_image, predictions_by_image=predictions,
+                image_priority_predictions_by_image=image_priority_predictions,
                 model_artifacts=artifacts, policy_names=policy_names, retain_results=True)
             display(pd.DataFrame(demo_metrics).sort_values("normalized_utility_auc", ascending=False))
             image_paths = {row["image_id"]: row["image_path"] for row in reviewed_rows}
             from PIL import Image
-            fig, axes = plt.subplots(5, 5, figsize=(15, 15))
+            fig, axes = plt.subplots(6, 10, figsize=(22, 14))
             for axis, job in zip(axes.flat, demo.jobs):
                 with Image.open(image_paths[job.candidate.image_id]) as opened:
                     axis.imshow(opened.convert("RGB"))
                 axis.set_title(f"{job.candidate.ue_id} | {job.candidate.arrival_ms:.0f} ms", fontsize=8)
                 axis.axis("off")
-            fig.suptitle("25 distinct LADI images assigned to five simulated UEs")
-            fig.tight_layout(); fig.savefig(plot_dir / "faculty_25_inputs.png", dpi=130)
+            fig.suptitle("All 60 distinct LADI images assigned to five simulated UEs")
+            fig.tight_layout(); fig.savefig(plot_dir / "faculty_60_inputs.png", dpi=130)
             display(fig); plt.close(fig)
             chosen_demo = next(result for result in demo_results if result["policy"] == "dqn")
             first = next(row for row in chosen_demo["decision_trace"] if len(row["candidate_snapshot"]) > 1)
             candidates = pd.DataFrame(first["candidate_snapshot"])
-            feature_names = ("P2 relevance", "P3 novelty", "P5 impact", "P6 urgency", "P7 sufficiency")
+            feature_names = ("P1 scene importance", "P2 relevance", "P3 novelty",
+                             "P4 interpretation confidence", "P5 impact",
+                             "P6 urgency", "P7 sufficiency")
             for index, name in enumerate(feature_names):
                 candidates[name] = candidates.features.map(lambda values: values[index])
                 candidates[name + " available"] = candidates.availability.map(lambda mask: mask[index])
@@ -652,7 +850,8 @@ def evaluation_notebook():
             print("Decoded decision-time fields:", decoded_header)
 
             dqn = NumpyDQNPolicy(artifacts["dqn"])
-            demo_environment = SemanticSchedulingEnvironment(demo, budget)
+            demo_environment = SemanticSchedulingEnvironment(
+                demo, budget, enable_delivered_history=True)
             for recorded_decision in chosen_demo["decision_trace"]:
                 snapshot = demo_environment.snapshot()
                 if recorded_decision is first:
@@ -665,7 +864,7 @@ def evaluation_notebook():
                 "eligible": valid_mask[:len(snapshot.jobs)],
                 "Q_value": q_values[:len(snapshot.jobs)]}).sort_values("Q_value", ascending=False))
         '''),
-        md('## 8. Timeline, novelty change, and selected real checkpoint replay'),
+        md('## 8. Delivery timeline and selected real checkpoint replay'),
         code(r'''
             demo_trace = []
             for result in demo_results:
@@ -682,16 +881,13 @@ def evaluation_notebook():
                     novelty_rows.append({"time_ms": decision["time_ms"],
                         "history_version": decision["history_version"],
                         "image_id": candidate["image_id"],
-                        "novelty": candidate["raw_features"][1],
-                        "novelty_available": candidate["availability"][1]})
+                        "P3_novelty": candidate["raw_features"][2],
+                        "P3_available": candidate["availability"][2]})
             novelty_frame = pd.DataFrame(novelty_rows)
-            changing = novelty_frame.groupby("image_id").history_version.nunique()
-            if (changing > 1).any():
-                demonstration_image = changing[changing > 1].index[0]
-                display(novelty_frame[novelty_frame.image_id == demonstration_image]
-                        .drop_duplicates(["history_version", "novelty"]))
-            else:
-                print("No waiting image spanned two history versions in this stream.")
+            display(novelty_frame[novelty_frame.P3_available]
+                    .sort_values(["history_version", "P3_novelty"])
+                    .head(20))
+            print("The table demonstrates that P3 is recomputed from receiver knowledge after successful deliveries.")
             fig, axis = plt.subplots(figsize=(11,5))
             for result in demo_results:
                 times, values = zip(*result["utility_curve"])
@@ -730,7 +926,7 @@ def evaluation_notebook():
         md('## 9. Claim ledger and output persistence'),
         code(r'''
             claims = pd.DataFrame([
-                {"category":"Implemented", "component":"P2/P3 extraction, prototype-rubric P5/P6 and default P7, 24-byte header, policies, DQN, metrics"},
+                {"category":"Implemented", "component":"P1-P7 dynamic features, successful-delivery knowledge base, policies, DQN, metrics"},
                 {"category":"Simulated", "component":"UE arrivals, queues, deadlines, service duration, transport outcome"},
                 {"category":"Measured when available", "component":"SwinJSCC checkpoint latency, channel uses, selected PSNR/SSIM"},
                 {"category":"Proposed", "component":"Real 5G MAC/PHY control channel, RB allocation, distributed KB sync"},
@@ -747,7 +943,19 @@ def evaluation_notebook():
             print("Kaggle CLI: kaggle kernels output <username>/semantic-scheduler-evaluate -p downloaded/evaluation-run")
         '''),
     ]
-    return nbformat.v4.new_notebook(cells=cells, metadata={"kernelspec": {
+    dynamic_only = []
+    skip_code_after_heading = False
+    for cell in cells:
+        if (cell.cell_type == "markdown" and
+                (cell.source.startswith("## 5b. Experiment A")
+                 or cell.source.startswith("## 5c. Evidence ladder"))):
+            skip_code_after_heading = True
+            continue
+        if skip_code_after_heading and cell.cell_type == "code":
+            skip_code_after_heading = False
+            continue
+        dynamic_only.append(cell)
+    return nbformat.v4.new_notebook(cells=dynamic_only, metadata={"kernelspec": {
         "display_name": "Python 3", "language": "python", "name": "python3"}})
 
 

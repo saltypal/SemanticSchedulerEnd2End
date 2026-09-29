@@ -50,7 +50,7 @@ def test_dqn_state_shape_and_mask_excludes_padded_slots():
     budget = ResourceBudgetSemantic(1.0)
     snapshot = SemanticSchedulingEnvironment(episode, budget).snapshot()
     state, mask = model_state(snapshot, budget)
-    assert state.shape == (STATE_DIM,) == (459,)
+    assert state.shape == (STATE_DIM,) == (559,)
     assert mask.shape == (25,)
     assert np.flatnonzero(mask).tolist() == [0, 1]
     assert not any(field in snapshot.__dataclass_fields__ for field in

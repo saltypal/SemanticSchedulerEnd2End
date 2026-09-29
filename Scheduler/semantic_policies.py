@@ -105,13 +105,18 @@ class SemanticGreedyPolicy(SemanticPolicyBase):
             job = snapshot.jobs[index]
             values = job.features.normalized_values(cold_start_novelty=1.0)
             mask = job.features.availability_mask()
-            relevance = values[0] if mask[0] else 0.5
-            novelty = values[1] if mask[1] else 1.0
-            impact = values[2] if mask[2] else 0.5
-            urgency = values[3] if mask[3] else 0.5
-            sufficiency = values[4] if mask[4] else 0.5
+            scene = values[0] if mask[0] else 0.5
+            relevance = values[1] if mask[1] else 0.5
+            novelty = values[2] if mask[2] else 1.0
+            confidence = values[3] if mask[3] else 0.5
+            impact = values[4] if mask[4] else 0.5
+            urgency = values[5] if mask[5] else 0.5
+            sufficiency = values[6] if mask[6] else 0.5
             cost = job.resource_units / max(1.0, budget.service_rate_units_per_ms * 200.0)
-            scores[index] = (relevance * (0.25 + 0.75 * novelty)
+            scores[index] = ((0.25 + 0.75 * scene)
+                             * (0.25 + 0.75 * relevance)
+                             * (0.25 + 0.75 * novelty)
+                             * (0.25 + 0.75 * confidence)
                              * (0.25 + 0.75 * impact)
                              * (0.25 + 0.75 * urgency)
                              * (0.25 + 0.75 * sufficiency) / max(cost, 0.1))
@@ -128,7 +133,7 @@ class SemanticWeightedPolicy(SemanticPolicyBase):
     """
 
     name = "semantic_weighted"
-    WEIGHTS = (0.25, 0.20, 0.25, 0.20, 0.10)
+    WEIGHTS = (0.18, 0.14, 0.18, 0.10, 0.16, 0.16, 0.08)
 
     def decide(self, snapshot: SemanticCandidateSnapshot,
                budget: ResourceBudgetSemantic) -> PolicyDecision:
@@ -137,7 +142,7 @@ class SemanticWeightedPolicy(SemanticPolicyBase):
             job = snapshot.jobs[index]
             values = job.features.normalized_values(cold_start_novelty=1.0)
             mask = job.features.availability_mask()
-            usable = tuple(value if available else (1.0 if pos == 1 else 0.5)
+            usable = tuple(value if available else (1.0 if pos == 2 else 0.5)
                            for pos, (value, available) in enumerate(zip(values, mask)))
             cost = job.resource_units / max(1.0, budget.service_rate_units_per_ms * 200.0)
             scores[index] = float(sum(weight * value for weight, value
@@ -160,14 +165,15 @@ class SemanticLexicographicPolicy(SemanticPolicyBase):
             job = snapshot.jobs[index]
             values = job.features.normalized_values(cold_start_novelty=1.0)
             mask = job.features.availability_mask()
-            usable = tuple(value if available else (1.0 if pos == 1 else 0.5)
+            usable = tuple(value if available else (1.0 if pos == 2 else 0.5)
                            for pos, (value, available) in enumerate(zip(values, mask)))
             slack = (float("inf") if job.deadline_ms is None else
                      max(0.0, job.deadline_ms - snapshot.now_ms))
             # Higher semantic evidence wins; urgency and impact precede
             # relevance/novelty, then the earliest deadline breaks ties.
-            return (-usable[3], -usable[2], -usable[0], -usable[1],
-                    -usable[4], slack, job.arrival_ms, job.job_id)
+            return (-usable[5], -usable[4], -usable[0], -usable[1],
+                    -usable[2], -usable[3], -usable[6], slack,
+                    job.arrival_ms, job.job_id)
 
         selected = min(snapshot.eligible_indices, key=key)
         return PolicyDecision(self.name, snapshot.now_ms, selected, None,
@@ -246,18 +252,73 @@ class LADIClassifierPriorityPolicy(SemanticPolicyBase):
         }
         self.threshold = float(threshold)
 
+    def predict_priority(self, image_id: str) -> int:
+        """Map cached image-model outputs to the frozen task-priority rubric."""
+        if image_id not in self.predictions:
+            raise ValueError(f"Missing cached classifier prediction for {image_id}")
+        probabilities = self.predictions[image_id]
+        return min((priority for label, priority in self.PRIORITY_LABELS.items()
+                    if probabilities.get(label, 0.0) >= self.threshold), default=3)
+
     def decide(self, snapshot: SemanticCandidateSnapshot,
                budget: ResourceBudgetSemantic) -> PolicyDecision:
         scores = {}
         for index in snapshot.eligible_indices:
             job = snapshot.jobs[index]
-            if job.image_id not in self.predictions:
-                raise ValueError(f"Missing cached classifier prediction for {job.image_id}")
-            probabilities = self.predictions[job.image_id]
-            predicted = min((priority for label, priority in self.PRIORITY_LABELS.items()
-                             if probabilities.get(label, 0.0) >= self.threshold), default=3)
+            predicted = self.predict_priority(job.image_id)
             scores[index] = -float(predicted)
         return self._pick(snapshot, scores, "cached LADI predicted labels mapped to task rubric")
+
+
+class ClipImagePriorityPolicy(SemanticPolicyBase):
+    """Schedule using image-only class probabilities trained on frozen CLIP vectors."""
+
+    NAMES = ("clip_image_priority", "clip_image_priority_edf")
+
+    def __init__(self, predictions_by_image: Mapping[str, Mapping[str, float]],
+                 *, use_deadline: bool = False) -> None:
+        self.name = "clip_image_priority_edf" if use_deadline else "clip_image_priority"
+        self.predictions = {image_id: {int(label): float(probability)
+                                      for label, probability in row.items()}
+                            for image_id, row in predictions_by_image.items()}
+        for image_id, row in self.predictions.items():
+            if not row or not set(row).issubset({0, 1, 2, 3}):
+                raise ValueError(f"Invalid priority classes for {image_id}")
+            if any(not math.isfinite(value) or value < 0 for value in row.values()):
+                raise ValueError(f"Invalid class probabilities for {image_id}")
+            if not math.isclose(sum(row.values()), 1.0, abs_tol=1e-4):
+                raise ValueError(f"Class probabilities do not sum to one for {image_id}")
+
+    def predict_priority(self, image_id: str) -> int:
+        if image_id not in self.predictions:
+            raise ValueError(f"Missing image-only priority prediction for {image_id}")
+        return max(self.predictions[image_id], key=self.predictions[image_id].get)
+
+    def decide(self, snapshot: SemanticCandidateSnapshot,
+               budget: ResourceBudgetSemantic) -> PolicyDecision:
+        if not snapshot.eligible_indices:
+            raise ValueError("No eligible jobs")
+
+        def key(index: int):
+            job = snapshot.jobs[index]
+            if job.image_id not in self.predictions:
+                raise ValueError(f"Missing image-only priority prediction for {job.image_id}")
+            probabilities = self.predictions[job.image_id]
+            expected_class = sum(label * probability for label, probability
+                                 in probabilities.items())
+            deadline = (float("inf") if job.deadline_ms is None else
+                        job.deadline_ms)
+            if self.name == "clip_image_priority_edf":
+                predicted_class = self.predict_priority(job.image_id)
+                return predicted_class, deadline, expected_class, job.arrival_ms, job.job_id
+            return expected_class, job.arrival_ms, job.job_id
+
+        selected = min(snapshot.eligible_indices, key=key)
+        return PolicyDecision(
+            self.name, snapshot.now_ms, selected, -float(key(selected)[0]),
+            "lowest image-predicted expected priority class"
+            + (" with deadline tie-break" if self.name.endswith("_edf") else ""),
+        )
 
 
 class OrdinalClassifierPolicy(SemanticPolicyBase):
@@ -270,17 +331,25 @@ class OrdinalClassifierPolicy(SemanticPolicyBase):
             self.mean = np.asarray(data["mean"], dtype=np.float32)
             self.scale = np.asarray(data["scale"], dtype=np.float32)
             self.classes = np.asarray(data["classes"], dtype=np.float32)
-        if self.coefficients.shape[1] != 10 or self.mean.shape != (10,) or self.scale.shape != (10,):
+        if (self.coefficients.shape[1] != 14 or self.mean.shape != (14,)
+                or self.scale.shape != (14,)):
             raise ValueError("Ordinal classifier feature schema is incompatible")
+
+    def predict_probabilities(self, job) -> np.ndarray:
+        row = (static_feature_row(job) - self.mean) / self.scale
+        logits = self.coefficients @ row + self.intercepts
+        shifted = logits - np.max(logits)
+        values = np.exp(shifted)
+        return values / values.sum()
+
+    def predict_priority(self, job) -> int:
+        return int(self.classes[int(np.argmax(self.predict_probabilities(job)))])
 
     def decide(self, snapshot: SemanticCandidateSnapshot,
                budget: ResourceBudgetSemantic) -> PolicyDecision:
         scores = {}
         for index in snapshot.eligible_indices:
-            row = (static_feature_row(snapshot.jobs[index]) - self.mean) / self.scale
-            logits = self.coefficients @ row + self.intercepts
-            shifted = logits - np.max(logits)
-            probabilities = np.exp(shifted) / np.exp(shifted).sum()
+            probabilities = self.predict_probabilities(snapshot.jobs[index])
             scores[index] = -float(probabilities @ self.classes)
         return self._pick(snapshot, scores, "lowest expected priority class")
 
@@ -293,7 +362,7 @@ class PairwiseRankerPolicy(SemanticPolicyBase):
             self.weights = np.asarray(data["weights"], dtype=np.float32)
             self.mean = np.asarray(data["mean"], dtype=np.float32)
             self.scale = np.asarray(data["scale"], dtype=np.float32)
-        if self.weights.shape != (10,) or self.mean.shape != (10,) or self.scale.shape != (10,):
+        if self.weights.shape != (14,) or self.mean.shape != (14,) or self.scale.shape != (14,):
             raise ValueError("Pairwise ranker feature schema is incompatible")
 
     def decide(self, snapshot: SemanticCandidateSnapshot,
@@ -314,7 +383,7 @@ class NumpyDQNPolicy(SemanticPolicyBase):
         if (w1.shape != (64, STATE_DIM) or b1.shape != (64,)
                 or w2.shape != (32, 64) or b2.shape != (32,)
                 or w3.shape != (25, 32) or b3.shape != (25,)):
-            raise ValueError("DQN checkpoint is incompatible with 459-64-32-25 schema")
+            raise ValueError(f"DQN checkpoint is incompatible with {STATE_DIM}-64-32-25 schema")
 
     def q_values(self, snapshot: SemanticCandidateSnapshot,
                  budget: ResourceBudgetSemantic) -> tuple[np.ndarray, np.ndarray]:

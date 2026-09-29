@@ -12,7 +12,11 @@ import math
 from typing import Mapping
 
 
-FEATURE_NAMES = ("context_relevance", "delivered_history_novelty", "task_impact", "urgency", "evidence_sufficiency")
+FEATURE_NAMES = (
+    "scene_importance", "context_relevance", "delivered_history_novelty",
+    "interpretation_confidence", "task_impact", "urgency",
+    "evidence_sufficiency",
+)
 BASE_PRIORITY_WEIGHTS = (4.0, 3.0, 2.0, 1.0)
 
 
@@ -58,7 +62,7 @@ class FeatureValue:
 
 @dataclass(frozen=True, slots=True)
 class SchedulingFeatureVectorV2:
-    """The five Track-A features plus the cached image embedding.
+    """Seven scheduler features plus the cached image embedding.
 
     ``embedding`` is used by INFRA to refresh novelty at decision time.  It is
     deliberately not placed in a policy snapshot.
@@ -71,6 +75,10 @@ class SchedulingFeatureVectorV2:
     evidence_sufficiency: FeatureValue
     embedding: tuple[float, ...] = ()
     schema_id: int = 2
+    scene_importance: FeatureValue = field(default_factory=lambda:
+        FeatureValue.unavailable("classifier_not_attached", "track-a/v2"))
+    interpretation_confidence: FeatureValue = field(default_factory=lambda:
+        FeatureValue.unavailable("classifier_not_attached", "track-a/v2"))
 
     def __post_init__(self) -> None:
         if self.schema_id != 2:
@@ -89,12 +97,14 @@ class SchedulingFeatureVectorV2:
 
     def normalized_values(self, *, cold_start_novelty: float = 1.0, unavailable_fill: float = 0.0) -> tuple[float, ...]:
         """Return model values in the published order without availability bits."""
-        p2, p3, p5, p6, p7 = self.values
+        p1, p2, p3, p4, p5, p6, p7 = self.values
         def present(item: FeatureValue, transform, fallback: float) -> float:
             return transform(item.value) if item.available and item.value is not None else fallback
         return (
+            min(1.0, max(0.0, present(p1, lambda x: x, unavailable_fill))),
             min(1.0, max(0.0, present(p2, lambda x: (x + 1.0) / 2.0, unavailable_fill))),
             min(1.0, max(0.0, present(p3, lambda x: x, cold_start_novelty))),
+            min(1.0, max(0.0, present(p4, lambda x: x, unavailable_fill))),
             min(1.0, max(0.0, present(p5, lambda x: x / 3.0, unavailable_fill))),
             min(1.0, max(0.0, present(p6, lambda x: x / 3.0, unavailable_fill))),
             min(1.0, max(0.0, present(p7, lambda x: x, unavailable_fill))),

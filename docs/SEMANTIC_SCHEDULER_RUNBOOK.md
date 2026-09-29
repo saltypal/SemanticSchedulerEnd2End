@@ -3,18 +3,18 @@
 ## What is implemented
 
 The scheduler selects the next **whole SwinJSCC latent job** among currently
-eligible jobs from five simulated user equipments. `SemParam` extracts CLIP
-context relevance (P2) and a cached embedding; `INFRA` recomputes novelty (P3)
-against successfully delivered images at each decision. P5 task impact and P6
-urgency come from a fixed task rubric. For this prototype P7 is explicitly
-defaulted to one, with no human review claim. A fixed 24-byte V2 header describes these five values and receiver
-history version. The header is a logical sidecar; it has no implemented physical
-control channel. `EncDec` encodes once and can replay selected latents through
-the real SwinJSCC checkpoint and AWGN channel.
+eligible jobs from five simulated user equipments. The dynamic experiment uses
+classifier-derived scene importance (P1), CLIP task relevance (P2), delivered-
+history novelty (P3), classifier interpretation confidence (P4), task impact
+(P5), urgency (P6), and sufficiency (P7). `INFRA` recomputes P3 against
+successfully delivered images at every decision. P5/P6 come from the fixed task
+rubric and P7 is a prototype default, with no human-review claim. Header V2
+still carries P2/P3/P5/P6/P7; P1/P4 are carried in the logical scheduling
+envelope pending Header V3.
 
 The queue, arrivals, service time, deadlines and channel success are simulated.
 No code in this branch allocates 5G resource blocks. The DQN is a small standard
-459→64→32→25 next-job policy; PyTorch training lives in `INFRA/learning`, while
+559→64→32→25 next-job policy; PyTorch training lives in `INFRA/learning`, while
 `Scheduler` uses exported NumPy weights. FIFO, round robin, privileged fixed
 priority, EDF, priority+EDF, SJF, aging, semantic greedy, LADI predicted-label
 priority, ordinal classifier and pairwise ranker share the same episode input.
@@ -42,14 +42,14 @@ as one ZIP; the ZIP is unpacked into the run's working directory.
 
 The class rubric is task-specific supervision, not universal disaster priority.
 P5/P6/P7 results must be called **prototype-rubric-assisted**. The evaluation cells
-also mask these fields to show P2/P3 input sensitivity. Static
+also mask these fields to show automatic-feature sensitivity. Static
 class-priority targets cannot teach the supervised classifier/ranker the
 decision-time novelty effect; the DQN and semantic heuristic are the dynamic
 novelty comparators. All image-disjoint and closed-catalogue results are kept
 separate.
-The P2/P3-only semantic-greedy comparator uses automatic semantic fields, but
-still sees simulator deadlines generated from rubric urgency. Masking inputs to
-classifiers, ranker or DQN trained with all five fields is an out-of-distribution
+The P1/P2/P3/P4 comparator uses automatic semantic fields. The main simulator
+generates deadlines independently of rubric urgency; a separate sensitivity
+case couples them. Masking inputs to classifiers, ranker or DQN trained with all seven fields is an out-of-distribution
 stress test, not a retrained automatic-only model comparison.
 
 With one fixed 1024×1024 SwinJSCC rate for every image, measured complex-channel
@@ -144,7 +144,7 @@ without them it leaves the list empty and the notebook fails its input gate.
 
 ## Faculty walkthrough and interpretation
 
-1. Open the 25-image faculty grid and five-UE arrival table.
+1. Open the 60-image faculty grid and five-UE arrival table.
 2. Inspect one queue snapshot: five parameters, availability, deadline,
    resource units, scheduler score, decision and 24-byte header.
 3. Follow a related image pair through successful delivery and the novelty

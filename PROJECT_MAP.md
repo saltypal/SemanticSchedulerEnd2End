@@ -27,6 +27,21 @@ after its two-hour capped training; notebook 2 permits independent reruns.
 Existing V1 contracts and notebook aliases
 remain independent compatibility surfaces.
 
+The active faculty experiment has two tracks: the supplied static all-arrived
+image-ordering notebook, which does not use receiver history, and dynamic
+five-UE queues, which recompute P3 from successfully delivered history. The
+dynamic scheduler observes P1-P7: classifier-derived P1/P4, CLIP P2,
+knowledge-base P3, and rubric-assisted P5/P6/P7. The main dynamic track
+generates packet deadlines independently of semantic urgency, while an
+explicitly separate sensitivity track couples them.
+`INFRA/learning/supervised_training.py` now trains a
+small image-only priority classifier from cached CLIP embeddings, and
+`Scheduler/semantic_policies.py` schedules its cached class probabilities.
+`INFRA/semantic_evaluator.py` reports static nDCG@5 and a priority-delivery
+AUC over a policy-independent offered-workload window. The safety horizon is
+not the evaluation window. Header V2 still encodes P2/P3/P5/P6/P7; P1/P4 are
+carried in the simulator scheduling envelope pending a future header revision.
+
 Each module owns its README, config defaults, environment requirements, tests, evaluation and active notebooks. Modules have maintainers by responsibility, not hardcoded personal names. Coordinate changes to INFRA contracts with consumers and add integration tests.
 
 The teammate's `1e44baa` consolidation adds checkpoint-compatible DeepJSCC/NTSCC source snapshots under `references/`, Git LFS assets under `models/`, and benchmark code now owned by `EncDec/Research/`. `semcom_benchmark/` keeps historical notebook imports and `src/Evaluation/repaired_notebook_models.py` aliases the canonical EncDec evaluator. Production `.pth` checkpoints are configured external inputs, not files in this Git repository. See `docs/MAIN_MERGE_1E44BAA.md` for asset and validation status.

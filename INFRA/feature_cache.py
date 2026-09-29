@@ -12,7 +12,10 @@ from SemParam.scheduler_features import SchedulingFeatureVectorV2 as ExtractedFe
 
 
 def to_policy_features(extracted: ExtractedFeatures) -> SchedulingFeatureVectorV2:
-    """Copy the five values and cached embedding across the module boundary."""
+    """Copy extractor fields and cached embedding across the module boundary.
+
+    P1/P4 are attached later from the independently cached image classifier.
+    """
 
     def convert(name: str) -> FeatureValue:
         source = getattr(extracted, name)

@@ -16,7 +16,7 @@ from INFRA.event_simulation import SemanticSchedulingEnvironment, run_episode
 from INFRA.semantic_contracts import (
     EpisodeSpec, PolicyDecision, ResourceBudgetSemantic, SemanticCandidateSnapshot,
 )
-from INFRA.semantic_evaluator import normalized_utility_auc
+from INFRA.semantic_evaluator import normalized_utility_auc, priority_delivery_auc
 from Scheduler.feature_adapter import MAX_CANDIDATES, STATE_DIM, model_state
 
 
@@ -33,7 +33,7 @@ class DQNConfig:
     epsilon_fraction: float = 0.7
     episodes: int = 300
     validate_every: int = 25
-    max_decisions: int = 25
+    max_decisions: int = 60
     gradient_clip_norm: float = 10.0
     max_seconds: float | None = 2400.0
 
@@ -73,7 +73,7 @@ def _epsilon(config: DQNConfig, episode_index: int) -> float:
 
 
 def _validate(network, episodes: Sequence[EpisodeSpec], budget: ResourceBudgetSemantic,
-              device: str) -> float:
+              device: str, *, enable_delivered_history: bool) -> float:
     import torch
 
     class GreedyPolicy:
@@ -97,10 +97,11 @@ def _validate(network, episodes: Sequence[EpisodeSpec], budget: ResourceBudgetSe
     scores = []
     network.eval()
     for episode in episodes:
-        result = run_episode(episode, GreedyPolicy(), budget)
+        result = run_episode(episode, GreedyPolicy(), budget,
+                             enable_delivered_history=enable_delivered_history)
         value = normalized_utility_auc(
-            result["utility_curve"], horizon_ms=float(result["horizon_ms"]),
-            maximum_utility=float(result["maximum_utility"]))
+            result["utility_curve"], horizon_ms=result["horizon_ms"],
+            maximum_utility=result["maximum_utility"])
         if value is not None:
             scores.append(value)
     network.train()
@@ -116,6 +117,7 @@ def train_dqn(
     config: DQNConfig | None = None,
     provenance: Mapping[str, object] | None = None,
     device: str = "auto",
+    enable_delivered_history: bool = True,
 ) -> dict[str, object]:
     """Train one seed and save best/last training and inference checkpoints."""
     import torch
@@ -142,6 +144,9 @@ def train_dqn(
     target = build_q_network().to(device)
     target.load_state_dict(online.state_dict())
     target.eval()
+    use_data_parallel = device.startswith("cuda") and torch.cuda.device_count() > 1
+    online_batches = nn.DataParallel(online) if use_data_parallel else online
+    target_batches = nn.DataParallel(target) if use_data_parallel else target
     optimizer = torch.optim.Adam(online.parameters(), lr=settings.learning_rate)
     replay = deque(maxlen=settings.replay_capacity)
     optimization_steps = 0
@@ -149,7 +154,9 @@ def train_dqn(
     history: list[dict[str, float | int]] = []
     action_histogram = [0] * MAX_CANDIDATES
     provenance_data = dict(provenance or {})
-    provenance_data.setdefault("feature_schema", "track-a/v2:459-64-32-25")
+    provenance_data.setdefault("feature_schema", f"track-a/v2:{STATE_DIM}-64-32-25")
+    provenance_data["dqn_data_parallel"] = use_data_parallel
+    provenance_data["dqn_gpu_count"] = torch.cuda.device_count() if device.startswith("cuda") else 0
     training_started = monotonic()
 
     def save_checkpoint(stem: str, episode_index: int) -> None:
@@ -170,7 +177,9 @@ def train_dqn(
     completed_episodes = 0
     stopped_by_time_budget = False
     for episode_index in range(settings.episodes):
-        environment = SemanticSchedulingEnvironment(train_episodes[episode_index], budget)
+        environment = SemanticSchedulingEnvironment(
+            train_episodes[episode_index], budget,
+            enable_delivered_history=enable_delivered_history)
         snapshot = environment.snapshot()
         episode_reward = 0.0
         losses: list[float] = []
@@ -206,9 +215,9 @@ def train_dqn(
                 next_states = torch.from_numpy(np.stack([item[3] for item in batch])).to(device)
                 next_masks = torch.from_numpy(np.stack([item[4] for item in batch])).to(device)
                 terminals = torch.tensor([item[5] for item in batch], dtype=torch.bool, device=device)
-                current = online(states).gather(1, actions.unsqueeze(1)).squeeze(1)
+                current = online_batches(states).gather(1, actions.unsqueeze(1)).squeeze(1)
                 with torch.no_grad():
-                    next_values = target(next_states).masked_fill(~next_masks, -torch.inf)
+                    next_values = target_batches(next_states).masked_fill(~next_masks, -torch.inf)
                     maximum = next_values.max(dim=1).values
                     maximum = torch.where(terminals | ~next_masks.any(dim=1), 0.0, maximum)
                     expected = rewards + settings.gamma * maximum
@@ -231,15 +240,13 @@ def train_dqn(
             "invalid_action_count": 0,
         }
         episode_result = environment.result(policy_name="dqn_training")
-        training_auc = normalized_utility_auc(
-            episode_result["utility_curve"],
-            horizon_ms=float(episode_result["horizon_ms"]),
-            maximum_utility=float(episode_result["maximum_utility"]))
-        row["training_utility_auc"] = 0.0 if training_auc is None else training_auc
+        training_auc = priority_delivery_auc(episode_result)
+        row["training_priority_delivery_auc"] = 0.0 if training_auc is None else training_auc
         if ((episode_index + 1) % settings.validate_every == 0
                 or episode_index + 1 == settings.episodes):
-            validation = _validate(online, validation_episodes, budget, device)
-            row["validation_utility_auc"] = validation
+            validation = _validate(online, validation_episodes, budget, device,
+                                   enable_delivered_history=enable_delivered_history)
+            row["validation_semantic_utility_auc"] = validation
             if validation > best_validation:
                 best_validation = validation
                 save_checkpoint(f"dqn_seed{seed}_best", episode_index + 1)
@@ -247,9 +254,10 @@ def train_dqn(
         completed_episodes = episode_index + 1
         if (settings.max_seconds is not None
                 and monotonic() - training_started >= settings.max_seconds):
-            if "validation_utility_auc" not in row:
-                validation = _validate(online, validation_episodes, budget, device)
-                row["validation_utility_auc"] = validation
+            if "validation_semantic_utility_auc" not in row:
+                validation = _validate(online, validation_episodes, budget, device,
+                                       enable_delivered_history=enable_delivered_history)
+                row["validation_semantic_utility_auc"] = validation
                 if validation > best_validation:
                     best_validation = validation
                     save_checkpoint(f"dqn_seed{seed}_best", completed_episodes)
@@ -271,7 +279,8 @@ def train_dqn(
         "completed_episodes": completed_episodes,
         "stopped_by_time_budget": stopped_by_time_budget,
         "elapsed_seconds": monotonic() - training_started,
-        "best_validation_utility_auc": best_validation,
+        "best_validation_semantic_utility_auc": best_validation,
+        "enable_delivered_history": enable_delivered_history,
         "config": asdict(settings), "provenance": provenance_data,
         "training_checkpoint": f"dqn_seed{seed}_best.pt",
         "numpy_inference_weights": f"dqn_seed{seed}_best.npz",
@@ -287,8 +296,10 @@ def train_dqn_seeds(
     output_dir: str | Path, *, config: DQNConfig | None = None,
     provenance: Mapping[str, object] | None = None,
     device: str = "auto",
+    enable_delivered_history: bool = True,
 ) -> dict[int, dict[str, object]]:
     return {seed: train_dqn(episodes, validation_episodes, budget, output_dir,
                             seed=seed, config=config, provenance=provenance,
-                            device=device)
+                            device=device,
+                            enable_delivered_history=enable_delivered_history)
             for seed, episodes in train_episodes_by_seed.items()}

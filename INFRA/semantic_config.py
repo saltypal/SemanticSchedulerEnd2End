@@ -21,6 +21,7 @@ class SemanticSchedulerConfig:
     test_episodes_per_track: int
     primary_transport_success_probability: float
     robustness_transport_success_probability: float
+    deadline_mode: str = "independent_network_sla"
 
     def __post_init__(self) -> None:
         if not self.task_id:
@@ -31,12 +32,14 @@ class SemanticSchedulerConfig:
             value = getattr(self, name)
             if type(value) is not int or value <= 0:
                 raise ValueError(f"{name} must be a positive integer")
-        if self.image_count != 60 or self.ue_count != 5 or self.jobs_per_episode != 25:
-            raise ValueError("This run requires the locked 60-image, five-UE, 25-job protocol")
-        if self.queue_capacity < self.jobs_per_episode:
-            raise ValueError("Normal queue capacity must hold the 25-job episode")
+        if self.image_count != 60 or self.ue_count != 5 or self.jobs_per_episode != 60:
+            raise ValueError("This run requires the locked 60-image, five-UE, 60-job protocol")
+        if self.queue_capacity > self.jobs_per_episode:
+            raise ValueError("Queue capacity cannot exceed jobs per episode")
         if self.horizon_ms <= 0:
             raise ValueError("horizon_ms must be positive")
+        if self.deadline_mode not in {"independent_network_sla", "task_coupled"}:
+            raise ValueError("deadline_mode must be independent_network_sla or task_coupled")
         for name in ("primary_transport_success_probability",
                      "robustness_transport_success_probability"):
             if not 0 <= getattr(self, name) <= 1:

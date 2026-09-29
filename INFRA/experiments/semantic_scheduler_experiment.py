@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import asdict
+from dataclasses import asdict, replace
 import csv
 from hashlib import sha256
 import json
@@ -18,7 +18,7 @@ from INFRA.event_simulation import run_episode
 from INFRA.feature_cache import to_policy_features
 from INFRA.ladi_manifest import validate_ladi60_manifest
 from INFRA.semantic_contracts import (
-    EpisodeJobSpec, FeatureValue, LatentJobSpec,
+    FEATURE_NAMES, EpisodeJobSpec, FeatureValue, LatentJobSpec,
     ResourceBudgetSemantic, SchedulingFeatureVectorV2,
 )
 from INFRA.semantic_config import SemanticSchedulerConfig
@@ -76,7 +76,8 @@ def prepare_feature_cache(
 ) -> dict[str, Path]:
     """Extract CLIP once per reviewed image and optionally predict LADI labels."""
     from SemParam.scheduler_features import SchedulerAnnotation, SchedulerFeatureExtractor
-    from SemParam.ladi_prediction_provider import LadiPredictionProvider
+    from SemParam.ladi_prediction_provider import (
+        LadiPredictionProvider, semantic_scene_features)
 
     rows = validate_ladi60_manifest(reviewed_manifest, require_reviewed=True)
     destination = Path(output_dir)
@@ -108,6 +109,24 @@ def prepare_feature_cache(
             )
             process_cpu_ms = (process_time_ns() - cpu_started) / 1_000_000.0
             policy_features = to_policy_features(extracted)
+            if classifier is not None:
+                classifier_prediction = classifier.predict(row["image_path"])
+                probabilities = dict(classifier_prediction.probabilities)
+                predictions[row["image_id"]] = probabilities
+                scene_importance, interpretation_confidence = semantic_scene_features(
+                    probabilities)
+                model_version = classifier_prediction.model_repository
+                policy_features = replace(
+                    policy_features,
+                    scene_importance=FeatureValue(
+                        scene_importance, True,
+                        "ladi_classifier:task_weighted_probability",
+                        model_version),
+                    interpretation_confidence=FeatureValue(
+                        interpretation_confidence, True,
+                        "ladi_classifier:one_minus_binary_entropy",
+                        model_version),
+                )
             cache_row = {
                 "image_id": row["image_id"],
                 "features": asdict(policy_features),
@@ -119,9 +138,6 @@ def prepare_feature_cache(
                 "source_sha256": row["source_sha256"],
             }
             handle.write(json.dumps(cache_row, sort_keys=True) + "\n")
-            if classifier is not None:
-                predictions[row["image_id"]] = dict(
-                    classifier.predict(row["image_path"]).probabilities)
     prediction_path.write_text(json.dumps(predictions, indent=2, sort_keys=True),
                                encoding="utf-8")
     return {"features": feature_path, "predictions": prediction_path}
@@ -153,9 +169,11 @@ def _load_feature_rows(path: str | Path) -> dict[str, tuple[SchedulingFeatureVec
             continue
         record = json.loads(line)
         raw = record["features"]
-        parsed = {name: FeatureValue(**raw[name]) for name in (
-            "context_relevance", "delivered_history_novelty", "task_impact",
-            "urgency", "evidence_sufficiency")}
+        parsed = {
+            name: (FeatureValue(**raw[name]) if name in raw else
+                   FeatureValue.unavailable("legacy_five_field_cache", "track-a/v2"))
+            for name in FEATURE_NAMES
+        }
         image_id = record["image_id"]
         if image_id in values:
             raise ValueError(f"Duplicate feature-cache image ID {image_id}")
@@ -224,9 +242,10 @@ def build_suites_from_manifest(catalogue: Sequence[EpisodeJobSpec],
     rows = validate_ladi60_manifest(reviewed_manifest, require_reviewed=True)
     if config is not None and (config.task_id != TASK_ID or len(ue_profiles) != config.ue_count):
         raise ValueError("Task or UE profiles differ from the locked scheduler config")
-    jobs_per_episode = 25 if config is None else config.jobs_per_episode
+    jobs_per_episode = 60 if config is None else config.jobs_per_episode
     queue_capacity = 25 if config is None else config.queue_capacity
     horizon_ms = 2000.0 if config is None else config.horizon_ms
+    deadline_mode = "independent_network_sla" if config is None else config.deadline_mode
     train_count = 300 if config is None else config.train_episodes_per_seed
     validation_count = 30 if config is None else config.validation_episodes
     test_count = 100 if config is None else config.test_episodes_per_track
@@ -245,7 +264,8 @@ def build_suites_from_manifest(catalogue: Sequence[EpisodeJobSpec],
                                      prefix=f"train-s{seed}", episode_count=train_count,
                                      jobs_per_episode=jobs_per_episode, seed=seed,
                                      ue_profiles=ue_profiles,
-                                     queue_capacity=queue_capacity, horizon_ms=horizon_ms)
+                                     queue_capacity=queue_capacity, horizon_ms=horizon_ms,
+                                     deadline_mode=deadline_mode, allow_reuse=True)
         for seed in (42, 43, 44)
     }
     validation_episodes = generate_episode_suite(
@@ -257,33 +277,46 @@ def build_suites_from_manifest(catalogue: Sequence[EpisodeJobSpec],
         # from the one used for training and test evaluation.
         jobs_per_episode=jobs_per_episode, seed=1001, allow_reuse=True,
         ue_profiles=ue_profiles,
-        queue_capacity=queue_capacity, horizon_ms=horizon_ms)
+        queue_capacity=queue_capacity, horizon_ms=horizon_ms,
+        deadline_mode=deadline_mode)
     image_disjoint = generate_episode_suite(
         test, task_id=TASK_ID, prefix="image-disjoint", episode_count=test_count,
         jobs_per_episode=jobs_per_episode, seed=2001, allow_reuse=True,
-        ue_profiles=ue_profiles, queue_capacity=queue_capacity, horizon_ms=horizon_ms)
+        ue_profiles=ue_profiles, queue_capacity=queue_capacity, horizon_ms=horizon_ms,
+        deadline_mode=deadline_mode)
     closed_catalogue = generate_episode_suite(
         train, task_id=TASK_ID, prefix="closed-catalogue", episode_count=test_count,
         jobs_per_episode=jobs_per_episode, seed=3001,
-        ue_profiles=ue_profiles, queue_capacity=queue_capacity, horizon_ms=horizon_ms)
-    groups: dict[str, list[EpisodeJobSpec]] = defaultdict(list)
-    for item in catalogue:
-        groups[item.evidence_group_id].append(item)
-    selected_groups = []
-    for stratum in sorted({row["selection_stratum"] for row in rows})[:5]:
-        selected_groups.append(sorted(group for group in groups
-                                      if group.startswith(f"{stratum}-group"))[0])
-    paired = [item for group in selected_groups for item in groups[group]]
-    chosen_ids = {item.candidate.image_id for item in paired}
-    remaining = [item for item in catalogue if item.candidate.image_id not in chosen_ids]
-    demo_templates = paired + remaining[:15]
+        ue_profiles=ue_profiles, queue_capacity=queue_capacity, horizon_ms=horizon_ms,
+        allow_reuse=True,
+        deadline_mode=deadline_mode)
+    distinct_test = generate_episode_suite(
+        test, task_id=TASK_ID, prefix="image-disjoint-distinct",
+        episode_count=test_count, jobs_per_episode=len(test), seed=4001,
+        ue_profiles=ue_profiles, queue_capacity=queue_capacity,
+        horizon_ms=horizon_ms, deadline_mode=deadline_mode)
+
+    def all_arrive_together(episode):
+        return replace(
+            episode, episode_id=f"static-{episode.episode_id}",
+            jobs=tuple(replace(item, candidate=replace(
+                item.candidate, arrival_ms=0.0,
+                deadline_ms=horizon_ms - 100.0)) for item in episode.jobs))
+
+    static_test = tuple(all_arrive_together(item) for item in distinct_test)
+    static_closed = tuple(all_arrive_together(item) for item in closed_catalogue)
+    demo_templates = list(catalogue)
     demo = build_episode(demo_templates, episode_id="faculty-demo", task_id=TASK_ID,
                          seed=5501, ue_profiles=ue_profiles,
-                         queue_capacity=queue_capacity, horizon_ms=horizon_ms)
+                         queue_capacity=queue_capacity, horizon_ms=horizon_ms,
+                         deadline_mode=deadline_mode)
     return {
         "train_by_seed": train_episodes,
         "validation": validation_episodes,
         "image_disjoint": image_disjoint,
+        "image_disjoint_distinct": distinct_test,
+        "static_image_disjoint": static_test,
+        "static_closed_catalogue": static_closed,
         "closed_catalogue": closed_catalogue,
         "faculty_demo": (demo,),
     }
@@ -293,16 +326,19 @@ def evaluate_policy_suite(
     episodes: Sequence, budget: ResourceBudgetSemantic,
     *, priority_by_image: Mapping[str, int],
     predictions_by_image: Mapping[str, Mapping[str, float]],
+    image_priority_predictions_by_image: Mapping[str, Mapping[str, float]] | None = None,
     model_artifacts: Mapping[str, str | Path],
     policy_names: Sequence[str] | None = None,
     visible_features: tuple[str, ...] | None = None,
     cost_coefficient: float = 0.1,
     retain_results: bool = False,
+    enable_delivered_history: bool = True,
 ) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     """Run all available policies on identical episode objects and outcomes."""
     default_names = (
         "fifo", "ue_round_robin", "fixed_priority", "edf", "priority_edf",
         "sjf", "aging", "semantic_greedy", "ladi_classifier_priority",
+        "clip_image_priority", "clip_image_priority_edf",
         "semantic_weighted", "semantic_lexicographic",
         "feature_ordinal_classifier", "pairwise_linear_ranker", "dqn",
         "privileged_marginal_utility",
@@ -323,16 +359,19 @@ def evaluate_policy_suite(
             policy = create_semantic_policy(
                 name, priority_by_image=priority_by_image,
                 predictions_by_image=predictions_by_image,
+                image_priority_predictions_by_image=image_priority_predictions_by_image,
                 oracle_facts_by_image=oracle_facts,
                 model_artifact=artifact,
             )
             if visible_features is None:
                 result = run_episode(episode, policy, budget,
-                                     cost_coefficient=cost_coefficient)
+                                     cost_coefficient=cost_coefficient,
+                                     enable_delivered_history=enable_delivered_history)
             else:
                 result = run_episode(episode, policy, budget,
                                      visible_features=visible_features,
-                                     cost_coefficient=cost_coefficient)
+                                     cost_coefficient=cost_coefficient,
+                                     enable_delivered_history=enable_delivered_history)
             if retain_results:
                 results.append(result)
             metrics.append({"episode_id": episode.episode_id, "policy": name,
