@@ -49,6 +49,7 @@ DEPENDENCIES = code(r'''
     import json, platform
     subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r",
                     str(PROJECT_ROOT / "environment/requirements-semantic-scheduler-kaggle.txt")], check=True)
+    from tqdm.auto import tqdm
     import numpy as np
     import pandas as pd
     import torch
@@ -64,7 +65,7 @@ DEPENDENCIES = code(r'''
         "packages": {name: package_metadata.version(name) for name in
                      ("torch", "numpy", "pandas", "scikit-learn", "transformers", "datasets")},
     }
-    print(ENVIRONMENT)
+    print(ENVIRONMENT, flush=True)
 ''')
 
 
@@ -124,7 +125,7 @@ def train_notebook():
             if DQN_SETTINGS["episodes"] != SCHEDULER_SETTINGS.train_episodes_per_seed:
                 raise ValueError("DQN and stream episode counts disagree")
             (RUN_ROOT / "environment.json").write_text(json.dumps(ENVIRONMENT, indent=2), encoding="utf-8")
-            print({"run_id": RUN_ID, "output": str(RUN_ROOT), "payload_mode": PAYLOAD_MODE})
+            print({"run_id": RUN_ID, "output": str(RUN_ROOT), "payload_mode": PAYLOAD_MODE}, flush=True)
         '''),
         md('''
             ## 3. Experiment-ready prototype dataset gate
@@ -146,17 +147,18 @@ def train_notebook():
             sheet = render_contact_sheet(MANIFEST_PATH, RUN_ROOT / "ladi60_contact_sheet.png")
             from PIL import Image
             display(Image.open(sheet))
-            print("All 60 hashes and fixed prototype annotations validated; no human-review claim is made.")
+            print("[1/8] All 60 hashes and fixed prototype annotations validated; no human-review claim is made.", flush=True)
         '''),
         md('## 4. Extract CLIP features and cached image-classifier predictions once'),
         code(r'''
+            print("[2/8] Extracting CLIP/LADI features for 60 images...", flush=True)
             cache = prepare_feature_cache(MANIFEST_PATH, RUN_ROOT / "cache",
                 include_ladi_predictions=True, device=DEVICE)
             feature_rows = [json.loads(line) for line in cache["features"].read_text(encoding="utf-8").splitlines()]
             extraction = pd.DataFrame({"image_id": row["image_id"],
                                        "latency_ms": row["extraction_latency_ms"]} for row in feature_rows)
             display(extraction.describe(include="all"))
-            print("P1/P4 come from the cached image classifier; embeddings remain internal and refresh P3 at every decision.")
+            print("[2/8] Feature extraction complete. P1/P4 are cached; P3 refreshes at every decision.", flush=True)
         '''),
         md('''
             ## 5. Cache payload cost once
@@ -167,6 +169,7 @@ def train_notebook():
             `simulated_fixed` is only for an explicitly labelled infrastructure smoke run.
         '''),
         code(r'''
+            print("[3/8] Preparing one payload-cost record per image...", flush=True)
             if PAYLOAD_MODE == "simulated_fixed":
                 PAYLOAD_COSTS = simulated_fixed_payload_costs(
                     MANIFEST_PATH, RUN_ROOT / "payload" / "payload_costs.csv")
@@ -190,7 +193,7 @@ def train_notebook():
                 raise ValueError("A run cannot mix resource units")
             if PAYLOAD_MODE == "measured" and cost_frame.resource_unit.iloc[0] != "complex_channel_uses":
                 raise ValueError("Measured mode requires checkpoint-derived channel uses")
-            display(cost_frame.head())
+            display(cost_frame.head()); print("[3/8] Payload preparation complete.", flush=True)
         '''),
         md('## 6. Freeze streams, UE profiles, deadlines, and transport tapes'),
         code(r'''
@@ -201,6 +204,7 @@ def train_notebook():
             unit = catalogue[0].candidate.resource_unit
             service_rate = max(item.candidate.resource_units for item in catalogue) / 10.0
             budget = ResourceBudgetSemantic(service_rate, resource_unit=unit)
+            print("[4/8] Freezing dynamic UE streams and transport tapes...", flush=True)
             print({"train_episodes_per_seed": SCHEDULER_SETTINGS.train_episodes_per_seed,
                    "validation_jobs_per_episode": len(suites["validation"][0].jobs),
                    "validation_episodes": len(suites["validation"]),
@@ -242,6 +246,7 @@ def train_notebook():
             supervised = fit_supervised_models(train_jobs, models_dir, provenance=provenance)
             image_classifier = fit_image_priority_classifier(
                 train_jobs, catalogue, models_dir, provenance=provenance)
+            print("[5/8] Fitting image and feature-based schedulers on the 36-image train split...", flush=True)
             print({"feature_models": {name: str(path) for name, path in supervised.items()},
                    "image_classifier": {name: str(path) for name, path in image_classifier.items()}})
         '''),
@@ -256,6 +261,7 @@ def train_notebook():
             run outside that training budget.
         '''),
         code(r'''
+            print("[6/8] Starting DQN training; progress is printed every 10 episodes per seed.", flush=True)
             dqn_config = DQNConfig(**DQN_SETTINGS)
             dqn_manifests = train_dqn_seeds(
                 suites["train_by_seed"], suites["validation"], budget, models_dir,
@@ -267,7 +273,7 @@ def train_notebook():
                 training_rows.extend(json.loads(path.read_text(encoding="utf-8")))
             training_frame = pd.DataFrame(training_rows)
             training_frame.to_csv(RUN_ROOT / "training_metrics.csv", index=False)
-            display(training_frame.groupby("seed").tail(1))
+            display(training_frame.groupby("seed").tail(1)); print("[6/8] DQN training complete.", flush=True)
         '''),
         md('## 9. Diagnostics and durable artifact manifest'),
         code(r'''
@@ -316,7 +322,7 @@ def train_notebook():
             }
             (RUN_ROOT / "run_manifest.json").write_text(
                 json.dumps(run_manifest, indent=2, sort_keys=True), encoding="utf-8")
-            print("Persistent run:", RUN_ROOT)
+            print("[7/8] Persistent training artifacts:", RUN_ROOT, flush=True)
             print("Kaggle CLI: kaggle kernels output <username>/semantic-scheduler-train -p downloaded/train-run")
         '''),
     ]

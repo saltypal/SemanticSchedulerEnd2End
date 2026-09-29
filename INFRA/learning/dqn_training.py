@@ -177,6 +177,8 @@ def train_dqn(
     completed_episodes = 0
     stopped_by_time_budget = False
     for episode_index in range(settings.episodes):
+        if episode_index == 0 or (episode_index + 1) % 10 == 0:
+            print(f"[DQN seed={seed}] episode {episode_index + 1}/{settings.episodes}", flush=True)
         environment = SemanticSchedulingEnvironment(
             train_episodes[episode_index], budget,
             enable_delivered_history=enable_delivered_history)
@@ -298,8 +300,11 @@ def train_dqn_seeds(
     device: str = "auto",
     enable_delivered_history: bool = True,
 ) -> dict[int, dict[str, object]]:
-    return {seed: train_dqn(episodes, validation_episodes, budget, output_dir,
+    print(f"[DQN] starting {len(train_episodes_by_seed)} seed(s); data_parallel={device.startswith('cuda')}", flush=True)
+    results = {seed: train_dqn(episodes, validation_episodes, budget, output_dir,
                             seed=seed, config=config, provenance=provenance,
                             device=device,
                             enable_delivered_history=enable_delivered_history)
             for seed, episodes in train_episodes_by_seed.items()}
+    print("[DQN] all configured seeds finished", flush=True)
+    return results
