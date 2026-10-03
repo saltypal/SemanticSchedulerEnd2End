@@ -6,7 +6,7 @@ from time import perf_counter_ns
 from typing import Any
 from INFRA.Artifacts import TaskContext
 from SemParam.catalog import SEMANTIC_PARAMETER_ORDER, SemanticPipelineSettings
-from SemParam.observation_builder import parse_semantic_timestamp
+from SemParam.features.observation import parse_semantic_timestamp
 
 def _as_mapping(value: Any, name: str) -> dict[str, Any]:
     if not isinstance(value, dict):
@@ -59,14 +59,14 @@ def execute(config, run):
     legacy = config['semantic']['resolved_settings']
     settings = settings_from_config(legacy)
     if config['action'] == 'validate':
-        from SemParam.semantic_header import SemanticHeaderCodec
+        from SemParam.headers.semantic import SemanticHeaderCodec
         return {'status':'semantic_contract_validated', 'parameters':list(settings.enabled_parameters),
                 'codec_checkpoint_required':False, 'extraction_accuracy':'not evaluated'}
     from INFRA.runs import seed_models, select_device
-    from SemParam.clip_backbone import CLIPBackbone
+    from SemParam.features.clip import CLIPBackbone
     from SemParam.KnowledgeBases import NetworkXKnowledgeBase
     from SemParam.pipeline import TransformerParameterPipeline
-    from SemParam.semantic_header import SemanticHeaderCodec
+    from SemParam.headers.semantic import SemanticHeaderCodec
     seed_models(config['seed'])
     device = select_device(config['device'])
     clip_settings = legacy['semantic']['clip']

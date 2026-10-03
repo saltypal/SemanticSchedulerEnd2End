@@ -1,94 +1,55 @@
 # Project map
 
-## Read this first
+Read this before changing the repository. Current goal: **schedule complete image latent payloads**, with static batches as the main working path.
 
-The current semantic scheduler branch schedules **whole latent jobs** from five simulated UEs. `docs/SEMANTIC_SCHEDULER_RUNBOOK.md` is its operational guide and `docs/DEMO_CLAIMS.md` states measured/simulated/proposed claims. The 2026-09-27 Phase 1 documents are historical design checkpoints; the superseded pilot remains under `Archived/image_scheduling_pilot_20260927/`.
+## Owners
 
-This rebuild replaces stage-based implementation ownership. Existing stage imports remain aliases for compatibility. Source is Python 3.12, local Git and the existing GitHub remote; large assets stay in configured shared storage. New work is not remotely reproducible until its commit is pushed.
+| Owner | Canonical responsibility | Entry points |
+|---|---|---|
+| INFRA | Contracts, lifecycle, transport, persistence, configuration and learning orchestration | `latent/cli.py`, `cli.py`, `configuration.py`, `learning/` |
+| EncDec | Models, communication codebooks, reconstruction and codec benchmarks | `runtime.py`, `Models/`, `Codebooks/`, `Evaluation/`, `integration/` |
+| SemParam | Extraction, semantic codebooks, knowledge and serialization | `features/`, `history/`, `headers/`, `pipeline.py`, `runtime.py` |
+| Scheduler | Policies over immutable snapshots | `latent/policies.py`, `baselines/policies.py`, `semantic/` |
 
-| Module | Inputs → outputs | Important files | Boundary / acceptance |
-|---|---|---|---|
-| EncDec | RGB tensor/image → encoded representation → reconstructed image; benchmark rows | `runtime.py`, `catalog.py`, `Evaluation/kodak_benchmark.py`, `Models/`, `Research/`, `Codebooks/`, `training.py` | Owns codecs and communication VQ; Kodak keeps 24 images, schema and append dedup |
-| SemParam | image or explicit feature provider + task/context → provenanced ParameterValue bundle | `runtime.py`, `pipeline.py`, `Codebooks/pipeline.py`, `clip_backbone.py`, `evaluation/coverage.py` | Image path loads no codec; missing values remain unavailable |
-| Scheduler | immutable QueueSnapshot + ResourceBudget → Decision | `policies.py`, `fixtures.py`, `evaluation/report.py` | No neural imports; deterministic selection; no queue mutation |
-| INFRA | root config + jobs/modules → simulation traces + run artifacts | `configuration.py`, `contracts.py`, `simulation.py`, `runs.py`, `cli.py`, `workers.py` | Owns arrivals, clock, deadlines, queues, transport and persistence |
+Policies select jobs; only INFRA changes time/lifecycle/history. Lower class integers mean higher priority. Do not infer classes from filenames. Scheduler imports no codec or neural framework. Image-only SemParam methods need no codec checkpoint; codec-dependent methods receive `INFRA.features.FeatureProvider`.
 
-The additive Track-A path uses `SemParam/scheduler_features.py`,
-`delivered_history.py`, and V2 header code; `INFRA/semantic_contracts.py`,
-`semantic_streams.py`, `event_simulation.py`, `semantic_evaluator.py`,
-`feature_cache.py`, and `learning/`; `Scheduler/semantic_policies.py`,
-`feature_adapter.py`, and `policy_registry.py`; and
-`EncDec/integration/scheduler_replay.py`. Dataset input accepts loose files
-or a flat manual-upload ZIP via
-`INFRA/kaggle_dataset_bundle.py`. The two active notebooks are
-`Scheduler/notebooks/01_train_semantic_scheduler.ipynb` and
-`02_evaluate_all_policies.ipynb`. Notebook 1 also runs the complete evaluation
-after its two-hour capped training; notebook 2 permits independent reruns.
-Existing V1 contracts and notebook aliases
-remain independent compatibility surfaces.
+## Main whole-latent path
 
-The active faculty experiment has two tracks: the supplied static all-arrived
-image-ordering notebook, which does not use receiver history, and dynamic
-five-UE queues, which recompute P3 from successfully delivered history. The
-dynamic scheduler observes P1-P7: classifier-derived P1/P4, CLIP P2,
-knowledge-base P3, and rubric-assisted P5/P6/P7. The main dynamic track
-generates packet deadlines independently of semantic urgency, while an
-explicitly separate sensitivity track couples them.
-`INFRA/learning/supervised_training.py` now trains a
-small image-only priority classifier from cached CLIP embeddings, and
-`Scheduler/semantic_policies.py` schedules its cached class probabilities.
-`INFRA/semantic_evaluator.py` reports static nDCG@5 and a priority-delivery
-AUC over a policy-independent offered-workload window. The safety horizon is
-not the evaluation window. Header V2 still encodes P2/P3/P5/P6/P7; P1/P4 are
-carried in the simulator scheduling envelope pending a future header revision.
+- `INFRA/latent/contracts.py`: frozen jobs, candidates, snapshots, delivery evidence and service configuration. No UE field.
+- `INFRA/latent/simulation.py`: whole-payload service, arrivals, deadlines, censoring, live/cached feedback and receiver history.
+- `INFRA/latent/evaluation.py`: reference ranking and confirmed task-quality evidence remain separate.
+- `INFRA/latent/experiment.py`: input validation, cache adaptation, logging and persistence.
+- `Scheduler/latent/policies.py`: six static policies.
+- `SemParam/features/latent.py`: image/task relevance and confirmed receiver novelty.
+- `EncDec/integration/scheduler_replay.py`: tensor caching and saved-order replay.
+- `EncDec/integration/latent_transport.py`: load-once live codec callback.
 
-Each module owns its README, config defaults, environment requirements, tests, evaluation and active notebooks. Modules have maintainers by responsibility, not hardcoded personal names. Coordinate changes to INFRA contracts with consumers and add integration tests.
-
-The teammate's `1e44baa` consolidation adds checkpoint-compatible DeepJSCC/NTSCC source snapshots under `references/`, Git LFS assets under `models/`, and benchmark code now owned by `EncDec/Research/`. `semcom_benchmark/` keeps historical notebook imports and `src/Evaluation/repaired_notebook_models.py` aliases the canonical EncDec evaluator. Production `.pth` checkpoints are configured external inputs, not files in this Git repository. See `docs/MAIN_MERGE_1E44BAA.md` for asset and validation status.
-
-## Control and data flow
-
-```mermaid
-flowchart LR
-  Config[config.yaml and explicit CLI] --> Runner[INFRA dispatcher and run store]
-  Runner --> Codec[EncDec encode / transport / decode]
-  Runner --> Extract[SemParam image extraction]
-  Codec -. explicit FeatureProvider .-> Extract
-  Runner --> Sim[INFRA arrivals and UE queues]
-  Sim --> Snapshot[QueueSnapshot and ResourceBudget]
-  Snapshot --> Policy[Scheduler policy]
-  Policy --> Decision[Decision with stable job IDs]
-  Decision --> Sim
-  Codec --> Results[Module results / run ID]
-  Extract --> Results
-  Sim --> Results
+```powershell
+python -m INFRA.latent.cli --batch Scheduler/config/static_latent_demo.json
 ```
 
-The current synthetic INFRA fixture exercises scheduling contracts. Real images are not automatically assigned emergency priorities. Full wireless system integration and classifier/class-priority calibration remain future work.
+Transport returns confirmed reconstruction evidence. Source embeddings are not substituted for receiver embeddings. See `docs/STATIC_LATENT_SCHEDULER.md` for methodology and evidence limits.
 
-## Key contracts and units
+## Earlier experiments and compatibility
 
-`INFRA/contracts.py`: frozen Job, QueueSnapshot, ResourceBudget and Decision. A job contains stable job/image/UE IDs, arrival time (ms), resource demand, class and optional deadline. Budget explicitly chooses complex channel uses or digital bits. One selected job completes at slot end. No partial transmission. Overlarge jobs remain pending/expire. Jobs whose deadlines are at/before current time expire; completion exactly on the deadline succeeds.
+`INFRA/scheduling/contracts.py` and `simulation.py` retain the original slotted fixture. `semantic_contracts.py`, `streams.py`, `requests.py` and `event_simulation.py` retain the earlier five-UE P1-P7 experiment. `Scheduler/semantic/` retains the semantic/DQN policy interface; `INFRA/learning/` retains classifier/DQN training and optional priority-match objectives. Refactoring changes neither existing observation dimensions nor experimental rules.
 
-`INFRA/Artifacts/`: retained tensor/semantic contracts. `INFRA/features.py`: injected feature provider. SemParam values keep availability, evidence source, version and provenance. Semantic codebooks remain separate from EncDec communication codebooks.
+`SemParam/features/scheduler.py`, `history/delivered.py` and `headers/semantic.py` own V2 features/history/header contracts. P1/P4 remain in the scheduling envelope; V2 headers serialize P2/P3/P5/P6/P7. `INFRA/data/` owns LADI manifests, feature caches and upload bundles. `INFRA/experiments/semantic_scheduler_experiment.py` is the earlier training/evaluation orchestrator.
 
-`EncDec/Evaluation/kodak_benchmark.py`: BenchmarkCodec encode/decode/complexity, EncodedSample(state, payload_bits, channel_uses, metadata). Payload bits and channel uses may be absent. Float tensor storage is a diagnostic, never radio traffic. CSV v1 columns/dedup are retained; new outcomes JSON supplies errors and stage timings. Legacy decode timing includes transport; explicit per-stage times are recorded for EncDecCodec.
+Old flat paths, `src/` and `semcom_benchmark/` are identity-preserving compatibility aliases. Edit canonical packages. Preserve old serialized class references. Supplied reference classes are evaluator-only except declared privileged baselines. The existing dirty `learning/dqn_training.py` work was preserved during cleanup.
 
-## Extend the system
+## Assets and notebooks
 
-1. Codec: implement BenchmarkCodec or adapt EncDecInterface with EncDecCodec; declare catalog capabilities, preprocessing, checkpoint identity and environment. Add a round-trip test. Use `INFRA/workers.py` with a pinned external factory for incompatible environments.
-2. Extractor: return ParameterValue records through the existing bundle contract; use an injected embedding/feature provider; test unavailable evidence and knowledge query-before-record.
-3. Policy: expose `name`, `reset()`, `decide(snapshot,budget)`; return Decision; register the name and test empty/tie/budget/arrival/deadline/replay cases. Policies own only their internal state.
-4. Simulation/transport: implement under INFRA, preserving resource units and timing boundaries. Do not put simulation queue mutations in a policy.
+Team DeepJSCC/NTSCC benchmark code lives in `EncDec/Research/`. Pinned snapshots stay in `references/`, Git LFS identities in `models/`, shared images in `data/`, and historical outcomes in `results/`. Never change these as a refactoring side effect.
 
-## Validation and limits
+The main whole-latent guide is scheduler notebook 04. Scheduler notebooks 01/02 retain the earlier training/evaluation workflow. Teammate-local parameter/static notebooks remain intact. Root `Notebooks/` and module `notebooks/historical/` are reference material. Remote `8073b75`'s LADI notebook schedules JPEG chunks, not the canonical learned latents.
 
-See `docs/VALIDATION_REPORT.md` for measured checks and model availability, `docs/REBUILD_GUIDE.md` for reproducible commands, `docs/MIGRATION_MAP.md` for source moves, and `docs/NOTEBOOK_MIGRATION.md` for preserved notebooks.
+## Validation and provenance
 
-The Track-A branch implements DQN and classifier/ranker training code, but no
-60-image research result is claimed until the explicitly unreviewed prototype
-manifest is run from a pushed commit. Pairing and P7 remain assumptions. AIDER labeling,
-NS-3/system-level wireless, real MAC/PHY control transmission, TPU/XLA and a
-universal semantic priority rule are outside this prototype. Training
-portability is implemented; full convergence on T4/P100/A100/dual GPU is not
-asserted from CPU tests.
+Run owning-module tests, affected integration checks and full regressions. Keep imports lazy, reject invalid configuration before execution and fail unsupported accelerators explicitly. Utilities belong to their group under `scripts/`; flat utility paths are compatibility launchers.
+
+New outputs use configured `results/<module>/<run-id>`, retaining config, commit, dirty state, source digest, environment and measurement outcomes. Keep storage bytes, bits and complex channel uses distinct. Missing evidence stays unavailable; failed reconstructions have no quality score. Hardware comparisons require matching provenance.
+
+Refresh Graphify with `python scripts/refresh_graph.py --semantic docs/architecture_semantics.json`. It excludes compatibility aliases and records exact working-source hashes; HEAD alone does not describe a dirty tree. Do not claim checkpoint inference, training convergence or research novelty from fixture tests.
+
+See `docs/CODEBASE_CLEANUP.md`, `docs/MIGRATION_MAP.md`, `docs/NOTEBOOK_MIGRATION.md` and `docs/README.md` for migration and navigation.

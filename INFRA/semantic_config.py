@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from INFRA.semantic_streams import UEProfile
+from INFRA.scheduling.streams import UEProfile
 
 
 @dataclass(frozen=True, slots=True)

@@ -9,10 +9,10 @@ from INFRA.runs import Run
 def execute(config, run):
     module, action = config['module'], config['action']
     if module in ('INFRA','Scheduler'):
-        from INFRA.contracts import ResourceBudget
-        from INFRA.simulation import simulate
-        from Scheduler.fixtures import demonstration_jobs
-        from Scheduler.policies import POLICIES, create_policy
+        from INFRA.scheduling.contracts import ResourceBudget
+        from INFRA.scheduling.simulation import simulate
+        from Scheduler.baselines.fixtures import demonstration_jobs
+        from Scheduler.baselines.policies import POLICIES, create_policy
         settings = config['scheduler']
         budget = ResourceBudget(settings['resource_units'], config['transport']['resource_unit'], settings['max_jobs_per_slot'])
         names = POLICIES if config['implementation'] == 'all' else (config['implementation'],)

@@ -28,8 +28,8 @@ from SemParam.Codebooks.swin_representation import capture_pre_modulation_repres
 from EncDec.Models.SwinJSCC.model_loader import load_stage1_swinjscc
 from EncDec.Preprocessing.image_loader import discover_images, file_sha256
 from SemParam.KnowledgeBases import NetworkXKnowledgeBase
-from SemParam.clip_backbone import CLIPBackbone
-from SemParam.observation_builder import parse_semantic_timestamp
+from SemParam.features.clip import CLIPBackbone
+from SemParam.features.observation import parse_semantic_timestamp
 from SemParam.pipeline import TransformerParameterPipeline
 from SemParam.runtime import load_semantic_image_artifact, settings_from_config, task_context_from_mapping
 from INFRA.utils.config_loader import load_yaml_config

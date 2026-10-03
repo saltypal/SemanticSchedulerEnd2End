@@ -67,8 +67,8 @@ def resolve_config(path=None, overrides=None):
         raise ValueError('Implemented transport names: awgn, rayleigh_perfect_csi; Rician is deferred')
     config['transport']['name'] = channel
     if module in ('Scheduler','INFRA'):
-        from INFRA.contracts import ResourceBudget
-        from Scheduler.policies import POLICIES
+        from INFRA.scheduling.contracts import ResourceBudget
+        from Scheduler.baselines.policies import POLICIES
         if config['implementation'] not in (*POLICIES, 'all'):
             raise ValueError('Unknown scheduler implementation')
         settings = config['scheduler']

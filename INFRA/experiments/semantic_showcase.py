@@ -16,11 +16,11 @@ from EncDec.Preprocessing.resize import center_crop_to_multiple
 from INFRA.Artifacts import ImageArtifact, TaskContext
 from SemParam.KnowledgeBases import NetworkXKnowledgeBase
 from SemParam.catalog import SEMANTIC_PARAMETER_ORDER, SemanticPipelineSettings
-from SemParam.clip_backbone import CLIPBackbone
-from SemParam.observation_builder import parse_semantic_timestamp
-from SemParam.packet_builder import build_semantic_packet, print_semantic_packet
+from SemParam.features.clip import CLIPBackbone
+from SemParam.features.observation import parse_semantic_timestamp
+from SemParam.headers.packet import build_semantic_packet, print_semantic_packet
 from SemParam.pipeline import TransformerParameterPipeline
-from SemParam.semantic_header import SemanticHeaderCodec
+from SemParam.headers.semantic import SemanticHeaderCodec
 from SemParam.showcase import ShowcaseRecord, plot_semantic_showcase
 
 

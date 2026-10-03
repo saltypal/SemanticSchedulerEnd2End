@@ -23,7 +23,7 @@ from INFRA.Artifacts import (
 from INFRA.Artifacts.observation_artifact import ensure_utc
 from INFRA.Interfaces import KnowledgeInterface
 from SemParam.catalog import SemanticPipelineSettings
-from SemParam.extractors import build_extractors
+from SemParam.features.extractors import build_extractors
 
 
 @dataclass(slots=True)

@@ -8,7 +8,7 @@ from typing import Mapping, Sequence
 
 import numpy as np
 
-from INFRA.semantic_contracts import EpisodeJobSpec
+from INFRA.scheduling.semantic_contracts import EpisodeJobSpec
 
 
 def fit_supervised_models(
@@ -22,7 +22,7 @@ def fit_supervised_models(
     """
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
-    from Scheduler.feature_adapter import static_feature_row
+    from Scheduler.semantic.features import static_feature_row
 
     if len(train_jobs) < 4:
         raise ValueError("At least four reviewed training images are required")

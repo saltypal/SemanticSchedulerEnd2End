@@ -25,3 +25,31 @@ metadata. See `SEMANTIC_SCHEDULER_RUNBOOK.md` for commands and data gates.
 - `Notebooks\SwinJSCC_DIV2K_Kodak_T4x2_WITH_CODEBOOK.ipynb` → `EncDec\notebooks\historical\SwinJSCC_DIV2K_Kodak_T4x2_WITH_CODEBOOK.ipynb` (historical; original preserved)
 - `Notebooks\SwinJSCC_Kaggle_T4x2_DataParallel_Training.ipynb` → `EncDec\notebooks\historical\SwinJSCC_Kaggle_T4x2_DataParallel_Training.ipynb` (historical; original preserved)
 - `Notebooks\SwinJSCC_Official_DIV2K_Kodak_Kaggle_T4x2_DataParallel_FINAL.ipynb` → `EncDec\notebooks\historical\SwinJSCC_Official_DIV2K_Kodak_Kaggle_T4x2_DataParallel_FINAL.ipynb` (historical; original preserved)
+# Optional class-order DQN experiment
+
+The teammate's `8073b75` notebook remains at
+`Notebooks/04_LADI_v2_End_to_End_Semantic_Channel_Scheduling.ipynb` as an
+upstream JPEG/chunk reference. Its classifier and simulated channel experiment
+are separate from the canonical whole-latent notebook. See
+`docs/MERGE_8073B75.md`; no automatic relocation or algorithm replacement was
+performed during the merge.
+
+The device-independent static path is
+`Scheduler/notebooks/04_static_latent_scheduler.ipynb`. It imports canonical
+modules, resets only a disposable cloud checkout, persists outputs separately,
+and compares complete latent payloads. The teammate's LADI static notebook is
+preserved as reference; its rubric-derived order is not a deployment input.
+
+`scripts/train_class_priority_dqn.py` is a separate local entry point for a
+prescribed-class ordering objective. It reuses the cached 260-image features
+and the same 559-input DQN runtime, but selects checkpoints by validation
+priority-pair match rate instead of semantic-utility AUC. The normal training
+notebook and its existing checkpoints retain their original objective. Do not
+compare the two checkpoint objectives as if they were the same experiment.
+
+
+# Canonical package cleanup (2026-10-02)
+
+The static notebook generator now imports INFRA.latent and Scheduler.latent.
+Existing teammate/static/extraction and earlier training notebooks remain intact;
+old imports resolve through identity-preserving aliases. See CODEBASE_CLEANUP.md.

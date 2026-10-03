@@ -1,0 +1,22 @@
+{
+  "schema": "latent-batch/v1",
+  "config": {"service_rate_units_per_ms": 1, "resource_unit": "simulated_units", "horizon_ms": 30, "mode": "static", "history_mode": "confirmed"},
+  "provenance": {"kind": "synthetic_functional_fixture", "note": "Tests scheduler mechanics only; no measured image or model performance."},
+  "jobs": [
+    {"job_id":"background", "image_id":"background", "task_id":"demo", "payload_id":"latent-background", "resource_units":6, "resource_unit":"simulated_units", "payload_provenance":"synthetic", "priority_class":3, "priority_source":"explicit_demo", "context_relevance":0.1, "task_importance":1, "embedding":[0,1]},
+    {"job_id":"critical", "image_id":"critical", "task_id":"demo", "payload_id":"latent-critical", "resource_units":4, "resource_unit":"simulated_units", "payload_provenance":"synthetic", "priority_class":0, "priority_source":"explicit_demo", "context_relevance":0.9, "task_importance":3, "embedding":[1,0], "deadline_ms":12},
+    {"job_id":"duplicate", "image_id":"duplicate", "task_id":"demo", "payload_id":"latent-duplicate", "resource_units":3, "resource_unit":"simulated_units", "payload_provenance":"synthetic", "priority_class":1, "priority_source":"explicit_demo", "context_relevance":0.9, "task_importance":2, "embedding":[1,0]},
+    {"job_id":"new-evidence", "image_id":"new-evidence", "task_id":"demo", "payload_id":"latent-new-evidence", "resource_units":3, "resource_unit":"simulated_units", "payload_provenance":"synthetic", "priority_class":1, "priority_source":"explicit_demo", "context_relevance":0.8, "task_importance":2, "embedding":[0,1]},
+    {"job_id":"failed", "image_id":"failed", "task_id":"demo", "payload_id":"latent-failed", "resource_units":2, "resource_unit":"simulated_units", "payload_provenance":"synthetic", "priority_class":2, "priority_source":"explicit_demo", "context_relevance":0.7, "task_importance":1, "embedding":[1,1]}
+  ],
+  "evaluation": {
+    "reference_priority":{"background":3,"critical":0,"duplicate":1,"new-evidence":1,"failed":2},
+    "delivery_evidence":[
+      {"job_id":"background","transport_success":true,"provenance":"synthetic","task_quality":0.1,"receiver_embedding":[0,1]},
+      {"job_id":"critical","transport_success":true,"provenance":"synthetic","task_quality":0.9,"receiver_embedding":[1,0],"evidence_group_id":"incident-a"},
+      {"job_id":"duplicate","transport_success":true,"provenance":"synthetic","task_quality":0.8,"receiver_embedding":[1,0],"evidence_group_id":"incident-a"},
+      {"job_id":"new-evidence","transport_success":true,"provenance":"synthetic","task_quality":0.8,"receiver_embedding":[0,1],"evidence_group_id":"incident-b"},
+      {"job_id":"failed","transport_success":false,"provenance":"synthetic"}
+    ]
+  }
+}

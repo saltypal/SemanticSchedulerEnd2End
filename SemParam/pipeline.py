@@ -10,9 +10,9 @@ from INFRA.Artifacts import ObservationArtifact, SemanticParameterBundle, TaskCo
 from INFRA.Artifacts.observation_artifact import ensure_utc
 from INFRA.Interfaces import KnowledgeInterface
 from SemParam.catalog import SemanticPipelineSettings
-from SemParam.clip_backbone import SemanticEmbeddingBackend
-from SemParam.extractors import build_extractors
-from SemParam.observation_builder import ObservationBuilder
+from SemParam.features.clip import SemanticEmbeddingBackend
+from SemParam.features.extractors import build_extractors
+from SemParam.features.observation import ObservationBuilder
 
 
 class TransformerParameterPipeline:

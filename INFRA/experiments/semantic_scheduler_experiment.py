@@ -14,19 +14,19 @@ import subprocess
 from time import process_time_ns
 from typing import Mapping, Sequence
 
-from INFRA.event_simulation import run_episode
-from INFRA.feature_cache import to_policy_features
-from INFRA.ladi_manifest import validate_ladi_manifest
-from INFRA.semantic_contracts import (
+from INFRA.scheduling.event_simulation import run_episode
+from INFRA.data.feature_cache import to_policy_features
+from INFRA.data.ladi_manifest import validate_ladi_manifest
+from INFRA.scheduling.semantic_contracts import (
     FEATURE_NAMES, EpisodeJobSpec, FeatureValue, LatentJobSpec,
     ResourceBudgetSemantic, SchedulingFeatureVectorV2,
 )
 from INFRA.semantic_config import SemanticSchedulerConfig
-from INFRA.semantic_evaluator import aggregate_episode_metrics
-from INFRA.semantic_streams import (
+from INFRA.evaluation.semantic import aggregate_episode_metrics
+from INFRA.scheduling.streams import (
     DEFAULT_UE_PROFILES, UEProfile, build_episode, generate_episode_suite,
 )
-from Scheduler.policy_registry import create_semantic_policy
+from Scheduler.semantic.registry import create_semantic_policy
 
 
 TASK_ID = "post_disaster_access_and_damage_triage_v1"
@@ -75,8 +75,8 @@ def prepare_feature_cache(
     local_files_only: bool = False,
 ) -> dict[str, Path]:
     """Extract CLIP once per reviewed image and optionally predict LADI labels."""
-    from SemParam.scheduler_features import SchedulerAnnotation, SchedulerFeatureExtractor
-    from SemParam.ladi_prediction_provider import (
+    from SemParam.features.scheduler import SchedulerAnnotation, SchedulerFeatureExtractor
+    from SemParam.features.ladi_prediction import (
         LadiPredictionProvider, semantic_scene_features)
 
     rows = validate_ladi_manifest(reviewed_manifest, require_reviewed=True)
