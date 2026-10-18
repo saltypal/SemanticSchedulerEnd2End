@@ -1,0 +1,12 @@
+task_id: post_disaster_access_and_damage_triage_v1
+image_count: 60
+ue_count: 5
+jobs_per_episode: 60
+queue_capacity: 25
+horizon_ms: 4000.0
+train_episodes_per_seed: 300
+validation_episodes: 30
+test_episodes_per_track: 100
+primary_transport_success_probability: 1.0
+robustness_transport_success_probability: 0.9
+deadline_mode: independent_network_sla

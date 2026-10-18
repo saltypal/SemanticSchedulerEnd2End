@@ -1,0 +1,6 @@
+profiles:
+  - {ue_id: ue_drone, kind: periodic, interval_ms: 20.0, jitter_ms: 3.0, burst_size: 1}
+  - {ue_id: ue_burst_camera, kind: burst, interval_ms: 60.0, jitter_ms: 0.0, burst_size: 3}
+  - {ue_id: ue_responder, kind: exponential, interval_ms: 25.0, jitter_ms: 0.0, burst_size: 1}
+  - {ue_id: ue_survey, kind: periodic, interval_ms: 40.0, jitter_ms: 10.0, burst_size: 1}
+  - {ue_id: ue_relay, kind: burst, interval_ms: 45.0, jitter_ms: 0.0, burst_size: 2}

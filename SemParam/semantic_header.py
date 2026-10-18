@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import struct
+import zlib
 from dataclasses import dataclass
 from typing import Iterable
 
@@ -12,6 +13,9 @@ from SemParam.catalog import resolve_catalog
 
 HEADER_MAGIC = b"SHP"
 HEADER_VERSION = 1
+SCHEDULING_HEADER_VERSION = 2
+SCHEDULING_HEADER_SCHEMA_ID = 0x0201
+SCHEDULING_HEADER_BYTES = 24
 
 _FIELD_IDS = {
     "AoI_seconds": 1,
@@ -43,6 +47,134 @@ class DecodedSemanticHeaderField:
 class DecodedSemanticHeader:
     version: int
     fields: tuple[DecodedSemanticHeaderField, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class SemanticSchedulingHeaderV2:
+    """Fixed 24-byte header for Track-A scheduler requests.
+
+    This header is deliberately separate from the V1 variable-length semantic
+    bundle above.  V1 remains the compatibility codec for existing notebooks.
+    """
+
+    context_relevance: float | None
+    delivered_history_novelty: float | None
+    task_impact: int | None
+    urgency: int | None
+    evidence_sufficiency: int | None
+    history_version: int = 0
+    history_count: int = 0
+    schema_id: int = SCHEDULING_HEADER_SCHEMA_ID
+
+    def __post_init__(self) -> None:
+        if not 0 <= self.schema_id <= 0xFFFF:
+            raise ValueError("schema_id must fit uint16.")
+        if not 0 <= self.history_version <= 0xFFFFFFFF:
+            raise ValueError("history_version must fit uint32.")
+        if not 0 <= self.history_count <= 0xFFFF:
+            raise ValueError("history_count must fit uint16.")
+        if self.context_relevance is not None and not -1.0 <= self.context_relevance <= 1.0:
+            raise ValueError("context_relevance must be in [-1, 1].")
+        if self.delivered_history_novelty is not None and not 0.0 <= self.delivered_history_novelty <= 1.0:
+            raise ValueError("delivered_history_novelty must be in [0, 1].")
+        for name, value in (("task_impact", self.task_impact), ("urgency", self.urgency)):
+            if value is not None and value not in range(4):
+                raise ValueError(f"{name} must be an integer in [0, 3].")
+        if self.evidence_sufficiency is not None and self.evidence_sufficiency not in (0, 1):
+            raise ValueError("evidence_sufficiency must be 0, 1, or None.")
+
+    @property
+    def presence_mask(self) -> int:
+        values = (
+            self.context_relevance,
+            self.delivered_history_novelty,
+            self.task_impact,
+            self.urgency,
+            self.evidence_sufficiency,
+        )
+        return sum(1 << index for index, value in enumerate(values) if value is not None)
+
+
+class SemanticSchedulingHeaderV2Codec:
+    """Encode the fixed 24-byte semantic scheduling sidecar with CRC32."""
+
+    _STRUCT = struct.Struct(">3sBHBhHBBBIHI")
+
+    @staticmethod
+    def _encode_relevance(value: float | None) -> int:
+        return 0 if value is None else int(round(value * 32767.0))
+
+    @staticmethod
+    def _encode_novelty(value: float | None) -> int:
+        return 0 if value is None else int(round(value * 65535.0))
+
+    @staticmethod
+    def _decode_relevance(value: int, present: bool) -> float | None:
+        return value / 32767.0 if present else None
+
+    @staticmethod
+    def _decode_novelty(value: int, present: bool) -> float | None:
+        return value / 65535.0 if present else None
+
+    def encode(self, header: SemanticSchedulingHeaderV2) -> bytes:
+        mask = header.presence_mask
+        body = self._STRUCT.pack(
+            HEADER_MAGIC,
+            SCHEDULING_HEADER_VERSION,
+            header.schema_id,
+            mask,
+            self._encode_relevance(header.context_relevance),
+            self._encode_novelty(header.delivered_history_novelty),
+            0 if header.task_impact is None else header.task_impact,
+            0 if header.urgency is None else header.urgency,
+            0 if header.evidence_sufficiency is None else header.evidence_sufficiency,
+            header.history_version,
+            header.history_count,
+            0,
+        )
+        checksum = zlib.crc32(body[:-4]) & 0xFFFFFFFF
+        encoded = body[:-4] + struct.pack(">I", checksum)
+        if len(encoded) != SCHEDULING_HEADER_BYTES:
+            raise AssertionError("Scheduling header layout is not 24 bytes.")
+        return encoded
+
+    def decode(self, payload: bytes) -> SemanticSchedulingHeaderV2:
+        if len(payload) != SCHEDULING_HEADER_BYTES:
+            raise ValueError(f"Scheduling header must be exactly {SCHEDULING_HEADER_BYTES} bytes.")
+        (
+            magic,
+            version,
+            schema_id,
+            mask,
+            relevance,
+            novelty,
+            impact,
+            urgency,
+            sufficiency,
+            history_version,
+            history_count,
+            checksum,
+        ) = self._STRUCT.unpack(payload)
+        if magic != HEADER_MAGIC:
+            raise ValueError("Scheduling header magic is absent or corrupt.")
+        if version != SCHEDULING_HEADER_VERSION:
+            raise ValueError(f"Unsupported scheduling header version: {version}")
+        if mask & ~0b1_1111:
+            raise ValueError("Scheduling header presence mask has reserved bits set.")
+        expected_checksum = zlib.crc32(payload[:-4]) & 0xFFFFFFFF
+        if checksum != expected_checksum:
+            raise ValueError("Scheduling header CRC32 is invalid.")
+        decoded = SemanticSchedulingHeaderV2(
+            context_relevance=self._decode_relevance(relevance, bool(mask & 0b00001)),
+            delivered_history_novelty=self._decode_novelty(novelty, bool(mask & 0b00010)),
+            task_impact=impact if mask & 0b00100 else None,
+            urgency=urgency if mask & 0b01000 else None,
+            evidence_sufficiency=sufficiency if mask & 0b10000 else None,
+            history_version=history_version,
+            history_count=history_count,
+            schema_id=schema_id,
+        )
+        return decoded
 
 
 class SemanticHeaderCodec:
