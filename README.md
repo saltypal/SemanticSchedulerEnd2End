@@ -6,6 +6,8 @@ The repository has three research modules—**EncDec**, **SemParam**, and **Sche
 
 **Current implementation:** codec benchmarks, image-based semantic extraction, semantic codebook methods, and deterministic scheduler baselines are available. The modular INFRA demonstration currently runs a **synthetic scheduling simulation**. It does not yet perform the complete image → inferred priority → multi-UE wireless transmission workflow. AIDER labeling, classifier training, the final faculty-approved priority rubric, and RL scheduling remain deferred.
 
+For a detailed explanation with simple examples, see the [complete scheduler report](docs/semantic-scheduler-report/README.md), available as Markdown, a 64-page PDF, standalone HTML, and an evidence bundle. It separates implemented behavior and test evidence from proposed static and dynamic scheduling work.
+
 ## Contents
 
 - [1. Project objective and data](#1-project-objective-and-data)
