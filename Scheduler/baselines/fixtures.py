@@ -1,5 +1,5 @@
 """Explicit synthetic arrivals and class labels, not image inference."""
-from INFRA.scheduling.contracts import Job
+from Evaluation.scheduling.contracts import Job
 
 def demonstration_jobs():
     return [

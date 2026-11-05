@@ -8,7 +8,7 @@ import html
 import json
 from pathlib import Path
 
-from INFRA.data.ladi_manifest import MANIFEST_FIELDS, STRATA, validate_ladi60_manifest
+from Evaluation.data.ladi_manifest import MANIFEST_FIELDS, STRATA, validate_ladi60_manifest
 
 
 def build_review_page(manifest_path: str | Path, output_path: str | Path) -> Path:

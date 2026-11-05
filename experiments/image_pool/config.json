@@ -1,0 +1,40 @@
+{
+  "schema": "image_pool_v1",
+  "seed": 29,
+  "new_download_cap_bytes": 2147483648,
+  "per_image_cap_bytes": 20971520,
+  "metadata_file_cap_bytes": 67108864,
+  "sources": {
+    "open_images": {
+      "cap": 1000,
+      "role": "development",
+      "access": "official_individual_images"
+    },
+    "places365": {
+      "cap": 1000,
+      "role": "development",
+      "access": "managed_input_manifest_required"
+    },
+    "crisismmd": {
+      "cap": 4000,
+      "role": "development",
+      "access": "pinned_individual_images"
+    }
+  },
+  "spi_selection": "completed_4000_study_development_macro_f1_only",
+  "runtime_fields_excluded": [
+    "mission_relevance",
+    "novelty",
+    "UE_history",
+    "context_centroids",
+    "synthetic_capture_time",
+    "synthetic_location"
+  ],
+  "notes": [
+    "absolute caps, not dataset percentages",
+    "native categories are not SPI labels",
+    "no full image/video archives",
+    "FloodNet excluded from scheduler fitting and selection",
+    "Expanded 6000-image target approved 2026-10-30; exact existing 4000 CrisisMMD IDs; duplicates audited separately"
+  ]
+}

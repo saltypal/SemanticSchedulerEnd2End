@@ -1,0 +1,1173 @@
+{
+  "config": {
+    "seed": 110,
+    "max_ues": 4,
+    "messages": 28,
+    "capture_window": 7.0,
+    "failure_probability": 0.05,
+    "repeat_probability": 0.25,
+    "missing_spi_probability": 0.1,
+    "delay_cap": 10.0,
+    "service_mean": 1.0,
+    "service_log_sigma": 0.0,
+    "correlated_outage": false
+  },
+  "ues": [
+    {
+      "source_id": "ue000",
+      "profile_id": "person_drone",
+      "device_description": "Aerial person-search camera",
+      "mission": "Search for visible people and relevant surroundings; do not assume distress.",
+      "join": 0.0,
+      "leave": 6.50235539357056,
+      "pause": [
+        1.9507066180711679,
+        2.600942157428224
+      ],
+      "origin": [
+        12.898129668276441,
+        77.50437458455697
+      ],
+      "velocity": [
+        9.769354251804915e-06,
+        -8.739243789285162e-06
+      ]
+    },
+    {
+      "source_id": "ue001",
+      "profile_id": "farm_drone",
+      "device_description": "Agricultural survey drone",
+      "mission": "Inspect visible field changes for routine agriculture.",
+      "join": 1.3709088818410868,
+      "leave": 6.234808934551139,
+      "pause": [
+        2.8300788976541025,
+        3.316468902925108
+      ],
+      "origin": [
+        12.89717282858558,
+        77.49857135837561
+      ],
+      "velocity": [
+        -9.039159354177141e-07,
+        -5.309382402302283e-06
+      ]
+    },
+    {
+      "source_id": "ue002",
+      "profile_id": "farm_drone",
+      "device_description": "Agricultural survey drone",
+      "mission": "Inspect visible field changes for routine agriculture.",
+      "join": 0.9378949738250608,
+      "leave": 4.718658036193273,
+      "pause": [
+        2.0721238925355245,
+        2.450200198772346
+      ],
+      "origin": [
+        12.908614000341526,
+        77.49812964627041
+      ],
+      "velocity": [
+        4.179741822640542e-06,
+        -1.1534258802395186e-07
+      ]
+    },
+    {
+      "source_id": "ue003",
+      "profile_id": "fire_drone",
+      "device_description": "Wildfire observation drone",
+      "mission": "Observe visible fire and smoke near routes and infrastructure.",
+      "join": 1.307207397927742,
+      "leave": 6.241743923844988,
+      "pause": [
+        2.7875683557029154,
+        3.2810220082946406
+      ],
+      "origin": [
+        12.901652798899464,
+        77.50661346591816
+      ],
+      "velocity": [
+        -7.978934220715135e-06,
+        -3.3700748712464935e-06
+      ]
+    }
+  ],
+  "records": [
+    {
+      "message_id": "[\"ue000\",\"episode110\",0]",
+      "capture": 1.2955118978862268,
+      "extraction_ready": 1.3372952279688957,
+      "arrival": 1.380413419595244,
+      "location": [
+        12.89814232459111,
+        77.50436326276267
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_available": true,
+        "relevance": 0.8373515740971798,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001296,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 5,
+          "categories": 1,
+          "largest_box_fraction": 0.03723417794944898,
+          "union_box_coverage": 0.11309988950080033
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact0",
+        "reference_priority": 1,
+        "reference_relevance": 0.9560089589636566,
+        "service_duration": 1.0,
+        "failure_draw": 0.23566179180991786,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",1]",
+      "capture": 1.615850137530977,
+      "extraction_ready": 1.658247566136144,
+      "arrival": 1.681937225739758,
+      "location": [
+        12.901639906137506,
+        77.50660802038222
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.2924571907229052,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001616,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 1,
+          "largest_box_fraction": 0.02544670616838779,
+          "union_box_coverage": 0.02544670616838779
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact1",
+        "reference_priority": 2,
+        "reference_relevance": 0.9125275094905677,
+        "service_duration": 1.0,
+        "failure_draw": 0.4307567419897861,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue000\",\"episode110\",2]",
+      "capture": 1.7705656024703325,
+      "extraction_ready": 1.8045235630372758,
+      "arrival": 1.88404624567095,
+      "location": [
+        12.898146965559038,
+        77.50435911115252
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.4848237998849842,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232001771,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 0,
+          "categories": 0,
+          "largest_box_fraction": null,
+          "union_box_coverage": 0.0
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact2",
+        "reference_priority": 2,
+        "reference_relevance": 0.6155081911082132,
+        "service_duration": 1.0,
+        "failure_draw": 0.8931365899094185,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",3]",
+      "capture": 2.375173821033493,
+      "extraction_ready": 2.3870842172374456,
+      "arrival": 2.4478431541244285,
+      "location": [
+        12.901633847543783,
+        77.50660546140456
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.7154569499212007,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002375,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 3,
+          "largest_box_fraction": 0.31947501792415656,
+          "union_box_coverage": 0.3982227895231022
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact0",
+        "reference_priority": 1,
+        "reference_relevance": 0.9560089589636566,
+        "service_duration": 1.0,
+        "failure_draw": 0.8538681901214878,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",4]",
+      "capture": 2.446231342865977,
+      "extraction_ready": 2.4888493217861365,
+      "arrival": 2.5130281932205643,
+      "location": [
+        12.897170617398087,
+        77.49855837039797
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.3213785519867006,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002446,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 3,
+          "largest_box_fraction": 0.18025598771904536,
+          "union_box_coverage": 0.27646864980815994
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact3",
+        "reference_priority": 3,
+        "reference_relevance": 0.32925862292777053,
+        "service_duration": 1.0,
+        "failure_draw": 0.8211575479289166,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",5]",
+      "capture": 2.450200198772346,
+      "extraction_ready": 2.4893294663938974,
+      "arrival": 2.5683332240981454,
+      "location": [
+        12.908624241545771,
+        77.49812936365798
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_available": true,
+        "relevance": -0.24924945423858513,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002450,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 2,
+          "largest_box_fraction": 0.3878520574881742,
+          "union_box_coverage": 0.444296046473805
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact4",
+        "reference_priority": 0,
+        "reference_relevance": 0.42010978066667226,
+        "service_duration": 1.0,
+        "failure_draw": 0.8338488488126421,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",6]",
+      "capture": 2.450200198772346,
+      "extraction_ready": 2.4948911226996975,
+      "arrival": 2.5355548790191436,
+      "location": [
+        12.908624241545771,
+        77.49812936365798
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.1513150540508235,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002450,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 2,
+          "categories": 2,
+          "largest_box_fraction": 0.36091519094046853,
+          "union_box_coverage": 0.6822722242425017
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact5",
+        "reference_priority": 2,
+        "reference_relevance": 0.3714097934805404,
+        "service_duration": 1.0,
+        "failure_draw": 0.9017517590609831,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",7]",
+      "capture": 2.496362228185392,
+      "extraction_ready": 2.5390742646347344,
+      "arrival": 2.5683022830593734,
+      "location": [
+        12.908624434491136,
+        77.49812935833353
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": -0.10071085436922561,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002496,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 2,
+          "largest_box_fraction": 0.3214112999681401,
+          "union_box_coverage": 0.8057844514600982
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact6",
+        "reference_priority": 3,
+        "reference_relevance": 0.3892102815107953,
+        "service_duration": 1.0,
+        "failure_draw": 0.8716479244230642,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",8]",
+      "capture": 2.688331745762689,
+      "extraction_ready": 2.7150500191752482,
+      "arrival": 2.7423059080485266,
+      "location": [
+        12.897170398559675,
+        77.49855708499435
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.3030323137875757,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002688,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 2,
+          "largest_box_fraction": 0.031436567235148975,
+          "union_box_coverage": 0.07082192401872242
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact7",
+        "reference_priority": 1,
+        "reference_relevance": 0.6027045086452809,
+        "service_duration": 1.0,
+        "failure_draw": 0.9390012062385477,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",9]",
+      "capture": 2.7131856673024606,
+      "extraction_ready": 2.72871107238895,
+      "arrival": 2.7840810942993794,
+      "location": [
+        12.901631150569496,
+        77.50660432227933
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.9317256376004329,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002713,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 1,
+          "largest_box_fraction": 0.36266043174895746,
+          "union_box_coverage": 0.962562058856529
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact8",
+        "reference_priority": 2,
+        "reference_relevance": 0.031876715791152144,
+        "service_duration": 1.0,
+        "failure_draw": 0.11786971718846295,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",10]",
+      "capture": 2.7492673128308347,
+      "extraction_ready": 2.788996994879328,
+      "arrival": 2.8569926158233794,
+      "location": [
+        12.897170343479045,
+        77.49855676146413
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.2226328825591444,
+        "novelty": 0.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002749,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 9,
+          "categories": 4,
+          "largest_box_fraction": 0.012342021264676165,
+          "union_box_coverage": 0.1081145131074231
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact7",
+        "reference_priority": 1,
+        "reference_relevance": 0.6027045086452809,
+        "service_duration": 1.0,
+        "failure_draw": 0.37532886023508083,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",11]",
+      "capture": 2.810691950175701,
+      "extraction_ready": 2.8482698120460483,
+      "arrival": 2.892166375689632,
+      "location": [
+        12.897170287956337,
+        77.49855643533724
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.42630078049204573,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002811,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 3,
+          "largest_box_fraction": 0.0468740429349755,
+          "union_box_coverage": 0.2922119218177443
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact6",
+        "reference_priority": 3,
+        "reference_relevance": 0.3892102815107953,
+        "service_duration": 1.0,
+        "failure_draw": 0.651802763099969,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",12]",
+      "capture": 2.85683758966202,
+      "extraction_ready": 2.891740647420824,
+      "arrival": 2.975039250682925,
+      "location": [
+        12.90862594118508,
+        77.49812931675537
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.47809236066643346,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002857,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 4,
+          "largest_box_fraction": 0.21967327699466646,
+          "union_box_coverage": 0.38944632242434724
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact9",
+        "reference_priority": 3,
+        "reference_relevance": 0.20211811766466947,
+        "service_duration": 1.0,
+        "failure_draw": 0.08962585230358266,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",13]",
+      "capture": 3.2810220082946406,
+      "extraction_ready": 3.2934963287396077,
+      "arrival": 3.389860358509527,
+      "location": [
+        12.901626619840684,
+        77.50660240862834
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.0945424146226933,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003281,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 2,
+          "largest_box_fraction": 0.3983413023508574,
+          "union_box_coverage": 0.6044553967926907
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact10",
+        "reference_priority": 3,
+        "reference_relevance": 0.4969581315821828,
+        "service_duration": 1.0,
+        "failure_draw": 0.42928478612865906,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",14]",
+      "capture": 3.316468902925108,
+      "extraction_ready": 3.351142936440328,
+      "arrival": 3.4109121348158484,
+      "location": [
+        12.89716983077649,
+        77.49855374997398
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.03128738483599934,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003316,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 1,
+          "largest_box_fraction": 0.36146210417283353,
+          "union_box_coverage": 0.4301406764858377
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact10",
+        "reference_priority": 3,
+        "reference_relevance": 0.4969581315821828,
+        "service_duration": 1.0,
+        "failure_draw": 0.5915845417226627,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",15]",
+      "capture": 3.4708394540372884,
+      "extraction_ready": 3.483672834769786,
+      "arrival": 3.5617073648197364,
+      "location": [
+        12.90162510529977,
+        77.50660176892934
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.8446544601376679,
+        "novelty": 0.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003471,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 4,
+          "largest_box_fraction": 0.24369033446270624,
+          "union_box_coverage": 0.7160266844011683
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact1",
+        "reference_priority": 2,
+        "reference_relevance": 0.9125275094905677,
+        "service_duration": 1.0,
+        "failure_draw": 0.22368624910110568,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",16]",
+      "capture": 3.5250930673818273,
+      "extraction_ready": 3.547775810183892,
+      "arrival": 3.623478077034886,
+      "location": [
+        12.908628734320448,
+        77.49812923967706
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.13444733172007864,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003525,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 1,
+          "largest_box_fraction": 0.2533989317443551,
+          "union_box_coverage": 0.8063966193254071
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact11",
+        "reference_priority": 1,
+        "reference_relevance": 0.42968169370982157,
+        "service_duration": 1.0,
+        "failure_draw": 0.2065964958559935,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",17]",
+      "capture": 3.5685606467569837,
+      "extraction_ready": 3.5969095728333014,
+      "arrival": 3.6780256414492736,
+      "location": [
+        12.9016243255888,
+        77.5066014396016
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.1908734162293827,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003569,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 3,
+          "largest_box_fraction": 0.3276731242210944,
+          "union_box_coverage": 0.9497562772799204
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact12",
+        "reference_priority": 3,
+        "reference_relevance": 0.5212302822718168,
+        "service_duration": 1.0,
+        "failure_draw": 0.7244811148272224,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",18]",
+      "capture": 3.6276197429620307,
+      "extraction_ready": 3.6711307487186136,
+      "arrival": 3.708255943613439,
+      "location": [
+        12.901623854360157,
+        77.50660124056803
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_available": true,
+        "relevance": -0.5769647822040564,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003628,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 2,
+          "largest_box_fraction": 0.38527068868947584,
+          "union_box_coverage": 0.7676802269072849
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact13",
+        "reference_priority": 0,
+        "reference_relevance": 0.2377763560396975,
+        "service_duration": 1.0,
+        "failure_draw": 0.2961944390735428,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue000\",\"episode110\",19]",
+      "capture": 3.884618700848132,
+      "extraction_ready": 3.932626523693734,
+      "arrival": 3.9478048660386955,
+      "location": [
+        12.898167618492662,
+        77.50434063592712
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.711166384306903,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003885,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 0,
+          "categories": 0,
+          "largest_box_fraction": null,
+          "union_box_coverage": 0.0
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact14",
+        "reference_priority": 3,
+        "reference_relevance": 0.23395915007859847,
+        "service_duration": 1.0,
+        "failure_draw": 0.32856479742837885,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue000\",\"episode110\",20]",
+      "capture": 3.9155839132415036,
+      "extraction_ready": 3.9552063845170387,
+      "arrival": 4.032995249242717,
+      "location": [
+        12.898167921002793,
+        77.50434036531458
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_available": true,
+        "relevance": 1.0,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003916,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 0,
+          "categories": 0,
+          "largest_box_fraction": null,
+          "union_box_coverage": 0.0
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact15",
+        "reference_priority": 0,
+        "reference_relevance": 0.9359348739381517,
+        "service_duration": 1.0,
+        "failure_draw": 0.7090488387951405,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",21]",
+      "capture": 4.146903259847305,
+      "extraction_ready": 4.18570743060426,
+      "arrival": 4.2526667674038965,
+      "location": [
+        12.908631333326516,
+        77.49812916795585
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.25084247826604783,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004147,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 4,
+          "largest_box_fraction": 0.09484843577333267,
+          "union_box_coverage": 0.6150494538498723
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact16",
+        "reference_priority": 3,
+        "reference_relevance": 0.4198006262809394,
+        "service_duration": 1.0,
+        "failure_draw": 0.5209451522499896,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",22]",
+      "capture": 4.150743173538738,
+      "extraction_ready": 4.195190529958452,
+      "arrival": 4.231205210761934,
+      "location": [
+        12.908631349376364,
+        77.49812916751296
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": -0.7548235496529636,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004151,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 1,
+          "largest_box_fraction": 0.30460438822228725,
+          "union_box_coverage": 0.30460438822228725
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact17",
+        "reference_priority": 1,
+        "reference_relevance": 0.09992035202382477,
+        "service_duration": 1.0,
+        "failure_draw": 0.47539454469899955,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode110\",23]",
+      "capture": 4.601130510693944,
+      "extraction_ready": 4.639069116538271,
+      "arrival": 4.690284116197563,
+      "location": [
+        12.908633231879152,
+        77.49812911556411
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_available": true,
+        "relevance": -0.3549716703484799,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004601,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 7,
+          "categories": 2,
+          "largest_box_fraction": 0.24446400143643202,
+          "union_box_coverage": 0.8982092017442966
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact18",
+        "reference_priority": 3,
+        "reference_relevance": 0.31416289485416904,
+        "service_duration": 1.0,
+        "failure_draw": 0.09844926461946746,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",24]",
+      "capture": 5.367681988189993,
+      "extraction_ready": 5.383645208892738,
+      "arrival": 5.464558047680926,
+      "location": [
+        12.897167976652295,
+        77.49854285929932
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.7520081509311489,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232005368,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 6,
+          "categories": 1,
+          "largest_box_fraction": 0.21264019124561676,
+          "union_box_coverage": 0.6405070628881985
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact19",
+        "reference_priority": 3,
+        "reference_relevance": 0.08253794450926688,
+        "service_duration": 1.0,
+        "failure_draw": 0.06786607642637377,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode110\",25]",
+      "capture": 5.510855624362555,
+      "extraction_ready": 5.5351269894635085,
+      "arrival": 5.554217785376253,
+      "location": [
+        12.901608828144937,
+        77.5065948939221
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.5361758039635066,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232005511,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 3,
+          "largest_box_fraction": 0.39164021934287385,
+          "union_box_coverage": 0.6843924284467304
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact20",
+        "reference_priority": 1,
+        "reference_relevance": 0.1810293006123317,
+        "service_duration": 1.0,
+        "failure_draw": 0.27422321486492107,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",26]",
+      "capture": 5.935023438557762,
+      "extraction_ready": 5.953339427423024,
+      "arrival": 5.96566563572192,
+      "location": [
+        12.897167463823317,
+        77.49853984706661
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.3268674724222855,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232005935,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 4,
+          "largest_box_fraction": 0.27785685279355954,
+          "union_box_coverage": 0.39234320988988053
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact21",
+        "reference_priority": 3,
+        "reference_relevance": 0.16761500250484196,
+        "service_duration": 1.0,
+        "failure_draw": 0.3871639728854678,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode110\",27]",
+      "capture": 6.163369240082837,
+      "extraction_ready": 6.20150566368212,
+      "arrival": 6.269237057290294,
+      "location": [
+        12.897167257417909,
+        77.49853863469143
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.6597195818768952,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232006163,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 1,
+          "largest_box_fraction": 0.10042630766668935,
+          "union_box_coverage": 0.8598014167811519
+        }
+      },
+      "evaluator": {
+        "fact_id": "world110/fact22",
+        "reference_priority": 1,
+        "reference_relevance": 0.7389725741909063,
+        "service_duration": 1.0,
+        "failure_draw": 0.14428170376026184,
+        "failed": false,
+        "correlated_outage": false
+      }
+    }
+  ],
+  "schema": "synthetic_stream_v1",
+  "registry_hash": "324d60fb15ea0de10dfe557502ca3af9c68aff6159b890c14760a861fe8e892a",
+  "limitations": [
+    "No real RGB stream",
+    "Reference relevance is a constructed scalar, not actual mission inference",
+    "No SPI classifier",
+    "No real VLM",
+    "No codec or radio simulation"
+  ],
+  "sha256": "ae305b7b8affbb84488d3ecdbce8089b22465e81b2bf1ea26859cc6e90a99f13"
+}

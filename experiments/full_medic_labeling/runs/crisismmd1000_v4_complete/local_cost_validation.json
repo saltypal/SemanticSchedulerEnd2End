@@ -1,0 +1,31 @@
+{
+  "linear_2x4_times_4x3_expected": 48,
+  "measured": {
+    "supported_flops": 48,
+    "unsupported_or_uncounted_ops": [
+      "aten::linear",
+      "aten::t",
+      "aten::transpose",
+      "aten::as_strided",
+      "aten::matmul",
+      "aten::resolve_conj"
+    ],
+    "status": "partial",
+    "convention": "two FLOPs per multiply-accumulate",
+    "shape": {
+      "input": [
+        2,
+        4
+      ]
+    }
+  },
+  "timing_summary": {
+    "p50_ms": 2.0,
+    "p95_ms": 2.9,
+    "samples_ms": [
+      1,
+      2,
+      3
+    ]
+  }
+}

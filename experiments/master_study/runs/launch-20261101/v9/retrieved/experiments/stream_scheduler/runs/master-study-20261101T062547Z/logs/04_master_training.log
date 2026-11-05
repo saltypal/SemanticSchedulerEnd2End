@@ -1,0 +1,1173 @@
+START 04_master_training output /kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z
+{'cuda': True, 'devices': 2, 'torch': '2.11.0+cu128'}
+MASTER_START vectors ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/source/experiments/stream_scheduler/complete_vectors.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/vectors', '--device', 'cuda:0']
+[vectors] 
+[vectors] Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+[vectors] Fetching 8 files:  12%|█▎        | 1/8 [00:00<00:03,  2.04it/s]
+[vectors] Fetching 8 files:  25%|██▌       | 2/8 [00:00<00:01,  3.47it/s]
+[vectors] Fetching 8 files:  50%|█████     | 4/8 [00:04<00:05,  1.33s/it]
+[vectors] Fetching 8 files: 100%|██████████| 8/8 [00:04<00:00,  1.77it/s]
+[vectors] Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+[vectors] MISSING_CLIP 32 2065
+[vectors] MISSING_CLIP 64 2065
+[vectors] MISSING_CLIP 96 2065
+[vectors] MISSING_CLIP 128 2065
+[vectors] MISSING_CLIP 160 2065
+[vectors] MISSING_CLIP 192 2065
+[vectors] MISSING_CLIP 224 2065
+[vectors] MISSING_CLIP 256 2065
+[vectors] MISSING_CLIP 288 2065
+[vectors] MISSING_CLIP 320 2065
+[vectors] MISSING_CLIP 352 2065
+[vectors] MISSING_CLIP 384 2065
+[vectors] MISSING_CLIP 416 2065
+[vectors] MISSING_CLIP 448 2065
+[vectors] MISSING_CLIP 480 2065
+[vectors] MISSING_CLIP 512 2065
+[vectors] MISSING_CLIP 544 2065
+[vectors] MISSING_CLIP 576 2065
+[vectors] MISSING_CLIP 608 2065
+[vectors] MISSING_CLIP 640 2065
+[vectors] MISSING_CLIP 672 2065
+[vectors] MISSING_CLIP 704 2065
+[vectors] MISSING_CLIP 736 2065
+[vectors] MISSING_CLIP 768 2065
+[vectors] MISSING_CLIP 800 2065
+[vectors] MISSING_CLIP 832 2065
+[vectors] MISSING_CLIP 864 2065
+[vectors] MISSING_CLIP 896 2065
+[vectors] MISSING_CLIP 928 2065
+[vectors] MISSING_CLIP 960 2065
+[vectors] MISSING_CLIP 992 2065
+[vectors] MISSING_CLIP 1024 2065
+[vectors] MISSING_CLIP 1056 2065
+[vectors] MISSING_CLIP 1088 2065
+[vectors] MISSING_CLIP 1120 2065
+[vectors] MISSING_CLIP 1152 2065
+[vectors] MISSING_CLIP 1184 2065
+[vectors] MISSING_CLIP 1216 2065
+[vectors] MISSING_CLIP 1248 2065
+[vectors] MISSING_CLIP 1280 2065
+[vectors] MISSING_CLIP 1312 2065
+[vectors] MISSING_CLIP 1344 2065
+[vectors] MISSING_CLIP 1376 2065
+[vectors] MISSING_CLIP 1408 2065
+[vectors] MISSING_CLIP 1440 2065
+[vectors] MISSING_CLIP 1472 2065
+[vectors] MISSING_CLIP 1504 2065
+[vectors] MISSING_CLIP 1536 2065
+[vectors] MISSING_CLIP 1568 2065
+[vectors] MISSING_CLIP 1600 2065
+[vectors] MISSING_CLIP 1632 2065
+[vectors] MISSING_CLIP 1664 2065
+[vectors] MISSING_CLIP 1696 2065
+[vectors] MISSING_CLIP 1728 2065
+[vectors] MISSING_CLIP 1760 2065
+[vectors] MISSING_CLIP 1792 2065
+[vectors] MISSING_CLIP 1824 2065
+[vectors] MISSING_CLIP 1856 2065
+[vectors] MISSING_CLIP 1888 2065
+[vectors] MISSING_CLIP 1920 2065
+[vectors] MISSING_CLIP 1952 2065
+[vectors] MISSING_CLIP 1984 2065
+[vectors] MISSING_CLIP 2016 2065
+[vectors] MISSING_CLIP 2048 2065
+[vectors] MISSING_CLIP 2065 2065
+MASTER_START prepare_teacher ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/source/experiments/stream_scheduler/prepare_teacher.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared', '--mission-text', '--vector-extension', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/vectors/vectors.npz']
+[prepare_teacher] START teacher request preparation /kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared
+[prepare_teacher] 
+[prepare_teacher] Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+[prepare_teacher] Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 20460.02it/s]
+[prepare_teacher] DONE /kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared/requests.jsonl
+MASTER_START D ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/source/experiments/stream_scheduler/train_real_suite.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/D', '--seeds', '1729,2718,31415', '--epochs', '50', '--rl-steps', '20000', '--training-episodes', '64', '--samples', '512', '--validation-traces', '15', '--device', 'cuda:0', '--mission-vectors', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared/data/mission_vectors.npy', '--vector-extension', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/vectors/vectors.npz', '--stream-mode', 'mixed', '--stream-duration', '200', '--stream-burst-factor', '4']
+MASTER_START teacher ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/source/experiments/stream_scheduler/qwen_teacher.py', '--requests', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared/requests.jsonl', '--output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/teacher', '--revision', 'cc594898137f460bfe9f0759e9844b3ce807cfb5', '--device', 'cuda:1', '--max-calls', '216']
+[D] START REAL DATA SUITE {'archive': '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', 'output': '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/D', 'epochs': 50, 'seeds': '1729,2718,31415', 'training_episodes': 64, 'samples': 512, 'model_seconds': None, 'validation_traces': 15, 'arms': 'all', 'mission_text': False, 'device': 'cuda:0', 'rl_steps': 20000, 'deadline_seconds': None, 'resume': False, 'dynamic_ues': False, 'burst': False, 'vector_extension': '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/vectors/vectors.npz', 'mission_vectors': '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared/data/mission_vectors.npy', 'stream_mode': 'mixed', 'scenario_manifest': None, 'stream_duration': 200.0, 'stream_burst_factor': 4.0, 'scenario_manifest_sha256': None, 'mission_vectors_sha256': '922de6b1984732e5b4d7c6d14fec26594b54aa420215a3740d465bb2e026688f'}
+[D] BASELINE fifo
+[D] BASELINE round_robin
+[D] BASELINE random
+[D] BASELINE spi_fifo
+[teacher] The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+[D] BASELINE relevance
+[D] BASELINE novelty
+[D] BASELINE spi_novelty
+[D] BASELINE predicted_edf
+[D] TRAIN linear_choice/1729
+[teacher] `torch_dtype` is deprecated! Use `dtype` instead!
+[teacher] 
+[D] EPOCH linear_choice 1729 0 loss 1.1130481972267814 validation -5.725746333527485
+[teacher] Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+[teacher] Fetching 5 files:  20%|██        | 1/5 [01:04<04:16, 64.04s/it]
+[teacher] Fetching 5 files:  40%|████      | 2/5 [01:07<01:25, 28.61s/it]
+[teacher] Fetching 5 files: 100%|██████████| 5/5 [01:07<00:00, 13.59s/it]
+[teacher] 
+[D] EPOCH linear_choice 1729 1 loss 1.1030011348718523 validation -5.560608549052395
+[teacher] Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+[teacher]   torch._check_is_size(blocksize)
+[teacher] 
+[teacher] Loading checkpoint shards:  20%|██        | 1/5 [00:09<00:38,  9.55s/it]
+[D] EPOCH linear_choice 1729 2 loss 1.0930274574487817 validation -5.35456439509798
+[teacher] Loading checkpoint shards:  40%|████      | 2/5 [00:19<00:29,  9.98s/it]
+[teacher] Loading checkpoint shards:  60%|██████    | 3/5 [00:32<00:22, 11.05s/it]
+[teacher] Loading checkpoint shards:  80%|████████  | 4/5 [00:49<00:13, 13.39s/it]
+[teacher] Loading checkpoint shards: 100%|██████████| 5/5 [00:53<00:00, 10.11s/it]
+[teacher] Loading checkpoint shards: 100%|██████████| 5/5 [00:53<00:00, 10.68s/it]
+[D] EPOCH linear_choice 1729 3 loss 1.0837157428556798 validation -5.17725052025429
+[D] EPOCH linear_choice 1729 4 loss 1.075195036025024 validation -5.101233334321958
+[D] EPOCH linear_choice 1729 5 loss 1.0670551477255774 validation -4.998174987562844
+[teacher] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[teacher] /usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+[teacher]   torch._check_is_size(blocksize)
+[D] EPOCH linear_choice 1729 6 loss 1.0587436409265387 validation -4.915268469137163
+[teacher] TEACHER control-strict-0-0 parsed 17.41140482700007
+[teacher] TEACHER control-strict-0-1 parsed 14.154221548999999
+[D] EPOCH linear_choice 1729 7 loss 1.0510635518779357 validation -4.830273696898266
+[teacher] TEACHER control-strict-1-0 parsed 12.03108910900005
+[D] EPOCH linear_choice 1729 8 loss 1.0439654021870857 validation -4.751942928398103
+[teacher] TEACHER control-strict-1-1 parsed 17.207220099999972
+[teacher] TEACHER control-strict-2-0 parsed 17.38547074099995
+[D] EPOCH linear_choice 1729 9 loss 1.036734183958056 validation -4.673566646635138
+[teacher] TEACHER control-strict-2-1 parsed 15.914850212999909
+[D] EPOCH linear_choice 1729 10 loss 1.030375661730182 validation -4.616426455699988
+[teacher] TEACHER control-strict-3-0 parsed 9.666829544000052
+[teacher] TEACHER control-strict-3-1 parsed 13.525292852000007
+[D] EPOCH linear_choice 1729 11 loss 1.0236777044905752 validation -4.57636540599282
+[teacher] TEACHER control-strict-4-0 parsed 13.746568769000078
+[teacher] TEACHER control-strict-4-1 parsed 14.57170536000001
+[D] EPOCH linear_choice 1729 12 loss 1.0173229778039397 validation -4.5242935703403635
+[teacher] TEACHER control-strict-5-0 parsed 13.034876276999967
+[teacher] TEACHER control-strict-5-1 parsed 8.112050036999904
+[D] EPOCH linear_choice 1729 13 loss 1.0114724960945107 validation -4.493912730545189
+[teacher] TEACHER control-strict-6-0 parsed 11.66964322900003
+[D] EPOCH linear_choice 1729 14 loss 1.0056983147035627 validation -4.465991928241485
+[teacher] TEACHER control-strict-6-1 parsed 14.408434142000033
+[teacher] TEACHER control-strict-7-0 parsed 12.92769440099994
+[D] EPOCH linear_choice 1729 15 loss 1.0003451633394933 validation -4.439219020271175
+[teacher] TEACHER control-strict-7-1 parsed 17.14945143099999
+[D] EPOCH linear_choice 1729 16 loss 0.9948695649703344 validation -4.411403078394514
+[teacher] TEACHER control-tie-0 parsed 20.411549999000044
+[teacher] TEACHER control-unknown-0 parsed 11.356501308999896
+[D] EPOCH linear_choice 1729 17 loss 0.9897313617242902 validation -4.392363098933145
+[teacher] TEACHER control-tie-1 parsed 15.93282487600004
+[teacher] TEACHER control-unknown-1 parsed 8.954763509000031
+[D] EPOCH linear_choice 1729 18 loss 0.9846685215209922 validation -4.369172961117195
+[teacher] TEACHER control-tie-2 parsed 11.789038734999963
+[teacher] TEACHER control-unknown-2 parsed 8.832214098999998
+[D] EPOCH linear_choice 1729 19 loss 0.980019732761909 validation -4.364076151639768
+[teacher] TEACHER control-tie-3 parsed 9.267332735000082
+[teacher] TEACHER control-unknown-3 parsed 8.94826509099994
+[D] EPOCH linear_choice 1729 20 loss 0.9751341586896017 validation -4.352112968107478
+[teacher] TEACHER control-tie-4 parsed 12.235985773999914
+[teacher] TEACHER control-unknown-4 parsed 8.993859388999908
+[D] EPOCH linear_choice 1729 21 loss 0.9708525950417799 validation -4.344029553811955
+[teacher] TEACHER control-tie-5 parsed 9.846267828000009
+[teacher] TEACHER control-unknown-5 parsed 9.032475922999993
+[D] EPOCH linear_choice 1729 22 loss 0.9664143657074401 validation -4.330448970431718
+[teacher] TEACHER control-tie-6 parsed 13.031249814000034
+[teacher] TEACHER control-unknown-6 parsed 9.09532712400005
+[D] EPOCH linear_choice 1729 23 loss 0.9621014027746723 validation -4.321649397189317
+[teacher] TEACHER control-tie-7 parsed 11.03665670700002
+[teacher] TEACHER control-unknown-7 parsed 8.860338641999988
+[D] EPOCH linear_choice 1729 24 loss 0.9580183962780032 validation -4.31734107751904
+[teacher] TEACHER train-0-0 parsed 27.03875246000007
+[D] EPOCH linear_choice 1729 25 loss 0.9539899073504642 validation -4.308454487041603
+[teacher] TEACHER train-0-1 parsed 27.195942482999953
+[D] EPOCH linear_choice 1729 26 loss 0.9501282785398265 validation -4.303640815785026
+[D] EPOCH linear_choice 1729 27 loss 0.9464827403882701 validation -4.297862388735182
+[teacher] TEACHER train-1-0 parsed 30.822598122000045
+[teacher] TEACHER train-1-1 parsed 17.23040848000005
+[D] EPOCH linear_choice 1729 28 loss 0.9427552958676482 validation -4.290947876266548
+[D] EPOCH linear_choice 1729 29 loss 0.9391056333266783 validation -4.281353542941994
+[teacher] TEACHER train-2-0 parsed 24.402389631000005
+[D] EPOCH linear_choice 1729 30 loss 0.9357108055321756 validation -4.276635504070748
+[teacher] TEACHER train-2-1 parsed 32.10279935299991
+[D] EPOCH linear_choice 1729 31 loss 0.9321944915744311 validation -4.267432321639777
+[teacher] TEACHER train-3-0 parsed 24.42338608199998
+[D] EPOCH linear_choice 1729 32 loss 0.9289188582504935 validation -4.254483827127287
+[teacher] TEACHER train-3-1 parsed 26.025898998000002
+[D] EPOCH linear_choice 1729 33 loss 0.9255878688384067 validation -4.249610208529848
+[D] EPOCH linear_choice 1729 34 loss 0.9224670713438707 validation -4.240877185195802
+[teacher] TEACHER train-4-0 parsed 36.219019063999895
+[D] EPOCH linear_choice 1729 35 loss 0.9193815294762745 validation -4.233172605649918
+[teacher] TEACHER train-4-1 parsed 34.16174717099989
+[D] EPOCH linear_choice 1729 36 loss 0.9164227331422415 validation -4.221449363139176
+[D] EPOCH linear_choice 1729 37 loss 0.9134038217940971 validation -4.216563325152739
+[teacher] TEACHER train-5-0 parsed 28.026539376999835
+[D] EPOCH linear_choice 1729 38 loss 0.9106313564549839 validation -4.2106246782060754
+[teacher] TEACHER train-5-1 parsed 27.93934546599985
+[D] EPOCH linear_choice 1729 39 loss 0.9078020484223231 validation -4.204563582715485
+[teacher] TEACHER train-6-0 parsed 33.114195538000104
+[D] EPOCH linear_choice 1729 40 loss 0.9049054900750372 validation -4.199122325743875
+[D] EPOCH linear_choice 1729 41 loss 0.9023122793501791 validation -4.194313046153791
+[teacher] TEACHER train-6-1 parsed 26.597170261999963
+[D] EPOCH linear_choice 1729 42 loss 0.8995719750220066 validation -4.191875403080602
+[teacher] TEACHER train-7-0 parsed 30.892129050999984
+[D] EPOCH linear_choice 1729 43 loss 0.8969336432340902 validation -4.188778372631357
+[teacher] TEACHER train-7-1 parsed 31.914826347000144
+[D] EPOCH linear_choice 1729 44 loss 0.8944269094533999 validation -4.180341045959448
+[D] EPOCH linear_choice 1729 45 loss 0.8918762724371809 validation -4.177549863125862
+[teacher] TEACHER train-8-0 parsed 28.303801628999963
+[D] EPOCH linear_choice 1729 46 loss 0.8894204594395763 validation -4.173676039702765
+[teacher] TEACHER train-8-1 parsed 23.217522475999886
+[D] EPOCH linear_choice 1729 47 loss 0.8869656129447999 validation -4.168914123740587
+[teacher] TEACHER train-9-0 parsed 20.193351163999978
+[D] EPOCH linear_choice 1729 48 loss 0.8845835074864548 validation -4.164782209271323
+[teacher] TEACHER train-9-1 parsed 24.22675515800006
+[D] EPOCH linear_choice 1729 49 loss 0.8822578489186936 validation -4.159367957427173
+[teacher] TEACHER train-10-0 parsed 25.50073530099985
+[D] TRAIN mlp_choice/1729
+[teacher] TEACHER train-10-1 parsed 27.24886732599998
+[D] EPOCH mlp_choice 1729 0 loss 1.0751191440458392 validation -4.5676119871435485
+[teacher] TEACHER train-11-0 parsed 28.985286718999987
+[D] EPOCH mlp_choice 1729 1 loss 1.0650655678382106 validation -4.393644030618427
+[teacher] TEACHER train-11-1 parsed 28.20484750200012
+[D] EPOCH mlp_choice 1729 2 loss 1.0522987242130672 validation -4.330865056960542
+[teacher] TEACHER train-12-0 parsed 21.951508157000035
+[D] EPOCH mlp_choice 1729 3 loss 1.0365464749800808 validation -4.219812027923935
+[D] EPOCH mlp_choice 1729 4 loss 1.0209460167542976 validation -4.221915975581214
+[teacher] TEACHER train-12-1 parsed 29.92416062799998
+[D] EPOCH mlp_choice 1729 5 loss 1.0024820118777307 validation -4.175220055109431
+[teacher] TEACHER train-13-0 parsed 28.356641997999986
+[D] EPOCH mlp_choice 1729 6 loss 0.9793993990649196 validation -4.151981343362156
+[teacher] TEACHER train-13-1 parsed 28.305885107999984
+[D] EPOCH mlp_choice 1729 7 loss 0.9544429703633867 validation -4.141538934313603
+[D] EPOCH mlp_choice 1729 8 loss 0.9292750549776589 validation -4.143889100408264
+[teacher] TEACHER train-14-0 parsed 32.413298994000115
+[D] EPOCH mlp_choice 1729 9 loss 0.9019000664828163 validation -4.105987683069843
+[teacher] TEACHER train-14-1 parsed 28.661091565000106
+[D] EPOCH mlp_choice 1729 10 loss 0.8768647061158702 validation -4.099450878223363
+[teacher] TEACHER train-15-0 parsed 25.2689558699999
+[D] EPOCH mlp_choice 1729 11 loss 0.851957813192926 validation -4.055142420675954
+[teacher] TEACHER train-15-1 parsed 25.76067497600002
+[D] EPOCH mlp_choice 1729 12 loss 0.8277023640488658 validation -4.033240398039337
+[teacher] TEACHER train-16-0 parsed 29.027633728999945
+[D] EPOCH mlp_choice 1729 13 loss 0.8060084493447315 validation -4.017137420478527
+[D] EPOCH mlp_choice 1729 14 loss 0.7854651162045889 validation -4.008799436241117
+[teacher] TEACHER train-16-1 parsed 28.714620517999947
+[D] EPOCH mlp_choice 1729 15 loss 0.7666889737778476 validation -3.9861473339097775
+[teacher] TEACHER train-17-0 parsed 30.72762848499997
+[D] EPOCH mlp_choice 1729 16 loss 0.7491113257388398 validation -3.9803552648421623
+[teacher] TEACHER train-17-1 parsed 25.814414186999784
+[D] EPOCH mlp_choice 1729 17 loss 0.7332465031361732 validation -3.9640040083973833
+[D] EPOCH mlp_choice 1729 18 loss 0.7157233400149362 validation -3.950069719487592
+[teacher] TEACHER train-18-0 parsed 28.012427477000074
+[D] EPOCH mlp_choice 1729 19 loss 0.7012226914694646 validation -3.9355859853957846
+[teacher] TEACHER train-18-1 parsed 28.01701429900004
+[D] EPOCH mlp_choice 1729 20 loss 0.6888585473820878 validation -3.9249032002437967
+[teacher] TEACHER train-19-0 parsed 22.28232135799999
+[D] EPOCH mlp_choice 1729 21 loss 0.6722555847998093 validation -3.9033327221603105
+[teacher] TEACHER train-19-1 parsed 21.323331275999863
+[D] EPOCH mlp_choice 1729 22 loss 0.6639291184889825 validation -3.9091314314057155
+[teacher] TEACHER train-20-0 parsed 30.115012590999868
+[D] EPOCH mlp_choice 1729 23 loss 0.65119185140727 validation -3.9066665865829733
+[teacher] TEACHER train-20-1 parsed 25.745308492000277
+[D] EPOCH mlp_choice 1729 24 loss 0.6393256859743601 validation -3.8923487485200687
+[teacher] TEACHER train-21-0 parsed 23.73654165200014
+[D] EPOCH mlp_choice 1729 25 loss 0.6272073901495208 validation -3.8832256633058053
+[D] EPOCH mlp_choice 1729 26 loss 0.6209862970996505 validation -3.8748516030994407
+[teacher] TEACHER train-21-1 parsed 28.46316088499998
+[D] EPOCH mlp_choice 1729 27 loss 0.6104816217250617 validation -3.870141937678292
+[teacher] TEACHER train-22-0 parsed 30.871095991000402
+[D] EPOCH mlp_choice 1729 28 loss 0.6020522017703499 validation -3.8495467377797477
+[teacher] TEACHER train-22-1 parsed 30.042257829999926
+[D] EPOCH mlp_choice 1729 29 loss 0.5939268547868315 validation -3.85794396423421
+[D] EPOCH mlp_choice 1729 30 loss 0.5855200353248865 validation -3.8454242250654738
+[teacher] TEACHER train-23-0 parsed 29.711267322999902
+[D] EPOCH mlp_choice 1729 31 loss 0.5774237416458063 validation -3.823400730493582
+[teacher] TEACHER train-23-1 parsed 29.36495585900002
+[D] EPOCH mlp_choice 1729 32 loss 0.5711304240686692 validation -3.820183149947481
+[teacher] TEACHER train-24-0 parsed 26.649988120000216
+[D] EPOCH mlp_choice 1729 33 loss 0.5619008307642841 validation -3.806643345098599
+[teacher] TEACHER train-24-1 parsed 30.589908770999955
+[D] EPOCH mlp_choice 1729 34 loss 0.5538095918160441 validation -3.79856603251091
+[D] EPOCH mlp_choice 1729 35 loss 0.5496125681675273 validation -3.7928610648860657
+[teacher] TEACHER train-25-0 parsed 30.082009346000177
+[D] EPOCH mlp_choice 1729 36 loss 0.5422207842564282 validation -3.7962737971677787
+[teacher] TEACHER train-25-1 parsed 28.250112460999844
+[D] EPOCH mlp_choice 1729 37 loss 0.5352673058207403 validation -3.766930118897462
+[teacher] TEACHER train-26-0 parsed 22.627201116999913
+[D] EPOCH mlp_choice 1729 38 loss 0.5307647017268843 validation -3.7653988860890726
+[teacher] TEACHER train-26-1 parsed 19.99752333100014
+[D] EPOCH mlp_choice 1729 39 loss 0.5261089869154859 validation -3.7791730366545164
+[teacher] TEACHER train-27-0 parsed 31.343562048999956
+[D] EPOCH mlp_choice 1729 40 loss 0.5187631439857248 validation -3.7540575070532904
+[D] EPOCH mlp_choice 1729 41 loss 0.5157344779698719 validation -3.745235467858341
+[teacher] TEACHER train-27-1 parsed 25.5270416139997
+[D] EPOCH mlp_choice 1729 42 loss 0.5095893052792327 validation -3.740441833569005
+[teacher] TEACHER validation-0-0 parsed 23.335420106999663
+[D] EPOCH mlp_choice 1729 43 loss 0.5084804473239012 validation -3.7530943684541183
+[teacher] TEACHER validation-0-1 parsed 27.37575755800026
+[D] EPOCH mlp_choice 1729 44 loss 0.5030118029295181 validation -3.7416273123183994
+[teacher] TEACHER validation-1-0 parsed 23.099969832999705
+[D] EPOCH mlp_choice 1729 45 loss 0.5046410915738315 validation -3.7358548707826227
+[teacher] TEACHER validation-1-1 parsed 22.040648108999903
+[D] EPOCH mlp_choice 1729 46 loss 0.4948155017981987 validation -3.767360105317788
+[teacher] TEACHER validation-2-0 parsed 26.15664140400031
+[D] EPOCH mlp_choice 1729 47 loss 0.504566511695319 validation -3.726437725010616
+[teacher] TEACHER validation-2-1 parsed 26.15877692899994
+[D] EPOCH mlp_choice 1729 48 loss 0.5002899682634577 validation -3.705925641670773
+[D] EPOCH mlp_choice 1729 49 loss 0.4876596057078916 validation -3.7291976990275892
+[teacher] TEACHER validation-3-0 parsed 28.86324962100025
+[D] TRAIN delay_huber/1729
+[teacher] TEACHER validation-3-1 parsed 29.281470075000016
+[D] EPOCH delay_huber 1729 0 loss 0.02105958467206115 validation -5.585500149146328
+[teacher] TEACHER validation-4-0 parsed 29.417047911999816
+[D] EPOCH delay_huber 1729 1 loss 0.010659116015901304 validation -5.112855632521032
+[teacher] TEACHER validation-4-1 parsed 29.41022427500002
+[D] EPOCH delay_huber 1729 2 loss 0.00927839401059316 validation -4.764948288210211
+[teacher] TEACHER validation-5-0 parsed 27.818733407999844
+[D] EPOCH delay_huber 1729 3 loss 0.009052414311025103 validation -4.544093445230743
+[D] EPOCH delay_huber 1729 4 loss 0.008604915797903345 validation -4.389217756847862
+[teacher] TEACHER validation-5-1 parsed 36.62630966500001
+[D] EPOCH delay_huber 1729 5 loss 0.008114382944086174 validation -4.2590457114293825
+[teacher] TEACHER validation-6-0 parsed 22.103186431000267
+[D] EPOCH delay_huber 1729 6 loss 0.008073730085065733 validation -4.165715319853631
+[teacher] TEACHER validation-6-1 parsed 22.161495242
+[D] EPOCH delay_huber 1729 7 loss 0.00751837581035808 validation -4.146086692894918
+[teacher] TEACHER validation-7-0 parsed 21.04725502700012
+[D] EPOCH delay_huber 1729 8 loss 0.007325973969237953 validation -4.111918830965611
+[teacher] TEACHER validation-7-1 parsed 26.75274439199984
+[D] EPOCH delay_huber 1729 9 loss 0.0071806108398524415 validation -4.061258577944149
+[teacher] TEACHER validation-8-0 parsed 25.046021485999972
+[D] EPOCH delay_huber 1729 10 loss 0.006986665782719115 validation -4.0273652992700395
+[teacher] TEACHER validation-8-1 parsed 21.49254025900018
+[D] EPOCH delay_huber 1729 11 loss 0.0068506324092405535 validation -4.013479350554598
+[teacher] TEACHER validation-9-0 parsed 22.0010158340001
+[D] EPOCH delay_huber 1729 12 loss 0.006580846715037225 validation -3.9640463307217937
+[teacher] TEACHER validation-9-1 parsed 21.443751650000195
+[D] EPOCH delay_huber 1729 13 loss 0.006453788729496035 validation -3.9294225032731247
+[teacher] TEACHER validation-10-0 parsed 25.459978313999727
+[D] EPOCH delay_huber 1729 14 loss 0.006374735107867124 validation -3.901892463774944
+[teacher] TEACHER validation-10-1 parsed 24.41452136199996
+[D] EPOCH delay_huber 1729 15 loss 0.006181596655821853 validation -3.8964065989861014
+[D] EPOCH delay_huber 1729 16 loss 0.0061920575322851334 validation -3.8698434897179834
+[teacher] TEACHER validation-11-0 parsed 28.809467617000337
+[D] EPOCH delay_huber 1729 17 loss 0.005945671937364505 validation -3.851984351400538
+[teacher] TEACHER validation-11-1 parsed 28.169234479999886
+[D] EPOCH delay_huber 1729 18 loss 0.005774103801043928 validation -3.82679203866461
+[D] EPOCH delay_huber 1729 19 loss 0.005659979667907322 validation -3.8136489280021437
+[teacher] TEACHER prefix-train-0-0 parsed 42.19703235099996
+[D] EPOCH delay_huber 1729 20 loss 0.005544679783023643 validation -3.781892789835195
+[D] EPOCH delay_huber 1729 21 loss 0.005445523982974043 validation -3.780918606201752
+[teacher] TEACHER prefix-train-0-1 parsed 42.228916959000344
+[D] EPOCH delay_huber 1729 22 loss 0.005369784131916577 validation -3.7626888556045706
+[teacher] TEACHER replay-0 parsed 22.683662655999797
+[D] EPOCH delay_huber 1729 23 loss 0.005175110097232816 validation -3.770743384478604
+[D] EPOCH delay_huber 1729 24 loss 0.005101461018477416 validation -3.7539277302768777
+[teacher] TEACHER prefix-train-1-0 parsed 39.91806518900012
+[teacher] TEACHER prefix-train-1-1 parsed 14.4079885189999
+[D] EPOCH delay_huber 1729 25 loss 0.005107181072995293 validation -3.753404241631606
+[teacher] TEACHER replay-1 parsed 14.910401427999659
+[D] EPOCH delay_huber 1729 26 loss 0.0049928335625128994 validation -3.734234574536836
+[teacher] TEACHER prefix-train-2-0 parsed 13.455968646999736
+[teacher] TEACHER prefix-train-2-1 parsed 15.81083996999996
+[D] EPOCH delay_huber 1729 27 loss 0.005027490434533988 validation -3.7184020201942056
+[teacher] TEACHER replay-2 parsed 17.713103342000068
+[D] EPOCH delay_huber 1729 28 loss 0.0050165866993427954 validation -3.7326600593548624
+[teacher] TEACHER prefix-train-3-0 parsed 15.819386570000006
+[D] EPOCH delay_huber 1729 29 loss 0.004791823856730382 validation -3.719830579078808
+[teacher] TEACHER prefix-train-3-1 parsed 15.784962853000252
+[teacher] TEACHER replay-3 parsed 12.382196738999937
+[teacher] TEACHER prefix-train-4-0 parsed 7.53998736199992
+[D] EPOCH delay_huber 1729 30 loss 0.0046615644361953645 validation -3.729742714016122
+[D] EPOCH delay_huber 1729 31 loss 0.004524835661694482 validation -3.704442797801079
+[teacher] TEACHER prefix-train-4-1 parsed 34.467760153999734
+[D] EPOCH delay_huber 1729 32 loss 0.004534843546302181 validation -3.7096688411086918
+[teacher] TEACHER replay-4 parsed 13.521495160000086
+[D] EPOCH delay_huber 1729 33 loss 0.004406904047495441 validation -3.6996704485750107
+[teacher] TEACHER prefix-train-5-0 parsed 38.82172904100025
+[D] EPOCH delay_huber 1729 34 loss 0.004365959747279713 validation -3.69808901152828
+[D] EPOCH delay_huber 1729 35 loss 0.004300459254080902 validation -3.7009480810656727
+[teacher] TEACHER prefix-train-5-1 parsed 30.970603073999882
+[teacher] TEACHER replay-5 parsed 16.00719274200037
+[D] EPOCH delay_huber 1729 36 loss 0.0042138877755630855 validation -3.6912559734710007
+[teacher] TEACHER prefix-train-6-0 parsed 14.41143896199992
+[D] EPOCH delay_huber 1729 37 loss 0.004285348066021655 validation -3.6903460945316713
+[D] EPOCH delay_huber 1729 38 loss 0.004161573354576786 validation -3.6905314086480616
+[teacher] TEACHER prefix-train-6-1 parsed 38.127599822999855
+[teacher] TEACHER replay-6 parsed 12.571946597000078
+[D] EPOCH delay_huber 1729 39 loss 0.004258919880639311 validation -3.687136963121648
+[D] EPOCH delay_huber 1729 40 loss 0.0043963517677558794 validation -3.6857560852442526
+[teacher] TEACHER prefix-train-7-0 parsed 32.52568916200016
+[D] EPOCH delay_huber 1729 41 loss 0.004058544491752913 validation -3.690525730952284
+[teacher] TEACHER prefix-train-7-1 parsed 32.067760517999886
+[D] EPOCH delay_huber 1729 42 loss 0.00397502331664723 validation -3.6903014434962063
+[teacher] TEACHER replay-7 parsed 15.474365280000256
+[D] EPOCH delay_huber 1729 43 loss 0.003914261300447475 validation -3.692133748464665
+[teacher] TEACHER prefix-train-8-0 parsed 20.090904869000042
+[D] EPOCH delay_huber 1729 44 loss 0.004074681968383231 validation -3.6714066603002466
+[teacher] TEACHER prefix-train-8-1 parsed 14.384494236000137
+[teacher] TEACHER replay-8 parsed 12.455266491000202
+[D] EPOCH delay_huber 1729 45 loss 0.00401638480764982 validation -3.6869283377284203
+[teacher] TEACHER prefix-train-9-0 parsed 16.48138363299995
+[D] EPOCH delay_huber 1729 46 loss 0.003760599348945991 validation -3.6869565997271128
+[teacher] TEACHER prefix-train-9-1 parsed 31.49423922699998
+[D] EPOCH delay_huber 1729 47 loss 0.0037385650710897167 validation -3.682162617866493
+[teacher] TEACHER replay-9 parsed 18.430571777000296
+[D] EPOCH delay_huber 1729 48 loss 0.003846987738041596 validation -3.680403865307859
+[teacher] TEACHER prefix-train-10-0 parsed 14.120089557000028
+[D] EPOCH delay_huber 1729 49 loss 0.0037093324948132 validation -3.685971958595229
+[teacher] TEACHER prefix-train-10-1 parsed 20.16031655200004
+[teacher] TEACHER replay-10 parsed 12.788547549000214
+[D] TRAIN ranknet/1729
+[teacher] TEACHER prefix-train-11-0 parsed 32.28236030399967
+[D] EPOCH ranknet 1729 0 loss 0.6888280239072628 validation -4.626457767203003
+[D] EPOCH ranknet 1729 1 loss 0.6829454702092335 validation -4.3354677272707685
+[teacher] TEACHER prefix-train-11-1 parsed 39.582103952000125
+[D] EPOCH ranknet 1729 2 loss 0.6762178679928184 validation -4.399298058387605
+[teacher] TEACHER replay-11 parsed 13.0947729479999
+[D] EPOCH ranknet 1729 3 loss 0.6675381497479975 validation -4.245147439656335
+[teacher] TEACHER prefix-train-12-0 parsed 31.1983201070002
+[D] EPOCH ranknet 1729 4 loss 0.656892919447273 validation -4.173125088860704
+[teacher] TEACHER prefix-train-12-1 parsed 31.18936316600002
+[D] EPOCH ranknet 1729 5 loss 0.6454582028090954 validation -4.123247604570142
+[teacher] TEACHER replay-12 parsed 12.348857621999741
+[D] EPOCH ranknet 1729 6 loss 0.6329247532994486 validation -4.112590241566366
+[D] EPOCH ranknet 1729 7 loss 0.6199326600180939 validation -4.081065614655604
+[teacher] TEACHER prefix-train-13-0 parsed 41.284781791999194
+[D] EPOCH ranknet 1729 8 loss 0.6076429213862866 validation -4.046499748452812
+[D] EPOCH ranknet 1729 9 loss 0.5948822981008561 validation -4.024858270334369
+[teacher] TEACHER prefix-train-13-1 parsed 46.21380741200028
+[D] EPOCH ranknet 1729 10 loss 0.5842924717653659 validation -4.0197559790195605
+[teacher] TEACHER replay-13 parsed 16.624876094000683
+[D] EPOCH ranknet 1729 11 loss 0.574068663532671 validation -4.004556762980589
+[teacher] TEACHER prefix-train-14-0 parsed 31.196086572999775
+[teacher] TEACHER prefix-train-14-1 parsed 13.220486140000503
+[D] EPOCH ranknet 1729 12 loss 0.5649865275809134 validation -3.9965287557293325
+[teacher] TEACHER replay-14 parsed 14.674470343999928
+[D] EPOCH ranknet 1729 13 loss 0.556349941969529 validation -4.001615156685227
+[D] EPOCH ranknet 1729 14 loss 0.5489033831290726 validation -3.9722099584109745
+[teacher] TEACHER prefix-train-15-0 parsed 35.14472682399992
+[D] EPOCH ranknet 1729 15 loss 0.541834804633254 validation -3.94823235399705
+[teacher] TEACHER prefix-train-15-1 parsed 25.564443553000274
+[D] EPOCH ranknet 1729 16 loss 0.5346836402604822 validation -3.936449038615042
+[teacher] TEACHER replay-15 parsed 15.866902441999628
+[teacher] TEACHER prefix-train-16-0 parsed 14.995524097999805
+[D] EPOCH ranknet 1729 17 loss 0.527477035388074 validation -3.9170366424580276
+[teacher] TEACHER prefix-train-16-1 parsed 15.010447386000124
+[teacher] TEACHER replay-16 parsed 7.335656336000284
+[D] EPOCH ranknet 1729 18 loss 0.5209132283016515 validation -3.91718754660543
+[teacher] TEACHER prefix-train-17-0 parsed 15.42274661600004
+[teacher] TEACHER prefix-train-17-1 parsed 13.186983636999685
+[D] EPOCH ranknet 1729 19 loss 0.5142829451178841 validation -3.8885702990116413
+[teacher] TEACHER replay-17 parsed 15.352065459999721
+[D] EPOCH ranknet 1729 20 loss 0.5069965763450455 validation -3.844880894442654
+[D] EPOCH ranknet 1729 21 loss 0.5010044532091342 validation -3.846422081974174
+[teacher] TEACHER prefix-train-18-0 parsed 34.028650367999944
+[D] EPOCH ranknet 1729 22 loss 0.49431691177142056 validation -3.8151255168044824
+[teacher] TEACHER prefix-train-18-1 parsed 20.62010149300022
+[teacher] TEACHER replay-18 parsed 14.9807428539998
+[D] EPOCH ranknet 1729 23 loss 0.4891015936200347 validation -3.8048177947693715
+[D] EPOCH ranknet 1729 24 loss 0.4822108983698854 validation -3.8087936669915816
+[teacher] TEACHER prefix-train-19-0 parsed 34.15160905399989
+[D] EPOCH ranknet 1729 25 loss 0.47781349916658655 validation -3.77418912802198
+[teacher] TEACHER prefix-train-19-1 parsed 34.06695848700019
+[D] EPOCH ranknet 1729 26 loss 0.47463932066511916 validation -3.7847461070464665
+[teacher] TEACHER replay-19 parsed 15.675318573000368
+[D] EPOCH ranknet 1729 27 loss 0.4684348513644636 validation -3.771732912168836
+[teacher] TEACHER prefix-train-20-0 parsed 15.974349533999884
+[D] EPOCH ranknet 1729 28 loss 0.46418010844695345 validation -3.749337553440925
+[teacher] TEACHER prefix-train-20-1 parsed 32.967112893000376
+[D] EPOCH ranknet 1729 29 loss 0.45986703368862436 validation -3.749557360317018
+[teacher] TEACHER replay-20 parsed 16.354706422999698
+[D] EPOCH ranknet 1729 30 loss 0.454787901658392 validation -3.740961150566259
+[teacher] TEACHER prefix-train-21-0 parsed 15.428896272000202
+[teacher] TEACHER prefix-train-21-1 parsed 15.206726708000133
+[D] EPOCH ranknet 1729 31 loss 0.45130275596375213 validation -3.726525637465094
+[teacher] TEACHER replay-21 parsed 13.947103585999685
+[teacher] TEACHER prefix-train-22-0 parsed 14.089369586999965
+[D] EPOCH ranknet 1729 32 loss 0.4480583149049835 validation -3.7075694547644544
+[D] EPOCH ranknet 1729 33 loss 0.444746335769878 validation -3.707570338143062
+[teacher] TEACHER prefix-train-22-1 parsed 31.77010962999975
+[teacher] TEACHER replay-22 parsed 12.701129224999931
+[D] EPOCH ranknet 1729 34 loss 0.44104072806726435 validation -3.7020102874890486
+[teacher] TEACHER prefix-train-23-0 parsed 18.565847265999764
+[D] EPOCH ranknet 1729 35 loss 0.4376983444322491 validation -3.6976173769221137
+[D] EPOCH ranknet 1729 36 loss 0.4361035690038193 validation -3.6920914606102775
+[teacher] TEACHER prefix-train-23-1 parsed 39.379829622000216
+[D] EPOCH ranknet 1729 37 loss 0.4328232441478974 validation -3.665017679825199
+[teacher] TEACHER replay-23 parsed 12.081903895000323
+[D] EPOCH ranknet 1729 38 loss 0.43187864341200566 validation -3.6617243316046406
+[teacher] TEACHER prefix-train-24-0 parsed 31.9687570469996
+[D] EPOCH ranknet 1729 39 loss 0.42805409222441426 validation -3.669237049624107
+[teacher] TEACHER prefix-train-24-1 parsed 31.789468023000154
+[D] EPOCH ranknet 1729 40 loss 0.42699086626262783 validation -3.661058001690181
+[D] EPOCH ranknet 1729 41 loss 0.4308067487768312 validation -3.669358948852514
+[teacher] TEACHER prefix-train-25-0 parsed 33.64687892499933
+[D] EPOCH ranknet 1729 42 loss 0.4266527122076553 validation -3.6534402135224164
+[teacher] TEACHER prefix-train-25-1 parsed 33.867475778999506
+[D] EPOCH ranknet 1729 43 loss 0.42575994255645355 validation -3.632901896463414
+[D] EPOCH ranknet 1729 44 loss 0.42783111469095303 validation -3.676895074966083
+[teacher] TEACHER prefix-train-26-0 parsed 31.752676387000065
+[D] EPOCH ranknet 1729 45 loss 0.4205456660302289 validation -3.645555145427993
+[D] EPOCH ranknet 1729 46 loss 0.4198555722512225 validation -3.6511749738550474
+[teacher] TEACHER prefix-train-26-1 parsed 42.98763335300009
+[teacher] TEACHER prefix-train-27-0 parsed 8.120689341999423
+[D] EPOCH ranknet 1729 47 loss 0.4182753076530332 validation -3.6450076347245353
+[D] EPOCH ranknet 1729 48 loss 0.41441600064641904 validation -3.634089666685514
+[teacher] TEACHER prefix-train-27-1 parsed 33.095117146999655
+[D] EPOCH ranknet 1729 49 loss 0.4123774642793592 validation -3.6303085289772503
+[teacher] TEACHER prefix-validation-0-0 parsed 31.139283103999333
+[D] TRAIN lambdamart/1729
+[teacher] TEACHER prefix-validation-0-1 parsed 32.42109175200039
+[D] /usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRanker was fitted with feature names
+[D]   warnings.warn(
+[teacher] TEACHER prefix-validation-1-0 parsed 33.804934603999754
+[D] TRAIN priority_classifier/1729
+[teacher] TEACHER prefix-validation-1-1 parsed 16.302094491999924
+[teacher] TEACHER prefix-validation-2-0 parsed 20.793618179000077
+[D] EPOCH priority_classifier 1729 0 loss 1.3332576376851648 validation -5.4480768735815355
+[teacher] TEACHER prefix-validation-2-1 parsed 20.65969539300022
+[D] EPOCH priority_classifier 1729 1 loss 1.2566968927858397 validation -5.128454842306651
+[D] EPOCH priority_classifier 1729 2 loss 1.2415035346057266 validation -4.922414747670286
+[teacher] TEACHER prefix-validation-3-0 parsed 31.861364582000533
+[D] EPOCH priority_classifier 1729 3 loss 1.2331357527291402 validation -4.86602633014859
+[teacher] TEACHER prefix-validation-3-1 parsed 34.39695120600027
+[D] EPOCH priority_classifier 1729 4 loss 1.216298658051528 validation -4.816042851474115
+[teacher] TEACHER prefix-validation-4-0 parsed 21.98105736599973
+[D] EPOCH priority_classifier 1729 5 loss 1.203207414248027 validation -4.800059051948347
+[teacher] TEACHER prefix-validation-4-1 invalid 28.112910455999554
+[D] EPOCH priority_classifier 1729 6 loss 1.1960793560137972 validation -4.737455939906713
+[D] EPOCH priority_classifier 1729 7 loss 1.178182389063295 validation -4.713732631964537
+[teacher] TEACHER prefix-validation-5-0 parsed 32.7025127779998
+[D] EPOCH priority_classifier 1729 8 loss 1.1676503630587831 validation -4.690094984043406
+[teacher] TEACHER prefix-validation-5-1 parsed 16.816630235000048
+[D] EPOCH priority_classifier 1729 9 loss 1.1453554161125794 validation -4.648295850595315
+[teacher] TEACHER prefix-validation-6-0 parsed 19.35482501000024
+[teacher] TEACHER prefix-validation-6-1 parsed 17.86552342899995
+[D] EPOCH priority_classifier 1729 10 loss 1.127165207406506 validation -4.578369998367569
+[teacher] TEACHER prefix-validation-7-0 parsed 23.57593576599993
+[D] EPOCH priority_classifier 1729 11 loss 1.11552760770428 validation -4.550622164603246
+[teacher] TEACHER prefix-validation-7-1 parsed 17.802543772999343
+[D] EPOCH priority_classifier 1729 12 loss 1.0943801276443992 validation -4.532410278144388
+[teacher] TEACHER prefix-validation-8-0 parsed 14.900734959999681
+[teacher] TEACHER prefix-validation-8-1 parsed 14.630485094000505
+[D] EPOCH priority_classifier 1729 13 loss 1.0751038714370225 validation -4.42961644531896
+[teacher] TEACHER prefix-validation-9-0 parsed 10.397368552000444
+[D] EPOCH priority_classifier 1729 14 loss 1.0493039510038216 validation -4.386216888279625
+[teacher] TEACHER prefix-validation-9-1 parsed 16.412532741000177
+[D] EPOCH priority_classifier 1729 15 loss 1.031419771257788 validation -4.369525671606767
+[teacher] TEACHER prefix-validation-10-0 parsed 24.16912392300037
+[teacher] TEACHER prefix-validation-10-1 parsed 16.318690637000145
+[D] EPOCH priority_classifier 1729 16 loss 1.0059252658393234 validation -4.309511735962955
+[D] EPOCH priority_classifier 1729 17 loss 0.9912096824627952 validation -4.273146142470037
+[teacher] TEACHER prefix-validation-11-0 parsed 39.2082136629997
+[D] EPOCH priority_classifier 1729 18 loss 0.969126467120077 validation -4.251720862148061
+[D] EPOCH priority_classifier 1729 19 loss 0.9573783943415037 validation -4.244818251015393
+[teacher] TEACHER prefix-validation-11-1 parsed 35.068234501000006
+MASTER_START P ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/source/experiments/stream_scheduler/train_teacher_rankers.py', '--prepared', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared', '--teacher-output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/teacher', '--output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/P', '--device', 'cuda:1', '--seeds', '1729,2718,31415', '--epochs', '50']
+MASTER_START feedback ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/source/experiments/stream_scheduler/train_feedback_rl.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--prepared', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared', '--teacher-output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/teacher', '--output', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/feedback', '--device', 'cuda:1', '--seeds', '1729,2718,31415', '--steps', '20000', '--mission-vectors', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/prepared/data/mission_vectors.npy', '--vector-extension', '/kaggle/working/experiments/stream_scheduler/runs/master-study-20261101T062547Z/results/vectors/vectors.npz']
+[D] EPOCH priority_classifier 1729 20 loss 0.9392469369377068 validation -4.202560595598225
+[D] EPOCH priority_classifier 1729 21 loss 0.9160398216117756 validation -4.166237637914328
+[D] EPOCH priority_classifier 1729 22 loss 0.9074883724242682 validation -4.1512175823902995
+[D] EPOCH priority_classifier 1729 23 loss 0.8901130306367122 validation -4.12445877080371
+[D] EPOCH priority_classifier 1729 24 loss 0.8744961913726002 validation -4.123383896957203
+[D] EPOCH priority_classifier 1729 25 loss 0.8525163084777887 validation -4.083099519108422
+[D] EPOCH priority_classifier 1729 26 loss 0.8410707086386537 validation -4.068022313834829
+[D] EPOCH priority_classifier 1729 27 loss 0.827752552655511 validation -4.068180811089275
+[D] EPOCH priority_classifier 1729 28 loss 0.8114028758127461 validation -4.0635251276637
+[D] EPOCH priority_classifier 1729 29 loss 0.8042624999216059 validation -4.0464038468763395
+[D] EPOCH priority_classifier 1729 30 loss 0.7851852730354949 validation -4.029397650283296
+[D] EPOCH priority_classifier 1729 31 loss 0.7708809849418685 validation -4.019718598236431
+[D] EPOCH priority_classifier 1729 32 loss 0.7591209311895 validation -4.010340031719483
+[D] EPOCH priority_classifier 1729 33 loss 0.7492034496135602 validation -3.9916692803736025
+[D] EPOCH priority_classifier 1729 34 loss 0.7377237250493636 validation -3.9944160238955932
+[D] EPOCH priority_classifier 1729 35 loss 0.734091700974659 validation -3.9921143522683553
+[D] EPOCH priority_classifier 1729 36 loss 0.7141662041226482 validation -3.983334001833697
+[feedback] RL vlm_replay 1729 2000 updates 375 validation -1.2268755916070448
+[D] EPOCH priority_classifier 1729 37 loss 0.7040140428198356 validation -3.9794921905644474
+[D] EPOCH priority_classifier 1729 38 loss 0.7039095410154914 validation -3.9539919197333266
+[D] EPOCH priority_classifier 1729 39 loss 0.692298995886631 validation -3.9737606002312327
+[D] EPOCH priority_classifier 1729 40 loss 0.6749856431702028 validation -3.9512285514339416
+[D] EPOCH priority_classifier 1729 41 loss 0.6592741356810166 validation -3.952238400494477
+[D] EPOCH priority_classifier 1729 42 loss 0.6532364274944484 validation -3.9312868314986154
+[D] EPOCH priority_classifier 1729 43 loss 0.6419454154470259 validation -3.940551357209797
+[D] EPOCH priority_classifier 1729 44 loss 0.6475191209854074 validation -3.9430843266515003
+[D] EPOCH priority_classifier 1729 45 loss 0.6273959694193536 validation -3.9239568869567565
+[D] EPOCH priority_classifier 1729 46 loss 0.6230128017691072 validation -3.927024912287886
+[D] EPOCH priority_classifier 1729 47 loss 0.6083986906922974 validation -3.915439457031447
+[D] EPOCH priority_classifier 1729 48 loss 0.5957053584048708 validation -3.907849073785962
+[D] EPOCH priority_classifier 1729 49 loss 0.5869145604307562 validation -3.921909946981589
+[D] TRAIN deepsets_ranknet/1729
+[D] EPOCH deepsets_ranknet 1729 0 loss 0.6908317030174658 validation -4.708841957788581
+[D] EPOCH deepsets_ranknet 1729 1 loss 0.6813278788467869 validation -4.344651178584445
+[D] EPOCH deepsets_ranknet 1729 2 loss 0.6729975293856114 validation -4.3010586167288505
+[D] EPOCH deepsets_ranknet 1729 3 loss 0.6631899162312038 validation -4.2653085655425045
+[D] EPOCH deepsets_ranknet 1729 4 loss 0.6527875324245542 validation -4.16572992307836
+[D] EPOCH deepsets_ranknet 1729 5 loss 0.6413079155026935 validation -4.130590202471909
+[D] EPOCH deepsets_ranknet 1729 6 loss 0.6285412464931142 validation -4.043803279773176
+[D] EPOCH deepsets_ranknet 1729 7 loss 0.6139877051173244 validation -3.9914801443493007
+[feedback] RL vlm_replay 1729 4000 updates 875 validation -1.1869267592814385
+[D] EPOCH deepsets_ranknet 1729 8 loss 0.5995003052812535 validation -3.9647065461276196
+[D] EPOCH deepsets_ranknet 1729 9 loss 0.5845717211632291 validation -3.9515663542312613
+[D] EPOCH deepsets_ranknet 1729 10 loss 0.5707246601668885 validation -3.942355269031966
+[D] EPOCH deepsets_ranknet 1729 11 loss 0.5571947942007682 validation -3.9375581902853347
+[D] EPOCH deepsets_ranknet 1729 12 loss 0.5447587183225551 validation -3.9515338641166853
+[D] EPOCH deepsets_ranknet 1729 13 loss 0.5318661206947581 validation -3.9242109871335447
+[D] EPOCH deepsets_ranknet 1729 14 loss 0.5207731771515682 validation -3.920190915421233
+[D] EPOCH deepsets_ranknet 1729 15 loss 0.5099302365633775 validation -3.8756741503140852
+[D] EPOCH deepsets_ranknet 1729 16 loss 0.4993748985889397 validation -3.860357819790614
+[D] EPOCH deepsets_ranknet 1729 17 loss 0.48931460616495315 validation -3.848395354684966
+[D] EPOCH deepsets_ranknet 1729 18 loss 0.48102901579750323 validation -3.8472703817184524
+[D] EPOCH deepsets_ranknet 1729 19 loss 0.4737315920206129 validation -3.8272347174705703
+[D] EPOCH deepsets_ranknet 1729 20 loss 0.4662005976774708 validation -3.7793876320968818
+[D] EPOCH deepsets_ranknet 1729 21 loss 0.46249917709906185 validation -3.765042418365672
+[D] EPOCH deepsets_ranknet 1729 22 loss 0.45566472666973823 validation -3.7428900249120884
+[D] EPOCH deepsets_ranknet 1729 23 loss 0.45278390473788477 validation -3.727449211417601
+[D] EPOCH deepsets_ranknet 1729 24 loss 0.45077259240190415 validation -3.7174460975417656
+[D] EPOCH deepsets_ranknet 1729 25 loss 0.447208738072959 validation -3.7013572015754805
+[D] EPOCH deepsets_ranknet 1729 26 loss 0.44530354926581595 validation -3.678553315302285
+[D] EPOCH deepsets_ranknet 1729 27 loss 0.44363018532339993 validation -3.67337986295929
+[D] EPOCH deepsets_ranknet 1729 28 loss 0.44304935067304996 validation -3.677501969577648
+[D] EPOCH deepsets_ranknet 1729 29 loss 0.44068925646473645 validation -3.670482163573904
+[feedback] RL vlm_replay 1729 6000 updates 1375 validation -1.2325894843381726
+[D] EPOCH deepsets_ranknet 1729 30 loss 0.43883404613657717 validation -3.668515592361044
+[D] EPOCH deepsets_ranknet 1729 31 loss 0.4387214499923573 validation -3.655074730513172
+[D] EPOCH deepsets_ranknet 1729 32 loss 0.43918097681458335 validation -3.65963548564592
+[D] EPOCH deepsets_ranknet 1729 33 loss 0.4358254075312402 validation -3.654720288707271
+[D] EPOCH deepsets_ranknet 1729 34 loss 0.4370010946772851 validation -3.659658363428844
+[D] EPOCH deepsets_ranknet 1729 35 loss 0.434561452751268 validation -3.656407360888635
+[D] EPOCH deepsets_ranknet 1729 36 loss 0.4328258911452423 validation -3.6474915454156145
+[D] EPOCH deepsets_ranknet 1729 37 loss 0.43198406923130506 validation -3.658884755604991
+[D] EPOCH deepsets_ranknet 1729 38 loss 0.43202836043407444 validation -3.6526547101220173
+[D] EPOCH deepsets_ranknet 1729 39 loss 0.43138045527490476 validation -3.6542944990479143
+[D] EPOCH deepsets_ranknet 1729 40 loss 0.42924136451738093 validation -3.6540901984235004
+[D] EPOCH deepsets_ranknet 1729 41 loss 0.4280085555825792 validation -3.658855409171316
+[D] EPOCH deepsets_ranknet 1729 42 loss 0.4288111270873216 validation -3.6856175922923593
+[D] EPOCH deepsets_ranknet 1729 43 loss 0.4275138796754021 validation -3.6651783465314103
+[D] EPOCH deepsets_ranknet 1729 44 loss 0.42652478357275214 validation -3.6965332597772913
+[D] TRAIN set_transformer_ranknet/1729
+[D] EPOCH set_transformer_ranknet 1729 0 loss 0.6895220539299771 validation -4.804753629599405
+[D] EPOCH set_transformer_ranknet 1729 1 loss 0.6822119805729017 validation -4.536824315367176
+[D] EPOCH set_transformer_ranknet 1729 2 loss 0.6739390511065722 validation -4.284287536385222
+[D] EPOCH set_transformer_ranknet 1729 3 loss 0.6626379664521664 validation -4.223561328396445
+[feedback] RL vlm_replay 1729 8000 updates 1875 validation -1.0290546045862106
+[D] EPOCH set_transformer_ranknet 1729 4 loss 0.6454287324449979 validation -4.113053248546866
+[D] EPOCH set_transformer_ranknet 1729 5 loss 0.6200754010933451 validation -4.05518274111837
+[D] EPOCH set_transformer_ranknet 1729 6 loss 0.5864351800992154 validation -4.006110717008925
+[D] EPOCH set_transformer_ranknet 1729 7 loss 0.5504253998224158 validation -3.9255479880288986
+[D] EPOCH set_transformer_ranknet 1729 8 loss 0.5197629038739251 validation -3.8892310669766004
+[D] EPOCH set_transformer_ranknet 1729 9 loss 0.49911359892576 validation -3.8257659911662203
+[D] EPOCH set_transformer_ranknet 1729 10 loss 0.48113947643287247 validation -3.8167398542042275
+[D] EPOCH set_transformer_ranknet 1729 11 loss 0.47012254565561307 validation -3.815777224991704
+[D] EPOCH set_transformer_ranknet 1729 12 loss 0.45860862479457865 validation -3.795252954975955
+[D] EPOCH set_transformer_ranknet 1729 13 loss 0.4521651552804542 validation -3.739514523805071
+[D] EPOCH set_transformer_ranknet 1729 14 loss 0.4454198842850019 validation -3.778683617959947
+[D] EPOCH set_transformer_ranknet 1729 15 loss 0.4417867120773735 validation -3.8624611359703125
+[D] EPOCH set_transformer_ranknet 1729 16 loss 0.45779061968823953 validation -3.7570714922853523
+[D] EPOCH set_transformer_ranknet 1729 17 loss 0.4318858468468534 validation -3.73677965562931
+[D] EPOCH set_transformer_ranknet 1729 18 loss 0.43919355214711686 validation -3.7408584690419224
+[D] EPOCH set_transformer_ranknet 1729 19 loss 0.4261377024158719 validation -3.7271762489758804
+[D] EPOCH set_transformer_ranknet 1729 20 loss 0.4151331422444855 validation -3.7267555701082165
+[D] EPOCH set_transformer_ranknet 1729 21 loss 0.40897791338557 validation -3.747818443919484
+[D] EPOCH set_transformer_ranknet 1729 22 loss 0.40288300831343804 validation -3.7741035016903584
+[feedback] RL vlm_replay 1729 10000 updates 2375 validation -1.0686385573039254
+[D] EPOCH set_transformer_ranknet 1729 23 loss 0.39718861046458187 validation -3.8064576593460995
+[D] EPOCH set_transformer_ranknet 1729 24 loss 0.3941263602255276 validation -3.7933300324599957
+[D] EPOCH set_transformer_ranknet 1729 25 loss 0.3900793739621804 validation -3.8315890883894004
+[D] EPOCH set_transformer_ranknet 1729 26 loss 0.3882548297501671 validation -3.772762011146642
+[D] EPOCH set_transformer_ranknet 1729 27 loss 0.3820318001476153 validation -3.8158294380542603
+[D] EPOCH set_transformer_ranknet 1729 28 loss 0.37992849071406454 validation -3.737654956479437
+[D] TRAIN listmle/1729
+[D] EPOCH listmle 1729 0 loss 1.773415734787949 validation -4.9135326838130755
+[D] EPOCH listmle 1729 1 loss 1.738119333732028 validation -4.741598404318855
+[D] EPOCH listmle 1729 2 loss 1.7099252628679036 validation -4.555749055083208
+[D] EPOCH listmle 1729 3 loss 1.6789308315565605 validation -4.52020075451413
+[D] EPOCH listmle 1729 4 loss 1.6456741775785173 validation -4.482321675146401
+[D] EPOCH listmle 1729 5 loss 1.6076555332215894 validation -4.424931709291423
+[D] EPOCH listmle 1729 6 loss 1.5631178537336718 validation -4.370017671389416
+[D] EPOCH listmle 1729 7 loss 1.517934700020221 validation -4.345190079468699
+[D] EPOCH listmle 1729 8 loss 1.4677403839696355 validation -4.284110854533652
+[D] EPOCH listmle 1729 9 loss 1.4137023256606414 validation -4.278852324324222
+[D] EPOCH listmle 1729 10 loss 1.3585662320882332 validation -4.26113863046318
+[D] EPOCH listmle 1729 11 loss 1.2989718343029504 validation -4.230548730975859
+[feedback] RL vlm_replay 1729 12000 updates 2875 validation -1.0121483013675168
+[D] EPOCH listmle 1729 12 loss 1.2348778054994696 validation -4.215828519587678
+[D] EPOCH listmle 1729 13 loss 1.1760786086821757 validation -4.19963176946846
+[D] EPOCH listmle 1729 14 loss 1.1164028660840346 validation -4.192838537349297
+[D] EPOCH listmle 1729 15 loss 1.0621741621935068 validation -4.179957349382097
+[D] EPOCH listmle 1729 16 loss 1.0073140611668594 validation -4.2182828362735325
+[D] EPOCH listmle 1729 17 loss 0.9608868017417043 validation -4.213175352351035
+[D] EPOCH listmle 1729 18 loss 0.9191199891707477 validation -4.24532206193292
+[D] EPOCH listmle 1729 19 loss 0.8834429882905063 validation -4.216281061086771
+[D] EPOCH listmle 1729 20 loss 0.8632987157887771 validation -4.211804605132958
+[D] EPOCH listmle 1729 21 loss 0.8299889956452265 validation -4.220907427916247
+[D] EPOCH listmle 1729 22 loss 0.8082804202783007 validation -4.213866721238926
+[D] EPOCH listmle 1729 23 loss 0.802056571766108 validation -4.233649471450262
+[D] TRAIN masked_ppo/1729
+[D] PPO 2048 updates 128 validation -5.409416168237235
+[D] PPO 4096 updates 256 validation -5.940431975683956
+[feedback] RL vlm_replay 1729 14000 updates 3375 validation -0.9383165949854576
+[D] PPO 6144 updates 384 validation -5.423479180179109
+[D] PPO 8192 updates 512 validation -5.2222761596345455
+[D] PPO 10240 updates 640 validation -6.17639584434677
+[D] PPO 12032 updates 752 validation -5.478118776670827
+[D] PPO 14080 updates 880 validation -6.967589856573947
+[D] PPO 16128 updates 1008 validation -6.781099010073813
+[feedback] RL vlm_replay 1729 16000 updates 3875 validation -1.1371340921589528
+[D] PPO 18176 updates 1136 validation -6.277610788891366
+[D] PPO 20000 updates 1252 validation -5.780459542165899
+[D] TRAIN masked_double_dqn/1729
+[feedback] RL vlm_replay 1729 18000 updates 4375 validation -0.9534223335290801
+[D] RL masked_double_dqn 1729 2000 updates 375 validation -5.680141314467613
+[feedback] RL vlm_replay 1729 20000 updates 4875 validation -0.9611857298880472
+[feedback] FEEDBACK_RL vlm_replay/1729 {'status': 'evaluated_development_only', 'completed_decisions': 20000, 'validation': -0.9383165949854576}
+[D] RL masked_double_dqn 1729 4000 updates 875 validation -4.977365805621779
+[feedback] RL vlm_replay 2718 2000 updates 375 validation -1.0997597538041972
+[feedback] RL vlm_replay 2718 4000 updates 875 validation -1.1432840192971878
+[D] RL masked_double_dqn 1729 6000 updates 1375 validation -5.97875006348002
+[feedback] RL vlm_replay 2718 6000 updates 1375 validation -1.2266987937971774
+[D] RL masked_double_dqn 1729 8000 updates 1875 validation -5.861359874350055
+[feedback] RL vlm_replay 2718 8000 updates 1875 validation -1.1733357049686262
+[D] RL masked_double_dqn 1729 10000 updates 2375 validation -6.037290494931046
+[feedback] RL vlm_replay 2718 10000 updates 2375 validation -1.0341181872430965
+[feedback] RL vlm_replay 2718 12000 updates 2875 validation -1.060826869039445
+[D] RL masked_double_dqn 1729 12000 updates 2875 validation -4.9628761841145765
+[feedback] RL vlm_replay 2718 14000 updates 3375 validation -0.860545784125493
+[D] RL masked_double_dqn 1729 14000 updates 3375 validation -5.684697894130028
+[feedback] RL vlm_replay 2718 16000 updates 3875 validation -0.9191329123878952
+[feedback] RL vlm_replay 2718 18000 updates 4375 validation -1.027706079555614
+[D] RL masked_double_dqn 1729 16000 updates 3875 validation -4.980950329524472
+[feedback] RL vlm_replay 2718 20000 updates 4875 validation -0.8457986299844257
+[feedback] FEEDBACK_RL vlm_replay/2718 {'status': 'evaluated_development_only', 'completed_decisions': 20000, 'validation': -0.8457986299844257}
+[D] RL masked_double_dqn 1729 18000 updates 4375 validation -5.320916883190057
+[feedback] RL vlm_replay 31415 2000 updates 375 validation -1.1719887320598192
+[feedback] RL vlm_replay 31415 4000 updates 875 validation -1.0859768822066984
+[D] RL masked_double_dqn 1729 20000 updates 4875 validation -5.545072502775185
+[D] TRAIN td_per/1729
+[feedback] RL vlm_replay 31415 6000 updates 1375 validation -1.1500287918707346
+[D] RL td_per 1729 2000 updates 375 validation -5.623018566845411
+[feedback] RL vlm_replay 31415 8000 updates 1875 validation -1.1693598826300609
+[D] RL td_per 1729 4000 updates 875 validation -5.377756406499883
+[feedback] RL vlm_replay 31415 10000 updates 2375 validation -1.0596609060713702
+[feedback] RL vlm_replay 31415 12000 updates 2875 validation -0.9981245578964403
+[D] RL td_per 1729 6000 updates 1375 validation -5.808984119545343
+[feedback] RL vlm_replay 31415 14000 updates 3375 validation -1.0531050288912773
+[D] RL td_per 1729 8000 updates 1875 validation -5.521853390595941
+[feedback] RL vlm_replay 31415 16000 updates 3875 validation -1.0836741144891862
+[feedback] RL vlm_replay 31415 18000 updates 4375 validation -1.0807987084741186
+[D] RL td_per 1729 10000 updates 2375 validation -5.390199966203375
+[feedback] RL vlm_replay 31415 20000 updates 4875 validation -1.0602877913751902
+[feedback] FEEDBACK_RL vlm_replay/31415 {'status': 'evaluated_development_only', 'completed_decisions': 20000, 'validation': -0.9981245578964403}
+[D] RL td_per 1729 12000 updates 2875 validation -5.045113930213162
+[D] RL td_per 1729 14000 updates 3375 validation -5.030233076532733
+[D] RL td_per 1729 16000 updates 3875 validation -4.7130651891820365
+[D] RL td_per 1729 18000 updates 4375 validation -5.059777128448441
+[D] RL td_per 1729 20000 updates 4875 validation -4.947780755875759
+[D] TRAIN ranknet_warmstart_ppo/1729
+[D] PPO 2048 updates 128 validation -3.7950488018898056
+[D] PPO 4096 updates 256 validation -3.746413303826422
+[D] PPO 6144 updates 384 validation -4.07029695431702
+[D] PPO 8192 updates 512 validation -4.0926013619554835
+[D] PPO 10240 updates 640 validation -4.1372094916281785
+[D] PPO 12032 updates 752 validation -4.110743844403301
+[D] PPO 14080 updates 880 validation -4.163961876040246
+[D] PPO 16128 updates 1008 validation -4.345470065954034
+[D] PPO 18176 updates 1136 validation -4.248599560325387
+[D] PPO 20000 updates 1252 validation -4.31752732613355
+[D] TRAIN temporal_deepsets_ranknet/1729
+[D] EPOCH temporal_deepsets_ranknet 1729 0 loss 0.6896159677999094 validation -4.946950527424911
+[D] EPOCH temporal_deepsets_ranknet 1729 1 loss 0.681457866798155 validation -4.558261758286345
+[D] EPOCH temporal_deepsets_ranknet 1729 2 loss 0.6744522895314731 validation -4.379524847644178
+[D] EPOCH temporal_deepsets_ranknet 1729 3 loss 0.6668567745364271 validation -4.268017278660851
+[D] EPOCH temporal_deepsets_ranknet 1729 4 loss 0.6575525108492002 validation -4.27709992707099
+[D] EPOCH temporal_deepsets_ranknet 1729 5 loss 0.6469138866523281 validation -4.211844480960837
+[D] EPOCH temporal_deepsets_ranknet 1729 6 loss 0.6343896599137224 validation -4.140714515592641
+[D] EPOCH temporal_deepsets_ranknet 1729 7 loss 0.6210691985615995 validation -4.120684870423292
+[D] EPOCH temporal_deepsets_ranknet 1729 8 loss 0.6069611708226148 validation -4.076404676635063
+[D] EPOCH temporal_deepsets_ranknet 1729 9 loss 0.5914294501417316 validation -4.038735832424162
+[D] EPOCH temporal_deepsets_ranknet 1729 10 loss 0.5773181780386949 validation -4.023524986862211
+[D] EPOCH temporal_deepsets_ranknet 1729 11 loss 0.5627460984978825 validation -4.01794256417752
+[D] EPOCH temporal_deepsets_ranknet 1729 12 loss 0.5495584322234208 validation -4.010623671606989
+[D] EPOCH temporal_deepsets_ranknet 1729 13 loss 0.5363404691124742 validation -3.9855425865076
+[D] EPOCH temporal_deepsets_ranknet 1729 14 loss 0.5239959159571299 validation -3.954033656221237
+[D] EPOCH temporal_deepsets_ranknet 1729 15 loss 0.5118416262675964 validation -3.9242983995368745
+[D] EPOCH temporal_deepsets_ranknet 1729 16 loss 0.4993050531738845 validation -3.9142422764528084
+[D] EPOCH temporal_deepsets_ranknet 1729 17 loss 0.4870909950464011 validation -3.888655643754373
+[D] EPOCH temporal_deepsets_ranknet 1729 18 loss 0.47631465991003097 validation -3.8748009991160024
+[D] EPOCH temporal_deepsets_ranknet 1729 19 loss 0.4681207983630884 validation -3.874807879556427
+[D] EPOCH temporal_deepsets_ranknet 1729 20 loss 0.45928333330482474 validation -3.8322829489170003
+[D] EPOCH temporal_deepsets_ranknet 1729 21 loss 0.45525750390567055 validation -3.811406883480859
+[D] EPOCH temporal_deepsets_ranknet 1729 22 loss 0.44671518878809024 validation -3.7967926184910996
+[D] EPOCH temporal_deepsets_ranknet 1729 23 loss 0.4410103841858586 validation -3.781324589132579
+[D] EPOCH temporal_deepsets_ranknet 1729 24 loss 0.43605952940617954 validation -3.789120341829421
+[D] EPOCH temporal_deepsets_ranknet 1729 25 loss 0.43277823534388205 validation -3.7829424287260998
+[D] EPOCH temporal_deepsets_ranknet 1729 26 loss 0.4308596702574192 validation -3.770174923933521
+[D] EPOCH temporal_deepsets_ranknet 1729 27 loss 0.4281118611048349 validation -3.8062674744214773
+[D] EPOCH temporal_deepsets_ranknet 1729 28 loss 0.4253739133688583 validation -3.800865278751606
+[D] EPOCH temporal_deepsets_ranknet 1729 29 loss 0.41830395935908626 validation -3.82661621937959
+[D] EPOCH temporal_deepsets_ranknet 1729 30 loss 0.4166565110448701 validation -3.799849232981964
+[D] EPOCH temporal_deepsets_ranknet 1729 31 loss 0.41401462914297227 validation -3.8075950545722894
+[D] EPOCH temporal_deepsets_ranknet 1729 32 loss 0.4110939524141415 validation -3.8332072682965785
+[D] EPOCH temporal_deepsets_ranknet 1729 33 loss 0.40880160244234176 validation -3.839892150784188
+[D] EPOCH temporal_deepsets_ranknet 1729 34 loss 0.40656911663107387 validation -3.889161600275264
+[D] TRAIN linear_choice/2718
+[D] EPOCH linear_choice 2718 0 loss 1.2105035715792551 validation -6.213865411376332
+[D] EPOCH linear_choice 2718 1 loss 1.1963194055370538 validation -5.944995767600886
+[D] EPOCH linear_choice 2718 2 loss 1.1833893166967184 validation -5.760877064517279
+[D] EPOCH linear_choice 2718 3 loss 1.1722605041710727 validation -5.54384496734371
+[D] EPOCH linear_choice 2718 4 loss 1.1618442722831863 validation -5.395698088990738
+[D] EPOCH linear_choice 2718 5 loss 1.1516096405236118 validation -5.267519355890078
+[D] EPOCH linear_choice 2718 6 loss 1.1427946851016528 validation -5.169643771505008
+[D] EPOCH linear_choice 2718 7 loss 1.1339371602039738 validation -5.074225732620755
+[D] EPOCH linear_choice 2718 8 loss 1.1255391988589103 validation -4.980861535134717
+[D] EPOCH linear_choice 2718 9 loss 1.1178315328905382 validation -4.929522475240324
+[D] EPOCH linear_choice 2718 10 loss 1.1099627310432583 validation -4.8838808869429
+[D] EPOCH linear_choice 2718 11 loss 1.1026888003011783 validation -4.833454311524627
+[D] EPOCH linear_choice 2718 12 loss 1.095904021629368 validation -4.806583318108833
+[D] EPOCH linear_choice 2718 13 loss 1.0891513640262995 validation -4.773253147461778
+[D] EPOCH linear_choice 2718 14 loss 1.0827042836740792 validation -4.748283277794984
+[D] EPOCH linear_choice 2718 15 loss 1.0763401092983873 validation -4.702585645759429
+[D] EPOCH linear_choice 2718 16 loss 1.070489158041506 validation -4.673090549178814
+[D] EPOCH linear_choice 2718 17 loss 1.06460143848356 validation -4.65761971465309
+[D] EPOCH linear_choice 2718 18 loss 1.0589774316692926 validation -4.638252412960454
+[D] EPOCH linear_choice 2718 19 loss 1.0537460831543768 validation -4.625728143113403
+[D] EPOCH linear_choice 2718 20 loss 1.0485206612621445 validation -4.616775586741615
+[D] EPOCH linear_choice 2718 21 loss 1.0434774750686553 validation -4.5884189289289345
+[D] EPOCH linear_choice 2718 22 loss 1.0386557246457382 validation -4.588578386878107
+[D] EPOCH linear_choice 2718 23 loss 1.0339068962059108 validation -4.582742405684326
+[D] EPOCH linear_choice 2718 24 loss 1.029274169535163 validation -4.581494700853137
+[D] EPOCH linear_choice 2718 25 loss 1.0247704847300627 validation -4.572612513972507
+[D] EPOCH linear_choice 2718 26 loss 1.0204239223107516 validation -4.565713912159948
+[D] EPOCH linear_choice 2718 27 loss 1.016316544785198 validation -4.553155166646947
+[D] EPOCH linear_choice 2718 28 loss 1.0122344537492258 validation -4.545364635689674
+[D] EPOCH linear_choice 2718 29 loss 1.0081173688442593 validation -4.5401477650329145
+[D] EPOCH linear_choice 2718 30 loss 1.0042338679219225 validation -4.5376640097752166
+[D] EPOCH linear_choice 2718 31 loss 1.0004702299204935 validation -4.528757510349036
+[D] EPOCH linear_choice 2718 32 loss 0.996826661225543 validation -4.5222944629879125
+[D] EPOCH linear_choice 2718 33 loss 0.9932507628776941 validation -4.51746627720332
+[D] EPOCH linear_choice 2718 34 loss 0.9897231481026814 validation -4.511600594193072
+[D] EPOCH linear_choice 2718 35 loss 0.9864523535886084 validation -4.5072702869896535
+[D] EPOCH linear_choice 2718 36 loss 0.9830297457749945 validation -4.5038619778400735
+[D] EPOCH linear_choice 2718 37 loss 0.9798013094139386 validation -4.4929664612360325
+[D] EPOCH linear_choice 2718 38 loss 0.9766939828284533 validation -4.480394620358282
+[D] EPOCH linear_choice 2718 39 loss 0.9735757988888816 validation -4.473945502629291
+[D] EPOCH linear_choice 2718 40 loss 0.9705456389181585 validation -4.469258901228233
+[D] EPOCH linear_choice 2718 41 loss 0.9675010480794561 validation -4.469659178061579
+[D] EPOCH linear_choice 2718 42 loss 0.9645339760076569 validation -4.463899568514188
+[D] EPOCH linear_choice 2718 43 loss 0.9617518764617572 validation -4.458109730013449
+[D] EPOCH linear_choice 2718 44 loss 0.958914353608726 validation -4.452113485491877
+[D] EPOCH linear_choice 2718 45 loss 0.9562946944306773 validation -4.4438835043363865
+[D] EPOCH linear_choice 2718 46 loss 0.9536613810358636 validation -4.439558597095699
+[D] EPOCH linear_choice 2718 47 loss 0.9509232929492571 validation -4.433487245147967
+[D] EPOCH linear_choice 2718 48 loss 0.9484846787684295 validation -4.421757411283078
+[D] EPOCH linear_choice 2718 49 loss 0.9459213874875063 validation -4.415965478737697
+[D] TRAIN mlp_choice/2718
+[D] EPOCH mlp_choice 2718 0 loss 1.161975941026067 validation -4.323581298338284
+[D] EPOCH mlp_choice 2718 1 loss 1.1473789249558046 validation -4.296780415128921
+[D] EPOCH mlp_choice 2718 2 loss 1.1318283593798257 validation -4.272659147397056
+[D] EPOCH mlp_choice 2718 3 loss 1.1148004114627839 validation -4.307325859710848
+[D] EPOCH mlp_choice 2718 4 loss 1.0937725880059852 validation -4.294088570537343
+[D] EPOCH mlp_choice 2718 5 loss 1.0664482027292252 validation -4.294132514184619
+[D] EPOCH mlp_choice 2718 6 loss 1.0387208545064353 validation -4.313651135822229
+[D] EPOCH mlp_choice 2718 7 loss 1.0063394958714404 validation -4.312504059137397
+[D] EPOCH mlp_choice 2718 8 loss 0.974546802151634 validation -4.307242071767659
+[D] EPOCH mlp_choice 2718 9 loss 0.945415610730289 validation -4.3054969076498795
+[D] EPOCH mlp_choice 2718 10 loss 0.9180756254144102 validation -4.306997857335997
+[D] TRAIN delay_huber/2718
+[D] EPOCH delay_huber 2718 0 loss 0.008935530540166714 validation -4.676675551796055
+[D] EPOCH delay_huber 2718 1 loss 0.007474261186150022 validation -4.574515407644155
+[D] EPOCH delay_huber 2718 2 loss 0.006760804326290781 validation -4.462354811950836
+[D] EPOCH delay_huber 2718 3 loss 0.006475878267139024 validation -4.384320246004169
+[D] EPOCH delay_huber 2718 4 loss 0.006093151375637262 validation -4.3104879690392695
+[D] EPOCH delay_huber 2718 5 loss 0.005842439648802156 validation -4.299543432674926
+[D] EPOCH delay_huber 2718 6 loss 0.005785382505123504 validation -4.214815353524492
+[D] EPOCH delay_huber 2718 7 loss 0.005395025340013682 validation -4.192345694183588
+[D] EPOCH delay_huber 2718 8 loss 0.005219757654540302 validation -4.162586388333727
+[D] EPOCH delay_huber 2718 9 loss 0.00507059210248606 validation -4.1303030248998605
+[D] EPOCH delay_huber 2718 10 loss 0.004948992250751516 validation -4.109718955770961
+[D] EPOCH delay_huber 2718 11 loss 0.004940380706386804 validation -4.099021080746366
+[D] EPOCH delay_huber 2718 12 loss 0.004809970506218786 validation -4.062657972930581
+[D] EPOCH delay_huber 2718 13 loss 0.004601201384215159 validation -4.04543492022369
+[D] EPOCH delay_huber 2718 14 loss 0.00441889228525838 validation -4.029463584855972
+[D] EPOCH delay_huber 2718 15 loss 0.004408460578231299 validation -4.012701804256369
+[D] EPOCH delay_huber 2718 16 loss 0.004283591274413023 validation -4.001574845065704
+[D] EPOCH delay_huber 2718 17 loss 0.004133636775452521 validation -3.997417968273392
+[D] EPOCH delay_huber 2718 18 loss 0.004050827863915307 validation -3.991369836105508
+[D] EPOCH delay_huber 2718 19 loss 0.004055959661501518 validation -3.950567898413685
+[D] EPOCH delay_huber 2718 20 loss 0.003823691986021699 validation -3.952802258009729
+[D] EPOCH delay_huber 2718 21 loss 0.0037945513193047287 validation -3.932464105903716
+[D] EPOCH delay_huber 2718 22 loss 0.0036584528451588105 validation -3.9077953673316252
+[D] EPOCH delay_huber 2718 23 loss 0.0035804984135124895 validation -3.8881186367676706
+[D] EPOCH delay_huber 2718 24 loss 0.0036468290450792917 validation -3.895131781700625
+[D] EPOCH delay_huber 2718 25 loss 0.003737624859133426 validation -3.8920722368604967
+[D] EPOCH delay_huber 2718 26 loss 0.003604759551784742 validation -3.8685382159247466
+[D] EPOCH delay_huber 2718 27 loss 0.00346511446724751 validation -3.877094497944906
+[D] EPOCH delay_huber 2718 28 loss 0.0034578207807623995 validation -3.830245242327189
+[D] EPOCH delay_huber 2718 29 loss 0.0033652233450611746 validation -3.8340758760806435
+[D] EPOCH delay_huber 2718 30 loss 0.0032054001144172783 validation -3.84044037662583
+[D] EPOCH delay_huber 2718 31 loss 0.003142856455864873 validation -3.7971503511988667
+[D] EPOCH delay_huber 2718 32 loss 0.0030922146843007092 validation -3.7957024528072747
+[D] EPOCH delay_huber 2718 33 loss 0.0030869396329800125 validation -3.78634214178677
+[D] EPOCH delay_huber 2718 34 loss 0.002993232290803949 validation -3.775798863420482
+[D] EPOCH delay_huber 2718 35 loss 0.0029715452844423784 validation -3.7760846564685013
+[D] EPOCH delay_huber 2718 36 loss 0.0029830374303725926 validation -3.7568496371537003
+[D] EPOCH delay_huber 2718 37 loss 0.0029386152156594403 validation -3.775338002508905
+[D] EPOCH delay_huber 2718 38 loss 0.0028510896095355065 validation -3.736920580921818
+[D] EPOCH delay_huber 2718 39 loss 0.0027879192142281906 validation -3.7444899899748303
+[D] EPOCH delay_huber 2718 40 loss 0.002803727671271933 validation -3.742298775048782
+[D] EPOCH delay_huber 2718 41 loss 0.0028536875456307564 validation -3.7364576155258216
+[D] EPOCH delay_huber 2718 42 loss 0.0028637116355902936 validation -3.7592213027027612
+[D] EPOCH delay_huber 2718 43 loss 0.0026805258855207015 validation -3.7224517627011378
+[D] EPOCH delay_huber 2718 44 loss 0.0028037643244305244 validation -3.7328961023507348
+[D] EPOCH delay_huber 2718 45 loss 0.0026471417723241686 validation -3.742830672474753
+[D] EPOCH delay_huber 2718 46 loss 0.002640878419196968 validation -3.7132872021323218
+[D] EPOCH delay_huber 2718 47 loss 0.0025521449963059606 validation -3.748927909450463
+[D] EPOCH delay_huber 2718 48 loss 0.0026161762374834474 validation -3.7069069214816355
+[D] EPOCH delay_huber 2718 49 loss 0.002945523118597304 validation -3.730492695027501
+[D] TRAIN ranknet/2718
+[D] EPOCH ranknet 2718 0 loss 0.6873440573690459 validation -4.37778228316637
+[D] EPOCH ranknet 2718 1 loss 0.6789869134081528 validation -4.284192612036313
+[D] EPOCH ranknet 2718 2 loss 0.6707294269581325 validation -4.269074908381062
+[D] EPOCH ranknet 2718 3 loss 0.6618947383249179 validation -4.225111162781643
+[D] EPOCH ranknet 2718 4 loss 0.6510586275835522 validation -4.19242958479914
+[D] EPOCH ranknet 2718 5 loss 0.6380490580049809 validation -4.206050352262175
+[D] EPOCH ranknet 2718 6 loss 0.6252614997210912 validation -4.196691346635831
+[D] EPOCH ranknet 2718 7 loss 0.6104968674189877 validation -4.1975097208805545
+[D] EPOCH ranknet 2718 8 loss 0.5968424992752261 validation -4.174546633902926
+[D] EPOCH ranknet 2718 9 loss 0.5836688166600652 validation -4.172539010238063
+[D] EPOCH ranknet 2718 10 loss 0.571081659050833 validation -4.165691365071099
+[D] EPOCH ranknet 2718 11 loss 0.5604579103091964 validation -4.146874040041498
+[D] EPOCH ranknet 2718 12 loss 0.5512076589948265 validation -4.124654358252881
+[D] EPOCH ranknet 2718 13 loss 0.5414452034747228 validation -4.107918828523316
+[D] EPOCH ranknet 2718 14 loss 0.5329021909910807 validation -4.096863185114712
+[D] EPOCH ranknet 2718 15 loss 0.5256314013295196 validation -4.050325390458862
+[D] EPOCH ranknet 2718 16 loss 0.5175638336222619 validation -4.0415987961099695
+[D] EPOCH ranknet 2718 17 loss 0.5101584669209842 validation -4.026992876810994
+[D] EPOCH ranknet 2718 18 loss 0.5037549947128355 validation -3.9907792780538975
+[D] EPOCH ranknet 2718 19 loss 0.4964481447459548 validation -3.979294975219685
+[D] EPOCH ranknet 2718 20 loss 0.4904464384921994 validation -3.9662270272375326
+[D] EPOCH ranknet 2718 21 loss 0.48399567629257945 validation -3.944220549968684
+[D] EPOCH ranknet 2718 22 loss 0.47788360382719475 validation -3.939697568843081
+[D] EPOCH ranknet 2718 23 loss 0.47318428875496465 validation -3.929868913656387
+[D] EPOCH ranknet 2718 24 loss 0.46906499753549724 validation -3.9192676056127733
+[D] EPOCH ranknet 2718 25 loss 0.4624918309518762 validation -3.8968100590314205
+[D] EPOCH ranknet 2718 26 loss 0.45846089088354347 validation -3.882945542389038
+[D] EPOCH ranknet 2718 27 loss 0.45405044442736653 validation -3.885005394019886
+[D] EPOCH ranknet 2718 28 loss 0.4490612880324534 validation -3.858359828898306
+[D] EPOCH ranknet 2718 29 loss 0.4454536278340129 validation -3.86238325884069
+[D] EPOCH ranknet 2718 30 loss 0.4410770937977304 validation -3.832755378816406
+[D] EPOCH ranknet 2718 31 loss 0.43642038101233993 validation -3.836696277439695
+[D] EPOCH ranknet 2718 32 loss 0.4345896699780383 validation -3.8195058902520396
+[D] EPOCH ranknet 2718 33 loss 0.4313281367747095 validation -3.7948210353830394
+[D] EPOCH ranknet 2718 34 loss 0.42858171782859245 validation -3.785622119613416
+[D] EPOCH ranknet 2718 35 loss 0.42482350672310076 validation -3.7852719153391208
+[D] EPOCH ranknet 2718 36 loss 0.4232983478109986 validation -3.7622974184043754
+[D] EPOCH ranknet 2718 37 loss 0.4200780299312328 validation -3.7648315705062227
+[D] EPOCH ranknet 2718 38 loss 0.4158688857659172 validation -3.7560031874868334
+[D] EPOCH ranknet 2718 39 loss 0.4129632157318497 validation -3.75170425517455
+[D] EPOCH ranknet 2718 40 loss 0.41032051252045676 validation -3.740067369280547
+[D] EPOCH ranknet 2718 41 loss 0.40901365285935753 validation -3.7293489699015345
+[D] EPOCH ranknet 2718 42 loss 0.4055584271312682 validation -3.7352890458397856
+[D] EPOCH ranknet 2718 43 loss 0.40430117643899166 validation -3.7170153818680376
+[D] EPOCH ranknet 2718 44 loss 0.4030156008383585 validation -3.7214445085837915
+[D] EPOCH ranknet 2718 45 loss 0.40137173760075484 validation -3.714941085801278
+[D] EPOCH ranknet 2718 46 loss 0.3992852333567214 validation -3.702509789413886
+[D] EPOCH ranknet 2718 47 loss 0.3956001570256831 validation -3.695718051606931
+[D] EPOCH ranknet 2718 48 loss 0.39649860579554286 validation -3.7019411781011686
+[D] EPOCH ranknet 2718 49 loss 0.39350977309209156 validation -3.6881128421871363
+[D] TRAIN lambdamart/2718
+[D] /usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRanker was fitted with feature names
+[D]   warnings.warn(
+[D] TRAIN priority_classifier/2718
+[D] EPOCH priority_classifier 2718 0 loss 1.3206695853732526 validation -5.288500245540527
+[D] EPOCH priority_classifier 2718 1 loss 1.24005938321352 validation -5.054678309878871
+[D] EPOCH priority_classifier 2718 2 loss 1.2029763971222565 validation -5.011603991804961
+[D] EPOCH priority_classifier 2718 3 loss 1.181316364905797 validation -4.849333413131793
+[D] EPOCH priority_classifier 2718 4 loss 1.1640621050610207 validation -4.823540746213774
+[D] EPOCH priority_classifier 2718 5 loss 1.151134098181501 validation -4.768246031675765
+[D] EPOCH priority_classifier 2718 6 loss 1.131337802944472 validation -4.713022962866743
+[D] EPOCH priority_classifier 2718 7 loss 1.1134776422113646 validation -4.579085986290451
+[D] EPOCH priority_classifier 2718 8 loss 1.0942487424908904 validation -4.509436137494857
+[D] EPOCH priority_classifier 2718 9 loss 1.069921701811836 validation -4.461481506282991
+[D] EPOCH priority_classifier 2718 10 loss 1.0473604952858295 validation -4.39123693243974
+[D] EPOCH priority_classifier 2718 11 loss 1.026969485617883 validation -4.364031774976481
+[D] EPOCH priority_classifier 2718 12 loss 1.0026793726356118 validation -4.323184925578464
+[D] EPOCH priority_classifier 2718 13 loss 0.9847738133685198 validation -4.287908044694302
+[D] EPOCH priority_classifier 2718 14 loss 0.9688433246265049 validation -4.278054116205079
+[D] EPOCH priority_classifier 2718 15 loss 0.946858923536638 validation -4.269542305304138
+[D] EPOCH priority_classifier 2718 16 loss 0.931099384524714 validation -4.256575821126644
+[D] EPOCH priority_classifier 2718 17 loss 0.9103675678852596 validation -4.223872184529886
+[D] EPOCH priority_classifier 2718 18 loss 0.895629713209928 validation -4.208187268333665
+[D] EPOCH priority_classifier 2718 19 loss 0.8756986324315221 validation -4.185972628332521
+[D] EPOCH priority_classifier 2718 20 loss 0.8646681791906303 validation -4.18013236045125
+[D] EPOCH priority_classifier 2718 21 loss 0.8595713988870557 validation -4.17928728658883
+[D] EPOCH priority_classifier 2718 22 loss 0.8477787966567121 validation -4.172303955970677
+[D] EPOCH priority_classifier 2718 23 loss 0.835220622639099 validation -4.187991333025115
+[D] EPOCH priority_classifier 2718 24 loss 0.8187633246870973 validation -4.182006461428313
+[D] EPOCH priority_classifier 2718 25 loss 0.7958613813298143 validation -4.159451251471168
+[D] EPOCH priority_classifier 2718 26 loss 0.7802460968077867 validation -4.145241569517345
+[D] EPOCH priority_classifier 2718 27 loss 0.7664325961391114 validation -4.127440614767177
+[D] EPOCH priority_classifier 2718 28 loss 0.7537307379780032 validation -4.125187741133071
+[D] EPOCH priority_classifier 2718 29 loss 0.7450409201383081 validation -4.117957424325476
+[D] EPOCH priority_classifier 2718 30 loss 0.7349123494730065 validation -4.116116323343797
+[D] EPOCH priority_classifier 2718 31 loss 0.7215417749748667 validation -4.107541383870361
+[D] EPOCH priority_classifier 2718 32 loss 0.7109416566725031 validation -4.107889708674652
+[D] EPOCH priority_classifier 2718 33 loss 0.6992007445767285 validation -4.077876364091582
+[D] EPOCH priority_classifier 2718 34 loss 0.6909508752942202 validation -4.061991630207747
+[D] EPOCH priority_classifier 2718 35 loss 0.6764534788887886 validation -4.084982190542033
+[D] EPOCH priority_classifier 2718 36 loss 0.6692339094347517 validation -4.063412092891512
+[D] EPOCH priority_classifier 2718 37 loss 0.6622948061824445 validation -4.05852475673437
+[D] EPOCH priority_classifier 2718 38 loss 0.6534595723674101 validation -4.055450684854118
+[D] EPOCH priority_classifier 2718 39 loss 0.639597592226437 validation -4.055665302137902
+[D] EPOCH priority_classifier 2718 40 loss 0.6308069740721294 validation -4.0354264183011
+[D] EPOCH priority_classifier 2718 41 loss 0.6262532212115275 validation -4.032435559660592
+[D] EPOCH priority_classifier 2718 42 loss 0.6103228912990062 validation -4.029544966134666
+[D] EPOCH priority_classifier 2718 43 loss 0.6030616952068613 validation -4.039446739587884
+[D] EPOCH priority_classifier 2718 44 loss 0.604106255460465 validation -4.022123715976536
+[D] EPOCH priority_classifier 2718 45 loss 0.5904528550065606 validation -4.024555971503533
+[D] EPOCH priority_classifier 2718 46 loss 0.5755143979730519 validation -4.018008082978677
+[D] EPOCH priority_classifier 2718 47 loss 0.5649032171893964 validation -4.013869302579945
+[D] EPOCH priority_classifier 2718 48 loss 0.5579411631476603 validation -4.000999604998811
+[D] EPOCH priority_classifier 2718 49 loss 0.5503432538806123 validation -4.01832680354892
+[D] TRAIN deepsets_ranknet/2718
+[D] EPOCH deepsets_ranknet 2718 0 loss 0.6868889207253233 validation -4.6546387559849505
+[D] EPOCH deepsets_ranknet 2718 1 loss 0.6786530741374008 validation -4.5147324525176975
+[D] EPOCH deepsets_ranknet 2718 2 loss 0.6715646428638138 validation -4.469988924933043
+[D] EPOCH deepsets_ranknet 2718 3 loss 0.6634235896053724 validation -4.339661155454615
+[D] EPOCH deepsets_ranknet 2718 4 loss 0.6533222721191123 validation -4.2486893802249375
+[D] EPOCH deepsets_ranknet 2718 5 loss 0.6410928503028117 validation -4.244624858424655
+[D] EPOCH deepsets_ranknet 2718 6 loss 0.6275519449845888 validation -4.223012299845879
+[D] EPOCH deepsets_ranknet 2718 7 loss 0.6101839623006526 validation -4.1963176899773265
+[D] EPOCH deepsets_ranknet 2718 8 loss 0.5927874326298479 validation -4.165340650878919
+[D] EPOCH deepsets_ranknet 2718 9 loss 0.5754337102844147 validation -4.136048284658713
+[D] EPOCH deepsets_ranknet 2718 10 loss 0.5589667208259925 validation -4.12615645677705
+[D] EPOCH deepsets_ranknet 2718 11 loss 0.5439104154429515 validation -4.1109552513733965
+[D] EPOCH deepsets_ranknet 2718 12 loss 0.5315203870322875 validation -4.084763097140579
+[D] EPOCH deepsets_ranknet 2718 13 loss 0.5203908326657256 validation -4.066364579397264
+[D] EPOCH deepsets_ranknet 2718 14 loss 0.5093307127972366 validation -4.034607532980169
+[D] EPOCH deepsets_ranknet 2718 15 loss 0.5008919888823584 validation -3.9860923411720455
+[D] EPOCH deepsets_ranknet 2718 16 loss 0.4902346393582775 validation -3.9412029906056416
+[D] EPOCH deepsets_ranknet 2718 17 loss 0.4800322125374805 validation -3.90865654742324
+[D] EPOCH deepsets_ranknet 2718 18 loss 0.4712571170830415 validation -3.8844705678915634
+[D] EPOCH deepsets_ranknet 2718 19 loss 0.4619569969073609 validation -3.862317199332649
+[D] EPOCH deepsets_ranknet 2718 20 loss 0.45747397146942603 validation -3.8415229213393207
+[D] EPOCH deepsets_ranknet 2718 21 loss 0.44881867131539366 validation -3.831825434199025
+[D] EPOCH deepsets_ranknet 2718 22 loss 0.4428651257576348 validation -3.805704865868017
+[D] EPOCH deepsets_ranknet 2718 23 loss 0.4383783674662709 validation -3.789566371692996
+[D] EPOCH deepsets_ranknet 2718 24 loss 0.43349115811435013 validation -3.7603361083346605
+[D] EPOCH deepsets_ranknet 2718 25 loss 0.4283472332021745 validation -3.7526193995318473
+[D] EPOCH deepsets_ranknet 2718 26 loss 0.42301021911127634 validation -3.7029271255193366
+[D] EPOCH deepsets_ranknet 2718 27 loss 0.4242962518239395 validation -3.6980172885876725
+[D] EPOCH deepsets_ranknet 2718 28 loss 0.4213581551914416 validation -3.6885938274874452
+[D] EPOCH deepsets_ranknet 2718 29 loss 0.4182818413987732 validation -3.6702279459068876
+[D] EPOCH deepsets_ranknet 2718 30 loss 0.41364034858830223 validation -3.6739199188275875
+[D] EPOCH deepsets_ranknet 2718 31 loss 0.4107052473241808 validation -3.653288527786057
+[D] EPOCH deepsets_ranknet 2718 32 loss 0.407841090542302 validation -3.662370896969287
+[D] EPOCH deepsets_ranknet 2718 33 loss 0.4054971411264887 validation -3.6406931488086056
+[D] EPOCH deepsets_ranknet 2718 34 loss 0.4048712309059397 validation -3.6359331453279373
+[D] EPOCH deepsets_ranknet 2718 35 loss 0.40221545872655184 validation -3.6401888350317346
+[D] EPOCH deepsets_ranknet 2718 36 loss 0.402557558151301 validation -3.6482595090952756
+[D] EPOCH deepsets_ranknet 2718 37 loss 0.4029772086959902 validation -3.6391204495397083
+[D] EPOCH deepsets_ranknet 2718 38 loss 0.40198390687418595 validation -3.627044504553893
+[D] EPOCH deepsets_ranknet 2718 39 loss 0.3977808984367872 validation -3.630052261721822
+[D] EPOCH deepsets_ranknet 2718 40 loss 0.39646323738032585 validation -3.6231075501270364
+[D] EPOCH deepsets_ranknet 2718 41 loss 0.39489354552218003 validation -3.6319178400871865
+[D] EPOCH deepsets_ranknet 2718 42 loss 0.39347215752147413 validation -3.6172652942520207
+[D] EPOCH deepsets_ranknet 2718 43 loss 0.39099358498947545 validation -3.6339257806946432
+[D] EPOCH deepsets_ranknet 2718 44 loss 0.38860362286379146 validation -3.6147655589134313
+[D] EPOCH deepsets_ranknet 2718 45 loss 0.3894243263680357 validation -3.643455837688708
+[D] EPOCH deepsets_ranknet 2718 46 loss 0.38897659521311745 validation -3.60371274579781
+[D] EPOCH deepsets_ranknet 2718 47 loss 0.3883436809590666 validation -3.621803557735562
+[D] EPOCH deepsets_ranknet 2718 48 loss 0.3857488157858944 validation -3.61474957985884
+[D] EPOCH deepsets_ranknet 2718 49 loss 0.38473012033407894 validation -3.614686288332955
+[D] TRAIN set_transformer_ranknet/2718
+[D] EPOCH set_transformer_ranknet 2718 0 loss 0.6900247909361497 validation -4.910549591034562
+[D] EPOCH set_transformer_ranknet 2718 1 loss 0.6834298414178193 validation -4.563997936050678
+[D] EPOCH set_transformer_ranknet 2718 2 loss 0.6741325972834602 validation -4.583507620690145
+[D] EPOCH set_transformer_ranknet 2718 3 loss 0.6604835716425441 validation -4.341539769240032
+[D] EPOCH set_transformer_ranknet 2718 4 loss 0.6363779844832607 validation -4.171546968111923
+[D] EPOCH set_transformer_ranknet 2718 5 loss 0.6023520049930084 validation -4.126412132683468
+[D] EPOCH set_transformer_ranknet 2718 6 loss 0.567946023948025 validation -4.065981128410941
+[D] EPOCH set_transformer_ranknet 2718 7 loss 0.5334706466237549 validation -4.017640862576345
+[D] EPOCH set_transformer_ranknet 2718 8 loss 0.4973493839352159 validation -3.91767975584817
+[D] EPOCH set_transformer_ranknet 2718 9 loss 0.4748057164179045 validation -3.900177814867404
+[D] EPOCH set_transformer_ranknet 2718 10 loss 0.45289594524001586 validation -3.8603043967152484
+[D] EPOCH set_transformer_ranknet 2718 11 loss 0.44090731710457476 validation -3.856363765325719
+[D] EPOCH set_transformer_ranknet 2718 12 loss 0.4338586469493748 validation -3.7914800595135323
+[D] EPOCH set_transformer_ranknet 2718 13 loss 0.4247028969684834 validation -3.7651981426665717
+[D] EPOCH set_transformer_ranknet 2718 14 loss 0.4177404059564651 validation -3.752016442209689
+[D] EPOCH set_transformer_ranknet 2718 15 loss 0.4179688252233973 validation -3.817502287892344
+[D] EPOCH set_transformer_ranknet 2718 16 loss 0.4077341834654362 validation -3.8009034361476295
+[D] EPOCH set_transformer_ranknet 2718 17 loss 0.40591637539728254 validation -3.7638032839928997
+[D] EPOCH set_transformer_ranknet 2718 18 loss 0.3988872979343796 validation -3.7905683363088682
+[D] EPOCH set_transformer_ranknet 2718 19 loss 0.3997769352713476 validation -3.7908689925042958
+[D] EPOCH set_transformer_ranknet 2718 20 loss 0.3960781691284865 validation -3.8986143276151046
+[D] EPOCH set_transformer_ranknet 2718 21 loss 0.38690471290101414 validation -3.7349029272125747
+[D] EPOCH set_transformer_ranknet 2718 22 loss 0.38113912723019894 validation -3.765003171599911
+[D] EPOCH set_transformer_ranknet 2718 23 loss 0.3804677205198459 validation -3.816052247841184
+[D] EPOCH set_transformer_ranknet 2718 24 loss 0.37883761159946516 validation -3.781621568056868
+[D] EPOCH set_transformer_ranknet 2718 25 loss 0.37251562049209497 validation -3.80561119927701
+[D] EPOCH set_transformer_ranknet 2718 26 loss 0.3656301701691973 validation -3.8163515439429734
+[D] EPOCH set_transformer_ranknet 2718 27 loss 0.3569630368876915 validation -3.8049953239596475
+[D] EPOCH set_transformer_ranknet 2718 28 loss 0.3506065034831636 validation -3.859363933825323
+[D] EPOCH set_transformer_ranknet 2718 29 loss 0.34625969886906205 validation -3.8146376628592735
+[D] TRAIN listmle/2718
+[D] EPOCH listmle 2718 0 loss 1.7698373981991653 validation -4.60720593591479
+[D] EPOCH listmle 2718 1 loss 1.7389183381818376 validation -4.344426923685086
+[D] EPOCH listmle 2718 2 loss 1.7148945728937786 validation -4.2362332383188015
+[D] EPOCH listmle 2718 3 loss 1.686554377558846 validation -4.204329294373785
+[D] EPOCH listmle 2718 4 loss 1.6548174945813305 validation -4.182081256724639
+[D] EPOCH listmle 2718 5 loss 1.6092631554453627 validation -4.179195984012612
+[D] EPOCH listmle 2718 6 loss 1.5633451784931638 validation -4.166613236349981
+[D] EPOCH listmle 2718 7 loss 1.5038060549670045 validation -4.177416405672423
+[D] EPOCH listmle 2718 8 loss 1.425590473151057 validation -4.164723388080555
+[D] EPOCH listmle 2718 9 loss 1.3509568238408312 validation -4.161615691860474
+[D] EPOCH listmle 2718 10 loss 1.2709231620314736 validation -4.153349773883461
+[D] EPOCH listmle 2718 11 loss 1.1962439005479872 validation -4.117219060858495
+[D] EPOCH listmle 2718 12 loss 1.1283823422290995 validation -4.1010940713997766
+[D] EPOCH listmle 2718 13 loss 1.0625902269996188 validation -4.086581815189067
+[D] EPOCH listmle 2718 14 loss 1.0076481458151116 validation -4.071830113187949
+[D] EPOCH listmle 2718 15 loss 0.9603584774260251 validation -4.051562008105282
+[D] EPOCH listmle 2718 16 loss 0.9133337614764957 validation -4.01023723732126
+[D] EPOCH listmle 2718 17 loss 0.8721178482351063 validation -3.9906611564379446
+[D] EPOCH listmle 2718 18 loss 0.8323856994228543 validation -3.985237382370275
+[D] EPOCH listmle 2718 19 loss 0.7952152526228683 validation -3.9694379494525815
+[D] EPOCH listmle 2718 20 loss 0.7643772022529218 validation -3.9516214176344775
+[D] EPOCH listmle 2718 21 loss 0.7287094888728369 validation -3.936194693684644
+[D] EPOCH listmle 2718 22 loss 0.6976488301495336 validation -3.9374086048438786
+[D] EPOCH listmle 2718 23 loss 0.6735436198940067 validation -3.9437352892109554
+[D] EPOCH listmle 2718 24 loss 0.6522864953808065 validation -3.9263009101187296
+[D] EPOCH listmle 2718 25 loss 0.6264464975621715 validation -3.9111245710001667
+[D] EPOCH listmle 2718 26 loss 0.607311532861969 validation -3.9007331400948404
+[D] EPOCH listmle 2718 27 loss 0.5846649401311604 validation -3.9008331856878717
+[D] EPOCH listmle 2718 28 loss 0.5683054391693019 validation -3.9006865087698386
+[D] EPOCH listmle 2718 29 loss 0.5528439917138912 validation -3.9032695154273127
+[D] EPOCH listmle 2718 30 loss 0.5376470602533352 validation -3.893840126326627
+[D] EPOCH listmle 2718 31 loss 0.5272674408255134 validation -3.8880237019837485
+[D] EPOCH listmle 2718 32 loss 0.5178786495571617 validation -3.8835545900453963
+[D] EPOCH listmle 2718 33 loss 0.5053381703606566 validation -3.8857728291082028
+[D] EPOCH listmle 2718 34 loss 0.5001040692177584 validation -3.8818267846030685
+[D] EPOCH listmle 2718 35 loss 0.4900791427624301 validation -3.8695323744462176
+[D] EPOCH listmle 2718 36 loss 0.4819352294570245 validation -3.8925632273087127
+[D] EPOCH listmle 2718 37 loss 0.47255800844832035 validation -3.88824058798956
+[D] EPOCH listmle 2718 38 loss 0.48217671858908245 validation -3.894720099952137
+[D] EPOCH listmle 2718 39 loss 0.4624034101553496 validation -3.8878398152075166
+[D] EPOCH listmle 2718 40 loss 0.4555238035724223 validation -3.8895133188698328
+[D] EPOCH listmle 2718 41 loss 0.45471987573418227 validation -3.8843788174710814
+[D] EPOCH listmle 2718 42 loss 0.4510037288444597 validation -3.8958335174419356
+[D] EPOCH listmle 2718 43 loss 0.45293457246145363 validation -3.8947240165719665
+[D] TRAIN masked_ppo/2718
+[D] PPO 2048 updates 128 validation -5.824452197545637
+[D] PPO 4096 updates 256 validation -5.596152957372975
+[D] PPO 6144 updates 384 validation -5.209194798087798
+[D] PPO 8192 updates 512 validation -4.85568113001137
+[D] PPO 10240 updates 640 validation -5.03342331729958
+[D] PPO 12032 updates 752 validation -5.51433845470907
+[D] PPO 14080 updates 880 validation -5.391038500044098
+[D] PPO 16128 updates 1008 validation -5.193512955441884
+[D] PPO 18176 updates 1136 validation -5.8642349516511745
+[D] PPO 20000 updates 1252 validation -5.616500083333507
+[D] TRAIN masked_double_dqn/2718
+[D] RL masked_double_dqn 2718 2000 updates 375 validation -5.919938054236861
+[D] RL masked_double_dqn 2718 4000 updates 875 validation -5.9711066227974365
+[D] RL masked_double_dqn 2718 6000 updates 1375 validation -5.5970666673056355
+[D] RL masked_double_dqn 2718 8000 updates 1875 validation -6.041376499058614
+[D] RL masked_double_dqn 2718 10000 updates 2375 validation -5.900044060356981
+[D] RL masked_double_dqn 2718 12000 updates 2875 validation -5.498657555030673
+[D] RL masked_double_dqn 2718 14000 updates 3375 validation -5.710551878765454
+[D] RL masked_double_dqn 2718 16000 updates 3875 validation -5.70852328724718
+[D] RL masked_double_dqn 2718 18000 updates 4375 validation -5.466868964851999
+[D] RL masked_double_dqn 2718 20000 updates 4875 validation -6.4272832363665575
+[D] TRAIN td_per/2718
+[D] RL td_per 2718 2000 updates 375 validation -5.724624271824268
+[D] RL td_per 2718 4000 updates 875 validation -6.384577172673528

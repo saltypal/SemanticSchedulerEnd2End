@@ -1,0 +1,777 @@
+{
+  "temporal_deepsets_ranknet/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 463880,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 5.1320515,
+        "context_and_select_p95_ms": 7.669173650000001,
+        "supported_operator_flops": 1011424,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 3.8408195000000003,
+        "context_and_select_p95_ms": 5.542533100000001,
+        "supported_operator_flops": 3683680,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 5.206892,
+        "context_and_select_p95_ms": 6.555824450000003,
+        "supported_operator_flops": 14372704,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 14.0516185,
+        "context_and_select_p95_ms": 16.261887,
+        "supported_operator_flops": 57128800,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 57985
+  },
+  "td_per/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 376584,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 3.2645365,
+        "context_and_select_p95_ms": 5.3814454,
+        "supported_operator_flops": 375296,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.9851145,
+        "context_and_select_p95_ms": 4.1531333,
+        "supported_operator_flops": 1501184,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 4.1993075,
+        "context_and_select_p95_ms": 7.804987600000001,
+        "supported_operator_flops": 6004736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 5.1927579999999995,
+        "context_and_select_p95_ms": 6.789814250000002,
+        "supported_operator_flops": 24018944,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 47073
+  },
+  "set_transformer_ranknet/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 472072,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 3.3346995,
+        "context_and_select_p95_ms": 5.574586849999999,
+        "supported_operator_flops": 436736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 4.0423005,
+        "context_and_select_p95_ms": 15.68705225,
+        "supported_operator_flops": 1796096,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 4.4042045000000005,
+        "context_and_select_p95_ms": 4.982779300000001,
+        "supported_operator_flops": 7970816,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 17.2755035,
+        "context_and_select_p95_ms": 22.30019885,
+        "supported_operator_flops": 44466176,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 59009
+  },
+  "ranknet_warmstart_ppo/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 376584,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.633897,
+        "context_and_select_p95_ms": 2.99361445,
+        "supported_operator_flops": 375296,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.60088,
+        "context_and_select_p95_ms": 2.8918676999999997,
+        "supported_operator_flops": 1501184,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.273575,
+        "context_and_select_p95_ms": 3.53944215,
+        "supported_operator_flops": 6004736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 5.5275715000000005,
+        "context_and_select_p95_ms": 7.96139315,
+        "supported_operator_flops": 24018944,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 47073
+  },
+  "ranknet/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 617480,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.895811,
+        "context_and_select_p95_ms": 4.83174325,
+        "supported_operator_flops": 616704,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.9842935,
+        "context_and_select_p95_ms": 3.6633451000000004,
+        "supported_operator_flops": 2466816,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.7130295,
+        "context_and_select_p95_ms": 4.165336600000001,
+        "supported_operator_flops": 9867264,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 6.904249,
+        "context_and_select_p95_ms": 8.91848725,
+        "supported_operator_flops": 39469056,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 77185
+  },
+  "priority_classifier/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 618272,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.9983305,
+        "context_and_select_p95_ms": 4.102401400000001,
+        "supported_operator_flops": 617472,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.8620085,
+        "context_and_select_p95_ms": 4.7412903,
+        "supported_operator_flops": 2469888,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.8844045,
+        "context_and_select_p95_ms": 3.9981105,
+        "supported_operator_flops": 9879552,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 6.428596000000001,
+        "context_and_select_p95_ms": 7.0903463,
+        "supported_operator_flops": 39518208,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 77284
+  },
+  "mlp_choice/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 617480,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.7175115,
+        "context_and_select_p95_ms": 4.01303765,
+        "supported_operator_flops": 616704,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.9786200000000003,
+        "context_and_select_p95_ms": 3.1794736,
+        "supported_operator_flops": 2466816,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.491027,
+        "context_and_select_p95_ms": 5.79174635,
+        "supported_operator_flops": 9867264,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 9.5511975,
+        "context_and_select_p95_ms": 17.3102701,
+        "supported_operator_flops": 39469056,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 77185
+  },
+  "masked_ppo/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 376584,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 3.3951884999999997,
+        "context_and_select_p95_ms": 5.0594019,
+        "supported_operator_flops": 375296,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.7793285,
+        "context_and_select_p95_ms": 4.91740555,
+        "supported_operator_flops": 1501184,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.74319,
+        "context_and_select_p95_ms": 5.5830561,
+        "supported_operator_flops": 6004736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 5.5690435,
+        "context_and_select_p95_ms": 6.23213505,
+        "supported_operator_flops": 24018944,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 47073
+  },
+  "masked_double_dqn/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 376584,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.866454,
+        "context_and_select_p95_ms": 3.1259278000000004,
+        "supported_operator_flops": 375296,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 3.0002715,
+        "context_and_select_p95_ms": 3.12634905,
+        "supported_operator_flops": 1501184,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.9244925,
+        "context_and_select_p95_ms": 6.29774855,
+        "supported_operator_flops": 6004736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 6.879704,
+        "context_and_select_p95_ms": 10.92693715,
+        "supported_operator_flops": 24018944,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 47073
+  },
+  "listmle/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 376584,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 3.745772,
+        "context_and_select_p95_ms": 5.0408381,
+        "supported_operator_flops": 375296,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 3.128525,
+        "context_and_select_p95_ms": 3.31530455,
+        "supported_operator_flops": 1501184,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.4689595,
+        "context_and_select_p95_ms": 5.6228261,
+        "supported_operator_flops": 6004736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 5.921371000000001,
+        "context_and_select_p95_ms": 7.8121207,
+        "supported_operator_flops": 24018944,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 47073
+  },
+  "linear_choice/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 9384,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.9326475,
+        "context_and_select_p95_ms": 3.0629571500000004,
+        "supported_operator_flops": 9376,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.930579,
+        "context_and_select_p95_ms": 3.807984750000001,
+        "supported_operator_flops": 37504,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 4.855406,
+        "context_and_select_p95_ms": 5.62873705,
+        "supported_operator_flops": 150016,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 9.681999000000001,
+        "context_and_select_p95_ms": 16.27802345,
+        "supported_operator_flops": 600064,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 1173
+  },
+  "lambdamart/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 0,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 9.513603,
+        "context_and_select_p95_ms": 11.762529100000002
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 13.757305500000001,
+        "context_and_select_p95_ms": 19.7570667
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 32.5655195,
+        "context_and_select_p95_ms": 86.15268240000002
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 94.6113445,
+        "context_and_select_p95_ms": 143.00593475000002
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel"
+  },
+  "delay_huber/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 617480,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.352268,
+        "context_and_select_p95_ms": 2.449671,
+        "supported_operator_flops": 616704,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.5723935,
+        "context_and_select_p95_ms": 2.7987482000000004,
+        "supported_operator_flops": 2466816,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 3.357216,
+        "context_and_select_p95_ms": 3.7067167000000003,
+        "supported_operator_flops": 9867264,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 5.671428000000001,
+        "context_and_select_p95_ms": 5.95439265,
+        "supported_operator_flops": 39469056,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 77185
+  },
+  "deepsets_ranknet/1729/model.json": {
+    "native_threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "prefix": "libgomp",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/torch/lib/libgomp.so.1",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/home/Satya/.venvs/semantic-scheduler/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "torch_threads": 1,
+    "weight_numpy_bytes": 376584,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 2.3086535,
+        "context_and_select_p95_ms": 2.3910105,
+        "supported_operator_flops": 375296,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 2.5100344999999997,
+        "context_and_select_p95_ms": 2.70164755,
+        "supported_operator_flops": 1501184,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 2.8124715,
+        "context_and_select_p95_ms": 2.9071574499999997,
+        "supported_operator_flops": 6004736,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 4.789995,
+        "context_and_select_p95_ms": 5.018199,
+        "supported_operator_flops": 24018944,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 47073
+  }
+}

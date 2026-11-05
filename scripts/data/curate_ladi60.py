@@ -23,8 +23,8 @@ def main() -> None:
 
     from datasets import Image, load_dataset
     from huggingface_hub import HfApi
-    from INFRA.data.ladi_manifest import DATASET_ID, draft_ladi60_manifest, render_contact_sheet
-    from SemParam.features.clip import CLIPBackbone
+    from Evaluation.data.ladi_manifest import DATASET_ID, draft_ladi60_manifest, render_contact_sheet
+    from Archived.owners_before_simplification_20261027.SemParam.features.clip import CLIPBackbone
 
     revision = arguments.revision or HfApi().dataset_info(DATASET_ID).sha
     dataset = load_dataset(DATASET_ID, split=arguments.source_split,

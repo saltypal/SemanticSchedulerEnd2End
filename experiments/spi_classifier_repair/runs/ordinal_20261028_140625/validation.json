@@ -1,0 +1,85 @@
+{
+  "student": {
+    "n": 96,
+    "levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "ordinal_scale": "configured output order",
+    "accuracy": 0.5,
+    "balanced_accuracy": 0.4953827155097045,
+    "macro_f1": 0.4466205837173579,
+    "brier_multiclass": 0.62999981108318,
+    "critical_to_low_medium": 0,
+    "critical_to_low_medium_rate": 0.0,
+    "log_loss": 1.122431222108809,
+    "rps": 0.14996231292967976,
+    "ordinal_mae": 0.6041666666666666,
+    "confusion_true_rows_predicted_columns": [
+      [
+        26,
+        10,
+        7,
+        0
+      ],
+      [
+        6,
+        1,
+        1,
+        0
+      ],
+      [
+        3,
+        12,
+        15,
+        8
+      ],
+      [
+        0,
+        0,
+        1,
+        6
+      ]
+    ],
+    "high_critical_underpredictions": 16,
+    "per_class": {
+      "Low": {
+        "support": 43,
+        "precision": 0.7428571428571429,
+        "recall": 0.6046511627906976,
+        "f1": 0.6666666666666666
+      },
+      "Medium": {
+        "support": 8,
+        "precision": 0.043478260869565216,
+        "recall": 0.125,
+        "f1": 0.06451612903225806
+      },
+      "High": {
+        "support": 38,
+        "precision": 0.625,
+        "recall": 0.39473684210526316,
+        "f1": 0.4838709677419355
+      },
+      "Critical": {
+        "support": 7,
+        "precision": 0.42857142857142855,
+        "recall": 0.8571428571428571,
+        "f1": 0.5714285714285714
+      }
+    }
+  },
+  "selected": {
+    "C": 1.0,
+    "fold_macro_f1": [
+      0.521232256115977,
+      0.36984032332869543,
+      0.43910758686976326
+    ],
+    "mean_macro_f1": 0.44339338877147855
+  },
+  "scope": "exposed development teacher agreement; no final test",
+  "runtime_promotion_allowed": false
+}

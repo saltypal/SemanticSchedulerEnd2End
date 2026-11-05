@@ -1,0 +1,70 @@
+{
+  "retrieved_files": 186,
+  "checksum_entries": 45,
+  "direct_mismatches": [],
+  "recovery_zip_sha256": "386323ba5ca009377bbbcb33d7da026a113185d912c75edc03d8c79bef36f90d",
+  "recovery_zip_entries": 46,
+  "recovery_zip_crc": "ok",
+  "zip_mismatches": [],
+  "runtime": {
+    "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+    "interpreter": "/usr/bin/python3",
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "numpy": "2.1.3",
+      "transformers": "5.3.0",
+      "huggingface-hub": "1.5.0",
+      "accelerate": "1.12.0",
+      "bitsandbytes": "0.49.2",
+      "scikit-learn": "1.7.2",
+      "nbformat": "5.10.4"
+    },
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "cuda": "12.8",
+    "thinking": false
+  },
+  "runtime_source_tag": "20261027_spi_evidence_v3a",
+  "runtime_source_files": 108,
+  "runtime_source_mismatches": [],
+  "campaign_status": {
+    "status": "incomplete",
+    "four_class_model": false,
+    "independent_urgency_validation": false,
+    "reason": "RuntimeError: image transport/response preflight failed; inspect receipts",
+    "labelled_images": 0
+  },
+  "cell_status": {
+    "0": {
+      "status": "complete",
+      "log": "/kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3a/cell_evidence/cell_0.log",
+      "seconds": 0.011120741000013368
+    },
+    "1": {
+      "status": "complete",
+      "log": "/kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3a/cell_evidence/cell_1.log",
+      "seconds": 43.25063973100001
+    },
+    "2": {
+      "status": "failed",
+      "log": "/kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3a/cell_evidence/cell_2.log",
+      "seconds": 323.273336999,
+      "error": "RuntimeError",
+      "message": "image transport/response preflight failed; inspect receipts",
+      "traceback": [
+        "Traceback (most recent call last):",
+        "  File \"/kaggle/working/spi_source_20261027_spi_evidence_v3a/parameters/cloud_notebook.py\", line 37, in cell",
+        "    try:yield",
+        "        ^^^^^",
+        "  File \"/tmp/ipykernel_23/1183775873.py\", line 8, in <cell line: 0>",
+        "    OUTPUT=execute(INPUT_ROOT,Path('/kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3a/campaign'),",
+        "        seconds=6660,maximum_images=300,runtime_receipt=recorder.output.parent/'runtime.json')",
+        "  File \"/kaggle/working/spi_source_20261027_spi_evidence_v3a/parameters/spi_pipeline.py\", line 132, in execute",
+        "    raise RuntimeError('image transport/response preflight failed; inspect receipts')",
+        "RuntimeError: image transport/response preflight failed; inspect receipts"
+      ]
+    }
+  }
+}

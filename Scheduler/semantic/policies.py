@@ -8,7 +8,7 @@ from typing import Mapping
 
 import numpy as np
 
-from INFRA.scheduling.semantic_contracts import (
+from Evaluation.scheduling.semantic_contracts import (
     PolicyDecision, ResourceBudgetSemantic, SemanticCandidateSnapshot,
 )
 from Scheduler.semantic.features import STATE_DIM, model_state, static_feature_row

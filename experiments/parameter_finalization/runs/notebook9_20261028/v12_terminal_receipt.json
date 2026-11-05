@@ -1,0 +1,78 @@
+{
+  "version": 12,
+  "status": "KernelWorkerStatus.ERROR",
+  "terminal_status_utc": "2026-10-28T06:31:52Z",
+  "log_path": "experiments/parameter_finalization/runs/notebook9_20261028/monitor_v12/kaggle_logs_v12_terminal.txt",
+  "log_bytes": 49592,
+  "log_sha256": "7b22f2c8bbaad5eef1f2414da45871380fde34e2a0769972d76f68b5f25cd783",
+  "runtime": "Python 3.13.15; Torch 2.11.0+cu128; CUDA 12.8; 2 Tesla T4",
+  "stage": "cell4 input_detector_preflight; mount selected; failed CLIP feature-signature equality before detector warmup",
+  "input_mount": "/kaggle/input/datasets/satyapaladugu/betterscheduler-spiv2-inputs-20261027b",
+  "input_manifest_sha256": "b633e716aa20a36d7f5581dce49bffebc260516ba5ecf78a1ec0ee83ddd92be0",
+  "input_layout": "Kaggle expanded zip; 300 member hashes verified; outer archive hash unavailable",
+  "actual_clip_signature": "105485efb3f14d80514f39138c3310714dfdbee850291a8f4e76551df5e5f065",
+  "expected_feature_signature": "3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de",
+  "failure": "RuntimeError: fresh CLIP embedding signature differs from existing 300-image features; stop before teacher labeling",
+  "teacher_labels_started": false,
+  "spi_training_started": false,
+  "parameter_cache_started": false,
+  "run_recovery_zip_downloaded": false,
+  "retrieved_files": 19,
+  "recovery_manifest_entries": 10,
+  "recovery_manifest_checks": [
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "match": true,
+      "sha256": "93716a8606f2733fc4ecc011682e9ec722d18c9cf66b3fe3cad61f9fee3b7a68"
+    },
+    {
+      "path": "runtime_config.json",
+      "match": true,
+      "sha256": "954df05f24610823e651ee33665f75527ce254711b79d99f0d27aaa10c74bb57"
+    },
+    {
+      "path": "runtime.json",
+      "match": true,
+      "sha256": "55b3f923abdf949ebf70c54fa91e98c01505eeaedc7266b902f4d4079fd5751a"
+    },
+    {
+      "path": "cell_evidence/cell_4.log",
+      "match": true,
+      "sha256": "e3b8203b33c0f63a47972673b4daf6496914d8535added69658afb8d167e6fee"
+    },
+    {
+      "path": "cell_evidence/cell_0.log",
+      "match": true,
+      "sha256": "3ee9a6a63d64ef0e21fe73465674a2275274337e2d9f281810ee85d4440de989"
+    },
+    {
+      "path": "cell_evidence/cell_2.log",
+      "match": true,
+      "sha256": "1f76bfcac9607c5cd4a927f51c684e03a893d663959ab7d0de9902e15655ab35"
+    },
+    {
+      "path": "cell_evidence/cell_3.log",
+      "match": true,
+      "sha256": "84d53042605dc42388eb15f1f6555fd0ed3c0b885e176054f00d841ed6eaba4d"
+    },
+    {
+      "path": "cell_evidence/cell_status.json",
+      "match": true,
+      "sha256": "1d12d92344bed69ab6095ca1f9927da329f39bb678ab35e8dd4946ee9c379c05"
+    },
+    {
+      "path": "cell_evidence/cell_1.log",
+      "match": true,
+      "sha256": "066e4a9fbe7abd3caff0fd1c09ec1a7fcdafd63ae5217d412b6e16abc1914022"
+    },
+    {
+      "path": "cell_evidence/executed.ipynb",
+      "match": true,
+      "sha256": "e06b48fadd8e027de0fdf9f1d0683fc6ce9588c377ae6077ae96699e4a841550"
+    }
+  ],
+  "executed_notebook": "submission_v12_streamfix/retrieved_version12/experiments/parameter_finalization/runs/notebook9_20261028_v12/cell_evidence/executed.ipynb",
+  "account_quota": "5.79h used, 24.21h remaining of 30h",
+  "quota_refresh_utc": "2026-10-31T00:00:00Z",
+  "local_retrieval_note": "Kaggle output CLI stalled after the 19 files including all 10 recovery-manifest payloads were present and verified; only local helper processes were stopped; remote was terminal"
+}

@@ -1,0 +1,918 @@
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+[{"stream_name":"stderr","time":8.701027408,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.70106586,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.701072265,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.701076312,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.322175546,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.322204083,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.322208604,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.322212423,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.52811737,"data":"START 01_session run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":10.529071349,"data":"{'profile': 'wsl', 'interpreter': '/usr/bin/python3', 'python': '3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]', 'platform': 'Linux-6.18.55+-x86_64-with-glibc2.39', 'training_stop_hours': 10.5, 'finalization_stop_hours': 11.5, 'platform_limit_hours': 12, 'host_environment': 'managed Kaggle, not a transferred local venv'}\n"}
+,{"stream_name":"stdout","time":10.529943993,"data":"END 01_session complete seconds 0.0\n"}
+,{"stream_name":"stdout","time":10.766261971,"data":"START 02_pinned_source run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":10.811243991,"data":"Verified source files 177\n"}
+,{"stream_name":"stdout","time":10.811973056,"data":"END 02_pinned_source complete seconds 0.05\n"}
+,{"stream_name":"stdout","time":10.861701791,"data":"START 03_inputs_and_cache run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":29.786240173,"data":"Image archive and frozen caches verified. No SPI/scene/CLIP extraction is rerun.\n"}
+,{"stream_name":"stdout","time":29.787161881,"data":"END 03_inputs_and_cache complete seconds 18.92\n"}
+,{"stream_name":"stdout","time":29.838340906,"data":"START 04_environment run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":29.839207062,"data":"Install into active kernel: ['/usr/bin/python3', '-m', 'pip', 'install', 'lightgbm==4.6.0', 'pytest\u003e=8,\u003c9', 'transformers==4.57.6', 'bitsandbytes==0.49.2', 'lm-format-enforcer==0.11.3', 'accelerate\u003e=1.2,\u003c2', 'Pillow\u003e=11.3,\u003c13', 'einops==0.8.1', 'PyYAML\u003e=6,\u003c7', 'threadpoolctl\u003e=3.5,\u003c4']\n"}
+,{"stream_name":"stdout","time":30.724276342,"data":"Requirement already satisfied: lightgbm==4.6.0 in /usr/local/lib/python3.13/dist-packages (4.6.0)\n"}
+,{"stream_name":"stdout","time":30.724945297,"data":"Requirement already satisfied: pytest\u003c9,\u003e=8 in /usr/local/lib/python3.13/dist-packages (8.4.2)\n"}
+,{"stream_name":"stdout","time":30.926904378,"data":"Requirement already satisfied: lightgbm==4.6.0 in /usr/local/lib/python3.13/dist-packages (4.6.0)\n"}
+,{"stream_name":"stdout","time":30.926933162,"data":"Requirement already satisfied: pytest\u003c9,\u003e=8 in /usr/local/lib/python3.13/dist-packages (8.4.2)\n"}
+,{"stream_name":"stdout","time":30.982383318,"data":"Collecting transformers==4.57.6\n"}
+,{"stream_name":"stdout","time":31.119208197,"data":"  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)\n"}
+,{"stream_name":"stdout","time":31.185930629,"data":"Collecting transformers==4.57.6\n"}
+,{"stream_name":"stdout","time":31.185953925,"data":"  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)\n"}
+,{"stream_name":"stdout","time":31.362752362,"data":"Collecting bitsandbytes==0.49.2\n"}
+,{"stream_name":"stdout","time":31.385786719,"data":"  Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)\n"}
+,{"stream_name":"stdout","time":31.461621341,"data":"Collecting lm-format-enforcer==0.11.3\n"}
+,{"stream_name":"stdout","time":31.483873784,"data":"  Downloading lm_format_enforcer-0.11.3-py3-none-any.whl.metadata (17 kB)\n"}
+,{"stream_name":"stdout","time":31.50395023,"data":"Requirement already satisfied: accelerate\u003c2,\u003e=1.2 in /usr/local/lib/python3.13/dist-packages (1.14.0)\n"}
+,{"stream_name":"stdout","time":31.564547398,"data":"Collecting bitsandbytes==0.49.2\n"}
+,{"stream_name":"stdout","time":31.564565484,"data":"  Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)\n"}
+,{"stream_name":"stdout","time":31.564570151,"data":"Collecting lm-format-enforcer==0.11.3\n"}
+,{"stream_name":"stdout","time":31.564573791,"data":"  Downloading lm_format_enforcer-0.11.3-py3-none-any.whl.metadata (17 kB)\n"}
+,{"stream_name":"stdout","time":31.564578874,"data":"Requirement already satisfied: accelerate\u003c2,\u003e=1.2 in /usr/local/lib/python3.13/dist-packages (1.14.0)\n"}
+,{"stream_name":"stdout","time":31.911790056,"data":"Collecting Pillow\u003c13,\u003e=11.3\n"}
+,{"stream_name":"stdout","time":31.936106077,"data":"  Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)\n"}
+,{"stream_name":"stdout","time":31.997380851,"data":"Collecting einops==0.8.1\n"}
+,{"stream_name":"stdout","time":32.019366951,"data":"  Downloading einops-0.8.1-py3-none-any.whl.metadata (13 kB)\n"}
+,{"stream_name":"stdout","time":32.034224155,"data":"Requirement already satisfied: PyYAML\u003c7,\u003e=6 in /usr/local/lib/python3.13/dist-packages (6.0.3)\n"}
+,{"stream_name":"stdout","time":32.0350982,"data":"Requirement already satisfied: threadpoolctl\u003c4,\u003e=3.5 in /usr/local/lib/python3.13/dist-packages (3.6.0)\n"}
+,{"stream_name":"stdout","time":32.037465727,"data":"Requirement already satisfied: numpy\u003e=1.17.0 in /usr/local/lib/python3.13/dist-packages (from lightgbm==4.6.0) (2.1.3)\n"}
+,{"stream_name":"stdout","time":32.038202564,"data":"Requirement already satisfied: scipy in /usr/local/lib/python3.13/dist-packages (from lightgbm==4.6.0) (1.16.3)\n"}
+,{"stream_name":"stdout","time":32.040016432,"data":"Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (3.32.5)\n"}
+,{"stream_name":"stdout","time":32.113948423,"data":"Collecting Pillow\u003c13,\u003e=11.3\n"}
+,{"stream_name":"stdout","time":32.113978106,"data":"  Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)\n"}
+,{"stream_name":"stdout","time":32.113983616,"data":"Collecting einops==0.8.1\n"}
+,{"stream_name":"stdout","time":32.113987226,"data":"  Downloading einops-0.8.1-py3-none-any.whl.metadata (13 kB)\n"}
+,{"stream_name":"stdout","time":32.113990883,"data":"Requirement already satisfied: PyYAML\u003c7,\u003e=6 in /usr/local/lib/python3.13/dist-packages (6.0.3)\n"}
+,{"stream_name":"stdout","time":32.113994688,"data":"Requirement already satisfied: threadpoolctl\u003c4,\u003e=3.5 in /usr/local/lib/python3.13/dist-packages (3.6.0)\n"}
+,{"stream_name":"stdout","time":32.11399847,"data":"Requirement already satisfied: numpy\u003e=1.17.0 in /usr/local/lib/python3.13/dist-packages (from lightgbm==4.6.0) (2.1.3)\n"}
+,{"stream_name":"stdout","time":32.114011697,"data":"Requirement already satisfied: scipy in /usr/local/lib/python3.13/dist-packages (from lightgbm==4.6.0) (1.16.3)\n"}
+,{"stream_name":"stdout","time":32.114015768,"data":"Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (3.32.5)\n"}
+,{"stream_name":"stdout","time":32.143266654,"data":"Collecting huggingface-hub\u003c1.0,\u003e=0.34.0 (from transformers==4.57.6)\n"}
+,{"stream_name":"stdout","time":32.166184593,"data":"  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)\n"}
+,{"stream_name":"stdout","time":32.197942973,"data":"Requirement already satisfied: packaging\u003e=20.0 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (26.3)\n"}
+,{"stream_name":"stdout","time":32.198651737,"data":"Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2025.11.3)\n"}
+,{"stream_name":"stdout","time":32.199300341,"data":"Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2.34.2)\n"}
+,{"stream_name":"stdout","time":32.345353221,"data":"Collecting huggingface-hub\u003c1.0,\u003e=0.34.0 (from transformers==4.57.6)\n"}
+,{"stream_name":"stdout","time":32.345388064,"data":"  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)\n"}
+,{"stream_name":"stdout","time":32.34539426,"data":"Requirement already satisfied: packaging\u003e=20.0 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (26.3)\n"}
+,{"stream_name":"stdout","time":32.345399435,"data":"Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2025.11.3)\n"}
+,{"stream_name":"stdout","time":32.345403674,"data":"Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2.34.2)\n"}
+,{"stream_name":"stdout","time":32.510953391,"data":"Collecting tokenizers\u003c=0.23.0,\u003e=0.22.0 (from transformers==4.57.6)\n"}
+,{"stream_name":"stdout","time":32.53336642,"data":"  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)\n"}
+,{"stream_name":"stdout","time":32.551239457,"data":"Requirement already satisfied: safetensors\u003e=0.4.3 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (0.8.0)\n"}
+,{"stream_name":"stdout","time":32.552006071,"data":"Requirement already satisfied: tqdm\u003e=4.27 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (4.67.3)\n"}
+,{"stream_name":"stdout","time":32.555450406,"data":"Requirement already satisfied: torch\u003c3,\u003e=2.3 in /usr/local/lib/python3.13/dist-packages (from bitsandbytes==0.49.2) (2.11.0+cu128)\n"}
+,{"stream_name":"stdout","time":32.598718138,"data":"Collecting interegular\u003e=0.3.2 (from lm-format-enforcer==0.11.3)\n"}
+,{"stream_name":"stdout","time":32.620992954,"data":"  Downloading interegular-0.3.3-py37-none-any.whl.metadata (3.0 kB)\n"}
+,{"stream_name":"stdout","time":32.634836779,"data":"Requirement already satisfied: pydantic\u003e=1.10.8 in /usr/local/lib/python3.13/dist-packages (from lm-format-enforcer==0.11.3) (2.13.5)\n"}
+,{"stream_name":"stdout","time":32.637949016,"data":"Requirement already satisfied: iniconfig\u003e=1 in /usr/local/lib/python3.13/dist-packages (from pytest\u003c9,\u003e=8) (2.3.0)\n"}
+,{"stream_name":"stdout","time":32.638924517,"data":"Requirement already satisfied: pluggy\u003c2,\u003e=1.5 in /usr/local/lib/python3.13/dist-packages (from pytest\u003c9,\u003e=8) (1.6.0)\n"}
+,{"stream_name":"stdout","time":32.639648147,"data":"Requirement already satisfied: pygments\u003e=2.7.2 in /usr/local/lib/python3.13/dist-packages (from pytest\u003c9,\u003e=8) (2.21.0)\n"}
+,{"stream_name":"stdout","time":32.643647456,"data":"Requirement already satisfied: psutil in /usr/local/lib/python3.13/dist-packages (from accelerate\u003c2,\u003e=1.2) (5.9.5)\n"}
+,{"stream_name":"stdout","time":32.654687184,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers==4.57.6) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":32.655624916,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.1.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers==4.57.6) (1.6.0)\n"}
+,{"stream_name":"stdout","time":32.656659332,"data":"Requirement already satisfied: typing-extensions\u003e=3.7.4.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers==4.57.6) (4.16.0)\n"}
+,{"stream_name":"stdout","time":32.668402127,"data":"Requirement already satisfied: setuptools\u003c82 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (81.0.0)\n"}
+,{"stream_name":"stdout","time":32.669177142,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.14.0)\n"}
+,{"stream_name":"stdout","time":32.670003773,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.6.1)\n"}
+,{"stream_name":"stdout","time":32.67063661,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.1.6)\n"}
+,{"stream_name":"stdout","time":32.67226609,"data":"Requirement already satisfied: cuda-toolkit==12.8.1 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.1)\n"}
+,{"stream_name":"stdout","time":32.673466481,"data":"Requirement already satisfied: cuda-bindings\u003c13,\u003e=12.9.4 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.9.7)\n"}
+,{"stream_name":"stdout","time":32.674414894,"data":"Requirement already satisfied: nvidia-cudnn-cu12==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":32.675388505,"data":"Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (0.7.1)\n"}
+,{"stream_name":"stdout","time":32.676334307,"data":"Requirement already satisfied: nvidia-nccl-cu12==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (2.28.9)\n"}
+,{"stream_name":"stdout","time":32.677234595,"data":"Requirement already satisfied: nvidia-nvshmem-cu12==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.4.5)\n"}
+,{"stream_name":"stdout","time":32.678132821,"data":"Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.6.0)\n"}
+,{"stream_name":"stdout","time":32.689052067,"data":"Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.4.1)\n"}
+,{"stream_name":"stdout","time":32.690181926,"data":"Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.90)\n"}
+,{"stream_name":"stdout","time":32.691353244,"data":"Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (11.3.3.83)\n"}
+,{"stream_name":"stdout","time":32.692434347,"data":"Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.13.1.3)\n"}
+,{"stream_name":"stdout","time":32.693461662,"data":"Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.90)\n"}
+,{"stream_name":"stdout","time":32.694873902,"data":"Requirement already satisfied: nvidia-curand-cu12==10.3.9.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (10.3.9.90)\n"}
+,{"stream_name":"stdout","time":32.69612145,"data":"Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (11.7.3.90)\n"}
+,{"stream_name":"stdout","time":32.697450368,"data":"Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.5.8.93)\n"}
+,{"stream_name":"stdout","time":32.69902592,"data":"Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.93)\n"}
+,{"stream_name":"stdout","time":32.700388619,"data":"Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.93)\n"}
+,{"stream_name":"stdout","time":32.701597793,"data":"Requirement already satisfied: nvidia-nvtx-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.90)\n"}
+,{"stream_name":"stdout","time":32.713379889,"data":"Collecting tokenizers\u003c=0.23.0,\u003e=0.22.0 (from transformers==4.57.6)\n"}
+,{"stream_name":"stdout","time":32.713426058,"data":"  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)\n"}
+,{"stream_name":"stdout","time":32.713436565,"data":"Requirement already satisfied: safetensors\u003e=0.4.3 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (0.8.0)\n"}
+,{"stream_name":"stdout","time":32.713439583,"data":"Requirement already satisfied: tqdm\u003e=4.27 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (4.67.3)\n"}
+,{"stream_name":"stdout","time":32.713442135,"data":"Requirement already satisfied: torch\u003c3,\u003e=2.3 in /usr/local/lib/python3.13/dist-packages (from bitsandbytes==0.49.2) (2.11.0+cu128)\n"}
+,{"stream_name":"stdout","time":32.713444849,"data":"Collecting interegular\u003e=0.3.2 (from lm-format-enforcer==0.11.3)\n"}
+,{"stream_name":"stdout","time":32.713447332,"data":"  Downloading interegular-0.3.3-py37-none-any.whl.metadata (3.0 kB)\n"}
+,{"stream_name":"stdout","time":32.713449781,"data":"Requirement already satisfied: pydantic\u003e=1.10.8 in /usr/local/lib/python3.13/dist-packages (from lm-format-enforcer==0.11.3) (2.13.5)\n"}
+,{"stream_name":"stdout","time":32.713452426,"data":"Requirement already satisfied: iniconfig\u003e=1 in /usr/local/lib/python3.13/dist-packages (from pytest\u003c9,\u003e=8) (2.3.0)\n"}
+,{"stream_name":"stdout","time":32.713455068,"data":"Requirement already satisfied: pluggy\u003c2,\u003e=1.5 in /usr/local/lib/python3.13/dist-packages (from pytest\u003c9,\u003e=8) (1.6.0)\n"}
+,{"stream_name":"stdout","time":32.713457618,"data":"Requirement already satisfied: pygments\u003e=2.7.2 in /usr/local/lib/python3.13/dist-packages (from pytest\u003c9,\u003e=8) (2.21.0)\n"}
+,{"stream_name":"stdout","time":32.713460172,"data":"Requirement already satisfied: psutil in /usr/local/lib/python3.13/dist-packages (from accelerate\u003c2,\u003e=1.2) (5.9.5)\n"}
+,{"stream_name":"stdout","time":32.71346279,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers==4.57.6) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":32.713465673,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.1.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers==4.57.6) (1.6.0)\n"}
+,{"stream_name":"stdout","time":32.713484943,"data":"Requirement already satisfied: typing-extensions\u003e=3.7.4.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers==4.57.6) (4.16.0)\n"}
+,{"stream_name":"stdout","time":32.713489893,"data":"Requirement already satisfied: setuptools\u003c82 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (81.0.0)\n"}
+,{"stream_name":"stdout","time":32.713495485,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.14.0)\n"}
+,{"stream_name":"stdout","time":32.713500115,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.6.1)\n"}
+,{"stream_name":"stdout","time":32.713504341,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.1.6)\n"}
+,{"stream_name":"stdout","time":32.713508376,"data":"Requirement already satisfied: cuda-toolkit==12.8.1 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.1)\n"}
+,{"stream_name":"stdout","time":32.713512936,"data":"Requirement already satisfied: cuda-bindings\u003c13,\u003e=12.9.4 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.9.7)\n"}
+,{"stream_name":"stdout","time":32.71352073,"data":"Requirement already satisfied: nvidia-cudnn-cu12==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":32.713524871,"data":"Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (0.7.1)\n"}
+,{"stream_name":"stdout","time":32.713528777,"data":"Requirement already satisfied: nvidia-nccl-cu12==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (2.28.9)\n"}
+,{"stream_name":"stdout","time":32.713535493,"data":"Requirement already satisfied: nvidia-nvshmem-cu12==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.4.5)\n"}
+,{"stream_name":"stdout","time":32.713555792,"data":"Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.6.0)\n"}
+,{"stream_name":"stdout","time":32.713560635,"data":"Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.4.1)\n"}
+,{"stream_name":"stdout","time":32.71356575,"data":"Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.90)\n"}
+,{"stream_name":"stdout","time":32.71357045,"data":"Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (11.3.3.83)\n"}
+,{"stream_name":"stdout","time":32.713575314,"data":"Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.13.1.3)\n"}
+,{"stream_name":"stdout","time":32.713579725,"data":"Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.90)\n"}
+,{"stream_name":"stdout","time":32.713584151,"data":"Requirement already satisfied: nvidia-curand-cu12==10.3.9.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (10.3.9.90)\n"}
+,{"stream_name":"stdout","time":32.71358878,"data":"Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (11.7.3.90)\n"}
+,{"stream_name":"stdout","time":32.713593413,"data":"Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.5.8.93)\n"}
+,{"stream_name":"stdout","time":32.71360765,"data":"Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.93)\n"}
+,{"stream_name":"stdout","time":32.713612278,"data":"Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.93)\n"}
+,{"stream_name":"stdout","time":32.713615331,"data":"Requirement already satisfied: nvidia-nvtx-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == \"Linux\"-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (12.8.90)\n"}
+,{"stream_name":"stdout","time":32.71464565,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003c13,\u003e=12.9.4-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.8.0)\n"}
+,{"stream_name":"stdout","time":32.76673259,"data":"Requirement already satisfied: annotated-types\u003e=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003e=1.10.8-\u003elm-format-enforcer==0.11.3) (0.8.0)\n"}
+,{"stream_name":"stdout","time":32.767354532,"data":"Requirement already satisfied: pydantic-core==2.46.5 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003e=1.10.8-\u003elm-format-enforcer==0.11.3) (2.46.5)\n"}
+,{"stream_name":"stdout","time":32.768189751,"data":"Requirement already satisfied: typing-inspection\u003e=0.4.2 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003e=1.10.8-\u003elm-format-enforcer==0.11.3) (0.4.4)\n"}
+,{"stream_name":"stdout","time":32.785427293,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.3.0)\n"}
+,{"stream_name":"stdout","time":32.800113962,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.0.3)\n"}
+,{"stream_name":"stdout","time":32.808439835,"data":"Requirement already satisfied: charset_normalizer\u003c4,\u003e=2 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (3.4.9)\n"}
+,{"stream_name":"stdout","time":32.809148088,"data":"Requirement already satisfied: idna\u003c4,\u003e=2.5 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (3.19)\n"}
+,{"stream_name":"stdout","time":32.809977771,"data":"Requirement already satisfied: urllib3\u003c3,\u003e=1.26 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (2.8.0)\n"}
+,{"stream_name":"stdout","time":32.810663042,"data":"Requirement already satisfied: certifi\u003e=2023.5.7 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (2026.10.19)\n"}
+,{"stream_name":"stdout","time":32.854612778,"data":"Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)\n"}
+,{"stream_name":"stdout","time":32.91687733,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003c13,\u003e=12.9.4-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.8.0)\n"}
+,{"stream_name":"stdout","time":32.916913482,"data":"Requirement already satisfied: annotated-types\u003e=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003e=1.10.8-\u003elm-format-enforcer==0.11.3) (0.8.0)\n"}
+,{"stream_name":"stdout","time":32.916919189,"data":"Requirement already satisfied: pydantic-core==2.46.5 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003e=1.10.8-\u003elm-format-enforcer==0.11.3) (2.46.5)\n"}
+,{"stream_name":"stdout","time":32.916924909,"data":"Requirement already satisfied: typing-inspection\u003e=0.4.2 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003e=1.10.8-\u003elm-format-enforcer==0.11.3) (0.4.4)\n"}
+,{"stream_name":"stdout","time":32.916932346,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (1.3.0)\n"}
+,{"stream_name":"stdout","time":32.916935215,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch\u003c3,\u003e=2.3-\u003ebitsandbytes==0.49.2) (3.0.3)\n"}
+,{"stream_name":"stdout","time":32.91693801,"data":"Requirement already satisfied: charset_normalizer\u003c4,\u003e=2 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (3.4.9)\n"}
+,{"stream_name":"stdout","time":32.916940753,"data":"Requirement already satisfied: idna\u003c4,\u003e=2.5 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (3.19)\n"}
+,{"stream_name":"stdout","time":32.916943417,"data":"Requirement already satisfied: urllib3\u003c3,\u003e=1.26 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (2.8.0)\n"}
+,{"stream_name":"stdout","time":32.916946085,"data":"Requirement already satisfied: certifi\u003e=2023.5.7 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers==4.57.6) (2026.10.19)\n"}
+,{"stream_name":"stdout","time":32.916948747,"data":"Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)\n"}
+,{"stream_name":"stdout","time":33.056978934,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 72.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":33.081416032999996,"data":"Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl (60.7 MB)\n"}
+,{"stream_name":"stdout","time":33.259130857,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 72.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":33.259169642,"data":"Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl (60.7 MB)\n"}
+,{"stream_name":"stdout","time":33.890299176,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.7/60.7 MB 75.4 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":33.913175307,"data":"Downloading lm_format_enforcer-0.11.3-py3-none-any.whl (45 kB)\n"}
+,{"stream_name":"stdout","time":33.947932689,"data":"Downloading einops-0.8.1-py3-none-any.whl (64 kB)\n"}
+,{"stream_name":"stdout","time":33.986419401,"data":"Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)\n"}
+,{"stream_name":"stdout","time":34.053802522,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 104.9 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.076174349,"data":"Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)\n"}
+,{"stream_name":"stdout","time":34.092525044,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.7/60.7 MB 75.4 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.092574064,"data":"Downloading lm_format_enforcer-0.11.3-py3-none-any.whl (45 kB)\n"}
+,{"stream_name":"stdout","time":34.092579221,"data":"Downloading einops-0.8.1-py3-none-any.whl (64 kB)\n"}
+,{"stream_name":"stdout","time":34.09259696,"data":"Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)\n"}
+,{"stream_name":"stdout","time":34.09261918,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 104.9 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.09262442,"data":"Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)\n"}
+,{"stream_name":"stdout","time":34.096436454,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 17.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.119373174,"data":"Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)\n"}
+,{"stream_name":"stdout","time":34.15186191,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 104.8 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.174230575,"data":"Downloading interegular-0.3.3-py37-none-any.whl (23 kB)\n"}
+,{"stream_name":"stdout","time":34.298946799,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 17.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.298994018,"data":"Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)\n"}
+,{"stream_name":"stdout","time":34.298997962,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 104.8 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":34.299001069,"data":"Downloading interegular-0.3.3-py37-none-any.whl (23 kB)\n"}
+,{"stream_name":"stdout","time":36.388917895,"data":"Installing collected packages: Pillow, interegular, einops, huggingface-hub, tokenizers, lm-format-enforcer, transformers, bitsandbytes\n"}
+,{"stream_name":"stdout","time":36.389562995,"data":"  Attempting uninstall: Pillow\n"}
+,{"stream_name":"stdout","time":36.39720516,"data":"    Found existing installation: pillow 13.0.0\n"}
+,{"stream_name":"stdout","time":36.40891072,"data":"    Uninstalling pillow-13.0.0:\n"}
+,{"stream_name":"stdout","time":36.591251233,"data":"Installing collected packages: Pillow, interegular, einops, huggingface-hub, tokenizers, lm-format-enforcer, transformers, bitsandbytes\n"}
+,{"stream_name":"stdout","time":36.59128593,"data":"  Attempting uninstall: Pillow\n"}
+,{"stream_name":"stdout","time":36.591293422,"data":"    Found existing installation: pillow 13.0.0\n"}
+,{"stream_name":"stdout","time":36.591301746,"data":"    Uninstalling pillow-13.0.0:\n"}
+,{"stream_name":"stdout","time":36.627154899,"data":"      Successfully uninstalled pillow-13.0.0\n"}
+,{"stream_name":"stdout","time":36.829233941,"data":"      Successfully uninstalled pillow-13.0.0\n"}
+,{"stream_name":"stdout","time":37.052466584,"data":"  Attempting uninstall: einops\n"}
+,{"stream_name":"stdout","time":37.075310145,"data":"    Found existing installation: einops 0.8.2\n"}
+,{"stream_name":"stdout","time":37.083216359,"data":"    Uninstalling einops-0.8.2:\n"}
+,{"stream_name":"stdout","time":37.108874319,"data":"      Successfully uninstalled einops-0.8.2\n"}
+,{"stream_name":"stdout","time":37.178434575,"data":"  Attempting uninstall: huggingface-hub\n"}
+,{"stream_name":"stdout","time":37.211584031,"data":"    Found existing installation: huggingface_hub 1.29.0\n"}
+,{"stream_name":"stdout","time":37.233850675,"data":"    Uninstalling huggingface_hub-1.29.0:\n"}
+,{"stream_name":"stdout","time":37.254818441,"data":"  Attempting uninstall: einops\n"}
+,{"stream_name":"stdout","time":37.254838841,"data":"    Found existing installation: einops 0.8.2\n"}
+,{"stream_name":"stdout","time":37.254842999,"data":"    Uninstalling einops-0.8.2:\n"}
+,{"stream_name":"stdout","time":37.254846716,"data":"      Successfully uninstalled einops-0.8.2\n"}
+,{"stream_name":"stdout","time":37.254850369,"data":"  Attempting uninstall: huggingface-hub\n"}
+,{"stream_name":"stdout","time":37.254854034,"data":"    Found existing installation: huggingface_hub 1.29.0\n"}
+,{"stream_name":"stdout","time":37.25485974,"data":"    Uninstalling huggingface_hub-1.29.0:\n"}
+,{"stream_name":"stdout","time":37.428866964,"data":"      Successfully uninstalled huggingface_hub-1.29.0\n"}
+,{"stream_name":"stdout","time":37.631070516,"data":"      Successfully uninstalled huggingface_hub-1.29.0\n"}
+,{"stream_name":"stdout","time":37.766438056,"data":"  Attempting uninstall: tokenizers\n"}
+,{"stream_name":"stdout","time":37.795802994,"data":"    Found existing installation: tokenizers 0.23.1\n"}
+,{"stream_name":"stdout","time":37.807194963,"data":"    Uninstalling tokenizers-0.23.1:\n"}
+,{"stream_name":"stdout","time":37.888329993,"data":"      Successfully uninstalled tokenizers-0.23.1\n"}
+,{"stream_name":"stdout","time":37.968626287,"data":"  Attempting uninstall: tokenizers\n"}
+,{"stream_name":"stdout","time":37.968655856,"data":"    Found existing installation: tokenizers 0.23.1\n"}
+,{"stream_name":"stdout","time":37.968661442,"data":"    Uninstalling tokenizers-0.23.1:\n"}
+,{"stream_name":"stdout","time":37.968665532,"data":"      Successfully uninstalled tokenizers-0.23.1\n"}
+,{"stream_name":"stdout","time":38.016335235,"data":"  Attempting uninstall: transformers\n"}
+,{"stream_name":"stdout","time":38.038938445,"data":"    Found existing installation: transformers 5.16.1\n"}
+,{"stream_name":"stdout","time":38.21838159,"data":"  Attempting uninstall: transformers\n"}
+,{"stream_name":"stdout","time":38.218424148,"data":"    Found existing installation: transformers 5.16.1\n"}
+,{"stream_name":"stdout","time":38.53179001,"data":"    Uninstalling transformers-5.16.1:\n"}
+,{"stream_name":"stdout","time":38.733901088,"data":"    Uninstalling transformers-5.16.1:\n"}
+,{"stream_name":"stdout","time":41.328629467,"data":"      Successfully uninstalled transformers-5.16.1\n"}
+,{"stream_name":"stdout","time":41.530939641,"data":"      Successfully uninstalled transformers-5.16.1\n"}
+,{"stream_name":"stdout","time":50.195495844,"data":"\n"}
+,{"stream_name":"stderr","time":50.196952728,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":50.196974118,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.196978481,"data":"gradio 6.26.0 requires huggingface-hub\u003c2.0,\u003e=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.19699755,"data":"diffusers 0.40.0 requires huggingface-hub\u003c2.0,\u003e=1.23.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":50.26453172,"data":"Successfully installed Pillow-12.3.0 bitsandbytes-0.49.2 einops-0.8.1 huggingface-hub-0.36.2 interegular-0.3.3 lm-format-enforcer-0.11.3 tokenizers-0.22.2 transformers-4.57.6\n"}
+,{"stream_name":"stdout","time":50.398256572,"data":"\n"}
+,{"stream_name":"stdout","time":50.398297919,"data":"Successfully installed Pillow-12.3.0 bitsandbytes-0.49.2 einops-0.8.1 huggingface-hub-0.36.2 interegular-0.3.3 lm-format-enforcer-0.11.3 tokenizers-0.22.2 transformers-4.57.6\n"}
+,{"stream_name":"stderr","time":50.399420311,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":50.399442044,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.399448266,"data":"gradio 6.26.0 requires huggingface-hub\u003c2.0,\u003e=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.39945348,"data":"diffusers 0.40.0 requires huggingface-hub\u003c2.0,\u003e=1.23.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.399458957,"data":"\n"}
+,{"stream_name":"stderr","time":50.399462895,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":50.399467363,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.399471586,"data":"gradio 6.26.0 requires huggingface-hub\u003c2.0,\u003e=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":50.399475987,"data":"diffusers 0.40.0 requires huggingface-hub\u003c2.0,\u003e=1.23.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":71.942091055,"data":"{'python': '3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]', 'torch': '2.11.0+cu128', 'numpy': '2.1.3', 'lightgbm': '4.6.0', 'transformers': '4.57.6', 'cuda': True, 'devices': ['Tesla T4', 'Tesla T4']}\n"}
+,{"stream_name":"stdout","time":72.46024355,"data":"Managed Torch/CUDA retained; no core-framework replacement. Fresh kernel required if dependencies were previously imported.\n"}
+,{"stream_name":"stdout","time":72.461180987,"data":"END 04_environment complete seconds 42.62\n"}
+,{"stream_name":"stdout","time":72.520015472,"data":"START 05_contracts_and_reference_scope run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":78.242077181,"data":"{\n"}
+,{"stream_name":"stdout","time":78.242111731,"data":"  \"status\": \"ready_scoped_D\",\n"}
+,{"stream_name":"stdout","time":78.242129596,"data":"  \"coverage\": {\n"}
+,{"stream_name":"stdout","time":78.242134921,"data":"    \"crisismmd\": {\n"}
+,{"stream_name":"stdout","time":78.242139726,"data":"      \"offered\": 4000,\n"}
+,{"stream_name":"stdout","time":78.242144818,"data":"      \"assessable\": 3915\n"}
+,{"stream_name":"stdout","time":78.242149648,"data":"    },\n"}
+,{"stream_name":"stdout","time":78.242153699,"data":"    \"open_images\": {\n"}
+,{"stream_name":"stdout","time":78.242157881,"data":"      \"offered\": 1000,\n"}
+,{"stream_name":"stdout","time":78.242161926,"data":"      \"assessable\": 0\n"}
+,{"stream_name":"stdout","time":78.242165971,"data":"    },\n"}
+,{"stream_name":"stdout","time":78.242186748,"data":"    \"places365\": {\n"}
+,{"stream_name":"stdout","time":78.242189494,"data":"      \"offered\": 1000,\n"}
+,{"stream_name":"stdout","time":78.24219170800001,"data":"      \"assessable\": 0\n"}
+,{"stream_name":"stdout","time":78.242193888,"data":"    }\n"}
+,{"stream_name":"stdout","time":78.242196002,"data":"  },\n"}
+,{"stream_name":"stdout","time":78.242198228,"data":"  \"missing_reference_sources\": [],\n"}
+,{"stream_name":"stdout","time":78.242200484,"data":"  \"train_images\": 3099,\n"}
+,{"stream_name":"stdout","time":78.242202669,"data":"  \"validation_images\": 780,\n"}
+,{"stream_name":"stdout","time":78.24220495,"data":"  \"scope\": \"D class/age only. Mission-evidence study requires separate independent reference manifest.\"\n"}
+,{"stream_name":"stdout","time":78.242207508,"data":"}\n"}
+,{"stream_name":"stdout","time":78.250627555,"data":"Only CrisisMMD has D references. Ordinary-domain and independent mission-E claims remain blocked.\n"}
+,{"stream_name":"stdout","time":82.626711958,"data":".........................                                                            [100%].                                                            [100%]\n"}
+,{"stream_name":"stdout","time":82.626754554,"data":"13 passed in 2.59s\n"}
+,{"stream_name":"stdout","time":82.829047987,"data":"\n"}
+,{"stream_name":"stdout","time":82.829090885,"data":"13 passed in 2.59s\n"}
+,{"stream_name":"stdout","time":86.391117706,"data":"Packaged regression subset and SQ01 CRC checks passed. No analog channel is used.\n"}
+,{"stream_name":"stdout","time":86.393740687,"data":"END 05_contracts_and_reference_scope complete seconds 13.87\n"}
+,{"stream_name":"stdout","time":86.458205704,"data":"START 06_frozen_sqgan_payload_check run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":89.608146279,"data":"Materialized codec input README.md 1037\n"}
+,{"stream_name":"stdout","time":90.620062642,"data":"Materialized codec input assets/checkpoint/decoder.ckpt 204883058\n"}
+,{"stream_name":"stdout","time":91.437125773,"data":"Materialized codec input assets/checkpoint/decoder_semantic.ckpt 169944100\n"}
+,{"stream_name":"stdout","time":91.88535729,"data":"Materialized codec input assets/checkpoint/demasker.ckpt 58375175\n"}
+,{"stream_name":"stdout","time":92.264906288,"data":"Materialized codec input assets/checkpoint/demasker_semantic.ckpt 58376850\n"}
+,{"stream_name":"stdout","time":92.846935541,"data":"Materialized codec input assets/checkpoint/encoder.ckpt 117332422\n"}
+,{"stream_name":"stdout","time":93.414706516,"data":"Materialized codec input assets/checkpoint/encoder_semantic.ckpt 117322708\n"}
+,{"stream_name":"stdout","time":93.492869075,"data":"Materialized codec input assets/checkpoint/masker.ckpt 8581630\n"}
+,{"stream_name":"stdout","time":93.56620404,"data":"Materialized codec input assets/checkpoint/masker_semantic.ckpt 8583135\n"}
+,{"stream_name":"stdout","time":93.6167736,"data":"Materialized codec input assets/checkpoint/quantize.ckpt 2104091\n"}
+,{"stream_name":"stdout","time":93.669093487,"data":"Materialized codec input assets/checkpoint/quantize_semantic.ckpt 2104218\n"}
+,{"stream_name":"stdout","time":93.7011271,"data":"Materialized codec input dataset_identity.json 259\n"}
+,{"stream_name":"stdout","time":93.739635566,"data":"Materialized codec input environment.json 13724\n"}
+,{"stream_name":"stdout","time":93.783093056,"data":"Materialized codec input environment_plan.json 419\n"}
+,{"stream_name":"stdout","time":93.816709512,"data":"Materialized codec input evaluation_reload.json 242\n"}
+,{"stream_name":"stdout","time":105.406771938,"data":"Materialized codec input last.pt 2341438033\n"}
+,{"stream_name":"stdout","time":105.440756814,"data":"Materialized codec input metrics/metric_coverage.json 1132\n"}
+,{"stream_name":"stdout","time":105.512173455,"data":"Materialized codec input metrics/per_image.csv 33336\n"}
+,{"stream_name":"stdout","time":105.549276046,"data":"Materialized codec input metrics/per_image.json 101567\n"}
+,{"stream_name":"stdout","time":105.589413431,"data":"Materialized codec input metrics/profile.json 966\n"}
+,{"stream_name":"stdout","time":105.614254968,"data":"Materialized codec input metrics/summary.json 598\n"}
+,{"stream_name":"stdout","time":105.647865176,"data":"Materialized codec input model.json 855\n"}
+,{"stream_name":"stdout","time":105.683389008,"data":"Materialized codec input portable_config.json 935\n"}
+,{"stream_name":"stdout","time":105.709607309,"data":"Materialized codec input requested_config.json 670\n"}
+,{"stream_name":"stdout","time":105.740479772,"data":"Materialized codec input resolved_config.json 1086\n"}
+,{"stream_name":"stdout","time":105.771327564,"data":"Materialized codec input source.json 4480\n"}
+,{"stream_name":"stdout","time":105.806897823,"data":"Materialized codec input training_summary.json 223\n"}
+,{"stream_name":"stdout","time":121.863973783,"data":"Working with z of shape (1, 256, 16, 32) = 131072 dimensions.\n"}
+,{"stream_name":"stdout","time":123.990233805,"data":"Working with z of shape (1, 256, 16, 32) = 131072 dimensions.\n"}
+,{"stream_name":"stdout","time":152.885652584,"data":"SQGAN 1 of6 bytes 464 decode_seconds 0.5274\n"}
+,{"stream_name":"stdout","time":153.520894719,"data":"SQGAN 2 of6 bytes 464 decode_seconds 0.3924\n"}
+,{"stream_name":"stdout","time":154.157637911,"data":"SQGAN 3 of6 bytes 464 decode_seconds 0.3982\n"}
+,{"stream_name":"stdout","time":154.793231096,"data":"SQGAN 4 of6 bytes 464 decode_seconds 0.3928\n"}
+,{"stream_name":"stdout","time":155.449057975,"data":"SQGAN 5 of6 bytes 464 decode_seconds 0.3973\n"}
+,{"stream_name":"stdout","time":156.098877969,"data":"SQGAN 6 of6 bytes 464 decode_seconds 0.3971\n"}
+,{"stream_name":"stdout","time":156.735190143,"data":"END 06_frozen_sqgan_payload_check complete seconds 70.27\n"}
+,{"stream_name":"stdout","time":156.796034554,"data":"START 07_training_and_conditional_labels run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":156.798811296,"data":"START prepare_teacher remaining_seconds 37654\n"}
+,{"stream_name":"stdout","time":156.800487106,"data":"START supervised remaining_seconds 37654\n"}
+,{"stream_name":"stdout","time":158.4172024,"data":"[prepare_teacher] START teacher request preparation /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/teacher_prepared\n"}
+,{"stream_name":"stdout","time":158.427862584,"data":"[supervised] START REAL DATA SUITE {'archive': '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', 'output': '/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D', 'epochs': 50, 'seeds': '1729', 'training_episodes': 64, 'samples': 512, 'model_seconds': None, 'validation_traces': 15, 'arms': 'linear_choice,mlp_choice,delay_huber,ranknet,lambdamart,priority_classifier,deepsets_ranknet,set_transformer_ranknet,listmle,temporal_deepsets_ranknet', 'mission_text': False, 'device': 'cuda:0', 'rl_steps': 20000, 'deadline_seconds': 37563.720661927, 'resume': False, 'dynamic_ues': False, 'burst': False, 'vector_extension': '/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/shared/vectors/vectors.npz', 'mission_vectors': '/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/shared/missions/mission_vectors.npy', 'stream_mode': 'mixed', 'scenario_manifest': None, 'objective': 'D', 'require_sources': 'crisismmd', 'stream_duration': 200.0, 'stream_burst_factor': 4.0, 'scenario_manifest_sha256': None, 'mission_vectors_sha256': '922de6b1984732e5b4d7c6d14fec26594b54aa420215a3740d465bb2e026688f'}\n"}
+,{"stream_name":"stdout","time":166.239412729,"data":"[supervised] BASELINE fifo\n"}
+,{"stream_name":"stdout","time":167.332673177,"data":"[supervised] BASELINE round_robin\n"}
+,{"stream_name":"stdout","time":168.440349171,"data":"[supervised] BASELINE random\n"}
+,{"stream_name":"stdout","time":169.551310408,"data":"[supervised] BASELINE spi_fifo\n"}
+,{"stream_name":"stdout","time":170.763220235,"data":"[prepare_teacher] DONE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/teacher_prepared/requests.jsonl\n"}
+,{"stream_name":"stdout","time":170.890706124,"data":"[supervised] BASELINE relevance\n"}
+,{"stream_name":"stdout","time":171.209434423,"data":"START teacher remaining_seconds 37639\n"}
+,{"stream_name":"stdout","time":172.220661329,"data":"[supervised] BASELINE novelty\n"}
+,{"stream_name":"stdout","time":173.334069568,"data":"[supervised] BASELINE spi_novelty\n"}
+,{"stream_name":"stdout","time":174.657978857,"data":"[supervised] BASELINE predicted_edf\n"}
+,{"stream_name":"stdout","time":181.366656188,"data":"[teacher] The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.\n"}
+,{"stream_name":"stdout","time":183.002338518,"data":"[supervised] TRAIN linear_choice/1729\n"}
+,{"stream_name":"stdout","time":188.135255185,"data":"[teacher] `torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stdout","time":193.447695759,"data":"[teacher] \n"}
+,{"stream_name":"stdout","time":242.245522013,"data":"[supervised] EPOCH linear_choice 1729 0 loss 2.206066102895674 validation -5.683250955077838\n"}
+,{"stream_name":"stdout","time":259.075409344,"data":"[teacher] Fetching 5 files:   0%|          | 0/5 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":259.35739203,"data":"[teacher] Fetching 5 files:  20%|██        | 1/5 [01:05\u003c04:22, 65.61s/it]\n"}
+,{"stream_name":"stdout","time":259.726724139,"data":"[teacher] Fetching 5 files:  40%|████      | 2/5 [01:05\u003c01:21, 27.19s/it]\n"}
+,{"stream_name":"stdout","time":259.726963451,"data":"[teacher] Fetching 5 files:  60%|██████    | 3/5 [01:06\u003c00:29, 14.94s/it]\n"}
+,{"stream_name":"stdout","time":259.728617191,"data":"[teacher] Fetching 5 files: 100%|██████████| 5/5 [01:06\u003c00:00, 13.26s/it]\n"}
+,{"stream_name":"stdout","time":270.126268685,"data":"[supervised] EPOCH linear_choice 1729 1 loss 2.191993940670417 validation -5.525446258307112\n"}
+,{"stream_name":"stdout","time":273.611250727,"data":"[teacher] \n"}
+,{"stream_name":"stdout","time":275.58703991,"data":"[teacher] Loading checkpoint shards:   0%|          | 0/5 [00:00\u003c?, ?it/s]/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i \u003e= 0) instead.\n"}
+,{"stream_name":"stdout","time":275.588469355,"data":"[teacher]   torch._check_is_size(blocksize)\n"}
+,{"stream_name":"stdout","time":280.81524801,"data":"[teacher] \n"}
+,{"stream_name":"stdout","time":291.838545176,"data":"[teacher] Loading checkpoint shards:  20%|██        | 1/5 [00:07\u003c00:28,  7.21s/it]\n"}
+,{"stream_name":"stdout","time":295.739196913,"data":"[supervised] EPOCH linear_choice 1729 2 loss 2.1794982132823186 validation -5.363946658660566\n"}
+,{"stream_name":"stdout","time":304.40897561,"data":"[teacher] Loading checkpoint shards:  40%|████      | 2/5 [00:18\u003c00:28,  9.46s/it]\n"}
+,{"stream_name":"stdout","time":321.074716261,"data":"[teacher] Loading checkpoint shards:  60%|██████    | 3/5 [00:30\u003c00:21, 10.87s/it]\n"}
+,{"stream_name":"stdout","time":321.865212391,"data":"[supervised] EPOCH linear_choice 1729 3 loss 2.167404276509993 validation -5.23710197275652\n"}
+,{"stream_name":"stdout","time":325.177064282,"data":"[teacher] Loading checkpoint shards:  80%|████████  | 4/5 [00:47\u003c00:13, 13.16s/it]\n"}
+,{"stream_name":"stdout","time":325.178113816,"data":"[teacher] Loading checkpoint shards: 100%|██████████| 5/5 [00:51\u003c00:00,  9.90s/it]\n"}
+,{"stream_name":"stdout","time":325.179089785,"data":"[teacher] Loading checkpoint shards: 100%|██████████| 5/5 [00:51\u003c00:00, 10.32s/it]\n"}
+,{"stream_name":"stdout","time":345.813328449,"data":"[supervised] EPOCH linear_choice 1729 4 loss 2.1561989759513907 validation -5.119728896014948\n"}
+,{"stream_name":"stdout","time":368.876255658,"data":"[supervised] EPOCH linear_choice 1729 5 loss 2.145869310603652 validation -5.044199879096735\n"}
+,{"stream_name":"stdout","time":385.736649135,"data":"[teacher] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"}
+,{"stream_name":"stdout","time":389.899708812,"data":"[teacher] /usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i \u003e= 0) instead.\n"}
+,{"stream_name":"stdout","time":389.900869235,"data":"[teacher]   torch._check_is_size(blocksize)\n"}
+,{"stream_name":"stdout","time":393.825581929,"data":"[supervised] EPOCH linear_choice 1729 6 loss 2.1361823392031494 validation -4.965524492495622\n"}
+,{"stream_name":"stdout","time":403.035339433,"data":"[teacher] TEACHER control-strict-0-0 parsed 17.339927752999984\n"}
+,{"stream_name":"stdout","time":415.951494012,"data":"[supervised] EPOCH linear_choice 1729 7 loss 2.1269114951249293 validation -4.868523513186317\n"}
+,{"stream_name":"stdout","time":417.584334386,"data":"[teacher] TEACHER control-strict-0-1 parsed 14.50612886600004\n"}
+,{"stream_name":"stdout","time":429.912717846,"data":"[teacher] TEACHER control-strict-1-0 parsed 12.272410095000055\n"}
+,{"stream_name":"stdout","time":438.10335925,"data":"[supervised] EPOCH linear_choice 1729 8 loss 2.1183563765610147 validation -4.820448668433626\n"}
+,{"stream_name":"stdout","time":447.426052043,"data":"[teacher] TEACHER control-strict-1-1 parsed 17.44809155500002\n"}
+,{"stream_name":"stdout","time":460.376406335,"data":"[supervised] EPOCH linear_choice 1729 9 loss 2.110209317511867 validation -4.781034071956354\n"}
+,{"stream_name":"stdout","time":464.65185093,"data":"[teacher] TEACHER control-strict-2-0 parsed 17.188316273000055\n"}
+,{"stream_name":"stdout","time":480.529948129,"data":"[teacher] TEACHER control-strict-2-1 parsed 15.81300188800003\n"}
+,{"stream_name":"stdout","time":483.01255654,"data":"[supervised] EPOCH linear_choice 1729 10 loss 2.1024553269212944 validation -4.751605569594824\n"}
+,{"stream_name":"stdout","time":490.197770065,"data":"[teacher] TEACHER control-strict-3-0 parsed 9.646300546999896\n"}
+,{"stream_name":"stdout","time":503.808571586,"data":"[teacher] TEACHER control-strict-3-1 parsed 13.571253826000088\n"}
+,{"stream_name":"stdout","time":505.219389622,"data":"[supervised] EPOCH linear_choice 1729 11 loss 2.094830045891381 validation -4.713295022251504\n"}
+,{"stream_name":"stdout","time":517.834669109,"data":"[teacher] TEACHER control-strict-4-0 parsed 13.96336721199998\n"}
+,{"stream_name":"stdout","time":527.432087781,"data":"[supervised] EPOCH linear_choice 1729 12 loss 2.0880492033201015 validation -4.659594011944025\n"}
+,{"stream_name":"stdout","time":532.269851384,"data":"[teacher] TEACHER control-strict-4-1 parsed 14.406429816000013\n"}
+,{"stream_name":"stdout","time":545.134095905,"data":"[teacher] TEACHER control-strict-5-0 parsed 12.825669614999924\n"}
+,{"stream_name":"stdout","time":549.498488735,"data":"[supervised] EPOCH linear_choice 1729 13 loss 2.0812091361161924 validation -4.613705310201482\n"}
+,{"stream_name":"stdout","time":553.070500921,"data":"[teacher] TEACHER control-strict-5-1 parsed 7.8976393789999975\n"}
+,{"stream_name":"stdout","time":564.895117639,"data":"[teacher] TEACHER control-strict-6-0 parsed 11.781186511999977\n"}
+,{"stream_name":"stdout","time":571.799598865,"data":"[supervised] EPOCH linear_choice 1729 14 loss 2.0747856210152653 validation -4.591393788229184\n"}
+,{"stream_name":"stdout","time":579.604083464,"data":"[teacher] TEACHER control-strict-6-1 parsed 14.647922924\n"}
+,{"stream_name":"stdout","time":592.744019146,"data":"[teacher] TEACHER control-strict-7-0 parsed 13.117489879999994\n"}
+,{"stream_name":"stdout","time":594.057590928,"data":"[supervised] EPOCH linear_choice 1729 15 loss 2.0686402640521004 validation -4.5711184991006695\n"}
+,{"stream_name":"stdout","time":610.381411058,"data":"[teacher] TEACHER control-strict-7-1 parsed 17.57382267899993\n"}
+,{"stream_name":"stdout","time":616.351040877,"data":"[supervised] EPOCH linear_choice 1729 16 loss 2.0627866170844915 validation -4.547737582995876\n"}
+,{"stream_name":"stdout","time":631.042835788,"data":"[teacher] TEACHER control-tie-0 parsed 20.397447349000004\n"}
+,{"stream_name":"stdout","time":638.584474012,"data":"[supervised] EPOCH linear_choice 1729 17 loss 2.056979524061149 validation -4.535613391521826\n"}
+,{"stream_name":"stdout","time":642.927819323,"data":"[teacher] TEACHER control-unknown-0 parsed 11.850096988000018\n"}
+,{"stream_name":"stdout","time":659.157167329,"data":"[teacher] TEACHER control-tie-1 parsed 16.195763337000017\n"}
+,{"stream_name":"stdout","time":660.660590525,"data":"[supervised] EPOCH linear_choice 1729 18 loss 2.0515562207905744 validation -4.52201559010052\n"}
+,{"stream_name":"stdout","time":668.173640202,"data":"[teacher] TEACHER control-unknown-1 parsed 8.994001598000068\n"}
+,{"stream_name":"stdout","time":679.930744765,"data":"[teacher] TEACHER control-tie-2 parsed 11.692369801999916\n"}
+,{"stream_name":"stdout","time":682.988464425,"data":"[supervised] EPOCH linear_choice 1729 19 loss 2.0463271387181687 validation -4.507863699251136\n"}
+,{"stream_name":"stdout","time":688.956489271,"data":"[teacher] TEACHER control-unknown-2 parsed 9.019690356999945\n"}
+,{"stream_name":"stdout","time":698.313040747,"data":"[teacher] TEACHER control-tie-3 parsed 9.319967346999988\n"}
+,{"stream_name":"stdout","time":705.173341654,"data":"[supervised] EPOCH linear_choice 1729 20 loss 2.041215893759608 validation -4.499818182468644\n"}
+,{"stream_name":"stdout","time":707.530001935,"data":"[teacher] TEACHER control-unknown-3 parsed 9.195316864000006\n"}
+,{"stream_name":"stdout","time":719.726821956,"data":"[teacher] TEACHER control-tie-4 parsed 12.131266708999988\n"}
+,{"stream_name":"stdout","time":727.267527795,"data":"[supervised] EPOCH linear_choice 1729 21 loss 2.036291190028581 validation -4.488811757927213\n"}
+,{"stream_name":"stdout","time":728.999272816,"data":"[teacher] TEACHER control-unknown-4 parsed 9.274604852000039\n"}
+,{"stream_name":"stdout","time":738.97144128,"data":"[teacher] TEACHER control-tie-5 parsed 9.931980752999948\n"}
+,{"stream_name":"stdout","time":748.112115067,"data":"[teacher] TEACHER control-unknown-5 parsed 9.119802253999978\n"}
+,{"stream_name":"stdout","time":749.567585992,"data":"[supervised] EPOCH linear_choice 1729 22 loss 2.031640048305541 validation -4.480311881118854\n"}
+,{"stream_name":"stdout","time":761.633981636,"data":"[teacher] TEACHER control-tie-6 parsed 13.45786765899993\n"}
+,{"stream_name":"stdout","time":770.696504065,"data":"[teacher] TEACHER control-unknown-6 parsed 9.06689346600001\n"}
+,{"stream_name":"stdout","time":771.650362863,"data":"[supervised] EPOCH linear_choice 1729 23 loss 2.027208888683647 validation -4.472052971300736\n"}
+,{"stream_name":"stdout","time":782.0669742,"data":"[teacher] TEACHER control-tie-7 parsed 11.326049147000049\n"}
+,{"stream_name":"stdout","time":791.172564254,"data":"[teacher] TEACHER control-unknown-7 parsed 9.08421108999994\n"}
+,{"stream_name":"stdout","time":793.984403831,"data":"[supervised] EPOCH linear_choice 1729 24 loss 2.022785628092471 validation -4.4694695226280166\n"}
+,{"stream_name":"stdout","time":816.167332543,"data":"[supervised] EPOCH linear_choice 1729 25 loss 2.018535756436888 validation -4.46144226084742\n"}
+,{"stream_name":"stdout","time":820.089290674,"data":"[teacher] TEACHER train-0-0 parsed 28.733561603\n"}
+,{"stream_name":"stdout","time":838.262597139,"data":"[supervised] EPOCH linear_choice 1729 26 loss 2.0142926299318216 validation -4.458313679855235\n"}
+,{"stream_name":"stdout","time":845.532295373,"data":"[teacher] TEACHER train-0-1 parsed 25.317179891000023\n"}
+,{"stream_name":"stdout","time":860.360403004,"data":"[supervised] EPOCH linear_choice 1729 27 loss 2.010357913719775 validation -4.44737293656788\n"}
+,{"stream_name":"stdout","time":878.126186485,"data":"[teacher] TEACHER train-1-0 parsed 32.414251201999946\n"}
+,{"stream_name":"stdout","time":882.45562645,"data":"[supervised] EPOCH linear_choice 1729 28 loss 2.006512192431756 validation -4.442050765471557\n"}
+,{"stream_name":"stdout","time":904.461901886,"data":"[supervised] EPOCH linear_choice 1729 29 loss 2.0026746540610967 validation -4.438976825855203\n"}
+,{"stream_name":"stdout","time":907.243194182,"data":"[teacher] TEACHER train-1-1 parsed 28.956255287999966\n"}
+,{"stream_name":"stdout","time":926.07290451,"data":"[supervised] EPOCH linear_choice 1729 30 loss 1.9990667357438907 validation -4.431638723035487\n"}
+,{"stream_name":"stdout","time":937.205833098,"data":"[teacher] TEACHER train-2-0 parsed 29.759376660000044\n"}
+,{"stream_name":"stdout","time":947.794280806,"data":"[supervised] EPOCH linear_choice 1729 31 loss 1.9956205029154448 validation -4.425840193435283\n"}
+,{"stream_name":"stdout","time":964.944820686,"data":"[teacher] TEACHER train-2-1 parsed 27.50594322699999\n"}
+,{"stream_name":"stdout","time":969.413075914,"data":"[supervised] EPOCH linear_choice 1729 32 loss 1.9921663457926313 validation -4.420002073504415\n"}
+,{"stream_name":"stdout","time":990.861229143,"data":"[supervised] EPOCH linear_choice 1729 33 loss 1.9889037853928373 validation -4.409088278717328\n"}
+,{"stream_name":"stdout","time":992.229360848,"data":"[teacher] TEACHER train-3-0 parsed 27.13636145800001\n"}
+,{"stream_name":"stdout","time":1012.494860134,"data":"[supervised] EPOCH linear_choice 1729 34 loss 1.9857109637288417 validation -4.402083482637698\n"}
+,{"stream_name":"stdout","time":1021.372708222,"data":"[teacher] TEACHER train-3-1 parsed 28.97910855799978\n"}
+,{"stream_name":"stdout","time":1034.329197176,"data":"[supervised] EPOCH linear_choice 1729 35 loss 1.9824270837610856 validation -4.402397948396124\n"}
+,{"stream_name":"stdout","time":1056.500949906,"data":"[teacher] TEACHER train-4-0 parsed 34.88603545900014\n"}
+,{"stream_name":"stdout","time":1056.561005858,"data":"[supervised] EPOCH linear_choice 1729 36 loss 1.9794298940415467 validation -4.395570550821615\n"}
+,{"stream_name":"stdout","time":1078.512521841,"data":"[supervised] EPOCH linear_choice 1729 37 loss 1.9765145486570472 validation -4.389476570466426\n"}
+,{"stream_name":"stdout","time":1090.838465718,"data":"[teacher] TEACHER train-4-1 parsed 34.09870783799988\n"}
+,{"stream_name":"stdout","time":1100.86902665,"data":"[supervised] EPOCH linear_choice 1729 38 loss 1.9735242559790092 validation -4.386623865366539\n"}
+,{"stream_name":"stdout","time":1113.847626936,"data":"[teacher] TEACHER train-5-0 parsed 22.880343076999907\n"}
+,{"stream_name":"stdout","time":1123.063820171,"data":"[supervised] EPOCH linear_choice 1729 39 loss 1.97073826790832 validation -4.384626340972655\n"}
+,{"stream_name":"stdout","time":1140.342199073,"data":"[teacher] TEACHER train-5-1 parsed 26.3557230670001\n"}
+,{"stream_name":"stdout","time":1144.819826434,"data":"[supervised] EPOCH linear_choice 1729 40 loss 1.9679553577733353 validation -4.381818599682621\n"}
+,{"stream_name":"stdout","time":1166.443031684,"data":"[supervised] EPOCH linear_choice 1729 41 loss 1.9653141064544952 validation -4.375184122057319\n"}
+,{"stream_name":"stdout","time":1174.030020077,"data":"[teacher] TEACHER train-6-0 parsed 33.437314502999925\n"}
+,{"stream_name":"stdout","time":1188.261304379,"data":"[supervised] EPOCH linear_choice 1729 42 loss 1.9626197769798697 validation -4.370921683917476\n"}
+,{"stream_name":"stdout","time":1209.665718832,"data":"[teacher] TEACHER train-6-1 parsed 35.34244071100011\n"}
+,{"stream_name":"stdout","time":1209.666902826,"data":"[supervised] EPOCH linear_choice 1729 43 loss 1.9601988227200169 validation -4.3672597633154036\n"}
+,{"stream_name":"stdout","time":1231.046628553,"data":"[supervised] EPOCH linear_choice 1729 44 loss 1.957702881798929 validation -4.3602125442841535\n"}
+,{"stream_name":"stdout","time":1241.227764095,"data":"[teacher] TEACHER train-7-0 parsed 31.32914702800008\n"}
+,{"stream_name":"stdout","time":1252.641627807,"data":"[supervised] EPOCH linear_choice 1729 45 loss 1.9551985221935282 validation -4.355964026825827\n"}
+,{"stream_name":"stdout","time":1270.065843012,"data":"[teacher] TEACHER train-7-1 parsed 28.64596845799997\n"}
+,{"stream_name":"stdout","time":1270.071250999,"data":"[teacher] Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":1270.075070454,"data":"[teacher]   File \"/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/source/experiments/stream_scheduler/qwen_teacher.py\", line 105, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":1270.076043676,"data":"[teacher]     a=p.parse_args();run(a.requests,a.output,a.revision,a.device,a.max_calls,a.deadline_seconds)\n"}
+,{"stream_name":"stdout","time":1270.077089006,"data":"[teacher]                      ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":1270.078378901,"data":"[teacher]   File \"/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/source/experiments/stream_scheduler/qwen_teacher.py\", line 99, in run\n"}
+,{"stream_name":"stdout","time":1270.079604216,"data":"[teacher]     raise RuntimeError(\"Scheduling preference pilot failed; stop collection: \"+json.dumps(quality))\n"}
+,{"stream_name":"stdout","time":1270.080748064,"data":"[teacher] RuntimeError: Scheduling preference pilot failed; stop collection: {\"contexts\": 8, \"parsed_pairs\": 8, \"consistent_pairs\": 4, \"strict_consistent\": 4, \"agreement\": 0.5, \"qualified\": false, \"scope\": \"presentation consistency only; independent semantic correctness still required\"}\n"}
+,{"stream_name":"stdout","time":1274.473152365,"data":"[supervised] EPOCH linear_choice 1729 46 loss 1.952833971390948 validation -4.356815320395683\n"}
+,{"stream_name":"stdout","time":1296.266609013,"data":"[supervised] EPOCH linear_choice 1729 47 loss 1.9504611712705555 validation -4.353541269719704\n"}
+,{"stream_name":"stdout","time":1317.070459908,"data":"[supervised] EPOCH linear_choice 1729 48 loss 1.9482349546577407 validation -4.3469498661577735\n"}
+,{"stream_name":"stdout","time":1337.874656857,"data":"[supervised] EPOCH linear_choice 1729 49 loss 1.9459711952932082 validation -4.339206407311279\n"}
+,{"stream_name":"stdout","time":1363.145400427,"data":"[supervised] TRAIN mlp_choice/1729\n"}
+,{"stream_name":"stdout","time":1389.382019118,"data":"[supervised] EPOCH mlp_choice 1729 0 loss 2.191947757807361 validation -4.727303173865841\n"}
+,{"stream_name":"stdout","time":1411.207372607,"data":"[supervised] EPOCH mlp_choice 1729 1 loss 2.174061817633533 validation -4.664464338429903\n"}
+,{"stream_name":"stdout","time":1432.941394397,"data":"[supervised] EPOCH mlp_choice 1729 2 loss 2.152290496958916 validation -4.58418875387004\n"}
+,{"stream_name":"stdout","time":1454.641467807,"data":"[supervised] EPOCH mlp_choice 1729 3 loss 2.1271622033879227 validation -4.60508397800058\n"}
+,{"stream_name":"stdout","time":1476.246685893,"data":"[supervised] EPOCH mlp_choice 1729 4 loss 2.094940949800754 validation -4.540808456970865\n"}
+,{"stream_name":"stdout","time":1498.049402068,"data":"[supervised] EPOCH mlp_choice 1729 5 loss 2.0596615291123306 validation -4.4749618076285405\n"}
+,{"stream_name":"stdout","time":1519.415416496,"data":"[supervised] EPOCH mlp_choice 1729 6 loss 2.025202247367025 validation -4.4410022245113145\n"}
+,{"stream_name":"stdout","time":1541.028367516,"data":"[supervised] EPOCH mlp_choice 1729 7 loss 1.9907035000101707 validation -4.4381756520794955\n"}
+,{"stream_name":"stdout","time":1562.838614191,"data":"[supervised] EPOCH mlp_choice 1729 8 loss 1.9591724946688227 validation -4.402031272439982\n"}
+,{"stream_name":"stdout","time":1584.494300257,"data":"[supervised] EPOCH mlp_choice 1729 9 loss 1.9327211059288296 validation -4.385824450549232\n"}
+,{"stream_name":"stdout","time":1605.863994862,"data":"[supervised] EPOCH mlp_choice 1729 10 loss 1.9097392876921262 validation -4.359878444580252\n"}
+,{"stream_name":"stdout","time":1627.29799018,"data":"[supervised] EPOCH mlp_choice 1729 11 loss 1.8881140140090626 validation -4.335629893843333\n"}
+,{"stream_name":"stdout","time":1648.723200727,"data":"[supervised] EPOCH mlp_choice 1729 12 loss 1.8707037933677126 validation -4.309913229107172\n"}
+,{"stream_name":"stdout","time":1670.109698808,"data":"[supervised] EPOCH mlp_choice 1729 13 loss 1.8517367259795496 validation -4.280821128929883\n"}
+,{"stream_name":"stdout","time":1691.596777814,"data":"[supervised] EPOCH mlp_choice 1729 14 loss 1.833870947438772 validation -4.249115595169483\n"}
+,{"stream_name":"stdout","time":1712.848570027,"data":"[supervised] EPOCH mlp_choice 1729 15 loss 1.8164917798387497 validation -4.222251984433722\n"}
+,{"stream_name":"stdout","time":1734.331490789,"data":"[supervised] EPOCH mlp_choice 1729 16 loss 1.7987594181810522 validation -4.192794008469321\n"}
+,{"stream_name":"stdout","time":1755.63492737,"data":"[supervised] EPOCH mlp_choice 1729 17 loss 1.780429518345045 validation -4.143753817562141\n"}
+,{"stream_name":"stdout","time":1777.211818057,"data":"[supervised] EPOCH mlp_choice 1729 18 loss 1.7631578889622568 validation -4.115264095032922\n"}
+,{"stream_name":"stdout","time":1798.63186512,"data":"[supervised] EPOCH mlp_choice 1729 19 loss 1.7441485409587891 validation -4.077147640380345\n"}
+,{"stream_name":"stdout","time":1819.876340467,"data":"[supervised] EPOCH mlp_choice 1729 20 loss 1.7249006691039794 validation -4.041419335692451\n"}
+,{"stream_name":"stdout","time":1841.586579578,"data":"[supervised] EPOCH mlp_choice 1729 21 loss 1.7064396260804053 validation -3.992628480767224\n"}
+,{"stream_name":"stdout","time":1863.154831793,"data":"[supervised] EPOCH mlp_choice 1729 22 loss 1.6866543489426928 validation -3.966870981316991\n"}
+,{"stream_name":"stdout","time":1884.763003656,"data":"[supervised] EPOCH mlp_choice 1729 23 loss 1.6680740513927155 validation -3.9266016049600205\n"}
+,{"stream_name":"stdout","time":1906.342389896,"data":"[supervised] EPOCH mlp_choice 1729 24 loss 1.647190954185635 validation -3.9087481870044285\n"}
+,{"stream_name":"stdout","time":1927.776401411,"data":"[supervised] EPOCH mlp_choice 1729 25 loss 1.6285310604867194 validation -3.879625081438142\n"}
+,{"stream_name":"stdout","time":1949.183974035,"data":"[supervised] EPOCH mlp_choice 1729 26 loss 1.6036517926021465 validation -3.843418902807733\n"}
+,{"stream_name":"stdout","time":1970.617861701,"data":"[supervised] EPOCH mlp_choice 1729 27 loss 1.5828378684104016 validation -3.817892757061763\n"}
+,{"stream_name":"stdout","time":1991.960779001,"data":"[supervised] EPOCH mlp_choice 1729 28 loss 1.561981417888151 validation -3.7806394621466666\n"}
+,{"stream_name":"stdout","time":2013.374765777,"data":"[supervised] EPOCH mlp_choice 1729 29 loss 1.5398315597787278 validation -3.753389397138057\n"}
+,{"stream_name":"stdout","time":2035.070063645,"data":"[supervised] EPOCH mlp_choice 1729 30 loss 1.5185320420817425 validation -3.735787659126485\n"}
+,{"stream_name":"stdout","time":2056.498279759,"data":"[supervised] EPOCH mlp_choice 1729 31 loss 1.4954870408576566 validation -3.701034522759558\n"}
+,{"stream_name":"stdout","time":2077.823722246,"data":"[supervised] EPOCH mlp_choice 1729 32 loss 1.4780589848067545 validation -3.691099541628143\n"}
+,{"stream_name":"stdout","time":2099.202219568,"data":"[supervised] EPOCH mlp_choice 1729 33 loss 1.4601138857521005 validation -3.666509441726665\n"}
+,{"stream_name":"stdout","time":2120.523671786,"data":"[supervised] EPOCH mlp_choice 1729 34 loss 1.4453088928843234 validation -3.6607954590980096\n"}
+,{"stream_name":"stdout","time":2142.033033402,"data":"[supervised] EPOCH mlp_choice 1729 35 loss 1.4264392263157337 validation -3.6375360478804506\n"}
+,{"stream_name":"stdout","time":2163.526956235,"data":"[supervised] EPOCH mlp_choice 1729 36 loss 1.4117243978076106 validation -3.6251809875997383\n"}
+,{"stream_name":"stdout","time":2185.366636777,"data":"[supervised] EPOCH mlp_choice 1729 37 loss 1.401341705719919 validation -3.624449816504047\n"}
+,{"stream_name":"stdout","time":2206.733949291,"data":"[supervised] EPOCH mlp_choice 1729 38 loss 1.392429866059759 validation -3.6340285053896078\n"}
+,{"stream_name":"stdout","time":2228.195642555,"data":"[supervised] EPOCH mlp_choice 1729 39 loss 1.379087139370165 validation -3.6191359852555705\n"}
+,{"stream_name":"stdout","time":2249.736131007,"data":"[supervised] EPOCH mlp_choice 1729 40 loss 1.3664712511336659 validation -3.6078999146727546\n"}
+,{"stream_name":"stdout","time":2270.982407602,"data":"[supervised] EPOCH mlp_choice 1729 41 loss 1.3543203295149084 validation -3.599331590236877\n"}
+,{"stream_name":"stdout","time":2292.377224164,"data":"[supervised] EPOCH mlp_choice 1729 42 loss 1.34916092602704 validation -3.602691099277228\n"}
+,{"stream_name":"stdout","time":2314.129469869,"data":"[supervised] EPOCH mlp_choice 1729 43 loss 1.337335299386127 validation -3.5875453306070844\n"}
+,{"stream_name":"stdout","time":2335.605629133,"data":"[supervised] EPOCH mlp_choice 1729 44 loss 1.324391870859915 validation -3.580097141351305\n"}
+,{"stream_name":"stdout","time":2357.107195492,"data":"[supervised] EPOCH mlp_choice 1729 45 loss 1.3280896041657722 validation -3.567531232121132\n"}
+,{"stream_name":"stdout","time":2378.684582569,"data":"[supervised] EPOCH mlp_choice 1729 46 loss 1.3097623050721674 validation -3.5954965984178546\n"}
+,{"stream_name":"stdout","time":2400.232459715,"data":"[supervised] EPOCH mlp_choice 1729 47 loss 1.3021927292686288 validation -3.5772900689293325\n"}
+,{"stream_name":"stdout","time":2422.113629267,"data":"[supervised] EPOCH mlp_choice 1729 48 loss 1.2969763290044525 validation -3.571654561533783\n"}
+,{"stream_name":"stdout","time":2443.595713227,"data":"[supervised] EPOCH mlp_choice 1729 49 loss 1.293184392592061 validation -3.5799794622615826\n"}
+,{"stream_name":"stdout","time":2472.218081074,"data":"[supervised] TRAIN delay_huber/1729\n"}
+,{"stream_name":"stdout","time":2498.419555506,"data":"[supervised] EPOCH delay_huber 1729 0 loss 0.028933404276360264 validation -5.303270287240684\n"}
+,{"stream_name":"stdout","time":2519.630029285,"data":"[supervised] EPOCH delay_huber 1729 1 loss 0.015455937295254074 validation -4.951881148932069\n"}
+,{"stream_name":"stdout","time":2541.223197095,"data":"[supervised] EPOCH delay_huber 1729 2 loss 0.014163886850308671 validation -4.696395099948668\n"}
+,{"stream_name":"stdout","time":2562.680100393,"data":"[supervised] EPOCH delay_huber 1729 3 loss 0.013155132770426015 validation -4.542493234231454\n"}
+,{"stream_name":"stdout","time":2584.024489626,"data":"[supervised] EPOCH delay_huber 1729 4 loss 0.012554520740820863 validation -4.495559136345161\n"}
+,{"stream_name":"stdout","time":2605.274654772,"data":"[supervised] EPOCH delay_huber 1729 5 loss 0.011922907162286833 validation -4.40151955327669\n"}
+,{"stream_name":"stdout","time":2626.653467199,"data":"[supervised] EPOCH delay_huber 1729 6 loss 0.011613991988635775 validation -4.369426907403089\n"}
+,{"stream_name":"stdout","time":2648.066476119,"data":"[supervised] EPOCH delay_huber 1729 7 loss 0.011378565441010124 validation -4.311731740210566\n"}
+,{"stream_name":"stdout","time":2669.450671067,"data":"[supervised] EPOCH delay_huber 1729 8 loss 0.010963785354547895 validation -4.26187833227956\n"}
+,{"stream_name":"stdout","time":2690.755137717,"data":"[supervised] EPOCH delay_huber 1729 9 loss 0.010659194406386518 validation -4.2288730196532365\n"}
+,{"stream_name":"stdout","time":2712.300359146,"data":"[supervised] EPOCH delay_huber 1729 10 loss 0.010368935768426013 validation -4.190020672302756\n"}
+,{"stream_name":"stdout","time":2733.866784916,"data":"[supervised] EPOCH delay_huber 1729 11 loss 0.01007362027849723 validation -4.179786919178874\n"}
+,{"stream_name":"stdout","time":2755.183953583,"data":"[supervised] EPOCH delay_huber 1729 12 loss 0.009848776804380677 validation -4.140368386403973\n"}
+,{"stream_name":"stdout","time":2776.434909919,"data":"[supervised] EPOCH delay_huber 1729 13 loss 0.009668888020916366 validation -4.135447160634932\n"}
+,{"stream_name":"stdout","time":2797.75791019,"data":"[supervised] EPOCH delay_huber 1729 14 loss 0.009477047399876426 validation -4.113875004754081\n"}
+,{"stream_name":"stdout","time":2819.0338739,"data":"[supervised] EPOCH delay_huber 1729 15 loss 0.009252363274491415 validation -4.060258210122483\n"}
+,{"stream_name":"stdout","time":2840.392030464,"data":"[supervised] EPOCH delay_huber 1729 16 loss 0.009026254074871787 validation -4.0178395982957715\n"}
+,{"stream_name":"stdout","time":2861.752471291,"data":"[supervised] EPOCH delay_huber 1729 17 loss 0.008950824652522726 validation -3.997753563432445\n"}
+,{"stream_name":"stdout","time":2883.272299936,"data":"[supervised] EPOCH delay_huber 1729 18 loss 0.008764268811725984 validation -3.9648575776649158\n"}
+,{"stream_name":"stdout","time":2904.725965793,"data":"[supervised] EPOCH delay_huber 1729 19 loss 0.00851621187264584 validation -3.9281818239651622\n"}
+,{"stream_name":"stdout","time":2926.059365096,"data":"[supervised] EPOCH delay_huber 1729 20 loss 0.008279372973898802 validation -3.8844954131534957\n"}
+,{"stream_name":"stdout","time":2947.450900747,"data":"[supervised] EPOCH delay_huber 1729 21 loss 0.008083032271940738 validation -3.8721232168666275\n"}
+,{"stream_name":"stdout","time":2969.196083839,"data":"[supervised] EPOCH delay_huber 1729 22 loss 0.00800350008835693 validation -3.838914218928471\n"}
+,{"stream_name":"stdout","time":2990.754661973,"data":"[supervised] EPOCH delay_huber 1729 23 loss 0.0077891222679991046 validation -3.808744583163048\n"}
+,{"stream_name":"stdout","time":3012.495302486,"data":"[supervised] EPOCH delay_huber 1729 24 loss 0.007575577794598942 validation -3.771776481456921\n"}
+,{"stream_name":"stdout","time":3034.13245034,"data":"[supervised] EPOCH delay_huber 1729 25 loss 0.007589712153077244 validation -3.7679688487977243\n"}
+,{"stream_name":"stdout","time":3055.439142492,"data":"[supervised] EPOCH delay_huber 1729 26 loss 0.007563692514036546 validation -3.7481686577686824\n"}
+,{"stream_name":"stdout","time":3076.982792875,"data":"[supervised] EPOCH delay_huber 1729 27 loss 0.007256190923075501 validation -3.7162685162053033\n"}
+,{"stream_name":"stdout","time":3098.359020142,"data":"[supervised] EPOCH delay_huber 1729 28 loss 0.007031471682672041 validation -3.6823638963622116\n"}
+,{"stream_name":"stdout","time":3119.699591131,"data":"[supervised] EPOCH delay_huber 1729 29 loss 0.006806268888000844 validation -3.6691468463604906\n"}
+,{"stream_name":"stdout","time":3141.079170405,"data":"[supervised] EPOCH delay_huber 1729 30 loss 0.006763452205248044 validation -3.656666451259089\n"}
+,{"stream_name":"stdout","time":3162.413227093,"data":"[supervised] EPOCH delay_huber 1729 31 loss 0.006729304717509876 validation -3.6014668541583523\n"}
+,{"stream_name":"stdout","time":3183.608988956,"data":"[supervised] EPOCH delay_huber 1729 32 loss 0.006652277834696463 validation -3.6142008985945067\n"}
+,{"stream_name":"stdout","time":3204.971578976,"data":"[supervised] EPOCH delay_huber 1729 33 loss 0.0063883554923185315 validation -3.5899508161899516\n"}
+,{"stream_name":"stdout","time":3226.574431061,"data":"[supervised] EPOCH delay_huber 1729 34 loss 0.0062280095502484645 validation -3.5438516661979924\n"}
+,{"stream_name":"stdout","time":3248.093232169,"data":"[supervised] EPOCH delay_huber 1729 35 loss 0.006108168402542802 validation -3.547437270897902\n"}
+,{"stream_name":"stdout","time":3269.593160968,"data":"[supervised] EPOCH delay_huber 1729 36 loss 0.005971863657247667 validation -3.5104365020679356\n"}
+,{"stream_name":"stdout","time":3291.137398593,"data":"[supervised] EPOCH delay_huber 1729 37 loss 0.005817725207787561 validation -3.4956587365108414\n"}
+,{"stream_name":"stdout","time":3312.822898569,"data":"[supervised] EPOCH delay_huber 1729 38 loss 0.005722156220311803 validation -3.4807723142882314\n"}
+,{"stream_name":"stdout","time":3334.399723392,"data":"[supervised] EPOCH delay_huber 1729 39 loss 0.005610365563807562 validation -3.456419278546952\n"}
+,{"stream_name":"stdout","time":3355.874385302,"data":"[supervised] EPOCH delay_huber 1729 40 loss 0.005563439533697867 validation -3.4470060540237655\n"}
+,{"stream_name":"stdout","time":3377.357038741,"data":"[supervised] EPOCH delay_huber 1729 41 loss 0.00543376959019648 validation -3.4544850376230127\n"}
+,{"stream_name":"stdout","time":3398.87880073,"data":"[supervised] EPOCH delay_huber 1729 42 loss 0.005513990592268314 validation -3.425806227819889\n"}
+,{"stream_name":"stdout","time":3420.019790933,"data":"[supervised] EPOCH delay_huber 1729 43 loss 0.005146811228811998 validation -3.4153350915803644\n"}
+,{"stream_name":"stdout","time":3441.432798775,"data":"[supervised] EPOCH delay_huber 1729 44 loss 0.005139031660544191 validation -3.4107582172179396\n"}
+,{"stream_name":"stdout","time":3463.035146298,"data":"[supervised] EPOCH delay_huber 1729 45 loss 0.005112385832285904 validation -3.404662296721379\n"}
+,{"stream_name":"stdout","time":3484.434724921,"data":"[supervised] EPOCH delay_huber 1729 46 loss 0.004987906846884105 validation -3.384741559150923\n"}
+,{"stream_name":"stdout","time":3505.865906523,"data":"[supervised] EPOCH delay_huber 1729 47 loss 0.004920045719030597 validation -3.3787832981734245\n"}
+,{"stream_name":"stdout","time":3527.658261223,"data":"[supervised] EPOCH delay_huber 1729 48 loss 0.004731912266313643 validation -3.3711713271609933\n"}
+,{"stream_name":"stdout","time":3549.096769601,"data":"[supervised] EPOCH delay_huber 1729 49 loss 0.0046910543788065695 validation -3.357320350407325\n"}
+,{"stream_name":"stdout","time":3577.702249088,"data":"[supervised] TRAIN ranknet/1729\n"}
+,{"stream_name":"stdout","time":3604.498388248,"data":"[supervised] EPOCH ranknet 1729 0 loss 0.6850981009192765 validation -4.768800436139233\n"}
+,{"stream_name":"stdout","time":3626.342805545,"data":"[supervised] EPOCH ranknet 1729 1 loss 0.6723950509913266 validation -4.554815080304367\n"}
+,{"stream_name":"stdout","time":3648.014425085,"data":"[supervised] EPOCH ranknet 1729 2 loss 0.6591270926874131 validation -4.491249008013159\n"}
+,{"stream_name":"stdout","time":3669.886583821,"data":"[supervised] EPOCH ranknet 1729 3 loss 0.642705843958538 validation -4.444611385863353\n"}
+,{"stream_name":"stdout","time":3691.894317639,"data":"[supervised] EPOCH ranknet 1729 4 loss 0.6245462656370364 validation -4.363796968973074\n"}
+,{"stream_name":"stdout","time":3713.818749088,"data":"[supervised] EPOCH ranknet 1729 5 loss 0.6065534403896891 validation -4.316076277943014\n"}
+,{"stream_name":"stdout","time":3735.782311234,"data":"[supervised] EPOCH ranknet 1729 6 loss 0.587718154565664 validation -4.280105327836468\n"}
+,{"stream_name":"stdout","time":3757.506046726,"data":"[supervised] EPOCH ranknet 1729 7 loss 0.5704120418376988 validation -4.240772763516989\n"}
+,{"stream_name":"stdout","time":3779.41821686,"data":"[supervised] EPOCH ranknet 1729 8 loss 0.5533923629845958 validation -4.2386346026869175\n"}
+,{"stream_name":"stdout","time":3801.256841128,"data":"[supervised] EPOCH ranknet 1729 9 loss 0.5369178290566197 validation -4.206002946350554\n"}
+,{"stream_name":"stdout","time":3823.201210465,"data":"[supervised] EPOCH ranknet 1729 10 loss 0.5227492247759074 validation -4.188353279213971\n"}
+,{"stream_name":"stdout","time":3845.234931883,"data":"[supervised] EPOCH ranknet 1729 11 loss 0.5099652452827286 validation -4.1842075830452865\n"}
+,{"stream_name":"stdout","time":3867.096703818,"data":"[supervised] EPOCH ranknet 1729 12 loss 0.49797971683619835 validation -4.169940467249773\n"}
+,{"stream_name":"stdout","time":3888.757054674,"data":"[supervised] EPOCH ranknet 1729 13 loss 0.4867528339200362 validation -4.139518772351955\n"}
+,{"stream_name":"stdout","time":3911.08187811,"data":"[supervised] EPOCH ranknet 1729 14 loss 0.4759614474078262 validation -4.109228464678563\n"}
+,{"stream_name":"stdout","time":3933.204027863,"data":"[supervised] EPOCH ranknet 1729 15 loss 0.46622622771246824 validation -4.079140742818376\n"}
+,{"stream_name":"stdout","time":3955.211345333,"data":"[supervised] EPOCH ranknet 1729 16 loss 0.45699439712097956 validation -4.0509427486952685\n"}
+,{"stream_name":"stdout","time":3977.076349734,"data":"[supervised] EPOCH ranknet 1729 17 loss 0.44718843975442724 validation -4.010370558326426\n"}
+,{"stream_name":"stdout","time":3998.648350199,"data":"[supervised] EPOCH ranknet 1729 18 loss 0.43773543389124825 validation -3.982094573605055\n"}
+,{"stream_name":"stdout","time":4020.464857709,"data":"[supervised] EPOCH ranknet 1729 19 loss 0.4285221579248173 validation -3.9537265193447286\n"}
+,{"stream_name":"stdout","time":4042.173172573,"data":"[supervised] EPOCH ranknet 1729 20 loss 0.42028089338418795 validation -3.9083799743412846\n"}
+,{"stream_name":"stdout","time":4064.033368016,"data":"[supervised] EPOCH ranknet 1729 21 loss 0.4106983984515864 validation -3.8769989317858102\n"}
+,{"stream_name":"stdout","time":4085.944950984,"data":"[supervised] EPOCH ranknet 1729 22 loss 0.4016761912994298 validation -3.8274730453388432\n"}
+,{"stream_name":"stdout","time":4107.73295082,"data":"[supervised] EPOCH ranknet 1729 23 loss 0.3924624449350631 validation -3.8140515877585273\n"}
+,{"stream_name":"stdout","time":4129.358348644,"data":"[supervised] EPOCH ranknet 1729 24 loss 0.383350559914561 validation -3.7610941407538423\n"}
+,{"stream_name":"stdout","time":4151.341892061,"data":"[supervised] EPOCH ranknet 1729 25 loss 0.3753753559190045 validation -3.7415346028608325\n"}
+,{"stream_name":"stdout","time":4173.335905185,"data":"[supervised] EPOCH ranknet 1729 26 loss 0.36696977745668846 validation -3.7036141110980982\n"}
+,{"stream_name":"stdout","time":4195.371217682,"data":"[supervised] EPOCH ranknet 1729 27 loss 0.3591524533221673 validation -3.6629154655319143\n"}
+,{"stream_name":"stdout","time":4217.115550203,"data":"[supervised] EPOCH ranknet 1729 28 loss 0.3499951757387407 validation -3.641346336880638\n"}
+,{"stream_name":"stdout","time":4238.88213451,"data":"[supervised] EPOCH ranknet 1729 29 loss 0.34306405567224374 validation -3.6138990000576525\n"}
+,{"stream_name":"stdout","time":4260.42382952,"data":"[supervised] EPOCH ranknet 1729 30 loss 0.3359280092058725 validation -3.5869382142030806\n"}
+,{"stream_name":"stdout","time":4282.345775745,"data":"[supervised] EPOCH ranknet 1729 31 loss 0.3292426987127328 validation -3.5705797526296448\n"}
+,{"stream_name":"stdout","time":4304.431118078,"data":"[supervised] EPOCH ranknet 1729 32 loss 0.32197070032265174 validation -3.535242272198069\n"}
+,{"stream_name":"stdout","time":4326.18686612,"data":"[supervised] EPOCH ranknet 1729 33 loss 0.31452723173822505 validation -3.519268154320098\n"}
+,{"stream_name":"stdout","time":4348.120719991,"data":"[supervised] EPOCH ranknet 1729 34 loss 0.30872197070499396 validation -3.493807678622693\n"}
+,{"stream_name":"stdout","time":4370.32760314,"data":"[supervised] EPOCH ranknet 1729 35 loss 0.30296064287909985 validation -3.4820706982613294\n"}
+,{"stream_name":"stdout","time":4392.509279242,"data":"[supervised] EPOCH ranknet 1729 36 loss 0.29891705881311736 validation -3.474863930659425\n"}
+,{"stream_name":"stdout","time":4414.785669245,"data":"[supervised] EPOCH ranknet 1729 37 loss 0.2930756661814087 validation -3.4447771264254623\n"}
+,{"stream_name":"stdout","time":4436.759263766,"data":"[supervised] EPOCH ranknet 1729 38 loss 0.2863675318024832 validation -3.4308379876457775\n"}
+,{"stream_name":"stdout","time":4458.696741241,"data":"[supervised] EPOCH ranknet 1729 39 loss 0.28211623281251264 validation -3.4267702310130717\n"}
+,{"stream_name":"stdout","time":4480.696554657,"data":"[supervised] EPOCH ranknet 1729 40 loss 0.2787762312229063 validation -3.4150917228551565\n"}
+,{"stream_name":"stdout","time":4502.571213849,"data":"[supervised] EPOCH ranknet 1729 41 loss 0.27603670298516647 validation -3.3899656622100367\n"}
+,{"stream_name":"stdout","time":4524.683628317,"data":"[supervised] EPOCH ranknet 1729 42 loss 0.2720155721980859 validation -3.3869676955725794\n"}
+,{"stream_name":"stdout","time":4546.755680617,"data":"[supervised] EPOCH ranknet 1729 43 loss 0.26870941488232347 validation -3.3985750980276506\n"}
+,{"stream_name":"stdout","time":4568.927192803,"data":"[supervised] EPOCH ranknet 1729 44 loss 0.266710989274074 validation -3.3826598608643663\n"}
+,{"stream_name":"stdout","time":4590.95088189,"data":"[supervised] EPOCH ranknet 1729 45 loss 0.26331881054017003 validation -3.368131402369119\n"}
+,{"stream_name":"stdout","time":4612.955513467,"data":"[supervised] EPOCH ranknet 1729 46 loss 0.2599113432240472 validation -3.371791571376826\n"}
+,{"stream_name":"stdout","time":4635.357260139,"data":"[supervised] EPOCH ranknet 1729 47 loss 0.25605442080287943 validation -3.377690678877955\n"}
+,{"stream_name":"stdout","time":4657.592714766,"data":"[supervised] EPOCH ranknet 1729 48 loss 0.25608215577546645 validation -3.364155749505431\n"}
+,{"stream_name":"stdout","time":4679.690124547,"data":"[supervised] EPOCH ranknet 1729 49 loss 0.2523025693476981 validation -3.3652759437878808\n"}
+,{"stream_name":"stdout","time":4708.939600888,"data":"[supervised] TRAIN lambdamart/1729\n"}
+,{"stream_name":"stdout","time":4727.554624291,"data":"[supervised] /usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRanker was fitted with feature names\n"}
+,{"stream_name":"stdout","time":4727.555463456,"data":"[supervised]   warnings.warn(\n"}
+,{"stream_name":"stdout","time":4778.901385051,"data":"[supervised] TRAIN priority_classifier/1729\n"}
+,{"stream_name":"stdout","time":4805.730238207,"data":"[supervised] EPOCH priority_classifier 1729 0 loss 1.3457579526584595 validation -5.367803497881836\n"}
+,{"stream_name":"stdout","time":4827.806658729,"data":"[supervised] EPOCH priority_classifier 1729 1 loss 1.2855947277275845 validation -5.011572467497744\n"}
+,{"stream_name":"stdout","time":4850.011319616,"data":"[supervised] EPOCH priority_classifier 1729 2 loss 1.271675691474229 validation -4.986721695037797\n"}
+,{"stream_name":"stdout","time":4872.330393021,"data":"[supervised] EPOCH priority_classifier 1729 3 loss 1.2579292327864096 validation -4.934622374209255\n"}
+,{"stream_name":"stdout","time":4894.871142882,"data":"[supervised] EPOCH priority_classifier 1729 4 loss 1.2476438377052546 validation -4.87652825777314\n"}
+,{"stream_name":"stdout","time":4917.001473995,"data":"[supervised] EPOCH priority_classifier 1729 5 loss 1.2317511897999793 validation -4.788714316819429\n"}
+,{"stream_name":"stdout","time":4939.151197311,"data":"[supervised] EPOCH priority_classifier 1729 6 loss 1.2167590814642608 validation -4.7447703300137345\n"}
+,{"stream_name":"stdout","time":4961.393658043,"data":"[supervised] EPOCH priority_classifier 1729 7 loss 1.1959708222420886 validation -4.718751718206827\n"}
+,{"stream_name":"stdout","time":4983.257645482,"data":"[supervised] EPOCH priority_classifier 1729 8 loss 1.1778349781525321 validation -4.640488497118209\n"}
+,{"stream_name":"stdout","time":5005.345931385,"data":"[supervised] EPOCH priority_classifier 1729 9 loss 1.1555510699981824 validation -4.609610814759772\n"}
+,{"stream_name":"stdout","time":5027.582250076,"data":"[supervised] EPOCH priority_classifier 1729 10 loss 1.1485033026256133 validation -4.549892388220278\n"}
+,{"stream_name":"stdout","time":5049.976472541,"data":"[supervised] EPOCH priority_classifier 1729 11 loss 1.1189694772765506 validation -4.48884649884711\n"}
+,{"stream_name":"stdout","time":5072.288184751,"data":"[supervised] EPOCH priority_classifier 1729 12 loss 1.0948186773603084 validation -4.39742626814882\n"}
+,{"stream_name":"stdout","time":5094.419766131,"data":"[supervised] EPOCH priority_classifier 1729 13 loss 1.0731704268837348 validation -4.3506646157732884\n"}
+,{"stream_name":"stdout","time":5117.121619951,"data":"[supervised] EPOCH priority_classifier 1729 14 loss 1.053432228618476 validation -4.293230932917311\n"}
+,{"stream_name":"stdout","time":5139.697714463,"data":"[supervised] EPOCH priority_classifier 1729 15 loss 1.025936428210116 validation -4.260665103375521\n"}
+,{"stream_name":"stdout","time":5162.526842181,"data":"[supervised] EPOCH priority_classifier 1729 16 loss 1.0083357023358985 validation -4.241686915928484\n"}
+,{"stream_name":"stdout","time":5185.014202435,"data":"[supervised] EPOCH priority_classifier 1729 17 loss 0.9891051019549195 validation -4.258587138545247\n"}
+,{"stream_name":"stdout","time":5207.136027556,"data":"[supervised] EPOCH priority_classifier 1729 18 loss 0.9688204398044036 validation -4.191485622112888\n"}
+,{"stream_name":"stdout","time":5229.365365125,"data":"[supervised] EPOCH priority_classifier 1729 19 loss 0.9466248076641932 validation -4.15318550283025\n"}
+,{"stream_name":"stdout","time":5251.579727635,"data":"[supervised] EPOCH priority_classifier 1729 20 loss 0.9312871428201106 validation -4.1628991784534275\n"}
+,{"stream_name":"stdout","time":5273.77287874,"data":"[supervised] EPOCH priority_classifier 1729 21 loss 0.9101514514386508 validation -4.156685556979481\n"}
+,{"stream_name":"stdout","time":5296.040674924,"data":"[supervised] EPOCH priority_classifier 1729 22 loss 0.8984274236972851 validation -4.138881022718019\n"}
+,{"stream_name":"stdout","time":5318.481367038,"data":"[supervised] EPOCH priority_classifier 1729 23 loss 0.8847982439474436 validation -4.159009963760247\n"}
+,{"stream_name":"stdout","time":5340.737849231,"data":"[supervised] EPOCH priority_classifier 1729 24 loss 0.8678328064461311 validation -4.122676336509365\n"}
+,{"stream_name":"stdout","time":5363.540924003,"data":"[supervised] EPOCH priority_classifier 1729 25 loss 0.8577293437829212 validation -4.128737399812621\n"}
+,{"stream_name":"stdout","time":5386.239451731,"data":"[supervised] EPOCH priority_classifier 1729 26 loss 0.8442871613506213 validation -4.1120444115445745\n"}
+,{"stream_name":"stdout","time":5408.721325463,"data":"[supervised] EPOCH priority_classifier 1729 27 loss 0.8340328267986479 validation -4.102243824352472\n"}
+,{"stream_name":"stdout","time":5431.307689179,"data":"[supervised] EPOCH priority_classifier 1729 28 loss 0.816459124519497 validation -4.084885353443998\n"}
+,{"stream_name":"stdout","time":5454.157362847,"data":"[supervised] EPOCH priority_classifier 1729 29 loss 0.798097382562446 validation -4.079560463699577\n"}
+,{"stream_name":"stdout","time":5476.595286249,"data":"[supervised] EPOCH priority_classifier 1729 30 loss 0.7900504244207696 validation -4.055651774033275\n"}
+,{"stream_name":"stdout","time":5499.213822174,"data":"[supervised] EPOCH priority_classifier 1729 31 loss 0.7775063457324904 validation -4.046188261013937\n"}
+,{"stream_name":"stdout","time":5521.966002221,"data":"[supervised] EPOCH priority_classifier 1729 32 loss 0.7709871780270987 validation -4.038173038980392\n"}
+,{"stream_name":"stdout","time":5544.508061289,"data":"[supervised] EPOCH priority_classifier 1729 33 loss 0.7624232059624774 validation -4.0231318650796615\n"}
+,{"stream_name":"stdout","time":5566.935011704,"data":"[supervised] EPOCH priority_classifier 1729 34 loss 0.7545738049411739 validation -4.003859978922956\n"}
+,{"stream_name":"stdout","time":5589.577306713,"data":"[supervised] EPOCH priority_classifier 1729 35 loss 0.7423771597868836 validation -3.9966247074133294\n"}
+,{"stream_name":"stdout","time":5612.226563064,"data":"[supervised] EPOCH priority_classifier 1729 36 loss 0.7251622069866244 validation -3.985529063065921\n"}
+,{"stream_name":"stdout","time":5634.718176923,"data":"[supervised] EPOCH priority_classifier 1729 37 loss 0.7174386238170882 validation -3.9756925308894235\n"}
+,{"stream_name":"stdout","time":5657.255274438,"data":"[supervised] EPOCH priority_classifier 1729 38 loss 0.7049829486832095 validation -3.9640929585258378\n"}
+,{"stream_name":"stdout","time":5679.731367435,"data":"[supervised] EPOCH priority_classifier 1729 39 loss 0.6962626286631348 validation -3.9576913140629313\n"}
+,{"stream_name":"stdout","time":5702.307119607,"data":"[supervised] EPOCH priority_classifier 1729 40 loss 0.6939824698542907 validation -3.9420655325514153\n"}
+,{"stream_name":"stdout","time":5724.869222346,"data":"[supervised] EPOCH priority_classifier 1729 41 loss 0.6861012353381284 validation -3.9296150319322747\n"}
+,{"stream_name":"stdout","time":5747.340984197,"data":"[supervised] EPOCH priority_classifier 1729 42 loss 0.6736963382486465 validation -3.9062566888568235\n"}
+,{"stream_name":"stdout","time":5769.797259649,"data":"[supervised] EPOCH priority_classifier 1729 43 loss 0.6608158190658742 validation -3.8964900735320835\n"}
+,{"stream_name":"stdout","time":5792.178217378,"data":"[supervised] EPOCH priority_classifier 1729 44 loss 0.6560539220292867 validation -3.88892474601801\n"}
+,{"stream_name":"stdout","time":5814.56514369,"data":"[supervised] EPOCH priority_classifier 1729 45 loss 0.6483999903343829 validation -3.8873522290820666\n"}
+,{"stream_name":"stdout","time":5837.180927155,"data":"[supervised] EPOCH priority_classifier 1729 46 loss 0.6355455572811479 validation -3.865229416380829\n"}
+,{"stream_name":"stdout","time":5859.567322655,"data":"[supervised] EPOCH priority_classifier 1729 47 loss 0.6262948416517702 validation -3.8579495460328093\n"}
+,{"stream_name":"stdout","time":5881.919013025,"data":"[supervised] EPOCH priority_classifier 1729 48 loss 0.6180417726070573 validation -3.8271161751190834\n"}
+,{"stream_name":"stdout","time":5904.258335719,"data":"[supervised] EPOCH priority_classifier 1729 49 loss 0.6162907474742951 validation -3.8336244633194934\n"}
+,{"stream_name":"stdout","time":5934.188363119,"data":"[supervised] TRAIN deepsets_ranknet/1729\n"}
+,{"stream_name":"stdout","time":5961.851550384,"data":"[supervised] EPOCH deepsets_ranknet 1729 0 loss 0.6873383161146194 validation -4.6823206389444065\n"}
+,{"stream_name":"stdout","time":5984.772389749,"data":"[supervised] EPOCH deepsets_ranknet 1729 1 loss 0.6694950266974047 validation -4.5829645460307145\n"}
+,{"stream_name":"stdout","time":6007.56062093,"data":"[supervised] EPOCH deepsets_ranknet 1729 2 loss 0.6551734482636675 validation -4.468295376203253\n"}
+,{"stream_name":"stdout","time":6030.341834308,"data":"[supervised] EPOCH deepsets_ranknet 1729 3 loss 0.6397061183233745 validation -4.341448704958415\n"}
+,{"stream_name":"stdout","time":6053.524493619,"data":"[supervised] EPOCH deepsets_ranknet 1729 4 loss 0.6224980884580873 validation -4.312618953798897\n"}
+,{"stream_name":"stdout","time":6076.691621178,"data":"[supervised] EPOCH deepsets_ranknet 1729 5 loss 0.603211130190175 validation -4.260444366679737\n"}
+,{"stream_name":"stdout","time":6099.903677641,"data":"[supervised] EPOCH deepsets_ranknet 1729 6 loss 0.5822735986148473 validation -4.232492823784495\n"}
+,{"stream_name":"stdout","time":6122.988385334,"data":"[supervised] EPOCH deepsets_ranknet 1729 7 loss 0.5605788301472785 validation -4.185666542650706\n"}
+,{"stream_name":"stdout","time":6146.202268356,"data":"[supervised] EPOCH deepsets_ranknet 1729 8 loss 0.5386317611555569 validation -4.13506684228265\n"}
+,{"stream_name":"stdout","time":6168.965862942,"data":"[supervised] EPOCH deepsets_ranknet 1729 9 loss 0.5158624998002779 validation -4.125478064981961\n"}
+,{"stream_name":"stdout","time":6191.957260562,"data":"[supervised] EPOCH deepsets_ranknet 1729 10 loss 0.4946017009606294 validation -4.113117301976718\n"}
+,{"stream_name":"stdout","time":6214.79667258,"data":"[supervised] EPOCH deepsets_ranknet 1729 11 loss 0.4758237608075433 validation -4.081407053165588\n"}
+,{"stream_name":"stdout","time":6237.795405557,"data":"[supervised] EPOCH deepsets_ranknet 1729 12 loss 0.45815998473881336 validation -4.044050636430937\n"}
+,{"stream_name":"stdout","time":6260.930101057,"data":"[supervised] EPOCH deepsets_ranknet 1729 13 loss 0.44115673104533926 validation -4.010793208039609\n"}
+,{"stream_name":"stdout","time":6284.217421019,"data":"[supervised] EPOCH deepsets_ranknet 1729 14 loss 0.42504308639217925 validation -3.943068635333056\n"}
+,{"stream_name":"stdout","time":6307.307754292,"data":"[supervised] EPOCH deepsets_ranknet 1729 15 loss 0.4107532214911771 validation -3.882659508847461\n"}
+,{"stream_name":"stdout","time":6330.498781363,"data":"[supervised] EPOCH deepsets_ranknet 1729 16 loss 0.39456928184245044 validation -3.8211772180925014\n"}
+,{"stream_name":"stdout","time":6353.500418709,"data":"[supervised] EPOCH deepsets_ranknet 1729 17 loss 0.37988238015577735 validation -3.7548582170378477\n"}
+,{"stream_name":"stdout","time":6376.491363382,"data":"[supervised] EPOCH deepsets_ranknet 1729 18 loss 0.36621438227530234 validation -3.710315792739749\n"}
+,{"stream_name":"stdout","time":6399.537896428,"data":"[supervised] EPOCH deepsets_ranknet 1729 19 loss 0.3512138786218202 validation -3.6669893436917254\n"}
+,{"stream_name":"stdout","time":6422.642377239,"data":"[supervised] EPOCH deepsets_ranknet 1729 20 loss 0.33817438384016896 validation -3.634784717275549\n"}
+,{"stream_name":"stdout","time":6445.643788332,"data":"[supervised] EPOCH deepsets_ranknet 1729 21 loss 0.32502703314617065 validation -3.5914753014109793\n"}
+,{"stream_name":"stdout","time":6468.755868824,"data":"[supervised] EPOCH deepsets_ranknet 1729 22 loss 0.3124016786107404 validation -3.5561822236066023\n"}
+,{"stream_name":"stdout","time":6491.53709002,"data":"[supervised] EPOCH deepsets_ranknet 1729 23 loss 0.30242502085121714 validation -3.5333337424947757\n"}
+,{"stream_name":"stdout","time":6514.640809961,"data":"[supervised] EPOCH deepsets_ranknet 1729 24 loss 0.2929510765437726 validation -3.514146654226315\n"}
+,{"stream_name":"stdout","time":6537.702254973,"data":"[supervised] EPOCH deepsets_ranknet 1729 25 loss 0.2850627452997827 validation -3.496671336551351\n"}
+,{"stream_name":"stdout","time":6560.7671994,"data":"[supervised] EPOCH deepsets_ranknet 1729 26 loss 0.2808454445758173 validation -3.481240549862576\n"}
+,{"stream_name":"stdout","time":6583.948229723,"data":"[supervised] EPOCH deepsets_ranknet 1729 27 loss 0.2751578895994129 validation -3.4304473410822567\n"}
+,{"stream_name":"stdout","time":6607.207800435,"data":"[supervised] EPOCH deepsets_ranknet 1729 28 loss 0.2716572078504669 validation -3.4476600673830444\n"}
+,{"stream_name":"stdout","time":6630.212989559,"data":"[supervised] EPOCH deepsets_ranknet 1729 29 loss 0.269778897535744 validation -3.445755878278911\n"}
+,{"stream_name":"stdout","time":6653.520523695,"data":"[supervised] EPOCH deepsets_ranknet 1729 30 loss 0.2692754902197265 validation -3.4360478942398127\n"}
+,{"stream_name":"stdout","time":6676.76875854,"data":"[supervised] EPOCH deepsets_ranknet 1729 31 loss 0.2665857375385059 validation -3.4245560723192394\n"}
+,{"stream_name":"stdout","time":6700.239150505,"data":"[supervised] EPOCH deepsets_ranknet 1729 32 loss 0.26483737773370564 validation -3.4175784244802156\n"}
+,{"stream_name":"stdout","time":6723.496598276,"data":"[supervised] EPOCH deepsets_ranknet 1729 33 loss 0.2615560990357082 validation -3.4212198202461477\n"}
+,{"stream_name":"stdout","time":6746.761400612,"data":"[supervised] EPOCH deepsets_ranknet 1729 34 loss 0.2614906429518342 validation -3.424905096258478\n"}
+,{"stream_name":"stdout","time":6769.945236077,"data":"[supervised] EPOCH deepsets_ranknet 1729 35 loss 0.2607823801757654 validation -3.417948492889867\n"}
+,{"stream_name":"stdout","time":6793.291652261,"data":"[supervised] EPOCH deepsets_ranknet 1729 36 loss 0.26018712626884266 validation -3.4138752696093575\n"}
+,{"stream_name":"stdout","time":6816.538308429,"data":"[supervised] EPOCH deepsets_ranknet 1729 37 loss 0.25757584104280085 validation -3.4129760847404946\n"}
+,{"stream_name":"stdout","time":6839.570336235,"data":"[supervised] EPOCH deepsets_ranknet 1729 38 loss 0.2565437978190701 validation -3.412792386184593\n"}
+,{"stream_name":"stdout","time":6862.748946812,"data":"[supervised] EPOCH deepsets_ranknet 1729 39 loss 0.25522704289062403 validation -3.4180607439420685\n"}
+,{"stream_name":"stdout","time":6885.851951244,"data":"[supervised] EPOCH deepsets_ranknet 1729 40 loss 0.2545129865176854 validation -3.406304904589328\n"}
+,{"stream_name":"stdout","time":6908.912713235,"data":"[supervised] EPOCH deepsets_ranknet 1729 41 loss 0.2541427361632387 validation -3.403029561977941\n"}
+,{"stream_name":"stdout","time":6932.10516168,"data":"[supervised] EPOCH deepsets_ranknet 1729 42 loss 0.2539117486116744 validation -3.417241500595892\n"}
+,{"stream_name":"stdout","time":6955.164595656,"data":"[supervised] EPOCH deepsets_ranknet 1729 43 loss 0.25311718337182043 validation -3.404140781953667\n"}
+,{"stream_name":"stdout","time":6978.251118728,"data":"[supervised] EPOCH deepsets_ranknet 1729 44 loss 0.25293761117757185 validation -3.392206962939329\n"}
+,{"stream_name":"stdout","time":7001.515492604,"data":"[supervised] EPOCH deepsets_ranknet 1729 45 loss 0.25130749528838514 validation -3.4046328942612236\n"}
+,{"stream_name":"stdout","time":7024.766740691,"data":"[supervised] EPOCH deepsets_ranknet 1729 46 loss 0.25156777399612196 validation -3.3887166593890345\n"}
+,{"stream_name":"stdout","time":7047.970686357,"data":"[supervised] EPOCH deepsets_ranknet 1729 47 loss 0.25085170137113266 validation -3.412131694682147\n"}
+,{"stream_name":"stdout","time":7071.216449406,"data":"[supervised] EPOCH deepsets_ranknet 1729 48 loss 0.25118056570088676 validation -3.4203394236869493\n"}
+,{"stream_name":"stdout","time":7094.358090144,"data":"[supervised] EPOCH deepsets_ranknet 1729 49 loss 0.24746090260652664 validation -3.3818849491861207\n"}
+,{"stream_name":"stdout","time":7123.352151775,"data":"[supervised] TRAIN set_transformer_ranknet/1729\n"}
+,{"stream_name":"stdout","time":7155.66410762,"data":"[supervised] EPOCH set_transformer_ranknet 1729 0 loss 0.6861691663507372 validation -4.838783931041628\n"}
+,{"stream_name":"stdout","time":7182.924302961,"data":"[supervised] EPOCH set_transformer_ranknet 1729 1 loss 0.673649215255864 validation -4.712466572401464\n"}
+,{"stream_name":"stdout","time":7210.321115484,"data":"[supervised] EPOCH set_transformer_ranknet 1729 2 loss 0.6614817057270557 validation -4.595786094036569\n"}
+,{"stream_name":"stdout","time":7237.453948642,"data":"[supervised] EPOCH set_transformer_ranknet 1729 3 loss 0.6419722959399223 validation -4.435057444078002\n"}
+,{"stream_name":"stdout","time":7264.353702738,"data":"[supervised] EPOCH set_transformer_ranknet 1729 4 loss 0.6113455634913407 validation -4.246163039979926\n"}
+,{"stream_name":"stdout","time":7291.642712881,"data":"[supervised] EPOCH set_transformer_ranknet 1729 5 loss 0.5766492043039761 validation -4.246907679894779\n"}
+,{"stream_name":"stdout","time":7319.092290539,"data":"[supervised] EPOCH set_transformer_ranknet 1729 6 loss 0.5328922728076577 validation -4.092537601447967\n"}
+,{"stream_name":"stdout","time":7346.217208598,"data":"[supervised] EPOCH set_transformer_ranknet 1729 7 loss 0.4844835420954041 validation -4.01908988826793\n"}
+,{"stream_name":"stdout","time":7373.381768459,"data":"[supervised] EPOCH set_transformer_ranknet 1729 8 loss 0.43922834112890996 validation -3.8364100270743795\n"}
+,{"stream_name":"stdout","time":7400.425934619,"data":"[supervised] EPOCH set_transformer_ranknet 1729 9 loss 0.40302895606146194 validation -3.760526442374318\n"}
+,{"stream_name":"stdout","time":7427.755128011,"data":"[supervised] EPOCH set_transformer_ranknet 1729 10 loss 0.3696422764005547 validation -3.6877240660107997\n"}
+,{"stream_name":"stdout","time":7455.105601321,"data":"[supervised] EPOCH set_transformer_ranknet 1729 11 loss 0.3511742605405743 validation -3.689528846434767\n"}
+,{"stream_name":"stdout","time":7482.190063102,"data":"[supervised] EPOCH set_transformer_ranknet 1729 12 loss 0.3372320012840646 validation -3.5265905888798197\n"}
+,{"stream_name":"stdout","time":7509.209877175,"data":"[supervised] EPOCH set_transformer_ranknet 1729 13 loss 0.32291864325998176 validation -3.4896902703934227\n"}
+,{"stream_name":"stdout","time":7536.491926408,"data":"[supervised] EPOCH set_transformer_ranknet 1729 14 loss 0.30713637706503505 validation -3.4688370036132787\n"}
+,{"stream_name":"stdout","time":7563.420840708,"data":"[supervised] EPOCH set_transformer_ranknet 1729 15 loss 0.2961761354990813 validation -3.4578724739356725\n"}
+,{"stream_name":"stdout","time":7590.363480959,"data":"[supervised] EPOCH set_transformer_ranknet 1729 16 loss 0.2876289977302804 validation -3.4837988529177077\n"}
+,{"stream_name":"stdout","time":7617.300559554,"data":"[supervised] EPOCH set_transformer_ranknet 1729 17 loss 0.2785674792157806 validation -3.4519627545344798\n"}
+,{"stream_name":"stdout","time":7644.660614351,"data":"[supervised] EPOCH set_transformer_ranknet 1729 18 loss 0.27474781490946043 validation -3.4526706355368146\n"}
+,{"stream_name":"stdout","time":7671.857735499,"data":"[supervised] EPOCH set_transformer_ranknet 1729 19 loss 0.2731011544856301 validation -3.4582803913988327\n"}
+,{"stream_name":"stdout","time":7699.102965722,"data":"[supervised] EPOCH set_transformer_ranknet 1729 20 loss 0.2622733247638962 validation -3.457713304538753\n"}
+,{"stream_name":"stdout","time":7726.113423241,"data":"[supervised] EPOCH set_transformer_ranknet 1729 21 loss 0.26096091331385196 validation -3.466718553670233\n"}
+,{"stream_name":"stdout","time":7753.220044077,"data":"[supervised] EPOCH set_transformer_ranknet 1729 22 loss 0.2631600703228969 validation -3.5789507135641085\n"}
+,{"stream_name":"stdout","time":7780.271686087,"data":"[supervised] EPOCH set_transformer_ranknet 1729 23 loss 0.26215218863080736 validation -3.4834212877855277\n"}
+,{"stream_name":"stdout","time":7807.316799811,"data":"[supervised] EPOCH set_transformer_ranknet 1729 24 loss 0.255678166844973 validation -3.519274827363489\n"}
+,{"stream_name":"stdout","time":7834.367407573,"data":"[supervised] EPOCH set_transformer_ranknet 1729 25 loss 0.24913947433242356 validation -3.5050285537017056\n"}
+,{"stream_name":"stdout","time":7866.637122778,"data":"[supervised] TRAIN listmle/1729\n"}
+,{"stream_name":"stdout","time":7897.348285929,"data":"[supervised] EPOCH listmle 1729 0 loss 1.6742203499812747 validation -4.752921641165953\n"}
+,{"stream_name":"stdout","time":7923.32786891,"data":"[supervised] EPOCH listmle 1729 1 loss 1.647679667155295 validation -4.5043835840193225\n"}
+,{"stream_name":"stdout","time":7949.399796854,"data":"[supervised] EPOCH listmle 1729 2 loss 1.6254892495001247 validation -4.4359285587583654\n"}
+,{"stream_name":"stdout","time":7975.36712455,"data":"[supervised] EPOCH listmle 1729 3 loss 1.6009391472068937 validation -4.344202524092155\n"}
+,{"stream_name":"stdout","time":8001.479092262,"data":"[supervised] EPOCH listmle 1729 4 loss 1.5743225252654354 validation -4.260774849885636\n"}
+,{"stream_name":"stdout","time":8027.510578875,"data":"[supervised] EPOCH listmle 1729 5 loss 1.5426670548436943 validation -4.1713453086133025\n"}
+,{"stream_name":"stdout","time":8053.49119953,"data":"[supervised] EPOCH listmle 1729 6 loss 1.507137355553271 validation -4.137190849373519\n"}
+,{"stream_name":"stdout","time":8079.389582564,"data":"[supervised] EPOCH listmle 1729 7 loss 1.469626650539548 validation -4.127926780328333\n"}
+,{"stream_name":"stdout","time":8105.324831572,"data":"[supervised] EPOCH listmle 1729 8 loss 1.4287199798776202 validation -4.1117958110365675\n"}
+,{"stream_name":"stdout","time":8131.218050061,"data":"[supervised] EPOCH listmle 1729 9 loss 1.386781189794038 validation -4.093028626911794\n"}
+,{"stream_name":"stdout","time":8157.106796509,"data":"[supervised] EPOCH listmle 1729 10 loss 1.3451028718332472 validation -4.0537953216015925\n"}
+,{"stream_name":"stdout","time":8182.809028429,"data":"[supervised] EPOCH listmle 1729 11 loss 1.3045940670432872 validation -4.004715458620248\n"}
+,{"stream_name":"stdout","time":8208.611745986,"data":"[supervised] EPOCH listmle 1729 12 loss 1.2645599547078157 validation -3.9505325349427673\n"}
+,{"stream_name":"stdout","time":8234.373009413,"data":"[supervised] EPOCH listmle 1729 13 loss 1.223659222221661 validation -3.924122400995585\n"}
+,{"stream_name":"stdout","time":8260.307714129,"data":"[supervised] EPOCH listmle 1729 14 loss 1.1841839523259021 validation -3.8542024252099045\n"}
+,{"stream_name":"stdout","time":8286.021034794,"data":"[supervised] EPOCH listmle 1729 15 loss 1.1431599259325689 validation -3.822330083639658\n"}
+,{"stream_name":"stdout","time":8311.756690485,"data":"[supervised] EPOCH listmle 1729 16 loss 1.102153640437676 validation -3.7804163909911193\n"}
+,{"stream_name":"stdout","time":8337.465262469,"data":"[supervised] EPOCH listmle 1729 17 loss 1.063068453430434 validation -3.7466727947395477\n"}
+,{"stream_name":"stdout","time":8363.293029333,"data":"[supervised] EPOCH listmle 1729 18 loss 1.0245752984959853 validation -3.718368956139962\n"}
+,{"stream_name":"stdout","time":8389.159423607,"data":"[supervised] EPOCH listmle 1729 19 loss 0.9893060386589221 validation -3.6942551320199404\n"}
+,{"stream_name":"stdout","time":8414.78708622,"data":"[supervised] EPOCH listmle 1729 20 loss 0.9590519421160608 validation -3.6112275717915376\n"}
+,{"stream_name":"stdout","time":8440.549914493,"data":"[supervised] EPOCH listmle 1729 21 loss 0.9294557440230621 validation -3.5610760709024105\n"}
+,{"stream_name":"stdout","time":8466.439790249,"data":"[supervised] EPOCH listmle 1729 22 loss 0.9030863733803441 validation -3.554606283203535\n"}
+,{"stream_name":"stdout","time":8492.222104597,"data":"[supervised] EPOCH listmle 1729 23 loss 0.8790740591002878 validation -3.523024764666948\n"}
+,{"stream_name":"stdout","time":8517.90938718,"data":"[supervised] EPOCH listmle 1729 24 loss 0.8621880396215376 validation -3.491607841036057\n"}
+,{"stream_name":"stdout","time":8543.817110492,"data":"[supervised] EPOCH listmle 1729 25 loss 0.8520641635396043 validation -3.469737069249924\n"}
+,{"stream_name":"stdout","time":8569.800365235,"data":"[supervised] EPOCH listmle 1729 26 loss 0.8409180000828407 validation -3.450622363326959\n"}
+,{"stream_name":"stdout","time":8595.459984563,"data":"[supervised] EPOCH listmle 1729 27 loss 0.8306182482028975 validation -3.4231399033725873\n"}
+,{"stream_name":"stdout","time":8621.445408768,"data":"[supervised] EPOCH listmle 1729 28 loss 0.8243104145698866 validation -3.438182275238673\n"}
+,{"stream_name":"stdout","time":8647.069981279,"data":"[supervised] EPOCH listmle 1729 29 loss 0.8217117826439853 validation -3.4211638660994983\n"}
+,{"stream_name":"stdout","time":8673.042800056,"data":"[supervised] EPOCH listmle 1729 30 loss 0.817947059680226 validation -3.421304106557653\n"}
+,{"stream_name":"stdout","time":8698.806653939,"data":"[supervised] EPOCH listmle 1729 31 loss 0.810776599002359 validation -3.410655277826709\n"}
+,{"stream_name":"stdout","time":8724.672585425,"data":"[supervised] EPOCH listmle 1729 32 loss 0.807807160505639 validation -3.4085113717715325\n"}
+,{"stream_name":"stdout","time":8750.459864356,"data":"[supervised] EPOCH listmle 1729 33 loss 0.8027940178146397 validation -3.4143358843832083\n"}
+,{"stream_name":"stdout","time":8776.403001591,"data":"[supervised] EPOCH listmle 1729 34 loss 0.8028206020745136 validation -3.385909586441159\n"}
+,{"stream_name":"stdout","time":8802.256067424,"data":"[supervised] EPOCH listmle 1729 35 loss 0.8007753513708519 validation -3.4102786758869694\n"}
+,{"stream_name":"stdout","time":8828.153644348,"data":"[supervised] EPOCH listmle 1729 36 loss 0.7979189471998602 validation -3.421862909038771\n"}
+,{"stream_name":"stdout","time":8854.067579201,"data":"[supervised] EPOCH listmle 1729 37 loss 0.7936371051294822 validation -3.3910904475454817\n"}
+,{"stream_name":"stdout","time":8879.817639858,"data":"[supervised] EPOCH listmle 1729 38 loss 0.787545123522937 validation -3.3970507685080724\n"}
+,{"stream_name":"stdout","time":8905.702197589,"data":"[supervised] EPOCH listmle 1729 39 loss 0.7852080575490801 validation -3.4222308379178425\n"}
+,{"stream_name":"stdout","time":8931.61316643,"data":"[supervised] EPOCH listmle 1729 40 loss 0.7830558844443618 validation -3.3969265309563386\n"}
+,{"stream_name":"stdout","time":8957.264854425,"data":"[supervised] EPOCH listmle 1729 41 loss 0.7806873502861187 validation -3.4021415970383027\n"}
+,{"stream_name":"stdout","time":8982.973503422,"data":"[supervised] EPOCH listmle 1729 42 loss 0.7792582970672907 validation -3.4003544756716817\n"}
+,{"stream_name":"stdout","time":9010.78317261,"data":"[supervised] TRAIN temporal_deepsets_ranknet/1729\n"}
+,{"stream_name":"stdout","time":9045.400550793,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 0 loss 0.689211442717351 validation -4.818212140400698\n"}
+,{"stream_name":"stdout","time":9074.910488757,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 1 loss 0.6739472165936604 validation -4.684808233650457\n"}
+,{"stream_name":"stdout","time":9104.670623185,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 2 loss 0.6629685143125243 validation -4.601682524499925\n"}
+,{"stream_name":"stdout","time":9134.214955445,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 3 loss 0.64946936146589 validation -4.54634812689946\n"}
+,{"stream_name":"stdout","time":9163.889422837,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 4 loss 0.6345504710334353 validation -4.463107237397041\n"}
+,{"stream_name":"stdout","time":9193.789693332,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 5 loss 0.6174381897435524 validation -4.3798842412841505\n"}
+,{"stream_name":"stdout","time":9223.672930993,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 6 loss 0.5971828011970501 validation -4.326805434957725\n"}
+,{"stream_name":"stdout","time":9253.444029296,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 7 loss 0.5758777107257629 validation -4.319208223835298\n"}
+,{"stream_name":"stdout","time":9283.248821387,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 8 loss 0.5539702617898001 validation -4.284364756555781\n"}
+,{"stream_name":"stdout","time":9313.186500147,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 9 loss 0.5308524365755147 validation -4.230263244172922\n"}
+,{"stream_name":"stdout","time":9342.940066316,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 10 loss 0.5095721398502064 validation -4.1985240973661355\n"}
+,{"stream_name":"stdout","time":9372.721699262,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 11 loss 0.490337948924207 validation -4.170328575680815\n"}
+,{"stream_name":"stdout","time":9402.632601181,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 12 loss 0.4727602643069986 validation -4.116719381831258\n"}
+,{"stream_name":"stdout","time":9432.519229241,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 13 loss 0.45588793566184904 validation -4.065013842894022\n"}
+,{"stream_name":"stdout","time":9462.699663034,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 14 loss 0.44022996339663223 validation -4.005033537083944\n"}
+,{"stream_name":"stdout","time":9492.890118529,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 15 loss 0.4240261539152925 validation -3.944122549138281\n"}
+,{"stream_name":"stdout","time":9522.753459922,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 16 loss 0.4084326045704074 validation -3.889332004224056\n"}
+,{"stream_name":"stdout","time":9552.736075083,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 17 loss 0.3921367999573704 validation -3.8495912495344493\n"}
+,{"stream_name":"stdout","time":9582.980854898,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 18 loss 0.37499707395136284 validation -3.7976246323930316\n"}
+,{"stream_name":"stdout","time":9613.438471488,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 19 loss 0.35629514657011896 validation -3.7466583099144697\n"}
+,{"stream_name":"stdout","time":9644.129722779,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 20 loss 0.34296481913202115 validation -3.691795201066429\n"}
+,{"stream_name":"stdout","time":9674.738872927,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 21 loss 0.32453849031935533 validation -3.653974805059265\n"}
+,{"stream_name":"stdout","time":9705.487700054,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 22 loss 0.30978813186493426 validation -3.6499481454640037\n"}
+,{"stream_name":"stdout","time":9735.883177485,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 23 loss 0.2970500861523533 validation -3.596603061187837\n"}
+,{"stream_name":"stdout","time":9766.272291156,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 24 loss 0.28602641119459804 validation -3.5802555299758696\n"}
+,{"stream_name":"stdout","time":9796.800302194,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 25 loss 0.2764997241674223 validation -3.56319012904697\n"}
+,{"stream_name":"stdout","time":9827.210091602,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 26 loss 0.2699387111527187 validation -3.5419950099282946\n"}
+,{"stream_name":"stdout","time":9857.646653781,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 27 loss 0.26269075773143413 validation -3.494939241959841\n"}
+,{"stream_name":"stdout","time":9888.303865161,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 28 loss 0.25831931060334057 validation -3.4951240681262017\n"}
+,{"stream_name":"stdout","time":9918.610980913,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 29 loss 0.25610582811448523 validation -3.4966406211015992\n"}
+,{"stream_name":"stdout","time":9948.94434841,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 30 loss 0.25473969391063633 validation -3.4872900548655745\n"}
+,{"stream_name":"stdout","time":9979.027916008,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 31 loss 0.25122696397908584 validation -3.453551184692693\n"}
+,{"stream_name":"stdout","time":10009.454736082,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 32 loss 0.24851374218894762 validation -3.4491765497532847\n"}
+,{"stream_name":"stdout","time":10040.312871809,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 33 loss 0.24675065752887804 validation -3.4621125772719696\n"}
+,{"stream_name":"stdout","time":10071.017992588,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 34 loss 0.24535898676035828 validation -3.460729347391878\n"}
+,{"stream_name":"stdout","time":10101.541654399,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 35 loss 0.24458048953512446 validation -3.466596631491212\n"}
+,{"stream_name":"stdout","time":10132.060345774,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 36 loss 0.24171725815214984 validation -3.4677904133797486\n"}
+,{"stream_name":"stdout","time":10162.319019652,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 37 loss 0.2403712882950373 validation -3.475169562640788\n"}
+,{"stream_name":"stdout","time":10192.754075514,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 38 loss 0.23910016068060713 validation -3.463549841085685\n"}
+,{"stream_name":"stdout","time":10223.162053707,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 39 loss 0.2390460014357032 validation -3.461517571432937\n"}
+,{"stream_name":"stdout","time":10253.551158386,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 40 loss 0.23966743296962534 validation -3.448037604886407\n"}
+,{"stream_name":"stdout","time":10283.691591834,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 41 loss 0.2400733198769558 validation -3.4539683872777696\n"}
+,{"stream_name":"stdout","time":10313.843372839,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 42 loss 0.24063820438401962 validation -3.461862011168504\n"}
+,{"stream_name":"stdout","time":10344.117216445,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 43 loss 0.23914488468656714 validation -3.4780284703818287\n"}
+,{"stream_name":"stdout","time":10374.397096943,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 44 loss 0.23897902468651466 validation -3.468746799556777\n"}
+,{"stream_name":"stdout","time":10404.554573365,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 45 loss 0.2353561275915652 validation -3.4525054097744223\n"}
+,{"stream_name":"stdout","time":10434.943284031,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 46 loss 0.2349663100356736 validation -3.457296560838708\n"}
+,{"stream_name":"stdout","time":10465.059030434,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 47 loss 0.23317061501864345 validation -3.469240949185761\n"}
+,{"stream_name":"stdout","time":10495.21006128,"data":"[supervised] EPOCH temporal_deepsets_ranknet 1729 48 loss 0.23278381220816868 validation -3.4612872547440916\n"}
+,{"stream_name":"stdout","time":10530.247130157,"data":"[supervised] FINISHED bounded method attempts; consult ledger /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D\n"}
+,{"stream_name":"stdout","time":10531.647086718,"data":"START rate_study remaining_seconds 27279\n"}
+,{"stream_name":"stdout","time":10532.083611047,"data":"[rate_study] Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":10532.084733806,"data":"[rate_study]   File \"/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/source/experiments/stream_scheduler/ue_rate_study.py\", line 6, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":10532.086126926,"data":"[rate_study]     from Evaluation.ue_scenarios import StreamConfig,build_stream\n"}
+,{"stream_name":"stdout","time":10532.087166957,"data":"[rate_study] ModuleNotFoundError: No module named 'Evaluation'\n"}
+,{"stream_name":"stdout","time":10532.336380543,"data":"START profile_supervised remaining_seconds 30878\n"}
+,{"stream_name":"stdout","time":10538.04744358,"data":"[profile_supervised] /usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.\n"}
+,{"stream_name":"stdout","time":10538.048464268,"data":"[profile_supervised]   _warn_once(\n"}
+,{"stream_name":"stdout","time":10539.711140827,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/linear_choice/1729/model.json\n"}
+,{"stream_name":"stdout","time":10542.211713643,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/temporal_deepsets_ranknet/1729/model.json\n"}
+,{"stream_name":"stdout","time":10544.483487191,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/set_transformer_ranknet/1729/model.json\n"}
+,{"stream_name":"stdout","time":10546.241404099,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/listmle/1729/model.json\n"}
+,{"stream_name":"stdout","time":10547.994933265,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/delay_huber/1729/model.json\n"}
+,{"stream_name":"stdout","time":10552.657065046,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/lambdamart/1729/model.json\n"}
+,{"stream_name":"stdout","time":10554.385155198,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/priority_classifier/1729/model.json\n"}
+,{"stream_name":"stdout","time":10556.085694288,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/ranknet/1729/model.json\n"}
+,{"stream_name":"stdout","time":10557.806669941,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/deepsets_ranknet/1729/model.json\n"}
+,{"stream_name":"stdout","time":10559.563353441,"data":"[profile_supervised] PROFILE /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/jobs/supervised/D/models/mlp_choice/1729/model.json\n"}
+,{"stream_name":"stdout","time":10560.188570531,"data":"START report_supervised remaining_seconds 30850\n"}
+,{"stream_name":"stdout","time":10560.461547441,"data":"[report_supervised] {\n"}
+,{"stream_name":"stdout","time":10560.462402802,"data":"[report_supervised]   \"scope\": \"development only; fixed first seed, no best-seed selection\",\n"}
+,{"stream_name":"stdout","time":10560.46331915,"data":"[report_supervised]   \"seed\": \"1729\",\n"}
+,{"stream_name":"stdout","time":10560.464148018,"data":"[report_supervised]   \"complete_methods\": [\n"}
+,{"stream_name":"stdout","time":10560.464920142,"data":"[report_supervised]     \"D/deepsets_ranknet\",\n"}
+,{"stream_name":"stdout","time":10560.465655907,"data":"[report_supervised]     \"D/delay_huber\",\n"}
+,{"stream_name":"stdout","time":10560.466351238,"data":"[report_supervised]     \"D/lambdamart\",\n"}
+,{"stream_name":"stdout","time":10560.467085914,"data":"[report_supervised]     \"D/linear_choice\",\n"}
+,{"stream_name":"stdout","time":10560.467841071,"data":"[report_supervised]     \"D/listmle\",\n"}
+,{"stream_name":"stdout","time":10560.468536747,"data":"[report_supervised]     \"D/mlp_choice\",\n"}
+,{"stream_name":"stdout","time":10560.469245917,"data":"[report_supervised]     \"D/priority_classifier\",\n"}
+,{"stream_name":"stdout","time":10560.469992108,"data":"[report_supervised]     \"D/ranknet\",\n"}
+,{"stream_name":"stdout","time":10560.4707518,"data":"[report_supervised]     \"D/set_transformer_ranknet\",\n"}
+,{"stream_name":"stdout","time":10560.471411501,"data":"[report_supervised]     \"D/temporal_deepsets_ranknet\"\n"}
+,{"stream_name":"stdout","time":10560.472136249,"data":"[report_supervised]   ],\n"}
+,{"stream_name":"stdout","time":10560.472889821,"data":"[report_supervised]   \"teacher_replay\": \"not_retrieved\",\n"}
+,{"stream_name":"stdout","time":10560.473588563,"data":"[report_supervised]   \"rows\": 10,\n"}
+,{"stream_name":"stdout","time":10560.47427122,"data":"[report_supervised]   \"independent_final_evaluation\": \"not_established\"\n"}
+,{"stream_name":"stdout","time":10560.475036256,"data":"[report_supervised] }\n"}
+,{"stream_name":"stdout","time":10560.475788152,"data":"REPORTS_SAVED /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":10560.672472839,"data":"START report_supervised remaining_seconds 30850\n"}
+,{"stream_name":"stdout","time":10560.93578733,"data":"[report_supervised] {\n"}
+,{"stream_name":"stdout","time":10560.93595317,"data":"[report_supervised]   \"scope\": \"development only; fixed first seed, no best-seed selection\",\n"}
+,{"stream_name":"stdout","time":10560.936974921,"data":"[report_supervised]   \"seed\": \"1729\",\n"}
+,{"stream_name":"stdout","time":10560.937931484,"data":"[report_supervised]   \"complete_methods\": [\n"}
+,{"stream_name":"stdout","time":10560.939169529,"data":"[report_supervised]     \"D/deepsets_ranknet\",\n"}
+,{"stream_name":"stdout","time":10560.941284219,"data":"[report_supervised]     \"D/delay_huber\",\n"}
+,{"stream_name":"stdout","time":10560.941814496,"data":"[report_supervised]     \"D/lambdamart\",\n"}
+,{"stream_name":"stdout","time":10560.942704176,"data":"[report_supervised]     \"D/linear_choice\",\n"}
+,{"stream_name":"stdout","time":10560.943439397,"data":"[report_supervised]     \"D/listmle\",\n"}
+,{"stream_name":"stdout","time":10560.944555775,"data":"[report_supervised]     \"D/mlp_choice\",\n"}
+,{"stream_name":"stdout","time":10560.945384033,"data":"[report_supervised]     \"D/priority_classifier\",\n"}
+,{"stream_name":"stdout","time":10560.94612658,"data":"[report_supervised]     \"D/ranknet\",\n"}
+,{"stream_name":"stdout","time":10560.947069248,"data":"[report_supervised]     \"D/set_transformer_ranknet\",\n"}
+,{"stream_name":"stdout","time":10560.947949372,"data":"[report_supervised]     \"D/temporal_deepsets_ranknet\"\n"}
+,{"stream_name":"stdout","time":10560.948753753,"data":"[report_supervised]   ],\n"}
+,{"stream_name":"stdout","time":10560.949468448,"data":"[report_supervised]   \"teacher_replay\": \"not_retrieved\",\n"}
+,{"stream_name":"stdout","time":10560.950171181,"data":"[report_supervised]   \"rows\": 10,\n"}
+,{"stream_name":"stdout","time":10560.950923815,"data":"[report_supervised]   \"independent_final_evaluation\": \"not_established\"\n"}
+,{"stream_name":"stdout","time":10560.951626772,"data":"[report_supervised] }\n"}
+,{"stream_name":"stdout","time":10560.99029412,"data":"REPORTS_SAVED /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":10560.991078769,"data":"Training stage exited; consult per-method state, not only process exit.\n"}
+,{"stream_name":"stdout","time":10560.991833481,"data":"END 07_training_and_conditional_labels complete seconds 10404.2\n"}
+,{"stream_name":"stdout","time":10561.118999652,"data":"START 08_tables_figures_and_recovery run /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z\n"}
+,{"stream_name":"stdout","time":10561.145449476,"data":"Shared D validation: supervised\n"}
+,{"stream_name":"stdout","time":10561.706800377,"data":"RUN STATUS {'status': 'partial_or_blocked', 'incomplete': ['teacher_students/linear_choice/1729', 'teacher_students/mlp_choice/1729', 'teacher_students/ranknet/1729', 'teacher_students/deepsets_ranknet/1729', 'teacher_students/set_transformer_ranknet/1729', 'teacher_students/temporal_deepsets_ranknet/1729', 'teacher_students/visionprefer/1729', 'feedback/rl_vlm_f/1729', 'feedback/vlm_replay/1729'], 'stage_failures': ['teacher', 'rate_study'], 'scientific_final_evaluation': False}\n"}
+,{"stream_name":"stdout","time":10561.707712087,"data":"Runtime/partial-FLOPs profiles: [PosixPath('/kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/profiles/supervised.json')]\n"}
+,{"stream_name":"stdout","time":10561.708449157,"data":"Important:Critical waits/misses are in critical_safeguards.json; aggregate D is not a Critical guarantee.\n"}
+,{"stream_name":"stdout","time":10561.709173479,"data":"Retrieve the ENTIRE run folder, including source/cache identity, session logs, raw teacher records, optimizer checkpoints and metrics.\n"}
+,{"stream_name":"stdout","time":10561.709974793,"data":"Resume:attach that run under /kaggle/input and set RESUME_INPUT. Preserve original input mount names and source snapshot.\n"}
+,{"stream_name":"stdout","time":10561.789641715,"data":"Incremental executed_notebook.ipynb is in /kaggle/working/experiments/scheduler_pair/runs/wsl-20261102T162419Z/sessions/20261102T162419Z ; platform executed notebook/rich output must also be retrieved.\n"}
+,{"stream_name":"stdout","time":10561.790377202,"data":"END 08_tables_figures_and_recovery complete seconds 0.67\n"}
+,{"stream_name":"stderr","time":10567.733449723,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":10567.733482763,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":10567.995284072,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":10567.995312167,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":10568.810629102,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":10568.979310761,"data":"[NbConvertApp] Writing 764363 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":10571.627415002,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":10572.428094941,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":10572.428161006,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":10572.428399216,"data":"[NbConvertApp] Writing 1041107 bytes to __results__.html\n"}
+]

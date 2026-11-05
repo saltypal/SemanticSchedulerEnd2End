@@ -1,0 +1,38 @@
+
+==================================== ERRORS ====================================
+_________ ERROR collecting Test/tests/test_contracts_and_registries.py _________
+ImportError while importing test module '/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Test/tests/test_contracts_and_registries.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Test/tests/test_contracts_and_registries.py:6: in <module>
+    from Evaluation.image_evaluator import register_image_quality_evaluator
+E   ModuleNotFoundError: No module named 'Evaluation.image_evaluator'
+_____________ ERROR collecting Test/tests/test_kodak_benchmark.py ______________
+ImportError while importing test module '/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Test/tests/test_kodak_benchmark.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Test/tests/test_kodak_benchmark.py:5: in <module>
+    from Evaluation.kodak_benchmark import CSV_COLUMNS, append_rows_csv, dataset_files, summarize_rows
+E   ModuleNotFoundError: No module named 'Evaluation.kodak_benchmark'
+____________ ERROR collecting Test/tests/test_packet_accounting.py _____________
+ImportError while importing test module '/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Test/tests/test_packet_accounting.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Test/tests/test_packet_accounting.py:2: in <module>
+    from Evaluation.Communication.channel_uses import qpsk_channel_uses
+E   ModuleNotFoundError: No module named 'Evaluation.Communication'
+=========================== short test summary info ============================
+ERROR Test/tests/test_contracts_and_registries.py
+ERROR Test/tests/test_kodak_benchmark.py
+ERROR Test/tests/test_packet_accounting.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!
+3 errors in 24.07s

@@ -1,1 +1,0 @@
-"""INFRA/latent implementation package."""

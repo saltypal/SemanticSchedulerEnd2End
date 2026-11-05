@@ -1,0 +1,140 @@
+{
+  "model": "yolo_world",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    },
+    "people_vehicles": {
+      "instances": 3,
+      "categories": 1,
+      "largest_box_fraction": 0.08055461541970033,
+      "union_box_coverage": 0.08727160208537368
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "person",
+      "box": [
+        441.3670959472656,
+        119.8182601928711,
+        511.99462890625,
+        288.0
+      ],
+      "score": 0.7402037382125854
+    },
+    {
+      "label": "person",
+      "box": [
+        14.125475883483887,
+        23.440166473388672,
+        31.793163299560547,
+        52.87138748168945
+      ],
+      "score": 0.2631690204143524
+    },
+    {
+      "label": "person",
+      "box": [
+        31.688013076782227,
+        29.087932586669922,
+        49.20661544799805,
+        56.08661651611328
+      ],
+      "score": 0.2509479224681854
+    }
+  ],
+  "values": {
+    "instances": 3,
+    "categories": 1,
+    "largest_box_fraction": 0.08055461541970033,
+    "union_box_coverage": 0.08727160208537368
+  },
+  "audit": {
+    "category_counts": {
+      "person": 3
+    },
+    "detections": [
+      {
+        "label": "person",
+        "box": [
+          441.3670959472656,
+          119.8182601928711,
+          511.99462890625,
+          288.0
+        ],
+        "score": 0.7402037382125854
+      },
+      {
+        "label": "person",
+        "box": [
+          14.125475883483887,
+          23.440166473388672,
+          31.793163299560547,
+          52.87138748168945
+        ],
+        "score": 0.2631690204143524
+      },
+      {
+        "label": "person",
+        "box": [
+          31.688013076782227,
+          29.087932586669922,
+          49.20661544799805,
+          56.08661651611328
+        ],
+        "score": 0.2509479224681854
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 288,
+    "producer": {
+      "checkpoint": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\models\\yolov8s-worldv2.pt",
+      "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+      "device": "cpu",
+      "vocabulary": [
+        "person",
+        "car",
+        "building",
+        "bridge"
+      ],
+      "settings": {
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "verbose": false
+      },
+      "settings_sha256": "e6de57b29ac266ce7a80f7e09dd5319325367c105ff2c4d1d27291b11f871312",
+      "effective_predict_settings": {
+        "task": "detect",
+        "mode": "predict",
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "rect": true,
+        "batch": 1,
+        "device": "cpu"
+      }
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency"
+  },
+  "load_seconds": 4.003987599979155,
+  "first_inference_seconds": 0.5439871000126004,
+  "warmed_latency": false,
+  "image_sha256": "54c48c062b0dcf70d3688cf1d8ada0bdbdb12df288dbea5586bc31fb425b4847",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

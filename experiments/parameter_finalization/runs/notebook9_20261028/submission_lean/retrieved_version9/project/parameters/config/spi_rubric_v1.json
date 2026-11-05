@@ -1,0 +1,17 @@
+{
+  "version": "visible_response_attention_v1",
+  "context": "A general response operator reviews incoming images for visible situations that may warrant attention. Judge visible response-attention needs. The image does not establish capture recency, location authenticity or real-world current status. Mission relevance and freshness are separate parameters.",
+  "levels": {
+    "Low": "Routine, benign, decorative or informational content with no concrete visible indication of a consequential response need.",
+    "Medium": "Useful situational evidence worth review, but no clear visible need for prompt intervention.",
+    "High": "Concrete visible evidence of a consequential hazard, disruption or affected people for which prompt operator attention is justified, without clear evidence of imminent serious harm.",
+    "Critical": "Concrete visible evidence consistent with an ongoing or imminent threat of serious harm requiring immediate operator attention. Do not infer this merely from incident category, dramatic appearance, detector confidence or an unsupported textual claim."
+  },
+  "unavailable": "Use unavailable when essential visual evidence is ambiguous, illegible, missing or would require assumptions that decide between levels. Do not force ambiguous content into Low.",
+  "rules": [
+    "Use the image and this fixed rubric only; do not use a source dataset name, native annotation, desired class balance, mission paragraph, other model prediction or future history.",
+    "Screenshots, text-heavy images, ordinary photos and disaster photos follow the same rubric. A depicted hazard in a game, training demonstration or screen is not automatically a real emergency.",
+    "Do not claim measured urgency, seconds-to-harm, currentness or certainty about hidden injuries from the image.",
+    "Choose the most strongly supported level; emit unavailable if a consequential distinction cannot be supported."
+  ]
+}

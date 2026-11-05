@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
     if not args.owner or any(char not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-" for char in args.owner):
         raise ValueError("Invalid Kaggle owner")
-    from INFRA.latent.experiment import read_batch, source_provenance
+    from Evaluation.latent.experiment import read_batch, source_provenance
     read_batch(args.batch)
     dataset = args.stage / "dataset"
     kernel = args.stage / "kernel"
@@ -26,7 +26,7 @@ def main():
     kernel.mkdir(parents=True, exist_ok=True)
     files = [ROOT / "PROJECT_MAP.md", ROOT / "Scheduler/config/static_latent_demo.json",
              ROOT / "docs/STATIC_LATENT_SCHEDULER.md"]
-    for owner in ("INFRA", "Scheduler", "SemParam", "EncDec"):
+    for owner in ("Evaluation", "Scheduler", "Archived.owners_before_simplification_20261027.SemParam", "Codec"):
         files.extend(path for path in (ROOT / owner).rglob("*.py") if "__pycache__" not in path.parts)
     with zipfile.ZipFile(dataset / "static_source.zip", "w", zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(set(files)):

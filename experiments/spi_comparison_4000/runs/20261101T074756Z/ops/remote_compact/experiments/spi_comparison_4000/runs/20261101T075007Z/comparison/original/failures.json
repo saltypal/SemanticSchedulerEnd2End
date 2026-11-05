@@ -1,0 +1,7 @@
+[
+  {
+    "encoder": "convnextv2_tiny",
+    "error": "[Errno 28] No space left on device",
+    "traceback": "Traceback (most recent call last):\n  File \"/kaggle/working/experiments/spi_classifier_repair/medic_campaign.py\", line 369, in compare\n    x,t,m=(feature_loader or features)(rows,name,out/name)\n          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/experiments/full_medic_labeling/crisis_study.py\", line 101, in loader\n    return study.features(records,name,output/'features'/name)\n           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/experiments/spi_classifier_repair/medic_campaign.py\", line 219, in features\n    write_json(out/'extraction_times.json',times);print('ENCODER',name,len(vectors),flush=True)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/parameters/artifacts.py\", line 19, in write_json\n    temporary.write_text(json.dumps(value,indent=2,allow_nan=False),encoding='utf-8')\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.13/pathlib/_abc.py\", line 652, in write_text\n    return f.write(data)\n           ~~~~~~~^^^^^^\nOSError: [Errno 28] No space left on device\n"
+  }
+]

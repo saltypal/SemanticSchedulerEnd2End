@@ -1,0 +1,388 @@
+START 04_complete_suite_execution output /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z
+Installing pinned VLM runtime; retaining managed Torch/CUDA
+{'torch': '2.11.0+cu128', 'numpy': '2.1.3', 'lightgbm': '4.6.0', 'transformers': '4.57.6', 'bitsandbytes': '0.49.2', 'accelerate': '1.14.0', 'Pillow': '12.3.0', 'cuda_available': True, 'gpu_count': 2, 'gpu_names': ['Tesla T4', 'Tesla T4']}
+FULL SUITE COMMAND ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/run_guarded.py', '--seconds', '8400', '--log-dir', '/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/logs/supervisor', '--', '/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/run_full_suite.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results', '--seconds', '8400']
+[complete_vectors] 
+[complete_vectors] Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+[complete_vectors] Fetching 8 files:  12%|█▎        | 1/8 [00:00<00:02,  2.43it/s]
+[complete_vectors] Fetching 8 files:  25%|██▌       | 2/8 [00:00<00:01,  4.34it/s]
+[complete_vectors] Fetching 8 files:  50%|█████     | 4/8 [00:04<00:05,  1.28s/it]
+[complete_vectors] Fetching 8 files: 100%|██████████| 8/8 [00:04<00:00,  1.85it/s]
+[complete_vectors] Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+[complete_vectors] MISSING_CLIP 32 2065
+[complete_vectors] MISSING_CLIP 64 2065
+[complete_vectors] MISSING_CLIP 96 2065
+[complete_vectors] MISSING_CLIP 128 2065
+[complete_vectors] MISSING_CLIP 160 2065
+[complete_vectors] MISSING_CLIP 192 2065
+[complete_vectors] MISSING_CLIP 224 2065
+[complete_vectors] MISSING_CLIP 256 2065
+[complete_vectors] MISSING_CLIP 288 2065
+[complete_vectors] MISSING_CLIP 320 2065
+[complete_vectors] MISSING_CLIP 352 2065
+[complete_vectors] MISSING_CLIP 384 2065
+[complete_vectors] MISSING_CLIP 416 2065
+[complete_vectors] MISSING_CLIP 448 2065
+[complete_vectors] MISSING_CLIP 480 2065
+[complete_vectors] MISSING_CLIP 512 2065
+[complete_vectors] MISSING_CLIP 544 2065
+[complete_vectors] MISSING_CLIP 576 2065
+[complete_vectors] MISSING_CLIP 608 2065
+[complete_vectors] MISSING_CLIP 640 2065
+[complete_vectors] MISSING_CLIP 672 2065
+[complete_vectors] MISSING_CLIP 704 2065
+[complete_vectors] MISSING_CLIP 736 2065
+[complete_vectors] MISSING_CLIP 768 2065
+[complete_vectors] MISSING_CLIP 800 2065
+[complete_vectors] MISSING_CLIP 832 2065
+[complete_vectors] MISSING_CLIP 864 2065
+[complete_vectors] MISSING_CLIP 896 2065
+[complete_vectors] MISSING_CLIP 928 2065
+[complete_vectors] MISSING_CLIP 960 2065
+[complete_vectors] MISSING_CLIP 992 2065
+[complete_vectors] MISSING_CLIP 1024 2065
+[complete_vectors] MISSING_CLIP 1056 2065
+[complete_vectors] MISSING_CLIP 1088 2065
+[complete_vectors] MISSING_CLIP 1120 2065
+[complete_vectors] MISSING_CLIP 1152 2065
+[complete_vectors] MISSING_CLIP 1184 2065
+[complete_vectors] MISSING_CLIP 1216 2065
+[complete_vectors] MISSING_CLIP 1248 2065
+[complete_vectors] MISSING_CLIP 1280 2065
+[complete_vectors] MISSING_CLIP 1312 2065
+[complete_vectors] MISSING_CLIP 1344 2065
+[complete_vectors] MISSING_CLIP 1376 2065
+[complete_vectors] MISSING_CLIP 1408 2065
+[complete_vectors] MISSING_CLIP 1440 2065
+[complete_vectors] MISSING_CLIP 1472 2065
+[complete_vectors] MISSING_CLIP 1504 2065
+[complete_vectors] MISSING_CLIP 1536 2065
+[complete_vectors] MISSING_CLIP 1568 2065
+[complete_vectors] MISSING_CLIP 1600 2065
+[complete_vectors] MISSING_CLIP 1632 2065
+[complete_vectors] MISSING_CLIP 1664 2065
+[complete_vectors] MISSING_CLIP 1696 2065
+[complete_vectors] MISSING_CLIP 1728 2065
+[complete_vectors] MISSING_CLIP 1760 2065
+[complete_vectors] MISSING_CLIP 1792 2065
+[complete_vectors] MISSING_CLIP 1824 2065
+[complete_vectors] MISSING_CLIP 1856 2065
+[complete_vectors] MISSING_CLIP 1888 2065
+[complete_vectors] MISSING_CLIP 1920 2065
+[complete_vectors] MISSING_CLIP 1952 2065
+[complete_vectors] MISSING_CLIP 1984 2065
+[complete_vectors] MISSING_CLIP 2016 2065
+[complete_vectors] MISSING_CLIP 2048 2065
+[complete_vectors] MISSING_CLIP 2065 2065
+[prepare_teacher] START teacher request preparation /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared
+[prepare_teacher] 
+[prepare_teacher] Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+[prepare_teacher] Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 50006.61it/s]
+[prepare_teacher] DONE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared/requests.jsonl
+[device_preflight] {"measured": {"cpu": {"median_update_ms": 9.430324999925688, "batch_states": 16, "candidates_per_state": 64, "scope": "prepared tensors, forward/backward/optimizer; preparation/transfer excluded"}, "cuda:0": {"median_update_ms": 3.781358000082946, "batch_states": 16, "candidates_per_state": 64, "scope": "prepared tensors, forward/backward/optimizer; preparation/transfer excluded"}}, "chosen_neural_device": "cuda:0", "torch": "2.11.0+cu128", "cuda_available": true}
+[D_suite] START REAL DATA SUITE {'archive': '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', 'output': '/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D', 'epochs': 50, 'seeds': '1729', 'training_episodes': 64, 'samples': 512, 'model_seconds': 600, 'validation_traces': 15, 'arms': 'all', 'mission_text': True, 'device': 'cuda:0', 'rl_steps': 20000, 'deadline_seconds': 7077.442657306001, 'resume': False, 'dynamic_ues': True, 'burst': True, 'vector_extension': '/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion/vectors.npz'}
+[Qwen] The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+[Qwen] `torch_dtype` is deprecated! Use `dtype` instead!
+[D_suite] 
+[D_suite] Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+[D_suite] Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 91929.95it/s]
+[D_suite] BASELINE fifo
+[D_suite] BASELINE round_robin
+[Qwen] 
+[D_suite] BASELINE random
+[D_suite] BASELINE spi_fifo
+[D_suite] BASELINE relevance
+[D_suite] BASELINE novelty
+[D_suite] BASELINE spi_novelty
+[D_suite] BASELINE predicted_edf
+[D_suite] TRAIN linear_choice/1729
+[Qwen] Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+[Qwen] Fetching 5 files:  20%|██        | 1/5 [01:09<04:38, 69.57s/it]
+[Qwen] Fetching 5 files:  80%|████████  | 4/5 [01:09<00:13, 13.22s/it]
+[Qwen] Fetching 5 files: 100%|██████████| 5/5 [01:09<00:00, 13.95s/it]
+[Qwen] 
+[Qwen] Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+[Qwen]   torch._check_is_size(blocksize)
+[Qwen] 
+[Qwen] Loading checkpoint shards:  20%|██        | 1/5 [00:10<00:43, 10.90s/it]
+[Qwen] Loading checkpoint shards:  40%|████      | 2/5 [00:24<00:36, 12.33s/it]
+[Qwen] Loading checkpoint shards:  60%|██████    | 3/5 [00:38<00:26, 13.24s/it]
+[Qwen] Loading checkpoint shards:  80%|████████  | 4/5 [00:55<00:14, 14.73s/it]
+[Qwen] Loading checkpoint shards: 100%|██████████| 5/5 [00:59<00:00, 10.96s/it]
+[Qwen] Loading checkpoint shards: 100%|██████████| 5/5 [00:59<00:00, 11.97s/it]
+[D_suite] EPOCH linear_choice 1729 0 loss 3.157184673848684 validation -8.821217506187752
+[D_suite] EPOCH linear_choice 1729 1 loss 3.1262805561030214 validation -8.598446177128297
+[Qwen] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[Qwen] /usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+[Qwen]   torch._check_is_size(blocksize)
+[Qwen] TEACHER control-strict-0-0 parsed 8.138220093000086
+[Qwen] TEACHER control-strict-0-1 parsed 4.2374203330000455
+[Qwen] TEACHER control-strict-1-0 parsed 4.42022621000001
+[Qwen] TEACHER control-strict-1-1 parsed 4.684082498000066
+[Qwen] TEACHER control-strict-2-0 parsed 5.2108274189999975
+[Qwen] TEACHER control-strict-2-1 parsed 4.829136819000041
+[Qwen] TEACHER control-strict-3-0 parsed 3.550890547999984
+[Qwen] TEACHER control-strict-3-1 parsed 4.7846405429999095
+[Qwen] TEACHER control-strict-4-0 parsed 4.61355908500002
+[Qwen] TEACHER control-strict-4-1 parsed 3.879135123000083
+[D_suite] EPOCH linear_choice 1729 2 loss 3.0991855416512535 validation -8.388214099765172
+[Qwen] TEACHER control-strict-5-0 parsed 4.006808222000018
+[Qwen] TEACHER control-strict-5-1 parsed 4.860635269999989
+[Qwen] TEACHER control-strict-6-0 parsed 5.179943427000012
+[Qwen] TEACHER control-strict-6-1 parsed 5.600768090000088
+[Qwen] TEACHER control-strict-7-0 parsed 4.175548762000062
+[Qwen] TEACHER control-strict-7-1 parsed 5.40371536400005
+[Qwen] TEACHER control-tie-0 parsed 8.718832518
+[Qwen] TEACHER control-unknown-0 parsed 3.679599787999905
+[Qwen] TEACHER control-tie-1 parsed 5.038304180000068
+[Qwen] TEACHER control-unknown-1 parsed 3.895573949999971
+[D_suite] EPOCH linear_choice 1729 3 loss 3.0740052957357493 validation -8.250354456236728
+[Qwen] TEACHER control-tie-2 parsed 4.043386921999854
+[Qwen] TEACHER control-unknown-2 parsed 3.955209524999873
+[Qwen] TEACHER control-tie-3 parsed 4.4260710589999235
+[Qwen] TEACHER control-unknown-3 parsed 3.920971550000104
+[Qwen] TEACHER control-tie-4 parsed 4.527664076000065
+[Qwen] TEACHER control-unknown-4 parsed 3.9601384620000317
+[Qwen] TEACHER control-tie-5 parsed 5.278541272999973
+[Qwen] TEACHER control-unknown-5 parsed 4.0555257849998725
+[Qwen] TEACHER control-tie-6 parsed 4.0664263969999865
+[Qwen] TEACHER control-unknown-6 parsed 3.99796268099999
+[Qwen] TEACHER control-tie-7 parsed 5.352594468999996
+[Qwen] TEACHER control-unknown-7 parsed 3.98009918400021
+[D_suite] EPOCH linear_choice 1729 4 loss 3.051553511106338 validation -8.123163998663708
+[Qwen] TEACHER train-0-0 parsed 10.631835768999963
+[Qwen] TEACHER train-0-1 parsed 9.290599345999908
+[Qwen] TEACHER train-1-0 parsed 9.544855323000093
+[Qwen] TEACHER train-1-1 parsed 8.94362039900011
+[Qwen] TEACHER train-2-0 parsed 9.424308477000068
+[D_suite] EPOCH linear_choice 1729 5 loss 3.032431462389616 validation -8.012491201563309
+[Qwen] TEACHER train-2-1 parsed 9.507696344999886
+[Qwen] TEACHER train-3-0 parsed 9.687615968000046
+[Qwen] TEACHER train-3-1 parsed 9.926732003000097
+[Qwen] TEACHER train-4-0 parsed 13.153892749000079
+[Qwen] TEACHER train-4-1 parsed 12.396163384000147
+[D_suite] EPOCH linear_choice 1729 6 loss 3.014273436102149 validation -7.936756386715037
+[Qwen] TEACHER train-5-0 parsed 9.115631815999905
+[Qwen] TEACHER train-5-1 parsed 8.573771240999804
+[Qwen] TEACHER train-6-0 parsed 12.881074241000078
+[Qwen] TEACHER train-6-1 parsed 11.036668055000064
+[Qwen] TEACHER train-7-0 parsed 11.011859650999895
+[D_suite] TRAIN mlp_choice/1729
+[Qwen] TEACHER train-7-1 parsed 9.83906042999979
+[Qwen] TEACHER train-8-0 parsed 12.652002123000102
+[Qwen] TEACHER train-8-1 parsed 16.052007121000088
+[Qwen] TEACHER train-9-0 parsed 14.212416535999864
+[Qwen] TEACHER train-9-1 parsed 13.277852027000108
+[Qwen] TEACHER train-10-0 parsed 12.553961767999908
+[Qwen] TEACHER train-10-1 parsed 12.474720211999966
+[Qwen] TEACHER train-11-0 parsed 13.888361262999979
+[Qwen] TEACHER train-11-1 parsed 14.66497659100014
+[Qwen] TEACHER train-12-0 parsed 14.329692038999838
+[D_suite] EPOCH mlp_choice 1729 0 loss 3.1528866142909355 validation -7.57030093317678
+[Qwen] TEACHER train-12-1 parsed 12.035648205000143
+[Qwen] TEACHER train-13-0 parsed 15.53053198900011
+[Qwen] TEACHER train-13-1 parsed 14.495380092000005
+[Qwen] TEACHER train-14-0 parsed 12.395453869999983
+[Qwen] TEACHER train-14-1 parsed 11.562519114999986
+[Qwen] TEACHER train-15-0 parsed 13.155545482999969
+[Qwen] TEACHER train-15-1 parsed 16.068477894000125
+[Qwen] TEACHER validation-0-0 parsed 13.911828426000056
+[Qwen] TEACHER validation-0-1 parsed 15.533393382999975
+[D_suite] EPOCH mlp_choice 1729 1 loss 3.1093372105385693 validation -7.393463921072568
+[Qwen] TEACHER validation-1-0 parsed 10.069806085999971
+[Qwen] TEACHER validation-1-1 parsed 11.233519920000163
+[Qwen] TEACHER validation-2-0 parsed 14.495452459999797
+[Qwen] TEACHER validation-2-1 parsed 17.69692448800015
+[Qwen] TEACHER validation-3-0 parsed 15.581576700000141
+[Qwen] TEACHER validation-3-1 parsed 14.560233983999979
+[Qwen] TEACHER validation-4-0 parsed 11.92097994300002
+[Qwen] TEACHER validation-4-1 parsed 11.910578622999992
+[Qwen] TEACHER validation-5-0 parsed 12.834452459999966
+[D_suite] EPOCH mlp_choice 1729 2 loss 3.060206281928867 validation -7.305943118903821
+[Qwen] TEACHER validation-5-1 parsed 11.473722627999905
+[Qwen] TEACHER validation-6-0 parsed 14.365500096000005
+[Qwen] TEACHER validation-6-1 parsed 13.589750340999899
+[Qwen] TEACHER validation-7-0 parsed 13.273957781000036
+[Qwen] TEACHER validation-7-1 parsed 13.30424571399999
+[Qwen] TEACHER test-0-0 parsed 15.57270279799991
+[Qwen] TEACHER test-0-1 parsed 16.51532728999996
+[Qwen] TEACHER test-1-0 parsed 15.43110232999993
+[Qwen] TEACHER test-1-1 parsed 12.444022313000005
+[Qwen] TEACHER test-2-0 parsed 11.708370634000175
+[D_suite] TRAIN delay_huber/1729
+[Qwen] TEACHER test-2-1 parsed 12.69711557000005
+[Qwen] TEACHER test-3-0 parsed 15.373963560999982
+[Qwen] TEACHER test-3-1 parsed 13.834920963000059
+[Qwen] TEACHER test-4-0 parsed 11.803184721000207
+[Qwen] TEACHER test-4-1 parsed 11.273395458000095
+[Qwen] TEACHER test-5-0 parsed 11.856692551000151
+[Qwen] TEACHER test-5-1 parsed 11.27232413799993
+[Qwen] TEACHER test-6-0 parsed 11.647430224000118
+[Qwen] TEACHER test-6-1 parsed 14.48719332099995
+[Qwen] TEACHER test-7-0 parsed 12.358743672999935
+[D_suite] EPOCH delay_huber 1729 0 loss 0.04812308528516951 validation -8.237811833386637
+[Qwen] TEACHER test-7-1 parsed 13.036675577999858
+[Qwen] TEACHER prefix-train-0-0 invalid 9.006482931999926
+[Qwen] TEACHER prefix-train-0-1 invalid 10.799250769999844
+[Qwen] TEACHER replay-0 parsed 8.968703834000053
+[Qwen] TEACHER prefix-train-1-0 invalid 14.150212297000053
+[Qwen] TEACHER prefix-train-1-1 invalid 4.7426945110000815
+[Qwen] TEACHER replay-1 parsed 10.570875340000157
+[Qwen] TEACHER prefix-train-2-0 invalid 10.898298778000026
+[Qwen] TEACHER prefix-train-2-1 invalid 5.540777831000014
+[Qwen] TEACHER replay-2 parsed 9.739210846000105
+[Qwen] TEACHER prefix-train-3-0 invalid 5.655219988999988
+[Qwen] TEACHER prefix-train-3-1 invalid 5.840728809999973
+[Qwen] TEACHER replay-3 parsed 9.369813211999826
+[D_suite] EPOCH delay_huber 1729 1 loss 0.025366845322423615 validation -7.5110197951291
+[Qwen] TEACHER prefix-train-4-0 invalid 19.52276185300002
+[Qwen] TEACHER prefix-train-4-1 invalid 10.354858932999832
+[Qwen] TEACHER replay-4 parsed 8.961927447000107
+[Qwen] TEACHER prefix-train-5-0 invalid 10.67415744400023
+[Qwen] TEACHER prefix-train-5-1 invalid 7.309683873000267
+[Qwen] TEACHER replay-5 parsed 10.453089778000049
+[Qwen] TEACHER prefix-train-6-0 invalid 4.996370968000065
+[Qwen] TEACHER prefix-train-6-1 invalid 5.51944407100018
+[Qwen] TEACHER replay-6 parsed 7.934798493000017
+[Qwen] TEACHER prefix-train-7-0 invalid 6.157703541000046
+[Qwen] TEACHER prefix-train-7-1 invalid 6.094266718999734
+[Qwen] TEACHER replay-7 parsed 9.674068529999658
+[Qwen] TEACHER prefix-train-8-0 invalid 4.6220333490000485
+[Qwen] TEACHER prefix-train-8-1 invalid 5.861606522999864
+[Qwen] TEACHER replay-8 parsed 9.09729001400001
+[D_suite] EPOCH delay_huber 1729 2 loss 0.02181989035443621 validation -7.093496616168128
+[Qwen] TEACHER prefix-train-9-0 invalid 4.4537825869997505
+[Qwen] TEACHER prefix-train-9-1 invalid 5.276432412000304
+[Qwen] TEACHER replay-9 invalid 4.692735783999979
+[Qwen] TEACHER prefix-train-10-0 invalid 11.70110445299997
+[Qwen] TEACHER prefix-train-10-1 invalid 8.354960423000193
+[Qwen] TEACHER replay-10 parsed 11.043716962999952
+[Qwen] TEACHER prefix-train-11-0 invalid 11.960962381000172
+[Qwen] TEACHER prefix-train-11-1 invalid 21.876906941000016
+[Qwen] TEACHER replay-11 parsed 13.656306208000387
+[Qwen] TEACHER prefix-train-12-0 invalid 34.32035852099989
+[Qwen] TEACHER prefix-train-12-1 invalid 5.337511563000135
+[D_suite] TRAIN ranknet/1729
+[Qwen] TEACHER replay-12 parsed 7.730543180999575
+[Qwen] TEACHER prefix-train-13-0 invalid 8.725848659000349
+[Qwen] TEACHER prefix-train-13-1 invalid 9.804644694999752
+[Qwen] TEACHER replay-13 parsed 12.110236007999902
+[Qwen] TEACHER prefix-train-14-0 invalid 6.3619420240002
+[Qwen] TEACHER prefix-train-14-1 invalid 6.962247254999966
+[Qwen] TEACHER replay-14 parsed 10.929068379
+[Qwen] TEACHER prefix-train-15-0 invalid 10.060485593000067
+[Qwen] TEACHER prefix-train-15-1 invalid 12.050328791000084
+[Qwen] TEACHER replay-15 parsed 10.61066502299991
+[Qwen] TEACHER prefix-train-16-0 invalid 9.725327651000043
+[Qwen] TEACHER prefix-train-16-1 invalid 19.782323355000244
+[D_suite] EPOCH ranknet 1729 0 loss 0.6819466284941882 validation -7.358386448321125
+[Qwen] TEACHER replay-16 parsed 8.383127285999763
+[Qwen] TEACHER prefix-train-17-0 invalid 33.0460155589999
+[Qwen] TEACHER prefix-train-17-1 invalid 5.21509998800002
+[Qwen] TEACHER replay-17 parsed 9.971001590000014
+[Qwen] TEACHER prefix-train-18-0 invalid 15.498085096000068
+[Qwen] TEACHER prefix-train-18-1 invalid 28.7777348300001
+[Qwen] TEACHER replay-18 parsed 9.223787694999828
+[Qwen] TEACHER prefix-train-19-0 invalid 12.085673769000095
+[Qwen] TEACHER prefix-train-19-1 invalid 9.018983322000167
+[D_suite] EPOCH ranknet 1729 1 loss 0.6689681066200137 validation -7.136075986293892
+[Qwen] TEACHER replay-19 parsed 11.39373848599962
+[Qwen] TEACHER prefix-train-20-0 invalid 11.895764461999988
+[Qwen] TEACHER prefix-train-20-1 invalid 5.13014096400002
+[Qwen] TEACHER replay-20 parsed 8.47734312800003
+[Qwen] TEACHER prefix-train-21-0 invalid 5.565424154999619
+[Qwen] TEACHER prefix-train-21-1 invalid 5.626882578999812
+[Qwen] TEACHER replay-21 parsed 9.925328139000158
+[Qwen] TEACHER prefix-train-22-0 invalid 9.389223513000161
+[Qwen] TEACHER prefix-train-22-1 invalid 8.472695492000184
+[Qwen] TEACHER replay-22 parsed 35.66360404600027
+[Qwen] TEACHER prefix-train-23-0 invalid 9.486745779999637
+[D_suite] EPOCH ranknet 1729 2 loss 0.654555510962382 validation -6.931510246795818
+[Qwen] TEACHER prefix-train-23-1 invalid 8.784589554000377
+[Qwen] TEACHER replay-23 parsed 9.701528208000127
+[Qwen] TEACHER prefix-validation-0-0 invalid 14.297967969000183
+[Qwen] TEACHER prefix-validation-0-1 invalid 12.846137227000327
+[Qwen] TEACHER prefix-validation-1-0 invalid 9.88116467000009
+[Qwen] TEACHER prefix-validation-1-1 invalid 9.965567289000319
+[Qwen] TEACHER prefix-validation-2-0 invalid 9.741172287000154
+[Qwen] TEACHER prefix-validation-2-1 invalid 5.994621848999941
+[Qwen] TEACHER prefix-validation-3-0 invalid 8.543403578999914
+[Qwen] TEACHER prefix-validation-3-1 invalid 9.16386056600004
+[Qwen] TEACHER prefix-validation-4-0 invalid 4.620839464000255
+[Qwen] TEACHER prefix-validation-4-1 invalid 16.101702468999974
+[D_suite] TRAIN lambdamart/1729
+[Qwen] TEACHER prefix-validation-5-0 invalid 26.013656731000083
+[D_suite] /usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRanker was fitted with feature names
+[D_suite]   warnings.warn(
+[Qwen] TEACHER prefix-validation-5-1 invalid 24.63563915299983
+[Qwen] TEACHER prefix-validation-6-0 invalid 8.238563600999896
+[Qwen] TEACHER prefix-validation-6-1 invalid 7.580411723999987
+[Qwen] TEACHER prefix-validation-7-0 invalid 5.42236811299972
+[Qwen] TEACHER prefix-validation-7-1 invalid 5.431007730000147
+[P_students] Traceback (most recent call last):
+[P_students]   File "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/train_teacher_rankers.py", line 38, in <module>
+[P_students]     if __name__=="__main__":main()
+[P_students]                             ~~~~^^
+[P_students]   File "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/train_teacher_rankers.py", line 26, in main
+[P_students]     if strict(roles["train"])<16 or strict(roles["validation"])<8:raise ValueError("insufficient qualified strict pairs: require16 train and8 validation")
+[P_students]                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[P_students] ValueError: insufficient qualified strict pairs: require16 train and8 validation
+[D_suite] TRAIN priority_classifier/1729
+[D_suite] EPOCH priority_classifier 1729 0 loss 1.381793583277613 validation -8.424774644017917
+[D_suite] EPOCH priority_classifier 1729 1 loss 1.3601846504025161 validation -8.134037205427047
+[D_suite] EPOCH priority_classifier 1729 2 loss 1.3487332221120596 validation -7.876767758678001
+[AI_feedback_RL] RL vlm_replay 1729 1909 updates 353 validation -1.0748259819843073
+[D_suite] TRAIN deepsets_ranknet/1729
+[AI_feedback_RL] FEEDBACK_RL vlm_replay/1729 {'status': 'partial_budget', 'completed_decisions': 1909, 'validation': -1.0748259819843073}
+[D_suite] EPOCH deepsets_ranknet 1729 0 loss 0.6830521627562121 validation -7.373223608036253
+[D_suite] EPOCH deepsets_ranknet 1729 1 loss 0.6636339348042384 validation -7.288224895091237
+[D_suite] EPOCH deepsets_ranknet 1729 2 loss 0.6477936038281769 validation -7.065687189224899
+[D_suite] EPOCH deepsets_ranknet 1729 3 loss 0.6302039097063243 validation -6.95334529954454
+[D_suite] TRAIN set_transformer_ranknet/1729
+[D_suite] EPOCH set_transformer_ranknet 1729 0 loss 0.6833861388731748 validation -7.660148224211261
+[D_suite] EPOCH set_transformer_ranknet 1729 1 loss 0.6671879471978173 validation -7.546154709543331
+[D_suite] EPOCH set_transformer_ranknet 1729 2 loss 0.6466250030789524 validation -7.198536688755938
+[D_suite] EPOCH set_transformer_ranknet 1729 3 loss 0.6163553145015612 validation -6.751368088226662
+[D_suite] TRAIN listmle/1729
+[D_suite] EPOCH listmle 1729 0 loss 1.764220671960149 validation -7.508845862264834
+[D_suite] EPOCH listmle 1729 1 loss 1.7108710561411449 validation -7.256579395708934
+[D_suite] EPOCH listmle 1729 2 loss 1.666530599555816 validation -7.056865389061752
+[D_suite] TRAIN masked_ppo/1729
+[D_suite] PPO 2048 updates 128 validation -9.131494070152483
+[D_suite] PPO 2304 updates 144 validation -9.053777454049014
+[D_suite] TRAIN masked_double_dqn/1729
+[D_suite] RL masked_double_dqn 1729 1098 updates 150 validation -9.022920617187522
+[D_suite] TRAIN td_per/1729
+[D_suite] RL td_per 1729 1009 updates 128 validation -8.745612927275793
+[D_suite] TRAIN ranknet_warmstart_ppo/1729
+[D_suite] PPO 2048 updates 128 validation -6.5918586597503595
+[D_suite] TRAIN rl_vlm_f/1729
+[D_suite] TRAIN vlm_replay/1729
+[D_suite] TRAIN visionprefer/1729
+[D_suite] TRAIN temporal_deepsets_ranknet/1729
+[D_suite] EPOCH temporal_deepsets_ranknet 1729 0 loss 0.6847857143729925 validation -7.712393295775157
+[D_suite] EPOCH temporal_deepsets_ranknet 1729 1 loss 0.6692062939982861 validation -7.5313679550215475
+[D_suite] EPOCH temporal_deepsets_ranknet 1729 2 loss 0.656612780643627 validation -7.307130111639683
+[D_suite] EPOCH temporal_deepsets_ranknet 1729 3 loss 0.6426275800913572 validation -7.1496378618673235
+[D_suite] EPOCH temporal_deepsets_ranknet 1729 4 loss 0.6264709957758896 validation -7.037927508278759
+[D_suite] FINISHED bounded method attempts; consult ledger /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D
+[profile_exports] /usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+[profile_exports]   _warn_once(
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/AI_feedback/vlm_replay/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/linear_choice/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/priority_classifier/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/temporal_deepsets_ranknet/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/delay_huber/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/ranknet/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/set_transformer_ranknet/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/listmle/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/td_per/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/masked_ppo/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/deepsets_ranknet/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/mlp_choice/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/ranknet_warmstart_ppo/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/lambdamart/1729/model.json
+[profile_exports] PROFILE /kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D/models/masked_double_dqn/1729/model.json
+SUPERVISOR_FINISHED {"complete_vectors": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/complete_vectors.py", "--archive", "/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion", "--device", "cuda:0"], "exit": 0}, "prepare_teacher": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/prepare_teacher.py", "--archive", "/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared", "--mission-text", "--vector-extension", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion/vectors.npz"], "exit": 0}, "device_preflight": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/preflight_device.py", "--prepared", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/device_preflight.json"], "exit": 0}, "D_suite": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/train_real_suite.py", "--archive", "/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/D", "--epochs", "50", "--seeds", "1729", "--training-episodes", "64", "--samples", "512", "--model-seconds", "600", "--rl-steps", "20000", "--deadline-seconds", "7077.442657306001", "--device", "cuda:0", "--mission-text", "--dynamic-ues", "--burst", "--vector-extension", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion/vectors.npz"], "exit": 0}, "Qwen": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/qwen_teacher.py", "--requests", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared/requests.jsonl", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher", "--revision", "cc594898137f460bfe9f0759e9844b3ce807cfb5", "--device", "cuda:1", "--max-calls", "216", "--deadline-seconds", "4200"], "exit": 0}, "P_students": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/train_teacher_rankers.py", "--prepared", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared", "--teacher-output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/P", "--device", "cuda:1", "--seeds", "1729", "--epochs", "50", "--model-seconds", "120"], "exit": 1}, "AI_feedback_RL": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/train_feedback_rl.py", "--archive", "/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar", "--prepared", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared", "--teacher-output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/AI_feedback", "--device", "cuda:1", "--seeds", "1729", "--steps", "20000", "--model-seconds", "600", "--mission-vectors", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared/data/mission_vectors.npy", "--vector-extension", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion/vectors.npz"], "exit": 0}, "profile_exports": {"command": ["/usr/bin/python3", "-u", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/source/experiments/stream_scheduler/profile_exports.py", "--models", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results", "--prepared", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared", "--output", "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/systems_profile.json", "--seconds", "300"], "exit": 0}}
+Driver exit 0 inspect per-method ledger; completion is not convergence
+END 04_complete_suite_execution complete 6299.083075409

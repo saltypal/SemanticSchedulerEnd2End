@@ -1,0 +1,32 @@
+START 04_targeted_repair_validation output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z
+Installing pinned teacher grammar/runtime; managed Torch retained
+{'torch': '2.11.0+cu128', 'numpy': '2.1.3', 'lightgbm': '4.6.0', 'transformers': '4.57.6', 'bitsandbytes': '0.49.2', 'lm-format-enforcer': '0.11.3', 'cuda_available': True, 'gpu_count': 2, 'gpu_names': ['Tesla T4', 'Tesla T4']}
+RUN MODE technical_followup ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/experiments/stream_scheduler/run_guarded.py', '--seconds', '720', '--log-dir', '/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/logs/supervisor', '--', '/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/experiments/stream_scheduler/gpu_teacher_format_check.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/results', '--inputs', '/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/repair_inputs', '--seconds', '700']
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files:  20%|██        | 1/5 [01:00<04:00, 60.10s/it]
+Fetching 5 files:  40%|████      | 2/5 [01:10<01:32, 30.96s/it]
+Fetching 5 files: 100%|██████████| 5/5 [01:10<00:00, 14.13s/it]
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+
+Loading checkpoint shards:  20%|██        | 1/5 [00:08<00:34,  8.62s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:16<00:24,  8.05s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:28<00:19,  9.74s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:42<00:11, 11.59s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:46<00:00,  8.94s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:46<00:00,  9.34s/it]
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+TEACHER train-1-0 parsed 32.064382901000045
+TEACHER train-1-1 parsed 15.92746023899997
+TEACHER prefix-train-0-0 parsed 41.86046082799999
+TEACHER prefix-train-0-1 parsed 42.19729150399996
+TEACHER replay-0 parsed 22.723326670999995
+TARGETED_GPU_VALIDATION {"cuda_channel_regression": {"status": "failed", "exit": 2}, "teacher_formats": {"status": "passed", "model": "Qwen/Qwen2.5-VL-7B-Instruct", "requested": 5, "responses": 5, "tasks": ["candidate", "candidate", "prefix", "prefix", "replay"], "weights_match_v5": true, "prior_controls_qualified": true, "no_training_or_label_promotion": true, "scope": "isolated structured-output hardware checks; prior narrow controls are not emergency-priority truth"}}
+Validation driver exit 1 inspect validation.json and raw teacher outputs
+END 04_targeted_repair_validation complete 411.65900091199995

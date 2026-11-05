@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
     output = ROOT / 'graphify-out'
     output.mkdir(exist_ok=True)
-    files = sorted(path for name in ('EncDec', 'SemParam', 'Scheduler', 'INFRA')
+    files = sorted(path for name in ('Codec', 'Archived.owners_before_simplification_20261027.SemParam', 'Scheduler', 'Evaluation')
                    for path in (ROOT/name).rglob('*.py') if '__pycache__' not in path.parts
                    and not path.read_text(encoding='utf-8-sig').startswith('"""Compatibility alias;'))
     ast_path = output / '.graphify_ast.json'
@@ -49,7 +49,7 @@ def main():
         counts = Counter()
         for member in members:
             source = str(graph.nodes[member].get('source_file', '')).replace('\\', '/')
-            for module in ('EncDec', 'SemParam', 'Scheduler', 'INFRA'):
+            for module in ('Codec', 'Archived.owners_before_simplification_20261027.SemParam', 'Scheduler', 'Evaluation'):
                 if module + '/' in source:
                     counts[module] += 1
         labels[key] = (counts.most_common(1)[0][0] if counts else 'Architecture') + f' community {key}'

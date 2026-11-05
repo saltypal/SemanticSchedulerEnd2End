@@ -1,0 +1,69 @@
+{
+  "feature_signature": "105485efb3f14d80514f39138c3310714dfdbee850291a8f4e76551df5e5f065",
+  "image_count": 300,
+  "producer": {
+    "backbone": "clip",
+    "model_id": "openai/clip-vit-base-patch32",
+    "model_path": "/kaggle/working/project/models/priority_classifiers/clip",
+    "config_sha256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+    "producer_scope": "frozen pretrained embeddings; prompt similarities are not probabilities",
+    "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "preprocessing": "RGB_longest512_bicubic_then_aspect_preserving_pad_v1",
+    "processor_sha256": "28509fc86423e209d47b210d0718158879eb118e5993fe7344637615e5fde5dd",
+    "device": "cuda:0",
+    "data_parallel_requested": false,
+    "model_load_seconds": 2.1981579310000825,
+    "image_processor": {
+      "crop_size": {
+        "height": 224,
+        "width": 224
+      },
+      "do_center_crop": true,
+      "do_normalize": true,
+      "do_resize": true,
+      "image_mean": [
+        0.48145466,
+        0.4578275,
+        0.40821073
+      ],
+      "image_std": [
+        0.26862954,
+        0.26130258,
+        0.27577711
+      ],
+      "resample": 3,
+      "size": {
+        "shortest_edge": 224
+      },
+      "do_convert_rgb": true,
+      "do_rescale": true,
+      "rescale_factor": 0.00392156862745098,
+      "image_processor_type": "CLIPImageProcessor"
+    },
+    "scene_prompts": {
+      "road": "a photograph of a road or street",
+      "residential": "a photograph of residential buildings",
+      "indoor": "a photograph of an indoor scene",
+      "forest": "a photograph of a forest",
+      "water": "a photograph of a river or flooded area",
+      "people": "a photograph containing people",
+      "vehicle": "a photograph containing vehicles",
+      "fire": "a photograph of a fire"
+    },
+    "model_dtype": "torch.float32",
+    "embedding_dimension": 512,
+    "image_size": 224,
+    "text_max_positions": 77,
+    "text_padding": "longest_in_batch",
+    "text_truncation": false,
+    "image_feature_normalization": "L2",
+    "text_feature_normalization": "L2",
+    "similarity": "normalized image/text dot product; no logit scale or softmax",
+    "inference_mode": true,
+    "batch_size": 8,
+    "context_method": "token_chunk_75_weighted_normalized_mean_v1",
+    "context_status": "ok"
+  },
+  "features_sha256": "f8d6493191a6f71753a20e0c1bdd6a8a99d256ee392cf9dfebee3f0370c6c086",
+  "reason": "fresh runtime extraction; original source cache remains unchanged"
+}

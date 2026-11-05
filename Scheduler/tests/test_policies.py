@@ -1,6 +1,6 @@
 import pytest
-from INFRA.contracts import Job, QueueSnapshot, ResourceBudget, Decision
-from INFRA.simulation import simulate
+from Evaluation.contracts import Job, QueueSnapshot, ResourceBudget, Decision
+from Evaluation.simulation import simulate
 from Scheduler.policies import create_policy, POLICIES
 
 def job(key, ue='ue1', arrival=0, units=10, priority=2, deadline=None):

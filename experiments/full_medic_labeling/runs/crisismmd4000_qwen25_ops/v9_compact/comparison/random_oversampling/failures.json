@@ -1,0 +1,7 @@
+[
+  {
+    "encoder": "siglip2_b16",
+    "error": "image has no unpadded token centers; unsupported aspect ratio",
+    "traceback": "Traceback (most recent call last):\n  File \"/kaggle/working/experiments/spi_classifier_repair/medic_campaign.py\", line 363, in compare\n    x,t,m=(feature_loader or features)(rows,name,out/name)\n          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/experiments/full_medic_labeling/crisis_study.py\", line 88, in loader\n    return study.features(records,name,output/'features'/name)\n           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/experiments/spi_classifier_repair/medic_campaign.py\", line 206, in features\n    if not valid.any():raise ValueError('image has no unpadded token centers; unsupported aspect ratio')\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: image has no unpadded token centers; unsupported aspect ratio\n"
+  }
+]

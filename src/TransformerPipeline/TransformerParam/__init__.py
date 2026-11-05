@@ -1,11 +1,11 @@
-"""Compatibility import; use SemParam.TransformerParam."""
+"""Compatibility import; use Archived.owners_before_simplification_20261027.SemParam.TransformerParam."""
 import importlib as _importlib
 import sys as _sys
 from pathlib import Path as _Path
 _root = _Path(__file__).resolve().parents[3]
 if str(_root) not in _sys.path:
     _sys.path.insert(0, str(_root))
-_target = _importlib.import_module('SemParam.TransformerParam')
+_target = _importlib.import_module('Archived.owners_before_simplification_20261027.SemParam.TransformerParam')
 
 def __getattr__(name):
     return getattr(_target, name)

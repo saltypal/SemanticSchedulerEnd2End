@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import shutil
 
-from INFRA.data.ladi_manifest import validate_ladi60_manifest
+from Evaluation.data.ladi_manifest import validate_ladi60_manifest
 from prepare_semantic_kaggle import kaggle_username
 
 

@@ -1,0 +1,85 @@
+{
+  "schema": "image_pool_v1",
+  "seed": 29,
+  "new_download_cap_bytes": 2147483648,
+  "per_image_cap_bytes": 20971520,
+  "metadata_file_cap_bytes": 67108864,
+  "sources": {
+    "coco": {
+      "cap": 200,
+      "role": "development",
+      "access": "official_individual_images"
+    },
+    "open_images": {
+      "cap": 200,
+      "role": "development",
+      "access": "official_individual_images"
+    },
+    "places365": {
+      "cap": 200,
+      "role": "development",
+      "access": "managed_input_manifest_required"
+    },
+    "crisismmd": {
+      "cap": 200,
+      "role": "development",
+      "access": "pinned_individual_images"
+    },
+    "bdd100k": {
+      "cap": 50,
+      "clips": 5,
+      "frames_per_clip": 10,
+      "role": "temporal",
+      "access": "managed_input_manifest_required"
+    },
+    "imagenet": {
+      "cap": 50,
+      "role": "supplementary",
+      "access": "licensed_managed_input_manifest_required"
+    },
+    "dota": {
+      "cap": 50,
+      "clips": 5,
+      "frames_per_clip": 10,
+      "role": "temporal",
+      "access": "managed_input_manifest_required"
+    },
+    "ucf_crime": {
+      "cap": 50,
+      "clips": 5,
+      "frames_per_clip": 10,
+      "role": "temporal",
+      "access": "managed_input_manifest_required"
+    },
+    "xbd": {
+      "cap": 50,
+      "role": "controlled_evidence",
+      "access": "licensed_managed_input_manifest_required"
+    },
+    "rescuenet": {
+      "cap": 50,
+      "role": "uav_evaluation",
+      "access": "managed_input_manifest_required"
+    },
+    "floodnet": {
+      "cap": 50,
+      "role": "scheduler_unseen_task",
+      "access": "managed_input_manifest_required"
+    }
+  },
+  "spi_selection": "completed_4000_study_development_macro_f1_only",
+  "runtime_fields_excluded": [
+    "mission_relevance",
+    "novelty",
+    "UE_history",
+    "context_centroids",
+    "synthetic_capture_time",
+    "synthetic_location"
+  ],
+  "notes": [
+    "absolute caps, not dataset percentages",
+    "native categories are not SPI labels",
+    "no full image/video archives",
+    "FloodNet excluded from scheduler fitting and selection"
+  ]
+}

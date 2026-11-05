@@ -1,0 +1,25 @@
+BEGIN verified fine-tuned SQ-GAN loading
+Working with z of shape (1, 256, 16, 32) = 131072 dimensions.
+Working with z of shape (1, 256, 16, 32) = 131072 dimensions.
+LOADED 121.72450871299999
+BEGIN transmitter semantic teacher
+BEGIN image -> digital packet
+PAYLOAD 464 bytes; BEGIN decode from bytes only
+{
+  "codec": "sqgan",
+  "actual_fine_tuned_checkpoint": "706396402d86e84276393ce3fe39f0b0b1b545ff024c0ecae3b8ab72d22f3d6d",
+  "payload_bytes": 464,
+  "payload_sha256": "7b3f9fc2ad7487bc047bd174b5fe58475459e787d16ed5d1fcb4445ebe8b0155",
+  "teacher_seconds": 27.306103898999993,
+  "encode_seconds": 22.686837618000027,
+  "decode_seconds": 41.073025023999946,
+  "shape": [
+    1,
+    3,
+    256,
+    512
+  ],
+  "finite": true,
+  "corruption_rejection": "SQ packet CRC failure; delivery failed",
+  "scope": "real image, trained weights, CPU encode+digital serialization+decode; no radio or quality/generalization claim"
+}

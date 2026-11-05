@@ -1,0 +1,52 @@
+{
+  "kernel": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "id_no": 141089219,
+  "version": 9,
+  "terminal_status": "KernelWorkerStatus.ERROR",
+  "submitted_at_utc": "2026-10-28T04:42:55.117482+00:00",
+  "terminal_observed_at_utc": "2026-10-28T04:45:02.555775+00:00",
+  "elapsed_to_preflight_failure_seconds": 69.6,
+  "source_sha256": "560920182dedba6bdb3e81c00e3f2fb7df130389d5e8b945040631934da73c7c",
+  "notebook_sha256": "ad1faa6e08903de9995940e5b09f3bba78c42c80e13be93f9a0644a24a5bbc3a",
+  "runtime": {
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ]
+  },
+  "failed_stage": "dependency and pinned model-asset preflight before original Notebook9 cells",
+  "error": "RuntimeError: pinned HF CLIP tokenizer asset size/hash mismatch: tokenizer.json",
+  "actual_labels_produced": false,
+  "spi_training_started": false,
+  "parameter_cache_started": false,
+  "retry": "none",
+  "recovery_verified": {
+    "remote_files": 135,
+    "all_remote_files_retrieved": true,
+    "run_manifest_entries": 5,
+    "run_manifest_hashes_match": true,
+    "source_files": 115,
+    "source_files_verified": true,
+    "recovery_zip_bytes": 19426,
+    "recovery_zip_crc": "pass"
+  },
+  "quota_after": "5.69 GPU-hours used / 24.31 remaining",
+  "log_path": "submission_lean/monitor_logs/kaggle_logs_latest.txt",
+  "retrieval_path": "submission_lean/retrieved_version9/",
+  "retrieval_receipt": "submission_lean/retrieval_receipt.json",
+  "local_pinned_asset_verification": "hf_clip_pinned_assets_verified.json",
+  "cloud_actual_download_sha": "not persisted; exact source literal defect is confirmed by main review and local pinned-revision verification",
+  "confirmed_failure_cause": "Staged notebook REMOTE_CLIP_FILES expected digest for tokenizer.json omitted digits 411; local and pinned Hugging Face revision share the correct SHA-256. The preflight correctly failed closed on the malformed expected literal.",
+  "latest_live_check": {
+    "checked_at_utc": "2026-10-28T05:33:19.714737+00:00",
+    "status": "KernelWorkerStatus.ERROR",
+    "latest_run_time_utc": "2026-10-28T04:42:57.697000Z",
+    "remote_outputs": 135,
+    "missing_local_outputs": 0,
+    "latest_logs_path": "submission_lean/monitor_logs/kaggle_logs_v9_live_20261028T053319Z.txt",
+    "latest_logs_sha256": "374d3ea3df8693b7fbf4916d00815e0bdfd79b6611819a73a10d8d73830f7ba0"
+  }
+}

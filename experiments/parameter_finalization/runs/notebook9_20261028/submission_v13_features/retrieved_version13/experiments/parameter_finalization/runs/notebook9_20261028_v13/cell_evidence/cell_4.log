@@ -1,0 +1,20 @@
+CELL START 4 log /kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v13/cell_evidence/cell_4.log
+[1mCLIPModel LOAD REPORT[0m from: /kaggle/working/project/models/priority_classifiers/clip
+Key                                  | Status     |  | 
+-------------------------------------+------------+--+-
+vision_model.embeddings.position_ids | UNEXPECTED |  | 
+text_model.embeddings.position_ids   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Input layout {'layout': 'kaggle_expanded_zip', 'images_verified': 300, 'archive_hash_verified': False, 'reason': 'Kaggle expanded archive; exact member hashes verified'} CLIP signature 105485efb3f14d80514f39138c3310714dfdbee850291a8f4e76551df5e5f065 expected 3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de
+Old cached feature signature differs; canonical labeling cell will re-extract all300 in this runtime before fitting
+WARNING ⚠️ user config directory '/kaggle/temp/notebook9_ultralytics/Ultralytics' is not writable, using '/tmp/Ultralytics'. Set YOLO_CONFIG_DIR to override.
+Creating new Ultralytics Settings v0.0.6 file ✅ 
+View Ultralytics Settings with 'yolo settings' or at '/tmp/Ultralytics/settings.json'
+Update Settings with 'yolo settings key=value', i.e. 'yolo settings runs_dir=path/to/dir'. For help see https://docs.ultralytics.com/quickstart/#ultralytics-settings.
+/usr/local/lib/python3.13/dist-packages/clip/clip.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import packaging
+YOLO-WORLD vocabulary 16 status ok reason None measurements {'instances': 0, 'categories': 0, 'largest_box_fraction': None, 'union_box_coverage': 0.0}
+END pre-label real feature/detector checks; teacher cell may now start
+CELL END 4 seconds 25.389076087000035

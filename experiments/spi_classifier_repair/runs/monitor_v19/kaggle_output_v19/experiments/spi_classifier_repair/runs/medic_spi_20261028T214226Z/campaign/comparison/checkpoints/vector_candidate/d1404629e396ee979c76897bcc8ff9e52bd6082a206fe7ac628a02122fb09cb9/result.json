@@ -1,0 +1,158 @@
+{
+  "encoder": "siglip2_b16",
+  "head": "knn",
+  "kind": "vector",
+  "artifact": "/kaggle/working/experiments/spi_classifier_repair/runs/medic_spi_20261028T214226Z/campaign/comparison/siglip2_b16/knn.joblib",
+  "grid": [
+    {
+      "config": {
+        "n_neighbors": 3
+      },
+      "cv_scores": [
+        0.5339635854341737,
+        0.4773090481786134,
+        0.6085281441817945
+      ],
+      "mean": 0.5399335925981938,
+      "warnings": [
+        {
+          "fold": 0,
+          "messages": []
+        },
+        {
+          "fold": 1,
+          "messages": []
+        },
+        {
+          "fold": 2,
+          "messages": []
+        }
+      ]
+    },
+    {
+      "config": {
+        "n_neighbors": 7
+      },
+      "cv_scores": [
+        0.5358439201451906,
+        0.45833333333333337,
+        0.49420198186801606
+      ],
+      "mean": 0.49612641178218,
+      "warnings": [
+        {
+          "fold": 0,
+          "messages": []
+        },
+        {
+          "fold": 1,
+          "messages": []
+        },
+        {
+          "fold": 2,
+          "messages": []
+        }
+      ]
+    }
+  ],
+  "selected": {
+    "config": {
+      "n_neighbors": 3
+    },
+    "cv_scores": [
+      0.5339635854341737,
+      0.4773090481786134,
+      0.6085281441817945
+    ],
+    "mean": 0.5399335925981938,
+    "warnings": [
+      {
+        "fold": 0,
+        "messages": []
+      },
+      {
+        "fold": 1,
+        "messages": []
+      },
+      {
+        "fold": 2,
+        "messages": []
+      }
+    ]
+  },
+  "development": {
+    "macro_f1": 0.42190034025503226,
+    "accuracy": 0.6166666666666667,
+    "balanced_accuracy": 0.5791666666666666,
+    "precision": [
+      0.8461538461538461,
+      0.0,
+      0.6190476190476191,
+      0.18181818181818182
+    ],
+    "recall": [
+      0.6666666666666666,
+      0.0,
+      0.65,
+      1.0
+    ],
+    "f1": [
+      0.7457627118644068,
+      0.0,
+      0.6341463414634146,
+      0.3076923076923077
+    ],
+    "worst_class_recall": 0.0,
+    "ordinal_mae": 0.6333333333333333,
+    "confusion": [
+      [
+        22,
+        1,
+        6,
+        4
+      ],
+      [
+        3,
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        1,
+        13,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ]
+    ],
+    "class_support": [
+      33,
+      5,
+      20,
+      2
+    ],
+    "class_recall_defined": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "critical_to_low_medium": 0,
+    "high_critical_underprediction": 2
+  },
+  "search_fit_seconds": 0.23195213600001807,
+  "artifact_bytes": 555219,
+  "head_cpu_p50_ms": 1.028843999961282,
+  "head_cpu_p95_ms": 1.179233249945355,
+  "timing_scope": "head predict only; excludes encoder and transfers",
+  "final_fit_warnings": [],
+  "training_loss_curve": null,
+  "training_flops": null,
+  "training_flops_reason": "sklearn solver not covered by neural operator counter",
+  "inference_dense_flops_proxy": null
+}

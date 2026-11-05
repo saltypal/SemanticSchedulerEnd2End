@@ -1,0 +1,81 @@
+{
+  "model": "grounding_dino",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 1,
+      "categories": 1,
+      "largest_box_fraction": 0.014707657713679637,
+      "union_box_coverage": 0.014707657713679637
+    },
+    "people_vehicles": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "building",
+      "box": [
+        0.0,
+        27.928483963012695,
+        41.45826721191406,
+        89.86641693115234
+      ],
+      "score": 0.3977855443954468
+    }
+  ],
+  "values": {
+    "instances": 1,
+    "categories": 1,
+    "largest_box_fraction": 0.014707657713679637,
+    "union_box_coverage": 0.014707657713679637
+  },
+  "audit": {
+    "category_counts": {
+      "building": 1
+    },
+    "detections": [
+      {
+        "label": "building",
+        "box": [
+          0.0,
+          27.928483963012695,
+          41.45826721191406,
+          89.86641693115234
+        ],
+        "score": 0.3977855443954468
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 341,
+    "producer": {
+      "producer": "grounding_dino",
+      "vocabulary": [
+        "building"
+      ],
+      "threshold": 0.35,
+      "text_threshold": 0.25,
+      "weights_sha256": {
+        "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+      },
+      "device": "cpu",
+      "interpretation": "box/text matching, not verified condition or priority",
+      "class_aware_nms_iou": 0.5,
+      "max_detections": 300,
+      "category_scope": "retained text phrases; no inferred urgency or merged taxonomy"
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency",
+    "raw_proposals": 1
+  },
+  "load_seconds": 12.4987245000666,
+  "first_inference_seconds": 28.51453019992914,
+  "warmed_latency": false,
+  "image_sha256": "b0d7808c50b32ab0047192ab2182e17e98b984693a7085c89adf8f7c4e5ae2f4",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

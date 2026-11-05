@@ -24,13 +24,13 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from INFRA.scheduling.event_simulation import run_episode
-from INFRA.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
-from INFRA.data.ladi_manifest import validate_ladi_manifest
-from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
-from INFRA.scheduling.semantic_contracts import ResourceBudgetSemantic
-from INFRA.evaluation.semantic import aggregate_episode_metrics
-from INFRA.scheduling.streams import build_episode
+from Evaluation.scheduling.event_simulation import run_episode
+from Evaluation.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
+from Evaluation.data.ladi_manifest import validate_ladi_manifest
+from Evaluation.semantic_config import load_scheduler_config, load_ue_profiles
+from Evaluation.scheduling.semantic_contracts import ResourceBudgetSemantic
+from Evaluation.evaluation.semantic import aggregate_episode_metrics
+from Evaluation.scheduling.streams import build_episode
 from Scheduler.semantic.registry import create_semantic_policy
 
 from evaluate_downloaded_scheduler import (
@@ -148,8 +148,8 @@ def main() -> None:
                     if split_by_image[item.candidate.image_id] == "test")
     if len(heldout) != 52:
         raise ValueError(f"Expected 52 held-out images, found {len(heldout)}")
-    settings = load_scheduler_config(ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
-    ue_profiles = load_ue_profiles(ROOT / "INFRA/config/ue_profiles.yaml")
+    settings = load_scheduler_config(ROOT / "Evaluation/config/semantic_scheduler_dynamic260.yaml")
+    ue_profiles = load_ue_profiles(ROOT / "Evaluation/config/ue_profiles.yaml")
     if settings.queue_capacity != 25 or len(ue_profiles) != 5:
         raise ValueError("Frozen checkpoint comparison expects a 25-slot queue and five UEs")
     if run_manifest["resource_unit"] != "simulated_units":

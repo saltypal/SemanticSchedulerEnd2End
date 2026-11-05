@@ -1,0 +1,497 @@
+{
+  "source_hashes": {
+    "Evaluation/semantic_learning_env.py": "fbcc0acfd9da8f976710d3b0304f382ce9b8b9d99af7702c2566db03f91e8d9c",
+    "experiments/stream_scheduler/train_real_suite.py": "a46be6b728b285142a5628ca1843f1e7d902b9f912e3c3f5b3bc51ae64d8ce70",
+    "experiments/stream_scheduler/semantic_suite_data.py": "0735ba9667edbfff981f2477437fa2f149acd8d27130b7f4a79bdaa434ce1b64"
+  },
+  "dataset_cache": {
+    "records": 6000,
+    "cached_embeddings": 3887,
+    "profile_sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+  },
+  "population_checks": [
+    {
+      "ues": 50,
+      "offered_messages": 256,
+      "churn_and_burst": true,
+      "availability_membership": "pass; session and half-open interval match",
+      "reset_cold_start_cases": 10,
+      "queue_survives_departure": {
+        "source": 0,
+        "leave": 203.3875284369757,
+        "checked_at": 205.3875284369757,
+        "retained_ready": 5
+      },
+      "fifo_accounting": {
+        "J_D": null,
+        "L_E": null,
+        "offered": 256,
+        "selected": 247,
+        "queued_at_horizon": 9,
+        "not_arrived": 0,
+        "completed": 246,
+        "failed": 43,
+        "in_flight": 1,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 38.76681937747376,
+            "median_selected_wait": 41.233613483829295,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 14.119535666431817,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 78,
+            "selected": 76,
+            "unselected": 2,
+            "mean_selected_wait": 58.02260648863127,
+            "median_selected_wait": 65.2676021497609,
+            "p95_selected_wait": 91.24784815337645,
+            "restricted_mean_wait": 15.462899524593057,
+            "followup_count": 78,
+            "eligible": 78,
+            "within_budget": 0.02564102564102564
+          },
+          "Medium": {
+            "offered": 27,
+            "selected": 26,
+            "unselected": 1,
+            "mean_selected_wait": 49.93425509850421,
+            "median_selected_wait": 58.19454890718599,
+            "p95_selected_wait": 82.28569463765213,
+            "restricted_mean_wait": 14.36371848896299,
+            "followup_count": 27,
+            "eligible": 27,
+            "within_budget": 0.1111111111111111
+          },
+          "Low": {
+            "offered": 55,
+            "selected": 51,
+            "unselected": 4,
+            "mean_selected_wait": 59.43456308024214,
+            "median_selected_wait": 67.58880149229273,
+            "p95_selected_wait": 91.06437882391009,
+            "restricted_mean_wait": 15.071351369599778,
+            "followup_count": 55,
+            "eligible": 55,
+            "within_budget": 0.12727272727272726
+          }
+        }
+      },
+      "random_accounting": {
+        "J_D": null,
+        "L_E": null,
+        "offered": 256,
+        "selected": 246,
+        "queued_at_horizon": 10,
+        "not_arrived": 0,
+        "completed": 245,
+        "failed": 42,
+        "in_flight": 1,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 19.151421642410924,
+            "median_selected_wait": 18.966635073997242,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 9.308834128149721,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.3333333333333333
+          },
+          "High": {
+            "offered": 78,
+            "selected": 75,
+            "unselected": 3,
+            "mean_selected_wait": 59.364417444537466,
+            "median_selected_wait": 50.503127909885606,
+            "p95_selected_wait": 155.65831052288237,
+            "restricted_mean_wait": 14.082382702789996,
+            "followup_count": 78,
+            "eligible": 78,
+            "within_budget": 0.038461538461538464
+          },
+          "Medium": {
+            "offered": 27,
+            "selected": 25,
+            "unselected": 2,
+            "mean_selected_wait": 44.16649287936254,
+            "median_selected_wait": 33.019404530422236,
+            "p95_selected_wait": 114.43702619955478,
+            "restricted_mean_wait": 13.763369583095864,
+            "followup_count": 27,
+            "eligible": 27,
+            "within_budget": 0.14814814814814814
+          },
+          "Low": {
+            "offered": 55,
+            "selected": 54,
+            "unselected": 1,
+            "mean_selected_wait": 59.59711198811336,
+            "median_selected_wait": 50.6389482628445,
+            "p95_selected_wait": 174.20283490926718,
+            "restricted_mean_wait": 13.581448587405983,
+            "followup_count": 55,
+            "eligible": 55,
+            "within_budget": 0.2909090909090909
+          }
+        }
+      },
+      "shared_failure_map": true,
+      "deterministic_replay": true
+    },
+    {
+      "ues": 60,
+      "offered_messages": 384,
+      "churn_and_burst": true,
+      "availability_membership": "pass; session and half-open interval match",
+      "reset_cold_start_cases": 9,
+      "queue_survives_departure": {
+        "source": 0,
+        "leave": 287.94498007992127,
+        "checked_at": 289.94498007992127,
+        "retained_ready": 6
+      },
+      "fifo_accounting": {
+        "J_D": null,
+        "L_E": null,
+        "offered": 384,
+        "selected": 335,
+        "queued_at_horizon": 49,
+        "not_arrived": 0,
+        "completed": 334,
+        "failed": 56,
+        "in_flight": 1,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 8,
+            "selected": 7,
+            "unselected": 1,
+            "mean_selected_wait": 78.29719997511282,
+            "median_selected_wait": 89.66601621306555,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 16.0,
+            "followup_count": 8,
+            "eligible": 8,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 111,
+            "selected": 98,
+            "unselected": 13,
+            "mean_selected_wait": 76.34915610621452,
+            "median_selected_wait": 74.92030327987412,
+            "p95_selected_wait": 129.9671418200373,
+            "restricted_mean_wait": 15.653361615403801,
+            "followup_count": 111,
+            "eligible": 111,
+            "within_budget": 0.009009009009009009
+          },
+          "Medium": {
+            "offered": 31,
+            "selected": 29,
+            "unselected": 2,
+            "mean_selected_wait": 73.57624604282415,
+            "median_selected_wait": 74.23796741374082,
+            "p95_selected_wait": 135.39337496848873,
+            "restricted_mean_wait": 15.151039946575771,
+            "followup_count": 31,
+            "eligible": 31,
+            "within_budget": 0.03225806451612903
+          },
+          "Low": {
+            "offered": 93,
+            "selected": 84,
+            "unselected": 9,
+            "mean_selected_wait": 69.28685007743597,
+            "median_selected_wait": 73.80858209217038,
+            "p95_selected_wait": 132.23239693258878,
+            "restricted_mean_wait": 15.349007304989716,
+            "followup_count": 93,
+            "eligible": 93,
+            "within_budget": 0.06451612903225806
+          }
+        }
+      },
+      "random_accounting": {
+        "J_D": null,
+        "L_E": null,
+        "offered": 384,
+        "selected": 337,
+        "queued_at_horizon": 47,
+        "not_arrived": 0,
+        "completed": 336,
+        "failed": 57,
+        "in_flight": 1,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 8,
+            "selected": 7,
+            "unselected": 1,
+            "mean_selected_wait": 83.36822563109904,
+            "median_selected_wait": 39.45119061960918,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 15.027413312518885,
+            "followup_count": 8,
+            "eligible": 8,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 111,
+            "selected": 102,
+            "unselected": 9,
+            "mean_selected_wait": 67.84106133296964,
+            "median_selected_wait": 51.86135319663278,
+            "p95_selected_wait": 201.23111025477763,
+            "restricted_mean_wait": 14.683505249534802,
+            "followup_count": 111,
+            "eligible": 111,
+            "within_budget": 0.02702702702702703
+          },
+          "Medium": {
+            "offered": 31,
+            "selected": 29,
+            "unselected": 2,
+            "mean_selected_wait": 68.11193041506043,
+            "median_selected_wait": 52.44127978578646,
+            "p95_selected_wait": 172.66255909157985,
+            "restricted_mean_wait": 14.399456302741168,
+            "followup_count": 31,
+            "eligible": 31,
+            "within_budget": 0.0967741935483871
+          },
+          "Low": {
+            "offered": 93,
+            "selected": 80,
+            "unselected": 13,
+            "mean_selected_wait": 70.38043663028841,
+            "median_selected_wait": 48.59973869942699,
+            "p95_selected_wait": 193.34215460950148,
+            "restricted_mean_wait": 13.710068570641495,
+            "followup_count": 93,
+            "eligible": 93,
+            "within_budget": 0.23655913978494625
+          }
+        }
+      },
+      "shared_failure_map": true,
+      "deterministic_replay": true
+    },
+    {
+      "ues": 100,
+      "offered_messages": 512,
+      "churn_and_burst": true,
+      "availability_membership": "pass; session and half-open interval match",
+      "reset_cold_start_cases": 18,
+      "queue_survives_departure": {
+        "source": 0,
+        "leave": 423.49010893221384,
+        "checked_at": 425.49010893221384,
+        "retained_ready": 5
+      },
+      "fifo_accounting": {
+        "J_D": null,
+        "L_E": null,
+        "offered": 512,
+        "selected": 444,
+        "queued_at_horizon": 68,
+        "not_arrived": 0,
+        "completed": 443,
+        "failed": 81,
+        "in_flight": 1,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 8,
+            "selected": 7,
+            "unselected": 1,
+            "mean_selected_wait": 134.0093843594513,
+            "median_selected_wait": 126.405014418972,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 16.0,
+            "followup_count": 8,
+            "eligible": 8,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 136,
+            "selected": 114,
+            "unselected": 22,
+            "mean_selected_wait": 101.03605563438245,
+            "median_selected_wait": 113.29225036311153,
+            "p95_selected_wait": 181.14225999794033,
+            "restricted_mean_wait": 15.767947066365608,
+            "followup_count": 136,
+            "eligible": 136,
+            "within_budget": 0.014705882352941176
+          },
+          "Medium": {
+            "offered": 73,
+            "selected": 67,
+            "unselected": 6,
+            "mean_selected_wait": 101.24585221290256,
+            "median_selected_wait": 114.32303728924356,
+            "p95_selected_wait": 168.26776949319492,
+            "restricted_mean_wait": 15.519053709375322,
+            "followup_count": 73,
+            "eligible": 73,
+            "within_budget": 0.0273972602739726
+          },
+          "Low": {
+            "offered": 113,
+            "selected": 98,
+            "unselected": 15,
+            "mean_selected_wait": 107.50006012983599,
+            "median_selected_wait": 116.31475725483543,
+            "p95_selected_wait": 178.6923910648599,
+            "restricted_mean_wait": 15.624351740704077,
+            "followup_count": 113,
+            "eligible": 113,
+            "within_budget": 0.04424778761061947
+          }
+        }
+      },
+      "random_accounting": {
+        "J_D": null,
+        "L_E": null,
+        "offered": 512,
+        "selected": 448,
+        "queued_at_horizon": 64,
+        "not_arrived": 0,
+        "completed": 447,
+        "failed": 78,
+        "in_flight": 1,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 8,
+            "selected": 7,
+            "unselected": 1,
+            "mean_selected_wait": 75.3731363708922,
+            "median_selected_wait": 55.397050284712265,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 15.062861468212269,
+            "followup_count": 8,
+            "eligible": 8,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 136,
+            "selected": 117,
+            "unselected": 19,
+            "mean_selected_wait": 101.93981387885046,
+            "median_selected_wait": 89.52713075647586,
+            "p95_selected_wait": 274.6503165687957,
+            "restricted_mean_wait": 14.811038622556419,
+            "followup_count": 136,
+            "eligible": 136,
+            "within_budget": 0.051470588235294115
+          },
+          "Medium": {
+            "offered": 73,
+            "selected": 63,
+            "unselected": 10,
+            "mean_selected_wait": 96.85719099009494,
+            "median_selected_wait": 69.87420722235596,
+            "p95_selected_wait": 308.40265299846254,
+            "restricted_mean_wait": 14.09105641840916,
+            "followup_count": 73,
+            "eligible": 73,
+            "within_budget": 0.1506849315068493
+          },
+          "Low": {
+            "offered": 113,
+            "selected": 100,
+            "unselected": 13,
+            "mean_selected_wait": 82.31746085923056,
+            "median_selected_wait": 57.79130552586122,
+            "p95_selected_wait": 220.1592262194393,
+            "restricted_mean_wait": 13.908666752882562,
+            "followup_count": 113,
+            "eligible": 113,
+            "within_budget": 0.21238938053097345
+          }
+        }
+      },
+      "shared_failure_map": true,
+      "deterministic_replay": true
+    }
+  ],
+  "ndcg": {
+    "ideal": {
+      "definition": "common reference snapshots; recursively select up to5 without advancing time/history; linear D marginal-risk gains",
+      "ndcg": {
+        "1": {
+          "mean": 1.0,
+          "defined": 1
+        },
+        "3": {
+          "mean": 1.0,
+          "defined": 1
+        },
+        "5": {
+          "mean": 1.0,
+          "defined": 1
+        }
+      },
+      "singletons": 0,
+      "zero_ideal_metric_cells": 0,
+      "candidate_counts": [
+        3
+      ]
+    },
+    "reversed": {
+      "definition": "common reference snapshots; recursively select up to5 without advancing time/history; linear D marginal-risk gains",
+      "ndcg": {
+        "1": {
+          "mean": 0.3333333333333333,
+          "defined": 1
+        },
+        "3": {
+          "mean": 0.7899980042460358,
+          "defined": 1
+        },
+        "5": {
+          "mean": 0.7899980042460358,
+          "defined": 1
+        }
+      },
+      "singletons": 0,
+      "zero_ideal_metric_cells": 0,
+      "candidate_counts": [
+        3
+      ]
+    },
+    "empty_singleton_zero_ideal": {
+      "definition": "common reference snapshots; recursively select up to5 without advancing time/history; linear D marginal-risk gains",
+      "ndcg": {
+        "1": {
+          "mean": null,
+          "defined": 0
+        },
+        "3": {
+          "mean": null,
+          "defined": 0
+        },
+        "5": {
+          "mean": null,
+          "defined": 0
+        }
+      },
+      "singletons": 2,
+      "zero_ideal_metric_cells": 3,
+      "candidate_counts": [
+        0,
+        1,
+        3
+      ]
+    },
+    "empty_and_singleton_reporting_separately": false,
+    "observation": "evaluate_probes increments one combined singletons counter for n=0 and n=1; candidate_counts preserves individual sizes."
+  }
+}

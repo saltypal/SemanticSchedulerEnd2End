@@ -30,5 +30,7 @@ def test_data_parallel_shards_preserve_per_image_symbols() -> None:
     features = torch.randn(4, 8, 16, device="cuda:0")
     all_symbols, _ = real_to_complex_per_image(features)
     shard_zero, _ = real_to_complex_per_image(features[:2])
-    shard_one, _ = real_to_complex_per_image(features[2:])
-    assert torch.equal(all_symbols.cpu(), torch.cat((shard_zero, shard_one)).cpu())
+    shard_one, _ = real_to_complex_per_image(features[2:].to('cuda:1'))
+    assert shard_zero.device.index == 0
+    assert shard_one.device.index == 1
+    assert torch.equal(all_symbols.cpu(), torch.cat((shard_zero.cpu(), shard_one.cpu())))

@@ -1,0 +1,32 @@
+[
+  {
+    "tested_encoder": "clip",
+    "adapter_branch": "clip_b32",
+    "global_shape": [
+      1,
+      512
+    ],
+    "token_shape": [
+      1,
+      49,
+      768
+    ],
+    "seconds_including_random_head_checks": 1.954723999951966,
+    "scope": "real encoder/image; random head shape checks, not trained accuracy; SigLIP1 tests shared branch, not SigLIP2 weights"
+  },
+  {
+    "tested_encoder": "siglip",
+    "adapter_branch": "siglip2_b16",
+    "global_shape": [
+      1,
+      768
+    ],
+    "token_shape": [
+      1,
+      196,
+      768
+    ],
+    "seconds_including_random_head_checks": 2.9087966999504715,
+    "scope": "real encoder/image; random head shape checks, not trained accuracy; SigLIP1 tests shared branch, not SigLIP2 weights"
+  }
+]

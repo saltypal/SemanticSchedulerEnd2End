@@ -1,0 +1,104 @@
+{
+  "source_version": "satyapaladugu/crisismmd1000-spi-labeling/9",
+  "label_counts": {
+    "Low": 1474,
+    "Medium": 688,
+    "High": 1669,
+    "unavailable": 67,
+    "Critical": 102
+  },
+  "availability_counts": {
+    "True": 3933,
+    "False": 67
+  },
+  "protocol_counts": {
+    "v1_checkpoint": 2540,
+    "v3_qwen25_no_thinking": 1460
+  },
+  "source_split_counts": {
+    "train": 1942,
+    "dev": 898,
+    "test": 1160
+  },
+  "label_jsonl_bytes": 5930164,
+  "label_jsonl_sha256": "8B10CAA82B1DA1B688C4E2D12526FF1D3500CF497A0CDE9260FD0B9BF631DC0E",
+  "progress": {
+    "processed_rows": 4000,
+    "target_rows": 4000,
+    "new_rows_this_session": 1460,
+    "elapsed_seconds": 13361.271189856,
+    "coverage_complete": true,
+    "training_started": false
+  },
+  "split_support": {
+    "train": {
+      "Low": 782,
+      "Medium": 339,
+      "High": 899,
+      "Critical": 48
+    },
+    "validation": {
+      "Low": 419,
+      "Medium": 149,
+      "High": 445,
+      "Critical": 24
+    },
+    "test": {
+      "Low": 273,
+      "Medium": 200,
+      "High": 325,
+      "Critical": 30
+    }
+  },
+  "comparisons": [
+    {
+      "balance": "original",
+      "required": 48,
+      "completed": 36,
+      "missing_count": 12,
+      "complete": false,
+      "candidate_count": 36,
+      "development_macro_f1_range": [
+        0.3976950544306844,
+        0.6336517064759876
+      ]
+    },
+    {
+      "balance": "class_weighted",
+      "required": 44,
+      "completed": 33,
+      "missing_count": 11,
+      "complete": false,
+      "candidate_count": 33,
+      "development_macro_f1_range": [
+        0.5392433026984227,
+        0.6389490433290279
+      ]
+    },
+    {
+      "balance": "random_oversampling",
+      "required": 48,
+      "completed": 36,
+      "missing_count": 12,
+      "complete": false,
+      "candidate_count": 36,
+      "development_macro_f1_range": [
+        0.5097830757071572,
+        0.6320962599315063
+      ]
+    },
+    {
+      "balance": "moderate_undersampling",
+      "required": 48,
+      "completed": 36,
+      "missing_count": 12,
+      "complete": false,
+      "candidate_count": 36,
+      "development_macro_f1_range": [
+        0.44957583900075154,
+        0.6403870159019908
+      ]
+    }
+  ],
+  "selection_status": "not_frozen; each balance fails completeness guard; held-out test and full-pipeline profiles not reached"
+}

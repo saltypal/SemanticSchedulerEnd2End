@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from INFRA.latent.contracts import LatentCandidate, LatentSnapshot
+from Evaluation.latent.contracts import LatentCandidate, LatentSnapshot
 
 
 POLICIES = ("fifo", "sjf", "edf", "priority_fifo", "priority_edf", "semantic")

@@ -1,0 +1,41 @@
+{
+  "status": "partial",
+  "model_status": {
+    "qwen4b": {
+      "status": "failed",
+      "reason": "model failure; no automatic retry",
+      "completed_reviews": 25,
+      "planned_reviews": 30,
+      "seconds": 225.25754209900003,
+      "comparison_scope": "practical model/runtime systems; family and precision both differ"
+    },
+    "qwen9b": {
+      "status": "partial",
+      "reason": "technical preflight format/runtime gate",
+      "completed_reviews": 3,
+      "planned_reviews": 30,
+      "seconds": 289.221677967,
+      "comparison_scope": "practical model/runtime systems; family and precision both differ"
+    }
+  },
+  "processes": {
+    "extraction": {
+      "returncode": 0,
+      "seconds": 38.01541037999999,
+      "log": "/kaggle/working/results/semantic_validation/20261026h3/logs/extraction_worker.log"
+    },
+    "qwen4b": {
+      "returncode": 0,
+      "seconds": 228.05715832600004,
+      "log": "/kaggle/working/results/semantic_validation/20261026h3/logs/qwen4b_worker.log"
+    },
+    "qwen9b": {
+      "returncode": 0,
+      "seconds": 296.3875679590001,
+      "log": "/kaggle/working/results/semantic_validation/20261026h3/logs/qwen9b_worker.log"
+    }
+  },
+  "seconds": 604.8942118040001,
+  "no_policy_training": true,
+  "enable_thinking": false
+}

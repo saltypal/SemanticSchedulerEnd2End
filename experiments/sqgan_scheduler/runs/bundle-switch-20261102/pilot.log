@@ -1,0 +1,11 @@
+BEGIN verified fine-tuned SQ-GAN loading
+Traceback (most recent call last):
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/sqgan_scheduler/runs/bundle-switch-20261102/pilot.py", line 9, in <module>
+    codec=SQGANDigitalCodec()
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Codec/integration/sqgan_payload.py", line 48, in __init__
+    builder,self.packet=load_source(self.source_root)
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Codec/integration/sqgan_payload.py", line 27, in load_source
+    spec=importlib.util.spec_from_file_location(alias,root/"src/__init__.py",submodule_search_locations=[str(root/"src")])
+         ^^^^^^^^^
+UnboundLocalError: cannot access local variable 'importlib' where it is not associated with a value

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/ipykernel_24/3943025391.py", line 5, in <cell line: 0>
+    run(RUN/'data/records.json',PROJECT/'parameters/results/spi_inputs_v2_20261027b/panel.json',PROJECT/'parameters/config/final_labeling_teacher.json',RUN/'campaign')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/project/experiments/spi_classifier_repair/medic_campaign.py", line 430, in run
+    winner,test=compare(rows,labels,out/'comparison')
+                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/contextlib.py", line 85, in inner
+    return func(*args, **kwds)
+  File "/kaggle/working/project/experiments/spi_classifier_repair/medic_campaign.py", line 386, in compare
+    if missing:raise RuntimeError('classifier matrix incomplete; locked test remains closed: '+str(missing))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: classifier matrix incomplete; locked test remains closed: [('clip_b32', 'extra_trees'), ('clip_b32', 'hist_boost'), ('clip_b32', 'knn'), ('clip_b32', 'linear_svm'), ('clip_b32', 'logistic'), ('clip_b32', 'mlp'), ('clip_b32', 'random_forest'), ('clip_b32', 'rbf_svm'), ('clip_b32', 'ridge'), ('convnextv2_tiny', 'extra_trees'), ('convnextv2_tiny', 'hist_boost'), ('convnextv2_tiny', 'knn'), ('convnextv2_tiny', 'linear_svm'), ('convnextv2_tiny', 'logistic'), ('convnextv2_tiny', 'mlp'), ('convnextv2_tiny', 'random_forest'), ('convnextv2_tiny', 'rbf_svm'), ('convnextv2_tiny', 'ridge')]

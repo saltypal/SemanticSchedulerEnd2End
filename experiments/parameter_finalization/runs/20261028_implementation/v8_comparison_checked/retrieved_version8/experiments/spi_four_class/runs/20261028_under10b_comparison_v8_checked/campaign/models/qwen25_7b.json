@@ -1,0 +1,41 @@
+{
+  "model_id": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "transformers": "5.5.0",
+  "parameter_devices": [
+    "cuda:1"
+  ],
+  "quantization": "NF4_double_quant_FP16",
+  "load_seconds": 77.95518014799995,
+  "model_footprint_bytes": 5784607312,
+  "thinking_control": "no_R1_prompt_requested; generated_thought_markers_rejected",
+  "template_enable_thinking_supported": false,
+  "mode": "image_only_SPI_pseudo_labels",
+  "image_processor": {
+    "size": {
+      "longest_edge": 262144,
+      "shortest_edge": 65536
+    },
+    "patch_size": 14,
+    "temporal_patch_size": 2,
+    "merge_size": 2,
+    "image_mean": [
+      0.48145466,
+      0.4578275,
+      0.40821073
+    ],
+    "image_std": [
+      0.26862954,
+      0.26130258,
+      0.27577711
+    ],
+    "image_processor_type": "Qwen2VLImageProcessor",
+    "do_convert_rgb": true,
+    "do_resize": true,
+    "resample": 3,
+    "do_rescale": true,
+    "rescale_factor": 0.00392156862745098,
+    "do_normalize": true
+  },
+  "independent_ground_truth": false
+}

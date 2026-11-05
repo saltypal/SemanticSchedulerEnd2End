@@ -1,0 +1,200 @@
+{
+  "model": "yolo_world",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    },
+    "people_vehicles": {
+      "instances": 6,
+      "categories": 1,
+      "largest_box_fraction": 0.005603682565087091,
+      "union_box_coverage": 0.01451961859421409
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "person",
+      "box": [
+        414.26708984375,
+        301.60247802734375,
+        433.86688232421875,
+        326.8093566894531
+      ],
+      "score": 0.6397138237953186
+    },
+    {
+      "label": "person",
+      "box": [
+        405.97705078125,
+        96.03787231445312,
+        416.7671813964844,
+        123.7113037109375
+      ],
+      "score": 0.5726760625839233
+    },
+    {
+      "label": "person",
+      "box": [
+        430.33172607421875,
+        110.1496810913086,
+        438.62957763671875,
+        137.5170135498047
+      ],
+      "score": 0.5427643656730652
+    },
+    {
+      "label": "person",
+      "box": [
+        388.4837951660156,
+        103.7137451171875,
+        398.8382263183594,
+        128.2559814453125
+      ],
+      "score": 0.46687570214271545
+    },
+    {
+      "label": "person",
+      "box": [
+        316.219482421875,
+        271.7203063964844,
+        334.65692138671875,
+        322.60540771484375
+      ],
+      "score": 0.4447338581085205
+    },
+    {
+      "label": "person",
+      "box": [
+        367.9677429199219,
+        101.7261962890625,
+        376.21221923828125,
+        128.2750244140625
+      ],
+      "score": 0.3313204348087311
+    }
+  ],
+  "values": {
+    "instances": 6,
+    "categories": 1,
+    "largest_box_fraction": 0.005603682565087091,
+    "union_box_coverage": 0.01451961859421409
+  },
+  "audit": {
+    "category_counts": {
+      "person": 6
+    },
+    "detections": [
+      {
+        "label": "person",
+        "box": [
+          414.26708984375,
+          301.60247802734375,
+          433.86688232421875,
+          326.8093566894531
+        ],
+        "score": 0.6397138237953186
+      },
+      {
+        "label": "person",
+        "box": [
+          405.97705078125,
+          96.03787231445312,
+          416.7671813964844,
+          123.7113037109375
+        ],
+        "score": 0.5726760625839233
+      },
+      {
+        "label": "person",
+        "box": [
+          430.33172607421875,
+          110.1496810913086,
+          438.62957763671875,
+          137.5170135498047
+        ],
+        "score": 0.5427643656730652
+      },
+      {
+        "label": "person",
+        "box": [
+          388.4837951660156,
+          103.7137451171875,
+          398.8382263183594,
+          128.2559814453125
+        ],
+        "score": 0.46687570214271545
+      },
+      {
+        "label": "person",
+        "box": [
+          316.219482421875,
+          271.7203063964844,
+          334.65692138671875,
+          322.60540771484375
+        ],
+        "score": 0.4447338581085205
+      },
+      {
+        "label": "person",
+        "box": [
+          367.9677429199219,
+          101.7261962890625,
+          376.21221923828125,
+          128.2750244140625
+        ],
+        "score": 0.3313204348087311
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 327,
+    "producer": {
+      "checkpoint": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\models\\yolov8s-worldv2.pt",
+      "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+      "device": "cpu",
+      "vocabulary": [
+        "person",
+        "car",
+        "building",
+        "bridge"
+      ],
+      "settings": {
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "verbose": false
+      },
+      "settings_sha256": "e6de57b29ac266ce7a80f7e09dd5319325367c105ff2c4d1d27291b11f871312",
+      "effective_predict_settings": {
+        "task": "detect",
+        "mode": "predict",
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "rect": true,
+        "batch": 1,
+        "device": "cpu"
+      }
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency"
+  },
+  "load_seconds": 4.214182800031267,
+  "first_inference_seconds": 0.5138384999008849,
+  "warmed_latency": false,
+  "image_sha256": "d12b48f3f58c1818a58501afb2158a7271a4e7e413423c965f1214aa49b36b5f",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

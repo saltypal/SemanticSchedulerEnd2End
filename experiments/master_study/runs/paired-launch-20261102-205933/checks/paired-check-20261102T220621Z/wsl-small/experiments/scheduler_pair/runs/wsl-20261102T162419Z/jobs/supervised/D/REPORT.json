@@ -1,0 +1,209 @@
+{
+  "scope": "real-cache D supervised and RL suite; no independent urgency claim",
+  "statuses": {
+    "linear_choice/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1180.1263370719998,
+      "validation_score": -4.339206407311279,
+      "model_sha256": "1c384d0044dc6f3078bab699219a19535f9993a7f52335912f4ac0717374f36e",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "mlp_choice/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1109.0883124719999,
+      "validation_score": -3.567531232121132,
+      "model_sha256": "30c9a1b5600f3ff2719ba56a4994ca20cba6212eb6c55532dbb1ebfca9dc165c",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "delay_huber/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1105.4678251590003,
+      "validation_score": -3.357320350407325,
+      "model_sha256": "eeda35026764520b88bcbd163b4b1b4e8e55948c0efcc9f99b0c65602ea94dc5",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "ranknet/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1131.252479017,
+      "validation_score": -3.364155749505431,
+      "model_sha256": "e743576d86de92a8af1e6101628ea33497213eef8887e06980104bc624892924",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "lambdamart/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 69.94429440800013,
+      "validation_score": -3.218262452978272,
+      "model_sha256": "28bc34bd77601ca67af35b7aae789b49c8a26c68bc17b10814a23006b757c3af",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "priority_classifier/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1155.3031346910002,
+      "validation_score": -3.8271161751190834,
+      "model_sha256": "6e249471ebce7e87380e7a6c7cc3f2531dc05bfa344fe8d7f0688b5e319f50e0",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "deepsets_ranknet/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1189.143022708,
+      "validation_score": -3.3818849491861207,
+      "model_sha256": "2cd67db08a3a67627920592c36d1c56a2cb4b5d5e65d38af15eea3bde2842dd1",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "set_transformer_ranknet/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 743.284159322,
+      "validation_score": -3.4519627545344798,
+      "model_sha256": "041bf4bcdd1c84304c87c11276d86c0c5c74748649cedcc90f464efbc1898c81",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "listmle/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1144.1654966379992,
+      "validation_score": -3.385909586441159,
+      "model_sha256": "f56f2f5bdf55ea9f46401b97b93a1ade366d83af82a215f1a47b7a9e3b0ffc30",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "masked_ppo/1729": {
+      "status": "planned"
+    },
+    "masked_double_dqn/1729": {
+      "status": "planned"
+    },
+    "td_per/1729": {
+      "status": "planned"
+    },
+    "ranknet_warmstart_ppo/1729": {
+      "status": "planned"
+    },
+    "rl_vlm_f/1729": {
+      "status": "blocked_labels",
+      "reason": "Teacher-dependent arm is executed by the separate qualified-feedback drivers"
+    },
+    "vlm_replay/1729": {
+      "status": "blocked_labels",
+      "reason": "Teacher-dependent arm is executed by the separate qualified-feedback drivers"
+    },
+    "visionprefer/1729": {
+      "status": "blocked_labels",
+      "reason": "Teacher-dependent arm is executed by the separate qualified-feedback drivers"
+    },
+    "temporal_deepsets_ranknet/1729": {
+      "status": "evaluated_development_only",
+      "seconds": 1518.8681354639994,
+      "validation_score": -3.448037604886407,
+      "model_sha256": "47facf2c0f2b22f1fb95e9e30890f65a093248f86ed5f7acde72d4e72c00962d",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    }
+  },
+  "input_profile": {
+    "schema": "scene93_received387_v1",
+    "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+    "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+    "feature_order": "scene374+SPI_prob4_C_H_M_L+R+N+availability6+cold1",
+    "semantic_producer": {
+      "repo": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+      "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+      "weights_sha256": {
+        "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+      },
+      "download_checkpoint_bytes": 605247071,
+      "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+      "parameters": 87849216
+    },
+    "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+    "spi_score_order": [
+      "Critical",
+      "High",
+      "Medium",
+      "Low"
+    ],
+    "spi_score_calibration": "uncalibrated producer scores; not urgency probabilities",
+    "spi_producers": [
+      "82262ee041119196e00078922e5a4ad8dbac8d01d16c586ba710906e7a3a88a9"
+    ],
+    "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+    "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+    "sha256": "6f9a56092cc293af21de76e3d3cc2897aa0cb5a21e35fbe5cdfd44dff2440d85"
+  },
+  "data_audit": {
+    "images": 6000,
+    "raw_unique": 5952,
+    "cached_embeddings": 5952,
+    "reference_known": 3915,
+    "reference_conflicts": 8,
+    "reference_scope": "mixed-protocol VLM pseudo-labels; not independent urgency truth",
+    "source_counts": {
+      "crisismmd": 4000,
+      "open_images": 1000,
+      "places365": 1000
+    },
+    "group_split_counts": {
+      "train": 5376,
+      "validation": 417,
+      "test": 207
+    },
+    "input_profile": {
+      "schema": "scene93_received387_v1",
+      "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+      "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+      "feature_order": "scene374+SPI_prob4_C_H_M_L+R+N+availability6+cold1",
+      "semantic_producer": {
+        "repo": "openai/clip-vit-base-patch32",
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+        "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+        "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+        "weights_sha256": {
+          "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+        },
+        "download_checkpoint_bytes": 605247071,
+        "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+        "parameters": 87849216
+      },
+      "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+      "spi_score_order": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "spi_score_calibration": "uncalibrated producer scores; not urgency probabilities",
+      "spi_producers": [
+        "82262ee041119196e00078922e5a4ad8dbac8d01d16c586ba710906e7a3a88a9"
+      ],
+      "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+      "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+      "sha256": "6f9a56092cc293af21de76e3d3cc2897aa0cb5a21e35fbe5cdfd44dff2440d85"
+    }
+  },
+  "final_test_opened": false,
+  "P_teacher": "blocked until qualified contextual labels are collected",
+  "RL": "included; inspect per-arm ledger",
+  "UE_mode": {
+    "dynamic_ues": false,
+    "burst": false,
+    "scope": "synthetic mixed-image streams; not real video chronology"
+  }
+}

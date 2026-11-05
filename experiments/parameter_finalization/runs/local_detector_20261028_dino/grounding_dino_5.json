@@ -1,0 +1,81 @@
+{
+  "model": "grounding_dino",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    },
+    "people_vehicles": {
+      "instances": 1,
+      "categories": 1,
+      "largest_box_fraction": 0.4322045205056078,
+      "union_box_coverage": 0.4322045205056078
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "person",
+      "box": [
+        265.501708984375,
+        12.453089714050293,
+        502.010009765625,
+        240.75140380859375
+      ],
+      "score": 0.369922012090683
+    }
+  ],
+  "values": {
+    "instances": 1,
+    "categories": 1,
+    "largest_box_fraction": 0.4322045205056078,
+    "union_box_coverage": 0.4322045205056078
+  },
+  "audit": {
+    "category_counts": {
+      "person": 1
+    },
+    "detections": [
+      {
+        "label": "person",
+        "box": [
+          265.501708984375,
+          12.453089714050293,
+          502.010009765625,
+          240.75140380859375
+        ],
+        "score": 0.369922012090683
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 244,
+    "producer": {
+      "producer": "grounding_dino",
+      "vocabulary": [
+        "person"
+      ],
+      "threshold": 0.35,
+      "text_threshold": 0.25,
+      "weights_sha256": {
+        "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+      },
+      "device": "cpu",
+      "interpretation": "box/text matching, not verified condition or priority",
+      "class_aware_nms_iou": 0.5,
+      "max_detections": 300,
+      "category_scope": "retained text phrases; no inferred urgency or merged taxonomy"
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency",
+    "raw_proposals": 1
+  },
+  "load_seconds": 17.898543999996036,
+  "first_inference_seconds": 27.707433699979447,
+  "warmed_latency": false,
+  "image_sha256": "b6d674d4d21c3867e42436bc80eb0794e346ff7f848a48d9ede6f301bef7f3ae",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

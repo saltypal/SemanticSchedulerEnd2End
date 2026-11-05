@@ -1,0 +1,327 @@
+{
+  "schema": "staged_approach_grid_v1",
+  "purpose": "faithful task evidence, not more approval",
+  "selection": {
+    "objective": "per-task independent-label balanced accuracy including unavailable predictions",
+    "constraints": [
+      "report class supports,coverage,all-reference correctness and constant baselines",
+      "no selection on old test20, c/e controls or test outputs",
+      "fit thresholds/calibration only in development groups; lock fresh confirmation before scoring",
+      "a profile is not favored because it transmits fewer assessable claims"
+    ],
+    "tie_break": [
+      "less incremental inference cost",
+      "fewer transmitted bytes"
+    ],
+    "reviewer_objective": "reject corrupt/omitted controls and agree with known annotation facts, not positive approval"
+  },
+  "stages": {
+    "native_score_replay": {
+      "configurations": [
+        {
+          "preprocessing": "checkpoint_native",
+          "threshold": 0.3,
+          "abstention_half_width": 0.0
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "threshold": 0.3,
+          "abstention_half_width": 0.1
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "threshold": 0.5,
+          "abstention_half_width": 0.0
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "threshold": 0.5,
+          "abstention_half_width": 0.1
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "threshold": 0.7,
+          "abstention_half_width": 0.0
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "threshold": 0.7,
+          "abstention_half_width": 0.1
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "threshold": 0.3,
+          "abstention_half_width": 0.0
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "threshold": 0.3,
+          "abstention_half_width": 0.1
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "threshold": 0.5,
+          "abstention_half_width": 0.0
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "threshold": 0.5,
+          "abstention_half_width": 0.1
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "threshold": 0.7,
+          "abstention_half_width": 0.0
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "threshold": 0.7,
+          "abstention_half_width": 0.1
+        }
+      ],
+      "count": 12,
+      "model_forward_cache_keys": [
+        "checkpoint_native",
+        "aspect_preserving_pad"
+      ],
+      "label_independent_forward_passes_per_image": 2
+    },
+    "clip_alignment": {
+      "configurations": [
+        {
+          "preprocessing": "checkpoint_native",
+          "text_source": "paragraph",
+          "condition_prompt_set": "historical"
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "text_source": "paragraph",
+          "condition_prompt_set": "balanced_aerial"
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "text_source": "observable_clause",
+          "condition_prompt_set": "historical"
+        },
+        {
+          "preprocessing": "checkpoint_native",
+          "text_source": "observable_clause",
+          "condition_prompt_set": "balanced_aerial"
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "text_source": "paragraph",
+          "condition_prompt_set": "historical"
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "text_source": "paragraph",
+          "condition_prompt_set": "balanced_aerial"
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "text_source": "observable_clause",
+          "condition_prompt_set": "historical"
+        },
+        {
+          "preprocessing": "aspect_preserving_pad",
+          "text_source": "observable_clause",
+          "condition_prompt_set": "balanced_aerial"
+        }
+      ],
+      "count": 8,
+      "note": "cosines remain continuous; no probability or native-label truth"
+    },
+    "detector": {
+      "configurations": [
+        {
+          "image_size": 640,
+          "confidence": 0.05,
+          "iou": 0.5,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 640,
+          "confidence": 0.05,
+          "iou": 0.7,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 640,
+          "confidence": 0.15,
+          "iou": 0.5,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 640,
+          "confidence": 0.15,
+          "iou": 0.7,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 640,
+          "confidence": 0.25,
+          "iou": 0.5,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 640,
+          "confidence": 0.25,
+          "iou": 0.7,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 1024,
+          "confidence": 0.05,
+          "iou": 0.5,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 1024,
+          "confidence": 0.05,
+          "iou": 0.7,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 1024,
+          "confidence": 0.15,
+          "iou": 0.5,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 1024,
+          "confidence": 0.15,
+          "iou": 0.7,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 1024,
+          "confidence": 0.25,
+          "iou": 0.5,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        },
+        {
+          "image_size": 1024,
+          "confidence": 0.25,
+          "iou": 0.7,
+          "max_detections": 300,
+          "vocabulary": "canonical_16",
+          "fusion": "evaluate raw detections before fusion"
+        }
+      ],
+      "count": 12,
+      "note": "box precision/recall needs localized labels; image-presence proxies cannot validate boxes",
+      "cache": "one low-confidence inference per image_size/IoU; higher confidence replay only above retained floor"
+    },
+    "representations": {
+      "profiles": [
+        "required_claims",
+        "claims_and_scores",
+        "mission_context_history",
+        "full_structured"
+      ],
+      "count": 4,
+      "native_cross_product_rows": 48,
+      "note": "reuse identical predictions; dropping history cannot repair claim accuracy"
+    },
+    "reviewer_controls": {
+      "configurations": [
+        {
+          "prompt_variant": "candidate_provenance_v2",
+          "max_new_tokens": 192,
+          "claim_scope": "mission",
+          "max_pixels": 262144,
+          "image_max_side": 512
+        },
+        {
+          "prompt_variant": "candidate_provenance_v2",
+          "max_new_tokens": 192,
+          "claim_scope": "mission",
+          "max_pixels": 589824,
+          "image_max_side": null
+        },
+        {
+          "prompt_variant": "candidate_provenance_v2",
+          "max_new_tokens": 384,
+          "claim_scope": "mission",
+          "max_pixels": 262144,
+          "image_max_side": 512
+        },
+        {
+          "prompt_variant": "candidate_provenance_v2",
+          "max_new_tokens": 384,
+          "claim_scope": "mission",
+          "max_pixels": 589824,
+          "image_max_side": null
+        },
+        {
+          "prompt_variant": "candidate_provenance_concise_v3",
+          "max_new_tokens": 192,
+          "claim_scope": "mission",
+          "max_pixels": 262144,
+          "image_max_side": 512
+        },
+        {
+          "prompt_variant": "candidate_provenance_concise_v3",
+          "max_new_tokens": 192,
+          "claim_scope": "mission",
+          "max_pixels": 589824,
+          "image_max_side": null
+        },
+        {
+          "prompt_variant": "candidate_provenance_concise_v3",
+          "max_new_tokens": 384,
+          "claim_scope": "mission",
+          "max_pixels": 262144,
+          "image_max_side": 512
+        },
+        {
+          "prompt_variant": "candidate_provenance_concise_v3",
+          "max_new_tokens": 384,
+          "claim_scope": "mission",
+          "max_pixels": 589824,
+          "image_max_side": null
+        }
+      ],
+      "count": 8,
+      "maximum_cases_per_configuration": 24,
+      "gates_unchanged": true,
+      "note": "test prompts on separate complete/omitted/contradicted controls before judging actual extraction"
+    }
+  },
+  "resources": {
+    "local_first": true,
+    "new_gpu_runs_authorized_by_this_file": false,
+    "pilot_max_parents": 20,
+    "pilot_cpu_inference_seconds": 180,
+    "stop": "missing class support or labels is inconclusive, never a pass"
+  },
+  "not_yet_validated": [
+    "cross-view new facts",
+    "natural urgency",
+    "household/road-blockage truth",
+    "spatial geometry without box labels"
+  ]
+}

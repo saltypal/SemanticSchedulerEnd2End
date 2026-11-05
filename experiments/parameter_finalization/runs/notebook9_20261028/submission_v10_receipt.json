@@ -1,0 +1,57 @@
+{
+  "timestamp_utc": "2026-10-28T05:35:11Z",
+  "kernel": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "kernel_id": 141089219,
+  "version": 10,
+  "run_id": "notebook9_20261028_v10",
+  "push": "Kernel version 10 successfully pushed",
+  "status": "KernelWorkerStatus.ERROR",
+  "notebook_sha256": "07b2c6f42b80c165d9a74fdd28ac732b735ab13a6cd6c3e9529a6769574fe180",
+  "source_zip_sha256": "d912b15e624f8a2381419e2348600131587d59f5e2cd23bdc22ceb2d49bed053",
+  "source_files": 115,
+  "source_hashes": "all match source_manifest.json",
+  "zip_crc": "passed",
+  "notebook_schema": "valid",
+  "runtime_config_sha256": "954df05f24610823e651ee33665f75527ce254711b79d99f0d27aaa10c74bb57",
+  "server_seconds": 7200,
+  "aggregate_gpu_hour_cap": 4.0,
+  "output_root": "/kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v10/",
+  "recovery": "/kaggle/working/run_recovery.zip",
+  "logs": "startup/preflight logs not yet available",
+  "artifacts": "not yet retrieved",
+  "status_checks": [
+    {
+      "timestamp_utc": "2026-10-28T05:35:40Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "logs": "empty response; no startup/preflight output available"
+    }
+  ],
+  "terminal_check_utc": "2026-10-28T05:39:00Z",
+  "failure": "FileNotFoundError at cell 4 during input_detector_preflight: /kaggle/input/betterscheduler-spiv2-inputs-20261027b/panel.json",
+  "elapsed_seconds": 83.76,
+  "logs_path": "experiments/parameter_finalization/runs/notebook9_20261028/submission_v10_fixed/monitor_logs/kaggle_logs_v10_terminal.txt",
+  "logs_bytes": 53069,
+  "logs_sha256": "cd1c48dcb0172b684e3a3777eaecf285b02b39ee942c177da202a325ef905aa3",
+  "preflight": "Passed: two Tesla T4s, pinned CLIP tokenizer file hashes/sizes, YOLO-WORLD weights hash, OpenAI CLIP weights hash; dependency installation completed",
+  "retrieval": {
+    "recovery_payload_missing": 0,
+    "outputs": "retrieved_version10/",
+    "executed_notebook": "retrieved_version10/experiments/parameter_finalization/runs/notebook9_20261028_v10/cell_evidence/executed.ipynb",
+    "recovery_zip_downloaded": false,
+    "cell_logs": "retrieved_version10/experiments/parameter_finalization/runs/notebook9_20261028_v10/cell_evidence/",
+    "recovery_payload_checksum_matches": 10,
+    "files": 19,
+    "listed_recovery_payload_files": 10
+  },
+  "input_dataset_api": {
+    "mount_path_error": "Runtime path did not expose panel.json at configured root",
+    "files": 304,
+    "image_files": 300,
+    "root_files": [
+      "panel.json",
+      "input_manifest.json",
+      "features.npz",
+      "selection_audit.json"
+    ]
+  }
+}

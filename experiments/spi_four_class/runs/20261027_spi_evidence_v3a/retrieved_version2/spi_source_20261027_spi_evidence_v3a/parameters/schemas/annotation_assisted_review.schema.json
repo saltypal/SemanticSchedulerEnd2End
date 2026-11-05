@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Annotation-assisted pilot reviewer response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["parameters_consistent", "representation_sufficient", "reason", "missing_or_conflicting_fields"],
+  "properties": {
+    "parameters_consistent": {"type": "boolean"},
+    "representation_sufficient": {"type": "boolean"},
+    "reason": {"type": "string", "pattern": "\\S"},
+    "missing_or_conflicting_fields": {"type": "array", "items": {"type": "string"}}
+  },
+  "allOf": [{"if": {"properties": {"representation_sufficient": {"const": true}}}, "then": {"properties": {"parameters_consistent": {"const": true}, "missing_or_conflicting_fields": {"maxItems": 0}}}}]
+}

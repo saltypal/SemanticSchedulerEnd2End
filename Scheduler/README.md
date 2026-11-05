@@ -1,16 +1,17 @@
 # Scheduler
 
-Read `PROJECT_MAP.md` for module boundaries and `docs/REBUILD_GUIDE.md` for commands.
-Implementation lives here; notebooks import it. Defaults are `config/defaults.yaml`.
-From the repository root: `python E2EMain.py --module Scheduler --action validate`.
-Tests: `python -m pytest Scheduler/tests -q`.
-Outputs: configured results directory / `Scheduler` / unique run ID.
-Environment: install `environment/requirements.txt` from the repository root.
+All existing scheduling policy implementations and scheduler training live here.
+See ALGORITHMS.md for exact entry points and evidence boundaries.
 
-Whole-latent policies live in `latent/policies.py`. They accept immutable
-payload snapshots and never select UEs. See `docs/STATIC_LATENT_SCHEDULER.md`
-and `notebooks/04_static_latent_scheduler.ipynb` for the static workflow.
+- baselines/ and latent/: classical policies and historical whole-latent policies.
+- decoder_scheduler.py: eight-field scalar-header policy family.
+- contextual_decoder_scheduler.py: completed-history-aware policies.
+- scene_policy.py: variable-feature policy inference and model artifacts.
+- spi_policy.py: SPI class policy helpers.
+- semantic/: older semantic/DQN policy family.
+- training/: scheduler fitting, selection, PPO/DQN and teacher experiments.
 
-## Current package ownership
-
-Canonical policy packages: `latent/` for whole-latent decisions, `baselines/` for original fixtures and `semantic/` for the earlier semantic/DQN interface. Policies never mutate lifecycle or import codecs/neural models.
+These policy families have different contracts. The new parameter header still
+requires a deliberate adapter; moving sources does not make them interchangeable.
+Models require compatible trained artifacts. No tests or training ran in this
+reorganization.

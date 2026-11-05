@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Draft offline visual claim review; never runtime ground truth",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_kind", "schema_version", "run_id", "review_id", "status", "input_image_ids", "claim_reviews", "model_version", "prompt_version", "hidden_fields", "raw_response_ref", "reason"],
+  "properties": {
+    "record_kind": {"const": "qwen_claim_review"},
+    "schema_version": {"const": "qwen_claim_review_draft_v1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "review_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["not_run", "complete", "model_failed", "parse_failed"]},
+    "input_image_ids": {"type": "array", "items": {"type": "string"}},
+    "model_version": {"type": ["null", "string"]},
+    "prompt_version": {"type": ["null", "string"]},
+    "hidden_fields": {"type": "array", "items": {"type": "string"}},
+    "raw_response_ref": {"type": ["null", "string"]},
+    "reason": {"type": ["null", "string"]},
+    "review_mode": {"enum": ["visible_parameter_json", "blinded_atomic_claims"]},
+    "parameters_consistent": {"type": "boolean"},
+    "representation_sufficient": {"type": "boolean"},
+    "sufficiency_rubric_id": {"type": "string", "minLength": 1},
+    "claim_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim_id", "verdict", "visible_evidence", "limitations", "assessment_kind"],
+        "properties": {
+          "claim_id": {"type": "string", "minLength": 1},
+          "verdict": {"enum": ["supported", "contradicted", "unclear"]},
+          "visible_evidence": {"type": "string"},
+          "limitations": {"type": "array", "items": {"type": "string"}},
+          "assessment_kind": {"const": "model_assessed"}
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "complete"}}},
+      "then": {
+        "required": ["parameters_consistent", "representation_sufficient", "sufficiency_rubric_id", "review_mode"],
+        "properties": {
+          "input_image_ids": {"minItems": 1},
+          "claim_reviews": {"minItems": 1},
+          "model_version": {"type": "string", "minLength": 1},
+          "prompt_version": {"type": "string", "minLength": 1},
+          "raw_response_ref": {"type": "string", "minLength": 1},
+          "hidden_fields": {"allOf": [
+            {"contains": {"const": "clip_scores"}},
+            {"contains": {"const": "reference_labels"}}
+          ]}
+        }
+      },
+      "else": {"properties": {"reason": {"type": "string", "minLength": 1}}}
+    },
+    {
+      "if": {"required": ["review_mode"], "properties": {"status": {"const": "complete"}, "review_mode": {"const": "blinded_atomic_claims"}}},
+      "then": {"properties": {"hidden_fields": {"allOf": [
+        {"contains": {"const": "parameter_values"}},
+        {"contains": {"const": "producer_confidences"}}
+      ]}}}
+    }
+  ]
+}

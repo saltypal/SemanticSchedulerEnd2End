@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from INFRA.event_simulation import run_episode
-from INFRA.semantic_contracts import (
+from Evaluation.event_simulation import run_episode
+from Evaluation.semantic_contracts import (
     EpisodeJobSpec, EpisodeSpec, FeatureValue, LatentJobSpec,
     ResourceBudgetSemantic, SchedulingFeatureVectorV2,
 )
@@ -45,7 +45,7 @@ def test_classical_and_semantic_policies_run(name):
 
 
 def test_dqn_state_shape_and_mask_excludes_padded_slots():
-    from INFRA.event_simulation import SemanticSchedulingEnvironment
+    from Evaluation.event_simulation import SemanticSchedulingEnvironment
     episode = _episode()
     budget = ResourceBudgetSemantic(1.0)
     snapshot = SemanticSchedulingEnvironment(episode, budget).snapshot()

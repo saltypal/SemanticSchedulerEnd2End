@@ -1,0 +1,70 @@
+{
+  "source_kernel": "satyapaladugu/crisismmd1000-spi-labeling/9",
+  "remote_run": "experiments/full_medic_labeling/runs/main_20261030T055542Z/",
+  "source_files": {
+    "labels.jsonl": {
+      "bytes": 5930164,
+      "sha256": "8B10CAA82B1DA1B688C4E2D12526FF1D3500CF497A0CDE9260FD0B9BF631DC0E"
+    },
+    "selected_manifest.json": {
+      "bytes": 759106,
+      "sha256": "5ACA7A3FFF82CF2CD6602EC7F40ECC30813BB80BB111B9F050821AC4E1A5CAB9"
+    },
+    "comparison/records.json": {
+      "bytes": 1491343,
+      "sha256": "F4290A68205487B364EC395B30565A6880C6A7587D8BC459E5846404BCCE7487"
+    }
+  },
+  "counts": {
+    "label_receipts": 4000,
+    "unique_label_ids": 4000,
+    "selected_manifest_rows": 4000,
+    "unique_selected_ids": 4000,
+    "id_join_rows": 4000,
+    "usable_available_rows": 3933,
+    "unavailable_rows": 67,
+    "comparison_record_rows": 3933,
+    "usable_to_comparison_join_rows": 3933,
+    "hash_mismatches": 0,
+    "level_mismatches": 0,
+    "label_source_vs_selected_split_mismatches": 6,
+    "label_source_vs_selected_split_mismatches_all_4000": 7,
+    "label_source_vs_selected_split_mismatches_usable_3933": 6
+  },
+  "distributions": {
+    "labels": {
+      "Low": 1474,
+      "Medium": 688,
+      "High": 1669,
+      "unavailable": 67,
+      "Critical": 102
+    },
+    "protocols": {
+      "v1_checkpoint": 2540,
+      "v3_qwen25_no_thinking": 1460
+    },
+    "label_source_split": {
+      "train": 1942,
+      "dev": 898,
+      "test": 1160
+    },
+    "classifier_comparison_split": {
+      "train": 2068,
+      "validation": 1037,
+      "test": 828
+    }
+  },
+  "join_semantics": "IDs exact; usable labels additionally match comparison records by image_sha256 and level. Split values are provenance references only and excluded from feature/input fields. Seven label_source_split vs selected_manifest_split differences are preserved as separate references; comparison_split reflects development repartition.",
+  "outputs": {
+    "labels_all_4000_original.jsonl": {
+      "bytes": 5930164,
+      "sha256": "8B10CAA82B1DA1B688C4E2D12526FF1D3500CF497A0CDE9260FD0B9BF631DC0E",
+      "rows": 4000
+    },
+    "labels_usable_3933_with_split_refs.jsonl": {
+      "bytes": 1748919,
+      "sha256": "F5B90DD1E09823634544C452C501B754DF271FC82593D9B828200C163FCBF9C1",
+      "rows": 3933
+    }
+  }
+}

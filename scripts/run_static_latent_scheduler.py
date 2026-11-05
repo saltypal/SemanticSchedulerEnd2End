@@ -1,4 +1,4 @@
-"""Compatibility alias; canonical implementation: INFRA.latent.cli."""
+"""Compatibility alias; canonical implementation: Evaluation.latent.cli."""
 from pathlib import Path
 import sys
 
@@ -8,8 +8,8 @@ if str(ROOT) not in sys.path:
 
 if __name__ == '__main__':
     from runpy import run_module
-    run_module('INFRA.latent.cli', run_name='__main__')
+    run_module('Evaluation.latent.cli', run_name='__main__')
 else:
     from importlib import import_module
     import sys
-    sys.modules[__name__] = import_module('INFRA.latent.cli')
+    sys.modules[__name__] = import_module('Evaluation.latent.cli')

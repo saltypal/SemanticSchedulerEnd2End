@@ -1,0 +1,221 @@
+{
+  "model": "grounding_dino",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    },
+    "people_vehicles": {
+      "instances": 8,
+      "categories": 1,
+      "largest_box_fraction": 0.004788368719337837,
+      "union_box_coverage": 0.015812243829032707
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "person",
+      "box": [
+        414.91412353515625,
+        302.4744873046875,
+        432.493896484375,
+        326.97198486328125
+      ],
+      "score": 0.6525147557258606
+    },
+    {
+      "label": "person",
+      "box": [
+        317.0671691894531,
+        272.2023010253906,
+        335.2923278808594,
+        316.1902770996094
+      ],
+      "score": 0.5808694362640381
+    },
+    {
+      "label": "person",
+      "box": [
+        430.7267761230469,
+        110.3414535522461,
+        438.4757995605469,
+        136.1850128173828
+      ],
+      "score": 0.5699934959411621
+    },
+    {
+      "label": "person",
+      "box": [
+        406.30926513671875,
+        96.2621841430664,
+        416.28302001953125,
+        123.74108123779297
+      ],
+      "score": 0.5469874739646912
+    },
+    {
+      "label": "person",
+      "box": [
+        329.4220275878906,
+        286.26336669921875,
+        345.0292663574219,
+        326.93389892578125
+      ],
+      "score": 0.5439537763595581
+    },
+    {
+      "label": "person",
+      "box": [
+        388.3661804199219,
+        104.61150360107422,
+        398.7934265136719,
+        128.6338348388672
+      ],
+      "score": 0.5233765840530396
+    },
+    {
+      "label": "person",
+      "box": [
+        386.57012939453125,
+        46.3233757019043,
+        391.0206298828125,
+        60.2904167175293
+      ],
+      "score": 0.4130580425262451
+    },
+    {
+      "label": "person",
+      "box": [
+        368.5608215332031,
+        104.12004089355469,
+        376.1690368652344,
+        126.3261489868164
+      ],
+      "score": 0.3799479305744171
+    }
+  ],
+  "values": {
+    "instances": 8,
+    "categories": 1,
+    "largest_box_fraction": 0.004788368719337837,
+    "union_box_coverage": 0.015812243829032707
+  },
+  "audit": {
+    "category_counts": {
+      "person": 8
+    },
+    "detections": [
+      {
+        "label": "person",
+        "box": [
+          414.91412353515625,
+          302.4744873046875,
+          432.493896484375,
+          326.97198486328125
+        ],
+        "score": 0.6525147557258606
+      },
+      {
+        "label": "person",
+        "box": [
+          317.0671691894531,
+          272.2023010253906,
+          335.2923278808594,
+          316.1902770996094
+        ],
+        "score": 0.5808694362640381
+      },
+      {
+        "label": "person",
+        "box": [
+          430.7267761230469,
+          110.3414535522461,
+          438.4757995605469,
+          136.1850128173828
+        ],
+        "score": 0.5699934959411621
+      },
+      {
+        "label": "person",
+        "box": [
+          406.30926513671875,
+          96.2621841430664,
+          416.28302001953125,
+          123.74108123779297
+        ],
+        "score": 0.5469874739646912
+      },
+      {
+        "label": "person",
+        "box": [
+          329.4220275878906,
+          286.26336669921875,
+          345.0292663574219,
+          326.93389892578125
+        ],
+        "score": 0.5439537763595581
+      },
+      {
+        "label": "person",
+        "box": [
+          388.3661804199219,
+          104.61150360107422,
+          398.7934265136719,
+          128.6338348388672
+        ],
+        "score": 0.5233765840530396
+      },
+      {
+        "label": "person",
+        "box": [
+          386.57012939453125,
+          46.3233757019043,
+          391.0206298828125,
+          60.2904167175293
+        ],
+        "score": 0.4130580425262451
+      },
+      {
+        "label": "person",
+        "box": [
+          368.5608215332031,
+          104.12004089355469,
+          376.1690368652344,
+          126.3261489868164
+        ],
+        "score": 0.3799479305744171
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 327,
+    "producer": {
+      "producer": "grounding_dino",
+      "vocabulary": [
+        "person"
+      ],
+      "threshold": 0.35,
+      "text_threshold": 0.25,
+      "weights_sha256": {
+        "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+      },
+      "device": "cpu",
+      "interpretation": "box/text matching, not verified condition or priority",
+      "class_aware_nms_iou": 0.5,
+      "max_detections": 300,
+      "category_scope": "retained text phrases; no inferred urgency or merged taxonomy"
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency",
+    "raw_proposals": 8
+  },
+  "load_seconds": 18.29489130002912,
+  "first_inference_seconds": 46.34129310003482,
+  "warmed_latency": false,
+  "image_sha256": "d12b48f3f58c1818a58501afb2158a7271a4e7e413423c965f1214aa49b36b5f",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

@@ -1,0 +1,37 @@
+{
+  "1729/model.json": {
+    "weight_numpy_bytes": 617480,
+    "timing": [
+      {
+        "queue": 4,
+        "context_and_select_p50_ms": 5.122353,
+        "context_and_select_p95_ms": 5.3764009,
+        "supported_operator_flops": 616704,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 16,
+        "context_and_select_p50_ms": 12.9306605,
+        "context_and_select_p95_ms": 17.378234100000007,
+        "supported_operator_flops": 2466816,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 64,
+        "context_and_select_p50_ms": 31.156330500000003,
+        "context_and_select_p95_ms": 43.55236695000001,
+        "supported_operator_flops": 9867264,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      },
+      {
+        "queue": 256,
+        "context_and_select_p50_ms": 131.412911,
+        "context_and_select_p95_ms": 185.7860895,
+        "supported_operator_flops": 39469056,
+        "flops_scope": "Torch profiler supported matmul/convolution operators,2ops/MAC; not total FLOPs; normalization/activation/pooling and context construction not fully counted"
+      }
+    ],
+    "scope": "synthetic queue-shape probes using real cached headers; CPU NumPy deployment, one thread, 5 warmups and20 repeats; no decoder/channel",
+    "parameters": 77185
+  }
+}

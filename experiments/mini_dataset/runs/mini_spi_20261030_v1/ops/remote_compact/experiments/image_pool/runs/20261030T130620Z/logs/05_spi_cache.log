@@ -1,0 +1,308 @@
+START 05_spi_cache output /kaggle/working/experiments/image_pool/runs/20261030T130620Z
+--- Logging error ---
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/logging/__init__.py", line 1154, in emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/experiments/image_pool/runs/20261030T130620Z/source_snapshot/experiments/scene_array_cache/cache.py", line 57, in write
+    self.parent.write(text); self.log.write(text); self.log.flush()
+                             ~~~~~~~~~~~~~~^^^^^^
+ValueError: I/O operation on closed file.
+Call stack:
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.13/dist-packages/colab_kernel_launcher.py", line 37, in <module>
+    ColabKernelApp.launch_instance()
+  File "/usr/local/lib/python3.13/dist-packages/traitlets/config/application.py", line 1080, in launch_instance
+    app.start()
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/kernelapp.py", line 712, in start
+    self.io_loop.start()
+  File "/usr/local/lib/python3.13/dist-packages/tornado/platform/asyncio.py", line 211, in start
+    self.asyncio_loop.run_forever()
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 684, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 2061, in _run_once
+    handle._run()
+  File "/usr/lib/python3.13/asyncio/events.py", line 89, in _run
+    self._context.run(self._callback, *self._args)
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/kernelbase.py", line 510, in dispatch_queue
+    await self.process_one()
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/kernelbase.py", line 499, in process_one
+    await dispatch(*args)
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/kernelbase.py", line 406, in dispatch_shell
+    await result
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/kernelbase.py", line 730, in execute_request
+    reply_content = await reply_content
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/ipkernel.py", line 383, in do_execute
+    res = shell.run_cell(
+  File "/usr/local/lib/python3.13/dist-packages/ipykernel/zmqshell.py", line 528, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/IPython/core/interactiveshell.py", line 2975, in run_cell
+    result = self._run_cell(
+  File "/usr/local/lib/python3.13/dist-packages/IPython/core/interactiveshell.py", line 3030, in _run_cell
+    return runner(coro)
+  File "/usr/local/lib/python3.13/dist-packages/IPython/core/async_helpers.py", line 78, in _pseudo_sync_runner
+    coro.send(None)
+  File "/usr/local/lib/python3.13/dist-packages/IPython/core/interactiveshell.py", line 3257, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File "/usr/local/lib/python3.13/dist-packages/IPython/core/interactiveshell.py", line 3473, in run_ast_nodes
+    if (await self.run_code(code, result,  async_=asy)):
+  File "/usr/local/lib/python3.13/dist-packages/IPython/core/interactiveshell.py", line 3553, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "/tmp/ipykernel_23/2062635504.py", line 13, in <cell line: 0>
+    if MODE=='real':SPI=Student(BUNDLE,'cuda:0')
+  File "/kaggle/working/experiments/image_pool/runs/20261030T130620Z/source_snapshot/experiments/image_pool/student.py", line 91, in __init__
+    self.core,self.projection,self.processor,self.identity=load_encoder(self.bundle['encoder'],device,pinned_identity=identity)
+  File "/kaggle/working/experiments/image_pool/runs/20261030T130620Z/source_snapshot/experiments/spi_classifier_repair/medic_campaign.py", line 122, in load_encoder
+    complete=AutoModel.from_pretrained(path,local_files_only=True).eval()
+  File "/usr/local/lib/python3.13/dist-packages/transformers/models/auto/auto_factory.py", line 387, in from_pretrained
+    return model_class.from_pretrained(
+  File "/usr/local/lib/python3.13/dist-packages/transformers/modeling_utils.py", line 4133, in from_pretrained
+    loading_info = cls._finalize_model_loading(model, load_config, loading_info)
+  File "/usr/local/lib/python3.13/dist-packages/transformers/modeling_utils.py", line 4295, in _finalize_model_loading
+    log_state_dict_report(
+  File "/usr/local/lib/python3.13/dist-packages/transformers/utils/loading_report.py", line 269, in log_state_dict_report
+    logger.warning(prelude + report)
+Message: '\x1b[1mCLIPModel LOAD REPORT\x1b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\nKey                                  | Status     |  | \n-------------------------------------+------------+--+-\nvision_model.embeddings.position_ids | UNEXPECTED |  | \ntext_model.embeddings.position_ids   | UNEXPECTED |  | \n\nNotes:\n- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.'
+Arguments: ()
+SPI CACHE 25 / 6000
+SPI CACHE 50 / 6000
+SPI CACHE 75 / 6000
+SPI CACHE 100 / 6000
+SPI CACHE 125 / 6000
+SPI CACHE 150 / 6000
+SPI CACHE 175 / 6000
+SPI CACHE 200 / 6000
+SPI CACHE 225 / 6000
+SPI CACHE 250 / 6000
+SPI CACHE 275 / 6000
+SPI CACHE 300 / 6000
+SPI CACHE 325 / 6000
+SPI CACHE 350 / 6000
+SPI CACHE 375 / 6000
+SPI CACHE 400 / 6000
+SPI CACHE 425 / 6000
+SPI CACHE 450 / 6000
+SPI CACHE 475 / 6000
+SPI CACHE 500 / 6000
+SPI CACHE 525 / 6000
+SPI CACHE 550 / 6000
+SPI CACHE 575 / 6000
+SPI CACHE 600 / 6000
+SPI CACHE 625 / 6000
+SPI CACHE 650 / 6000
+SPI CACHE 675 / 6000
+SPI CACHE 700 / 6000
+SPI CACHE 725 / 6000
+SPI CACHE 750 / 6000
+SPI CACHE 775 / 6000
+SPI CACHE 800 / 6000
+SPI CACHE 825 / 6000
+SPI CACHE 850 / 6000
+SPI CACHE 875 / 6000
+SPI CACHE 900 / 6000
+SPI CACHE 925 / 6000
+SPI CACHE 950 / 6000
+SPI CACHE 975 / 6000
+SPI CACHE 1000 / 6000
+SPI CACHE 1025 / 6000
+SPI CACHE 1050 / 6000
+SPI CACHE 1075 / 6000
+SPI CACHE 1100 / 6000
+SPI CACHE 1125 / 6000
+SPI CACHE 1150 / 6000
+SPI CACHE 1175 / 6000
+SPI CACHE 1200 / 6000
+SPI CACHE 1225 / 6000
+SPI CACHE 1250 / 6000
+SPI CACHE 1275 / 6000
+SPI CACHE 1300 / 6000
+SPI CACHE 1325 / 6000
+SPI CACHE 1350 / 6000
+SPI CACHE 1375 / 6000
+SPI CACHE 1400 / 6000
+SPI CACHE 1425 / 6000
+SPI CACHE 1450 / 6000
+SPI CACHE 1475 / 6000
+SPI CACHE 1500 / 6000
+SPI CACHE 1525 / 6000
+SPI CACHE 1550 / 6000
+SPI CACHE 1575 / 6000
+SPI CACHE 1600 / 6000
+SPI CACHE 1625 / 6000
+SPI CACHE 1650 / 6000
+SPI CACHE 1675 / 6000
+SPI CACHE 1700 / 6000
+SPI CACHE 1725 / 6000
+SPI CACHE 1750 / 6000
+SPI CACHE 1775 / 6000
+SPI CACHE 1800 / 6000
+SPI CACHE 1825 / 6000
+SPI CACHE 1850 / 6000
+SPI CACHE 1875 / 6000
+SPI CACHE 1900 / 6000
+SPI CACHE 1925 / 6000
+SPI CACHE 1950 / 6000
+SPI CACHE 1975 / 6000
+SPI CACHE 2000 / 6000
+SPI CACHE 2025 / 6000
+SPI CACHE 2050 / 6000
+SPI CACHE 2075 / 6000
+SPI CACHE 2100 / 6000
+SPI CACHE 2125 / 6000
+SPI CACHE 2150 / 6000
+SPI CACHE 2175 / 6000
+SPI CACHE 2200 / 6000
+SPI CACHE 2225 / 6000
+SPI CACHE 2250 / 6000
+SPI CACHE 2275 / 6000
+SPI CACHE 2300 / 6000
+SPI CACHE 2325 / 6000
+SPI CACHE 2350 / 6000
+SPI CACHE 2375 / 6000
+SPI CACHE 2400 / 6000
+SPI CACHE 2425 / 6000
+SPI CACHE 2450 / 6000
+SPI CACHE 2475 / 6000
+SPI CACHE 2500 / 6000
+SPI CACHE 2525 / 6000
+SPI CACHE 2550 / 6000
+SPI CACHE 2575 / 6000
+SPI CACHE 2600 / 6000
+SPI CACHE 2625 / 6000
+SPI CACHE 2650 / 6000
+SPI CACHE 2675 / 6000
+SPI CACHE 2700 / 6000
+SPI CACHE 2725 / 6000
+SPI CACHE 2750 / 6000
+SPI CACHE 2775 / 6000
+SPI CACHE 2800 / 6000
+SPI CACHE 2825 / 6000
+SPI CACHE 2850 / 6000
+SPI CACHE 2875 / 6000
+SPI CACHE 2900 / 6000
+SPI CACHE 2925 / 6000
+SPI CACHE 2950 / 6000
+SPI CACHE 2975 / 6000
+SPI CACHE 3000 / 6000
+SPI CACHE 3025 / 6000
+SPI CACHE 3050 / 6000
+SPI CACHE 3075 / 6000
+SPI CACHE 3100 / 6000
+SPI CACHE 3125 / 6000
+SPI CACHE 3150 / 6000
+SPI CACHE 3175 / 6000
+SPI CACHE 3200 / 6000
+SPI CACHE 3225 / 6000
+SPI CACHE 3250 / 6000
+SPI CACHE 3275 / 6000
+SPI CACHE 3300 / 6000
+SPI CACHE 3325 / 6000
+SPI CACHE 3350 / 6000
+SPI CACHE 3375 / 6000
+SPI CACHE 3400 / 6000
+SPI CACHE 3425 / 6000
+SPI CACHE 3450 / 6000
+SPI CACHE 3475 / 6000
+SPI CACHE 3500 / 6000
+SPI CACHE 3525 / 6000
+SPI CACHE 3550 / 6000
+SPI CACHE 3575 / 6000
+SPI CACHE 3600 / 6000
+SPI CACHE 3625 / 6000
+SPI CACHE 3650 / 6000
+SPI CACHE 3675 / 6000
+SPI CACHE 3700 / 6000
+SPI CACHE 3725 / 6000
+SPI CACHE 3750 / 6000
+SPI CACHE 3775 / 6000
+SPI CACHE 3800 / 6000
+SPI CACHE 3825 / 6000
+SPI CACHE 3850 / 6000
+SPI CACHE 3875 / 6000
+SPI CACHE 3900 / 6000
+SPI CACHE 3925 / 6000
+SPI CACHE 3950 / 6000
+SPI CACHE 3975 / 6000
+SPI CACHE 4000 / 6000
+SPI CACHE 4025 / 6000
+SPI CACHE 4050 / 6000
+SPI CACHE 4075 / 6000
+SPI CACHE 4100 / 6000
+SPI CACHE 4125 / 6000
+SPI CACHE 4150 / 6000
+SPI CACHE 4175 / 6000
+SPI CACHE 4200 / 6000
+SPI CACHE 4225 / 6000
+SPI CACHE 4250 / 6000
+SPI CACHE 4275 / 6000
+SPI CACHE 4300 / 6000
+SPI CACHE 4325 / 6000
+SPI CACHE 4350 / 6000
+SPI CACHE 4375 / 6000
+SPI CACHE 4400 / 6000
+SPI CACHE 4425 / 6000
+SPI CACHE 4450 / 6000
+SPI CACHE 4475 / 6000
+SPI CACHE 4500 / 6000
+SPI CACHE 4525 / 6000
+SPI CACHE 4550 / 6000
+SPI CACHE 4575 / 6000
+SPI CACHE 4600 / 6000
+SPI CACHE 4625 / 6000
+SPI CACHE 4650 / 6000
+SPI CACHE 4675 / 6000
+SPI CACHE 4700 / 6000
+SPI CACHE 4725 / 6000
+SPI CACHE 4750 / 6000
+SPI CACHE 4775 / 6000
+SPI CACHE 4800 / 6000
+SPI CACHE 4825 / 6000
+SPI CACHE 4850 / 6000
+SPI CACHE 4875 / 6000
+SPI CACHE 4900 / 6000
+SPI CACHE 4925 / 6000
+SPI CACHE 4950 / 6000
+SPI CACHE 4975 / 6000
+SPI CACHE 5000 / 6000
+SPI CACHE 5025 / 6000
+SPI CACHE 5050 / 6000
+SPI CACHE 5075 / 6000
+SPI CACHE 5100 / 6000
+SPI CACHE 5125 / 6000
+SPI CACHE 5150 / 6000
+SPI CACHE 5175 / 6000
+SPI CACHE 5200 / 6000
+SPI CACHE 5225 / 6000
+SPI CACHE 5250 / 6000
+SPI CACHE 5275 / 6000
+SPI CACHE 5300 / 6000
+SPI CACHE 5325 / 6000
+SPI CACHE 5350 / 6000
+SPI CACHE 5375 / 6000
+SPI CACHE 5400 / 6000
+SPI CACHE 5425 / 6000
+SPI CACHE 5450 / 6000
+SPI CACHE 5475 / 6000
+SPI CACHE 5500 / 6000
+SPI CACHE 5525 / 6000
+SPI CACHE 5550 / 6000
+SPI CACHE 5575 / 6000
+SPI CACHE 5600 / 6000
+SPI CACHE 5625 / 6000
+SPI CACHE 5650 / 6000
+SPI CACHE 5675 / 6000
+SPI CACHE 5700 / 6000
+SPI CACHE 5725 / 6000
+SPI CACHE 5750 / 6000
+SPI CACHE 5775 / 6000
+SPI CACHE 5800 / 6000
+SPI CACHE 5825 / 6000
+SPI CACHE 5850 / 6000
+SPI CACHE 5875 / 6000
+SPI CACHE 5900 / 6000
+SPI CACHE 5925 / 6000
+SPI CACHE 5950 / 6000
+SPI CACHE 5975 / 6000
+SPI CACHE 6000 / 6000
+END {'stage': '05_spi_cache', 'status': 'complete', 'seconds': 178.570927837}

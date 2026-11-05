@@ -1,0 +1,123 @@
+{
+  "model": "grounding_dino",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 1,
+      "categories": 1,
+      "largest_box_fraction": 0.16011549543577197,
+      "union_box_coverage": 0.16011549543577197
+    },
+    "people_vehicles": {
+      "instances": 2,
+      "categories": 1,
+      "largest_box_fraction": 0.0003788455794319896,
+      "union_box_coverage": 0.0006569918806059333
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "bridge",
+      "box": [
+        0.2346649169921875,
+        186.79379272460938,
+        511.94525146484375,
+        241.42405700683594
+      ],
+      "score": 0.47109150886535645
+    },
+    {
+      "label": "car",
+      "box": [
+        23.52139663696289,
+        197.77479553222656,
+        34.28947067260742,
+        203.91734313964844
+      ],
+      "score": 0.40037801861763
+    },
+    {
+      "label": "car",
+      "box": [
+        19.01020622253418,
+        206.5979766845703,
+        29.07423210144043,
+        211.4232940673828
+      ],
+      "score": 0.3779946565628052
+    }
+  ],
+  "values": {
+    "instances": 3,
+    "categories": 2,
+    "largest_box_fraction": 0.16011549543577197,
+    "union_box_coverage": 0.16011549543577197
+  },
+  "audit": {
+    "category_counts": {
+      "bridge": 1,
+      "car": 2
+    },
+    "detections": [
+      {
+        "label": "bridge",
+        "box": [
+          0.2346649169921875,
+          186.79379272460938,
+          511.94525146484375,
+          241.42405700683594
+        ],
+        "score": 0.47109150886535645
+      },
+      {
+        "label": "car",
+        "box": [
+          23.52139663696289,
+          197.77479553222656,
+          34.28947067260742,
+          203.91734313964844
+        ],
+        "score": 0.40037801861763
+      },
+      {
+        "label": "car",
+        "box": [
+          19.01020622253418,
+          206.5979766845703,
+          29.07423210144043,
+          211.4232940673828
+        ],
+        "score": 0.3779946565628052
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 341,
+    "producer": {
+      "producer": "grounding_dino",
+      "vocabulary": [
+        "bridge",
+        "car"
+      ],
+      "threshold": 0.35,
+      "text_threshold": 0.25,
+      "weights_sha256": {
+        "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+      },
+      "device": "cpu",
+      "interpretation": "box/text matching, not verified condition or priority",
+      "class_aware_nms_iou": 0.5,
+      "max_detections": 300,
+      "category_scope": "retained text phrases; no inferred urgency or merged taxonomy"
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency",
+    "raw_proposals": 3
+  },
+  "load_seconds": 18.307257799897343,
+  "first_inference_seconds": 41.91673610010184,
+  "warmed_latency": false,
+  "image_sha256": "08aa7a5dba89682a0d3c42cf03bd654c1fdbfbc7a24dc0dda50ba2d364e25df3",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

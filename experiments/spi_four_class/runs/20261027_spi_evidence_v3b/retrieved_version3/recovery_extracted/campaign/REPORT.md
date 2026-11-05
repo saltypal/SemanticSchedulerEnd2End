@@ -1,0 +1,11 @@
+# Four-class SPI campaign
+
+{
+  "status": "four_class_support_failed",
+  "four_class_model": false,
+  "independent_urgency_validation": false,
+  "reason": "do not invent/remove classes; inspect support by class/group",
+  "labelled_images": 300
+}
+
+Labels and validation describe teacher agreement, not independent urgency accuracy.

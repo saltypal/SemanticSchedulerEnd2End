@@ -1,0 +1,11 @@
+{
+  "id": "ladi_image_claim_consistency_v2",
+  "scope": "Explicit consistency assumptions for the optional aerial image classifier; not universal ground truth",
+  "rules": [
+    {"id": "affected-building-present", "if": ["building.affected_or_greater", true], "then": ["building.present", true]},
+    {"id": "minor-building-present", "if": ["building.minor_or_greater", true], "then": ["building.present", true]},
+    {"id": "flooded-building-present", "if": ["building.flooded", true], "then": ["building.present", true]},
+    {"id": "damaged-road-present", "if": ["road.damaged", true], "then": ["road.present", true]},
+    {"id": "damaged-tree-present", "if": ["tree.damaged", true], "then": ["tree.present", true]}
+  ]
+}

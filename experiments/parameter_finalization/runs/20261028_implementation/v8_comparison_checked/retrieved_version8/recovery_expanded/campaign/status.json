@@ -1,0 +1,184 @@
+{
+  "status": "comparison_complete",
+  "training_allowed": false,
+  "runtime_promotion_allowed": false,
+  "candidates": [
+    {
+      "name": "gemma4_e4b",
+      "status": "complete",
+      "text_controls": {
+        "passed": false,
+        "n": 48,
+        "valid_fraction": 1.0,
+        "macro_f1": 0.6454954954954956,
+        "critical_to_low_medium": 0.0,
+        "per_class": {
+          "Low": {
+            "support": 12,
+            "recall": 1.0
+          },
+          "Medium": {
+            "support": 12,
+            "recall": 0.08333333333333333
+          },
+          "High": {
+            "support": 12,
+            "recall": 0.6666666666666666
+          },
+          "Critical": {
+            "support": 12,
+            "recall": 1.0
+          }
+        },
+        "scope": "authored text policy conformance; not image urgency accuracy"
+      },
+      "visual_valid": 24,
+      "n": 24,
+      "median_wall_seconds": 0.7219846849999954,
+      "visual_accuracy": null,
+      "independent_reference": false
+    },
+    {
+      "name": "qwen35_9b",
+      "status": "complete",
+      "text_controls": {
+        "passed": true,
+        "n": 48,
+        "valid_fraction": 1.0,
+        "macro_f1": 0.9163752913752914,
+        "critical_to_low_medium": 0.0,
+        "per_class": {
+          "Low": {
+            "support": 12,
+            "recall": 1.0
+          },
+          "Medium": {
+            "support": 12,
+            "recall": 0.8333333333333334
+          },
+          "High": {
+            "support": 12,
+            "recall": 0.8333333333333334
+          },
+          "Critical": {
+            "support": 12,
+            "recall": 1.0
+          }
+        },
+        "scope": "authored text policy conformance; not image urgency accuracy"
+      },
+      "visual_valid": 24,
+      "n": 24,
+      "median_wall_seconds": 1.1246144579999964,
+      "visual_accuracy": null,
+      "independent_reference": false
+    },
+    {
+      "name": "qwen3vl_8b",
+      "status": "complete",
+      "text_controls": {
+        "passed": false,
+        "n": 48,
+        "valid_fraction": 1.0,
+        "macro_f1": 0.6931372549019608,
+        "critical_to_low_medium": 0.0,
+        "per_class": {
+          "Low": {
+            "support": 12,
+            "recall": 1.0
+          },
+          "Medium": {
+            "support": 12,
+            "recall": 0.3333333333333333
+          },
+          "High": {
+            "support": 12,
+            "recall": 0.5
+          },
+          "Critical": {
+            "support": 12,
+            "recall": 1.0
+          }
+        },
+        "scope": "authored text policy conformance; not image urgency accuracy"
+      },
+      "visual_valid": 24,
+      "n": 24,
+      "median_wall_seconds": 0.8419960784999603,
+      "visual_accuracy": null,
+      "independent_reference": false
+    },
+    {
+      "name": "qwen25_7b",
+      "status": "complete",
+      "text_controls": {
+        "passed": false,
+        "n": 48,
+        "valid_fraction": 1.0,
+        "macro_f1": 0.5952731092436975,
+        "critical_to_low_medium": 0.0,
+        "per_class": {
+          "Low": {
+            "support": 12,
+            "recall": 1.0
+          },
+          "Medium": {
+            "support": 12,
+            "recall": 0.16666666666666666
+          },
+          "High": {
+            "support": 12,
+            "recall": 0.4166666666666667
+          },
+          "Critical": {
+            "support": 12,
+            "recall": 1.0
+          }
+        },
+        "scope": "authored text policy conformance; not image urgency accuracy"
+      },
+      "visual_valid": 24,
+      "n": 24,
+      "median_wall_seconds": 0.8300634115000776,
+      "visual_accuracy": null,
+      "independent_reference": false
+    },
+    {
+      "name": "internvl3_8b",
+      "status": "complete",
+      "text_controls": {
+        "passed": false,
+        "n": 48,
+        "valid_fraction": 1.0,
+        "macro_f1": 0.7370588235294118,
+        "critical_to_low_medium": 0.0,
+        "per_class": {
+          "Low": {
+            "support": 12,
+            "recall": 1.0
+          },
+          "Medium": {
+            "support": 12,
+            "recall": 0.5833333333333334
+          },
+          "High": {
+            "support": 12,
+            "recall": 0.4166666666666667
+          },
+          "Critical": {
+            "support": 12,
+            "recall": 1.0
+          }
+        },
+        "scope": "authored text policy conformance; not image urgency accuracy"
+      },
+      "visual_valid": 24,
+      "n": 24,
+      "median_wall_seconds": 3.1521280754999452,
+      "visual_accuracy": null,
+      "independent_reference": false
+    }
+  ],
+  "selection": "pending claim-level review; labels are not ground truth",
+  "flops_status": "not_instrumented"
+}

@@ -17,13 +17,13 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from INFRA.class_priority_profiles import PRESENTATION_UE_PROFILES, validate_manifest_rubric
-from INFRA.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
-from INFRA.data.ladi_manifest import validate_ladi_manifest
-from INFRA.learning.dqn_training import DQNConfig, train_dqn
-from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
-from INFRA.scheduling.semantic_contracts import ResourceBudgetSemantic
-from INFRA.scheduling.streams import generate_episode_suite
+from Evaluation.class_priority_profiles import PRESENTATION_UE_PROFILES, validate_manifest_rubric
+from Evaluation.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
+from Evaluation.data.ladi_manifest import validate_ladi_manifest
+from Scheduler.training.dqn_training import DQNConfig, train_dqn
+from Evaluation.semantic_config import load_scheduler_config, load_ue_profiles
+from Evaluation.scheduling.semantic_contracts import ResourceBudgetSemantic
+from Evaluation.scheduling.streams import generate_episode_suite
 from evaluate_downloaded_scheduler import DEFAULT_MANIFEST, DEFAULT_RUN, check_manifest_match, file_sha256
 
 
@@ -51,10 +51,10 @@ def main() -> None:
 
     reviewed = validate_ladi_manifest(manifest_path, require_reviewed=True)
     validate_manifest_rubric(reviewed)
-    configured_profiles = load_ue_profiles(ROOT / "INFRA/config/ue_profiles.yaml")
+    configured_profiles = load_ue_profiles(ROOT / "Evaluation/config/ue_profiles.yaml")
     if tuple(configured_profiles) != PRESENTATION_UE_PROFILES:
         raise ValueError("Python UE profiles differ from the active YAML configuration")
-    config = load_scheduler_config(ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
+    config = load_scheduler_config(ROOT / "Evaluation/config/semantic_scheduler_dynamic260.yaml")
     catalogue = load_catalog(manifest_path, run_root / "feature_cache.jsonl",
                              run_root / "payload_costs.csv")
     split = {row["image_id"]: row["split"] for row in reviewed}
@@ -91,7 +91,7 @@ def main() -> None:
         "resource_unit": source_run["resource_unit"],
         "deadline_mode": config.deadline_mode,
         "validation_stream_seed": 3001,
-        "class_rubric": "INFRA.class_priority_profiles.CLASS_RUBRIC",
+        "class_rubric": "Evaluation.class_priority_profiles.CLASS_RUBRIC",
         "note": "Rubric-assisted class-order objective; labels hidden from model state.",
     }
     output.mkdir(parents=True, exist_ok=True)

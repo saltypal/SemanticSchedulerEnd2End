@@ -1,0 +1,57 @@
+{
+  "scope": "Static document regression/consistency; not model validation",
+  "old_registry_ids": [
+    "deepsets_ranknet",
+    "delay_huber",
+    "lambdamart",
+    "linear_choice",
+    "listmle",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "ranknet_warmstart_ppo",
+    "rl_vlm_f",
+    "set_transformer_ranknet",
+    "td_per",
+    "visionprefer",
+    "vlm_replay"
+  ],
+  "new_registry_ids": [
+    "deepsets_ranknet",
+    "delay_huber",
+    "lambdamart",
+    "linear_choice",
+    "listmle",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "ranknet_warmstart_ppo",
+    "rl_vlm_f",
+    "set_transformer_ranknet",
+    "td_per",
+    "temporal_deepsets_ranknet",
+    "visionprefer",
+    "vlm_replay"
+  ],
+  "all_sixteen_retained": true,
+  "new_ids": [
+    "temporal_deepsets_ranknet"
+  ],
+  "D_E_PER_equations_preserved": true,
+  "teacher_call_sum": 216,
+  "producer_sources_unchanged": {
+    "parameters/scene_arrays.py": true,
+    "parameters/scene_vocabulary.py": true
+  },
+  "final_document_sha256": "c60f10f4b792cb7c9065a6b24e1ad7531d5ad0a19814ff9a4ea2c29aa05e9752",
+  "review_findings_fixed_by_main": {
+    "same_context": "PAIR_VIEW restricts queue, processed and UE pools; deployment generalization explicit",
+    "extra_teacher_ablation": "omitted; student ablations reuse labels"
+  },
+  "reviewer_recheck": "not completed; selected model at capacity; main static check used",
+  "P_choice_loss_clarification": "two-way CE with teacher target [t,1-t] equals pair BCE; D choice targets unchanged"
+}

@@ -1,0 +1,60 @@
+{
+  "feature_signature": "105485efb3f14d80514f39138c3310714dfdbee850291a8f4e76551df5e5f065",
+  "scene": {
+    "category_counts": {},
+    "detections": [],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 341,
+    "producer": {
+      "checkpoint": "/kaggle/working/project/models/yolov8s-worldv2.pt",
+      "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+      "device": "cuda:0",
+      "vocabulary": [
+        "building",
+        "road",
+        "person",
+        "car",
+        "truck",
+        "bus",
+        "motorcycle",
+        "bicycle",
+        "debris",
+        "chair",
+        "couch",
+        "dining table",
+        "television",
+        "refrigerator",
+        "tree",
+        "water"
+      ],
+      "settings": {
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "verbose": false
+      },
+      "settings_sha256": "e6de57b29ac266ce7a80f7e09dd5319325367c105ff2c4d1d27291b11f871312",
+      "effective_predict_settings": {
+        "task": "detect",
+        "mode": "predict",
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "rect": true,
+        "batch": 1,
+        "device": "cuda:0"
+      }
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency"
+  },
+  "status": "passed"
+}

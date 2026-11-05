@@ -1,0 +1,101 @@
+{
+  "protocol": "scene_v2_offline_v1",
+  "upstream_identity": {
+    "manifest.json": "40136fa19e207fa5f7072565e1b3ae9532ea4f43926dabe0849569c650a3bc3a",
+    "checksums.json": "b2b104a9a847d2c4a0f46b5134ee6166777a15cd495fabe7defda70e78323afd"
+  },
+  "ontology": {
+    "id": "ladi_image_claim_consistency_v2",
+    "scope": "Explicit consistency assumptions for the optional aerial image classifier; not universal ground truth",
+    "rules": [
+      {
+        "id": "affected-building-present",
+        "if": [
+          "building.affected_or_greater",
+          true
+        ],
+        "then": [
+          "building.present",
+          true
+        ]
+      },
+      {
+        "id": "minor-building-present",
+        "if": [
+          "building.minor_or_greater",
+          true
+        ],
+        "then": [
+          "building.present",
+          true
+        ]
+      },
+      {
+        "id": "flooded-building-present",
+        "if": [
+          "building.flooded",
+          true
+        ],
+        "then": [
+          "building.present",
+          true
+        ]
+      },
+      {
+        "id": "damaged-road-present",
+        "if": [
+          "road.damaged",
+          true
+        ],
+        "then": [
+          "road.present",
+          true
+        ]
+      },
+      {
+        "id": "damaged-tree-present",
+        "if": [
+          "tree.damaged",
+          true
+        ],
+        "then": [
+          "tree.present",
+          true
+        ]
+      }
+    ]
+  },
+  "parent_images": 6,
+  "planned_calls": 44,
+  "model": {
+    "model_id": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "family": "qwen3_5",
+    "precision": "NF4 with FP16 compute",
+    "transformers": "5.3.0",
+    "accelerate": "1.12.0",
+    "bitsandbytes": "0.49.2"
+  },
+  "limits": {
+    "server_seconds": 1800,
+    "internal_seconds": 1650,
+    "maximum_aggregate_gpu_hours": 1
+  },
+  "review_settings": {
+    "max_new_tokens": 512,
+    "max_pixels": 262144,
+    "image_max_side": 512,
+    "prompt_variant": "scene_v2_offline_v1",
+    "claim_scope": "mission",
+    "enable_thinking": false
+  },
+  "operator_policy": {
+    "id": "synthetic_inspection_response_v1",
+    "scope": "engineering policy-following control; not validated emergency urgency",
+    "action": "submit observation for operator inspection triage",
+    "maximum_evidence_age_ms": 300000,
+    "affected_response_window_ms": 1800000,
+    "unaffected_response_window_ms": 86400000,
+    "rules": "Need trusted evidence age. If building absent, no action. If present, need affected condition. Recent affected evidence: 1800000ms; recent unaffected evidence: 86400000ms. Missing, untrusted or stale evidence: urgency indeterminate, not automatically low."
+  }
+}

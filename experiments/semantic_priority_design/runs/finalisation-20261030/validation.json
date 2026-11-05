@@ -1,0 +1,51 @@
+{
+  "scope": "Design/documentation plus independent numerical experiment only",
+  "plan_sha256": "9A2EE1BEA46FCA2A27EE60CF21BBF00E68755C834E97FA7F1367F8F76F9DE1BE",
+  "script_sha256": "0C1CF2F4A6B679083BD05DEFDA0F4C17A0A09E9FC210F368576DA8DA582DD621",
+  "numerical_status": "passed",
+  "exhaustive_cases": 6561,
+  "fractional_cases": 100,
+  "max_greedy_exact_gap": 0.0,
+  "requirements": [
+    {
+      "phrase": "no learned WAIT",
+      "present": true
+    },
+    {
+      "phrase": "receiver-history-derived learned features",
+      "present": true
+    },
+    {
+      "phrase": "Unknown-reference observations remain",
+      "present": true
+    },
+    {
+      "phrase": "negative interval cost",
+      "present": true
+    },
+    {
+      "phrase": "RankNet",
+      "present": true
+    },
+    {
+      "phrase": "216 teacher-call",
+      "present": true
+    },
+    {
+      "phrase": "one-shot",
+      "present": true
+    },
+    {
+      "phrase": "6,561",
+      "present": true
+    }
+  ],
+  "assessment": "REVIEW.md; two findings accepted and corrected",
+  "not_executed": [
+    "new production queue-wait evaluator",
+    "model training",
+    "VLM teacher",
+    "GPU/Kaggle",
+    "codec inference"
+  ]
+}

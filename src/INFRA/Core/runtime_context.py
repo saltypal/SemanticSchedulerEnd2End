@@ -1,10 +1,10 @@
-"""Compatibility import; use INFRA.Core.runtime_context."""
+"""Compatibility import; use Evaluation.Core.runtime_context."""
 import importlib as _importlib
 import sys as _sys
 from pathlib import Path as _Path
 _root = _Path(__file__).resolve().parents[3]
 if str(_root) not in _sys.path:
     _sys.path.insert(0, str(_root))
-_target = _importlib.import_module('INFRA.Core.runtime_context')
+_target = _importlib.import_module('Evaluation.Core.runtime_context')
 
 _sys.modules[__name__] = _target

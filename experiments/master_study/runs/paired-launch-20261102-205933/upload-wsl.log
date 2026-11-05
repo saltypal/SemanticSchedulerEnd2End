@@ -1,0 +1,15 @@
+2026-11-02T15:38:59.408Z shared cache dataset upload progress 100%.
+2026-11-02T21:2x IST: Initial `kaggle datasets create --dir-mode tar` on /home/Satya/paired_sqgan_bundle_20261102 failed with repeated EIO while making SQ-GAN.tar; D: had only 6.7 MB free after WSL vhdx growth. Freed only staging hardlinks under this launch run (source archive preserved; D: recovered ~948 MB). Confirmed copied last.pt SHA256 equals original 706396402d86e84276393ce3fe39f0b0b1b545ff024c0ecae3b8ab72d22f3d6d. Repacked exact run as single SQ-GAN.tar in WSL /tmp and started direct upload; session 23536, active at ~1% at last poll. Dataset ID satyapaladuguplus/semantic-scheduler-sqgan-bundle-20261102. Expected remote extracted path SQ-GAN/20261028T130100Z-eea4f3aa/...; verify listing before attaching.
+2026-11-02T21:18:13.9625344+05:30 Current local status: SQ-GAN single-file dataset upload in progress; prior line's 21:2x was shorthand, not a measured exact timestamp.
+2026-11-02T21:18:50.3337333+05:30 WSL SQ-GAN.tar upload progress observed 142 MB/2.30 GiB (~6%); dataset creation still active.
+2026-11-02T21:19:32.2941691+05:30 WSL bundle upload now 13% (about 300 MiB of 2.30 GiB).
+2026-11-02T21:24:53.6701695+05:30 WSL SQ-GAN.tar upload progress observed 63% (~1.45 GiB of 2.30 GiB).
+2026-11-02T21:35 IST: Flat direct datasets-version process PID 435 still running ~1m07s after launch; status endpoint/list still show previous corrupt v1 until upload completes. No duplicate issued. D: free 935,960,576 bytes.
+2026-11-02T21:40 IST: flat dataset version upload active at PID 435; `/proc/435/fd/3` is the verified hardlink `f015_last.pt`, fd read position 246,022,144 bytes (local bytes read, not guaranteed server-committed). Kaggle listing remains previous v1. Do not interrupt.
+2026-11-02T21:44 IST: upload PID 435 still active; last.pt source read position 571,867,136 bytes at 05:51 elapsed. This is local read progress only, not remote confirmation.
+2026-11-02T21:49 IST: upload PID 435 active at 06:41 elapsed; source read position on f015_last.pt 755,499,008 bytes. D: free 935,309,312 bytes. This does not prove remote receipt.
+2026-11-02T21:52 IST: upload PID 435 active at 07:09 elapsed; source read position on f015_last.pt 893,648,896 bytes (~38.2% of source file). Local-read progress only; no remote version confirmation.
+2026-11-02T22:00 IST: upload PID 435 active at 08:01 elapsed; last.pt source read position 1,160,773,632 bytes (~49.6% of source file). No remote commit confirmed.
+2026-11-02T22:03 IST: upload PID 435 active at 08:44 elapsed; last.pt source read position 1,389,232,128 bytes (~59.3%). Local read position only.
+2026-11-02T22:04 IST: upload PID 435 active at 09:16 elapsed; last.pt source read position 1,558,970,368 bytes (~66.6%).
+2026-11-02T22:18 IST: upload PID 435 at 10:31 elapsed; last.pt source read position 1,896,611,840 bytes (~81.0%). Cause of prior corrupt copy remains unproven; verified original untouched and current flat hardlinks avoid an extra large copy.

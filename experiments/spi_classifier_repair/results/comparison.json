@@ -1,0 +1,25 @@
+{
+  "baseline_v13": {
+    "macro_f1": 0.46370801725683597,
+    "accuracy": 0.5104166666666666,
+    "recall": {
+      "Low": 0.5348837209302325,
+      "Medium": 0.625,
+      "High": 0.42105263157894735,
+      "Critical": 0.7142857142857143
+    }
+  },
+  "efficientnet_v15": {
+    "macro_f1": 0.44622352379306,
+    "accuracy": 0.5416666666666666,
+    "recall": {
+      "Low": 0.5581395348837209,
+      "Medium": 0.375,
+      "High": 0.5789473684210527,
+      "Critical": 0.42857142857142855
+    }
+  },
+  "source": "v13 verified validation and v15 verified 20-file recovery archive",
+  "decision": "retain baseline; neither passes readiness; no promotion",
+  "validation_role": "exposed development, not final test"
+}

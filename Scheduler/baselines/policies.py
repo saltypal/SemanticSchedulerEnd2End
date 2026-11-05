@@ -1,5 +1,5 @@
-"""Deterministic nonpreemptive policies. Queue mutation belongs to INFRA."""
-from INFRA.scheduling.contracts import Decision, QueueSnapshot, ResourceBudget
+"""Deterministic nonpreemptive policies. Queue mutation belongs to Evaluation."""
+from Evaluation.scheduling.contracts import Decision, QueueSnapshot, ResourceBudget
 
 POLICIES = (
     'fifo',
@@ -76,7 +76,7 @@ class BaselinePolicy:
 
 
 def create_policy(name, **options):
-    """Create a legacy INFRA policy.
+    """Create a legacy Evaluation policy.
 
     Semantic scheduling policies use :func:`Scheduler.policy_registry.create_semantic_policy`.
     Keeping this factory preserves the original ``QueueSnapshot`` contract.

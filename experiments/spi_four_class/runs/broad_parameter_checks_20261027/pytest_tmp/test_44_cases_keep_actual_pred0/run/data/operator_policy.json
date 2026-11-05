@@ -1,0 +1,9 @@
+{
+  "id": "synthetic_inspection_response_v1",
+  "scope": "engineering policy-following control; not validated emergency urgency",
+  "action": "submit observation for operator inspection triage",
+  "maximum_evidence_age_ms": 300000,
+  "affected_response_window_ms": 1800000,
+  "unaffected_response_window_ms": 86400000,
+  "rules": "Need trusted evidence age. If building absent, no action. If present, need affected condition. Recent affected evidence: 1800000ms; recent unaffected evidence: 86400000ms. Missing, untrusted or stale evidence: urgency indeterminate, not automatically low."
+}

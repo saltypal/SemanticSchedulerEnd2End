@@ -1,0 +1,103 @@
+{
+  "static": {
+    "image_id": "4",
+    "image_sha256": "ad91fc7c9269fc89b3e31b50f807f187adb1131c8816f9bdf19e02246529b745",
+    "feature_signature": "4ba75c9ba701fe0a3206600535a8db42003232343353927351dc6f503a51d287",
+    "spi": {
+      "available": true,
+      "level": "Low",
+      "ordinal_index": 0,
+      "output_index": 0,
+      "supported_levels": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "scheduling_class": 3,
+      "scores": {
+        "Low": 0.9989946484565735,
+        "Medium": 0.0003351253690198064,
+        "High": 0.0003351253690198064,
+        "Critical": 0.0003351253690198064
+      },
+      "score_interpretation": "student model scores; not human-calibrated urgency",
+      "rubric_sha256": "synthetic_fixture_only",
+      "model_sha256": "4f01168f9d2443d610d53a251cf0bc0343ab917550e7e256a1377754f202ae8c"
+    },
+    "scene": {
+      "instances": 1,
+      "categories": 1,
+      "largest_box_fraction": 0.25,
+      "union_box_coverage": 0.25
+    },
+    "scene_status": "ok",
+    "scene_reason": null,
+    "scene_audit": {
+      "category_counts": {
+        "object": 1
+      },
+      "detections": [
+        {
+          "label": "object",
+          "box": [
+            0.0,
+            0.0,
+            8.0,
+            8.0
+          ],
+          "score": 0.9
+        }
+      ],
+      "rejected_boxes": 0,
+      "width": 16,
+      "height": 16,
+      "producer": {},
+      "interpretation": "detector-dependent rectangular extents, not physical distance or urgency"
+    }
+  },
+  "timing": {
+    "image_id": "4",
+    "image_load_seconds": 0.0003839000128209591,
+    "visual_extract_including_preprocessing_first_mission_seconds": 0.0006656999466940761,
+    "detector_and_measurement_seconds": 6.670004222542048e-05,
+    "spi_head_seconds": 0.00022090005222707987,
+    "end_to_end_seconds": 0.0017578999977558851,
+    "flops": null,
+    "flops_status": "not_instrumented; not zero",
+    "cold_or_first_call": false
+  },
+  "streams": [
+    {
+      "image_id": "4",
+      "split": "validation",
+      "ue": "ue",
+      "mission_version": "316500172e1212bf0219f69fede53de3a427d281419016e42610c1252486f959",
+      "sequence": 0,
+      "kb_version_before": 0,
+      "kb_version_after": 1,
+      "parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_display": "Normal",
+        "spi_available": true,
+        "spi_reason": null,
+        "relevance": null,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 1,
+          "largest_box_fraction": 0.25,
+          "union_box_coverage": 0.25
+        }
+      },
+      "header_hex": "029701000100000005000000010000000000000000000000000000ff0f010001004040",
+      "header_bytes": 35,
+      "relevance_and_text_cache_seconds": 5.900044925510883e-06,
+      "bundle_head_kb_serialization_commit_seconds": 0.00026000000070780516
+    }
+  ]
+}

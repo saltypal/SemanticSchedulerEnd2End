@@ -1,0 +1,63 @@
+{
+  "schema": "medic_spi_training_v1",
+  "dataset": "MEDIC",
+  "images": 300,
+  "classes": [
+    "Low",
+    "Medium",
+    "High",
+    "Critical"
+  ],
+  "teacher": {
+    "selection_file": "parameters/config/final_labeling_teacher.json",
+    "thinking": false,
+    "student_target": "image_only",
+    "associated_text_target": "separate_offline_message_priority"
+  },
+  "encoders": {
+    "clip_b32": "openai/clip-vit-base-patch32",
+    "siglip2_b16": "google/siglip2-base-patch16-224",
+    "dino": "facebook/dinov3-vits16-pretrain-lvd1689m",
+    "dino_access_fallback": "facebook/dinov2-small",
+    "convnextv2_tiny": "facebook/convnextv2-tiny-22k-224"
+  },
+  "vector_heads": [
+    "logistic",
+    "ridge",
+    "linear_svm",
+    "rbf_svm",
+    "knn",
+    "random_forest",
+    "extra_trees",
+    "hist_boost",
+    "mlp"
+  ],
+  "token_heads": [
+    "gated_abmil",
+    "single_query_cross_attention"
+  ],
+  "token_encoders": [
+    "siglip2_b16",
+    "dino"
+  ],
+  "selection": {
+    "hyperparameters": "grouped3fold_training_only",
+    "family": "development_macro_f1",
+    "test": "locked until complete pipeline frozen; no retuning after opening"
+  },
+  "resource_metrics": [
+    "cpu_gpu_latency_p50_p95",
+    "peak_memory",
+    "deployed_bytes",
+    "forward_flops_with_coverage",
+    "training_flops_with_coverage_or_explicit_unavailable",
+    "fit_and_search_seconds"
+  ],
+  "release": {
+    "minimum_class_recall": 0.7,
+    "export_parity": 0.0001,
+    "four_classes_required": true,
+    "independent_urgency_validated": false
+  },
+  "upstream": "exact version18 MEDIC acquisition manifest; no redownload/resample or mixed LADI cohort"
+}

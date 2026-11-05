@@ -1,0 +1,126 @@
+# Hardware repair validation
+
+{
+  "cuda_channel_regression": {
+    "status": "failed",
+    "exit": 2
+  },
+  "linear_choice": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "mlp_choice": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "delay_huber": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "priority_classifier": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "deepsets_ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "set_transformer_ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "listmle": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "temporal_deepsets_ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "visionprefer": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "lambdamart": {
+    "status": "passed",
+    "device": "cpu",
+    "scope": "tree native/export parity"
+  },
+  "masked_double_dqn": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "td_per": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "rl_vlm_f": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "vlm_replay": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "masked_ppo": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 64,
+    "updates": 4
+  },
+  "ranknet_warmstart_ppo": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 64,
+    "updates": 4
+  },
+  "teacher": {
+    "status": "failed_or_partial",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "requested": 39,
+    "responses": 34,
+    "parsed_by_task": {
+      "control": 32,
+      "candidate": 2
+    },
+    "qualification": {
+      "qualified": true,
+      "schema_valid_fraction": 1.0,
+      "accuracy": {
+        "strict": 1.0,
+        "tie": 1.0,
+        "unknown": 1.0
+      },
+      "scope": "visible-person relevance/identical/blank controls; not emergency-priority ground truth"
+    },
+    "scope": "schema/GPU and narrow controls only; not enough labels for training or emergency-priority validation"
+  }
+}
+
+Synthetic fixture optimization and real-image schema/control checks only; full training and emergency-priority accuracy are not certified.

@@ -1,0 +1,39 @@
+{
+  "scope": "post-v20 exploratory recovery; no fresh-test result",
+  "features_sha256": "4f51a1297bf867cdf3a85394016f193805ec0d8bac0a916f83f48a18608b485f",
+  "records_sha256": "b2d0920dd84b25bc4c1878f8ee85913431a873df660e6485ec53c7cd6cce0b3d",
+  "labels_sha256": "1389c5a031a067a7484543e365472e01c559709604f9bb936af43fc8a7819eb4",
+  "script_sha256": "b63012e30e579abbd202ffd088cccbb8cf07c726c7fef1f8f0e0f70c3fc83b18",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "interpreter": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe",
+  "hardware": "Windows-11-10.0.26300-SP0",
+  "packages": {
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0"
+  },
+  "seed": 29,
+  "cpu_threads": 1,
+  "rows": {
+    "train": 180,
+    "validation": 60
+  },
+  "class_counts": {
+    "train": [
+      94,
+      17,
+      43,
+      26
+    ],
+    "validation": [
+      33,
+      5,
+      20,
+      2
+    ]
+  },
+  "selection": "training-only nested grouped3x3; exclude zero pooled-recall candidates before macroF1",
+  "validation": "descriptive after training-only selection; no selector reads validation targets",
+  "old_test": "excluded from target parsing, fitting, selection and evaluation",
+  "encoder_inference": "reused exact v20 cached features, no fresh forward measured"
+}

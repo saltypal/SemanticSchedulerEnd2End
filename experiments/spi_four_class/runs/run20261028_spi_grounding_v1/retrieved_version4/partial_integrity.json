@@ -1,0 +1,58 @@
+{
+  "package_source_sha256": "5f385fbefde265f390d1520026e583d3cfbb37a2a4c1cb4f51d93da92ff9a3d1",
+  "approved_source_sha256": "5f385fbefde265f390d1520026e583d3cfbb37a2a4c1cb4f51d93da92ff9a3d1",
+  "source_sha_match": true,
+  "campaign_checksum_count": 10,
+  "campaign_checksums_matched": 10,
+  "campaign_checksum_failures": {},
+  "runtime_source_hash_count": 79,
+  "runtime_source_hash_mismatches": {},
+  "status": {
+    "seconds": 3060,
+    "purpose": "enriched visual grounding diagnosis",
+    "training_allowed": false,
+    "runtime_promotion_allowed": false,
+    "independent_urgency_reference": false,
+    "thinking": false,
+    "status": "incomplete",
+    "reason": "ValueError: supply images for visual review, or explicitly request the text-only diagnostic"
+  },
+  "progress": [
+    {
+      "stage": "01_verify_frozen_diagnostic",
+      "status": "complete",
+      "seconds": 62.76806042200002
+    },
+    {
+      "stage": "02_load_qwen35_9b",
+      "status": "complete",
+      "seconds": 207.68168441300003
+    },
+    {
+      "stage": "03_text_conformance_qwen35_9b",
+      "status": "failed",
+      "seconds": 0.0041867659999752505
+    }
+  ],
+  "runtime": {
+    "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+    "interpreter": "/usr/bin/python3",
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "numpy": "2.1.3",
+      "transformers": "5.3.0",
+      "huggingface-hub": "1.5.0",
+      "accelerate": "1.12.0",
+      "bitsandbytes": "0.49.2",
+      "scikit-learn": "1.7.2",
+      "nbformat": "5.10.4"
+    },
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "cuda": "12.8",
+    "thinking": false
+  },
+  "campaign_recovery_zip_sha256": "169440f0db5636b6f07c296ca797773d4761494e40b3331498a9106113ad996b"
+}

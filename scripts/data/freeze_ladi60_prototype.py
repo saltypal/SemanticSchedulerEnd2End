@@ -9,7 +9,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from INFRA.data.ladi_manifest import MANIFEST_FIELDS, validate_ladi60_manifest
+from Evaluation.data.ladi_manifest import MANIFEST_FIELDS, validate_ladi60_manifest
 
 
 def freeze_prototype(source: Path, destination: Path) -> Path:

@@ -1,0 +1,43 @@
+{
+  "model_id": "OpenGVLab/InternVL3-8B-hf",
+  "revision": "259a3b64a14623c0ec91a045cb43f7c5af5fa6af",
+  "transformers": "5.5.0",
+  "parameter_devices": [
+    "cuda:1"
+  ],
+  "quantization": "NF4_double_quant_FP16",
+  "load_seconds": 69.916439975,
+  "model_footprint_bytes": 5606542848,
+  "thinking_control": "no_R1_prompt_requested; generated_thought_markers_rejected",
+  "template_enable_thinking_supported": false,
+  "mode": "image_only_SPI_pseudo_labels",
+  "image_processor": {
+    "crop_to_patches": false,
+    "data_format": "channels_first",
+    "default_to_square": true,
+    "do_convert_rgb": true,
+    "do_normalize": true,
+    "do_rescale": true,
+    "do_resize": true,
+    "image_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "image_processor_type": "GotOcr2ImageProcessor",
+    "image_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "max_patches": 12,
+    "min_patches": 1,
+    "resample": 3,
+    "rescale_factor": 0.00392156862745098,
+    "size": {
+      "height": 448,
+      "width": 448
+    }
+  },
+  "independent_ground_truth": false
+}

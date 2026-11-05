@@ -1,0 +1,21 @@
+{
+  "schema": "spi_teacher_selection_v1",
+  "accepted": true,
+  "acceptance_basis": "explicit_user_choice",
+  "model_id": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "prompt_sha256": "d82cf5e618264170488cd92ff0cba5da04c9861aebc21f03bbeac687d5b992a9",
+  "label_protocol": "spi_direct_scene_priority_v1",
+  "scope": "Final labeling teacher for current300-image development experiment",
+  "independent_urgency_validated": false,
+  "known_limitations": [
+    "VLM pseudo-labels; not human urgency truth",
+    "Known dam/bridge grounding warnings remain recorded"
+  ],
+  "settings": {
+    "max_new_tokens": 240,
+    "max_pixels": 262144,
+    "enable_thinking": false,
+    "quantization": "NF4_FP16"
+  }
+}

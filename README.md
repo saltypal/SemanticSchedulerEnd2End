@@ -1,98 +1,71 @@
-# Semantic-aware image latent scheduler
+# Semantic image decoder scheduler
 
-A four-component research system that chooses **which complete image latent payload to transmit next**. The main path schedules latents, not UEs. Static batches are the current focus; explicit job arrivals use the same lifecycle engine. Older UE experiments remain separate references.
-
-## Start here
-
-```powershell
-python -m pip install -e ".[scheduler,test,notebook]"
-python -m INFRA.latent.cli --batch Scheduler/config/static_latent_demo.json
-python -m pytest -q -p no:cacheprovider
-```
-
-Python 3.12 is the declared environment. The static demo is an explicitly synthetic functional fixture: no dataset, checkpoint, CLIP download or GPU is required. After installation, `latent-scheduler` is equivalent to `python -m INFRA.latent.cli`. Old flat script commands remain compatible.
-
-## Four owners
-
-| Component | Responsibility | Main packages |
-|---|---|---|
-| **INFRA** | Contracts, arrivals, time, deadlines, transport orchestration, logs and results | `latent/`, `scheduling/`, `data/`, `learning/`, `Channels/`, `Transport/` |
-| **EncDec** | Models, communication codebooks, reconstruction and codec benchmarks | `Models/`, `Codebooks/`, `Baselines/`, `Evaluation/`, `integration/`, `Research/` |
-| **SemParam** | Image/task evidence, semantic codebooks, receiver knowledge and serialization | `features/`, `history/`, `headers/`, `KnowledgeBases/`, `Codebooks/` |
-| **Scheduler** | Selection policies over immutable candidates | `latent/`, `baselines/`, `semantic/` |
-
-Scheduler never imports a codec or neural framework. INFRA owns lifecycle mutation. Image-only extraction needs no codec checkpoint. Communication and semantic codebooks have separate owners.
-
-## Whole-latent flow
-
-```mermaid
-flowchart LR
-    Images[Images and explicit task] --> Codec[EncDec: cache latent tensors and demand]
-    Images --> Features[SemParam: cached semantic evidence]
-    Codec --> Jobs[INFRA: whole latent jobs]
-    Features --> Jobs
-    Jobs --> Snapshot[Immutable eligible candidates]
-    Snapshot --> Policy[Scheduler: select one payload]
-    Policy --> Lifecycle[INFRA: service, deadlines and outcomes]
-    Lifecycle --> Transport[EncDec: selected latent transmission]
-    Transport --> Feedback[Confirmed reconstruction evidence]
-    Feedback --> Lifecycle
-    Lifecycle --> Results[Persistent results and traces]
-```
-
-The static comparison includes FIFO, SJF, EDF, priority FIFO, priority EDF and semantic selection. Priority policies first gate on the highest eligible explicit/predicted class. Semantic selection combines task relevance, confirmed receiver novelty, importance, urgency and service cost. Missing evidence remains visible as unavailable. This is a declared heuristic, not a novelty or performance claim.
-
-## Repository layout
+One codebase. Four active owners.
 
 ```text
-INFRA/latent/          contracts, lifecycle, metrics, experiment and CLI
-INFRA/scheduling/      earlier slotted and five-UE simulation
-INFRA/data/            manifests, feature caches and dataset bundles
-INFRA/learning/        earlier classifier and DQN training
-EncDec/                codecs, communication codebooks and integration
-SemParam/features/     image/task extraction and cached predictions
-SemParam/history/      confirmed delivery knowledge
-SemParam/headers/      semantic serialization
-Scheduler/latent/      whole-latent policies
-Scheduler/baselines/   earlier fixture baselines
-Scheduler/semantic/    earlier semantic/DQN policy interface
-scripts/               utilities grouped by purpose
-src/, semcom_benchmark/ compatibility imports
-Notebooks/, Archived/  historical and teammate reference material
-data/, models/         shared datasets and assets
-references/, external/ pinned checkpoint/upstream source
-results/               persistent run artifacts and historical evidence
-docs/                  indexed architecture and research records
+SemanticSchedulerEnd2End/
+  Codec/          image encoders, decoders and latent adapters
+  Scheduler/      scheduling algorithms and training implementations
+  parameters/     SPI, relevance, novelty, capture and scene extraction
+  Evaluation/     receiver queue, decoder service, benchmarks and metrics
+  experiments/    new shared experiments and run records
+  Notebooks/      preserved team notebooks
+  Archived/       old INFRA, EncDec and SemParam implementations
+  data/           existing datasets (preserved)
+  models/         existing checkpoints (preserved)
+  results/        historical results (preserved)
 ```
 
-Old flat module paths are aliases to the same canonical module/class objects, not duplicate implementations. Edit the packages above. Downloaded runtime copies, Kaggle staging and scratch/browser outputs are ignored by Git. Assets, results and teammate notebooks remain at their original paths.
+## Flow
 
-## Experiments
+Image + UE mission + sender history -> parameters.
+Image -> Codec encoder -> complete latent payload.
+Received [parameter header][complete latent] -> Evaluation receiver queue ->
+Scheduler selects one job -> Codec decoder -> Evaluation records outcome.
 
-The main portable guide is `Scheduler/notebooks/04_static_latent_scheduler.ipynb`. It imports canonical modules and persists results outside disposable cloud checkouts. Substantive training and GPU experiments use Kaggle CLI with exact source/configuration provenance and logs.
+The current 35-byte parameter header is not yet integrated with the receiver
+queue. The existing SPI head supports Low, High and Critical; Medium remains
+unresolved. Parameter extraction will be revised next. Reorganization does not
+change these research limitations.
 
-Adapt an existing saved classifier/feature workload without retraining:
+## Where to work
 
-```powershell
-python -m INFRA.latent.cli --cached-run downloaded/train-final-cli/outputs/20260929T021341Z-d3338ef4
-```
+- `parameters/minimal_parameters.py`: current extractor and compact header.
+- `parameters/run_parameters.ps1`: parameter launcher; relocated model path.
+- `parameters/PLAN.md`: existing parameter research decision history.
+- `Scheduler/ALGORITHMS.md`: algorithm implementations and their requirements.
+- `Scheduler/training/`: RankNet, trees, PPO/DQN and other training code.
+- `Evaluation/decoder_queue.py` and `decoder_service.py`: receiver lifecycle.
+- `Evaluation/decoder_semantic_benchmark.py`: distinct-evidence coverage metrics.
+- `Evaluation/codec_metrics/`: image/codec reconstruction metrics.
+- `Codec/Models/`: existing codec implementations.
 
-New scheduler outputs live in `results/Scheduler/<run-id>`: configuration, source digest, commit/dirty state, input hash, environment, decisions, outcomes and metrics. Tensor storage bytes, digital bits and complex channel uses are different units.
+## Execution policy for this change
 
-The original module dispatcher remains available:
+No tests, inference, training, dependency installs or Kaggle jobs were run.
+Runtime/import compatibility of this layout remains unverified. Historical test
+results describe the old layout only. Existing virtual-environment console
+scripts may require reinstalling the editable package before future use.
 
-```powershell
-python E2EMain.py --module INFRA --action validate
-python E2EMain.py --module EncDec --action validate
-python E2EMain.py --module SemParam --action validate
-```
+All original notebooks and outputs were preserved. Old notebook imports can be
+resolved by explicitly calling `import project_compat; project_compat.install()`
+from a setup cell at the project root. This compatibility path has not been run.
+New code must use the four canonical owners directly.
 
-See [REBUILD_GUIDE.md](docs/REBUILD_GUIDE.md) for codec environments and older configuration. Model inference needs configured assets and is not validated by installing the package.
+## Kaggle
 
-## Evidence limits and navigation
+Update the existing owner/slug with a new notebook version. Do not make a new
+notebook identity for every experiment revision. Historical slugs and run IDs in
+`parameters/KAGGLE_RUNS.md` remain unchanged; relocated files are under
+`parameters/`. No remote notebook was submitted or stopped during this change.
 
-Ranking, deadline success, resource demand, waits and task usefulness are evaluated separately. Synthetic traces validate mechanics. Cached predictions do not establish calibration; PSNR/SSIM do not establish downstream task accuracy. Missing evidence never receives a fabricated score. Existing RL was not retrained by layout cleanup.
+See `PROJECT_MAP.md` and `experiments/codebase_simplification/PLAN.md`.
 
-The teammate's `Notebooks/04_LADI_v2_End_to_End_Semantic_Channel_Scheduling.ipynb` is a JPEG/chunk reference, separate from learned latent scheduling.
+## Four-class SPI execution
 
-Read [PROJECT_MAP.md](PROJECT_MAP.md), [the static methodology](docs/STATIC_LATENT_SCHEDULER.md), [the cleanup record](docs/CODEBASE_CLEANUP.md) and [the documentation index](docs/README.md).
+The active plan is parameters/PLAN.md and the notebook/run map is
+parameters/KAGGLE_RUNS.md. The parameter launcher now rejects a selected
+three-class fallback by default; historical comparison needs explicit
+-AllowHistoricalThreeClass. Local source includes this safeguard while the
+current remote version remains the exact frozen snapshot recorded in its run.
+Do not infer completed training from a running notebook or local regression tests.

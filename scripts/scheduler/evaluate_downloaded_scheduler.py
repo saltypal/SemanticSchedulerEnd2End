@@ -71,13 +71,13 @@ def main() -> None:
     # Use the checked-out source, which is at the training commit. New review
     # scripts do not alter the policy or simulator modules.
     sys.path.insert(0, str(ROOT))
-    from INFRA.experiments.semantic_scheduler_experiment import (
+    from Evaluation.experiments.semantic_scheduler_experiment import (
         TASK_ID, evaluate_policy_suite, load_catalog,
     )
-    from INFRA.data.ladi_manifest import validate_ladi_manifest
-    from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
-    from INFRA.scheduling.semantic_contracts import ResourceBudgetSemantic
-    from INFRA.scheduling.streams import generate_episode_suite
+    from Evaluation.data.ladi_manifest import validate_ladi_manifest
+    from Evaluation.semantic_config import load_scheduler_config, load_ue_profiles
+    from Evaluation.scheduling.semantic_contracts import ResourceBudgetSemantic
+    from Evaluation.scheduling.streams import generate_episode_suite
 
     run_root = args.run_root.resolve()
     manifest_path = args.manifest.resolve()
@@ -93,8 +93,8 @@ def main() -> None:
             raise ValueError(f"Missing or modified training artifact: {relative_path}")
 
     reviewed = validate_ladi_manifest(manifest_path, require_reviewed=True)
-    config = load_scheduler_config(ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
-    ue_profiles = load_ue_profiles(ROOT / "INFRA/config/ue_profiles.yaml")
+    config = load_scheduler_config(ROOT / "Evaluation/config/semantic_scheduler_dynamic260.yaml")
+    ue_profiles = load_ue_profiles(ROOT / "Evaluation/config/ue_profiles.yaml")
     catalogue = load_catalog(manifest_path, run_root / "feature_cache.jsonl",
                              run_root / "payload_costs.csv")
     split_by_id = {row["image_id"]: row["split"] for row in reviewed}

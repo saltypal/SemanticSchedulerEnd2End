@@ -23,12 +23,12 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from INFRA.scheduling.event_simulation import run_episode
-from INFRA.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
-from INFRA.data.ladi_manifest import validate_ladi_manifest
-from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
-from INFRA.scheduling.semantic_contracts import PolicyDecision, ResourceBudgetSemantic
-from INFRA.scheduling.streams import generate_episode_suite
+from Evaluation.scheduling.event_simulation import run_episode
+from Evaluation.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
+from Evaluation.data.ladi_manifest import validate_ladi_manifest
+from Evaluation.semantic_config import load_scheduler_config, load_ue_profiles
+from Evaluation.scheduling.semantic_contracts import PolicyDecision, ResourceBudgetSemantic
+from Evaluation.scheduling.streams import generate_episode_suite
 from Scheduler.semantic.registry import create_semantic_policy
 
 from evaluate_downloaded_scheduler import DEFAULT_MANIFEST, DEFAULT_RUN, check_manifest_match, file_sha256
@@ -127,8 +127,8 @@ def main() -> None:
             raise ValueError(f"Training artifact missing or changed: {relative}")
     reviewed = validate_ladi_manifest(manifest, require_reviewed=True)
     catalogue = load_catalog(manifest, run_root / "feature_cache.jsonl", run_root / "payload_costs.csv")
-    config = load_scheduler_config(ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
-    profiles = load_ue_profiles(ROOT / "INFRA/config/ue_profiles.yaml")
+    config = load_scheduler_config(ROOT / "Evaluation/config/semantic_scheduler_dynamic260.yaml")
+    profiles = load_ue_profiles(ROOT / "Evaluation/config/ue_profiles.yaml")
     # Use the train catalogue with replacement so repeated arrivals can change
     # delivered-history novelty while test episodes remain deterministic.
     train = tuple(item for item in catalogue

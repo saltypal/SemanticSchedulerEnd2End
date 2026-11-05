@@ -1,0 +1,29 @@
+{
+  "spi": {
+    "model_path": "student\\models\\spi.json",
+    "model_sha256": "cffb537846f936d21fe7bab3d7d5da89ee10ae39d83b79610365740172f5827d",
+    "file_sha256": "b5ef9a07ec7ba810aa11c25d03de8618d1b664d468cbff7120ed57e6cb1e9734",
+    "supported_levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "unsupported_levels": [],
+    "model_status": "four_class_development_candidate",
+    "score_calibration": "uncalibrated",
+    "four_class_status": "trained four-output artifact; independent urgency validation absent",
+    "validation_reference": "VLM teacher agreement, not independent human urgency truth"
+  },
+  "wire": {
+    "bytes": 35
+  },
+  "status": "four_class_development_candidate",
+  "release_checks": {
+    "export_parity": true,
+    "all_class_support": true,
+    "per_class_recall": true
+  },
+  "runtime_promotion_allowed": true,
+  "independent_urgency_validated": false
+}

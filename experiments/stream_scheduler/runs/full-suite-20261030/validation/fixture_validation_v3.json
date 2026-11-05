@@ -1,0 +1,262 @@
+{
+  "scope": "CPU fixtures only; no real data, training, inference, GPU or cloud",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "checks": [
+    {
+      "name": "D_cost_midservice_telescoping_unselected_horizon",
+      "status": "PASS",
+      "seconds": 0.03492597299998579,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "terminal_cost": 0.40625,
+        "reward_telescoping": 0.40625,
+        "selected": {
+          "0": 0.0,
+          "1": 1.5
+        },
+        "unselected_wait_cost": 0.15625
+      },
+      "error": null
+    },
+    {
+      "name": "target_A_B",
+      "status": "PASS",
+      "seconds": 0.021109066999997594,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "A": 0.75,
+        "B": 0.0625
+      },
+      "error": null
+    },
+    {
+      "name": "illegal_retry_failure_history_future_labels_387",
+      "status": "PASS",
+      "seconds": 0.02320690999999897,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "illegal_choice_rejected": true,
+        "retry_rejected": true,
+        "failed_attempt_in_history": true,
+        "future_labels_not_snapshot_fields": true,
+        "features": 387
+      },
+      "error": null
+    },
+    {
+      "name": "six_torch_numpy_parity_candidate_permutation_identity_relabel_temporal_order",
+      "status": "PASS",
+      "seconds": 3.9526232309999614,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "models": [
+          {
+            "kind": "linear",
+            "max_abs": 4.396431746434004e-08,
+            "permute_ok": true,
+            "relabel_ok": true
+          },
+          {
+            "kind": "mlp",
+            "max_abs": 9.73870369069818e-09,
+            "permute_ok": true,
+            "relabel_ok": true
+          },
+          {
+            "kind": "classifier",
+            "max_abs": 9.315297866407946e-09,
+            "permute_ok": true,
+            "relabel_ok": true
+          },
+          {
+            "kind": "deepsets",
+            "max_abs": 1.8477798874316775e-09,
+            "permute_ok": true,
+            "relabel_ok": true
+          },
+          {
+            "kind": "attention",
+            "max_abs": 1.2768040513755352e-08,
+            "permute_ok": true,
+            "relabel_ok": true
+          },
+          {
+            "kind": "temporal",
+            "max_abs": 9.549546736709047e-09,
+            "permute_ok": true,
+            "relabel_ok": true
+          }
+        ],
+        "temporal_order_delta": 0.0013392385695451536,
+        "array_shapes": {
+          "ready": [
+            4,
+            389
+          ],
+          "processed": [
+            2,
+            389
+          ],
+          "ue": [
+            4,
+            3,
+            389
+          ],
+          "ue_mask": [
+            4,
+            3
+          ],
+          "active": [
+            2,
+            3,
+            389
+          ],
+          "active_mask": [
+            2,
+            3
+          ],
+          "sizes": [
+            3
+          ],
+          "distances": [
+            4,
+            2
+          ],
+          "summary": [
+            4,
+            1172
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "strict_pair_gradient_numpy_class_weight_correction",
+      "status": "PASS",
+      "seconds": 0.14182463600002393,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "strict_grad": [
+          -0.4255574941635132,
+          0.4255574941635132
+        ],
+        "tie_grad": [
+          0.0,
+          0.0
+        ],
+        "inverse_cw_probabilities": [
+          0.5333333333333333,
+          0.26666666666666666,
+          0.13333333333333333,
+          0.06666666666666667
+        ],
+        "numpy_correction_match": true
+      },
+      "error": null
+    },
+    {
+      "name": "lambdamart_float_grades",
+      "status": "PASS",
+      "seconds": 2.3796820499999853,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a",
+        "Scheduler/semantic_learning_policy.py": "4e7e13a7b7e311b35337c816dc710899cc2429109137514d94b0ed71f1fc91bc",
+        "Scheduler/training/semantic_learning_models.py": "f7754cde828951e738e55b3727393b7c318f8d6dd560a1195c79b10d1f1d215d",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "float": [
+          0.0,
+          0.1,
+          0.5,
+          0.9,
+          1.0,
+          0.2,
+          0.7
+        ],
+        "grade": [
+          0,
+          26,
+          128,
+          230,
+          255,
+          51,
+          179
+        ],
+        "groups": [
+          7
+        ],
+        "real_lgb_training": false
+      },
+      "error": null
+    }
+  ],
+  "finish_utc": "2026-10-30T16:19:50Z"
+}

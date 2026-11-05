@@ -1,0 +1,5165 @@
+{
+  "metadata": {
+    "schema": "ue_scenario_v1",
+    "mode": "mixed",
+    "incident_id": null,
+    "config": {
+      "mode": "mixed",
+      "ues": 50,
+      "duration": 200.0,
+      "service_time": 1.0,
+      "load": 1.2,
+      "burst_factor": 4.0,
+      "mission_fraction": 0.8,
+      "repeat_probability": 0.2,
+      "capture_to_arrival": 0.1,
+      "tail": 16.0,
+      "seed": 70008,
+      "time_unit": "synthetic_time_unit"
+    },
+    "profiles": [
+      6,
+      5,
+      9,
+      2,
+      7,
+      6,
+      11,
+      2,
+      8,
+      0,
+      8,
+      11,
+      4,
+      3,
+      10,
+      2,
+      11,
+      3,
+      4,
+      10,
+      10,
+      0,
+      14,
+      13,
+      9,
+      9,
+      5,
+      2,
+      12,
+      13,
+      13,
+      3,
+      7,
+      12,
+      11,
+      1,
+      11,
+      6,
+      10,
+      0,
+      10,
+      10,
+      10,
+      1,
+      9,
+      5,
+      8,
+      7,
+      10,
+      14
+    ],
+    "missions": [
+      [
+        "phone",
+        "General-purpose phone. Share user-selected everyday observations without assuming an emergency."
+      ],
+      [
+        "incident_phone",
+        "Citizen incident reporting phone. Document visible incidents and useful changes for local response."
+      ],
+      [
+        "damage_drone",
+        "Aerial structural inspection drone. Identify visible building damage and newly exposed structural evidence."
+      ],
+      [
+        "person_drone",
+        "Person-search drone. Locate visible people and evidence relevant to search without assuming distress."
+      ],
+      [
+        "flood_drone",
+        "Flood and evacuation drone. Observe inundation and passable or blocked evacuation routes."
+      ],
+      [
+        "fire_drone",
+        "Wildfire observation drone. Observe visible smoke and flame and supported changes near infrastructure."
+      ],
+      [
+        "road_drone",
+        "Road and bridge drone. Inspect transport structures and visible obstruction or damage."
+      ],
+      [
+        "car",
+        "Ordinary connected-car camera. Observe immediate road conditions and travel obstacles."
+      ],
+      [
+        "response_car",
+        "Emergency vehicle camera. Report response access and visible incident developments."
+      ],
+      [
+        "traffic_cctv",
+        "Fixed intersection CCTV. Observe traffic flow, collisions and obstructions."
+      ],
+      [
+        "public_cctv",
+        "Fixed public-space CCTV. Observe visible incidents and crowd changes without inferring danger from occupancy."
+      ],
+      [
+        "water_camera",
+        "Fixed river and underpass camera. Observe water and route conditions without inferring physical depth."
+      ],
+      [
+        "robot",
+        "Industrial inspection robot. Report visible equipment and area conditions on its inspection route."
+      ],
+      [
+        "farm_drone",
+        "Agricultural survey drone. Observe crop and field conditions and supported changes."
+      ],
+      [
+        "maintenance",
+        "Infrastructure maintenance camera. Document inspection findings, repair evidence and relevant changes."
+      ]
+    ],
+    "ue_active_intervals": {
+      "0": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "1": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "2": [
+        [
+          37.14571764829704,
+          200.0
+        ]
+      ],
+      "3": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "4": [
+        [
+          22.5617404902792,
+          200.0
+        ]
+      ],
+      "5": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "6": [
+        [
+          23.236951618540548,
+          200.0
+        ]
+      ],
+      "7": [
+        [
+          27.08481788043413,
+          200.0
+        ]
+      ],
+      "8": [
+        [
+          20.98005452809428,
+          200.0
+        ]
+      ],
+      "9": [
+        [
+          10.495472012299029,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "10": [
+        [
+          36.553775489790496,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "11": [
+        [
+          28.03420714064281,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "12": [
+        [
+          11.535941085938116,
+          200.0
+        ]
+      ],
+      "13": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "14": [
+        [
+          27.990276387231688,
+          200.0
+        ]
+      ],
+      "15": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "16": [
+        [
+          19.026379828344282,
+          200.0
+        ]
+      ],
+      "17": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "18": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "19": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "20": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "21": [
+        [
+          24.550653167598494,
+          200.0
+        ]
+      ],
+      "22": [
+        [
+          12.262770342727478,
+          200.0
+        ]
+      ],
+      "23": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "24": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "25": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "26": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "27": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "28": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "29": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "30": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "31": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "32": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "33": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "34": [
+        [
+          24.28511130790561,
+          200.0
+        ]
+      ],
+      "35": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "36": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "37": [
+        [
+          37.62296751625311,
+          200.0
+        ]
+      ],
+      "38": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "39": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "40": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "41": [
+        [
+          25.343305452064655,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "42": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "43": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "44": [
+        [
+          9.484335128399364,
+          200.0
+        ]
+      ],
+      "45": [
+        [
+          0.0,
+          60.0
+        ],
+        [
+          70.0,
+          200.0
+        ]
+      ],
+      "46": [
+        [
+          13.882660408004517,
+          200.0
+        ]
+      ],
+      "47": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "48": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "49": [
+        [
+          0.0,
+          200.0
+        ]
+      ]
+    },
+    "offered_trace": [
+      {
+        "token": 0,
+        "image_id": "crisismmd:915287851478085632_0",
+        "ue": 45,
+        "mission": "fire_drone",
+        "capture": 0.3805513826893514,
+        "arrival": 0.4805513826893514,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 1,
+        "image_id": "crisismmd:916028011023126529_0",
+        "ue": 18,
+        "mission": "flood_drone",
+        "capture": 1.7741217703055234,
+        "arrival": 1.8741217703055235,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 2,
+        "image_id": "crisismmd:909423323229990914_0",
+        "ue": 32,
+        "mission": "car",
+        "capture": 5.44332499280932,
+        "arrival": 5.543324992809319,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 3,
+        "image_id": "crisismmd:910254709289684992_0",
+        "ue": 31,
+        "mission": "person_drone",
+        "capture": 8.22967413224232,
+        "arrival": 8.32967413224232,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 4,
+        "image_id": "crisismmd:906254249314590720_0",
+        "ue": 38,
+        "mission": "public_cctv",
+        "capture": 9.202599955401691,
+        "arrival": 9.302599955401691,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 5,
+        "image_id": "crisismmd:906162712937451520_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 10.637160080578063,
+        "arrival": 10.737160080578063,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 6,
+        "image_id": "crisismmd:913501170173337600_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 15.793883923177034,
+        "arrival": 15.893883923177034,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 7,
+        "image_id": "crisismmd:930008792410001408_0",
+        "ue": 33,
+        "mission": "robot",
+        "capture": 17.735262825330697,
+        "arrival": 17.835262825330698,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 8,
+        "image_id": "crisismmd:910711041516036096_0",
+        "ue": 30,
+        "mission": "farm_drone",
+        "capture": 18.484611621488238,
+        "arrival": 18.58461162148824,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 9,
+        "image_id": "crisismmd:910563191700185088_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 20.879763013289725,
+        "arrival": 20.979763013289727,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 10,
+        "image_id": "crisismmd:922588370215112704_0",
+        "ue": 13,
+        "mission": "person_drone",
+        "capture": 22.83589813096694,
+        "arrival": 22.93589813096694,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 11,
+        "image_id": "crisismmd:911701484852490240_0",
+        "ue": 47,
+        "mission": "car",
+        "capture": 24.041748974719805,
+        "arrival": 24.141748974719807,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 12,
+        "image_id": "crisismmd:870079994306871296_0",
+        "ue": 6,
+        "mission": "water_camera",
+        "capture": 28.313394516855237,
+        "arrival": 28.413394516855238,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 13,
+        "image_id": "crisismmd:907772978116653056_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 29.161806585931238,
+        "arrival": 29.26180658593124,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 14,
+        "image_id": "crisismmd:904606118525239296_0",
+        "ue": 12,
+        "mission": "flood_drone",
+        "capture": 29.55285325120004,
+        "arrival": 29.652853251200042,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 15,
+        "image_id": "crisismmd:910160788849008640_0",
+        "ue": 27,
+        "mission": "damage_drone",
+        "capture": 30.11595431376227,
+        "arrival": 30.21595431376227,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 16,
+        "image_id": "crisismmd:910523485889470465_0",
+        "ue": 38,
+        "mission": "public_cctv",
+        "capture": 31.22782257503634,
+        "arrival": 31.32782257503634,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 17,
+        "image_id": "crisismmd:879810253310877697_0",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 32.0711050104537,
+        "arrival": 32.1711050104537,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 18,
+        "image_id": "crisismmd:910674385685680128_0",
+        "ue": 18,
+        "mission": "flood_drone",
+        "capture": 32.83827151270287,
+        "arrival": 32.93827151270287,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 19,
+        "image_id": "crisismmd:905691597005889536_0",
+        "ue": 1,
+        "mission": "fire_drone",
+        "capture": 33.90865763657301,
+        "arrival": 34.00865763657301,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 20,
+        "image_id": "crisismmd:905184065061576704_1",
+        "ue": 17,
+        "mission": "person_drone",
+        "capture": 34.80184255829953,
+        "arrival": 34.901842558299535,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 21,
+        "image_id": "crisismmd:913373637130022914_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 35.56945477099676,
+        "arrival": 35.66945477099676,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 22,
+        "image_id": "crisismmd:914125586494365696_0",
+        "ue": 28,
+        "mission": "robot",
+        "capture": 40.53998373238575,
+        "arrival": 40.63998373238575,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 23,
+        "image_id": "crisismmd:911655561237843970_0",
+        "ue": 32,
+        "mission": "car",
+        "capture": 41.33701593408616,
+        "arrival": 41.43701593408616,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 24,
+        "image_id": "crisismmd:907772978116653056_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 44.2361114309185,
+        "arrival": 44.3361114309185,
+        "phase": "routine",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 25,
+        "image_id": "crisismmd:905756573280198656_0",
+        "ue": 44,
+        "mission": "traffic_cctv",
+        "capture": 44.4300961584249,
+        "arrival": 44.530096158424904,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 26,
+        "image_id": "crisismmd:922565155874996225_0",
+        "ue": 47,
+        "mission": "car",
+        "capture": 44.77308425508895,
+        "arrival": 44.873084255088955,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 27,
+        "image_id": "crisismmd:910584503931895814_0",
+        "ue": 33,
+        "mission": "robot",
+        "capture": 46.6923129090092,
+        "arrival": 46.792312909009205,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 28,
+        "image_id": "crisismmd:930193943408586752_1",
+        "ue": 1,
+        "mission": "fire_drone",
+        "capture": 52.971893060351945,
+        "arrival": 53.07189306035195,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 29,
+        "image_id": "crisismmd:909862878747951104_0",
+        "ue": 49,
+        "mission": "maintenance",
+        "capture": 53.460322733938916,
+        "arrival": 53.56032273393892,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 30,
+        "image_id": "crisismmd:930193943408586752_1",
+        "ue": 1,
+        "mission": "fire_drone",
+        "capture": 55.4320744022033,
+        "arrival": 55.5320744022033,
+        "phase": "routine",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 31,
+        "image_id": "crisismmd:905461810828070913_0",
+        "ue": 20,
+        "mission": "public_cctv",
+        "capture": 55.57837397808714,
+        "arrival": 55.678373978087144,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 32,
+        "image_id": "crisismmd:922656568063217665_0",
+        "ue": 0,
+        "mission": "road_drone",
+        "capture": 60.86089268911977,
+        "arrival": 60.960892689119774,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 33,
+        "image_id": "crisismmd:910585414808854528_0",
+        "ue": 15,
+        "mission": "damage_drone",
+        "capture": 63.939175004031085,
+        "arrival": 64.03917500403108,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 34,
+        "image_id": "crisismmd:913697454788358145_0",
+        "ue": 21,
+        "mission": "phone",
+        "capture": 64.11234635546032,
+        "arrival": 64.21234635546031,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 35,
+        "image_id": "crisismmd:908271399545925633_0",
+        "ue": 46,
+        "mission": "response_car",
+        "capture": 67.07552445998166,
+        "arrival": 67.17552445998166,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 36,
+        "image_id": "crisismmd:906888945413357568_0",
+        "ue": 24,
+        "mission": "traffic_cctv",
+        "capture": 69.31397167208588,
+        "arrival": 69.41397167208588,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 37,
+        "image_id": "crisismmd:909885632582787072_0",
+        "ue": 35,
+        "mission": "incident_phone",
+        "capture": 70.12241721637001,
+        "arrival": 70.22241721637,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 38,
+        "image_id": "crisismmd:913478597331050496_0",
+        "ue": 37,
+        "mission": "road_drone",
+        "capture": 70.23465014677184,
+        "arrival": 70.33465014677184,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 39,
+        "image_id": "crisismmd:910674003211173888_0",
+        "ue": 43,
+        "mission": "incident_phone",
+        "capture": 72.9207834696132,
+        "arrival": 73.02078346961319,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 40,
+        "image_id": "crisismmd:904556150510596096_0",
+        "ue": 18,
+        "mission": "flood_drone",
+        "capture": 74.54055295092115,
+        "arrival": 74.64055295092115,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 41,
+        "image_id": "crisismmd:901813825711853568_0",
+        "ue": 14,
+        "mission": "public_cctv",
+        "capture": 75.96506403912643,
+        "arrival": 76.06506403912643,
+        "phase": "routine",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 42,
+        "image_id": "crisismmd:905255318141235200_1",
+        "ue": 42,
+        "mission": "public_cctv",
+        "capture": 80.00843879473491,
+        "arrival": 80.10843879473491,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 43,
+        "image_id": "crisismmd:914181646383042562_0",
+        "ue": 25,
+        "mission": "traffic_cctv",
+        "capture": 80.11039727821388,
+        "arrival": 80.21039727821388,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 44,
+        "image_id": "crisismmd:919562679404003328_0",
+        "ue": 8,
+        "mission": "response_car",
+        "capture": 80.13553381988946,
+        "arrival": 80.23553381988945,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 45,
+        "image_id": "crisismmd:910074634237771776_0",
+        "ue": 9,
+        "mission": "phone",
+        "capture": 80.7105203556046,
+        "arrival": 80.8105203556046,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 46,
+        "image_id": "crisismmd:907772978116653056_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 81.49957558123288,
+        "arrival": 81.59957558123287,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 47,
+        "image_id": "crisismmd:917947880035450880_0",
+        "ue": 19,
+        "mission": "public_cctv",
+        "capture": 81.66277142413507,
+        "arrival": 81.76277142413507,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 48,
+        "image_id": "crisismmd:912048104651788289_1",
+        "ue": 4,
+        "mission": "car",
+        "capture": 81.91627221615562,
+        "arrival": 82.01627221615561,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 49,
+        "image_id": "crisismmd:910160788849008640_0",
+        "ue": 27,
+        "mission": "damage_drone",
+        "capture": 82.45979423087344,
+        "arrival": 82.55979423087344,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 50,
+        "image_id": "crisismmd:930444320095789057_1",
+        "ue": 24,
+        "mission": "traffic_cctv",
+        "capture": 82.64885336885273,
+        "arrival": 82.74885336885272,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 51,
+        "image_id": "crisismmd:917844223021293569_0",
+        "ue": 49,
+        "mission": "maintenance",
+        "capture": 82.73759101815023,
+        "arrival": 82.83759101815022,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 52,
+        "image_id": "crisismmd:930036642282397696_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 83.39700953333143,
+        "arrival": 83.49700953333142,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 53,
+        "image_id": "crisismmd:916028011023126529_0",
+        "ue": 9,
+        "mission": "phone",
+        "capture": 84.12941878851811,
+        "arrival": 84.2294187885181,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 54,
+        "image_id": "crisismmd:921433090177863680_0",
+        "ue": 30,
+        "mission": "farm_drone",
+        "capture": 84.4233566728564,
+        "arrival": 84.5233566728564,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 55,
+        "image_id": "crisismmd:922565155874996225_0",
+        "ue": 47,
+        "mission": "car",
+        "capture": 84.66789555130899,
+        "arrival": 84.76789555130898,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 56,
+        "image_id": "crisismmd:905405070526873600_0",
+        "ue": 16,
+        "mission": "water_camera",
+        "capture": 85.76958071336038,
+        "arrival": 85.86958071336038,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 57,
+        "image_id": "crisismmd:910525564641009666_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 86.2976957479334,
+        "arrival": 86.3976957479334,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 58,
+        "image_id": "crisismmd:911987214858498048_0",
+        "ue": 35,
+        "mission": "incident_phone",
+        "capture": 86.43283778959724,
+        "arrival": 86.53283778959724,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 59,
+        "image_id": "crisismmd:910533452520394757_0",
+        "ue": 31,
+        "mission": "person_drone",
+        "capture": 86.53293068670558,
+        "arrival": 86.63293068670558,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 60,
+        "image_id": "crisismmd:872085722575929345_0",
+        "ue": 46,
+        "mission": "response_car",
+        "capture": 86.77587008566394,
+        "arrival": 86.87587008566393,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 61,
+        "image_id": "crisismmd:909783378110623744_0",
+        "ue": 8,
+        "mission": "response_car",
+        "capture": 86.80795957288076,
+        "arrival": 86.90795957288076,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 62,
+        "image_id": "crisismmd:904606118525239296_0",
+        "ue": 12,
+        "mission": "flood_drone",
+        "capture": 86.97239080774591,
+        "arrival": 87.0723908077459,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 63,
+        "image_id": "crisismmd:909709562537811968_0",
+        "ue": 1,
+        "mission": "fire_drone",
+        "capture": 88.34025596446094,
+        "arrival": 88.44025596446093,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 64,
+        "image_id": "crisismmd:910563191700185088_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 88.92847617787342,
+        "arrival": 89.02847617787342,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 65,
+        "image_id": "crisismmd:910763300186505216_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 89.13386077730141,
+        "arrival": 89.2338607773014,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 66,
+        "image_id": "crisismmd:922588370215112704_0",
+        "ue": 48,
+        "mission": "public_cctv",
+        "capture": 89.21328631314341,
+        "arrival": 89.31328631314341,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 67,
+        "image_id": "crisismmd:930262966460485632_0",
+        "ue": 40,
+        "mission": "public_cctv",
+        "capture": 89.89512425318863,
+        "arrival": 89.99512425318862,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 68,
+        "image_id": "crisismmd:908772392159387648_2",
+        "ue": 24,
+        "mission": "traffic_cctv",
+        "capture": 90.35030653812761,
+        "arrival": 90.4503065381276,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 69,
+        "image_id": "crisismmd:910235206308831232_0",
+        "ue": 15,
+        "mission": "damage_drone",
+        "capture": 90.39957059924744,
+        "arrival": 90.49957059924743,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 70,
+        "image_id": "crisismmd:870977227923406848_0",
+        "ue": 26,
+        "mission": "fire_drone",
+        "capture": 91.10505045186684,
+        "arrival": 91.20505045186684,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 71,
+        "image_id": "crisismmd:905407906757181440_0",
+        "ue": 30,
+        "mission": "farm_drone",
+        "capture": 91.3355095622543,
+        "arrival": 91.4355095622543,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 72,
+        "image_id": "crisismmd:904261454949437440_0",
+        "ue": 46,
+        "mission": "response_car",
+        "capture": 91.5476245153682,
+        "arrival": 91.6476245153682,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 73,
+        "image_id": "crisismmd:908710215624904705_0",
+        "ue": 43,
+        "mission": "incident_phone",
+        "capture": 91.61818578767053,
+        "arrival": 91.71818578767052,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 74,
+        "image_id": "crisismmd:901813825711853568_0",
+        "ue": 14,
+        "mission": "public_cctv",
+        "capture": 92.0205445523302,
+        "arrival": 92.12054455233019,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 75,
+        "image_id": "crisismmd:906199568597086208_0",
+        "ue": 26,
+        "mission": "fire_drone",
+        "capture": 92.49649748697126,
+        "arrival": 92.59649748697126,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 76,
+        "image_id": "crisismmd:905461810828070913_0",
+        "ue": 20,
+        "mission": "public_cctv",
+        "capture": 92.74201296645354,
+        "arrival": 92.84201296645354,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 77,
+        "image_id": "crisismmd:919563091406286848_0",
+        "ue": 42,
+        "mission": "public_cctv",
+        "capture": 92.86108601934927,
+        "arrival": 92.96108601934927,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 78,
+        "image_id": "crisismmd:871995437447876608_0",
+        "ue": 21,
+        "mission": "phone",
+        "capture": 93.01362949361403,
+        "arrival": 93.11362949361403,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 79,
+        "image_id": "crisismmd:905184065061576704_1",
+        "ue": 17,
+        "mission": "person_drone",
+        "capture": 94.01748785324722,
+        "arrival": 94.11748785324721,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 80,
+        "image_id": "crisismmd:917856156059623424_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 94.76630484213533,
+        "arrival": 94.86630484213532,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 81,
+        "image_id": "crisismmd:909975544036458497_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 94.82841746075938,
+        "arrival": 94.92841746075938,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 82,
+        "image_id": "crisismmd:905663970219929601_0",
+        "ue": 0,
+        "mission": "road_drone",
+        "capture": 95.1221152905621,
+        "arrival": 95.2221152905621,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 83,
+        "image_id": "crisismmd:871287130709925888_0",
+        "ue": 44,
+        "mission": "traffic_cctv",
+        "capture": 95.19882525921241,
+        "arrival": 95.2988252592124,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 84,
+        "image_id": "crisismmd:910078085986422785_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 95.24582700615721,
+        "arrival": 95.34582700615721,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 85,
+        "image_id": "crisismmd:910579326894071810_0",
+        "ue": 19,
+        "mission": "public_cctv",
+        "capture": 95.24765549791223,
+        "arrival": 95.34765549791223,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 86,
+        "image_id": "crisismmd:929992868156108800_0",
+        "ue": 11,
+        "mission": "water_camera",
+        "capture": 95.52950918450732,
+        "arrival": 95.62950918450731,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 87,
+        "image_id": "crisismmd:929992868156108800_0",
+        "ue": 11,
+        "mission": "water_camera",
+        "capture": 95.92287101765871,
+        "arrival": 96.0228710176587,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 88,
+        "image_id": "crisismmd:907277725165146112_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 96.10505705608219,
+        "arrival": 96.20505705608218,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 89,
+        "image_id": "crisismmd:910579326894071810_0",
+        "ue": 19,
+        "mission": "public_cctv",
+        "capture": 96.7506055035173,
+        "arrival": 96.8506055035173,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 90,
+        "image_id": "crisismmd:912998714121302016_0",
+        "ue": 10,
+        "mission": "response_car",
+        "capture": 97.4772337359262,
+        "arrival": 97.5772337359262,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 91,
+        "image_id": "crisismmd:919649495268208640_0",
+        "ue": 25,
+        "mission": "traffic_cctv",
+        "capture": 97.64078667202514,
+        "arrival": 97.74078667202514,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 92,
+        "image_id": "crisismmd:909854852603367424_0",
+        "ue": 0,
+        "mission": "road_drone",
+        "capture": 97.97141214870726,
+        "arrival": 98.07141214870725,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 93,
+        "image_id": "crisismmd:910763300186505216_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 98.13677413034117,
+        "arrival": 98.23677413034116,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 94,
+        "image_id": "crisismmd:930373217159712768_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 98.14621337776032,
+        "arrival": 98.24621337776031,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 95,
+        "image_id": "crisismmd:906744961072291840_3",
+        "ue": 17,
+        "mission": "person_drone",
+        "capture": 98.21573262608077,
+        "arrival": 98.31573262608076,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 96,
+        "image_id": "crisismmd:907654982144544769_0",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 98.46369287770177,
+        "arrival": 98.56369287770177,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 97,
+        "image_id": "crisismmd:930101240339542016_0",
+        "ue": 15,
+        "mission": "damage_drone",
+        "capture": 99.12537057118999,
+        "arrival": 99.22537057118998,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 98,
+        "image_id": "crisismmd:909411653699108866_0",
+        "ue": 2,
+        "mission": "traffic_cctv",
+        "capture": 99.29964524016975,
+        "arrival": 99.39964524016975,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 99,
+        "image_id": "crisismmd:929049019124535302_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 99.38608203862884,
+        "arrival": 99.48608203862884,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 100,
+        "image_id": "crisismmd:929049019124535302_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 99.52188417706368,
+        "arrival": 99.62188417706368,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 101,
+        "image_id": "crisismmd:921692663195111424_0",
+        "ue": 49,
+        "mission": "maintenance",
+        "capture": 99.71147979618819,
+        "arrival": 99.81147979618818,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 102,
+        "image_id": "crisismmd:911908841675264002_0",
+        "ue": 10,
+        "mission": "response_car",
+        "capture": 99.84930843526563,
+        "arrival": 99.94930843526562,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 103,
+        "image_id": "crisismmd:923648872207081473_0",
+        "ue": 43,
+        "mission": "incident_phone",
+        "capture": 99.86575017951577,
+        "arrival": 99.96575017951577,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 104,
+        "image_id": "crisismmd:905761884808335361_0",
+        "ue": 30,
+        "mission": "farm_drone",
+        "capture": 100.1644420951,
+        "arrival": 100.2644420951,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 105,
+        "image_id": "crisismmd:910262990540242944_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 100.20709927024484,
+        "arrival": 100.30709927024483,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 106,
+        "image_id": "crisismmd:871287130709925888_0",
+        "ue": 38,
+        "mission": "public_cctv",
+        "capture": 100.2284759761423,
+        "arrival": 100.3284759761423,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 107,
+        "image_id": "crisismmd:911655561237843970_0",
+        "ue": 32,
+        "mission": "car",
+        "capture": 100.24753776557785,
+        "arrival": 100.34753776557784,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 108,
+        "image_id": "crisismmd:905461810828070913_0",
+        "ue": 20,
+        "mission": "public_cctv",
+        "capture": 100.49932146206201,
+        "arrival": 100.59932146206201,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 109,
+        "image_id": "crisismmd:904606118525239296_0",
+        "ue": 12,
+        "mission": "flood_drone",
+        "capture": 101.1673263245136,
+        "arrival": 101.26732632451359,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 110,
+        "image_id": "crisismmd:907277725165146112_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 101.20253550046782,
+        "arrival": 101.30253550046781,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 111,
+        "image_id": "crisismmd:909434968652251136_0",
+        "ue": 1,
+        "mission": "fire_drone",
+        "capture": 101.38119002356345,
+        "arrival": 101.48119002356344,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 112,
+        "image_id": "crisismmd:916070325019987969_0",
+        "ue": 4,
+        "mission": "car",
+        "capture": 102.12312579719664,
+        "arrival": 102.22312579719663,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 113,
+        "image_id": "crisismmd:909833497640095746_0",
+        "ue": 32,
+        "mission": "car",
+        "capture": 102.77375962051781,
+        "arrival": 102.8737596205178,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 114,
+        "image_id": "crisismmd:873403196718202881_0",
+        "ue": 7,
+        "mission": "damage_drone",
+        "capture": 103.16822906927595,
+        "arrival": 103.26822906927595,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 115,
+        "image_id": "crisismmd:909447517565325312_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 103.95988703626344,
+        "arrival": 104.05988703626343,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 116,
+        "image_id": "crisismmd:921808746959048704_0",
+        "ue": 9,
+        "mission": "phone",
+        "capture": 104.72723632108287,
+        "arrival": 104.82723632108286,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 117,
+        "image_id": "crisismmd:923009219955249153_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 104.93560731484003,
+        "arrival": 105.03560731484002,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 118,
+        "image_id": "crisismmd:916011739812188161_0",
+        "ue": 2,
+        "mission": "traffic_cctv",
+        "capture": 105.22444479202403,
+        "arrival": 105.32444479202402,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 119,
+        "image_id": "crisismmd:919562679404003328_2",
+        "ue": 48,
+        "mission": "public_cctv",
+        "capture": 105.44923656851714,
+        "arrival": 105.54923656851713,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 120,
+        "image_id": "crisismmd:911711789246693377_0",
+        "ue": 21,
+        "mission": "phone",
+        "capture": 105.5088591845401,
+        "arrival": 105.6088591845401,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 121,
+        "image_id": "crisismmd:906965327111737345_0",
+        "ue": 48,
+        "mission": "public_cctv",
+        "capture": 105.92716903159638,
+        "arrival": 106.02716903159637,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 122,
+        "image_id": "crisismmd:929992506158149635_0",
+        "ue": 25,
+        "mission": "traffic_cctv",
+        "capture": 105.9741097861656,
+        "arrival": 106.0741097861656,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 123,
+        "image_id": "crisismmd:919649109782421504_0",
+        "ue": 28,
+        "mission": "robot",
+        "capture": 107.63175244405718,
+        "arrival": 107.73175244405718,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 124,
+        "image_id": "crisismmd:921390909031354368_0",
+        "ue": 4,
+        "mission": "car",
+        "capture": 107.8729839649218,
+        "arrival": 107.9729839649218,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 125,
+        "image_id": "crisismmd:904261454949437440_0",
+        "ue": 46,
+        "mission": "response_car",
+        "capture": 108.60684407626144,
+        "arrival": 108.70684407626143,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 126,
+        "image_id": "crisismmd:910160788849008640_0",
+        "ue": 27,
+        "mission": "damage_drone",
+        "capture": 108.93467295880652,
+        "arrival": 109.03467295880651,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 127,
+        "image_id": "crisismmd:913474174580084737_0",
+        "ue": 12,
+        "mission": "flood_drone",
+        "capture": 109.09045176718479,
+        "arrival": 109.19045176718478,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 128,
+        "image_id": "crisismmd:906772360002523136_0",
+        "ue": 11,
+        "mission": "water_camera",
+        "capture": 110.59389764447315,
+        "arrival": 110.69389764447314,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 129,
+        "image_id": "crisismmd:906772360002523136_0",
+        "ue": 11,
+        "mission": "water_camera",
+        "capture": 110.60624202730851,
+        "arrival": 110.7062420273085,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 130,
+        "image_id": "crisismmd:908510389981368321_0",
+        "ue": 8,
+        "mission": "response_car",
+        "capture": 110.82562358767154,
+        "arrival": 110.92562358767154,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 131,
+        "image_id": "crisismmd:918065827047407616_0",
+        "ue": 37,
+        "mission": "road_drone",
+        "capture": 110.98168249956333,
+        "arrival": 111.08168249956333,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 132,
+        "image_id": "crisismmd:914977057859362816_0",
+        "ue": 7,
+        "mission": "damage_drone",
+        "capture": 111.71780149997949,
+        "arrival": 111.81780149997948,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 133,
+        "image_id": "crisismmd:908525619037732865_2",
+        "ue": 2,
+        "mission": "traffic_cctv",
+        "capture": 111.98241439714415,
+        "arrival": 112.08241439714415,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 134,
+        "image_id": "crisismmd:905691597005889536_0",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 112.33442213986169,
+        "arrival": 112.43442213986168,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 135,
+        "image_id": "crisismmd:908537559093039105_0",
+        "ue": 16,
+        "mission": "water_camera",
+        "capture": 113.32671526743326,
+        "arrival": 113.42671526743325,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 136,
+        "image_id": "crisismmd:907664730936020994_0",
+        "ue": 17,
+        "mission": "person_drone",
+        "capture": 113.51180163410335,
+        "arrival": 113.61180163410334,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 137,
+        "image_id": "crisismmd:908133217009590272_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 113.98502351172846,
+        "arrival": 114.08502351172845,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 138,
+        "image_id": "crisismmd:908133217009590272_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 114.21490885312255,
+        "arrival": 114.31490885312255,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 139,
+        "image_id": "crisismmd:911655561237843970_0",
+        "ue": 0,
+        "mission": "road_drone",
+        "capture": 114.7524659918403,
+        "arrival": 114.85246599184029,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 140,
+        "image_id": "crisismmd:907948019043196929_0",
+        "ue": 0,
+        "mission": "road_drone",
+        "capture": 115.04881968621609,
+        "arrival": 115.14881968621609,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 141,
+        "image_id": "crisismmd:930088679141527552_0",
+        "ue": 13,
+        "mission": "person_drone",
+        "capture": 115.17516765570767,
+        "arrival": 115.27516765570766,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 142,
+        "image_id": "crisismmd:910763300186505216_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 115.55554838471976,
+        "arrival": 115.65554838471975,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 143,
+        "image_id": "crisismmd:917807529479901184_0",
+        "ue": 27,
+        "mission": "damage_drone",
+        "capture": 115.78547396417389,
+        "arrival": 115.88547396417388,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 144,
+        "image_id": "crisismmd:905461810828070913_0",
+        "ue": 20,
+        "mission": "public_cctv",
+        "capture": 115.88028489512405,
+        "arrival": 115.98028489512404,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 145,
+        "image_id": "crisismmd:909424491427778560_1",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 116.16958198640161,
+        "arrival": 116.2695819864016,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 146,
+        "image_id": "crisismmd:907139822598356992_0",
+        "ue": 42,
+        "mission": "public_cctv",
+        "capture": 116.93053369303524,
+        "arrival": 117.03053369303524,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 147,
+        "image_id": "crisismmd:905407906757181440_0",
+        "ue": 21,
+        "mission": "phone",
+        "capture": 117.00728602748774,
+        "arrival": 117.10728602748773,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 148,
+        "image_id": "crisismmd:906744961072291840_0",
+        "ue": 5,
+        "mission": "road_drone",
+        "capture": 117.24138719695699,
+        "arrival": 117.34138719695699,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 149,
+        "image_id": "crisismmd:901688029521334272_3",
+        "ue": 22,
+        "mission": "maintenance",
+        "capture": 118.58057667644408,
+        "arrival": 118.68057667644408,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 150,
+        "image_id": "crisismmd:919804068155060225_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 118.62413667422734,
+        "arrival": 118.72413667422734,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 151,
+        "image_id": "crisismmd:905721072250736640_0",
+        "ue": 9,
+        "mission": "phone",
+        "capture": 118.72962740492574,
+        "arrival": 118.82962740492573,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 152,
+        "image_id": "crisismmd:917848117084430336_0",
+        "ue": 5,
+        "mission": "road_drone",
+        "capture": 119.16149728589865,
+        "arrival": 119.26149728589864,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 153,
+        "image_id": "crisismmd:930407396698218498_0",
+        "ue": 43,
+        "mission": "incident_phone",
+        "capture": 119.41543632904725,
+        "arrival": 119.51543632904725,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 154,
+        "image_id": "crisismmd:908525619037732865_2",
+        "ue": 2,
+        "mission": "traffic_cctv",
+        "capture": 119.45165813775374,
+        "arrival": 119.55165813775373,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 155,
+        "image_id": "crisismmd:906965327111737345_0",
+        "ue": 48,
+        "mission": "public_cctv",
+        "capture": 119.8377820108964,
+        "arrival": 119.9377820108964,
+        "phase": "incident",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 156,
+        "image_id": "crisismmd:930624137143508992_0",
+        "ue": 20,
+        "mission": "public_cctv",
+        "capture": 119.98060184002512,
+        "arrival": 120.08060184002511,
+        "phase": "incident",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 157,
+        "image_id": "crisismmd:928291159943692288_0",
+        "ue": 30,
+        "mission": "farm_drone",
+        "capture": 121.55731321921192,
+        "arrival": 121.65731321921191,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 158,
+        "image_id": "crisismmd:909798840471080961_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 123.98346747848802,
+        "arrival": 124.08346747848802,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 159,
+        "image_id": "crisismmd:871703713722880000_0",
+        "ue": 0,
+        "mission": "road_drone",
+        "capture": 124.35658319386869,
+        "arrival": 124.45658319386868,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 160,
+        "image_id": "crisismmd:904291309502038018_0",
+        "ue": 29,
+        "mission": "farm_drone",
+        "capture": 125.17048504401819,
+        "arrival": 125.27048504401819,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 161,
+        "image_id": "crisismmd:911987214858498048_0",
+        "ue": 35,
+        "mission": "incident_phone",
+        "capture": 125.44391752627254,
+        "arrival": 125.54391752627254,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 162,
+        "image_id": "crisismmd:928716883930550272_1",
+        "ue": 48,
+        "mission": "public_cctv",
+        "capture": 127.22270561308451,
+        "arrival": 127.32270561308451,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 163,
+        "image_id": "crisismmd:930072924752670720_0",
+        "ue": 11,
+        "mission": "water_camera",
+        "capture": 127.84444986413193,
+        "arrival": 127.94444986413193,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 164,
+        "image_id": "crisismmd:910541543961964544_0",
+        "ue": 4,
+        "mission": "car",
+        "capture": 129.58561753579318,
+        "arrival": 129.68561753579317,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 165,
+        "image_id": "crisismmd:905114566081867781_0",
+        "ue": 28,
+        "mission": "robot",
+        "capture": 131.05454292926046,
+        "arrival": 131.15454292926046,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 166,
+        "image_id": "crisismmd:910614165076750337_1",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 132.4459780777525,
+        "arrival": 132.5459780777525,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 167,
+        "image_id": "crisismmd:930101240339542016_0",
+        "ue": 15,
+        "mission": "damage_drone",
+        "capture": 134.82176917045132,
+        "arrival": 134.9217691704513,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 168,
+        "image_id": "crisismmd:878136759959343108_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 134.971651853218,
+        "arrival": 135.071651853218,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 169,
+        "image_id": "crisismmd:914187089914290176_0",
+        "ue": 37,
+        "mission": "road_drone",
+        "capture": 135.5247294880003,
+        "arrival": 135.6247294880003,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 170,
+        "image_id": "crisismmd:910715482742849537_0",
+        "ue": 27,
+        "mission": "damage_drone",
+        "capture": 137.1620407528542,
+        "arrival": 137.2620407528542,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 171,
+        "image_id": "crisismmd:907664730936020994_0",
+        "ue": 17,
+        "mission": "person_drone",
+        "capture": 138.09556025769808,
+        "arrival": 138.19556025769808,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 172,
+        "image_id": "crisismmd:909792210861694977_0",
+        "ue": 22,
+        "mission": "maintenance",
+        "capture": 138.6266722362838,
+        "arrival": 138.7266722362838,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 173,
+        "image_id": "crisismmd:910218229397602304_0",
+        "ue": 45,
+        "mission": "fire_drone",
+        "capture": 141.46672823695747,
+        "arrival": 141.56672823695746,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 174,
+        "image_id": "crisismmd:907772978116653056_1",
+        "ue": 13,
+        "mission": "person_drone",
+        "capture": 146.91177489571538,
+        "arrival": 147.01177489571538,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 175,
+        "image_id": "crisismmd:906204627393277952_0",
+        "ue": 43,
+        "mission": "incident_phone",
+        "capture": 147.5471212574447,
+        "arrival": 147.6471212574447,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 176,
+        "image_id": "crisismmd:907717423192788992_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 149.04461064501425,
+        "arrival": 149.14461064501424,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 177,
+        "image_id": "crisismmd:916028011023126529_0",
+        "ue": 36,
+        "mission": "water_camera",
+        "capture": 149.11238398215215,
+        "arrival": 149.21238398215215,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 178,
+        "image_id": "crisismmd:921482506922323969_0",
+        "ue": 34,
+        "mission": "water_camera",
+        "capture": 150.35127421214756,
+        "arrival": 150.45127421214755,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 179,
+        "image_id": "crisismmd:919902803761430528_0",
+        "ue": 45,
+        "mission": "fire_drone",
+        "capture": 151.15720469095652,
+        "arrival": 151.2572046909565,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 180,
+        "image_id": "crisismmd:913102526383144961_2",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 152.18085195691887,
+        "arrival": 152.28085195691887,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 181,
+        "image_id": "crisismmd:869954009963970560_0",
+        "ue": 47,
+        "mission": "car",
+        "capture": 152.4084934041802,
+        "arrival": 152.5084934041802,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 182,
+        "image_id": "crisismmd:909745313816219648_2",
+        "ue": 9,
+        "mission": "phone",
+        "capture": 152.45690696927267,
+        "arrival": 152.55690696927266,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 183,
+        "image_id": "crisismmd:909885632582787072_0",
+        "ue": 23,
+        "mission": "farm_drone",
+        "capture": 152.6829569991422,
+        "arrival": 152.7829569991422,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 184,
+        "image_id": "crisismmd:910525151719997440_0",
+        "ue": 37,
+        "mission": "road_drone",
+        "capture": 154.87600150878305,
+        "arrival": 154.97600150878304,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 185,
+        "image_id": "crisismmd:914125586494365696_0",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 155.54849675040077,
+        "arrival": 155.64849675040077,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 186,
+        "image_id": "crisismmd:931486388104679424_0",
+        "ue": 1,
+        "mission": "fire_drone",
+        "capture": 157.93609514528447,
+        "arrival": 158.03609514528446,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 187,
+        "image_id": "crisismmd:905796606796197888_0",
+        "ue": 37,
+        "mission": "road_drone",
+        "capture": 159.04400301171705,
+        "arrival": 159.14400301171705,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 188,
+        "image_id": "crisismmd:907772978116653056_1",
+        "ue": 13,
+        "mission": "person_drone",
+        "capture": 160.87322904917124,
+        "arrival": 160.97322904917124,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 189,
+        "image_id": "crisismmd:911558544780152832_1",
+        "ue": 5,
+        "mission": "road_drone",
+        "capture": 161.6507986521201,
+        "arrival": 161.7507986521201,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 190,
+        "image_id": "crisismmd:909855425402634247_0",
+        "ue": 44,
+        "mission": "traffic_cctv",
+        "capture": 163.71087770984556,
+        "arrival": 163.81087770984556,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 191,
+        "image_id": "crisismmd:904666134556819456_0",
+        "ue": 22,
+        "mission": "maintenance",
+        "capture": 166.43045838521837,
+        "arrival": 166.53045838521837,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 192,
+        "image_id": "crisismmd:909447240959262720_3",
+        "ue": 44,
+        "mission": "traffic_cctv",
+        "capture": 166.82586292155588,
+        "arrival": 166.92586292155588,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 193,
+        "image_id": "crisismmd:917921510731452416_0",
+        "ue": 17,
+        "mission": "person_drone",
+        "capture": 167.8144778151064,
+        "arrival": 167.91447781510638,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 194,
+        "image_id": "crisismmd:906199568597086208_0",
+        "ue": 26,
+        "mission": "fire_drone",
+        "capture": 170.24124948752234,
+        "arrival": 170.34124948752233,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 195,
+        "image_id": "crisismmd:909434968652251136_0",
+        "ue": 21,
+        "mission": "phone",
+        "capture": 170.49706322887815,
+        "arrival": 170.59706322887814,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 196,
+        "image_id": "crisismmd:910563191700185088_1",
+        "ue": 26,
+        "mission": "fire_drone",
+        "capture": 170.69511206106247,
+        "arrival": 170.79511206106247,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 197,
+        "image_id": "crisismmd:910542340967718912_0",
+        "ue": 26,
+        "mission": "fire_drone",
+        "capture": 171.49355269174077,
+        "arrival": 171.59355269174077,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 198,
+        "image_id": "crisismmd:911558544780152832_1",
+        "ue": 5,
+        "mission": "road_drone",
+        "capture": 171.53323581767992,
+        "arrival": 171.63323581767992,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 199,
+        "image_id": "crisismmd:917932244643311617_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 172.3913996690031,
+        "arrival": 172.4913996690031,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 200,
+        "image_id": "crisismmd:909965848235741187_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 172.80545813519913,
+        "arrival": 172.90545813519913,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 201,
+        "image_id": "crisismmd:930373217159712768_0",
+        "ue": 9,
+        "mission": "phone",
+        "capture": 174.3665609023084,
+        "arrival": 174.4665609023084,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 202,
+        "image_id": "crisismmd:911908841675264002_0",
+        "ue": 10,
+        "mission": "response_car",
+        "capture": 175.1287452579988,
+        "arrival": 175.22874525799878,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 203,
+        "image_id": "crisismmd:901813825711853568_0",
+        "ue": 14,
+        "mission": "public_cctv",
+        "capture": 175.24079471544118,
+        "arrival": 175.34079471544118,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 204,
+        "image_id": "crisismmd:910525564641009666_0",
+        "ue": 49,
+        "mission": "maintenance",
+        "capture": 175.47107749549343,
+        "arrival": 175.57107749549343,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 205,
+        "image_id": "crisismmd:901787699648004097_1",
+        "ue": 5,
+        "mission": "road_drone",
+        "capture": 175.49754541495406,
+        "arrival": 175.59754541495406,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 206,
+        "image_id": "crisismmd:914977057859362816_0",
+        "ue": 7,
+        "mission": "damage_drone",
+        "capture": 178.91879494221678,
+        "arrival": 179.01879494221677,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 207,
+        "image_id": "crisismmd:901822661080244224_0",
+        "ue": 43,
+        "mission": "incident_phone",
+        "capture": 179.64925802286018,
+        "arrival": 179.74925802286018,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 208,
+        "image_id": "crisismmd:901768014583840768_0",
+        "ue": 41,
+        "mission": "public_cctv",
+        "capture": 180.1384662722525,
+        "arrival": 180.23846627225248,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 209,
+        "image_id": "crisismmd:930262966460485632_0",
+        "ue": 14,
+        "mission": "public_cctv",
+        "capture": 182.307198976262,
+        "arrival": 182.40719897626198,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 210,
+        "image_id": "crisismmd:922977569732988928_0",
+        "ue": 6,
+        "mission": "water_camera",
+        "capture": 182.34879770512396,
+        "arrival": 182.44879770512395,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 211,
+        "image_id": "crisismmd:909718820968833030_0",
+        "ue": 20,
+        "mission": "public_cctv",
+        "capture": 184.50343805375252,
+        "arrival": 184.6034380537525,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 212,
+        "image_id": "crisismmd:904878370088816641_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 187.98532411482296,
+        "arrival": 188.08532411482295,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 213,
+        "image_id": "crisismmd:909833497640095746_0",
+        "ue": 37,
+        "mission": "road_drone",
+        "capture": 188.37833765920666,
+        "arrival": 188.47833765920666,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 214,
+        "image_id": "crisismmd:907772978116653056_1",
+        "ue": 13,
+        "mission": "person_drone",
+        "capture": 190.33277286047766,
+        "arrival": 190.43277286047766,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 215,
+        "image_id": "crisismmd:930262966460485632_0",
+        "ue": 40,
+        "mission": "public_cctv",
+        "capture": 192.5160167430734,
+        "arrival": 192.6160167430734,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 216,
+        "image_id": "crisismmd:923636376393928704_0",
+        "ue": 39,
+        "mission": "phone",
+        "capture": 192.94007400269714,
+        "arrival": 193.04007400269714,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 217,
+        "image_id": "crisismmd:908133217009590272_0",
+        "ue": 3,
+        "mission": "damage_drone",
+        "capture": 195.21429350639306,
+        "arrival": 195.31429350639306,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 218,
+        "image_id": "crisismmd:873491045442441216_1",
+        "ue": 33,
+        "mission": "robot",
+        "capture": 195.65039272978476,
+        "arrival": 195.75039272978475,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 219,
+        "image_id": "crisismmd:929992506158149635_0",
+        "ue": 25,
+        "mission": "traffic_cctv",
+        "capture": 196.68234353173904,
+        "arrival": 196.78234353173903,
+        "phase": "followup",
+        "kind": "exact_repeat",
+        "annotation": {}
+      },
+      {
+        "token": 220,
+        "image_id": "crisismmd:873818174466121728_0",
+        "ue": 40,
+        "mission": "public_cctv",
+        "capture": 199.3926100377673,
+        "arrival": 199.4926100377673,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      },
+      {
+        "token": 221,
+        "image_id": "crisismmd:918009550409752576_0",
+        "ue": 18,
+        "mission": "flood_drone",
+        "capture": 199.74848210476137,
+        "arrival": 199.84848210476136,
+        "phase": "followup",
+        "kind": "routine",
+        "annotation": {}
+      }
+    ],
+    "input_profile": {
+      "schema": "scene93_received387_v1",
+      "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+      "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+      "feature_order": "scene374+SPI4+R+N+availability6+cold1",
+      "semantic_producer": {
+        "repo": "openai/clip-vit-base-patch32",
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+        "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+        "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+        "weights_sha256": {
+          "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+        },
+        "download_checkpoint_bytes": 605247071,
+        "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+        "parameters": 87849216
+      },
+      "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+      "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+      "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+      "sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+    },
+    "expected_aggregate_rate_if_all_active": 1.2,
+    "expected_per_ue_rate_if_active": 0.024,
+    "realized_rate": 1.11,
+    "offered_service_load": 1.11,
+    "scope": "simulated capture/arrival times; scene linkage only from declared manifest; no physical mobility/GPS inferred"
+  },
+  "metrics": {
+    "J_D": 9.307347372523337,
+    "L_E": null,
+    "offered": 222,
+    "selected": 178,
+    "queued_at_horizon": 44,
+    "not_arrived": 0,
+    "completed": 177,
+    "failed": 0,
+    "in_flight": 1,
+    "by_reference_tier": {
+      "Critical": {
+        "offered": 9,
+        "selected": 7,
+        "unselected": 2,
+        "mean_selected_wait": 27.16136998410269,
+        "median_selected_wait": 2.2229648305610255,
+        "p95_selected_wait": null,
+        "restricted_mean_wait": 9.2932876662772,
+        "followup_count": 9,
+        "eligible": 9,
+        "within_budget": 0.3333333333333333
+      },
+      "High": {
+        "offered": 109,
+        "selected": 101,
+        "unselected": 8,
+        "mean_selected_wait": 11.362129930478766,
+        "median_selected_wait": 1.1974402030929667,
+        "p95_selected_wait": 59.88531299753829,
+        "restricted_mean_wait": 5.5864689143648505,
+        "followup_count": 109,
+        "eligible": 109,
+        "within_budget": 0.5596330275229358
+      },
+      "Medium": {
+        "offered": 46,
+        "selected": 33,
+        "unselected": 13,
+        "mean_selected_wait": 28.863102289595354,
+        "median_selected_wait": 5.326095262995892,
+        "p95_selected_wait": 110.21055727285412,
+        "restricted_mean_wait": 10.406271960035713,
+        "followup_count": 46,
+        "eligible": 46,
+        "within_budget": 0.391304347826087
+      },
+      "Low": {
+        "offered": 58,
+        "selected": 37,
+        "unselected": 21,
+        "mean_selected_wait": 28.485703489656512,
+        "median_selected_wait": 12.359180771874748,
+        "p95_selected_wait": 109.49514901474289,
+        "restricted_mean_wait": 11.219117502735191,
+        "followup_count": 58,
+        "eligible": 58,
+        "within_budget": 0.3275862068965517
+      }
+    },
+    "selection_ms": {
+      "p50": 13.6953715,
+      "p95": 15.84532235,
+      "n": 178
+    },
+    "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+  },
+  "events": [
+    {
+      "token": 0,
+      "source": 45,
+      "arrival": 0.4805513826893514,
+      "dispatch": 0.4805513826893514,
+      "finish": 1.4805513826893515,
+      "observed_until": 1.4805513826893515,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 1,
+      "source": 18,
+      "arrival": 1.8741217703055235,
+      "dispatch": 1.8741217703055235,
+      "finish": 2.8741217703055235,
+      "observed_until": 2.8741217703055235,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 2,
+      "source": 32,
+      "arrival": 5.543324992809319,
+      "dispatch": 5.543324992809319,
+      "finish": 6.543324992809319,
+      "observed_until": 6.543324992809319,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 3,
+      "source": 31,
+      "arrival": 8.32967413224232,
+      "dispatch": 8.32967413224232,
+      "finish": 9.32967413224232,
+      "observed_until": 9.32967413224232,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 4,
+      "source": 38,
+      "arrival": 9.302599955401691,
+      "dispatch": 9.32967413224232,
+      "finish": 10.32967413224232,
+      "observed_until": 10.32967413224232,
+      "wait": 0.027074176840628184,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 5,
+      "source": 36,
+      "arrival": 10.737160080578063,
+      "dispatch": 10.737160080578063,
+      "finish": 11.737160080578063,
+      "observed_until": 11.737160080578063,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 6,
+      "source": 29,
+      "arrival": 15.893883923177034,
+      "dispatch": 15.893883923177034,
+      "finish": 16.893883923177036,
+      "observed_until": 16.893883923177036,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 7,
+      "source": 33,
+      "arrival": 17.835262825330698,
+      "dispatch": 17.835262825330698,
+      "finish": 18.835262825330698,
+      "observed_until": 18.835262825330698,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 8,
+      "source": 30,
+      "arrival": 18.58461162148824,
+      "dispatch": 18.835262825330698,
+      "finish": 19.835262825330698,
+      "observed_until": 19.835262825330698,
+      "wait": 0.25065120384245887,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 9,
+      "source": 36,
+      "arrival": 20.979763013289727,
+      "dispatch": 20.979763013289727,
+      "finish": 21.979763013289727,
+      "observed_until": 21.979763013289727,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 10,
+      "source": 13,
+      "arrival": 22.93589813096694,
+      "dispatch": 22.93589813096694,
+      "finish": 23.93589813096694,
+      "observed_until": 23.93589813096694,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 11,
+      "source": 47,
+      "arrival": 24.141748974719807,
+      "dispatch": 24.141748974719807,
+      "finish": 25.141748974719807,
+      "observed_until": 25.141748974719807,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 12,
+      "source": 6,
+      "arrival": 28.413394516855238,
+      "dispatch": 28.413394516855238,
+      "finish": 29.413394516855238,
+      "observed_until": 29.413394516855238,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 13,
+      "source": 29,
+      "arrival": 29.26180658593124,
+      "dispatch": 29.413394516855238,
+      "finish": 30.413394516855238,
+      "observed_until": 30.413394516855238,
+      "wait": 0.15158793092399847,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 14,
+      "source": 12,
+      "arrival": 29.652853251200042,
+      "dispatch": 30.413394516855238,
+      "finish": 31.413394516855238,
+      "observed_until": 31.413394516855238,
+      "wait": 0.7605412656551955,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 15,
+      "source": 27,
+      "arrival": 30.21595431376227,
+      "dispatch": 31.413394516855238,
+      "finish": 32.413394516855234,
+      "observed_until": 32.413394516855234,
+      "wait": 1.1974402030929667,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 16,
+      "source": 38,
+      "arrival": 31.32782257503634,
+      "dispatch": 32.413394516855234,
+      "finish": 33.413394516855234,
+      "observed_until": 33.413394516855234,
+      "wait": 1.0855719418188947,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 18,
+      "source": 18,
+      "arrival": 32.93827151270287,
+      "dispatch": 33.413394516855234,
+      "finish": 34.413394516855234,
+      "observed_until": 34.413394516855234,
+      "wait": 0.4751230041523655,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 19,
+      "source": 1,
+      "arrival": 34.00865763657301,
+      "dispatch": 34.413394516855234,
+      "finish": 35.413394516855234,
+      "observed_until": 35.413394516855234,
+      "wait": 0.404736880282222,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 20,
+      "source": 17,
+      "arrival": 34.901842558299535,
+      "dispatch": 35.413394516855234,
+      "finish": 36.413394516855234,
+      "observed_until": 36.413394516855234,
+      "wait": 0.5115519585556996,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 21,
+      "source": 34,
+      "arrival": 35.66945477099676,
+      "dispatch": 36.413394516855234,
+      "finish": 37.413394516855234,
+      "observed_until": 37.413394516855234,
+      "wait": 0.7439397458584764,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 17,
+      "source": 41,
+      "arrival": 32.1711050104537,
+      "dispatch": 37.413394516855234,
+      "finish": 38.413394516855234,
+      "observed_until": 38.413394516855234,
+      "wait": 5.242289506401534,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 22,
+      "source": 28,
+      "arrival": 40.63998373238575,
+      "dispatch": 40.63998373238575,
+      "finish": 41.63998373238575,
+      "observed_until": 41.63998373238575,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 23,
+      "source": 32,
+      "arrival": 41.43701593408616,
+      "dispatch": 41.63998373238575,
+      "finish": 42.63998373238575,
+      "observed_until": 42.63998373238575,
+      "wait": 0.20296779829958922,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 24,
+      "source": 29,
+      "arrival": 44.3361114309185,
+      "dispatch": 44.3361114309185,
+      "finish": 45.3361114309185,
+      "observed_until": 45.3361114309185,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 25,
+      "source": 44,
+      "arrival": 44.530096158424904,
+      "dispatch": 45.3361114309185,
+      "finish": 46.3361114309185,
+      "observed_until": 46.3361114309185,
+      "wait": 0.8060152724935961,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 26,
+      "source": 47,
+      "arrival": 44.873084255088955,
+      "dispatch": 46.3361114309185,
+      "finish": 47.3361114309185,
+      "observed_until": 47.3361114309185,
+      "wait": 1.463027175829545,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 27,
+      "source": 33,
+      "arrival": 46.792312909009205,
+      "dispatch": 47.3361114309185,
+      "finish": 48.3361114309185,
+      "observed_until": 48.3361114309185,
+      "wait": 0.5437985219092951,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 28,
+      "source": 1,
+      "arrival": 53.07189306035195,
+      "dispatch": 53.07189306035195,
+      "finish": 54.07189306035195,
+      "observed_until": 54.07189306035195,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 29,
+      "source": 49,
+      "arrival": 53.56032273393892,
+      "dispatch": 54.07189306035195,
+      "finish": 55.07189306035195,
+      "observed_until": 55.07189306035195,
+      "wait": 0.5115703264130289,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 30,
+      "source": 1,
+      "arrival": 55.5320744022033,
+      "dispatch": 55.5320744022033,
+      "finish": 56.5320744022033,
+      "observed_until": 56.5320744022033,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 31,
+      "source": 20,
+      "arrival": 55.678373978087144,
+      "dispatch": 56.5320744022033,
+      "finish": 57.5320744022033,
+      "observed_until": 57.5320744022033,
+      "wait": 0.8537004241161554,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 32,
+      "source": 0,
+      "arrival": 60.960892689119774,
+      "dispatch": 60.960892689119774,
+      "finish": 61.960892689119774,
+      "observed_until": 61.960892689119774,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 33,
+      "source": 15,
+      "arrival": 64.03917500403108,
+      "dispatch": 64.03917500403108,
+      "finish": 65.03917500403108,
+      "observed_until": 65.03917500403108,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 34,
+      "source": 21,
+      "arrival": 64.21234635546031,
+      "dispatch": 65.03917500403108,
+      "finish": 66.03917500403108,
+      "observed_until": 66.03917500403108,
+      "wait": 0.8268286485707677,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 35,
+      "source": 46,
+      "arrival": 67.17552445998166,
+      "dispatch": 67.17552445998166,
+      "finish": 68.17552445998166,
+      "observed_until": 68.17552445998166,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 36,
+      "source": 24,
+      "arrival": 69.41397167208588,
+      "dispatch": 69.41397167208588,
+      "finish": 70.41397167208588,
+      "observed_until": 70.41397167208588,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 38,
+      "source": 37,
+      "arrival": 70.33465014677184,
+      "dispatch": 70.41397167208588,
+      "finish": 71.41397167208588,
+      "observed_until": 71.41397167208588,
+      "wait": 0.07932152531404313,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 37,
+      "source": 35,
+      "arrival": 70.22241721637,
+      "dispatch": 71.41397167208588,
+      "finish": 72.41397167208588,
+      "observed_until": 72.41397167208588,
+      "wait": 1.191554455715874,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 39,
+      "source": 43,
+      "arrival": 73.02078346961319,
+      "dispatch": 73.02078346961319,
+      "finish": 74.02078346961319,
+      "observed_until": 74.02078346961319,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 40,
+      "source": 18,
+      "arrival": 74.64055295092115,
+      "dispatch": 74.64055295092115,
+      "finish": 75.64055295092115,
+      "observed_until": 75.64055295092115,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 41,
+      "source": 14,
+      "arrival": 76.06506403912643,
+      "dispatch": 76.06506403912643,
+      "finish": 77.06506403912643,
+      "observed_until": 77.06506403912643,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 42,
+      "source": 42,
+      "arrival": 80.10843879473491,
+      "dispatch": 80.10843879473491,
+      "finish": 81.10843879473491,
+      "observed_until": 81.10843879473491,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 44,
+      "source": 8,
+      "arrival": 80.23553381988945,
+      "dispatch": 81.10843879473491,
+      "finish": 82.10843879473491,
+      "observed_until": 82.10843879473491,
+      "wait": 0.8729049748454543,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 46,
+      "source": 29,
+      "arrival": 81.59957558123287,
+      "dispatch": 82.10843879473491,
+      "finish": 83.10843879473491,
+      "observed_until": 83.10843879473491,
+      "wait": 0.508863213502039,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 47,
+      "source": 19,
+      "arrival": 81.76277142413507,
+      "dispatch": 83.10843879473491,
+      "finish": 84.10843879473491,
+      "observed_until": 84.10843879473491,
+      "wait": 1.3456673705998412,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 45,
+      "source": 9,
+      "arrival": 80.8105203556046,
+      "dispatch": 84.10843879473491,
+      "finish": 85.10843879473491,
+      "observed_until": 85.10843879473491,
+      "wait": 3.2979184391303136,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 54,
+      "source": 30,
+      "arrival": 84.5233566728564,
+      "dispatch": 85.10843879473491,
+      "finish": 86.10843879473491,
+      "observed_until": 86.10843879473491,
+      "wait": 0.5850821218785143,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 56,
+      "source": 16,
+      "arrival": 85.86958071336038,
+      "dispatch": 86.10843879473491,
+      "finish": 87.10843879473491,
+      "observed_until": 87.10843879473491,
+      "wait": 0.23885808137453068,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 62,
+      "source": 12,
+      "arrival": 87.0723908077459,
+      "dispatch": 87.10843879473491,
+      "finish": 88.10843879473491,
+      "observed_until": 88.10843879473491,
+      "wait": 0.036047986989004244,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 49,
+      "source": 27,
+      "arrival": 82.55979423087344,
+      "dispatch": 88.10843879473491,
+      "finish": 89.10843879473491,
+      "observed_until": 89.10843879473491,
+      "wait": 5.5486445638614725,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 60,
+      "source": 46,
+      "arrival": 86.87587008566393,
+      "dispatch": 89.10843879473491,
+      "finish": 90.10843879473491,
+      "observed_until": 90.10843879473491,
+      "wait": 2.232568709070975,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 65,
+      "source": 3,
+      "arrival": 89.2338607773014,
+      "dispatch": 90.10843879473491,
+      "finish": 91.10843879473491,
+      "observed_until": 91.10843879473491,
+      "wait": 0.8745780174335067,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 48,
+      "source": 4,
+      "arrival": 82.01627221615561,
+      "dispatch": 91.10843879473491,
+      "finish": 92.10843879473491,
+      "observed_until": 92.10843879473491,
+      "wait": 9.092166578579295,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 53,
+      "source": 9,
+      "arrival": 84.2294187885181,
+      "dispatch": 92.10843879473491,
+      "finish": 93.10843879473491,
+      "observed_until": 93.10843879473491,
+      "wait": 7.879020006216805,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 74,
+      "source": 14,
+      "arrival": 92.12054455233019,
+      "dispatch": 93.10843879473491,
+      "finish": 94.10843879473491,
+      "observed_until": 94.10843879473491,
+      "wait": 0.987894242404721,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 72,
+      "source": 46,
+      "arrival": 91.6476245153682,
+      "dispatch": 94.10843879473491,
+      "finish": 95.10843879473491,
+      "observed_until": 95.10843879473491,
+      "wait": 2.4608142793667156,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 81,
+      "source": 29,
+      "arrival": 94.92841746075938,
+      "dispatch": 95.10843879473491,
+      "finish": 96.10843879473491,
+      "observed_until": 96.10843879473491,
+      "wait": 0.18002133397553166,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 82,
+      "source": 0,
+      "arrival": 95.2221152905621,
+      "dispatch": 96.10843879473491,
+      "finish": 97.10843879473491,
+      "observed_until": 97.10843879473491,
+      "wait": 0.8863235041728075,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 61,
+      "source": 8,
+      "arrival": 86.90795957288076,
+      "dispatch": 97.10843879473491,
+      "finish": 98.10843879473491,
+      "observed_until": 98.10843879473491,
+      "wait": 10.200479221854152,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 64,
+      "source": 36,
+      "arrival": 89.02847617787342,
+      "dispatch": 98.10843879473491,
+      "finish": 99.10843879473491,
+      "observed_until": 99.10843879473491,
+      "wait": 9.079962616861494,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 93,
+      "source": 3,
+      "arrival": 98.23677413034116,
+      "dispatch": 99.10843879473491,
+      "finish": 100.10843879473491,
+      "observed_until": 100.10843879473491,
+      "wait": 0.871664664393748,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 92,
+      "source": 0,
+      "arrival": 98.07141214870725,
+      "dispatch": 100.10843879473491,
+      "finish": 101.10843879473491,
+      "observed_until": 101.10843879473491,
+      "wait": 2.0370266460276554,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 107,
+      "source": 32,
+      "arrival": 100.34753776557784,
+      "dispatch": 101.10843879473491,
+      "finish": 102.10843879473491,
+      "observed_until": 102.10843879473491,
+      "wait": 0.7609010291570684,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 111,
+      "source": 1,
+      "arrival": 101.48119002356344,
+      "dispatch": 102.10843879473491,
+      "finish": 103.10843879473491,
+      "observed_until": 103.10843879473491,
+      "wait": 0.627248771171466,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 109,
+      "source": 12,
+      "arrival": 101.26732632451359,
+      "dispatch": 103.10843879473491,
+      "finish": 104.10843879473491,
+      "observed_until": 104.10843879473491,
+      "wait": 1.8411124702213186,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 115,
+      "source": 34,
+      "arrival": 104.05988703626343,
+      "dispatch": 104.10843879473491,
+      "finish": 105.10843879473491,
+      "observed_until": 105.10843879473491,
+      "wait": 0.04855175847147564,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 104,
+      "source": 30,
+      "arrival": 100.2644420951,
+      "dispatch": 105.10843879473491,
+      "finish": 106.10843879473491,
+      "observed_until": 106.10843879473491,
+      "wait": 4.843996699634914,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 101,
+      "source": 49,
+      "arrival": 99.81147979618818,
+      "dispatch": 106.10843879473491,
+      "finish": 107.10843879473491,
+      "observed_until": 107.10843879473491,
+      "wait": 6.296958998546728,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 113,
+      "source": 32,
+      "arrival": 102.8737596205178,
+      "dispatch": 107.10843879473491,
+      "finish": 108.10843879473491,
+      "observed_until": 108.10843879473491,
+      "wait": 4.234679174217106,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 95,
+      "source": 17,
+      "arrival": 98.31573262608076,
+      "dispatch": 108.10843879473491,
+      "finish": 109.10843879473491,
+      "observed_until": 109.10843879473491,
+      "wait": 9.79270616865415,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 119,
+      "source": 48,
+      "arrival": 105.54923656851713,
+      "dispatch": 109.10843879473491,
+      "finish": 110.10843879473491,
+      "observed_until": 110.10843879473491,
+      "wait": 3.559202226217778,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 126,
+      "source": 27,
+      "arrival": 109.03467295880651,
+      "dispatch": 110.10843879473491,
+      "finish": 111.10843879473491,
+      "observed_until": 111.10843879473491,
+      "wait": 1.0737658359283984,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 125,
+      "source": 46,
+      "arrival": 108.70684407626143,
+      "dispatch": 111.10843879473491,
+      "finish": 112.10843879473491,
+      "observed_until": 112.10843879473491,
+      "wait": 2.4015947184734756,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 124,
+      "source": 4,
+      "arrival": 107.9729839649218,
+      "dispatch": 112.10843879473491,
+      "finish": 113.10843879473491,
+      "observed_until": 113.10843879473491,
+      "wait": 4.1354548298131135,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 71,
+      "source": 30,
+      "arrival": 91.4355095622543,
+      "dispatch": 113.10843879473491,
+      "finish": 114.10843879473491,
+      "observed_until": 114.10843879473491,
+      "wait": 21.672929232480612,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 137,
+      "source": 34,
+      "arrival": 114.08502351172845,
+      "dispatch": 114.10843879473491,
+      "finish": 115.10843879473491,
+      "observed_until": 115.10843879473491,
+      "wait": 0.023415283006457344,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 138,
+      "source": 34,
+      "arrival": 114.31490885312255,
+      "dispatch": 115.10843879473491,
+      "finish": 116.10843879473491,
+      "observed_until": 116.10843879473491,
+      "wait": 0.7935299416123627,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 142,
+      "source": 3,
+      "arrival": 115.65554838471975,
+      "dispatch": 116.10843879473491,
+      "finish": 117.10843879473491,
+      "observed_until": 117.10843879473491,
+      "wait": 0.45289041001515784,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 135,
+      "source": 16,
+      "arrival": 113.42671526743325,
+      "dispatch": 117.10843879473491,
+      "finish": 118.10843879473491,
+      "observed_until": 118.10843879473491,
+      "wait": 3.6817235273016564,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 143,
+      "source": 27,
+      "arrival": 115.88547396417388,
+      "dispatch": 118.10843879473491,
+      "finish": 119.10843879473491,
+      "observed_until": 119.10843879473491,
+      "wait": 2.2229648305610255,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 130,
+      "source": 8,
+      "arrival": 110.92562358767154,
+      "dispatch": 119.10843879473491,
+      "finish": 120.10843879473491,
+      "observed_until": 120.10843879473491,
+      "wait": 8.18281520706337,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 139,
+      "source": 0,
+      "arrival": 114.85246599184029,
+      "dispatch": 120.10843879473491,
+      "finish": 121.10843879473491,
+      "observed_until": 121.10843879473491,
+      "wait": 5.255972802894618,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 140,
+      "source": 0,
+      "arrival": 115.14881968621609,
+      "dispatch": 121.10843879473491,
+      "finish": 122.10843879473491,
+      "observed_until": 122.10843879473491,
+      "wait": 5.959619108518822,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 121,
+      "source": 48,
+      "arrival": 106.02716903159637,
+      "dispatch": 122.10843879473491,
+      "finish": 123.10843879473491,
+      "observed_until": 123.10843879473491,
+      "wait": 16.081269763138536,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 149,
+      "source": 22,
+      "arrival": 118.68057667644408,
+      "dispatch": 123.10843879473491,
+      "finish": 124.10843879473491,
+      "observed_until": 124.10843879473491,
+      "wait": 4.427862118290832,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 151,
+      "source": 9,
+      "arrival": 118.82962740492573,
+      "dispatch": 124.10843879473491,
+      "finish": 125.10843879473491,
+      "observed_until": 125.10843879473491,
+      "wait": 5.278811389809178,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 157,
+      "source": 30,
+      "arrival": 121.65731321921191,
+      "dispatch": 125.10843879473491,
+      "finish": 126.10843879473491,
+      "observed_until": 126.10843879473491,
+      "wait": 3.451125575522994,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 155,
+      "source": 48,
+      "arrival": 119.9377820108964,
+      "dispatch": 126.10843879473491,
+      "finish": 127.10843879473491,
+      "observed_until": 127.10843879473491,
+      "wait": 6.17065678383851,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 152,
+      "source": 5,
+      "arrival": 119.26149728589864,
+      "dispatch": 127.10843879473491,
+      "finish": 128.10843879473492,
+      "observed_until": 128.10843879473492,
+      "wait": 7.846941508836267,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 160,
+      "source": 29,
+      "arrival": 125.27048504401819,
+      "dispatch": 128.10843879473492,
+      "finish": 129.10843879473492,
+      "observed_until": 129.10843879473492,
+      "wait": 2.8379537507167356,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 147,
+      "source": 21,
+      "arrival": 117.10728602748773,
+      "dispatch": 129.10843879473492,
+      "finish": 130.10843879473492,
+      "observed_until": 130.10843879473492,
+      "wait": 12.001152767247191,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 150,
+      "source": 34,
+      "arrival": 118.72413667422734,
+      "dispatch": 130.10843879473492,
+      "finish": 131.10843879473492,
+      "observed_until": 131.10843879473492,
+      "wait": 11.384302120507584,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 80,
+      "source": 29,
+      "arrival": 94.86630484213532,
+      "dispatch": 131.10843879473492,
+      "finish": 132.10843879473492,
+      "observed_until": 132.10843879473492,
+      "wait": 36.2421339525996,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 132,
+      "source": 7,
+      "arrival": 111.81780149997948,
+      "dispatch": 132.10843879473492,
+      "finish": 133.10843879473492,
+      "observed_until": 133.10843879473492,
+      "wait": 20.29063729475544,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 129,
+      "source": 11,
+      "arrival": 110.7062420273085,
+      "dispatch": 133.10843879473492,
+      "finish": 134.10843879473492,
+      "observed_until": 134.10843879473492,
+      "wait": 22.402196767426418,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 52,
+      "source": 34,
+      "arrival": 83.49700953333142,
+      "dispatch": 134.10843879473492,
+      "finish": 135.10843879473492,
+      "observed_until": 135.10843879473492,
+      "wait": 50.6114292614035,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 159,
+      "source": 0,
+      "arrival": 124.45658319386868,
+      "dispatch": 135.10843879473492,
+      "finish": 136.10843879473492,
+      "observed_until": 136.10843879473492,
+      "wait": 10.651855600866242,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 165,
+      "source": 28,
+      "arrival": 131.15454292926046,
+      "dispatch": 136.10843879473492,
+      "finish": 137.10843879473492,
+      "observed_until": 137.10843879473492,
+      "wait": 4.953895865474465,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 169,
+      "source": 37,
+      "arrival": 135.6247294880003,
+      "dispatch": 137.10843879473492,
+      "finish": 138.10843879473492,
+      "observed_until": 138.10843879473492,
+      "wait": 1.4837093067346245,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 91,
+      "source": 25,
+      "arrival": 97.74078667202514,
+      "dispatch": 138.10843879473492,
+      "finish": 139.10843879473492,
+      "observed_until": 139.10843879473492,
+      "wait": 40.367652122709785,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 148,
+      "source": 5,
+      "arrival": 117.34138719695699,
+      "dispatch": 139.10843879473492,
+      "finish": 140.10843879473492,
+      "observed_until": 140.10843879473492,
+      "wait": 21.767051597777936,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 51,
+      "source": 49,
+      "arrival": 82.83759101815022,
+      "dispatch": 140.10843879473492,
+      "finish": 141.10843879473492,
+      "observed_until": 141.10843879473492,
+      "wait": 57.2708477765847,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 110,
+      "source": 29,
+      "arrival": 101.30253550046781,
+      "dispatch": 141.10843879473492,
+      "finish": 142.10843879473492,
+      "observed_until": 142.10843879473492,
+      "wait": 39.80590329426711,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 128,
+      "source": 11,
+      "arrival": 110.69389764447314,
+      "dispatch": 142.10843879473492,
+      "finish": 143.10843879473492,
+      "observed_until": 143.10843879473492,
+      "wait": 31.414541150261783,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 136,
+      "source": 17,
+      "arrival": 113.61180163410334,
+      "dispatch": 143.10843879473492,
+      "finish": 144.10843879473492,
+      "observed_until": 144.10843879473492,
+      "wait": 29.49663716063158,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 102,
+      "source": 10,
+      "arrival": 99.94930843526562,
+      "dispatch": 144.10843879473492,
+      "finish": 145.10843879473492,
+      "observed_until": 145.10843879473492,
+      "wait": 44.1591303594693,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 171,
+      "source": 17,
+      "arrival": 138.19556025769808,
+      "dispatch": 145.10843879473492,
+      "finish": 146.10843879473492,
+      "observed_until": 146.10843879473492,
+      "wait": 6.912878537036846,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 172,
+      "source": 22,
+      "arrival": 138.7266722362838,
+      "dispatch": 146.10843879473492,
+      "finish": 147.10843879473492,
+      "observed_until": 147.10843879473492,
+      "wait": 7.381766558451119,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 174,
+      "source": 13,
+      "arrival": 147.01177489571538,
+      "dispatch": 147.10843879473492,
+      "finish": 148.10843879473492,
+      "observed_until": 148.10843879473492,
+      "wait": 0.0966638990195463,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 173,
+      "source": 45,
+      "arrival": 141.56672823695746,
+      "dispatch": 148.10843879473492,
+      "finish": 149.10843879473492,
+      "observed_until": 149.10843879473492,
+      "wait": 6.5417105577774635,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 78,
+      "source": 21,
+      "arrival": 93.11362949361403,
+      "dispatch": 149.10843879473492,
+      "finish": 150.10843879473492,
+      "observed_until": 150.10843879473492,
+      "wait": 55.994809301120895,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 88,
+      "source": 29,
+      "arrival": 96.20505705608218,
+      "dispatch": 150.10843879473492,
+      "finish": 151.10843879473492,
+      "observed_until": 151.10843879473492,
+      "wait": 53.90338173865274,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 158,
+      "source": 34,
+      "arrival": 124.08346747848802,
+      "dispatch": 151.10843879473492,
+      "finish": 152.10843879473492,
+      "observed_until": 152.10843879473492,
+      "wait": 27.024971316246905,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 179,
+      "source": 45,
+      "arrival": 151.2572046909565,
+      "dispatch": 152.10843879473492,
+      "finish": 153.10843879473492,
+      "observed_until": 153.10843879473492,
+      "wait": 0.8512341037784097,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 181,
+      "source": 47,
+      "arrival": 152.5084934041802,
+      "dispatch": 153.10843879473492,
+      "finish": 154.10843879473492,
+      "observed_until": 154.10843879473492,
+      "wait": 0.5999453905547227,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 177,
+      "source": 36,
+      "arrival": 149.21238398215215,
+      "dispatch": 154.10843879473492,
+      "finish": 155.10843879473492,
+      "observed_until": 155.10843879473492,
+      "wait": 4.896054812582776,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 163,
+      "source": 11,
+      "arrival": 127.94444986413193,
+      "dispatch": 155.10843879473492,
+      "finish": 156.10843879473492,
+      "observed_until": 156.10843879473492,
+      "wait": 27.163988930602997,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 184,
+      "source": 37,
+      "arrival": 154.97600150878304,
+      "dispatch": 156.10843879473492,
+      "finish": 157.10843879473492,
+      "observed_until": 157.10843879473492,
+      "wait": 1.1324372859518803,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 178,
+      "source": 34,
+      "arrival": 150.45127421214755,
+      "dispatch": 157.10843879473492,
+      "finish": 158.10843879473492,
+      "observed_until": 158.10843879473492,
+      "wait": 6.65716458258737,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 146,
+      "source": 42,
+      "arrival": 117.03053369303524,
+      "dispatch": 158.10843879473492,
+      "finish": 159.10843879473492,
+      "observed_until": 159.10843879473492,
+      "wait": 41.077905101699685,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 123,
+      "source": 28,
+      "arrival": 107.73175244405718,
+      "dispatch": 159.10843879473492,
+      "finish": 160.10843879473492,
+      "observed_until": 160.10843879473492,
+      "wait": 51.376686350677744,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 187,
+      "source": 37,
+      "arrival": 159.14400301171705,
+      "dispatch": 160.10843879473492,
+      "finish": 161.10843879473492,
+      "observed_until": 161.10843879473492,
+      "wait": 0.9644357830178762,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 188,
+      "source": 13,
+      "arrival": 160.97322904917124,
+      "dispatch": 161.10843879473492,
+      "finish": 162.10843879473492,
+      "observed_until": 162.10843879473492,
+      "wait": 0.13520974556368515,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 112,
+      "source": 4,
+      "arrival": 102.22312579719663,
+      "dispatch": 162.10843879473492,
+      "finish": 163.10843879473492,
+      "observed_until": 163.10843879473492,
+      "wait": 59.88531299753829,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 114,
+      "source": 7,
+      "arrival": 103.26822906927595,
+      "dispatch": 163.10843879473492,
+      "finish": 164.10843879473492,
+      "observed_until": 164.10843879473492,
+      "wait": 59.840209725458976,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 189,
+      "source": 5,
+      "arrival": 161.7507986521201,
+      "dispatch": 164.10843879473492,
+      "finish": 165.10843879473492,
+      "observed_until": 165.10843879473492,
+      "wait": 2.3576401426148266,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 94,
+      "source": 34,
+      "arrival": 98.24621337776031,
+      "dispatch": 165.10843879473492,
+      "finish": 166.10843879473492,
+      "observed_until": 166.10843879473492,
+      "wait": 66.86222541697461,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 154,
+      "source": 2,
+      "arrival": 119.55165813775373,
+      "dispatch": 166.10843879473492,
+      "finish": 167.10843879473492,
+      "observed_until": 167.10843879473492,
+      "wait": 46.55678065698119,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 192,
+      "source": 44,
+      "arrival": 166.92586292155588,
+      "dispatch": 167.10843879473492,
+      "finish": 168.10843879473492,
+      "observed_until": 168.10843879473492,
+      "wait": 0.18257587317904722,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 193,
+      "source": 17,
+      "arrival": 167.91447781510638,
+      "dispatch": 168.10843879473492,
+      "finish": 169.10843879473492,
+      "observed_until": 169.10843879473492,
+      "wait": 0.19396097962854242,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 190,
+      "source": 44,
+      "arrival": 163.81087770984556,
+      "dispatch": 169.10843879473492,
+      "finish": 170.10843879473492,
+      "observed_until": 170.10843879473492,
+      "wait": 5.297561084889367,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 156,
+      "source": 20,
+      "arrival": 120.08060184002511,
+      "dispatch": 170.10843879473492,
+      "finish": 171.10843879473492,
+      "observed_until": 171.10843879473492,
+      "wait": 50.02783695470981,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 195,
+      "source": 21,
+      "arrival": 170.59706322887814,
+      "dispatch": 171.10843879473492,
+      "finish": 172.10843879473492,
+      "observed_until": 172.10843879473492,
+      "wait": 0.5113755658567811,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 198,
+      "source": 5,
+      "arrival": 171.63323581767992,
+      "dispatch": 172.10843879473492,
+      "finish": 173.10843879473492,
+      "observed_until": 173.10843879473492,
+      "wait": 0.47520297705500525,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 176,
+      "source": 36,
+      "arrival": 149.14461064501424,
+      "dispatch": 173.10843879473492,
+      "finish": 174.10843879473492,
+      "observed_until": 174.10843879473492,
+      "wait": 23.963828149720683,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 77,
+      "source": 42,
+      "arrival": 92.96108601934927,
+      "dispatch": 174.10843879473492,
+      "finish": 175.10843879473492,
+      "observed_until": 175.10843879473492,
+      "wait": 81.14735277538566,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 122,
+      "source": 25,
+      "arrival": 106.0741097861656,
+      "dispatch": 175.10843879473492,
+      "finish": 176.10843879473492,
+      "observed_until": 176.10843879473492,
+      "wait": 69.03432900856933,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 203,
+      "source": 14,
+      "arrival": 175.34079471544118,
+      "dispatch": 176.10843879473492,
+      "finish": 177.10843879473492,
+      "observed_until": 177.10843879473492,
+      "wait": 0.7676440792937456,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 205,
+      "source": 5,
+      "arrival": 175.59754541495406,
+      "dispatch": 177.10843879473492,
+      "finish": 178.10843879473492,
+      "observed_until": 178.10843879473492,
+      "wait": 1.5108933797808675,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 166,
+      "source": 41,
+      "arrival": 132.5459780777525,
+      "dispatch": 178.10843879473492,
+      "finish": 179.10843879473492,
+      "observed_until": 179.10843879473492,
+      "wait": 45.56246071698243,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 206,
+      "source": 7,
+      "arrival": 179.01879494221677,
+      "dispatch": 179.10843879473492,
+      "finish": 180.10843879473492,
+      "observed_until": 180.10843879473492,
+      "wait": 0.08964385251815088,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 127,
+      "source": 12,
+      "arrival": 109.19045176718478,
+      "dispatch": 180.10843879473492,
+      "finish": 181.10843879473492,
+      "observed_until": 181.10843879473492,
+      "wait": 70.91798702755014,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 208,
+      "source": 41,
+      "arrival": 180.23846627225248,
+      "dispatch": 181.10843879473492,
+      "finish": 182.10843879473492,
+      "observed_until": 182.10843879473492,
+      "wait": 0.869972522482442,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 202,
+      "source": 10,
+      "arrival": 175.22874525799878,
+      "dispatch": 182.10843879473492,
+      "finish": 183.10843879473492,
+      "observed_until": 183.10843879473492,
+      "wait": 6.879693536736141,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 197,
+      "source": 26,
+      "arrival": 171.59355269174077,
+      "dispatch": 183.10843879473492,
+      "finish": 184.10843879473492,
+      "observed_until": 184.10843879473492,
+      "wait": 11.514886102994154,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 210,
+      "source": 6,
+      "arrival": 182.44879770512395,
+      "dispatch": 184.10843879473492,
+      "finish": 185.10843879473492,
+      "observed_until": 185.10843879473492,
+      "wait": 1.6596410896109717,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 211,
+      "source": 20,
+      "arrival": 184.6034380537525,
+      "dispatch": 185.10843879473492,
+      "finish": 186.10843879473492,
+      "observed_until": 186.10843879473492,
+      "wait": 0.5050007409824104,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 133,
+      "source": 2,
+      "arrival": 112.08241439714415,
+      "dispatch": 186.10843879473492,
+      "finish": 187.10843879473492,
+      "observed_until": 187.10843879473492,
+      "wait": 74.02602439759077,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 199,
+      "source": 3,
+      "arrival": 172.4913996690031,
+      "dispatch": 187.10843879473492,
+      "finish": 188.10843879473492,
+      "observed_until": 188.10843879473492,
+      "wait": 14.617039125731822,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 212,
+      "source": 3,
+      "arrival": 188.08532411482295,
+      "dispatch": 188.10843879473492,
+      "finish": 189.10843879473492,
+      "observed_until": 189.10843879473492,
+      "wait": 0.023114679911969915,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 213,
+      "source": 37,
+      "arrival": 188.47833765920666,
+      "dispatch": 189.10843879473492,
+      "finish": 190.10843879473492,
+      "observed_until": 190.10843879473492,
+      "wait": 0.630101135528264,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 194,
+      "source": 26,
+      "arrival": 170.34124948752233,
+      "dispatch": 190.10843879473492,
+      "finish": 191.10843879473492,
+      "observed_until": 191.10843879473492,
+      "wait": 19.76718930721259,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 214,
+      "source": 13,
+      "arrival": 190.43277286047766,
+      "dispatch": 191.10843879473492,
+      "finish": 192.10843879473492,
+      "observed_until": 192.10843879473492,
+      "wait": 0.6756659342572675,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 207,
+      "source": 43,
+      "arrival": 179.74925802286018,
+      "dispatch": 192.10843879473492,
+      "finish": 193.10843879473492,
+      "observed_until": 193.10843879473492,
+      "wait": 12.359180771874748,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 216,
+      "source": 39,
+      "arrival": 193.04007400269714,
+      "dispatch": 193.10843879473492,
+      "finish": 194.10843879473492,
+      "observed_until": 194.10843879473492,
+      "wait": 0.06836479203778367,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 86,
+      "source": 11,
+      "arrival": 95.62950918450731,
+      "dispatch": 194.10843879473492,
+      "finish": 195.10843879473492,
+      "observed_until": 195.10843879473492,
+      "wait": 98.47892961022761,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 87,
+      "source": 11,
+      "arrival": 96.0228710176587,
+      "dispatch": 195.10843879473492,
+      "finish": 196.10843879473492,
+      "observed_until": 196.10843879473492,
+      "wait": 99.08556777707622,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 217,
+      "source": 3,
+      "arrival": 195.31429350639306,
+      "dispatch": 196.10843879473492,
+      "finish": 197.10843879473492,
+      "observed_until": 197.10843879473492,
+      "wait": 0.7941452883418663,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 186,
+      "source": 1,
+      "arrival": 158.03609514528446,
+      "dispatch": 197.10843879473492,
+      "finish": 198.10843879473492,
+      "observed_until": 198.10843879473492,
+      "wait": 39.07234364945046,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 89,
+      "source": 19,
+      "arrival": 96.8506055035173,
+      "dispatch": 198.10843879473492,
+      "finish": 199.10843879473492,
+      "observed_until": 199.10843879473492,
+      "wait": 101.25783329121762,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 164,
+      "source": 4,
+      "arrival": 129.68561753579317,
+      "dispatch": 199.10843879473492,
+      "finish": 200.10843879473492,
+      "observed_until": 200.10843879473492,
+      "wait": 69.42282125894175,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 182,
+      "source": 9,
+      "arrival": 152.55690696927266,
+      "dispatch": 200.10843879473492,
+      "finish": 201.10843879473492,
+      "observed_until": 201.10843879473492,
+      "wait": 47.55153182546226,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 221,
+      "source": 18,
+      "arrival": 199.84848210476136,
+      "dispatch": 201.10843879473492,
+      "finish": 202.10843879473492,
+      "observed_until": 202.10843879473492,
+      "wait": 1.2599566899735635,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 219,
+      "source": 25,
+      "arrival": 196.78234353173903,
+      "dispatch": 202.10843879473492,
+      "finish": 203.10843879473492,
+      "observed_until": 203.10843879473492,
+      "wait": 5.326095262995892,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 79,
+      "source": 17,
+      "arrival": 94.11748785324721,
+      "dispatch": 203.10843879473492,
+      "finish": 204.10843879473492,
+      "observed_until": 204.10843879473492,
+      "wait": 108.99095094148771,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 75,
+      "source": 26,
+      "arrival": 92.59649748697126,
+      "dispatch": 204.10843879473492,
+      "finish": 205.10843879473492,
+      "observed_until": 205.10843879473492,
+      "wait": 111.51194130776366,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 55,
+      "source": 47,
+      "arrival": 84.76789555130898,
+      "dispatch": 205.10843879473492,
+      "finish": 206.10843879473492,
+      "observed_until": 206.10843879473492,
+      "wait": 120.34054324342594,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 201,
+      "source": 9,
+      "arrival": 174.4665609023084,
+      "dispatch": 206.10843879473492,
+      "finish": 207.10843879473492,
+      "observed_until": 207.10843879473492,
+      "wait": 31.64187789242652,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 43,
+      "source": 25,
+      "arrival": 80.21039727821388,
+      "dispatch": 207.10843879473492,
+      "finish": 208.10843879473492,
+      "observed_until": 208.10843879473492,
+      "wait": 126.89804151652105,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 70,
+      "source": 26,
+      "arrival": 91.20505045186684,
+      "dispatch": 208.10843879473492,
+      "finish": 209.10843879473492,
+      "observed_until": 209.10843879473492,
+      "wait": 116.90338834286808,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 67,
+      "source": 40,
+      "arrival": 89.99512425318862,
+      "dispatch": 209.10843879473492,
+      "finish": 210.10843879473492,
+      "observed_until": 210.10843879473492,
+      "wait": 119.1133145415463,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 0
+    },
+    {
+      "token": 204,
+      "source": 49,
+      "arrival": 175.57107749549343,
+      "dispatch": 210.10843879473492,
+      "finish": 211.10843879473492,
+      "observed_until": 211.10843879473492,
+      "wait": 34.537361299241496,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 183,
+      "source": 23,
+      "arrival": 152.7829569991422,
+      "dispatch": 211.10843879473492,
+      "finish": 212.10843879473492,
+      "observed_until": 212.10843879473492,
+      "wait": 58.32548179559274,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 85,
+      "source": 19,
+      "arrival": 95.34765549791223,
+      "dispatch": 212.10843879473492,
+      "finish": 213.10843879473492,
+      "observed_until": 213.10843879473492,
+      "wait": 116.7607832968227,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 200,
+      "source": 3,
+      "arrival": 172.90545813519913,
+      "dispatch": 213.10843879473492,
+      "finish": 214.10843879473492,
+      "observed_until": 214.10843879473492,
+      "wait": 40.2029806595358,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 134,
+      "source": 41,
+      "arrival": 112.43442213986168,
+      "dispatch": 214.10843879473492,
+      "finish": 215.10843879473492,
+      "observed_until": 215.10843879473492,
+      "wait": 101.67401665487324,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 57,
+      "source": 29,
+      "arrival": 86.3976957479334,
+      "dispatch": 215.10843879473492,
+      "finish": 216.10843879473492,
+      "observed_until": 216.1,
+      "wait": 128.71074304680153,
+      "completed": false,
+      "failed": null,
+      "reference_tier": 2
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "scope": "32 controls +64 candidate +64 prefix +24 replay =184 calls;24 tier calls and8 reserve remain",
+  "calls": 184,
+  "annotation_url": "https://storage.googleapis.com/openimages/v5/validation-annotations-human-imagelabels.csv",
+  "annotation_sha256": "c2bc8b312ee7ed01ac4c58a62c2432c7f6b83b320874cbb0644e2f51aed3faad",
+  "controls": 32,
+  "profile": {
+    "schema": "scene93_received387_v1",
+    "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+    "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+    "feature_order": "scene374+SPI4+R+N+availability6+cold1",
+    "semantic_producer": {
+      "repo": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+      "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+      "weights_sha256": {
+        "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+      },
+      "download_checkpoint_bytes": 605247071,
+      "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+      "parameters": 87849216
+    },
+    "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+    "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+    "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+    "sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+  },
+  "test_labels_unopened": true
+}

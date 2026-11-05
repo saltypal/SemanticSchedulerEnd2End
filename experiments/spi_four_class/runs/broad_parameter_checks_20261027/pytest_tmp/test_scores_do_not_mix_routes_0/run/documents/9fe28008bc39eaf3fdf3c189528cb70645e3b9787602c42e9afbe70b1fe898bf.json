@@ -1,0 +1,779 @@
+{
+  "schema": "semantic_scene_evidence_v2",
+  "observation": {
+    "id": "UE-A-6",
+    "image_id": "9fe28008bc39eaf3fdf3c189528cb70645e3b9787602c42e9afbe70b1fe898bf",
+    "source_id": "UE-A",
+    "width_px": 1800,
+    "height_px": 1200
+  },
+  "mission": {
+    "id": "building_damage",
+    "version": "dbb557160175764c9eb9d54e4020b0a5c266cbe670e2420aabb89503c5a33c02",
+    "context": "Document visible damage to buildings for post-event infrastructure assessment. Do not infer occupancy, structural safety, cause, or rescue urgency.",
+    "observable_clauses": [
+      {
+        "name": "building_damage",
+        "text": "a photograph documenting visible damage to buildings"
+      }
+    ],
+    "targets": [
+      "building"
+    ],
+    "unsupported_clauses": []
+  },
+  "scene": {
+    "claims": [
+      {
+        "name": "bridge.present",
+        "subject": {
+          "kind": "category",
+          "name": "bridge"
+        },
+        "predicate": "present",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.0009126667282544076,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "bridge.present"
+        },
+        "source_label": "bridges_any"
+      },
+      {
+        "name": "building.affected_or_greater",
+        "subject": {
+          "kind": "category",
+          "name": "building"
+        },
+        "predicate": "affected_or_greater",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.03208008408546448,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "building.affected_or_greater"
+        },
+        "source_label": "buildings_affected_or_greater"
+      },
+      {
+        "name": "building.flooded",
+        "subject": {
+          "kind": "category",
+          "name": "building"
+        },
+        "predicate": "flooded",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.0010995289776474237,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "building.flooded"
+        },
+        "source_label": "flooding_structures"
+      },
+      {
+        "name": "building.minor_or_greater",
+        "subject": {
+          "kind": "category",
+          "name": "building"
+        },
+        "predicate": "minor_or_greater",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.0014428590657189488,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "building.minor_or_greater"
+        },
+        "source_label": "buildings_minor_or_greater"
+      },
+      {
+        "name": "building.present",
+        "subject": {
+          "kind": "category",
+          "name": "building"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.600929856300354,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "building.present"
+        },
+        "source_label": "buildings_any"
+      },
+      {
+        "name": "debris.present",
+        "subject": {
+          "kind": "category",
+          "name": "debris"
+        },
+        "predicate": "present",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.0016336807748302817,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "debris.present"
+        },
+        "source_label": "debris_any"
+      },
+      {
+        "name": "flooding.present",
+        "subject": {
+          "kind": "category",
+          "name": "flooding"
+        },
+        "predicate": "present",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.010052639059722424,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "flooding.present"
+        },
+        "source_label": "flooding_any"
+      },
+      {
+        "name": "road.damaged",
+        "subject": {
+          "kind": "category",
+          "name": "road"
+        },
+        "predicate": "damaged",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.004234716761857271,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "road.damaged"
+        },
+        "source_label": "roads_damage"
+      },
+      {
+        "name": "road.present",
+        "subject": {
+          "kind": "category",
+          "name": "road"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.519784152507782,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "road.present"
+        },
+        "source_label": "roads_any"
+      },
+      {
+        "name": "tree.damaged",
+        "subject": {
+          "kind": "category",
+          "name": "tree"
+        },
+        "predicate": "damaged",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.2858317196369171,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "tree.damaged"
+        },
+        "source_label": "trees_damage"
+      },
+      {
+        "name": "tree.present",
+        "subject": {
+          "kind": "category",
+          "name": "tree"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.968424379825592,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "tree.present"
+        },
+        "source_label": "trees_any"
+      },
+      {
+        "name": "water.present",
+        "subject": {
+          "kind": "category",
+          "name": "water"
+        },
+        "predicate": "present",
+        "value": false,
+        "status": "available",
+        "reason": null,
+        "method": "ladi_reference_multilabel_sigmoid_v1",
+        "producer_ref": "image_classifier",
+        "score": {
+          "value": 0.15131732821464539,
+          "kind": "positive_class_sigmoid",
+          "calibrated": false,
+          "threshold": 0.5,
+          "decision_operator": ">",
+          "positive_class": "water.present"
+        },
+        "source_label": "water_any"
+      },
+      {
+        "name": "bus.present",
+        "subject": {
+          "kind": "category",
+          "name": "bus"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "producer_decision",
+        "producer_ref": "object_detector",
+        "score": {
+          "value": 0.6164119243621826,
+          "kind": "detector_score",
+          "calibrated": false
+        }
+      },
+      {
+        "name": "car.present",
+        "subject": {
+          "kind": "category",
+          "name": "car"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "producer_decision",
+        "producer_ref": "object_detector",
+        "score": {
+          "value": 0.34296876192092896,
+          "kind": "detector_score",
+          "calibrated": false
+        }
+      },
+      {
+        "name": "person.present",
+        "subject": {
+          "kind": "category",
+          "name": "person"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "producer_decision",
+        "producer_ref": "object_detector",
+        "score": {
+          "value": 0.07876602560281754,
+          "kind": "detector_score",
+          "calibrated": false
+        }
+      },
+      {
+        "name": "truck.present",
+        "subject": {
+          "kind": "category",
+          "name": "truck"
+        },
+        "predicate": "present",
+        "value": true,
+        "status": "available",
+        "reason": null,
+        "method": "producer_decision",
+        "producer_ref": "object_detector",
+        "score": {
+          "value": 0.6399986743927002,
+          "kind": "detector_score",
+          "calibrated": false
+        }
+      }
+    ],
+    "detections": {
+      "value": [
+        {
+          "category": "bus",
+          "detection_count": 1,
+          "largest_box_area_fraction": 0.004174998122784827,
+          "box_union_fraction": 0.004174998122784827,
+          "max_detection_score": 0.6164119243621826
+        },
+        {
+          "category": "car",
+          "detection_count": 13,
+          "largest_box_area_fraction": 0.0012291279519735664,
+          "box_union_fraction": 0.005745393232863905,
+          "max_detection_score": 0.34296876192092896
+        },
+        {
+          "category": "person",
+          "detection_count": 1,
+          "largest_box_area_fraction": 0.0003000068032105143,
+          "box_union_fraction": 0.0003000068032105143,
+          "max_detection_score": 0.07876602560281754
+        },
+        {
+          "category": "truck",
+          "detection_count": 2,
+          "largest_box_area_fraction": 0.004175406190828869,
+          "box_union_fraction": 0.006736031743314945,
+          "max_detection_score": 0.6399986743927002
+        }
+      ],
+      "status": "available",
+      "reason": null,
+      "method": "accepted_detector_category_summary_v2",
+      "producer_ref": "object_detector",
+      "searched_categories": [
+        "building",
+        "road",
+        "person",
+        "car",
+        "truck",
+        "bus",
+        "motorcycle",
+        "bicycle",
+        "debris",
+        "chair",
+        "couch",
+        "dining table",
+        "television",
+        "refrigerator",
+        "tree",
+        "water"
+      ],
+      "non_detection_is_absence": false,
+      "instance_boxes_location": "audit.raw_visual_evidence.detections"
+    },
+    "relations": {
+      "value": null,
+      "status": "unavailable",
+      "reason": "no relationship producer enabled",
+      "method": "not_implemented"
+    }
+  },
+  "measurements": {
+    "context_alignment": {
+      "value": 0.23530313372612,
+      "status": "available",
+      "reason": null,
+      "method": "operator_paragraph_cosine_v1",
+      "units": "cosine",
+      "producer_ref": "image_text_encoder",
+      "calibrated": false,
+      "scope": "declared mission; not importance"
+    },
+    "novelty": {
+      "value": {
+        "appearance_distance": 0.05327239234225456,
+        "new_predicted_concept_fraction": 0.2857142857142857
+      },
+      "status": "available",
+      "reason": null,
+      "method": "appearance_and_predicted_concept_delta_v2",
+      "kb_version": 3,
+      "comparable_history": 3,
+      "producer_ref": "image_text_encoder",
+      "reference": "sender observation history before current commit",
+      "new_asset_verified": false
+    },
+    "concept_rarity": {
+      "value": 0.6563839390314918,
+      "status": "available",
+      "reason": null,
+      "method": "concept_bernoulli_surprisal_v2",
+      "units": "normalized_mean_surprisal",
+      "history_count": 3,
+      "reference": "causal predicted UE observations",
+      "reference_probabilities": {
+        "building": 0.4,
+        "bus": 0.2,
+        "car": 0.4,
+        "person": 0.2,
+        "road": 0.4,
+        "tree": 0.6,
+        "truck": 0.4
+      },
+      "not_importance": true
+    },
+    "spatial": {
+      "value": {
+        "target_detections": 0,
+        "all_detections": 17,
+        "largest_target_box_area_fraction": 0.0,
+        "target_box_union_fraction": 0.0
+      },
+      "status": "available",
+      "reason": null,
+      "method": "accepted_box_geometry_v2",
+      "producer_ref": "object_detector",
+      "targets": [
+        "building"
+      ],
+      "object_count_verified": false,
+      "physical_distance_available": false
+    },
+    "complexity": {
+      "value": 0.5700338813359286,
+      "status": "available",
+      "reason": null,
+      "method": "task_count_coverage_v1",
+      "units": "normalized_detected_class_entropy",
+      "producer_ref": "object_detector",
+      "semantic_depth_verified": false
+    },
+    "temporal": {
+      "capture_time_ms": null,
+      "allowed_delay_ms": null,
+      "age_ms": null,
+      "deadline_ms": null,
+      "completion_slack_ms": null,
+      "available": false,
+      "reason": "trusted capture/current timestamps required"
+    },
+    "geographic": {
+      "value": null,
+      "status": "unavailable",
+      "reason": "trusted coordinates and mission region required",
+      "method": "trusted_geofence"
+    }
+  },
+  "similarity_signals": {
+    "value": [
+      {
+        "name": "affected_people",
+        "value": 0.21951699256896973,
+        "units": "cosine"
+      },
+      {
+        "name": "building_damage",
+        "value": 0.2330147922039032,
+        "units": "cosine"
+      },
+      {
+        "name": "mission_context:dbb557160175764c9eb9d54e4020b0a5c266cbe670e2420aabb89503c5a33c02",
+        "value": 0.23530313372612,
+        "units": "cosine"
+      },
+      {
+        "name": "road_damage",
+        "value": 0.2355329394340515,
+        "units": "cosine"
+      },
+      {
+        "name": "structural_flooding",
+        "value": 0.21853065490722656,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:fire",
+        "value": 0.19447451829910278,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:forest",
+        "value": 0.23962846398353577,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:indoor",
+        "value": 0.1741371750831604,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:people",
+        "value": 0.20326249301433563,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:residential",
+        "value": 0.2207939624786377,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:road",
+        "value": 0.2174021601676941,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:vehicle",
+        "value": 0.22579795122146606,
+        "units": "cosine"
+      },
+      {
+        "name": "scene:water",
+        "value": 0.24628326296806335,
+        "units": "cosine"
+      }
+    ],
+    "status": "available",
+    "reason": null,
+    "method": "raw_image_text_similarities_v2",
+    "calibrated": false,
+    "producer_ref": "image_text_encoder",
+    "not_probabilities": true
+  },
+  "diagnostics": [],
+  "provenance": {
+    "extraction_specification": "c710280da5cc3048858b2094e757ea7d30ab929563cda595489c1f7d8d471730",
+    "ontology": {
+      "id": "ladi_image_claim_consistency_v2",
+      "scope": "Explicit consistency assumptions for the optional aerial image classifier; not universal ground truth",
+      "rules": [
+        {
+          "id": "affected-building-present",
+          "if": [
+            "building.affected_or_greater",
+            true
+          ],
+          "then": [
+            "building.present",
+            true
+          ]
+        },
+        {
+          "id": "minor-building-present",
+          "if": [
+            "building.minor_or_greater",
+            true
+          ],
+          "then": [
+            "building.present",
+            true
+          ]
+        },
+        {
+          "id": "flooded-building-present",
+          "if": [
+            "building.flooded",
+            true
+          ],
+          "then": [
+            "building.present",
+            true
+          ]
+        },
+        {
+          "id": "damaged-road-present",
+          "if": [
+            "road.damaged",
+            true
+          ],
+          "then": [
+            "road.present",
+            true
+          ]
+        },
+        {
+          "id": "damaged-tree-present",
+          "if": [
+            "tree.damaged",
+            true
+          ],
+          "then": [
+            "tree.present",
+            true
+          ]
+        }
+      ]
+    },
+    "producers": {
+      "image_text_encoder": {
+        "kind": "image_text_encoder",
+        "settings_sha256": "0b5a701fbc7358921082648487979e853cec9cc5bd53d9c52019bd286706e140",
+        "settings": {
+          "backbone": "clip",
+          "config_sha256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+          "data_parallel_requested": false,
+          "device": "cuda:0",
+          "model_id": "openai/clip-vit-base-patch32",
+          "model_load_seconds": 2.5868936870000425,
+          "model_path": "/kaggle/temp/better_hf/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+          "preprocessing": "checkpoint_native",
+          "processor_sha256": "a69d3a60cc3d402f739e3748f6d239b538680fbbf43b67ce6d5087ec0011f304",
+          "producer_scope": "frozen pretrained embeddings; prompt similarities are not probabilities",
+          "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+        }
+      },
+      "object_detector": {
+        "kind": "object_detector",
+        "settings_sha256": "117e4811e59d218b9a484e76686af5570043c34eeb90e79ff42861b5aa2200d0",
+        "settings": {
+          "checkpoint": "yolov8s-worldv2.pt",
+          "classes_are_not_emergency_truth": true,
+          "conf_threshold": 0.05,
+          "detector": "YOLO-Worldv2-small",
+          "device": "cuda:0",
+          "inference_size": 640,
+          "nms_iou": 0.5,
+          "predict_settings": {
+            "agnostic_nms": false,
+            "augment": false,
+            "conf": 0.05,
+            "half": false,
+            "imgsz": 640,
+            "iou": 0.5,
+            "max_det": 300,
+            "verbose": false
+          },
+          "settings_sha256": "512d1ec24619cb552ddf30d080469701a56f3962b9a9fe16c09f80c6f07367b1",
+          "vocabulary": [
+            "building",
+            "road",
+            "person",
+            "car",
+            "truck",
+            "bus",
+            "motorcycle",
+            "bicycle",
+            "debris",
+            "chair",
+            "couch",
+            "dining table",
+            "television",
+            "refrigerator",
+            "tree",
+            "water"
+          ],
+          "vocabulary_sha256": "018cee83870de2b7615ef1ca7986f4dd2fc7ccf8a74afb214d33535849c99f7e",
+          "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792"
+        }
+      },
+      "image_classifier": {
+        "kind": "image_classifier",
+        "settings_sha256": "7e064ba004621cd1336da7f11da37e72f00cfe1790b701d87fe3fb3232a1c9df",
+        "settings": {
+          "architecture": "bit",
+          "calibrated": false,
+          "declared_domain": "aerial disaster imagery",
+          "device": "cuda:0",
+          "input_policy": "checkpoint_native",
+          "labels": {
+            "0": "bridges_any",
+            "1": "buildings_any",
+            "10": "trees_damage",
+            "11": "water_any",
+            "2": "buildings_affected_or_greater",
+            "3": "buildings_minor_or_greater",
+            "4": "debris_any",
+            "5": "flooding_any",
+            "6": "flooding_structures",
+            "7": "roads_any",
+            "8": "roads_damage",
+            "9": "trees_any"
+          },
+          "load_seconds": 2.034707463000018,
+          "model_id": "MITLL/LADI-v2-classifier-small-reference",
+          "preprocessing": {
+            "_processor_class": null,
+            "crop_size": {
+              "height": 448,
+              "width": 448
+            },
+            "do_center_crop": true,
+            "do_convert_rgb": true,
+            "do_normalize": true,
+            "do_rescale": true,
+            "do_resize": true,
+            "image_mean": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "image_processor_type": "BitImageProcessor",
+            "image_std": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "resample": 2,
+            "rescale_factor": 0.00392156862745098,
+            "size": {
+              "shortest_edge": 448
+            }
+          },
+          "preprocessing_sha256": "e86d96d8a1be47f9fbb157548eb4037502b30231de7a6413e4769b4c8bb6a2d5",
+          "revision": "6ba5a0300601284bc6b69dddb46c8991a8ac196c",
+          "threshold": 0.5,
+          "threshold_source": "published default",
+          "training_exposure": "official LADI training split",
+          "weights_sha256": {
+            "model.safetensors": "57288c631557ec80d9d50e4f4b7f5b11aeb1c3fd9905fc3c6c6d59e7cbf45213"
+          }
+        }
+      }
+    }
+  }
+}

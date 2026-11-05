@@ -11,11 +11,13 @@ requires-python = ">=3.12,<3.13"
 dependencies = ["PyYAML>=6,<7"]
 
 [project.scripts]
-latent-scheduler = "INFRA.latent.cli:main"
+latent-scheduler = "Evaluation.latent.cli:main"
+semantic-parameters = "parameters.parameter_cli:main"
 
 [project.optional-dependencies]
 encdec = ["numpy>=1.26,<3", "Pillow>=10,<12", "scikit-learn>=1.5,<2", "matplotlib>=3.8,<4", "timm>=1.0.28,<2"]
 semparam = ["numpy>=1.26,<3", "Pillow>=10,<12", "networkx>=3.3,<4", "transformers>=4.46,<5", "scikit-learn>=1.5,<2"]
+parameters = ["numpy>=2,<3", "Pillow>=11,<12", "torch>=2.10,<3", "transformers==4.57.6", "scikit-learn>=1.5,<2", "threadpoolctl>=3.1,<4"]
 scheduler = ["matplotlib>=3.8,<4"]
 metrics = ["scikit-image>=0.24,<1"]
 benchmark = [
@@ -38,12 +40,12 @@ notebook = [
 ]
 
 [tool.setuptools]
-package-dir = {"EncDec"="EncDec", "SemParam"="SemParam", "Scheduler"="Scheduler", "INFRA"="INFRA", "scripts"="scripts", "semcom_benchmark"="semcom_benchmark", "EncDecPipeline"="src/EncDecPipeline", "TransformerPipeline"="src/TransformerPipeline", "CodebookParam"="src/CodebookParam", "Channels"="src/Channels", "Baselines"="src/Baselines", "Evaluation"="src/Evaluation", "utils"="src/utils"}
+py-modules = ["project_compat"]
 
 [tool.setuptools.package-data]
-"*" = ["config/*.yaml", "config/*.json"]
+"*" = ["config/*.yaml", "config/*.json", "schemas/*.json"]
 
 [tool.pytest.ini_options]
-testpaths = ["Test/tests", "EncDec/tests", "SemParam/tests", "Scheduler/tests", "INFRA/tests"]
+testpaths = ["parameters/tests", "Scheduler/tests"]
 pythonpath = [".", "src"]
 addopts = "-ra"

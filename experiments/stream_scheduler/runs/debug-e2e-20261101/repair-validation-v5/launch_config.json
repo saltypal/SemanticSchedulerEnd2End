@@ -1,0 +1,42 @@
+{
+  "protocol": "SCHED-20261031-v2.2-repair-validation",
+  "mode": "repair_validation",
+  "state": "pre_submit_ready",
+  "utc": "2026-11-01T03:01:40Z",
+  "kernel": "satyapaladuguplus/semantic-decoder-scheduler-20261030",
+  "expected_version": 5,
+  "previous_latest_status": "COMPLETE",
+  "notebook": "experiments/stream_scheduler/kaggle/Semantic_Decoder_Scheduler.ipynb",
+  "notebook_sha256": "dc893aada315ba73951d11b1807864cfdb0cc79f25f2fdefcaea5289bd00f202",
+  "metadata_sha256": "930b9fb6d442ccc9bf81659ed91474c60049b54bd41f8222e74dc91a60bfce51",
+  "manifest": "experiments/stream_scheduler/runs/debug-e2e-20261101/repair_notebook_manifest.json",
+  "source_count": 131,
+  "bundle_count": 135,
+  "source_hash_mismatches": [],
+  "embedded_hash_mismatches": [],
+  "input_archive_sha256": "0f8c6186b09dcf6ab87911df642612919377157bb1585082bed1c93b1506fe2c",
+  "auxiliary_inputs": {
+    "repair_inputs/vectors.npz": "b4100bdbad5b0d54303d3bf4f2eb2f7fa49cd4bfe84ed0a3d766354680329e51",
+    "repair_inputs/identity.json": "e91191649cd116e273b4d1188f4e683f5ae2cf6fccf3c5f0838e2516640e1e74",
+    "repair_inputs/mission_vectors.npy": "922de6b1984732e5b4d7c6d14fec26594b54aa420215a3740d465bb2e026688f",
+    "repair_inputs/mission_vector_identity.json": "0277ad1d70fa278949e2de407d34093ba621a92f09ab99bb777a362ad8d528fc"
+  },
+  "command": "kaggle kernels push -p experiments/stream_scheduler/kaggle -t 1200 --accelerator NvidiaTeslaT4",
+  "gpu_cap_wall_seconds": 1200,
+  "gpu_count": 2,
+  "program_gpu_budget_hours": 6.0,
+  "prior_conservative_program_gpu_hours": 3.987,
+  "projected_total_program_gpu_hours": 4.654,
+  "scope": "17 supervised/RL synthetic mechanism checks, CUDA channel math checks, Qwen2.5-VL NF4 GPU format/control preflight with 39 requests; no full retraining or vision/SPI re-extraction",
+  "expected_remote_run": "/kaggle/working/experiments/stream_scheduler/runs/repair-validation-<UTC>/",
+  "expected_local_retrieval": "experiments/stream_scheduler/runs/debug-e2e-20261101/repair-validation-v5/retrieved",
+  "utc_pre_submit_check": "2026-11-01T03:03:00Z",
+  "pre_submit_audit": "experiments/stream_scheduler/runs/debug-e2e-20261101/repair-validation-v5/pre_submit_audit.json",
+  "pre_submit_audit_sha256": "7dacd94ec24613807125cbe52b56d33f3327dd1cd0cc97af8603c42863ddf94e",
+  "quota_before_push": {
+    "account_gpu_used_hours": 1.9354,
+    "account_gpu_remaining_hours": 28.0646,
+    "quota_refresh_utc": "2026-11-07T00:00:00Z",
+    "project_aggregate_budget_remaining_hours_after_v4": 2.013
+  }
+}

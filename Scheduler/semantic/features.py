@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from INFRA.scheduling.semantic_contracts import ResourceBudgetSemantic, SemanticCandidateSnapshot
+from Evaluation.scheduling.semantic_contracts import ResourceBudgetSemantic, SemanticCandidateSnapshot
 
 
 MAX_CANDIDATES = 25

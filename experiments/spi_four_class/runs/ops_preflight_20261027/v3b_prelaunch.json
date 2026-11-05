@@ -1,0 +1,90 @@
+{
+  "recorded_utc": "2026-10-27T16:05:36.272518+00:00",
+  "run_id": "20261027_spi_evidence_v3b",
+  "current_ref": "satyapaladugu/betterscheduler-spi-four-class-evidence-pipeline",
+  "kernel_numeric_id": 141089219,
+  "prior_version": 2,
+  "prior_status": "ERROR",
+  "expected_new_version": 3,
+  "title_restore_expected_ref": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "input": "satyapaladugu/betterscheduler-spiv2-inputs-20261027b",
+  "input_version": 1,
+  "input_status": "ready",
+  "source_zip": "experiments\\spi_four_class\\runs\\20261027_spi_evidence_v3b\\submission\\source.zip",
+  "source_zip_sha256": "bf06d6779e0bfcdf9f89c78218b60cebcfe22d996ae4fda999bbd77aaec3c85e",
+  "timeout_seconds": 7200,
+  "aggregate_gpu_hour_cap": 4.0,
+  "accelerator": "NvidiaTeslaT4",
+  "affected_tests": "26 passed in 14.35s; no source drift",
+  "offline_replay": "10 parsed, exact wrapper normalization only, no contradictions; Low8 Medium1 High0 Critical1",
+  "prelaunch_kernel_status": "Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)\nsatyapaladugu/betterscheduler-spi-four-class-evidence-pipeline has status \"KernelWorkerStatus.ERROR\"",
+  "quota": [
+    {
+      "resource": "GPU",
+      "used": "3.35h",
+      "remaining": "26.65h",
+      "total": "30.00h",
+      "refreshAt": "2026-10-31T00:00:00"
+    },
+    {
+      "resource": "TPU",
+      "used": "0.00h",
+      "remaining": "20.00h",
+      "total": "20.00h",
+      "refreshAt": "2026-10-31T00:00:00"
+    }
+  ],
+  "package_validation": {
+    "run_id": "20261027_spi_evidence_v3b",
+    "source_zip_sha256": "bf06d6779e0bfcdf9f89c78218b60cebcfe22d996ae4fda999bbd77aaec3c85e",
+    "package_hash_matches": true,
+    "expected_hash_matches": true,
+    "embedded_archive_matches": true,
+    "zip_crc": "ok",
+    "manifest_file_count": 108,
+    "changed_source_paths_vs_v3a": [
+      "parameters/build_spi_pipeline_notebook.py",
+      "parameters/spi_pipeline.py",
+      "parameters/spi_protocol.py"
+    ],
+    "source_drift_during_affected_tests": [],
+    "manifest_hash_mismatches": [],
+    "canonical_non_stub_mismatches": [],
+    "canonical_missing": [],
+    "namespace_stubs": [
+      "Evaluation/__init__.py",
+      "Scheduler/training/__init__.py",
+      "Scheduler/__init__.py"
+    ],
+    "namespace_stubs_match_builder": true,
+    "namespace_stub_mismatches": [],
+    "required_source_presence": {
+      "project_compat.py": true,
+      "parameters/spi_protocol.py": true,
+      "parameters/spi_pipeline.py": true,
+      "parameters/spi_teachers.py": true,
+      "parameters/spi_model_selection.py": true,
+      "parameters/spi_final_campaign.py": true
+    },
+    "nbformat": "valid",
+    "compiled_cells": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "kernel_metadata_id": "satyapaladugu/betterscheduler-spi-four-class-evidence-pipeline",
+    "kernel_metadata_id_no": 141089219,
+    "package_numeric_id": 141089219,
+    "title": "BetterScheduler SPI 20261027finalc",
+    "dataset_sources": [
+      "satyapaladugu/betterscheduler-spiv2-inputs-20261027b"
+    ],
+    "package_input": "satyapaladugu/betterscheduler-spiv2-inputs-20261027b",
+    "server_seconds": 7200,
+    "aggregate_gpu_hour_cap": 4.0,
+    "runtime_receipt_written_and_copied": true
+  },
+  "expected_output_root": "/kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/",
+  "submit_command": "kaggle kernels push -p experiments/spi_four_class/runs/20261027_spi_evidence_v3b/submission -t 7200 --accelerator NvidiaTeslaT4"
+}

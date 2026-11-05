@@ -1,0 +1,116 @@
+{
+  "J_time": null,
+  "coverage_at_horizon": null,
+  "offered_weight": 0,
+  "covered_weight": 0,
+  "useful_weight_deferred": 0,
+  "redundant_weight_fraction": null,
+  "exposure_delays": [],
+  "undelivered_fact_count": 0,
+  "failures": 0,
+  "unfinished": 0,
+  "attempts": 1,
+  "reward_sum": 0.0,
+  "curve": [
+    {
+      "time": 1.6926246193501857,
+      "covered_weight": 0
+    }
+  ],
+  "scope": "external_reference_scope_must_be_declared_by_source",
+  "distinct_useful_at_completions": {
+    "1": 0,
+    "5": null,
+    "10": null,
+    "20": null
+  },
+  "coverage_at_completions": {
+    "1": null,
+    "5": null,
+    "10": null,
+    "20": null
+  },
+  "mean_first_exposure_delay_capped": null,
+  "first_useful_completion_time": null,
+  "outcomes_by_official_source_split": {},
+  "delay_scope": "First successful distinct-fact exposure; undelivered facts capped at horizon",
+  "coverage_at_fractions": {
+    "0.25": null,
+    "0.5": null,
+    "0.75": null,
+    "1.0": null
+  },
+  "waiting_times": [
+    0.0
+  ],
+  "undelivered_message_fraction": 0.0,
+  "header_bytes_offered": 327,
+  "payload_bytes": "opaque reference; measured only in actual codec replay",
+  "priority": {
+    "reference_scope": [
+      "external_reference_scope_must_be_declared_by_source"
+    ],
+    "delay_cap": 10.0,
+    "cap_is_evaluation_budget_not_operational_deadline": true,
+    "completion_budget": 10,
+    "completed_attempts": 1,
+    "unknown_reference_messages": 1,
+    "by_reference_class": {
+      "critical": {
+        "offered_distinct_reports": 0,
+        "successfully_exposed": 0,
+        "mean_capped_completion_delay": null,
+        "exposure_within_evaluation_budget": null,
+        "undelivered_fraction": null,
+        "delivered_only_mean_wait": null,
+        "distinct_recall_at_completions": null
+      },
+      "high": {
+        "offered_distinct_reports": 0,
+        "successfully_exposed": 0,
+        "mean_capped_completion_delay": null,
+        "exposure_within_evaluation_budget": null,
+        "undelivered_fraction": null,
+        "delivered_only_mean_wait": null,
+        "distinct_recall_at_completions": null
+      },
+      "medium": {
+        "offered_distinct_reports": 0,
+        "successfully_exposed": 0,
+        "mean_capped_completion_delay": null,
+        "exposure_within_evaluation_budget": null,
+        "undelivered_fraction": null,
+        "delivered_only_mean_wait": null,
+        "distinct_recall_at_completions": null
+      },
+      "normal": {
+        "offered_distinct_reports": 0,
+        "successfully_exposed": 0,
+        "mean_capped_completion_delay": null,
+        "exposure_within_evaluation_budget": null,
+        "undelivered_fraction": null,
+        "delivered_only_mean_wait": null,
+        "distinct_recall_at_completions": null
+      }
+    },
+    "primary": "critical.mean_capped_completion_delay; report critical exposure and all class outcomes alongside it"
+  },
+  "accounting": {
+    "offered": 1,
+    "selected": 1,
+    "succeeded": 1,
+    "failed": 0,
+    "in_flight_at_horizon": 0,
+    "queued_at_horizon": 0,
+    "not_arrived": 0
+  },
+  "selection_ms": {
+    "p50": 0.0183,
+    "p95": 0.0183,
+    "n": 1,
+    "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+  },
+  "fallback_count": 0,
+  "events_sha256": "2ed55d46d8a53ab5f66d446a63de6c807a05d1df6675d6e8817962ac269b4652",
+  "input_stream_sha256": "515d74e657932f8da2a43540d815262cbc4f8102bd69fcd5e5d538468a8f4794"
+}

@@ -1,0 +1,328 @@
+{
+  "baseline_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\scene93-temporal-v2-20261030\\MASTER.before.md",
+  "case_count": 648,
+  "check_count": 14,
+  "checked_document_hash": "c60f10f4b792cb7c9065a6b24e1ad7531d5ad0a19814ff9a4ea2c29aa05e9752",
+  "checks": [
+    {
+      "cases": 2,
+      "detail": "Loaded actual scene modules under a synthetic namespace; regular parameters package initializer was not imported.",
+      "name": "isolated_import",
+      "outputs": {
+        "scene_arrays": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_arrays.py",
+        "scene_vocabulary": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_vocabulary.py"
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 4,
+      "detail": "93 total slots = 80 COCO + 5 object extensions + 8 regions; 85 object-count slots.",
+      "name": "vocabulary_dimensions",
+      "outputs": {
+        "classes": 93,
+        "coco": 80,
+        "objects": 85,
+        "regions": 8
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 4,
+      "detail": "Wire block and feature dimensions, plus requested 6 values + 6 masks + cold-start arithmetic.",
+      "name": "wire_and_feature_dimensions",
+      "outputs": {
+        "extended_width": 387,
+        "features": 374,
+        "wire_bits": 2952,
+        "wire_bytes": 369
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 97,
+      "detail": "Produced box examples summarize via actual summarize(); object counts apply, region count masks clear, region area remains available, clipped largest rectangles are correct.",
+      "name": "scene_summary_masks_status",
+      "outputs": {
+        "areas_person_road": [
+          0.36,
+          0.6
+        ],
+        "audit_kept": 4,
+        "counts_person_building": [
+          2,
+          1
+        ],
+        "saturated": false
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 373,
+      "detail": "Unavailable extraction has failed status, canonical zero values and every count/area mask false.",
+      "name": "unavailable_all_masks_status",
+      "outputs": {},
+      "status": "PASS"
+    },
+    {
+      "cases": 93,
+      "detail": "Serialize/deserialize area error bounded by half an 8-bit quantization step.",
+      "name": "area_quantization_error",
+      "outputs": {
+        "bound": 0.00196078431372549,
+        "max_abs_error": 0.0007843137254902044
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 2,
+      "detail": "Wire deserialize/serialize and JSON record roundtrip reproduce exact bytes.",
+      "name": "exact_byte_roundtrip",
+      "outputs": {
+        "length": 369,
+        "sha256": "91f2fc11f7b0f66ea61ac2a21b1236e651bc7ff696c63d215a1716bc040ee2ee"
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 7,
+      "detail": "Feature vector uses received quantized area; count alone receives log1p once; masks/status order matches implementation.",
+      "name": "received_feature_order_values",
+      "outputs": {
+        "length": 374,
+        "person_area_received": 0.3607843137254902,
+        "person_log1p_count": 1.0986122886681098,
+        "tail": [
+          1.0,
+          0.0
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 6,
+      "detail": "Rejects wrong byte length, registry hash, expected/embedded producer hashes, and padding bits in both masks.",
+      "name": "invalid_contract_rejections",
+      "outputs": {
+        "area_padding_byte_offset": 368,
+        "count_padding_byte_offset": 356,
+        "rejected_cases": [
+          "wrong_length",
+          "wrong_registry_hash",
+          "wrong_expected_producer",
+          "wrong_embedded_producer",
+          "count_mask_padding",
+          "area_mask_padding"
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 33,
+      "detail": "All sixteen baseline IDs remain; one temporal registry ID is added.",
+      "name": "model_registry_preservation",
+      "outputs": {
+        "added": [
+          "temporal_deepsets_ranknet"
+        ],
+        "baseline_ids": [
+          "linear_choice",
+          "mlp_choice",
+          "delay_huber",
+          "ranknet",
+          "lambdamart",
+          "priority_classifier",
+          "deepsets_ranknet",
+          "set_transformer_ranknet",
+          "listmle",
+          "masked_ppo",
+          "masked_double_dqn",
+          "td_per",
+          "ranknet_warmstart_ppo",
+          "rl_vlm_f",
+          "vlm_replay",
+          "visionprefer"
+        ],
+        "current_ids": [
+          "linear_choice",
+          "mlp_choice",
+          "delay_huber",
+          "ranknet",
+          "lambdamart",
+          "priority_classifier",
+          "deepsets_ranknet",
+          "set_transformer_ranknet",
+          "listmle",
+          "masked_ppo",
+          "masked_double_dqn",
+          "td_per",
+          "ranknet_warmstart_ppo",
+          "rl_vlm_f",
+          "vlm_replay",
+          "visionprefer",
+          "temporal_deepsets_ranknet"
+        ],
+        "missing": []
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 10,
+      "detail": "Literal D loss/target/reward and E loss formula lines match preserved baseline.",
+      "name": "objective_math_preserved",
+      "outputs": {
+        "baseline": [
+          "ell(W,delta) = W/delta + max(0,W/delta-1)",
+          "L_D(t) = sum over a_i<=t of ell(W_i(t),delta_i)",
+          "y_i = ell(W_i+d0,delta_i)-ell(W_i,delta_i)",
+          "Reward scale100 is fixed and independent of offered future jobs. Gamma=1. Include mid-service arrivals, idle intervals and the terminal interval. Reward sum equals -L_D(T)/100. The actor never receives true delta or z.",
+          "L_E(T)=sum_f w_f*(min(t_f,T)-r_f)/d0."
+        ],
+        "current": [
+          "ell(W,delta) = W/delta + max(0,W/delta-1)",
+          "L_D(t) = sum over a_i<=t of ell(W_i(t),delta_i)",
+          "y_i = ell(W_i+d0,delta_i)-ell(W_i,delta_i)",
+          "Reward scale100 is fixed and independent of offered future jobs. Gamma=1. Include mid-service arrivals, idle intervals and the terminal interval. Reward sum equals -L_D(T)/100. The actor never receives true delta or z.",
+          "L_E(T)=sum_f w_f*(min(t_f,T)-r_f)/d0."
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 6,
+      "detail": "The fixed teacher allocation contains six rows summing to216.",
+      "name": "teacher_call_allocation",
+      "outputs": {
+        "calls": [
+          32,
+          24,
+          64,
+          64,
+          24,
+          8
+        ],
+        "sum": 216
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 9,
+      "detail": "Two-way CE with target [t,1-t] equals RankNet pair BCE for t=0,0.5,1 and unequal/equal finite score differences.",
+      "name": "two_way_ce_equals_pair_bce",
+      "outputs": {
+        "cases": [
+          {
+            "abs_diff": 9.71445146547012e-17,
+            "pair_bce": 0.048587351573742055,
+            "score_difference": -3.0,
+            "target": 0.0,
+            "two_way_ce": 0.04858735157374196
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 1.548587351573742,
+            "score_difference": -3.0,
+            "target": 0.5,
+            "two_way_ce": 1.548587351573742
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 3.048587351573742,
+            "score_difference": -3.0,
+            "target": 1.0,
+            "two_way_ce": 3.048587351573742
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 0.6931471805599453,
+            "score_difference": 0.0,
+            "target": 0.0,
+            "two_way_ce": 0.6931471805599453
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 0.6931471805599453,
+            "score_difference": 0.0,
+            "target": 0.5,
+            "two_way_ce": 0.6931471805599453
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 0.6931471805599453,
+            "score_difference": 0.0,
+            "target": 1.0,
+            "two_way_ce": 0.6931471805599453
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 2.5788897342925496,
+            "score_difference": 2.5,
+            "target": 0.0,
+            "two_way_ce": 2.5788897342925496
+          },
+          {
+            "abs_diff": 0.0,
+            "pair_bce": 1.3288897342925496,
+            "score_difference": 2.5,
+            "target": 0.5,
+            "two_way_ce": 1.3288897342925496
+          },
+          {
+            "abs_diff": 1.3877787807814457e-17,
+            "pair_bce": 0.07888973429254963,
+            "score_difference": 2.5,
+            "target": 1.0,
+            "two_way_ce": 0.07888973429254964
+          }
+        ],
+        "max_abs_difference": 9.71445146547012e-17
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 2,
+      "detail": "Hashes of the two production source modules are identical before and after validation.",
+      "name": "production_sources_unchanged",
+      "outputs": {
+        "after": {
+          "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_arrays.py": "d055954dbab2b3dbf814e5db3d1cde90381e9e9e264191e76e86ab95c92f0481",
+          "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_vocabulary.py": "d2e75854b5180ae8127ada69bc3735d7f1c6ea7c00ffc159986bb2c830c32942"
+        },
+        "before": {
+          "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_arrays.py": "d055954dbab2b3dbf814e5db3d1cde90381e9e9e264191e76e86ab95c92f0481",
+          "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_vocabulary.py": "d2e75854b5180ae8127ada69bc3735d7f1c6ea7c00ffc159986bb2c830c32942"
+        }
+      },
+      "status": "PASS"
+    }
+  ],
+  "classification": "existing pure parameter module contract checks; no detector inference, scheduler adapter implementation, training, cloud or download",
+  "command": "& 'D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe' 'D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\scene93-temporal-v2-20261030\\validation\\validate_scene_contract.py'",
+  "document_hash_after": "c60f10f4b792cb7c9065a6b24e1ad7531d5ad0a19814ff9a4ea2c29aa05e9752",
+  "document_hash_before": "c60f10f4b792cb7c9065a6b24e1ad7531d5ad0a19814ff9a4ea2c29aa05e9752",
+  "document_hash_stable_during_check": true,
+  "limitations": [
+    "No detector/model inference; supplied boxes exercise summarize only.",
+    "No scheduler adapter was built or validated.",
+    "Document hash is the snapshot observed during this run and may change if the authorized editorial pass continues.",
+    "Current pure source modules may validate their implemented contract without establishing compatibility with a downstream consumer."
+  ],
+  "overall": "PASS",
+  "repo": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End",
+  "runtime": {
+    "backend": "CPU; isolated importlib namespace; standard library plus existing repo venv",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python_executable": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "script_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\scene93-temporal-v2-20261030\\validation\\validate_scene_contract.py",
+  "script_sha256": "a839d7b5ff10e3135a5f1c0309f0ba32961b6af06a9336a9211f4c8a076fa1e2",
+  "source_after_sha256": {
+    "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_arrays.py": "d055954dbab2b3dbf814e5db3d1cde90381e9e9e264191e76e86ab95c92f0481",
+    "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_vocabulary.py": "d2e75854b5180ae8127ada69bc3735d7f1c6ea7c00ffc159986bb2c830c32942"
+  },
+  "source_before_sha256": {
+    "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_arrays.py": "d055954dbab2b3dbf814e5db3d1cde90381e9e9e264191e76e86ab95c92f0481",
+    "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_vocabulary.py": "d2e75854b5180ae8127ada69bc3735d7f1c6ea7c00ffc159986bb2c830c32942"
+  },
+  "title": "scene_arrays_v2 bounded local contract validation"
+}

@@ -1,0 +1,29 @@
+CELL START 6 log /kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v13/cell_evidence/cell_6.log
+START four-class SPI classifier training on300-image cohort
+START grouped_selection output /kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v13/data_run/spi_classifier
+Candidate 1 / 8 {'family': 'linear', 'C': 0.1, 'balanced': False} macro-F1 0.28172354407110506
+Candidate 2 / 8 {'family': 'linear', 'C': 0.1, 'balanced': True} macro-F1 0.40777309730149797
+Candidate 3 / 8 {'family': 'linear', 'C': 1.0, 'balanced': False} macro-F1 0.3266821970180179
+Candidate 4 / 8 {'family': 'linear', 'C': 1.0, 'balanced': True} macro-F1 0.43685617442035923
+Candidate 5 / 8 {'family': 'linear', 'C': 10.0, 'balanced': False} macro-F1 0.35553228848894486
+Candidate 6 / 8 {'family': 'linear', 'C': 10.0, 'balanced': True} macro-F1 0.39664719688913236
+Candidate 7 / 8 {'family': 'mlp', 'balanced': False} macro-F1 0.40595978095978097
+Candidate 8 / 8 {'family': 'mlp', 'balanced': True} macro-F1 0.4118773519508814
+END grouped_selection {'stage': 'grouped_selection', 'status': 'complete', 'seconds': 3.208825512999965}
+START fit_selected output /kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v13/data_run/spi_classifier
+END fit_selected {'stage': 'fit_selected', 'status': 'complete', 'seconds': 0.030365426000116713}
+Traceback (most recent call last):
+  File "/kaggle/working/project/parameters/cloud_notebook.py", line 37, in cell
+    try:yield
+        ^^^^^
+  File "/tmp/ipykernel_23/1558305829.py", line 20, in <cell line: 0>
+    exec(compile(CELL_SOURCES[4], "notebook9_source_cell_4", "exec"), globals())
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "notebook9_source_cell_4", line 5, in <module>
+  File "/kaggle/working/project/parameters/dataset_pipeline.py", line 298, in train_spi_for_cache
+    receipt=candidate_release(model,output/'metrics/validation.json',current_manifest,
+                              output/'release_candidate.json',root=root)
+  File "/kaggle/working/project/parameters/spi_release.py", line 17, in candidate_release
+    raise ValueError('release checkpoint must be persisted inside the canonical project')
+ValueError: release checkpoint must be persisted inside the canonical project
+CELL END 6 seconds 3.5067116980001174

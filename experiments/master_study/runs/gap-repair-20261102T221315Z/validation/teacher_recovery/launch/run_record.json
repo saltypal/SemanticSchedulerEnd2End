@@ -1,0 +1,72 @@
+{
+  "planned_run_id": "teacher-recovery-wsl-v13-20261102T2243Z",
+  "status": "running_teacher_preparation",
+  "created_utc": "2026-11-02T22:43:41Z",
+  "kernel_id": "satyapaladuguplus/semantic-decoder-scheduler-20261030",
+  "prior_version": 12,
+  "prior_status": "COMPLETE",
+  "intended_version": 13,
+  "owner": "satyapaladuguplus",
+  "notebook_path": "experiments/master_study/gap_recovery/WSL_Teacher_Recovery.ipynb",
+  "notebook_sha256": "2fdea70f7df416957dadd91cd77ce5ac0bc0ca91f80a4726388e99edf830d30c",
+  "source_capsule_sha256": "a824d45cb146d850e709a67d29ded1aa2fa8dd3ca1db8248a82a4548fa3291e8",
+  "capsule_files_verified": 182,
+  "repo_revision": "032c23a3dafc7bfeb39a84ba55193b6b6f3a22a0",
+  "tests": {
+    "master_study": "28 passed",
+    "teacher_supervisor": "20 passed",
+    "scene_learning": "48 passed",
+    "source_diff_bytes": 0
+  },
+  "notebook_preflight": {
+    "nbformat4_valid": true,
+    "ast_code_cells": 7,
+    "cpu_setup_code_cells": 3,
+    "cpu_smoke": "passed; no training, no weights downloaded"
+  },
+  "hardware_requested": "NvidiaTeslaT4; notebook requires two CUDA devices",
+  "teacher_arms": 9,
+  "previously_completed_nonteacher_arms": 14,
+  "scientific_gates": {
+    "controls": 32,
+    "swap_consistency": 0.8,
+    "minimum_train_validation_support": "16/8",
+    "do_not_lower": true
+  },
+  "training_caps": {
+    "epochs_max": 50,
+    "patience": 8,
+    "rl_decisions_per_feedback_arm": 20000,
+    "training_stop_hours": 10.5,
+    "finalization_target_hours": 11.5,
+    "platform_limit_hours": 12
+  },
+  "inputs": {
+    "dataset_sources": [
+      "satyapaladuguplus/semantic-scheduler-paired-inputs-20261102"
+    ],
+    "kernel_sources": [
+      "satyapaladuguplus/semantic-image-pool-scene-cache-20261030"
+    ],
+    "sqgan_weights_attached": false,
+    "reuse_local_archives_and_shared_cache": true
+  },
+  "expected_runtime_output_root": "/kaggle/working/experiments/scheduler_pair/runs/",
+  "quota": "Not exposed by the installed Kaggle CLI; unavailable for this prelaunch check.",
+  "launch_command": "/home/Satya/.venvs/semantic-kaggle/bin/kaggle kernels push -p experiments/master_study/gap_recovery --accelerator NvidiaTeslaT4",
+  "actual_remote_version": 13,
+  "actual_remote_run_id": "teacher_recovery-20261102T224440Z",
+  "remote_status": "KernelWorkerStatus.RUNNING",
+  "runtime_python": "3.13.15",
+  "runtime_torch": "2.11.0+cu128",
+  "runtime_cuda": true,
+  "runtime_devices": [
+    "Tesla T4",
+    "Tesla T4"
+  ],
+  "current_stage": "prepare_teacher: teacher request preparation started",
+  "remote_source_capsule_sha256": "a824d45cb146d850e709a67d29ded1aa2fa8dd3ca1db8248a82a4548fa3291e8",
+  "remote_downloaded_notebook_serialized_sha256": "356058f93fb1f1f5f00a4516e36de1aaed599f951f9cbc28a7f17aa0d4913177",
+  "remote_download_hash_note": "Kaggle rewrote serialized filename/metadata; embedded source capsule hash and profile match.",
+  "live_log_path": "experiments/master_study/runs/gap-repair-20261102T221315Z/validation/teacher_recovery/launch/live_logs.stdout.log"
+}

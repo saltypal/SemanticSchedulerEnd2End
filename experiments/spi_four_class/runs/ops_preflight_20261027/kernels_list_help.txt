@@ -1,0 +1,31 @@
+usage: python.exe C:\Users\satya\AppData\Roaming\Python\Python314\Scripts\kaggle kernels list
+       [-h] [-m] [--page-token PAGE_TOKEN] [--page-size PAGE_SIZE] [-p PAGE]
+       [-s SEARCH] [-v | --format OUTPUT_FORMAT] [--parent PARENT]
+       [--competition COMPETITION] [--dataset DATASET] [--user USER]
+       [--language LANGUAGE] [--kernel-type KERNEL_TYPE]
+       [--output-type OUTPUT_TYPE] [--sort-by SORT_BY]
+
+options:
+  -h, --help            show this help message and exit
+  -m, --mine            Display only my items
+  --page-token PAGE_TOKEN
+                        Page token for results paging.
+  --page-size PAGE_SIZE
+                        Number of items to show on a page. Default size is 20, max is 200
+  -p, --page PAGE       Page number for results paging. Page size is 20 by default
+  -s, --search SEARCH   Term(s) to search for
+  -v, --csv             Print results in CSV format (if not set print in table format)
+  --format OUTPUT_FORMAT
+                        Print results in selected format (csv, table, json). For details on advanced options, see
+                        https://github.com/Kaggle/kaggle-cli/blob/main/docs/output_format.md
+  --parent PARENT       Find children of the specified parent kernel
+  --competition COMPETITION
+                        Find kernels for a given competition slug
+  --dataset DATASET     Find kernels for a given dataset slug. Format is {username/dataset-slug}
+  --user USER           Find kernels created by a given username
+  --language LANGUAGE   Specify the language the kernel is written in. Default is 'all'. Valid options are 'all', 'python', 'r', 'sqlite', and 'julia'
+  --kernel-type KERNEL_TYPE
+                        Specify the type of kernel. Default is 'all'. Valid options are 'all', 'script', and 'notebook'
+  --output-type OUTPUT_TYPE
+                        Search for specific kernel output types. Default is 'all'.  Valid options are 'all', 'visualizations', and 'data'
+  --sort-by SORT_BY     Sort list results. Default is 'hotness'. Valid options are 'hotness', 'commentCount', 'dateCreated', 'dateRun', 'relevance', 'scoreAscending', 'scoreDescending', 'viewCount', and 'voteCount'. 'relevance' is only applicable if a search term is specified.

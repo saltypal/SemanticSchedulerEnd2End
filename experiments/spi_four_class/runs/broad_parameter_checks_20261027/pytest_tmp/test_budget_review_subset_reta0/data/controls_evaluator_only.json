@@ -1,0 +1,3209 @@
+[
+  {
+    "case_id": "control-0-complete",
+    "image_id": "0",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "complete",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-0-condition_omitted",
+    "image_id": "0",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "condition_omitted",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "origins": {
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        },
+        "building.affected_or_greater": {
+          "kind": "derived",
+          "rule": "absent_implies_unaffected",
+          "premise": "building.present"
+        }
+      },
+      "literal_complete": false,
+      "literal_missing": [
+        "building.affected_or_greater"
+      ],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [
+        "building.affected_or_greater"
+      ],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-0-wrong_presence",
+    "image_id": "0",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_presence",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": false,
+            "correct": false
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [
+          "building.present"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-0-wrong_condition",
+    "image_id": "0",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_condition",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": false,
+      "semantic_missing": [],
+      "conflicts": [
+        {
+          "field": "building.present",
+          "retained_value": false,
+          "derived_value": true,
+          "rule": "affected_implies_present",
+          "premise": "building.affected_or_greater"
+        },
+        {
+          "field": "building.affected_or_greater",
+          "retained_value": true,
+          "derived_value": false,
+          "rule": "absent_implies_unaffected",
+          "premise": "building.present"
+        }
+      ],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": false,
+            "correct": false
+          }
+        },
+        "wrong_fields": [
+          "building.affected_or_greater"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-1-complete",
+    "image_id": "1",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "complete",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-1-condition_omitted",
+    "image_id": "1",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "condition_omitted",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.present": true
+      },
+      "origins": {
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": false,
+      "literal_missing": [
+        "building.affected_or_greater"
+      ],
+      "semantic_complete": false,
+      "semantic_missing": [
+        "building.affected_or_greater"
+      ],
+      "conflicts": [],
+      "unavailable_input_claims": [
+        "building.affected_or_greater"
+      ],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-1-wrong_presence",
+    "image_id": "1",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_presence",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": true,
+            "correct": false
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [
+          "building.present"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-1-wrong_condition",
+    "image_id": "1",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_condition",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": false,
+            "correct": false
+          }
+        },
+        "wrong_fields": [
+          "building.affected_or_greater"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-2-complete",
+    "image_id": "2",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "complete",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-2-condition_omitted",
+    "image_id": "2",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "condition_omitted",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.present": true
+      },
+      "origins": {
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": false,
+      "literal_missing": [
+        "building.affected_or_greater"
+      ],
+      "semantic_complete": false,
+      "semantic_missing": [
+        "building.affected_or_greater"
+      ],
+      "conflicts": [],
+      "unavailable_input_claims": [
+        "building.affected_or_greater"
+      ],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-2-wrong_presence",
+    "image_id": "2",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_presence",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": false,
+      "semantic_missing": [],
+      "conflicts": [
+        {
+          "field": "building.present",
+          "retained_value": false,
+          "derived_value": true,
+          "rule": "affected_implies_present",
+          "premise": "building.affected_or_greater"
+        },
+        {
+          "field": "building.affected_or_greater",
+          "retained_value": true,
+          "derived_value": false,
+          "rule": "absent_implies_unaffected",
+          "premise": "building.present"
+        }
+      ],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": true,
+            "correct": false
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [
+          "building.present"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-2-wrong_condition",
+    "image_id": "2",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_condition",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": true,
+            "correct": false
+          }
+        },
+        "wrong_fields": [
+          "building.affected_or_greater"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-3-complete",
+    "image_id": "3",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "complete",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-3-condition_masked",
+    "image_id": "3",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": true
+      },
+      "parameters": {},
+      "claim_availability": {
+        "building.affected_or_greater": {
+          "available": false,
+          "reason": "producer evidence unavailable"
+        }
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "condition_masked",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "origins": {
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        },
+        "building.affected_or_greater": {
+          "kind": "derived",
+          "rule": "absent_implies_unaffected",
+          "premise": "building.present"
+        }
+      },
+      "literal_complete": false,
+      "literal_missing": [
+        "building.affected_or_greater"
+      ],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [
+        "building.affected_or_greater"
+      ],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-3-wrong_presence",
+    "image_id": "3",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_presence",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": false,
+            "correct": false
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [
+          "building.present"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-3-wrong_condition",
+    "image_id": "3",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_condition",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": false,
+      "semantic_missing": [],
+      "conflicts": [
+        {
+          "field": "building.present",
+          "retained_value": false,
+          "derived_value": true,
+          "rule": "affected_implies_present",
+          "premise": "building.affected_or_greater"
+        },
+        {
+          "field": "building.affected_or_greater",
+          "retained_value": true,
+          "derived_value": false,
+          "rule": "absent_implies_unaffected",
+          "premise": "building.present"
+        }
+      ],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": false,
+            "correct": false
+          }
+        },
+        "wrong_fields": [
+          "building.affected_or_greater"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-4-complete",
+    "image_id": "4",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "complete",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-4-condition_masked",
+    "image_id": "4",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {},
+      "claim_availability": {
+        "building.affected_or_greater": {
+          "available": false,
+          "reason": "producer evidence unavailable"
+        }
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "condition_masked",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.present": true
+      },
+      "origins": {
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": false,
+      "literal_missing": [
+        "building.affected_or_greater"
+      ],
+      "semantic_complete": false,
+      "semantic_missing": [
+        "building.affected_or_greater"
+      ],
+      "conflicts": [],
+      "unavailable_input_claims": [
+        "building.affected_or_greater"
+      ],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-4-wrong_presence",
+    "image_id": "4",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_presence",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": true,
+            "correct": false
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [
+          "building.present"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-4-wrong_condition",
+    "image_id": "4",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_condition",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": false,
+            "correct": false
+          }
+        },
+        "wrong_fields": [
+          "building.affected_or_greater"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-5-complete",
+    "image_id": "5",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "complete",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-5-condition_masked",
+    "image_id": "5",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {},
+      "claim_availability": {
+        "building.affected_or_greater": {
+          "available": false,
+          "reason": "producer evidence unavailable"
+        }
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "condition_masked",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.present": true
+      },
+      "origins": {
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": false,
+      "literal_missing": [
+        "building.affected_or_greater"
+      ],
+      "semantic_complete": false,
+      "semantic_missing": [
+        "building.affected_or_greater"
+      ],
+      "conflicts": [],
+      "unavailable_input_claims": [
+        "building.affected_or_greater"
+      ],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-5-wrong_presence",
+    "image_id": "5",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": false,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_presence",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": false,
+      "semantic_missing": [],
+      "conflicts": [
+        {
+          "field": "building.present",
+          "retained_value": false,
+          "derived_value": true,
+          "rule": "affected_implies_present",
+          "premise": "building.affected_or_greater"
+        },
+        {
+          "field": "building.affected_or_greater",
+          "retained_value": true,
+          "derived_value": false,
+          "rule": "absent_implies_unaffected",
+          "premise": "building.present"
+        }
+      ],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": true,
+            "correct": false
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [
+          "building.present"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-5-wrong_condition",
+    "image_id": "5",
+    "image_path": "fixture.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "semantic_contract_control_v1",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "wrong_condition",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": true,
+            "correct": false
+          }
+        },
+        "wrong_fields": [
+          "building.affected_or_greater"
+        ],
+        "known_subset_consistent": false,
+        "all_required_verified": false,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  }
+]

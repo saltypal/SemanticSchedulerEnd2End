@@ -1,0 +1,28 @@
+
+==================================== ERRORS ====================================
+_ ERROR collecting experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Test/tests/test_channel_mapping.py _
+ImportError while importing test module '/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Test/tests/test_channel_mapping.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Test/tests/test_channel_mapping.py:5: in <module>
+    from Channels.channel_utils import complex_to_real_per_image, real_to_complex_per_image
+experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/src/Channels/__init__.py:8: in <module>
+    _target = _importlib.import_module('Evaluation.Channels')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Evaluation/Channels/__init__.py:4: in <module>
+    from Evaluation.Channels.channel_factory import create_channel, register_builtin_channels
+experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Evaluation/Channels/channel_factory.py:5: in <module>
+    from Evaluation.Channels.rician import RicianChannel
+experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Evaluation/Channels/rician.py:5: in <module>
+    from Evaluation.errors import ComponentUnavailableError
+E   ModuleNotFoundError: No module named 'Evaluation.errors'
+=========================== short test summary info ============================
+ERROR experiments/stream_scheduler/runs/repair-followup-20261101T033409Z/source/Test/tests/test_channel_mapping.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.76s

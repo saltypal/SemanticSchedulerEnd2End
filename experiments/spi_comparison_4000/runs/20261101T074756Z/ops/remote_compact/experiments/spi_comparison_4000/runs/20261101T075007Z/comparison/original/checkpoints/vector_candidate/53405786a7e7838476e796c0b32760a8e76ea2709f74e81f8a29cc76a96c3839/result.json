@@ -1,0 +1,285 @@
+{
+  "encoder": "clip_b32",
+  "head": "mlp",
+  "kind": "vector",
+  "artifact": "/kaggle/working/experiments/spi_comparison_4000/runs/20261101T075007Z/comparison/original/clip_b32/mlp.joblib",
+  "grid": [
+    {
+      "config": {
+        "hidden_layer_sizes": [
+          32
+        ]
+      },
+      "cv_scores": [
+        0.5624242424242425,
+        0.5900671118887437,
+        0.5669998395217308
+      ],
+      "mean": 0.573163731278239,
+      "warnings": [
+        {
+          "fold": 0,
+          "messages": [
+            "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+          ]
+        },
+        {
+          "fold": 1,
+          "messages": [
+            "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+          ]
+        },
+        {
+          "fold": 2,
+          "messages": [
+            "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+          ]
+        }
+      ]
+    },
+    {
+      "config": {
+        "hidden_layer_sizes": [
+          128
+        ]
+      },
+      "cv_scores": [
+        0.5670584094012086,
+        0.5410286791465975,
+        0.5859942361259582
+      ],
+      "mean": 0.5646937748912547,
+      "warnings": [
+        {
+          "fold": 0,
+          "messages": [
+            "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+          ]
+        },
+        {
+          "fold": 1,
+          "messages": [
+            "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+          ]
+        },
+        {
+          "fold": 2,
+          "messages": [
+            "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+          ]
+        }
+      ]
+    }
+  ],
+  "selected": {
+    "config": {
+      "hidden_layer_sizes": [
+        32
+      ]
+    },
+    "cv_scores": [
+      0.5624242424242425,
+      0.5900671118887437,
+      0.5669998395217308
+    ],
+    "mean": 0.573163731278239,
+    "warnings": [
+      {
+        "fold": 0,
+        "messages": [
+          "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+        ]
+      },
+      {
+        "fold": 1,
+        "messages": [
+          "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+        ]
+      },
+      {
+        "fold": 2,
+        "messages": [
+          "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+        ]
+      }
+    ]
+  },
+  "development": {
+    "macro_f1": 0.5896279431058258,
+    "accuracy": 0.7753134040501446,
+    "balanced_accuracy": 0.5653753342941543,
+    "precision": [
+      0.8577777777777778,
+      0.36363636363636365,
+      0.766,
+      0.7
+    ],
+    "recall": [
+      0.9212410501193318,
+      0.18791946308724833,
+      0.8606741573033708,
+      0.2916666666666667
+    ],
+    "f1": [
+      0.8883774453394706,
+      0.24778761061946902,
+      0.8105820105820106,
+      0.4117647058823529
+    ],
+    "worst_class_recall": 0.18791946308724833,
+    "ordinal_mae": 0.2719382835101254,
+    "confusion": [
+      [
+        386,
+        11,
+        22,
+        0
+      ],
+      [
+        40,
+        28,
+        81,
+        0
+      ],
+      [
+        24,
+        35,
+        383,
+        3
+      ],
+      [
+        0,
+        3,
+        14,
+        7
+      ]
+    ],
+    "class_support": [
+      419,
+      149,
+      445,
+      24
+    ],
+    "class_recall_defined": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "critical_to_low_medium": 3,
+    "high_critical_underprediction": 76
+  },
+  "search_fit_seconds": 7.28251337599977,
+  "artifact_bytes": 274608,
+  "head_cpu_p50_ms": 0.09366800031784805,
+  "head_cpu_p95_ms": 0.11602399977164168,
+  "timing_scope": "head predict only; excludes encoder and transfers",
+  "final_fit_warnings": [
+    "Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet."
+  ],
+  "training_loss_curve": [
+    1.336711883448103,
+    1.2271461129515595,
+    1.127764338091073,
+    1.05015992309293,
+    0.9906501311461086,
+    0.9371881523151552,
+    0.8899537489086057,
+    0.848525318610334,
+    0.8129228058431892,
+    0.7839472597289594,
+    0.7596098839842494,
+    0.7399907715940623,
+    0.7230146532982495,
+    0.708998747685576,
+    0.6968481692484637,
+    0.6856513960788003,
+    0.6761119698033932,
+    0.6673477818626904,
+    0.6597906050400464,
+    0.6524018033915752,
+    0.645503072525142,
+    0.6384068382592966,
+    0.6323986645267552,
+    0.6265318382933102,
+    0.6204357279255381,
+    0.6157118123179675,
+    0.6099124375320086,
+    0.6050269007919553,
+    0.6008214520003616,
+    0.5962702630941265,
+    0.5915741224600504,
+    0.5873379371789778,
+    0.5833089103851523,
+    0.5788603743102531,
+    0.5754564589259791,
+    0.5714764110693394,
+    0.5672698453782681,
+    0.5642720788323221,
+    0.5605184483322986,
+    0.5577123184299162,
+    0.5530328543936199,
+    0.5500148172621171,
+    0.5462080732491379,
+    0.5431138242267534,
+    0.540153556067421,
+    0.5370321682591518,
+    0.5338365787276023,
+    0.5307662163839661,
+    0.5280253790273812,
+    0.524748360925576,
+    0.5217741765466526,
+    0.51978912743915,
+    0.5166786424895478,
+    0.5130959842729094,
+    0.5106535965853756,
+    0.5083484055004442,
+    0.5050444624098759,
+    0.5025054757133717,
+    0.5000808605990901,
+    0.4971941743860327,
+    0.49439147396895894,
+    0.49225095949485365,
+    0.48938917010857047,
+    0.4864301015614869,
+    0.4840637851901696,
+    0.48175834235773124,
+    0.47930849191719443,
+    0.4773903673314043,
+    0.47432497375152083,
+    0.4731094643904603,
+    0.4702216376927082,
+    0.46812014097110066,
+    0.46510858429002966,
+    0.4638018367242533,
+    0.4613705699043921,
+    0.45960668761557333,
+    0.4567310397258556,
+    0.45454121934883424,
+    0.4525465440360813,
+    0.45040147810487613,
+    0.4480486494462016,
+    0.44586614363868493,
+    0.4442884797109183,
+    0.4417824344954462,
+    0.43972025172238344,
+    0.437528894687585,
+    0.4356326433112199,
+    0.4343976020300161,
+    0.4316566048918574,
+    0.4303132516255407,
+    0.42762045681430266,
+    0.4265831054169068,
+    0.4249214088231967,
+    0.4224988267992376,
+    0.42014379677914165,
+    0.4186527033448005,
+    0.41701924960046405,
+    0.41665033960159636,
+    0.4161222069281349,
+    0.411125385248117
+  ],
+  "training_flops": null,
+  "training_flops_reason": "sklearn solver not covered by neural operator counter",
+  "inference_dense_flops_proxy": 33024
+}

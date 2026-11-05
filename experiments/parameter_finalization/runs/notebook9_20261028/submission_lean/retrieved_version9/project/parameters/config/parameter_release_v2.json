@@ -1,0 +1,105 @@
+{
+  "schema": "better_parameter_release_v2",
+  "status": "fallback_with_yolo_evaluation_pending",
+  "generated_utc": "2026-10-27T01:35:04.350647+00:00",
+  "purpose": "parameter extraction research prototype; not validated urgency or scheduling policy",
+  "wire": {
+    "version": 2,
+    "bytes": 35,
+    "legacy_version": 1,
+    "legacy_bytes": 28,
+    "queue_integration": "not implemented",
+    "profile_registry": "must be shared before deployment"
+  },
+  "spi": {
+    "model_path": "parameters\\results\\spi_three_class_20261027\\models\\spi.json",
+    "model_sha256": "6ce81a22dc646dc58714290f37fde48dfb9e8149b17b63209af71d5e089b1cdd",
+    "file_sha256": "53353fbc76de055263d09910883c76ecdac74a96a3ac9daf973b145a81788744",
+    "model_status": "fallback",
+    "supported_levels": [
+      "Low",
+      "High",
+      "Critical"
+    ],
+    "unsupported_levels": [
+      "Medium"
+    ],
+    "target": "visible response-attention; pseudo-label teacher agreement",
+    "rubric_sha256": "8e5715ac6638e375de3ff59b2eb5eefa45e1a703f1b77313fde3fcce6afdc535",
+    "four_class_status": "corrected text gate failed:9/12, Medium0/3; no four-class model"
+  },
+  "relevance": {
+    "method": "CLIP image/mission cosine",
+    "range": [
+      -1,
+      1
+    ],
+    "probability": false,
+    "text_chunks_max": 16
+  },
+  "novelty": {
+    "method": "(1-max prior sender cosine)/2",
+    "range": [
+      0,
+      1
+    ],
+    "kb_capacity": 32,
+    "cold_start": 1.0,
+    "cold_start_flag": true,
+    "meaning": "appearance difference, not verified new facts"
+  },
+  "temporal": {
+    "capture": "trusted UTC milliseconds or null",
+    "allowed_delay": "operator milliseconds or null"
+  },
+  "scene": {
+    "method": "YOLO-World detections and exact box union",
+    "fields": [
+      "instances",
+      "categories",
+      "largest_box_fraction",
+      "union_box_coverage"
+    ],
+    "checkpoint": "yolov8s-worldv2.pt",
+    "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+    "vocabulary": [
+      "building",
+      "road",
+      "person",
+      "car",
+      "truck",
+      "bus",
+      "motorcycle",
+      "bicycle",
+      "debris",
+      "chair",
+      "couch",
+      "dining table",
+      "television",
+      "refrigerator",
+      "tree",
+      "water"
+    ],
+    "settings": {
+      "conf": 0.25,
+      "iou": 0.5,
+      "imgsz": 640,
+      "max_det": 300,
+      "agnostic_nms": false,
+      "half": false,
+      "augment": false,
+      "verbose": false
+    },
+    "real_detector_validation": "300 GPU outputs;202 zero; label-based accuracy pending"
+  },
+  "feature_signature": "3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de",
+  "ue_profiles": "BetterScheduler/config/ue_parameter_profiles_v2.json",
+  "limitations": [
+    "no independent human urgency validation",
+    "image-level SPI does not prove currentness",
+    "no verified screenshot benchmark",
+    "model-dependent scene categories",
+    "novelty is not verified asset correspondence"
+  ],
+  "cloud_run": "satyapaladugu/betterscheduler-spi-20261027finalc"
+}

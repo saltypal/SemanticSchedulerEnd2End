@@ -15,36 +15,36 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE_MOVES = {
-    "INFRA/contracts.py": "INFRA/scheduling/contracts.py",
-    "INFRA/semantic_contracts.py": "INFRA/scheduling/semantic_contracts.py",
-    "INFRA/scheduling_requests.py": "INFRA/scheduling/requests.py",
-    "INFRA/semantic_streams.py": "INFRA/scheduling/streams.py",
-    "INFRA/simulation.py": "INFRA/scheduling/simulation.py",
-    "INFRA/event_simulation.py": "INFRA/scheduling/event_simulation.py",
-    "INFRA/semantic_evaluator.py": "INFRA/evaluation/semantic.py",
-    "INFRA/feature_cache.py": "INFRA/data/feature_cache.py",
-    "INFRA/ladi_manifest.py": "INFRA/data/ladi_manifest.py",
-    "INFRA/kaggle_dataset_bundle.py": "INFRA/data/kaggle_bundle.py",
-    "INFRA/latent_contracts.py": "INFRA/latent/contracts.py",
-    "INFRA/latent_simulation.py": "INFRA/latent/simulation.py",
-    "INFRA/latent_evaluation.py": "INFRA/latent/evaluation.py",
-    "INFRA/experiments/static_latent_experiment.py": "INFRA/latent/experiment.py",
-    "scripts/run_static_latent_scheduler.py": "INFRA/latent/cli.py",
+    "Evaluation/contracts.py": "Evaluation/scheduling/contracts.py",
+    "Evaluation/semantic_contracts.py": "Evaluation/scheduling/semantic_contracts.py",
+    "Evaluation/scheduling_requests.py": "Evaluation/scheduling/requests.py",
+    "Evaluation/semantic_streams.py": "Evaluation/scheduling/streams.py",
+    "Evaluation/simulation.py": "Evaluation/scheduling/simulation.py",
+    "Evaluation/event_simulation.py": "Evaluation/scheduling/event_simulation.py",
+    "Evaluation/semantic_evaluator.py": "Evaluation/evaluation/semantic.py",
+    "Evaluation/feature_cache.py": "Evaluation/data/feature_cache.py",
+    "Evaluation/ladi_manifest.py": "Evaluation/data/ladi_manifest.py",
+    "Evaluation/kaggle_dataset_bundle.py": "Evaluation/data/kaggle_bundle.py",
+    "Evaluation/latent_contracts.py": "Evaluation/latent/contracts.py",
+    "Evaluation/latent_simulation.py": "Evaluation/latent/simulation.py",
+    "Evaluation/latent_evaluation.py": "Evaluation/latent/evaluation.py",
+    "Evaluation/experiments/static_latent_experiment.py": "Evaluation/latent/experiment.py",
+    "scripts/run_static_latent_scheduler.py": "Evaluation/latent/cli.py",
     "Scheduler/policies.py": "Scheduler/baselines/policies.py",
     "Scheduler/fixtures.py": "Scheduler/baselines/fixtures.py",
     "Scheduler/semantic_policies.py": "Scheduler/semantic/policies.py",
     "Scheduler/feature_adapter.py": "Scheduler/semantic/features.py",
     "Scheduler/policy_registry.py": "Scheduler/semantic/registry.py",
     "Scheduler/latent_policies.py": "Scheduler/latent/policies.py",
-    "SemParam/clip_backbone.py": "SemParam/features/clip.py",
-    "SemParam/extractors.py": "SemParam/features/extractors.py",
-    "SemParam/observation_builder.py": "SemParam/features/observation.py",
-    "SemParam/scheduler_features.py": "SemParam/features/scheduler.py",
-    "SemParam/ladi_prediction_provider.py": "SemParam/features/ladi_prediction.py",
-    "SemParam/latent_features.py": "SemParam/features/latent.py",
-    "SemParam/delivered_history.py": "SemParam/history/delivered.py",
-    "SemParam/semantic_header.py": "SemParam/headers/semantic.py",
-    "SemParam/packet_builder.py": "SemParam/headers/packet.py",
+    "Archived/owners_before_simplification_20261027/SemParam/clip_backbone.py": "Archived/owners_before_simplification_20261027/SemParam/features/clip.py",
+    "Archived/owners_before_simplification_20261027/SemParam/extractors.py": "Archived/owners_before_simplification_20261027/SemParam/features/extractors.py",
+    "Archived/owners_before_simplification_20261027/SemParam/observation_builder.py": "Archived/owners_before_simplification_20261027/SemParam/features/observation.py",
+    "Archived/owners_before_simplification_20261027/SemParam/scheduler_features.py": "Archived/owners_before_simplification_20261027/SemParam/features/scheduler.py",
+    "Archived/owners_before_simplification_20261027/SemParam/ladi_prediction_provider.py": "Archived/owners_before_simplification_20261027/SemParam/features/ladi_prediction.py",
+    "Archived/owners_before_simplification_20261027/SemParam/latent_features.py": "Archived/owners_before_simplification_20261027/SemParam/features/latent.py",
+    "Archived/owners_before_simplification_20261027/SemParam/delivered_history.py": "Archived/owners_before_simplification_20261027/SemParam/history/delivered.py",
+    "Archived/owners_before_simplification_20261027/SemParam/semantic_header.py": "Archived/owners_before_simplification_20261027/SemParam/headers/semantic.py",
+    "Archived/owners_before_simplification_20261027/SemParam/packet_builder.py": "Archived/owners_before_simplification_20261027/SemParam/headers/packet.py",
 }
 SCRIPT_GROUPS = {
     "codecs": ("bootstrap_swinjscc", "download_kodak24", "register_deepjscc",
@@ -138,10 +138,10 @@ def main():
     # intentionally continue to exercise the preserved compatibility imports.
     dirty = set(subprocess.check_output(["git", "diff", "--name-only"], cwd=ROOT, text=True).splitlines())
     consumers = []
-    for owner in ("INFRA", "SemParam", "Scheduler", "EncDec"):
+    for owner in ("Evaluation", "Archived.owners_before_simplification_20261027.SemParam", "Scheduler", "Codec"):
         for path in sorted((ROOT / owner).rglob("*.py")):
             relative = path.relative_to(ROOT).as_posix()
-            protected = {"INFRA/class_priority_profiles.py", "INFRA/learning/priority_match_objective.py"}
+            protected = {"Evaluation/class_priority_profiles.py", "Scheduler/training/priority_match_objective.py"}
             if relative in MOVES or "tests" in path.parts or "__pycache__" in path.parts or relative in dirty or relative in protected:
                 continue
             before = path.read_text(encoding="utf-8-sig")

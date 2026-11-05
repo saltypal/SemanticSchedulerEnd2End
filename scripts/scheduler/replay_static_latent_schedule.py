@@ -43,7 +43,7 @@ def main():
                 job["resource_units"] != int(cost["channel_uses"]) or
                 job["payload_provenance"] != "swinjscc:" + cost["checkpoint_sha256"]):
             raise ValueError("Scheduled payload does not match codec profile")
-    from EncDec.integration.scheduler_replay import replay_selected_jobs
+    from Codec.integration.scheduler_replay import replay_selected_jobs
     print(json.dumps({"stage": "replay_start", "latents": len(selected)}), flush=True)
     output = replay_selected_jobs([job["image_id"] for job in selected], images,
         args.payload_costs, args.output, model_dir=args.model_dir,

@@ -1,0 +1,4 @@
+# CrisisMMD1000 comparison correction
+Four encoders x eight ML and four neural heads =48 unique pairs. Four fold-only balancing modes. Class-weighted kNN is unsupported:188 supported balance/pair cells. Saved1000 teacher rows reused;983 valid and17unknown. Native-test components reserved. Exact-SHA/tweet components grouped. Development is repartitioned because native train has only one Medium after leakage cleanup; very limited support remains. Event/near-duplicate independence unverified.
+Checks: five tests passed; Python compilation, all notebook cell AST parsing, weighting-mode and sparse grouped-CV smoke passed. Cloud results pending.
+CPU/GPU encoder and head component timing, memory and partial neural FLOPs are included. Complete combined extraction timing, VLM prefill/decode FLOPs and sklearn training FLOPs remain unmeasured. Cache hits excluded from fresh timing. No encoder fine-tuning.

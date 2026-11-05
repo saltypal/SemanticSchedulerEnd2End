@@ -1,0 +1,43 @@
+CELL START 2 log /kaggle/working/experiments/spi_four_class/runs/20261028_gemma_diagnostic_checked/cell_evidence/cell_2.log
+START 01_verify_frozen_diagnostic output /kaggle/working/experiments/spi_four_class/runs/20261028_gemma_diagnostic_checked/campaign
+END 01_verify_frozen_diagnostic {'stage': '01_verify_frozen_diagnostic', 'status': 'complete', 'seconds': 13.22937123500003}
+START 02_load_gemma4_e4b output /kaggle/working/experiments/spi_four_class/runs/20261028_gemma_diagnostic_checked/campaign
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+END 02_load_gemma4_e4b {'stage': '02_load_gemma4_e4b', 'status': 'complete', 'seconds': 150.681454993}
+START 03_text_conformance_gemma4_e4b output /kaggle/working/experiments/spi_four_class/runs/20261028_gemma_diagnostic_checked/campaign
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Text controls gemma4_e4b 12 /48
+Text controls gemma4_e4b 24 /48
+Text controls gemma4_e4b 36 /48
+Text controls gemma4_e4b 48 /48
+END 03_text_conformance_gemma4_e4b {'stage': '03_text_conformance_gemma4_e4b', 'status': 'complete', 'seconds': 227.18527121599993}
+START 04_visual_grounding_gemma4_e4b output /kaggle/working/experiments/spi_four_class/runs/20261028_gemma_diagnostic_checked/campaign
+Grounding diagnostic gemma4_e4b 1 /24 complete None
+Grounding diagnostic gemma4_e4b 2 /24 complete None
+Grounding diagnostic gemma4_e4b 3 /24 complete None
+Grounding diagnostic gemma4_e4b 4 /24 complete None
+Grounding diagnostic gemma4_e4b 5 /24 complete None
+Grounding diagnostic gemma4_e4b 6 /24 complete None
+Grounding diagnostic gemma4_e4b 7 /24 complete None
+Grounding diagnostic gemma4_e4b 8 /24 complete None
+Grounding diagnostic gemma4_e4b 9 /24 complete None
+Grounding diagnostic gemma4_e4b 10 /24 complete None
+Grounding diagnostic gemma4_e4b 11 /24 complete None
+Grounding diagnostic gemma4_e4b 12 /24 complete None
+Grounding diagnostic gemma4_e4b 13 /24 complete Low
+Grounding diagnostic gemma4_e4b 14 /24 complete None
+Grounding diagnostic gemma4_e4b 15 /24 complete None
+Grounding diagnostic gemma4_e4b 16 /24 complete None
+Grounding diagnostic gemma4_e4b 17 /24 complete None
+Grounding diagnostic gemma4_e4b 18 /24 complete None
+Grounding diagnostic gemma4_e4b 19 /24 complete None
+Grounding diagnostic gemma4_e4b 20 /24 complete None
+Grounding diagnostic gemma4_e4b 21 /24 complete None
+Grounding diagnostic gemma4_e4b 22 /24 complete None
+Grounding diagnostic gemma4_e4b 23 /24 complete None
+Grounding diagnostic gemma4_e4b 24 /24 complete None
+END 04_visual_grounding_gemma4_e4b {'stage': '04_visual_grounding_gemma4_e4b', 'status': 'complete', 'seconds': 114.25370239799986}
+ACTUAL SPI OUTCOME {'seconds': 3060, 'purpose': 'enriched visual grounding diagnosis', 'training_allowed': False, 'runtime_promotion_allowed': False, 'independent_urgency_reference': False, 'thinking': False, 'status': 'diagnostic_complete', 'teachers': 1, 'next_gate': 'review decisive visual claims; no automatic bulk labeling or model promotion'}
+CELL END 2 seconds 505.96686393699997

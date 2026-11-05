@@ -1,0 +1,632 @@
+{
+  "review_type": "blinded_ai_diagnostic",
+  "review_sha256": "849904dccd3d29032069690656a3682ed472d31cfc41e99d08cb3f74e05138e6",
+  "source_role": "train",
+  "per_teacher_class": {
+    "Low": {
+      "cases": 12,
+      "outside_reviewer_plausible_range": 0,
+      "immediate_harm_not_established": 12
+    },
+    "Medium": {
+      "cases": 12,
+      "outside_reviewer_plausible_range": 3,
+      "immediate_harm_not_established": 12
+    },
+    "High": {
+      "cases": 12,
+      "outside_reviewer_plausible_range": 3,
+      "immediate_harm_not_established": 9
+    },
+    "Critical": {
+      "cases": 12,
+      "outside_reviewer_plausible_range": 6,
+      "immediate_harm_not_established": 6
+    }
+  },
+  "cases": [
+    {
+      "case_id": "A01",
+      "visible_evidence": "A weather bulletin shows a winter storm warning map and forecasts heavy wet snow and difficult travel.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Forecast text indicates a hazard, but no affected people or current damage are shown.",
+      "teacher_level": "Medium",
+      "image_id": "5c4c612b5a87dc345a2ce0ffe9c1d5ac15e95c5f0f8921c90f7141f42a75283d",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A02",
+      "visible_evidence": "A dense crowd of people and cameras surrounds a person in front of a building.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The gathering's purpose and any associated hazard are not visible.",
+      "teacher_level": "High",
+      "image_id": "82dab2d7801d01cf9cf72a0db06f2995cfab01b2cad24d94ebe3a25aaf71b217",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A03",
+      "visible_evidence": "A performer in bright clothing stands on a lit stage with one arm raised.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "25ffba30cf9aa64a0fbea9d559be14560d72cc3a80a8294f91c9d84f4c416f03",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A04",
+      "visible_evidence": "A composite graphic shows poultry, a person sneezing into a tissue, and a warning symbol.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The graphic signals a health concern but shows no confirmed illness or outbreak.",
+      "teacher_level": "Medium",
+      "image_id": "2abc1fbfe96ac43b5cb40533b575d1df29f99f193c25446fae6512a3cbd4ecce",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A05",
+      "visible_evidence": "A large utility pole and wires lie across a wet road amid branches and storm debris near buildings.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "A fallen pole and wires create a visible hazard, but no ongoing/imminent serious harm to a person is shown and electrical status is unknown.",
+      "teacher_level": "High",
+      "image_id": "08a6a1d80e3dbe2f167c3d60903650ef1b37f6dcf747cada962cecbc4f948fb0",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A06",
+      "visible_evidence": "An orange vehicle carrying people moves through deep floodwater while others stand in the water nearby.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "People are exposed to floodwater, but injury or imminent serious harm is not clearly shown.",
+      "teacher_level": "Critical",
+      "image_id": "97b4f64e2bf877d641593be29a4ab9270b9f60c34f8fcc33f5fa61ecd1291521",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A07",
+      "visible_evidence": "A decorative quote graphic contains relationship advice over a background of hearts.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "0833354b9106d0ec486893015dfd2f77bc9baf1790835dd7d23f7488f47fcf82",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A08",
+      "visible_evidence": "Two maps depict regional seismic hazard zones and an intensity distribution around a marked area.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The maps describe hazard information without showing an ongoing damaging event.",
+      "teacher_level": "Low",
+      "image_id": "dd3ed7364c45086a99e35624401c7d6167bc337a7a0f4079c605b435c69d7a99",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A09",
+      "visible_evidence": "A weather forecast graphic maps expected hurricane rainfall totals and warns of locally higher amounts.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "This is a forecast graphic and does not establish current flooding or impacts.",
+      "teacher_level": "High",
+      "image_id": "4b806fedd0fbfb47ef7236f5dcb14c86ab9a889e5146b77afacb551f2028fa24",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A10",
+      "visible_evidence": "A social media screenshot contains explicit targeted threats of shooting and killing a named account holder.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Explicit targeted threats are visible, but timing, capability, and any ongoing attack are not established.",
+      "teacher_level": "Medium",
+      "image_id": "670a8f33a011cfedf4a0d00f15170ce828fb0a6b6f86204337fee914df832769",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A11",
+      "visible_evidence": "An aerial view shows numerous homes and streets surrounded by floodwater.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Widespread flooding is visible, but no person in immediate danger or active critical failure is discernible.",
+      "teacher_level": "Critical",
+      "image_id": "d8236c0fcb9851e44887fb28d4d4e85857934cb9abc9f69573e2e53aeaf1163b",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A12",
+      "visible_evidence": "A large historic-looking building has fallen masonry and rubble piled around its base.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Severe building damage is visible, but no person in immediate danger or active critical failure is discernible.",
+      "teacher_level": "High",
+      "image_id": "f86fbec76b34c5ed8765dd9c8e8e377a0a6ff1913eb4dc54395237d2842e8fdd",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A13",
+      "visible_evidence": "A colorful infographic uses branching roads and small icons to illustrate a general system or process.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "8c204bce26cbbe012c2fba0325791c86936e5d7da0d4f832ac4ec79b178dac53",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A14",
+      "visible_evidence": "An illustration shows one hand holding another person's wrist or hand.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The context is unclear and no injury is visibly depicted.",
+      "teacher_level": "Medium",
+      "image_id": "c1d5b396e246c8d899010c10ef2eb78f62f377b19c3c6dd0e32be6a9a900c405",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A15",
+      "visible_evidence": "A person in military-style clothing lies prone on leaf-covered ground with gear visible.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "indeterminate",
+      "uncertainty": "The low-resolution still does not establish whether the person is injured, resting, or otherwise in danger.",
+      "teacher_level": "Critical",
+      "image_id": "b2f333169a3619bc4436344c82c8f418c83f7b5729669ed18366d71aaa13cca6",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A16",
+      "visible_evidence": "A person walks through street-level floodwater between homes and buildings.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "A person is wading through floodwater, but the still image does not show imminent serious harm or an active rescue.",
+      "teacher_level": "High",
+      "image_id": "96e1d2ce37294d465af80f142f400b14ff5e334131519f787ba66b55f1718e39",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A17",
+      "visible_evidence": "Fast, high water flows beside a wooded bank where trees and a fence line the edge.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The water appears elevated, but scale and nearby exposure are unclear.",
+      "teacher_level": "Medium",
+      "image_id": "104935dab53922a66693bb35057ba8794aed8f41724a62bddbe24f5d97899fa3",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A18",
+      "visible_evidence": "A product mockup shows two editions of a self-help book with line illustrations on their covers.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "3f4fadde6e0ed47d14f02296ac5ca2077c826d89ac1279c0448887578fd79490",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A19",
+      "visible_evidence": "A fenced roadwork area contains cones, construction materials, and workers beside a paved path.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Routine work is visible, with no specific injury or failure apparent.",
+      "teacher_level": "Medium",
+      "image_id": "519c94d05625df4dc58315599a0aa9f9dcc3a8e8afe04577aa95774e0e56d9b5",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A20",
+      "visible_evidence": "A person sits on steps outside a building in an ordinary street scene.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "ade19cfe10c495330cf386824f08486c4ebe41436d8f975663a36a1a2b51e77b",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A21",
+      "visible_evidence": "A corrugated metal roof or wall section has collapsed into a yard beside a house and trees.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "Substantial property damage is visible, but ongoing collapse or injury is not established.",
+      "teacher_level": "High",
+      "image_id": "d412462fe405239198102eaece2ecd0805e619f3d3e4a138a43f1acade0daf38",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A22",
+      "visible_evidence": "A waterside area is covered with broken wooden structures and building debris.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Extensive debris damage is visible, but no person in immediate danger or active critical failure is discernible.",
+      "teacher_level": "High",
+      "image_id": "fd48c9d8b3b61d9270e348298126fd8a626a1284e2505f2e514513167024f6a4",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A23",
+      "visible_evidence": "Rescuers in floodwater assist a person into a small boat near a flooded building.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "An active rescue and hazardous flooding are visible, but serious injury is not apparent.",
+      "teacher_level": "Critical",
+      "image_id": "1f691dbe2fa5b0d63382c97bee9c6c5bbbfce868957810b07ee770e8a86ffd94",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A24",
+      "visible_evidence": "A six-panel social media collage depicts a helicopter, rooftop scenes, rescue messages, and arguments about relief payments.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "indeterminate",
+      "uncertainty": "The collage is too small to determine whether depicted scenes are documentary, satirical, or current.",
+      "teacher_level": "Medium",
+      "image_id": "20744d03ec3b8856f4bdb56453e43f205cded57055a7a73d70da8bc4dd087c6e",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A25",
+      "visible_evidence": "A swollen muddy river runs beneath a low bridge with water close to the bridge deck.",
+      "plausible_levels": [
+        "Medium",
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "High water passes beneath a bridge, but no person in immediate danger or active critical failure is shown.",
+      "teacher_level": "Medium",
+      "image_id": "cdb0db7dd2ee68dbc6d46169a63c0c1c5d16c54b71d33de118f3481b387974da",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A26",
+      "visible_evidence": "Cranes and a steel-framed structure are visible at an active urban construction site.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No failure or specific hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "8d79941ee112edb29c93c2574538244a1be3df30ae7282b1295d6268aa84838e",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A27",
+      "visible_evidence": "A person carrying a rifle walks among a flock of sheep on a dry path.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "A firearm is visible, but no threat or violence is depicted.",
+      "teacher_level": "Critical",
+      "image_id": "30023e7fb8a9b67702126769f2f1eee657413226ad7e4cfff730214029932d25",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A28",
+      "visible_evidence": "An aerial view shows a settlement with extensive standing water along streets and around buildings.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Flooding and damaged structures are visible, but no person in immediate danger or active critical failure is discernible.",
+      "teacher_level": "Critical",
+      "image_id": "c3f502af2e587acd412dec0d95c41961e3a021e3f355845584474f9b2e707873",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A29",
+      "visible_evidence": "A multi-story building is severely tilted with rubble at its base and several people close to the structure.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "The unstable appearance and nearby people suggest danger, but an active collapse is not captured.",
+      "teacher_level": "Critical",
+      "image_id": "08583170ddcec4c83aa5cf370a528eeca04bdcf66b4a2cae179c175da2634218",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A30",
+      "visible_evidence": "Water covers part of a park or riverside path among trees and fencing.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Localized inundation is visible without clear damage or exposed people.",
+      "teacher_level": "High",
+      "image_id": "2e1f5fa16b5b35b10b8ba9f68d432da36011d345038e06d176ba94893fe2ce82",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A31",
+      "visible_evidence": "People stand in a lit public square at night around a monument and parked vehicles.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Medium",
+      "image_id": "463c3ff9a8590f7e5e243a4627112d5ec653e33e2771e068ec432342cc9fbb66",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A32",
+      "visible_evidence": "A phone screenshot shows an outgoing call in progress to a phone number.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The call recipient and purpose are not visible.",
+      "teacher_level": "Low",
+      "image_id": "7b02f0efdb5732985bcb16328039426e1833a03a4f8bfbde82d27ec6d80b37a3",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A33",
+      "visible_evidence": "A retail checkout screenshot states the cart balance is below the $0.01 minimum and the listed shoe item is currently unavailable.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The screenshot shows a concrete checkout/item-availability problem; it does not indicate an emergency or broader disruption.",
+      "teacher_level": "Medium",
+      "image_id": "1b09660479f89eae8f040628f8116453124699f1fc2b693fef2864b008f08040",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A34",
+      "visible_evidence": "A map diagram traces oil and gas infrastructure along the Texas Gulf Coast.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Infrastructure is mapped, but no incident is depicted.",
+      "teacher_level": "Low",
+      "image_id": "4ac8ac9a7be51e157c1e8d7510e725fba511d3ef381172abdcf6c8bbc6558c7b",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A35",
+      "visible_evidence": "A damaged multi-story building and a rubble-filled street are surrounded by people, including apparent responders.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "Severe structural damage and an active response are visible; immediate injury is not clear.",
+      "teacher_level": "Critical",
+      "image_id": "60933f7b33fb38bbdd9dbfa04b5ffb3ae0f7c54552fbc74dc91b3abaf06a9ccb",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A36",
+      "visible_evidence": "A weather map shows forecast winter precipitation bands across a broad region.",
+      "plausible_levels": [
+        "Low",
+        "Medium"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The graphic indicates forecast weather but no specific impact or warning text is legible.",
+      "teacher_level": "High",
+      "image_id": "ceeae3132e3b0551f396b4c56a237cfa3abdb4346e7b3517e4538ebd023e0dc1",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A37",
+      "visible_evidence": "A collage shows people preparing large pots of food outdoors beside buildings.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "The scene appears to show food preparation, with no concrete hazard visible.",
+      "teacher_level": "Medium",
+      "image_id": "14e60c8238259db887fcca13305e8d8165506bf9d26407dbce661fc5125e05b5",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A38",
+      "visible_evidence": "A road and roadside area are buried under a large pile of rock and earth beside a road sign and buildings.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "A large debris pile and damaged structure are visible, but no person in immediate danger or active critical failure is discernible.",
+      "teacher_level": "High",
+      "image_id": "8c42414acb4359ad4d767a274ff5802cd448ec7e2766d502a93fdc850ca0bdbc",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A39",
+      "visible_evidence": "A large slope failure has deposited earth near homes while a crowd gathers at its base.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "The scene shows substantial landslide damage and nearby people, but ongoing movement or injuries are unclear.",
+      "teacher_level": "High",
+      "image_id": "8a047dd3d9a8ff07830beea6bd21f45d1d99f976358ad0fd9fead2389fafb7b0",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A40",
+      "visible_evidence": "A tall multi-story building leans markedly over a nighttime street, with people and parked cars nearby.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "Severe structural instability and nearby people are visible, but active collapse is not captured.",
+      "teacher_level": "Critical",
+      "image_id": "751d67549edaa9145d673207d5d63708755ba55af5d616968bf7e75468551419",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A41",
+      "visible_evidence": "A mass of soil and broken masonry has slumped against a house, leaving debris across the adjoining area.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "Serious slope damage beside a residence is visible, but imminent further movement is not established.",
+      "teacher_level": "High",
+      "image_id": "31e33f54fee27fa353d51cb88833501c6d17466a7be3f219d04ed04a980dff4c",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A42",
+      "visible_evidence": "A partially collapsed multi-story building has exposed rooms and rubble while several people stand or work nearby.",
+      "plausible_levels": [
+        "High",
+        "Critical"
+      ],
+      "immediate_harm_evidence": "visible",
+      "uncertainty": "Severe structural damage and people in the debris zone are apparent; no active collapse is captured.",
+      "teacher_level": "Critical",
+      "image_id": "dd2ccbfd3fa4fa24501148303e117c6a7fced1f35296f4aedc5e71f82a066a5b",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A43",
+      "visible_evidence": "A person stands near a flooded residential street beside overhead wires and a damaged slope or embankment.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "One person stands above floodwater near houses, but the still image does not establish imminent serious harm or an active rescue.",
+      "teacher_level": "Critical",
+      "image_id": "bd20726d419f67d2b5e28a9cb78c2d8470aee874014d77dc53262bd136c2e104",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A44",
+      "visible_evidence": "A navigation map shows a route along roads beside a green park area.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Medium",
+      "image_id": "ea8c7ff0cbcced74e97c162322b30daf91379f4dcfa67214bdfa87ba9c44fad9",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A45",
+      "visible_evidence": "A black-and-white line drawing depicts a stylized human face wearing a hat.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "f3272a23946de149b666890824be3ea94ac0448c2c7dd9a94d857b7506da28d1",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A46",
+      "visible_evidence": "An aerial view shows widespread destruction of buildings across a dense settlement.",
+      "plausible_levels": [
+        "High"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "Widespread building destruction is visible, but no person in immediate danger or active critical failure is discernible.",
+      "teacher_level": "Critical",
+      "image_id": "e59a2e07a5069c4ca794475b39cc1d8721ca3cbad012155e1b39cf375fbd9baa",
+      "teacher_within_review_range": false
+    },
+    {
+      "case_id": "A47",
+      "visible_evidence": "A woman in a bright red dress poses against a plain light-colored background.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "11989a1ba976ec32cdcc745674948d5e367b49271856556f2ed0c27160301fa3",
+      "teacher_within_review_range": true
+    },
+    {
+      "case_id": "A48",
+      "visible_evidence": "A girls' basketball game is in progress in a gym with spectators seated along the court.",
+      "plausible_levels": [
+        "Low"
+      ],
+      "immediate_harm_evidence": "not_established",
+      "uncertainty": "No concrete hazard is visible.",
+      "teacher_level": "Low",
+      "image_id": "818e33a85f0eed08dd3804f315c0b39d62d31381f1654914e6cf4480ae80304e",
+      "teacher_within_review_range": true
+    }
+  ],
+  "independent_urgency_validated": false,
+  "automatic_relabeling": false,
+  "limitation": "AI judgment on a balanced panel; disagreement prompts inspection, not truth or reliability clearance"
+}

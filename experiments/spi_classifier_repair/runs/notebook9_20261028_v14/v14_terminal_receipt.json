@@ -1,0 +1,46 @@
+{
+  "schema": "spi_classifier_repair_kaggle_terminal_receipt_v1",
+  "kernel": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "kernel_id": 141089219,
+  "version": 14,
+  "push_receipt": "Kernel version 14 successfully pushed",
+  "terminal_status": "KernelWorkerStatus.ERROR",
+  "status_verified_utc": "2026-10-28T07:35:28.3323248Z",
+  "terminal_failure": {
+    "exception": "ModuleNotFoundError",
+    "message": "No module named 'project_compat'",
+    "trace": "/kaggle/working/project/parameters/__init__.py imports project_compat.install while wrapper imports parameters.cloud_notebook",
+    "phase": "package import, before CellRecorder / dependency setup / input discovery",
+    "cause": "root project_compat.py omitted from embedded source ZIP"
+  },
+  "model_or_teacher_calls": 0,
+  "input_images_read": 0,
+  "labels_consumed": 0,
+  "training_started": false,
+  "outputs": {
+    "recovery_archive": "not created; failure happened before wrapper recorder/finally",
+    "Kaggle_output_retrieval": "returned the execution log only; no run_recovery.zip"
+  },
+  "log": {
+    "path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_classifier_repair\\runs\\notebook9_20261028_v14\\monitor_v14\\betterscheduler-spi-20261027finalc.log",
+    "bytes": 8409,
+    "sha256": "d43d945504b0651720a08644282d33adf1bc4ebf321b851016bb38063d9d3af9",
+    "latest_snapshot": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_classifier_repair\\runs\\notebook9_20261028_v14\\monitor_v14\\kaggle_logs_latest.txt",
+    "snapshot_sha256": "25f27d84960ee1ac526311cf18e514dbcefba6d39cd05f255ea369862f4f7426"
+  },
+  "package": {
+    "notebook_sha256": "e033131715f88a489e9f3e54f86f03655f64285aa0e61e3255e9264183ac8a4e",
+    "source_zip_sha256": "56b621f4cac2931ad9944377fb59efb79a591ff8a0762ece76c69cd596eb9888",
+    "source_file_count": 91
+  },
+  "resource_observation": {
+    "kernel_log_terminal_wall_seconds": 15.84,
+    "allocated_devices": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "aggregate_gpu_hour_upper_bound": 0.0088,
+    "actual_billing_measurement": "not directly exposed"
+  },
+  "remote_job": "terminal; no cancellation or retry"
+}

@@ -1,0 +1,28 @@
+{
+  "kernel": "satyapaladugu/crisismmd1000-spi-labeling/9",
+  "version": 9,
+  "pages_read": 30,
+  "filenames_seen": 3000,
+  "listing_more_pages": true,
+  "matches": [
+    "experiments/full_medic_labeling/runs/main_20261030T055542Z/comparison/class_weighted/failures.json"
+  ],
+  "downloaded": [
+    {
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261030T055542Z/comparison/class_weighted/failures.json",
+      "local_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\full_medic_labeling\\runs\\crisismmd4000_qwen25_ops\\v9_compact\\comparison\\class_weighted\\failures.json",
+      "bytes": 1011,
+      "sha256": "AE3DCCBB5C31440D3DEF9A9F58FA187993DBD81A8DC5C871774DC12B96D864AF",
+      "http_status": 200,
+      "content": [
+        {
+          "encoder": "siglip2_b16",
+          "error": "image has no unpadded token centers; unsupported aspect ratio",
+          "traceback": "Traceback (most recent call last):\n  File \"/kaggle/working/experiments/spi_classifier_repair/medic_campaign.py\", line 363, in compare\n    x,t,m=(feature_loader or features)(rows,name,out/name)\n          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/experiments/full_medic_labeling/crisis_study.py\", line 88, in loader\n    return study.features(records,name,output/'features'/name)\n           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/experiments/spi_classifier_repair/medic_campaign.py\", line 206, in features\n    if not valid.any():raise ValueError('image has no unpadded token centers; unsupported aspect ratio')\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: image has no unpadded token centers; unsupported aspect ratio\n"
+        }
+      ]
+    }
+  ],
+  "elapsed_s": 28.4,
+  "observed_utc": "2026-10-30T11:43:53.915085+00:00"
+}

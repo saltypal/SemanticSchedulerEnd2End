@@ -1,0 +1,9 @@
+{
+  "missing_or_conflicting_fields": [
+    "building.present",
+    "building.affected_or_greater"
+  ],
+  "parameters_consistent": false,
+  "representation_sufficient": false,
+  "reason": "The candidate representation explicitly sets both building.present and building.affected_or_greater to false, which directly contradicts the known reference fact that building.present is true, violating the decoding contract's rule that absent_implies_unaffected and the requirement to align with native reference facts."
+}

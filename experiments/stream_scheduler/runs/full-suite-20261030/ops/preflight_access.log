@@ -1,0 +1,60 @@
+WSL identity
+uid=1000(Satya) gid=1000(Satya) groups=1000(Satya),27(sudo)
+Python 3.14.4
+Kaggle CLI 2.2.4
+account satyapaladuguplus
+--- quota ---
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+resource  used    remaining  total   refreshAt            
+--------  ------  ---------  ------  -------------------  
+GPU       15.49h  14.51h     30.00h  2026-10-31T00:00:00  
+TPU       0.00h   20.00h     20.00h  2026-10-31T00:00:00  
+--- scheduler version 1 ---
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+satyapaladuguplus/semantic-decoder-scheduler-20261030/1 has status "KernelWorkerStatus.COMPLETE"
+--- source cache v5 ---
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+satyapaladuguplus/semantic-image-pool-scene-cache-20261030/5 has status "KernelWorkerStatus.COMPLETE"
+--- mini label managed input file access ---
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+Next Page Token = CfDJ8FwkkMkekkBCtzoFDl4Vj7jzkqJqZa57JUUjPNoOMLH8dryFOZ4xwShK67NAN10TFdbbDlvQYXvvIeu3qIrK9PG-ViT98dAGMXhT_7UiZlt77RHwyc5FlbSGQBjM2CSiv6rVbDhVvKJHnZKLWqKR
+name                              size  creationDate                
+----------------------------  --------  --------------------------  
+input_manifest.json               4011  2026-10-30 13:05:05.099000  
+label_progress.json                180  2026-10-30 13:05:05.130000  
+label_receipts_4000.jsonl      5930164  2026-10-30 13:05:05.363000  
+label_source_identity.json         587  2026-10-30 13:05:05.153000  
+mini_training_records.json      881729  2026-10-30 13:05:05.172000  
+pool_manifest.json             8266984  2026-10-30 13:05:05.457000  
+scene/artifact_manifest.json      1568  2026-10-30 13:05:05.314000  
+scene/cache_identity.json      2680815  2026-10-30 13:05:05.434000  
+scene/environment.json             415  2026-10-30 13:05:05.387000  
+scene/failures.json                  2  2026-10-30 13:05:05.336000  
+scene/progress.json                235  2026-10-30 13:05:05.336000  
+scene/registry.json              10571  2026-10-30 13:05:05.336000  
+scene/scene_cache.sqlite      29782016  2026-10-30 13:05:06.421000  
+scene/scene_records.jsonl     24810646  2026-10-30 13:05:06.148000  
+scene/scheduler_arrays.npz      321031  2026-10-30 13:05:05.642000  
+scene/summary.json                4042  2026-10-30 13:05:05.642000  
+selected_manifest.json          759106  2026-10-30 13:05:05.325000  
+v4_ACCEPTANCE.json                 343  2026-10-30 13:05:05.184000  
+v4_artifact_manifest.json        12628  2026-10-30 13:05:05.230000  
+v4_config.json                    1108  2026-10-30 13:05:05.130000  
+--- model search help ---
+usage: kaggle models list [-h] [--sort-by SORT_BY] [-s SEARCH] [--owner OWNER]
+                          [--page-size PAGE_SIZE] [--page-token PAGE_TOKEN]
+                          [-v | --format OUTPUT_FORMAT]
+
+options:
+  -h, --help            show this help message and exit
+  --sort-by SORT_BY     Sort list results. Default is 'hotness'. Valid options are 'hotness', 'downloadCount', 'voteCount', 'notebookCount' and 'createTime'
+  -s, --search SEARCH   Term(s) to search for
+  --owner OWNER         Find public models owned by a specific user or organization
+  --page-size PAGE_SIZE
+                        Number of items to show on a page. Default size is 20, max is 200
+  --page-token PAGE_TOKEN
+                        Page token for results paging.
+  -v, --csv             Print results in CSV format (if not set print in table format)
+  --format OUTPUT_FORMAT
+                        Print results in selected format (csv, table, json). For details on advanced options, see
+                        https://github.com/Kaggle/kaggle-cli/blob/main/docs/output_format.md

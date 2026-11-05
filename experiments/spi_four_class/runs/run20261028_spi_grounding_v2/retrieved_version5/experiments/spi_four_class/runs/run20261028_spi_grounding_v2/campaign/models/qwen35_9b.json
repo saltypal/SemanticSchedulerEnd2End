@@ -1,0 +1,46 @@
+{
+  "model_id": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "weights_sha256": {
+    "model.safetensors-00001-of-00004.safetensors": "db6f444b43d318c92f360a13a25561a6a65b10c0631b8ed305a426dbaa6c380e",
+    "model.safetensors-00004-of-00004.safetensors": "b62b0c4cd7e44edee103ee8f4fe225f246d5e768e07bfd5f25b63a8aa1fdd0c6",
+    "model.safetensors-00003-of-00004.safetensors": "7ec36ba3a4176a44c3c0876ad80c56a2f70c84bf008d82e9501df642f17dadec",
+    "model.safetensors-00002-of-00004.safetensors": "31c7d7e2dd5d207840b31cc59083c8f4c4718959149e0358c0364052bb9a0330"
+  },
+  "device": "cuda:1",
+  "dtype": "float16",
+  "quantization": "bitsandbytes_nf4_double_quant_fp16_compute",
+  "attention": "sdpa",
+  "optional_kernel_presence": {
+    "fla": false,
+    "causal_conv1d": false
+  },
+  "delta_backend": "built_in_torch",
+  "parameter_devices": [
+    "cuda:1"
+  ],
+  "load_seconds": 109.69222350900009,
+  "model_footprint_bytes": 7765103400,
+  "linear4bit_modules": 358,
+  "transformers": "5.3.0",
+  "enable_thinking": false,
+  "do_sample": false,
+  "mode": "annotation_assisted_visible_json",
+  "not_independent_ground_truth": true,
+  "settings": {
+    "max_new_tokens": 240,
+    "max_pixels": 262144,
+    "image_max_side": null,
+    "prompt_variant": "semantic_contract_v5",
+    "claim_scope": "all",
+    "enable_thinking": false
+  },
+  "review_protocol": "semantic_contract_v5",
+  "max_image_pixels": 262144,
+  "max_new_tokens": 240,
+  "effective_processor_size": {
+    "shortest_edge": 65536,
+    "longest_edge": 262144
+  },
+  "system_prompt_sha256": "67b0237083fcacaa2fefa42cdcbc453c9a9b257ca4c3223da2720d4f7b302683"
+}

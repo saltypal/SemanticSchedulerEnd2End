@@ -1,0 +1,370 @@
+{
+  "kernel": "satyapaladuguplus/semantic-image-pool-scene-cache-20261030/3",
+  "version_number": 3,
+  "kernel_id": 141684654,
+  "source_sha256": "43AC33D6C0A4501C9256F838518D4C865470842029665B20BA3AF8DCBA0613F5",
+  "status": "COMPLETE",
+  "monitor_started_utc": "2026-10-30T09:20:19.146570+00:00",
+  "observed_utc": "2026-10-30T09:24:31.633312+00:00",
+  "monitor_elapsed_seconds": 252.49,
+  "cap_seconds": 24600,
+  "runtime_path": "/kaggle/working/experiments/image_pool/runs/20261030T091952Z/handoff/image_parameters.jsonl",
+  "log_bytes": 29850,
+  "log_sha256": "65966D3ADD541C8B2B2C0F9B40C266F5FE0E4B16415F40A62BCED514A6FD7CF3",
+  "retrieval_exit_code": 0,
+  "retrieval_stdout_bytes": 138,
+  "retrieval_stderr_bytes": 0,
+  "retrieved_file_count": 38,
+  "retrieved_bytes": 10089420,
+  "retrieved_files": [
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/ACCEPTANCE.json",
+      "bytes": 461,
+      "sha256": "413058AC99D1AF2C4A1E72D3CE1E12279237E595434E711C95656EAB7ADAD025",
+      "acceptance": {
+        "mode": "real",
+        "acquired_images": 600,
+        "parameters_complete": false,
+        "all_requested_sources_available": false,
+        "status": "scene_only_spi_pending",
+        "scene_only": true,
+        "spi_pending": true,
+        "missing_sources": [
+          "coco",
+          "bdd100k",
+          "imagenet",
+          "dota",
+          "ucf_crime",
+          "xbd",
+          "rescuenet",
+          "floodnet"
+        ],
+        "scene_accuracy": "unmeasured",
+        "SPI_domain_accuracy": "unmeasured",
+        "native_category_is_priority": false
+      }
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/artifact_manifest.json",
+      "bytes": 12618,
+      "sha256": "F686EC19CAB0A5B3C0AD85D03B823A8E9A1344D171016D7935459E9DB66297FD"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/data/source_status.json",
+      "bytes": 1752,
+      "sha256": "B396A3A09B0F915486700D64C50455460403ABAB10498D39C9C940298D4AA0FD",
+      "source_status": {
+        "coco": {
+          "status": "unavailable",
+          "selected": 0,
+          "cap": 200,
+          "reason": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'images.cocodataset.org'. (_ssl.c:1032)>"
+        },
+        "open_images": {
+          "status": "complete",
+          "selected": 200,
+          "cap": 200,
+          "failures": []
+        },
+        "places365": {
+          "status": "complete",
+          "selected": 200,
+          "cap": 200,
+          "failures": []
+        },
+        "crisismmd": {
+          "status": "complete",
+          "selected": 200,
+          "cap": 200,
+          "failures": []
+        },
+        "bdd100k": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "imagenet": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "dota": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "ucf_crime": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "xbd": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "rescuenet": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "floodnet": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        }
+      }
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/environment.json",
+      "bytes": 425,
+      "sha256": "409B38C1C2ED127294DB769F22562EB54EF05B6A10380F09EEA1BC676044B96C"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/handoff/image_parameters.jsonl",
+      "bytes": 3179317,
+      "sha256": "9F98F49034C1AE39573CFA13F09263F388EB4EBD65A7917402A5E7566132B253"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/handoff/reference_records.json",
+      "bytes": 144402,
+      "sha256": "DD161364DF66E2272CE7EE1DC075AE6152C11E27D33B22AD61D99EDACCB9FC10"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/01_source.json",
+      "bytes": 83,
+      "sha256": "BE61D421B3E8D49A8666D4297A6FA7B5F27802BE24A42666C09A8FCF34669DFF"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/01_source.log",
+      "bytes": 550,
+      "sha256": "2F08DDA6027B2AA2ACB083143642832F07D68CD257FDB5FB6CD421A468995DC6"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/02_model_selection.json",
+      "bytes": 94,
+      "sha256": "AF65751CCC1801684C0980E5D3286F830A143E4F22F6D570BC517570F4B17A74"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/02_model_selection.log",
+      "bytes": 254,
+      "sha256": "2B6BCF9315A368F700315ECB66CC48639ECC225F641AE34B37E87E073C2AFD4E"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/03_acquisition.json",
+      "bytes": 88,
+      "sha256": "47C0AD382964401977833C644C527777469EB202CD4B5C869E7DD0776E80776F"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/03_acquisition.log",
+      "bytes": 4324,
+      "sha256": "EAA04AC101D93E465D1DA030657B4921F2A40C953350D4C1777FF82D086A4A08"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/04_scene_cache.json",
+      "bytes": 88,
+      "sha256": "FB9BA210CD5C7092D4C1CB65CC1CA8E6D34AEB9FB72B5348F5783D3B40A95BBF"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/04_scene_cache.log",
+      "bytes": 5146,
+      "sha256": "09AA4A33CCC797666F5D427EE409B322161C270E74F653CA3C408750C73898EA"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/05_spi_cache.json",
+      "bytes": 87,
+      "sha256": "A789F0BACC79A7BED764B0F4B8F1BD0AD161655CE2B86C6DD61867E97061BA48"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/05_spi_cache.log",
+      "bytes": 171,
+      "sha256": "62CA0D93629DF74234110E5FD84FEF61495C64A320E976857957CEE76FADD12D"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/06_handoff.json",
+      "bytes": 85,
+      "sha256": "E8A5BC23F64374BE617FF3E4B529F5EC850BEF4C340EF8E77D8F29353DFD0600"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/06_handoff.log",
+      "bytes": 398,
+      "sha256": "B2814BE37E635C7AA044AE5F98CC51DE4215781ED67FF53D267BA4EB9F03E018"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/07_costs.json",
+      "bytes": 81,
+      "sha256": "EC3716D2995FDEE526D7B7EC4DB4D0D4D34D052D2A499BE8E70C5F4115281267"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/07_costs.log",
+      "bytes": 503,
+      "sha256": "74B506205560A05BC6439BD878371B59E873D8B52AD2A693D0192538A46119AF"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/08_results.json",
+      "bytes": 83,
+      "sha256": "1AE53F08B2A5FF9A7FA5B84C6F3CFA4CA29260BC2C688614EB77437E19CA5294"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/logs/08_results.log",
+      "bytes": 3448,
+      "sha256": "3F502BE251EFAD502ADBCF0E786F1AEF072B8BBF6CE491F4FBB65B5589FCC878"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/pool_manifest.json",
+      "bytes": 818161,
+      "sha256": "1E2933CEF33D139944A4D753CDCF47A5943EA8377431190E058CED0E76802808"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/references.json",
+      "bytes": 144402,
+      "sha256": "DD161364DF66E2272CE7EE1DC075AE6152C11E27D33B22AD61D99EDACCB9FC10"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/artifact_manifest.json",
+      "bytes": 1564,
+      "sha256": "533602930FE0557572F95A62E4B7B8283AD3C5F5A9B4B40C378E1CFE9A1C47C3"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/cache_identity.json",
+      "bytes": 270576,
+      "sha256": "0D673B34A472BCDEAE5EFC01DB7F763DA84CE8352AB61F8A028102A03232A799"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/environment.json",
+      "bytes": 415,
+      "sha256": "45B38FE5637EB5E20B6D43D2B9C494239B568281E93E25A65EEED0FBAFECF81E"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/failures.json",
+      "bytes": 2,
+      "sha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/progress.json",
+      "bytes": 232,
+      "sha256": "3E00C7BBD6F8F4B89792F8C7133013460D91D82EEC323C15FFE707C4B9ACBC24"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/registry.json",
+      "bytes": 10571,
+      "sha256": "212FA3B7235C12369378A47ED84616222C073F2A44C5726664539999EE7447A7"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/scene_cache.sqlite",
+      "bytes": 2965504,
+      "sha256": "BA08E8ED467DAFFCD8F7B74731AE77C687E1259CA6416795F6A53D9879EC0A25"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/scene_records.jsonl",
+      "bytes": 2450510,
+      "sha256": "9CD2C091920364642BE81A907728184AF5A9DC6CB7DB9235AD783BFD3F079103"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/scheduler_arrays.npz",
+      "bytes": 34729,
+      "sha256": "487198DFEEA0349467E5ADC10B5EE01782343E3A2807FBBA59A21EB2DE208F68"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene/summary.json",
+      "bytes": 3962,
+      "sha256": "25DA842AAD8D16F339C6C128A681F8FBB5DD0D9318F68CC16569CA02C0FBEC01"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/scene_producer.json",
+      "bytes": 857,
+      "sha256": "2E88E804880962AEBEBAC5B000296CB560D22C026EFE3CB2CCEBAE3641D05ED4"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/source.json",
+      "bytes": 2013,
+      "sha256": "69E6D5563E64D672E0E00CF0039D46C4DD0D8BB3131316EF6DA48E83BA986D3B"
+    },
+    {
+      "path": "retrieved_v3/experiments/image_pool/runs/20261030T091952Z/source_status.json",
+      "bytes": 1752,
+      "sha256": "B396A3A09B0F915486700D64C50455460403ABAB10498D39C9C940298D4AA0FD",
+      "source_status": {
+        "coco": {
+          "status": "unavailable",
+          "selected": 0,
+          "cap": 200,
+          "reason": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'images.cocodataset.org'. (_ssl.c:1032)>"
+        },
+        "open_images": {
+          "status": "complete",
+          "selected": 200,
+          "cap": 200,
+          "failures": []
+        },
+        "places365": {
+          "status": "complete",
+          "selected": 200,
+          "cap": 200,
+          "failures": []
+        },
+        "crisismmd": {
+          "status": "complete",
+          "selected": 200,
+          "cap": 200,
+          "failures": []
+        },
+        "bdd100k": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "imagenet": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "dota": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "ucf_crime": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "xbd": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "rescuenet": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        },
+        "floodnet": {
+          "status": "input_required",
+          "selected": 0,
+          "cap": 50,
+          "reason": "no accessible per-image/clip manifest; no full archive downloaded"
+        }
+      }
+    },
+    {
+      "path": "retrieved_v3/semantic-image-pool-scene-cache-20261030.log",
+      "bytes": 29712,
+      "sha256": "7872564547901B37C9D791CD1DA639A6F375F4486FD14B3E85BBD339061DCDEC"
+    }
+  ],
+  "excluded_media_and_weights": true
+}

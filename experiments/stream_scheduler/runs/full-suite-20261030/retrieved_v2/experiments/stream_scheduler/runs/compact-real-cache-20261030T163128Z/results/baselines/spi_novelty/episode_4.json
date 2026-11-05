@@ -1,0 +1,803 @@
+{
+  "metadata": {
+    "seed": 70004,
+    "ue_count": 12,
+    "profiles": [
+      9,
+      13,
+      14,
+      0,
+      5,
+      7,
+      7,
+      7,
+      4,
+      10,
+      9,
+      3
+    ],
+    "missions": [
+      [
+        "phone",
+        "General-purpose phone. Share user-selected everyday observations without assuming an emergency."
+      ],
+      [
+        "incident_phone",
+        "Citizen incident reporting phone. Document visible incidents and useful changes for local response."
+      ],
+      [
+        "damage_drone",
+        "Aerial structural inspection drone. Identify visible building damage and newly exposed structural evidence."
+      ],
+      [
+        "person_drone",
+        "Person-search drone. Locate visible people and evidence relevant to search without assuming distress."
+      ],
+      [
+        "flood_drone",
+        "Flood and evacuation drone. Observe inundation and passable or blocked evacuation routes."
+      ],
+      [
+        "fire_drone",
+        "Wildfire observation drone. Observe visible smoke and flame and supported changes near infrastructure."
+      ],
+      [
+        "road_drone",
+        "Road and bridge drone. Inspect transport structures and visible obstruction or damage."
+      ],
+      [
+        "car",
+        "Ordinary connected-car camera. Observe immediate road conditions and travel obstacles."
+      ],
+      [
+        "response_car",
+        "Emergency vehicle camera. Report response access and visible incident developments."
+      ],
+      [
+        "traffic_cctv",
+        "Fixed intersection CCTV. Observe traffic flow, collisions and obstructions."
+      ],
+      [
+        "public_cctv",
+        "Fixed public-space CCTV. Observe visible incidents and crowd changes without inferring danger from occupancy."
+      ],
+      [
+        "water_camera",
+        "Fixed river and underpass camera. Observe water and route conditions without inferring physical depth."
+      ],
+      [
+        "robot",
+        "Industrial inspection robot. Report visible equipment and area conditions on its inspection route."
+      ],
+      [
+        "farm_drone",
+        "Agricultural survey drone. Observe crop and field conditions and supported changes."
+      ],
+      [
+        "maintenance",
+        "Infrastructure maintenance camera. Document inspection findings, repair evidence and relevant changes."
+      ]
+    ],
+    "mode": "MIXED_IID; artificial chronology; exact-copy correspondence only",
+    "assets": {
+      "0": "crisismmd:914154101600112640_0",
+      "1": "crisismmd:910218504380538881_0",
+      "2": "crisismmd:909822717574238208_0",
+      "3": "crisismmd:910764046516764672_0",
+      "4": "crisismmd:923245527608807425_0",
+      "5": "crisismmd:920352459297558529_0",
+      "6": "crisismmd:910614037884522496_0",
+      "7": "crisismmd:931486388104679424_0",
+      "8": "crisismmd:909863262371663872_0",
+      "9": "crisismmd:910160153055498241_1",
+      "10": "crisismmd:910711041516036096_0",
+      "11": "crisismmd:910192971492012032_0",
+      "12": "crisismmd:923612046054297601_0",
+      "13": "crisismmd:918102877981364226_0",
+      "14": "crisismmd:909482048653537282_0",
+      "15": "crisismmd:929989361453621249_0",
+      "16": "crisismmd:910543087566454785_0",
+      "17": "crisismmd:907737364750929920_0",
+      "18": "crisismmd:904504140021293056_0",
+      "19": "crisismmd:920221872356253697_0",
+      "20": "crisismmd:910812992908005377_0",
+      "21": "crisismmd:870279064996777985_0",
+      "22": "crisismmd:930015597135585280_0",
+      "23": "crisismmd:870148339307749377_0",
+      "24": "crisismmd:913594815408984065_2",
+      "25": "crisismmd:905164133934485504_0",
+      "26": "crisismmd:920081216837115904_0",
+      "27": "crisismmd:909708564691914752_0",
+      "28": "crisismmd:906664753602457601_0",
+      "29": "crisismmd:908723853798641664_0",
+      "30": "crisismmd:930193943408586752_3",
+      "31": "crisismmd:870678906940129280_0",
+      "32": "crisismmd:911492333702656000_0",
+      "33": "crisismmd:930151625032740865_0",
+      "34": "crisismmd:906888945413357568_0",
+      "35": "crisismmd:901743093493489664_1",
+      "36": "crisismmd:909401980266860544_0",
+      "37": "crisismmd:929049019124535302_0",
+      "38": "crisismmd:878136759959343108_0",
+      "39": "crisismmd:911769884434010114_0",
+      "40": "crisismmd:904303802639056896_0",
+      "41": "crisismmd:911715501684002817_0",
+      "42": "crisismmd:901835409440768000_1",
+      "43": "crisismmd:901779677429342208_0",
+      "44": "crisismmd:913934298243305473_1",
+      "45": "crisismmd:910538720117391360_3",
+      "46": "crisismmd:930374412708335616_0",
+      "47": "crisismmd:911701484852490240_0"
+    },
+    "input_profile": {
+      "schema": "scene93_received387_v1",
+      "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+      "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+      "feature_order": "scene374+SPI4+R+N+availability6+cold1",
+      "semantic_producer": {
+        "repo": "openai/clip-vit-base-patch32",
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+        "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+        "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+        "weights_sha256": {
+          "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+        },
+        "download_checkpoint_bytes": 605247071,
+        "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+        "parameters": 87849216
+      },
+      "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+      "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+      "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+      "sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+    },
+    "mission_relevance_available": 0,
+    "novelty_available": 36,
+    "sender_kb": "pre-offer FIFO128, cosine query then commit; policy-independent"
+  },
+  "metrics": {
+    "J_D": 0.22204050121994104,
+    "L_E": null,
+    "offered": 48,
+    "selected": 48,
+    "queued_at_horizon": 0,
+    "not_arrived": 0,
+    "completed": 48,
+    "failed": 0,
+    "in_flight": 0,
+    "by_reference_tier": {
+      "Critical": {
+        "offered": 0,
+        "selected": 0,
+        "unselected": 0,
+        "mean_selected_wait": null,
+        "median_selected_wait": null,
+        "p95_selected_wait": null,
+        "restricted_mean_wait": null,
+        "followup_count": 0,
+        "eligible": 0,
+        "within_budget": null
+      },
+      "High": {
+        "offered": 17,
+        "selected": 17,
+        "unselected": 0,
+        "mean_selected_wait": 1.187890377231534,
+        "median_selected_wait": 1.0,
+        "p95_selected_wait": null,
+        "restricted_mean_wait": 1.187890377231534,
+        "followup_count": 17,
+        "eligible": 17,
+        "within_budget": 1.0
+      },
+      "Medium": {
+        "offered": 12,
+        "selected": 12,
+        "unselected": 0,
+        "mean_selected_wait": 0.9618847625290554,
+        "median_selected_wait": 0.41362240944088136,
+        "p95_selected_wait": null,
+        "restricted_mean_wait": 0.9618847625290554,
+        "followup_count": 12,
+        "eligible": 12,
+        "within_budget": 1.0
+      },
+      "Low": {
+        "offered": 19,
+        "selected": 19,
+        "unselected": 0,
+        "mean_selected_wait": 3.5087013149722672,
+        "median_selected_wait": 1.3364193456167612,
+        "p95_selected_wait": null,
+        "restricted_mean_wait": 3.5087013149722672,
+        "followup_count": 19,
+        "eligible": 19,
+        "within_budget": 1.0
+      }
+    },
+    "selection_ms": {
+      "p50": 0.01594,
+      "p95": 0.029401499999999997,
+      "n": 48
+    },
+    "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+  },
+  "events": [
+    {
+      "token": 0,
+      "source": 4,
+      "arrival": 0.0,
+      "dispatch": 0.0,
+      "finish": 1.0,
+      "observed_until": 1.0,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 1,
+      "source": 9,
+      "arrival": 0.0,
+      "dispatch": 1.0,
+      "finish": 2.0,
+      "observed_until": 2.0,
+      "wait": 1.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 2,
+      "source": 2,
+      "arrival": 0.0,
+      "dispatch": 2.0,
+      "finish": 3.0,
+      "observed_until": 3.0,
+      "wait": 2.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 3,
+      "source": 1,
+      "arrival": 0.0,
+      "dispatch": 3.0,
+      "finish": 4.0,
+      "observed_until": 4.0,
+      "wait": 3.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 6,
+      "source": 3,
+      "arrival": 0.0,
+      "dispatch": 4.0,
+      "finish": 5.0,
+      "observed_until": 5.0,
+      "wait": 4.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 7,
+      "source": 1,
+      "arrival": 0.0,
+      "dispatch": 5.0,
+      "finish": 6.0,
+      "observed_until": 6.0,
+      "wait": 5.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 4,
+      "source": 6,
+      "arrival": 0.0,
+      "dispatch": 6.0,
+      "finish": 7.0,
+      "observed_until": 7.0,
+      "wait": 6.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 5,
+      "source": 10,
+      "arrival": 0.0,
+      "dispatch": 7.0,
+      "finish": 8.0,
+      "observed_until": 8.0,
+      "wait": 7.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 8,
+      "source": 11,
+      "arrival": 13.745638294903467,
+      "dispatch": 13.745638294903467,
+      "finish": 14.745638294903467,
+      "observed_until": 14.745638294903467,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 9,
+      "source": 11,
+      "arrival": 13.780644033368265,
+      "dispatch": 14.745638294903467,
+      "finish": 15.745638294903467,
+      "observed_until": 15.745638294903467,
+      "wait": 0.9649942615352014,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 10,
+      "source": 10,
+      "arrival": 16.203769465526783,
+      "dispatch": 16.203769465526783,
+      "finish": 17.203769465526783,
+      "observed_until": 17.203769465526783,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 11,
+      "source": 1,
+      "arrival": 16.79466378513035,
+      "dispatch": 17.203769465526783,
+      "finish": 18.203769465526783,
+      "observed_until": 18.203769465526783,
+      "wait": 0.4091056803964328,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 12,
+      "source": 11,
+      "arrival": 20.06470561313083,
+      "dispatch": 20.06470561313083,
+      "finish": 21.06470561313083,
+      "observed_until": 21.06470561313083,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 13,
+      "source": 6,
+      "arrival": 20.170729045409374,
+      "dispatch": 21.06470561313083,
+      "finish": 22.06470561313083,
+      "observed_until": 22.06470561313083,
+      "wait": 0.893976567721456,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 15,
+      "source": 11,
+      "arrival": 21.12543086114354,
+      "dispatch": 22.06470561313083,
+      "finish": 23.06470561313083,
+      "observed_until": 23.06470561313083,
+      "wait": 0.9392747519872913,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 16,
+      "source": 6,
+      "arrival": 22.59973031729307,
+      "dispatch": 23.06470561313083,
+      "finish": 24.06470561313083,
+      "observed_until": 24.06470561313083,
+      "wait": 0.4649752958377604,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 14,
+      "source": 8,
+      "arrival": 20.76723667864885,
+      "dispatch": 24.06470561313083,
+      "finish": 25.06470561313083,
+      "observed_until": 25.06470561313083,
+      "wait": 3.29746893448198,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 17,
+      "source": 10,
+      "arrival": 24.33195512055149,
+      "dispatch": 25.06470561313083,
+      "finish": 26.06470561313083,
+      "observed_until": 26.06470561313083,
+      "wait": 0.7327504925793384,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 19,
+      "source": 6,
+      "arrival": 25.419551369514412,
+      "dispatch": 26.06470561313083,
+      "finish": 27.06470561313083,
+      "observed_until": 27.06470561313083,
+      "wait": 0.6451542436164175,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 20,
+      "source": 1,
+      "arrival": 25.909049201263116,
+      "dispatch": 27.06470561313083,
+      "finish": 28.06470561313083,
+      "observed_until": 28.06470561313083,
+      "wait": 1.1556564118677137,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 18,
+      "source": 8,
+      "arrival": 24.646717549765253,
+      "dispatch": 28.06470561313083,
+      "finish": 29.06470561313083,
+      "observed_until": 29.06470561313083,
+      "wait": 3.417988063365577,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 21,
+      "source": 5,
+      "arrival": 27.813192451454153,
+      "dispatch": 29.06470561313083,
+      "finish": 30.06470561313083,
+      "observed_until": 30.06470561313083,
+      "wait": 1.2515131616766766,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 22,
+      "source": 2,
+      "arrival": 29.516327399236285,
+      "dispatch": 30.06470561313083,
+      "finish": 31.06470561313083,
+      "observed_until": 31.06470561313083,
+      "wait": 0.5483782138945443,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 23,
+      "source": 0,
+      "arrival": 29.554588298615347,
+      "dispatch": 31.06470561313083,
+      "finish": 32.064705613130826,
+      "observed_until": 32.064705613130826,
+      "wait": 1.5101173145154831,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 24,
+      "source": 8,
+      "arrival": 30.952737791938596,
+      "dispatch": 32.064705613130826,
+      "finish": 33.064705613130826,
+      "observed_until": 33.064705613130826,
+      "wait": 1.1119678211922306,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 25,
+      "source": 7,
+      "arrival": 33.20047703848312,
+      "dispatch": 33.20047703848312,
+      "finish": 34.20047703848312,
+      "observed_until": 34.20047703848312,
+      "wait": 0.0,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 26,
+      "source": 5,
+      "arrival": 33.78233789999779,
+      "dispatch": 34.20047703848312,
+      "finish": 35.20047703848312,
+      "observed_until": 35.20047703848312,
+      "wait": 0.4181391384853299,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 28,
+      "source": 1,
+      "arrival": 34.05624124737872,
+      "dispatch": 35.20047703848312,
+      "finish": 36.20047703848312,
+      "observed_until": 36.20047703848312,
+      "wait": 1.1442357911043999,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 29,
+      "source": 11,
+      "arrival": 35.80091772801616,
+      "dispatch": 36.20047703848312,
+      "finish": 37.20047703848312,
+      "observed_until": 37.20047703848312,
+      "wait": 0.39955931046696236,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 30,
+      "source": 5,
+      "arrival": 36.14614981761072,
+      "dispatch": 37.20047703848312,
+      "finish": 38.20047703848312,
+      "observed_until": 38.20047703848312,
+      "wait": 1.054327220872402,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 32,
+      "source": 5,
+      "arrival": 37.81589676899945,
+      "dispatch": 38.20047703848312,
+      "finish": 39.20047703848312,
+      "observed_until": 39.20047703848312,
+      "wait": 0.38458026948367063,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 31,
+      "source": 11,
+      "arrival": 37.5591830375386,
+      "dispatch": 39.20047703848312,
+      "finish": 40.20047703848312,
+      "observed_until": 40.20047703848312,
+      "wait": 1.6412940009445194,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 33,
+      "source": 6,
+      "arrival": 38.86405769286636,
+      "dispatch": 40.20047703848312,
+      "finish": 41.20047703848312,
+      "observed_until": 41.20047703848312,
+      "wait": 1.3364193456167612,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 34,
+      "source": 3,
+      "arrival": 40.92101841419018,
+      "dispatch": 41.20047703848312,
+      "finish": 42.20047703848312,
+      "observed_until": 42.20047703848312,
+      "wait": 0.27945862429294266,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 36,
+      "source": 7,
+      "arrival": 41.404146350968155,
+      "dispatch": 42.20047703848312,
+      "finish": 43.20047703848312,
+      "observed_until": 43.20047703848312,
+      "wait": 0.7963306875149669,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 38,
+      "source": 8,
+      "arrival": 42.63179339626354,
+      "dispatch": 43.20047703848312,
+      "finish": 44.20047703848312,
+      "observed_until": 44.20047703848312,
+      "wait": 0.5686836422195825,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 37,
+      "source": 11,
+      "arrival": 42.3668631561756,
+      "dispatch": 44.20047703848312,
+      "finish": 45.20047703848312,
+      "observed_until": 45.20047703848312,
+      "wait": 1.8336138823075245,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 35,
+      "source": 3,
+      "arrival": 41.35447004863161,
+      "dispatch": 45.20047703848312,
+      "finish": 46.20047703848312,
+      "observed_until": 46.20047703848312,
+      "wait": 3.84600698985151,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 40,
+      "source": 2,
+      "arrival": 44.50176848369246,
+      "dispatch": 46.20047703848312,
+      "finish": 47.20047703848312,
+      "observed_until": 47.20047703848312,
+      "wait": 1.698708554790663,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 42,
+      "source": 9,
+      "arrival": 46.99816735860209,
+      "dispatch": 47.20047703848312,
+      "finish": 48.20047703848312,
+      "observed_until": 48.20047703848312,
+      "wait": 0.20230967988103288,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 27,
+      "source": 6,
+      "arrival": 33.960357596079334,
+      "dispatch": 48.20047703848312,
+      "finish": 49.20047703848312,
+      "observed_until": 49.20047703848312,
+      "wait": 14.240119442403788,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 44,
+      "source": 11,
+      "arrival": 49.180710897026195,
+      "dispatch": 49.20047703848312,
+      "finish": 50.20047703848312,
+      "observed_until": 50.20047703848312,
+      "wait": 0.01976614145692679,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 2
+    },
+    {
+      "token": 39,
+      "source": 3,
+      "arrival": 43.26316159947575,
+      "dispatch": 50.20047703848312,
+      "finish": 51.20047703848312,
+      "observed_until": 51.20047703848312,
+      "wait": 6.937315439007371,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 45,
+      "source": 1,
+      "arrival": 50.982642657253976,
+      "dispatch": 51.20047703848312,
+      "finish": 52.20047703848312,
+      "observed_until": 52.20047703848312,
+      "wait": 0.2178343812291459,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 46,
+      "source": 5,
+      "arrival": 51.06322433042068,
+      "dispatch": 52.20047703848312,
+      "finish": 53.20047703848312,
+      "observed_until": 53.20047703848312,
+      "wait": 1.1372527080624408,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 47,
+      "source": 3,
+      "arrival": 52.737140711986726,
+      "dispatch": 53.20047703848312,
+      "finish": 54.20047703848312,
+      "observed_until": 54.20047703848312,
+      "wait": 0.4633363264963961,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 1
+    },
+    {
+      "token": 43,
+      "source": 3,
+      "arrival": 48.409426705932155,
+      "dispatch": 54.20047703848312,
+      "finish": 55.20047703848312,
+      "observed_until": 55.20047703848312,
+      "wait": 5.791050332550967,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    },
+    {
+      "token": 41,
+      "source": 11,
+      "arrival": 46.55206161443271,
+      "dispatch": 55.20047703848312,
+      "finish": 56.20047703848312,
+      "observed_until": 56.20047703848312,
+      "wait": 8.648415424050413,
+      "completed": true,
+      "failed": false,
+      "reference_tier": 3
+    }
+  ]
+}

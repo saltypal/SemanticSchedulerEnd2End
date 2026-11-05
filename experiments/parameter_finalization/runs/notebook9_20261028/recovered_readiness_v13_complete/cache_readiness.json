@@ -1,0 +1,188 @@
+{
+  "schema": "better_parameter_release_v2",
+  "status": "four_class_validation_failed",
+  "generated_utc": "2026-10-27T01:35:04.350647+00:00",
+  "purpose": "parameter extraction research prototype; not validated urgency or scheduling policy",
+  "wire": {
+    "version": 2,
+    "bytes": 35,
+    "legacy_version": 1,
+    "legacy_bytes": 28,
+    "queue_integration": "not implemented",
+    "profile_registry": "must be shared before deployment"
+  },
+  "spi": {
+    "model_path": "spi_classifier\\models\\spi.json",
+    "model_sha256": "f2055ff6ae2b3f1c46c25567bed216289bcdc172b4237375a7c042e83e4bd1b3",
+    "file_sha256": "1d5f2cb70941ca94b1ac6e9df2dcd16211bc3943abee6a5830bf3feb235069da",
+    "model_status": "four_class_validation_failed",
+    "supported_levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "unsupported_levels": [],
+    "target": "depicted intervention need; image-only teacher agreement",
+    "rubric_sha256": "003f9ea75ff8759ece9819d64f153f29402313e0a994716638b93e9674689a3a",
+    "four_class_status": "trained four-output artifact; independent urgency validation absent",
+    "feature_signature": "105485efb3f14d80514f39138c3310714dfdbee850291a8f4e76551df5e5f065",
+    "label_source": "vlm_pseudo",
+    "score_calibration": "uncalibrated",
+    "validation_reference": "VLM teacher agreement, not independent human urgency truth"
+  },
+  "relevance": {
+    "method": "CLIP image/mission cosine",
+    "range": [
+      -1,
+      1
+    ],
+    "probability": false,
+    "text_chunks_max": 16
+  },
+  "novelty": {
+    "method": "(1-max prior sender cosine)/2",
+    "range": [
+      0,
+      1
+    ],
+    "kb_capacity": 32,
+    "cold_start": 1.0,
+    "cold_start_flag": true,
+    "meaning": "appearance difference, not verified new facts"
+  },
+  "temporal": {
+    "capture": "trusted UTC milliseconds or null",
+    "allowed_delay": "operator milliseconds or null"
+  },
+  "scene": {
+    "method": "YOLO-World detections and exact box union",
+    "fields": [
+      "instances",
+      "categories",
+      "largest_box_fraction",
+      "union_box_coverage"
+    ],
+    "checkpoint": "yolov8s-worldv2.pt",
+    "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+    "vocabulary": [
+      "building",
+      "road",
+      "person",
+      "car",
+      "truck",
+      "bus",
+      "motorcycle",
+      "bicycle",
+      "debris",
+      "chair",
+      "couch",
+      "dining table",
+      "television",
+      "refrigerator",
+      "tree",
+      "water"
+    ],
+    "settings": {
+      "conf": 0.25,
+      "iou": 0.5,
+      "imgsz": 640,
+      "max_det": 300,
+      "agnostic_nms": false,
+      "half": false,
+      "augment": false,
+      "verbose": false
+    },
+    "real_detector_validation": "300 GPU outputs;202 zero; label-based accuracy pending"
+  },
+  "feature_signature": "3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de",
+  "ue_profiles": "BetterScheduler/config/ue_parameter_profiles_v2.json",
+  "limitations": [
+    "no independent human urgency validation",
+    "image-level SPI does not prove currentness",
+    "no verified screenshot benchmark",
+    "model-dependent scene categories",
+    "novelty is not verified asset correspondence"
+  ],
+  "cloud_run": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "release_checks": {
+    "export_parity": true,
+    "all_class_support": true,
+    "per_class_recall": false
+  },
+  "runtime_promotion_allowed": false,
+  "independent_urgency_validated": false,
+  "class_support": {
+    "train": {
+      "Low": {
+        "rows": 88,
+        "groups": 86,
+        "passes": true
+      },
+      "Medium": {
+        "rows": 24,
+        "groups": 23,
+        "passes": true
+      },
+      "High": {
+        "rows": 78,
+        "groups": 77,
+        "passes": true
+      },
+      "Critical": {
+        "rows": 14,
+        "groups": 14,
+        "passes": true
+      }
+    },
+    "validation": {
+      "Low": {
+        "rows": 43,
+        "groups": 41,
+        "passes": true
+      },
+      "Medium": {
+        "rows": 8,
+        "groups": 7,
+        "passes": true
+      },
+      "High": {
+        "rows": 38,
+        "groups": 37,
+        "passes": true
+      },
+      "Critical": {
+        "rows": 7,
+        "groups": 7,
+        "passes": true
+      }
+    }
+  },
+  "teacher_selection": {
+    "schema": "spi_teacher_selection_v1",
+    "accepted": true,
+    "acceptance_basis": "explicit_user_choice",
+    "model_id": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "prompt_sha256": "d82cf5e618264170488cd92ff0cba5da04c9861aebc21f03bbeac687d5b992a9",
+    "label_protocol": "spi_direct_scene_priority_v1",
+    "scope": "Final labeling teacher for current300-image development experiment",
+    "independent_urgency_validated": false,
+    "known_limitations": [
+      "VLM pseudo-labels; not human urgency truth",
+      "Known dam/bridge grounding warnings remain recorded"
+    ],
+    "settings": {
+      "max_new_tokens": 240,
+      "max_pixels": 262144,
+      "enable_thinking": false,
+      "quantization": "NF4_FP16"
+    }
+  },
+  "reference_type": "teacher_agreement",
+  "diagnostic_review": {
+    "accepted": false,
+    "unresolved_decisive_contradictions": null,
+    "reason": "User-selected pseudo-label teacher; no independent urgency validation."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "CPU scripted generation through actual Qwen reviewer adapters; CUDA synchronization/memory calls stubbed, no real model/GPU accuracy test",
+  "command": ".venv/Scripts/python.exe -m pytest experiments/spi_four_class/test_reviewer_boundary.py -q",
+  "result": "14 passed in 8.81s",
+  "files_sha256": {
+    "experiments/spi_four_class/test_reviewer_boundary.py": "69936dd21c5f592fa40bcf4ce40e2d35d80779cc9700852baff262fb092216be",
+    "experiments/spi_four_class/visual_reliability.py": "3fa8aa4eb9f64c97d8be941e7690dfffff963093dcab436aea66868c47e7eb2a",
+    "parameters/qwen_reviewer.py": "6c6ad6bd1ccc802402c15ceecb60dd35b4d84af4f6b3c961168aa4db814ccb4b",
+    "parameters/qwen35_reviewer.py": "fd8f89976c7828c7274fcfcda0801176ee881f2bc5c891dd6b62fea6bebbbb52",
+    "parameters/spi_protocol.py": "6ec916d9016e72a426e82e2ea6666e8507fc5ca6408fc62d8031865e1dad404e"
+  },
+  "checks": [
+    "QwenAnnotationReviewer and Qwen35AnnotationReviewer",
+    "text and image message templates",
+    "thinking disabled",
+    "strict parser through request path",
+    "failure receipts",
+    "pixel-presence failure path"
+  ]
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "epoch": 1,
+    "train": {
+      "n": 8,
+      "levels": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "ordinal_scale": "configured output order",
+      "accuracy": 0.375,
+      "balanced_accuracy": 0.375,
+      "macro_f1": 0.39166666666666666,
+      "brier_multiclass": 0.7368773557176312,
+      "critical_to_low_medium": 1,
+      "critical_to_low_medium_rate": 0.5,
+      "log_loss": 1.3594253937599334,
+      "rps": 0.20794960692277134,
+      "ordinal_mae": 1.375,
+      "confusion_true_rows_predicted_columns": [
+        [
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1
+        ]
+      ],
+      "high_critical_underpredictions": 2,
+      "per_class": {
+        "Low": {
+          "support": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "Medium": {
+          "support": 2,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666
+        },
+        "High": {
+          "support": 2,
+          "precision": 0.3333333333333333,
+          "recall": 0.5,
+          "f1": 0.4
+        },
+        "Critical": {
+          "support": 2,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        }
+      },
+      "loss": 1.359425351023674
+    },
+    "elapsed_seconds": 3.0,
+    "inner_validation": {
+      "n": 8,
+      "levels": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "ordinal_scale": "configured output order",
+      "accuracy": 0.5,
+      "balanced_accuracy": 0.5,
+      "macro_f1": 0.4666666666666667,
+      "brier_multiclass": 0.7422723442122036,
+      "critical_to_low_medium": 1,
+      "critical_to_low_medium_rate": 0.5,
+      "log_loss": 1.3723335467329068,
+      "rps": 0.20788703274587514,
+      "ordinal_mae": 0.75,
+      "confusion_true_rows_predicted_columns": [
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0
+        ]
+      ],
+      "high_critical_underpredictions": 2,
+      "per_class": {
+        "Low": {
+          "support": 2,
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "f1": 0.8
+        },
+        "Medium": {
+          "support": 2,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666
+        },
+        "High": {
+          "support": 2,
+          "precision": 0.3333333333333333,
+          "recall": 0.5,
+          "f1": 0.4
+        },
+        "Critical": {
+          "support": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "loss": 1.3723335266113281
+    }
+  }
+]

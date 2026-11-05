@@ -1,0 +1,18 @@
+{
+  "source_codec_only": true,
+  "native_mode": "all",
+  "pseudo_labels": true,
+  "teacher": "nvidia/segformer-b0-finetuned-cityscapes-1024-1024",
+  "teacher_revision": "21b3847fae21ddee674abd31129307b6a1235bd9",
+  "teacher_preprocessing": "ImageNet normalization at actual256x512 crop; no1024 resize",
+  "teacher_in_forward_cost": true,
+  "training": "author adversarial + perceptual + VQ objective; pretrained components; random discriminator",
+  "radio_channel": "not implemented; no claim of AWGN training",
+  "adaptations": [
+    "frozen teacher on custom crops",
+    "bounded fine-tuning instead of native convergence",
+    "remove unused null-class weight to match author loss semantic[:, :-1]",
+    "no augmentation of traffic objects outside native training-step label enhancer",
+    "manual two-optimizer loop instead of Lightning Trainer"
+  ]
+}

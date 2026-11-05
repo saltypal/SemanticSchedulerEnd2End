@@ -21,12 +21,12 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from INFRA.scheduling.event_simulation import run_episode
-from INFRA.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
-from INFRA.data.ladi_manifest import validate_ladi_manifest
-from INFRA.semantic_config import load_scheduler_config, load_ue_profiles
-from INFRA.scheduling.semantic_contracts import PolicyDecision, ResourceBudgetSemantic
-from INFRA.scheduling.streams import generate_episode_suite
+from Evaluation.scheduling.event_simulation import run_episode
+from Evaluation.experiments.semantic_scheduler_experiment import TASK_ID, load_catalog
+from Evaluation.data.ladi_manifest import validate_ladi_manifest
+from Evaluation.semantic_config import load_scheduler_config, load_ue_profiles
+from Evaluation.scheduling.semantic_contracts import PolicyDecision, ResourceBudgetSemantic
+from Evaluation.scheduling.streams import generate_episode_suite
 from Scheduler.semantic.registry import create_semantic_policy
 
 from evaluate_downloaded_scheduler import DEFAULT_MANIFEST, DEFAULT_RUN, check_manifest_match, file_sha256
@@ -137,8 +137,8 @@ def main() -> None:
     held_out = tuple(item for item in catalogue if split[item.candidate.image_id] == "test")
     if len(held_out) != 52:
         raise ValueError(f"Expected 52 distinct held-out images, found {len(held_out)}")
-    config = load_scheduler_config(ROOT / "INFRA/config/semantic_scheduler_dynamic260.yaml")
-    profiles = load_ue_profiles(ROOT / "INFRA/config/ue_profiles.yaml")
+    config = load_scheduler_config(ROOT / "Evaluation/config/semantic_scheduler_dynamic260.yaml")
+    profiles = load_ue_profiles(ROOT / "Evaluation/config/ue_profiles.yaml")
     episodes = generate_episode_suite(
         held_out, task_id=TASK_ID, prefix="image-disjoint-distinct",
         episode_count=args.episodes, jobs_per_episode=len(held_out), seed=4001,

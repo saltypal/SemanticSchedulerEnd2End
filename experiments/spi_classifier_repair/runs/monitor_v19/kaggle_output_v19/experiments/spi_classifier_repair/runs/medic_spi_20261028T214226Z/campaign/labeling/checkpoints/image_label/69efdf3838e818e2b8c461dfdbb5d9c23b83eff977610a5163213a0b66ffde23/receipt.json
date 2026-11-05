@@ -1,0 +1,114 @@
+{
+  "status": "complete",
+  "fingerprint": "69efdf3838e818e2b8c461dfdbb5d9c23b83eff977610a5163213a0b66ffde23",
+  "spec": {
+    "image_sha256": "a58a7413011a9fd95ba1b3aa3fd54fdec4069d79c2f9c0408576d285cf403a9c",
+    "selection": {
+      "schema": "spi_teacher_selection_v1",
+      "accepted": true,
+      "acceptance_basis": "explicit_user_choice",
+      "model_id": "Qwen/Qwen3.5-9B",
+      "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "prompt_sha256": "d82cf5e618264170488cd92ff0cba5da04c9861aebc21f03bbeac687d5b992a9",
+      "label_protocol": "spi_direct_scene_priority_v1",
+      "scope": "Final labeling teacher for current300-image development experiment",
+      "independent_urgency_validated": false,
+      "known_limitations": [
+        "VLM pseudo-labels; not human urgency truth",
+        "Known dam/bridge grounding warnings remain recorded"
+      ],
+      "settings": {
+        "max_new_tokens": 240,
+        "max_pixels": 262144,
+        "enable_thinking": false,
+        "quantization": "NF4_FP16"
+      }
+    },
+    "protocol": "image_only_direct_v1",
+    "effective_prompt_sha256": "d82cf5e618264170488cd92ff0cba5da04c9861aebc21f03bbeac687d5b992a9",
+    "implementation": {
+      "source_sha256": "4aae7df8340bda7ddd1f9bc1427ea58d9889835615ae504e8b3b1aac31ac55b5",
+      "python": "3.13.15",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "numpy": "2.1.3",
+        "scikit-learn": "1.7.2",
+        "transformers": "5.5.0"
+      },
+      "loader_modules": {
+        "spi_teachers.py": "c5cf34307afcc4d8a94130ef41452e4cdbe173f5caa908efe5568eee5ec033d7",
+        "qwen_reviewer.py": "594ca60fa7fc04f84c3ea04015b22e699ffd5a910134172ee3bc82dc66564905",
+        "qwen35_reviewer.py": "fd8f89976c7828c7274fcfcda0801176ee881f2bc5c891dd6b62fea6bebbbb52",
+        "model_settings.py": "4400bd5a4dad3592f523271e41a1086493c729461ee88a787d86ec99f1c68f6a"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "label.json",
+      "sha256": "616d9ec8789da1809eba999c3cae1d5141b5412ab1f1a6559e52f79f3da4b53b",
+      "bytes": 2189
+    }
+  ],
+  "value": {
+    "level": "High",
+    "available": true,
+    "reason": null,
+    "execution": {
+      "case_id": "a58a7413011a9fd95ba1b3aa3fd54fdec4069d79c2f9c0408576d285cf403a9c",
+      "status": "complete",
+      "parsed": {
+        "level": "High",
+        "available": true,
+        "reason": null
+      },
+      "raw_response_ref": "/kaggle/working/experiments/spi_classifier_repair/runs/medic_spi_20261028T214226Z/campaign/labeling/raw/a58a7413011a9fd95ba1b3aa3fd54fdec4069d79c2f9c0408576d285cf403a9c.txt",
+      "parse_recovery_used": true,
+      "wall_seconds": 1.452919167999994,
+      "enable_thinking": false,
+      "thinking_disabled_verified": true,
+      "template_sha256": "f35fc7291c7edefd20d02283cc6bc382816d1a0a83527e6704fe343ad08fd399",
+      "model_family": "qwen3_5",
+      "pixel_tensor_shape": [
+        988,
+        1536
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          26,
+          38
+        ]
+      ],
+      "processed_image_pixels": [
+        252928
+      ],
+      "pixel_tensor_sha256": "0bcefb299e9a7dd049c5edfd3398fea95ca6da60d80425048fe8cdc3436f40a6",
+      "input_tokens": 565,
+      "logits_to_keep": 1,
+      "finite_preflight_passed": true,
+      "generation_seconds": 1.4060809860000063,
+      "generation_wall_cap_seconds": 35,
+      "generated_tokens": 4,
+      "hit_token_limit": false,
+      "image_inputs": [
+        {
+          "sha256": "a58a7413011a9fd95ba1b3aa3fd54fdec4069d79c2f9c0408576d285cf403a9c",
+          "supplied_size": [
+            1200,
+            800
+          ]
+        }
+      ],
+      "request_ref": "/kaggle/working/experiments/spi_classifier_repair/runs/medic_spi_20261028T214226Z/campaign/labeling/raw/a58a7413011a9fd95ba1b3aa3fd54fdec4069d79c2f9c0408576d285cf403a9c.request.json",
+      "prompt_sha256": "4423e26a69367e0115dd8fd6e762486b8871e949b13d6fbc051fa5b20c9e771d",
+      "review_protocol": "spi_direct_scene_priority_v1",
+      "peak_gpu1_bytes": 8108194304,
+      "assessment_kind": "annotation_assisted_model_review",
+      "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+    },
+    "prompt_sha256": "d82cf5e618264170488cd92ff0cba5da04c9861aebc21f03bbeac687d5b992a9",
+    "label_protocol": "spi_direct_scene_priority_v1",
+    "limitation": "forced-choice VLM pseudo-label, not verified operational urgency"
+  }
+}

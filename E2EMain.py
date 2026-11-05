@@ -8,18 +8,18 @@ def main():
     if '--config' in sys.argv and '--module' not in sys.argv:
         index = sys.argv.index('--config') + 1
         if index < len(sys.argv):
-            from INFRA.configuration import read_yaml
+            from Evaluation.configuration import read_yaml
             content = read_yaml(sys.argv[index])
             use_legacy = use_legacy or ('stage' in content and 'module' not in content)
     if use_legacy:
-        from INFRA.legacy_cli import main as run
+        from Evaluation.legacy_cli import main as run
     else:
-        from INFRA.cli import main as run
+        from Evaluation.cli import main as run
     run()
 
 def __getattr__(name):
     # Existing notebook imports continue to work without eager neural imports.
-    from INFRA import legacy_cli
+    from Evaluation import legacy_cli
     return getattr(legacy_cli,name)
 
 if __name__ == '__main__':

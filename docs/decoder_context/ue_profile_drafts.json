@@ -1,0 +1,443 @@
+{
+  "schema_version": "ue_profile_drafts_v1",
+  "status": "draft_unexecuted",
+  "runtime_data_collected": false,
+  "mission_arbitration_required": true,
+  "intended_use": "Draft workload contexts for later receiver-side scheduling episodes. The receiver schedules complete image jobs from device instances; policies receive extracted parameters and do not receive images.",
+  "instantiation_note": "The scenario operator selects 10, 20, or 50 device instances and samples/reuses these 12 archetypes as appropriate. Archetypes are not ground truth, priority classes, urgency labels, or actual simulated devices. Device count and mission do not imply priority.",
+  "allowed_delay_ms": null,
+  "profiles": [
+    {
+      "id": "consumer_chat_photo_sharing",
+      "platform": {
+        "device_type": "consumer smartphone",
+        "device_context": "handheld rear camera; image may be queued for upload over a mobile or Wi-Fi connection"
+      },
+      "application": "personal messaging and photo sharing",
+      "mission": "A person shares an everyday photo with a chosen contact or group. The receiver should preserve enough visual information for the recipient's intended viewing, which may be social, practical, or personally meaningful; the scenario does not assume that this mission is unimportant.",
+      "answerable_visible_evidence_categories": [
+        "people and visible pose",
+        "pets and common objects",
+        "food and household items",
+        "indoor or outdoor scene",
+        "readable text when legible",
+        "coarse image quality or occlusion"
+      ],
+      "temporal_notes": "A single image supports only visible content at capture time. Conversation context, recipient intent, event significance, and whether a reply is time-sensitive are unavailable unless separately supplied.",
+      "candidate_published_sources": [
+        {
+          "name": "COCO: Common Objects in Context",
+          "url": "https://cocodataset.org/",
+          "relevance": "Common objects, people, captions, and segmentation as possible evidence categories.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "Open Images Dataset V7",
+          "url": "https://storage.googleapis.com/openimages/web/index.html",
+          "relevance": "Broad object, relationship, and visual attribute annotations.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Cannot infer social importance, recipient preference, consent, or urgency from image content alone.",
+        "Person boxes or appearance do not support diagnosis of distress, injury, identity, or emotional state."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "tourist_phone_observation",
+      "platform": {
+        "device_type": "consumer smartphone",
+        "device_context": "handheld or briefly stationary camera used while visiting a public place"
+      },
+      "application": "tourism, personal documentation, and optional place sharing",
+      "mission": "A visitor captures a landmark, public scene, sign, or moment of a trip for personal records or sharing. Depending on the episode, the image may also document an access condition or visible wayfinding information; no single purpose or service priority is presumed.",
+      "answerable_visible_evidence_categories": [
+        "buildings and landmarks",
+        "street and public-space layout",
+        "signs and readable text",
+        "vehicles and pedestrians",
+        "visible barriers or closures",
+        "scene lighting and occlusion"
+      ],
+      "temporal_notes": "A still image does not establish current operating hours, whether a route remains open, direction of travel, or whether a landmark or person is correctly identified. Repeated captures may be ordered only when timestamps are available.",
+      "candidate_published_sources": [
+        {
+          "name": "Mapillary Vistas Dataset",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2017/html/Neuhold_The_Mapillary_Vistas_ICCV_2017_paper.html",
+          "relevance": "Street-level scenes, road users, signs, and infrastructure categories.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "COCO: Common Objects in Context",
+          "url": "https://cocodataset.org/",
+          "relevance": "General objects and people in everyday scenes.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "No verified geolocation, landmark identity, current accessibility, or visitor intent is provided by pixels alone.",
+        "Do not infer individual safety or medical condition from person detections."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "road_inspection_vehicle",
+      "platform": {
+        "device_type": "vehicle-mounted camera system",
+        "device_context": "forward-facing or road-surface camera on a survey or maintenance vehicle; capture geometry and speed vary by installation"
+      },
+      "application": "road-surface inspection and maintenance triage",
+      "mission": "A road agency or contractor records roadway images to identify visible surface defects and locations that may merit human review. The image is an observation for inspection workflow support, not a final engineering condition rating.",
+      "answerable_visible_evidence_categories": [
+        "visible cracks and linear surface markings",
+        "pothole-like depressions or patches",
+        "surface wear and lane markings",
+        "debris or standing water",
+        "road users and nearby vehicles",
+        "image blur, viewpoint, and occlusion"
+      ],
+      "temporal_notes": "Vehicle motion can cause blur and rapid viewpoint change. A still image cannot establish defect depth, cause, precise geolocation, progression, or road safety; timestamps and calibrated location metadata are separate inputs.",
+      "candidate_published_sources": [
+        {
+          "name": "RDD2022: A multi-national image dataset for automatic Road Damage Detection",
+          "url": "https://doi.org/10.1002/gdj3.260",
+          "relevance": "Road imagery with annotated damage categories.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "Mapillary Vistas Dataset",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2017/html/Neuhold_The_Mapillary_Vistas_ICCV_2017_paper.html",
+          "relevance": "Street-level road scenes and contextual classes.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Visible damage labels do not directly determine severity, repair cost, or intervention deadline.",
+        "Candidate public data may differ in country, camera geometry, weather, and capture process from the episode."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "collision_monitoring_camera",
+      "platform": {
+        "device_type": "fixed roadside or facility camera",
+        "device_context": "elevated or curbside RGB camera covering a road conflict area; this profile describes image jobs, while incident monitoring normally also uses a time sequence"
+      },
+      "application": "traffic conflict observation and post-event review",
+      "mission": "An operator reviews imagery from an intersection or roadway to observe visible road users, signals, lane occupancy, and possible interactions for monitoring or later analysis. A single frame is not treated as proof that a collision occurred or is imminent.",
+      "answerable_visible_evidence_categories": [
+        "vehicles, cyclists, and pedestrians",
+        "visible traffic signals and signs",
+        "lane occupancy and relative positions",
+        "roadway obstructions",
+        "occlusion and visibility conditions"
+      ],
+      "temporal_notes": "Collision events, trajectories, yielding, and near-conflicts require ordered frames or independent event data. In a single still, only visible entities and their apparent positions can be described; proximity is not a collision label.",
+      "candidate_published_sources": [
+        {
+          "name": "BDD100K: A Large-scale Diverse Driving Video Database",
+          "url": "https://bdd-data.berkeley.edu/",
+          "relevance": "Driving scenes, road users, traffic controls, and video-based tasks.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "JAAD: Joint Attention in Autonomous Driving",
+          "url": "https://gamma.umd.edu/researchdirections/autonomousdriving/jaad/",
+          "relevance": "Road-user behavior in driving video; behavior remains sequence-dependent.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "No collision, near-collision, fault, intent, or safety outcome is established from one image.",
+        "Do not diagnose distress or injury from person boxes or visual appearance."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "flood_survey_drone",
+      "platform": {
+        "device_type": "multirotor survey drone",
+        "device_context": "downward or oblique RGB camera; imagery may arrive as individual frames from a planned survey"
+      },
+      "application": "post-flood area observation and mapping support",
+      "mission": "A survey team collects aerial images of an area after flooding to document visible water extent, access routes, and affected built or natural features for subsequent review. The image supports observation and does not itself constitute a rescue request or verified damage assessment.",
+      "answerable_visible_evidence_categories": [
+        "visible water extent",
+        "roads and apparent access interruptions",
+        "buildings and visible structural exterior",
+        "vehicles and large objects",
+        "vegetation and terrain cover",
+        "shadow, altitude, and image obstruction"
+      ],
+      "temporal_notes": "Water boundaries and passability change over time. A single frame cannot establish water depth, flow, contamination, occupancy inside a building, or safe access; georeferencing and capture time are required for map alignment and change analysis.",
+      "candidate_published_sources": [
+        {
+          "name": "FloodNet: A High Resolution Aerial Imagery Dataset for Post Flood Scene Understanding",
+          "url": "https://doi.org/10.1109/ACCESS.2021.3090981",
+          "relevance": "Post-flood UAV images with scene understanding labels.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "RescueNet: A High Resolution UAV-Based Post-Disaster Dataset for Semantic Segmentation",
+          "url": "https://github.com/BinaLab/RescueNet-A-High-Resolution-Post-Disaster-UAV-Dataset-for-Semantic-Segmentation",
+          "relevance": "Aerial post-disaster scene classes that may inform visible evidence categories.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Water depth, flow, structural integrity, trapped persons, and rescue urgency are not reliably visible from ordinary RGB imagery.",
+        "Aerial objects or people detections do not establish injury or distress."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "building_inspection_drone",
+      "platform": {
+        "device_type": "multirotor inspection drone",
+        "device_context": "close-range RGB camera with variable stand-off distance, viewing angle, and stabilization"
+      },
+      "application": "building-envelope inspection and maintenance documentation",
+      "mission": "An inspection team captures exterior surfaces, roof areas, and visible building components to document conditions for later professional review. The task is visual screening and record keeping; an image label is not a structural diagnosis.",
+      "answerable_visible_evidence_categories": [
+        "visible cracks or surface discontinuities",
+        "staining, spalling, or missing finish",
+        "roof and facade components",
+        "openings and exterior fixtures",
+        "vegetation or debris against surfaces",
+        "focus, scale cues, and occlusion"
+      ],
+      "temporal_notes": "Defect appearance depends on distance, lighting, angle, and scale. A single image does not establish depth, material, cause, progression, load capacity, or whether a feature is newly changed.",
+      "candidate_published_sources": [
+        {
+          "name": "SDNET2018: An annotated image dataset for non-contact concrete crack detection",
+          "url": "https://doi.org/10.1016/j.dib.2018.11.015",
+          "relevance": "Cracked and non-cracked concrete surfaces, including walls and decks.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "Cracks in the Foundation: Civil Infrastructure Dataset",
+          "url": "https://ibm.github.io/cracks-in-the-foundation-dataset/",
+          "relevance": "High-resolution civil infrastructure defect imagery.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Surface appearance is not a validated structural safety or occupancy determination.",
+        "Public concrete datasets may not transfer to other materials, drone ranges, or building types."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "forest_observation_unit",
+      "platform": {
+        "device_type": "fixed camera trap or field observation camera",
+        "device_context": "stationary outdoor RGB camera with variable daylight, weather, and vegetation occlusion"
+      },
+      "application": "wildlife and habitat observation",
+      "mission": "A field team collects images to document visible wildlife and habitat conditions over repeated visits. The receiver may help organize observations for later ecological review; one image does not establish population abundance or ecosystem health.",
+      "answerable_visible_evidence_categories": [
+        "visible animal instances and broad animal groups",
+        "vegetation and ground cover",
+        "water or exposed soil",
+        "human-made objects or trails",
+        "daylight and weather artifacts",
+        "occlusion and image quality"
+      ],
+      "temporal_notes": "Species presence and activity may depend on repeated, time-stamped observations. A still does not establish population size, absence from an area, behavior beyond the captured moment, or habitat trend.",
+      "candidate_published_sources": [
+        {
+          "name": "iWildCam 2021: Camera Trap Wildlife Identification Challenge",
+          "url": "https://github.com/visipedia/iwildcam_comp",
+          "relevance": "Camera-trap images and wildlife identification task definitions.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "Snapshot Serengeti",
+          "url": "https://lila.science/datasets/snapshot-serengeti/",
+          "relevance": "Published camera-trap imagery with animal annotations.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "A missing detection is not evidence of species absence.",
+        "Image labels do not establish abundance, ecological trend, or conservation urgency without sampling design and metadata."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "agriculture_inspection_drone",
+      "platform": {
+        "device_type": "multirotor or fixed-wing survey drone",
+        "device_context": "nadir RGB or multispectral camera over agricultural fields; sensor bands and ground sampling distance depend on configuration"
+      },
+      "application": "crop-field scouting and anomaly documentation",
+      "mission": "A grower or agronomy team surveys field imagery to identify visible spatial patterns that may warrant ground inspection. The image is a scouting cue; it does not by itself confirm a crop disease, nutrient deficiency, yield loss, or treatment recommendation.",
+      "answerable_visible_evidence_categories": [
+        "crop rows and field boundaries",
+        "visible gaps or uneven canopy patterns",
+        "standing water or exposed soil",
+        "weed-like or anomaly patterns at image scale",
+        "equipment and access tracks",
+        "shadow, sensor band, and resolution quality"
+      ],
+      "temporal_notes": "Crop appearance changes with growth stage, weather, and sensor settings. Comparison requires acquisition date, location, crop and band metadata; a single image cannot confirm a biological cause or forecast yield.",
+      "candidate_published_sources": [
+        {
+          "name": "Agriculture-Vision: A Large Aerial Image Database for Agricultural Pattern Analysis",
+          "url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Chiu_Agriculture-Vision_A_Large_Aerial_Image_Database_for_Agricultural_Pattern_Analysis_CVPR_2020_paper.html",
+          "relevance": "Aerial farmland imagery with annotated field-anomaly patterns.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "UAVid: A Semantic Segmentation Dataset for UAV Imagery",
+          "url": "https://uavid.nl/",
+          "relevance": "Aerial urban scene segmentation and small-object context, with domain differences from farmland.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Visible patterns do not identify agronomic cause, crop health status, or required intervention without field context and validation.",
+        "The cited aerial datasets do not represent every crop, season, sensor, or regional practice."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "bridge_inspection_platform",
+      "platform": {
+        "device_type": "bridge-mounted or close-range inspection camera",
+        "device_context": "RGB camera on a handheld pole, inspection vehicle, or robotic platform; image scale and surface coverage vary"
+      },
+      "application": "bridge condition documentation and engineering review support",
+      "mission": "An inspection crew records bridge surfaces and components so qualified staff can review visible defects and maintain a visual record. The image is an input to inspection, not a stand-alone condition rating or declaration of safety.",
+      "answerable_visible_evidence_categories": [
+        "visible cracks and joints",
+        "spalling, exposed reinforcement, or corrosion-like appearance",
+        "surface staining or efflorescence-like deposits",
+        "deck, wall, beam, and connection regions",
+        "water, debris, or vegetation near inspected surfaces",
+        "scale cues, lighting, and occlusion"
+      ],
+      "temporal_notes": "Change assessment needs repeatable viewpoints, timestamps, and scale calibration. A single image cannot establish crack depth, load capacity, active corrosion, progression, or bridge-wide condition.",
+      "candidate_published_sources": [
+        {
+          "name": "SDNET2018",
+          "url": "https://doi.org/10.15142/T3TD19",
+          "relevance": "Cracked and non-cracked concrete images including bridge decks.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Visible defect categories are not a substitute for engineering severity, material testing, or structural assessment.",
+        "Inspection coverage and image scale may be absent, preventing defect localization or completeness claims."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "construction_site_camera",
+      "platform": {
+        "device_type": "fixed site camera or camera on a mobile site device",
+        "device_context": "elevated or ground-level RGB view of part of an active construction area"
+      },
+      "application": "construction progress documentation and site-condition review",
+      "mission": "A project team captures site imagery to document visible work areas, materials, equipment, and changes for progress review or coordination. The image can support a checklist or discussion but does not independently certify completion, compliance, or worker safety.",
+      "answerable_visible_evidence_categories": [
+        "workers as visible persons",
+        "construction equipment and vehicles",
+        "building elements and materials",
+        "visible barriers and access routes",
+        "debris or apparent obstruction",
+        "lighting, weather, and occlusion"
+      ],
+      "temporal_notes": "Progress and activity are inherently time-dependent and need ordered captures, location, and a project reference plan. One frame does not establish work completion, sequence, productivity, or whether a person is performing a task safely.",
+      "candidate_published_sources": [
+        {
+          "name": "COCO: Common Objects in Context",
+          "url": "https://cocodataset.org/",
+          "relevance": "General person and object categories, not construction-specific.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "PPE compliance, unsafe behavior, work completion, and contractual progress need task-specific definitions and often temporal or project data.",
+        "Person boxes do not establish identity, role, distress, or injury.",
+        "No construction-specific published source has been selected in this draft; the remaining COCO candidate offers generic object categories, not project-progress or site-safety labels."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "pedestrian_crossing_observation",
+      "platform": {
+        "device_type": "fixed intersection camera",
+        "device_context": "roadside or overhead camera covering a marked crossing and adjacent approaches"
+      },
+      "application": "crossing-use observation and pedestrian-infrastructure review",
+      "mission": "A transport analyst reviews images to document visible crossing layout, road users, signals, and obstructions, potentially as part of a larger time-series study. A still image does not reveal a person's intention, whether they are waiting or crossing over time, or whether a crossing event is safe.",
+      "answerable_visible_evidence_categories": [
+        "pedestrian instances and apparent positions",
+        "marked crossing geometry",
+        "traffic signals and signs",
+        "vehicles, bicycles, and curb areas",
+        "visible obstructions",
+        "occlusion and visibility conditions"
+      ],
+      "temporal_notes": "Crossing behavior, waiting time, yielding, and interaction need sequences and calibrated timing. Frame-based person detections must not be treated as intent, distress, injury, or vulnerability labels.",
+      "candidate_published_sources": [
+        {
+          "name": "JAAD: Joint Attention in Autonomous Driving",
+          "url": "https://gamma.umd.edu/researchdirections/autonomousdriving/jaad/",
+          "relevance": "Road-user behavior in driving video, requiring temporal context.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "Mapillary Vistas Dataset",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2017/html/Neuhold_The_Mapillary_Vistas_ICCV_2017_paper.html",
+          "relevance": "Street-scene classes including road users and infrastructure.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Person location in one frame does not establish crossing intent, right-of-way, near-miss, or safety outcome.",
+        "Do not diagnose distress or injury from person boxes or appearance."
+      ],
+      "allowed_delay_ms": null
+    },
+    {
+      "id": "infrastructure_inspection_phone",
+      "platform": {
+        "device_type": "field inspector smartphone",
+        "device_context": "handheld close-up or contextual image captured during a walk-through inspection; capture distance and location tagging vary"
+      },
+      "application": "municipal infrastructure defect reporting and field documentation",
+      "mission": "An inspector or resident records visible conditions on streetscape assets such as sidewalks, signs, drainage covers, poles, or retaining surfaces for later verification and routing. The image documents an observation; it does not establish ownership, hazard severity, or a required response time.",
+      "answerable_visible_evidence_categories": [
+        "sidewalk and curb discontinuities",
+        "pavement cracks or surface damage",
+        "signs, poles, and street furniture",
+        "drains, grates, or visible blockage",
+        "vegetation or objects obstructing a path",
+        "contextual landmarks and image quality"
+      ],
+      "temporal_notes": "A close-up may lack context and a wide view may lack defect detail. Location, date, repeat capture, and asset records are needed to confirm the asset, change over time, and route the report.",
+      "candidate_published_sources": [
+        {
+          "name": "RDD2022: A multi-national image dataset for automatic Road Damage Detection",
+          "url": "https://doi.org/10.1002/gdj3.260",
+          "relevance": "Road-surface damage imagery and categories.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        },
+        {
+          "name": "Mapillary Vistas Dataset",
+          "url": "https://openaccess.thecvf.com/content_ICCV_2017/html/Neuhold_The_Mapillary_Vistas_ICCV_2017_paper.html",
+          "relevance": "Street-level road users, signs, sidewalks, and infrastructure context.",
+          "status": "candidate_only_not_access_or_schema_audited"
+        }
+      ],
+      "unsupported_claims_label_gaps": [
+        "Visible condition does not by itself establish accessibility impact, legal noncompliance, hazard severity, asset identity, or repair deadline.",
+        "Citizen and inspector reports may differ in capture conditions and verification; provenance is required."
+      ],
+      "allowed_delay_ms": null
+    }
+  ]
+}

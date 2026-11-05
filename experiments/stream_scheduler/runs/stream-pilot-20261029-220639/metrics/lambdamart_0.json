@@ -1,0 +1,208 @@
+{
+  "J_time": 0.5111806866736104,
+  "coverage_at_horizon": 0.8888888888888888,
+  "offered_weight": 18.0,
+  "covered_weight": 16.0,
+  "useful_weight_deferred": 2.0,
+  "redundant_weight_fraction": 0.2,
+  "exposure_delays": [
+    1.0006691379485677,
+    0.7090066193752045,
+    1.1877870633229803,
+    1.8220683005991658,
+    2.2056502522896118,
+    4.6337835972693675,
+    4.399087968218316,
+    12.087431571828551,
+    12.825961113009607
+  ],
+  "undelivered_fact_count": 12,
+  "failures": 3,
+  "unfinished": 1,
+  "attempts": 16,
+  "reward_sum": 0.5111806866736104,
+  "curve": [
+    {
+      "time": 1.6932937572987534,
+      "covered_weight": 1.0
+    },
+    {
+      "time": 3.2334192577834813,
+      "covered_weight": 3.0
+    },
+    {
+      "time": 3.9612435299503668,
+      "covered_weight": 5.0
+    },
+    {
+      "time": 4.76978012500428,
+      "covered_weight": 8.0
+    },
+    {
+      "time": 5.856630378013984,
+      "covered_weight": 8.0
+    },
+    {
+      "time": 7.428502680485213,
+      "covered_weight": 8.0
+    },
+    {
+      "time": 8.18267787005168,
+      "covered_weight": 11.0
+    },
+    {
+      "time": 9.016885059212031,
+      "covered_weight": 12.0
+    },
+    {
+      "time": 9.815376432750737,
+      "covered_weight": 12.0
+    },
+    {
+      "time": 10.759760794817366,
+      "covered_weight": 14.0
+    },
+    {
+      "time": 11.952536251982217,
+      "covered_weight": 14.0
+    },
+    {
+      "time": 12.683851024133824,
+      "covered_weight": 14.0
+    },
+    {
+      "time": 14.092128264876486,
+      "covered_weight": 14.0
+    },
+    {
+      "time": 14.94215161942234,
+      "covered_weight": 15.0
+    },
+    {
+      "time": 16.332203581478222,
+      "covered_weight": 16.0
+    },
+    {
+      "time": 17.172391350861787,
+      "covered_weight": 16.0
+    }
+  ],
+  "scope": "synthetic_world_fixture_not_image_semantics",
+  "distinct_useful_at_completions": {
+    "1": 1.0,
+    "5": 8.0,
+    "10": 14.0,
+    "20": null
+  },
+  "coverage_at_completions": {
+    "1": 0.05555555555555555,
+    "5": 0.4444444444444444,
+    "10": 0.7777777777777778,
+    "20": null
+  },
+  "mean_first_exposure_delay_capped": 4.487618764169456,
+  "first_useful_completion_time": 1.6932937572987534,
+  "outcomes_by_official_source_split": {
+    "unknown": {
+      "offered_fact_count": 21,
+      "offered_weight": 18.0,
+      "coverage": 0.8888888888888888,
+      "J_time": 0.5111806866736104
+    }
+  },
+  "delay_scope": "First successful distinct-fact exposure; undelivered facts capped at horizon",
+  "coverage_at_fractions": {
+    "0.25": 0.2777777777777778,
+    "0.5": 0.6111111111111112,
+    "0.75": 0.7777777777777778,
+    "1.0": 0.8888888888888888
+  },
+  "waiting_times": [
+    0.0,
+    0.0,
+    0.45996279115609484,
+    1.0135317055452528,
+    0.13870885618596507,
+    1.8689118945442487,
+    1.4514750627231443,
+    1.7546011018181185,
+    5.510642590743416,
+    3.4547036061516874,
+    6.376659332874702,
+    7.347184889917317,
+    9.24665157096917,
+    11.237408217282697,
+    10.162468144370255,
+    10.136953796494725
+  ],
+  "undelivered_message_fraction": 0.625,
+  "header_bytes_offered": 10380,
+  "payload_bytes": "opaque reference; measured only in actual codec replay",
+  "priority": {
+    "reference_scope": [
+      "synthetic_world_fixture_not_image_semantics"
+    ],
+    "delay_cap": 10.0,
+    "cap_is_evaluation_budget_not_operational_deadline": true,
+    "completion_budget": 10,
+    "completed_attempts": 15,
+    "unknown_reference_messages": 0,
+    "by_reference_class": {
+      "critical": {
+        "offered_distinct_reports": 2,
+        "successfully_exposed": 2,
+        "mean_capped_completion_delay": 2.013859276444389,
+        "exposure_within_evaluation_budget": 1.0,
+        "undelivered_fraction": 0.0,
+        "delivered_only_mean_wait": 1.2325033841341986,
+        "distinct_recall_at_completions": 1.0
+      },
+      "high": {
+        "offered_distinct_reports": 7,
+        "successfully_exposed": 3,
+        "mean_capped_completion_delay": 6.613697378702357,
+        "exposure_within_evaluation_budget": 0.42857142857142855,
+        "undelivered_fraction": 0.5714285714285714,
+        "delivered_only_mean_wait": 1.3048887991025941,
+        "distinct_recall_at_completions": 0.42857142857142855
+      },
+      "medium": {
+        "offered_distinct_reports": 6,
+        "successfully_exposed": 4,
+        "mean_capped_completion_delay": 7.605742122536323,
+        "exposure_within_evaluation_budget": 0.3333333333333333,
+        "undelivered_fraction": 0.33333333333333337,
+        "delivered_only_mean_wait": 6.618223444086359,
+        "distinct_recall_at_completions": 0.3333333333333333
+      },
+      "normal": {
+        "offered_distinct_reports": 6,
+        "successfully_exposed": 0,
+        "mean_capped_completion_delay": 10.0,
+        "exposure_within_evaluation_budget": 0.0,
+        "undelivered_fraction": 1.0,
+        "delivered_only_mean_wait": null,
+        "distinct_recall_at_completions": 0.0
+      }
+    },
+    "primary": "critical.mean_capped_completion_delay; report critical exposure and all class outcomes alongside it"
+  },
+  "accounting": {
+    "offered": 32,
+    "selected": 16,
+    "succeeded": 12,
+    "failed": 3,
+    "in_flight_at_horizon": 1,
+    "queued_at_horizon": 16,
+    "not_arrived": 0
+  },
+  "selection_ms": {
+    "p50": 9.936250000000001,
+    "p95": 13.507075,
+    "n": 16,
+    "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+  },
+  "fallback_count": 0,
+  "events_sha256": "7d57f44ed00abd814eecf5349345f42d65a1b90aa29aafaee10ca2621b093e9f",
+  "input_stream_sha256": "b830dc437c00025571f9c46f74cb257cb2323cb545ad692a6a0e732e0f3807d5"
+}

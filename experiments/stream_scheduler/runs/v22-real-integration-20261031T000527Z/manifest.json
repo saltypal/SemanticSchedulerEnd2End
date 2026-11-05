@@ -1,0 +1,39 @@
+{
+  "scope": "bounded real-cache method-integration smoke; no Qwen call; not full training",
+  "run": "experiments/stream_scheduler/runs/v22-real-integration-20261031T000527Z",
+  "source": {
+    "experiments/stream_scheduler/train_real_suite.py": "cf975989a2061b25306f57c89f8738978597ed668da3b8792d71c5788b504c0b",
+    "experiments/stream_scheduler/semantic_suite_data.py": "94215d5b6e3fb0b91e8e4beb838bd7cbc838efa87762e43134f512efe08a3e8a",
+    "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab",
+    "Scheduler/training/semantic_learning_models.py": "4742e1facf285fd1b9a490e792858c4eef32162e206629096a813c85ac1fcb63",
+    "Scheduler/training/semantic_learning_rl.py": "395247c1697c0099359450dd8572b5739bb2f08b96cebf60091cae0b190d5f0c",
+    "Scheduler/semantic_learning_policy.py": "5cfd7f2074fd64940de88574169a174bbec16ec0dc764164a33d68b1c08afb23",
+    "Evaluation/semantic_learning_env.py": "678842ba11f072be2a1ac319e6172c409fead870186c0c5aea864aa868308a0a"
+  },
+  "archive": "experiments/mini_dataset/runs/mini_spi_20261030_v1/downloads/Mini_dataset_6000.tar",
+  "command": [
+    "train_real_suite.py",
+    "--epochs",
+    "1",
+    "--seeds",
+    "1729",
+    "--training-episodes",
+    "2",
+    "--samples",
+    "32",
+    "--validation-traces",
+    "1",
+    "--model-seconds",
+    "180",
+    "--rl-steps",
+    "504",
+    "--deadline-seconds",
+    "14400",
+    "--device",
+    "cpu",
+    "--archive",
+    "<archive>",
+    "--output",
+    "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/stream_scheduler/runs/v22-real-integration-20261031T000527Z/results"
+  ]
+}

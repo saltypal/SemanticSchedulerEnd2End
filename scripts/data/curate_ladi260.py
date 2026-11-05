@@ -19,7 +19,7 @@ def main() -> None:
     from datasets import Image, load_dataset
     from huggingface_hub import HfApi
     from PIL import Image as PILImage
-    from INFRA.data.ladi_manifest import (
+    from Evaluation.data.ladi_manifest import (
         DATASET_ID, LADI260_COUNTS, LADI260_RUBRIC, LADI260_STRATA,
         MANIFEST_FIELDS, NATIVE_LABELS, validate_ladi260_manifest,
     )

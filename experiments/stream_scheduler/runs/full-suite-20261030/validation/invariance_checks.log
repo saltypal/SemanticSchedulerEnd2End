@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/stream_scheduler/runs/full-suite-20261030/validation/check_invariance.py", line 4, in <module>
+    torch.manual_seed(900+len(rows));m=lm.Scorer(k);a=lm.export(m,pre,'fixture',{});n=NumpyRanker(a);base=n.scores(s).reshape(len(s.ready),-1)
+                                                                                                          ~~~~~~~~^^^
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Scheduler/semantic_learning_policy.py", line 159, in scores
+    q=softmax(raw);cw=np.asarray(self.artifact['class_weights']);q=q/cw;q=q/q.sum(1,keepdims=True)
+                                                                   ~^~~
+TypeError: unsupported operand type(s) for /: 'float' and 'NoneType'

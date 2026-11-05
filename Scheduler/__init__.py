@@ -1,3 +1,5 @@
+from project_compat import install as _install_compat
+_install_compat()
 """Scheduling policies; importing this package never imports neural models."""
 from Scheduler.baselines.policies import BaselinePolicy, POLICIES, create_policy
 SemanticScheduler = BaselinePolicy

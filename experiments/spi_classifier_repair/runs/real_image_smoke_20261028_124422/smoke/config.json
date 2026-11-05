@@ -1,0 +1,34 @@
+{
+  "model": "torchvision.efficientnet_b1",
+  "weights": "IMAGENET1K_V2",
+  "seed": 17,
+  "max_epochs": 1,
+  "seconds": 300,
+  "preprocessing": "RGB aspect-preserving bicubic pad240 grey127; ImageNet normalization; no cropping or flips",
+  "inner_fit_ids": [
+    "05b4e78cfbcb82b6d8ce44fefb51c8aa475d77374117740640fd793d47f7b014",
+    "06fad3186ad86bf8e30bc5bb2f41cd643353d611efbe95b39a73946047a62a70",
+    "07e65103dd0d125d4a73518a0545c13a6bc29f4430fa6c6c3245fae46ff63f86",
+    "169bf059aa5a0df21ffc789d96b04eb0b34424d54c63e06100705e8335c72907",
+    "1228ca1d9c3dc8255a358fc5957a1ea5143e4be7d2e33fe7fa8b585357f9602e",
+    "136f6854e36dee1e5ee033f1c8bdf76f98d1397a122a3d42b5473add5f25e579",
+    "067728640b32124e09c5165ec8e0127dec67a6c4a3cbca053cb2c799bdc758e9",
+    "ceae3b2286a71716789cfbdda59528ac35696dc2f486b219eff592dfbb1a4cb8"
+  ],
+  "inner_stop_ids": [
+    "05e8b45a45348b211f7326550317ecc1f9aa6752c11ef4ff03e1942852c22d01",
+    "0896e9c19c2eea3d4a91b0d8e4e9410dca28f46917ae9f3ed8f2c637b3891024",
+    "1aeb196ec27a5a254bb0adf389f10df0572bcf549a4b3452b08a3b3826beb799",
+    "360190568680774b55e5fccbfc459aedaf6e58a8de4c98857641e200d5092189",
+    "12b43e78b085722dba1ae9f386939abd044365df3006e70130d73776809283ee",
+    "03deb61304136b0f73e815cfbd53824c9995dcc73c86f96252ed758c971c217a",
+    "061bfec1480caa5b255a2dbf708b585f32aad9e03c3c11931b4995a6140f499b",
+    "bf633e1657a19e293f0e8fb92ea0bcfade2f5cfd7052d371555fc64178155006"
+  ],
+  "outer_validation_role": "exposed development, not final test",
+  "reference": "Qwen pseudo-label agreement",
+  "batchnorm_policy": "running statistics frozen; affine parameters in unfrozen blocks remain trainable",
+  "torch": "2.14.0+cpu",
+  "torchvision": "0.29.0+cpu",
+  "device": "cpu"
+}
