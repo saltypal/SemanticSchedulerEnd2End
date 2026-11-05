@@ -1,6 +1,6 @@
 import json,sys
 from pathlib import Path
-from experiments.master_study import master_suite
+from Scheduler.training.study import master_suite
 
 def test_controller_executes_all_subprocess_stages(tmp_path,monkeypatch):
     scripts=tmp_path/"scripts";scripts.mkdir()

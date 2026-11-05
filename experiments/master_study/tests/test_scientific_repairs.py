@@ -8,9 +8,9 @@ from Evaluation.semantic_learning_env import Message,Episode,Environment
 from Scheduler.semantic_learning_policy import fit_normalizer
 from Scheduler.training.semantic_learning_models import Sample,supervised_loss,tensors
 from Scheduler.training.semantic_learning_rl import ActorCritic
-from experiments.stream_scheduler.train_real_suite import collect
-from experiments.stream_scheduler.semantic_suite_data import development_cohorts
-from experiments.stream_scheduler.teacher_pipeline import preference_reliability
+from Scheduler.training.stream_suite.train_real_suite import collect
+from Scheduler.training.stream_suite.semantic_suite_data import development_cohorts
+from Scheduler.training.stream_suite.teacher_pipeline import preference_reliability
 
 def episode(n=6):
     x=np.zeros(387);x[375]=1;x[380:384]=1
