@@ -288,7 +288,7 @@ def test_churn_preserves_declared_repeat_source_contract(repeat):
 
 
 def test_warmstarted_policy_keeps_original_actor_after_source_improves(tmp_path):
-    from experiments.stream_scheduler.train_real_suite import frozen_warmstart
+    from Scheduler.training.stream_suite.train_real_suite import frozen_warmstart
     source=tmp_path/"source.pt";frozen=tmp_path/"ppo"/"warmstart.pt"
     first=Scorer("deepsets").state_dict()
     torch.save({"best_state":first},source)

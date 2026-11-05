@@ -1,5 +1,20 @@
 # Current project map
 
+## Main scheduler suite
+
+The current parameter-based scheduler is the main implementation. Its training,
+stream adapters and evaluation drivers live in `Scheduler/training/stream_suite/`.
+Paired execution, reporting and notebook builders live in
+`Scheduler/training/study/`. Active notebook sources are under
+`Notebooks/SchedulerSuite/`. The simulator and deployed scorers remain in
+`Evaluation/` and `Scheduler/`. Historical experiment commands forward to the
+canonical modules; saved runs and previous notebooks remain unchanged.
+
+This promotion does not establish final-test performance or change the measured
+development results. Earlier dated layout and validation statements below describe
+their respective checkpoints. See `experiments/mainstream_migration/PLAN.md`.
+
+
 ## Classifier-independent local stream system
 
 `docs/decoder_context/STREAM_BUILD_STATUS.md` records the new external-parameter

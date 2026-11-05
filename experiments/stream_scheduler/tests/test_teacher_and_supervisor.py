@@ -5,10 +5,10 @@ import json
 import numpy as np
 import pytest
 from lmformatenforcer import JsonSchemaParser
-from experiments.stream_scheduler.teacher_output import answer_schema, parse_answer, ASPECT_NAMES
-from experiments.stream_scheduler.run_full_suite import summarize_execution
-from experiments.stream_scheduler.train_teacher_rankers import agreement, train_students
-from experiments.stream_scheduler.train_real_suite import collect, evaluate_probes
+from Scheduler.training.stream_suite.teacher_output import answer_schema, parse_answer, ASPECT_NAMES
+from Scheduler.training.stream_suite.run_full_suite import summarize_execution
+from Scheduler.training.stream_suite.train_teacher_rankers import agreement, train_students
+from Scheduler.training.stream_suite.train_real_suite import collect, evaluate_probes
 from Evaluation.semantic_learning_env import Environment
 from Scheduler.tests.test_scene_learning_system import fixture
 from Scheduler.semantic_learning_policy import fit_normalizer
@@ -170,7 +170,7 @@ def test_complete_teacher_label_to_all_student_pipeline(tmp_path):
 def test_static_tokenizer_reuse_keeps_independent_identical_constraints():
     import torch
     from transformers import AutoTokenizer
-    from experiments.stream_scheduler.teacher_output import prefix_factory,prefix_constraint
+    from Scheduler.training.stream_suite.teacher_output import prefix_factory,prefix_constraint
     try:
         tokenizer=AutoTokenizer.from_pretrained(
             "Qwen/Qwen2.5-VL-7B-Instruct",
@@ -201,8 +201,8 @@ def test_complete_teacher_cache_does_not_reload_weights_or_require_cuda(tmp_path
     import hashlib
     import torch
     from transformers import AutoProcessor
-    from experiments.stream_scheduler.qwen_teacher import run,MODEL_ID,INFERENCE_PROTOCOL
-    from experiments.stream_scheduler.teacher_output import OUTPUT_VERSION
+    from Scheduler.training.stream_suite.qwen_teacher import run,MODEL_ID,INFERENCE_PROTOCOL
+    from Scheduler.training.stream_suite.teacher_output import OUTPUT_VERSION
     image=tmp_path/"image.bin";image.write_bytes(b"cache identity fixture")
     request={"id":"cached","task":"candidate","context_id":"cached","images":[str(image)],"roles":["A"],"prompt":"fixture"}
     requests=tmp_path/"requests.jsonl";requests.write_text(json.dumps(request)+"\n")
@@ -210,7 +210,7 @@ def test_complete_teacher_cache_does_not_reload_weights_or_require_cuda(tmp_path
     revision="cc594898137f460bfe9f0759e9844b3ce807cfb5"
     (output/"provenance.json").write_text(json.dumps({"model_id":MODEL_ID,"revision":revision,
         "output_version":OUTPUT_VERSION,"quantization":"NF4_double_FP16", "inference_protocol":INFERENCE_PROTOCOL,
-        "renderer_sha256":hashlib.sha256((Path(__file__).parents[1]/"teacher_panels.py").read_bytes()).hexdigest()}))
+        "renderer_sha256":hashlib.sha256((Path(__import__("Scheduler.training.stream_suite.teacher_panels", fromlist=["__file__"]).__file__)).read_bytes()).hexdigest()}))
     (output/"responses.jsonl").write_text(json.dumps({"id":"cached","status":"parsed",
         "request_sha256":hashlib.sha256(json.dumps(request,sort_keys=True).encode()).hexdigest(),
         "image_sha256":[hashlib.sha256(image.read_bytes()).hexdigest()]})+"\n")

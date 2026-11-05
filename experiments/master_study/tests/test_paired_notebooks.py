@@ -3,7 +3,7 @@ import json,time,hashlib
 from pathlib import Path
 import pytest
 import torch
-from experiments.master_study import paired_runtime as runtime
+from Scheduler.training.study import paired_runtime as runtime
 from Scheduler.training import semantic_learning_models as models
 
 def config(tmp_path,profile="windows"):
@@ -73,7 +73,7 @@ def test_both_notebooks_compile_share_snapshot_and_reserve_time():
 
 def test_teacher_student_resume_preserves_complete_models_and_rejects_changed_labels(tmp_path):
     from experiments.stream_scheduler.tests.test_teacher_and_supervisor import test_complete_teacher_label_to_all_student_pipeline
-    from experiments.stream_scheduler.train_teacher_rankers import train_students
+    from Scheduler.training.stream_suite.train_teacher_rankers import train_students
     test_complete_teacher_label_to_all_student_pipeline(tmp_path)
     output=tmp_path/"students"
     before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob("resume.pt")}
@@ -86,7 +86,7 @@ def test_teacher_student_resume_preserves_complete_models_and_rejects_changed_la
 
 
 def test_merge_refuses_different_evaluator_traces(tmp_path):
-    from experiments.master_study.merge_paired_runs import merge
+    from Scheduler.training.study.merge_paired_runs import merge
     roots=[]
     for profile,job,method in (("wsl","supervised","ranknet"),("windows","double_dqn","masked_double_dqn")):
         root=tmp_path/profile;root.mkdir();roots.append(root)

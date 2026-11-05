@@ -1340,3 +1340,7 @@ Canonical build/readme:experiments/master_study/paired_kaggle/README.md. Noteboo
 Existing satyapaladuguplus/semantic-decoder-scheduler-20261030, version14 submitted and API RUNNING. Local notebook experiments/master_study/gap_recovery/WSL_Teacher_Recovery.ipynb. Source cc9655ede5cf2bfcad5a5611efddc7390f73d49229c2db488236850f3a82fe57. Same teacher revision, cases, panels and thresholds; FP16 balanced over2T4 rather than NF4.27 regression tests passed. Teacher qualification and downstream nine learner outcomes pending; no completed14retraining. Receipts experiments/master_study/runs/gap-repair-20261102T221315Z/fp16-push.log and fp16_launch_status.json.
 
 Version14 outcome verified: COMPLETE platform, partial_or_blocked research. Visual controls strict/tie/unknown100%; orientation1/8=12.5%, teacherunqualified. No nine dependent models trained. Evidence experiments/master_study/runs/gap-repair-20261102T221315Z/v14-check-logs.txt. FP16 did not fix scheduling-choice reliability; original14 and full320row rate study remain completed.
+
+## Mainstream source promotion 5 November 2026
+
+Canonical notebook sources now live under `Notebooks/SchedulerSuite/paired/wsl`, `Notebooks/SchedulerSuite/paired/windows` and `Notebooks/SchedulerSuite/recovery`. Existing owner slugs, published versions, run IDs and retrieved outputs are unchanged. Builders are in `Scheduler/training/study`. These rebuilt sources have not been submitted. Historical notebooks remain at their recorded paths.

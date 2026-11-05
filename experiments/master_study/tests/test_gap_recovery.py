@@ -3,10 +3,10 @@ import json,subprocess,sys,time
 from pathlib import Path
 import pytest
 from PIL import Image
-from experiments.stream_scheduler.teacher_panels import render_panel,PIXEL_BUDGET
-from experiments.stream_scheduler.teacher_output import parse_answer,ASPECT_NAMES
-from experiments.stream_scheduler.teacher_pipeline import aspect_preference
-from experiments.master_study.teacher_recovery import TeacherRecovery
+from Scheduler.training.stream_suite.teacher_panels import render_panel,PIXEL_BUDGET
+from Scheduler.training.stream_suite.teacher_output import parse_answer,ASPECT_NAMES
+from Scheduler.training.stream_suite.teacher_pipeline import aspect_preference
+from Scheduler.training.study.teacher_recovery import TeacherRecovery
 
 def test_current_panels_do_not_bind_interleaved_history_as_b(tmp_path):
     paths=[]
@@ -66,7 +66,7 @@ def test_rate_cli_imports_from_outside_project(tmp_path):
     assert "--ues" in result.stdout
 
 def test_old_teacher_visual_cache_cannot_silently_resume(tmp_path):
-    from experiments.stream_scheduler.qwen_teacher import run
+    from Scheduler.training.stream_suite.qwen_teacher import run
     image=tmp_path/"image.bin";image.write_bytes(b"fixture")
     request={"id":"cached","task":"candidate","images":[str(image)],"roles":["A"],"prompt":"fixture"}
     path=tmp_path/"requests.jsonl";path.write_text(json.dumps(request)+"\n")

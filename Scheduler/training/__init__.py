@@ -1,1 +1,1 @@
-"""Optional training dependencies, loaded only by experiment entry points."""
+"""Optional training dependencies, loaded only by explicit training entry points."""
