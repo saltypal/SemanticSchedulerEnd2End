@@ -1,5 +1,7 @@
 # Scheduler improvement trials
 
+See [SQ-GAN integration and staged replay](sqgan_staged_replay.md) for the next experiment, measured JPEG control, and native asset gate.
+
 See the [consolidated work record](work_record.md) for the byte accounting, no-COCO implementation, complete packet replay and reduced-feature refit.
 
 ## What we are testing
