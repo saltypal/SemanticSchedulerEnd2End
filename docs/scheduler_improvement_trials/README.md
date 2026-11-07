@@ -31,6 +31,23 @@ All three paths called all 12 images negative. Each matched 11 native negatives 
 The median local CPU time was 1,623.7 ms for source image preparation, scoring and header creation, 47.8 ms for JPEG encoding, 61.9 ms for JPEG decoding and 1,505.9 ms for the receiver reader. The median payload was 236,698 bytes. All 12 local images lacked capture timestamps and GPS in the inspected EXIF fields. The first batch therefore cannot qualify chronology or road linkage.
 
 The follow-up uses a separate, label-balanced public LADI validation batch and keeps the test split closed. Sampling is conditional on a visible road and is for development diagnostics. No population precision or field prevalence will be inferred from it.
+### Balanced follow-up
+
+The first request for a 100-row dataset page returned HTTP 502 after some images had downloaded. The retry used a new output directory, 25-row pages and bounded transient-error retries. It obtained 24 development images from the official LADI validation split: 12 native road-damage positives and 12 negatives, all with a native road-present label. The class balance is by design.
+
+| Path | True positives | False negatives | False positives | True negatives |
+| --- | ---: | ---: | ---: | ---: |
+| Source reader | 3 | 9 | 0 | 12 |
+| Header-only score | 3 | 9 | 0 | 12 |
+| JPEG reconstruction reader | 4 | 8 | 0 | 12 |
+
+The reconstruction path recovered one more positive in aggregate at the fixed threshold. The result is too small and too development-specific to establish an improvement. Median local CPU measurements were 1,026.6 ms for sender preparation and header scoring, 31.5 ms for JPEG encoding, 41.6 ms for JPEG decoding and 1,147.6 ms for receiver reading. Median JPEG payload was 312,803 bytes. The reader is the dominant receiver cost in this setup. None of the 24 assets supplied capture time or GPS in the inspected EXIF fields.
+
+All 24 downloaded images have distinct raw hashes, and none exactly matches the initial 12. No event or near-duplicate isolation is asserted. A leave-one-image-out development diagnostic placed each path's threshold just above its highest remaining negative score. Source and JPEG reconstruction each recovered 8 positives, while the 8-bit header recovered 7. Each path produced 1 false positive. This exploratory threshold check used the same small development set and is not a held-out estimate. It suggests the default threshold explains more of the measured loss than JPEG on this batch, and that score quantization can remove separation at low values.
+
+The team confirmed there is no receiver-arrival log or independently reviewed same-road linkage available internally. The CRASAR training-only audit found 18,590 road-line IDs in 36 annotation files and zero IDs reused across files. Rounding the two geographic endpoints to five decimals produced 548 candidate endpoint pairs appearing in multiple files. These are leads for a geographically matched cohort. They do not establish stable road identity, condition agreement, temporal availability or dispatch-time linkability. The source GeoTIFFs are large. A 64 KiB byte-range probe on one training raster succeeded. The smallest model configuration inspected in this pass still lists a roughly 977 MB checkpoint. A full model bundle has not been selected or qualified.
+
+
 ### Input qualification
 
 - LADI supplies native image-level road-damage labels and can support a bounded reader study. The local sample cannot establish same-road identity.
@@ -39,20 +56,47 @@ The follow-up uses a separate, label-balanced public LADI validation batch and k
 
 Sources: [LADI dataset](https://huggingface.co/datasets/MITLL/LADI-v2-dataset), [frozen reference reader](https://huggingface.co/MITLL/LADI-v2-classifier-small-reference), [RescueNet](https://doi.org/10.1038/s41597-023-02799-4), [CRASAR road benchmark](https://ojs.aaai.org/index.php/AAAI/article/view/41248), [CRASAR dataset](https://huggingface.co/datasets/CRASAR/CRASAR-U-DROIDs/tree/4c2732a7ab9658517ca8caa69bfee9e1f87ca532).
 
-## Day 2 — Freeze before opening a holdout
+## Day 2 — Protocol and holdout gate
 
-Pending qualification. The frozen manifest needs per-event roles, source and duplicate groups, evaluator-only road identities, decision budgets, a practically worthwhile gain, and false-report and tail-wait guardrails. Record reader and codec hashes before inference. A physical arrival trace and a chronological capture replay are different data sources. When only capture chronology is available, report results as controlled replay and label the timing assumptions.
+The controlled development replay is frozen in the saved command and run receipts. It uses a per-source-image fact proxy and exact injected repeats. It cannot answer the natural road-segment question. The production-style holdout remains unqualified.
 
-## Day 3 — Matched development replay
+Before opening a task holdout, require reviewed same-segment linkage across distinct views, road-condition labels and event roles with source and near-duplicate checks. The scheduling feature must be available from the message bytes at admission. Keep evaluation road IDs, condition labels and future service outcomes out of the policy. Freeze the actual source profile, reader, codec, deadline definition, effect threshold, false-report limit, tail-wait limit and analysis code. A physical arrival trace and a chronological capture replay must remain separate scopes. Without a field arrival log, report controlled replay with explicit synthetic transport and queue assumptions.
 
-Pending qualification. Use the same offered jobs and outcomes for FIFO, the incumbent priority rule, the static duplicate-aware policy and the receiver-state policy. Admit only complete arrivals. Update state only from receiver outputs, including erroneous reports. Failed, late and unfinished jobs earn zero evidence credit. Test that the policy interface cannot access road truth, future arrivals, or future outcomes. Measure sender overhead separately from the receiver bottleneck.
+## Day 3 — Matched development replay and correctness checks
 
-## Day 4 — Holdout
+The scheduler prototype receives a token, arrival, completion deadline, task score, appearance signature and expected service duration. Its static and conditional variants both discount exact signatures for completed positive reports. The conditional variant also reduces priority for near signatures. Both share the age guard, deadline check and service estimate. The guard prioritizes an old ready job once the wait threshold is reached. It does not guarantee a maximum wait under overload or nonpreemptive service.
 
-Closed. Once frozen, evaluate it once. Pair differences by event, report leave-one-event-out sensitivity and keep actual repeats separate from injected repeats. Replayed seeds share evidence and do not add independent events.
+The replay uses recorded sender and JPEG encoding costs before admission and recorded decode and reader times during receiver service. It assumes independent preparation for each offer and no measured network delay or shared sender contention. It uses common offered jobs, three nominal load levels, and a capture-relative deadline of six median service times. The same image list appears twice to inject exact repeats. Failed and unfinished jobs cannot credit evidence. Receiver state uses completed positive reports, including false positives. In this development variant, late successful reports may inform subsequent scheduling but earn zero timely evidence.
 
-## Day 5 — Decision
+Seven focused tests pass. They cover empty queues, exact-repeat equivalence, an actionable near-repeat fixture, age and deadline behavior, failed and unfinished jobs, false state and unique credit. The fixture confirms the mechanism can change a decision when its conditions hold. Its labels and results are constructed. The historical SPI-first and marginal urgency baselines need an SPI input aligned to the new cohort and were not run in this road-damage replay.
 
-Pending. The claim requires a useful gain over the matched duplicate-aware control after overhead and without violating the false-report and starvation guardrails. If the header-only path already supplies equivalent task outcomes, choose a task that needs visual evidence or stop the decode-scheduling claim. A Q1 submission decision requires evidence beyond a small development probe.
+| Nominal load | FIFO timely / offered | Static duplicate-aware | Receiver-conditioned | Max started wait, FIFO / static / conditioned |
+| --- | ---: | ---: | ---: | ---: |
+| 0.5 | 4/12 | 4/12 | 4/12 | 10 / 10 / 10 ms |
+| 0.9 | 4/12 | 4/12 | 4/12 | 2,157 / 3,025 / 3,025 ms |
+| 1.2 | 2/12 | 3/12 | 3/12 | 10,710 / 10,710 / 10,710 ms |
 
+All cells had zero observed false reports on this small selected sample. At load 1.2, all policies left five jobs unstarted. There were 21 late completions under FIFO and 27 under each score-based policy. The two score-based policies had identical dispatch orders on these traces. Their extra timely positive at load 1.2 comes with more late completions. Maximum started wait excludes unstarted jobs and must be read with the latter count.
 
+[Development figure](dev_replay_coverage.png) · [Detailed CSV](dev_replay_table.csv) · [Reproduction hashes](development_manifest.json)
+
+## Day 4 — Holdout remains closed
+
+The qualification gates have not been met for a multi-event road-segment experiment. The 24-image sample has no independently verified cross-view road linkage, and the public training annotation audit yielded candidate links only. No holdout result, event-level confidence interval or leave-one-event-out statistic is reported.
+
+## Day 5 — Current decision
+
+**No-go for a journal claim from this run.** The controlled pilot provides a working and testable comparison. Its receiver-conditioned policy shows no measured incremental gain over the matched duplicate-aware control. The follow-up dataset work should qualify physically distinct views of the same independently identified road segment and demonstrate reliable completed-reader decisions before spending effort on another learned scheduler.
+
+## Reproduction commands
+
+Run from the trial checkout. Use new paths for raw probe and replay receipts.
+
+```powershell
+python -m Evaluation.scheduler_trial_dev_samples <new-development-image-dir>
+python -m Evaluation.scheduler_trial_probe --sample-manifest <manifest> --model-dir <local-reference-model> --output <probe.json>
+python -m Evaluation.scheduler_trial_crasar_audit <linkage-audit.json>
+python -m Evaluation.scheduler_trial_replay <probe.json> <replay.json>
+python -m Evaluation.scheduler_trial_report docs/scheduler_improvement_trials/dev_balanced_replay.json docs/scheduler_improvement_trials
+python -m pytest Scheduler/tests/test_trial_evidence_policy.py Scheduler/tests/test_scheduler_trial_replay.py -q
+```

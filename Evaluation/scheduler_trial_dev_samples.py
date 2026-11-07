@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
 DATASET = "MITLL/LADI-v2-dataset"
@@ -18,13 +20,15 @@ def main():
     counts = {False: 0, True: 0}
     manifest = []
     with requests.Session() as session:
+        retries = Retry(total=3, backoff_factor=0.7, status_forcelist=(429, 500, 502, 503, 504))
+        session.mount('https://', HTTPAdapter(max_retries=retries))
         info = session.get(f"https://huggingface.co/api/datasets/{DATASET}", timeout=30)
         info.raise_for_status()
         revision = info.json()["sha"]
-        for offset in range(0, 600, 100):
+        for offset in range(0, 600, 25):
             response = session.get("https://datasets-server.huggingface.co/rows", params={
                 "dataset": DATASET, "config": "default", "split": "validation",
-                "offset": offset, "length": 100,
+                "offset": offset, "length": 25,
             }, timeout=45)
             response.raise_for_status()
             for item in response.json()["rows"]:
@@ -54,4 +58,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
