@@ -33,3 +33,9 @@ python -m Evaluation.scheduler_codec_study docs/scheduler_improvement_trials/nat
 ```
 
 Add `--cycles 4` for the stress control. The provenance command takes the cached development manifest and the publisher's `v2/ladi_v2a_labels_val_resized.csv` from the public resized archive. It fetches only the selected validation originals.
+
+## Higher-retention control
+
+Reran the same six calibration images with the image latent fraction increased from 0.25 to 0.50. The semantic fraction stayed at 0.25. Source hashes and manifest hash match the first pilot. All six jobs succeeded. Payloads grew from 464 to 624 B. Both settings detected 0/3 positives after reconstruction at the frozen 0.5 cutoff, with 0/3 false positives. This comparison provides no reason to increase the default rate for this reader. It does not select a new rate or threshold. The higher-retention receipt is [saved here](native_sqgan_half_retention_pilot.json).
+
+Verification includes 27 focused tests, exact matched arrivals, deadlines and payload identities across policies, and byte-for-byte reproduction of the 24-image replay. The next experiment should qualify a stronger frozen reader on fresh source images before testing it on paired SQ-GAN reconstructions.

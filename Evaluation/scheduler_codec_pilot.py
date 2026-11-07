@@ -42,7 +42,8 @@ def run(args):
     reader = AutoModelForImageClassification.from_pretrained(args.reader, local_files_only=True).eval()
     processor = AutoImageProcessor.from_pretrained(args.reader, local_files_only=True, use_fast=False)
     label = next(i for i, name in reader.config.id2label.items() if name == "roads_damage")
-    codec = (SQGANDigitalCodec(bundle=args.bundle, source_root=args.source_root)
+    codec = (SQGANDigitalCodec(bundle=args.bundle, source_root=args.source_root,
+                                image_fraction=args.image_fraction)
              if args.codec == "sqgan" else JPEGCodec(55))
 
     @torch.inference_mode()
@@ -111,6 +112,7 @@ def run(args):
                    reader_checkpoint_sha256=sha256(args.reader / "model.safetensors"), threshold=0.5,
                    preprocessing="Aspect-preserving fit in 512x256 gray canvas; crop padding before reading.",
                    manifest_sha256=sha256(args.manifest), sqgan_checkpoint_sha256=PINNED_SHA if args.codec == "sqgan" else None,
+                   image_fraction=args.image_fraction if args.codec == "sqgan" else None,
                    cue_bytes=1 if args.codec == "sqgan" else 0, rows=observations)
     with args.output.open("x", encoding="utf-8") as stream:
         json.dump(receipt, stream, indent=2, allow_nan=False)
@@ -122,6 +124,7 @@ def main():
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--reader", required=True, type=Path)
     parser.add_argument("--codec", choices=("sqgan", "jpeg"), default="sqgan")
+    parser.add_argument("--image-fraction", type=float, default=0.25)
     parser.add_argument("--bundle", type=Path)
     parser.add_argument("--source-root", type=Path)
     parser.add_argument("--output", required=True, type=Path)
