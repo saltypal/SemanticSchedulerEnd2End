@@ -1,0 +1,58 @@
+{
+  "catalog": {
+    "raw": {
+      "adapter": "RawRGBCodec",
+      "representation": "digital_bits",
+      "preprocessing": "RGB8, unchanged size",
+      "checkpoint": "none",
+      "environment": "Pillow + torch metrics",
+      "available": true,
+      "validation": "not run"
+    },
+    "jpeg": {
+      "adapter": "JPEGCodec",
+      "representation": "digital_bits",
+      "preprocessing": "RGB8, unchanged size; subsampling=0",
+      "checkpoint": "none",
+      "environment": "Pillow + torch metrics",
+      "available": true,
+      "validation": "not run"
+    },
+    "swinjscc": {
+      "adapter": "SwinJSCCAdapter",
+      "representation": "complex_channel_uses",
+      "preprocessing": "RGB [0,1] BCHW; dimensions multiple of 128",
+      "checkpoint": "hash-validated stage1_manifest.json",
+      "environment": "manifest-locked Python/PyTorch + pinned patched Swin source",
+      "available": false,
+      "validation": "missing assets",
+      "missing": [
+        "/workspace/SemanticSchedulerEnd2End/models/SwinJSCC/stage1_manifest.json",
+        "/workspace/SemanticSchedulerEnd2End/models/SwinJSCC/stage1_swinjscc_full.pt",
+        "/workspace/SemanticSchedulerEnd2End/models/SwinJSCC/stage1_swinjscc_encoder.pt",
+        "/workspace/SemanticSchedulerEnd2End/models/SwinJSCC/stage1_swinjscc_decoder.pt",
+        "/workspace/SemanticSchedulerEnd2End/external/SwinJSCC/.stage1a_patch.json"
+      ]
+    },
+    "deepjscc": {
+      "adapter": "DeepJSCCAdapter or repaired worker",
+      "representation": "complex_channel_uses",
+      "preprocessing": "external model contract; benchmark prohibits resizing",
+      "checkpoint": "configured external checkpoint",
+      "environment": "versioned external source; isolated worker supported",
+      "available": false,
+      "validation": "external dependency not configured"
+    },
+    "ntscc": {
+      "adapter": "repaired_notebook_models benchmark wrapper",
+      "representation": "complex_channel_uses",
+      "preprocessing": "external model contract; benchmark prohibits resizing",
+      "checkpoint": "configured external checkpoint",
+      "environment": "external NTSCC/semcom_benchmark environment; worker required",
+      "available": false,
+      "validation": "external dependency not configured"
+    }
+  },
+  "contract": "BenchmarkCodec encode/decode/complexity",
+  "model_inference_tested": false
+}
