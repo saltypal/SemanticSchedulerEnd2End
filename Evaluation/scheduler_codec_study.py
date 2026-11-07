@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import random
 from pathlib import Path
 
 import numpy as np
@@ -52,23 +53,31 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--cycles", type=int, default=1, help="Exact workload repetitions, not independent samples")
     args = parser.parse_args()
+    if args.cycles < 1:
+        parser.error("--cycles must be positive")
     raw = args.receipt.read_bytes()
     receipt = json.loads(raw)
     records = receipt["rows"]
     rows = [Observation(**row["observation"]) for row in records]
     if receipt["codec"] == "jpeg" and any(row.cue is not None for row in rows):
         raise ValueError("JPEG control cannot carry the SQ01 mask cue")
+    workload = list(rows)
+    rng = random.Random(1729)
+    for _ in range(1, args.cycles):
+        workload.extend(rng.sample(rows, len(rows)))
     results = []
     for load in (0.5, 0.9, 1.2):
         for burst in (False, True):
-            jobs, horizon = trace(rows, load, burst=burst)
+            jobs, horizon = trace(workload, load, burst=burst)
             results.append(dict(nominal_load=load, burst=burst, horizon_ms=horizon,
-                                offered_service_to_horizon=sum(o.decode_ms + o.reader_ms for o in rows) / horizon,
+                                offered_service_to_horizon=sum(o.decode_ms + o.reader_ms for o in workload) / horizon,
                                 policies={name: replay(jobs, horizon, name) for name in POLICIES}))
     output = dict(scope="Development replay. Synthetic captures, four serial sender queues, ideal delivery, "
                         "one nonpreemptive receiver. Deadline six median service times from capture.",
                   codec=receipt["codec"], source_sha256=hashlib.sha256(raw).hexdigest(),
+                  cycles=args.cycles, unique_measured_images=len(rows),
                   cue_bytes=receipt["cue_bytes"], cue_diagnostic=cue_check(records, rows),
                   holdout_opened=False, results=results)
     with args.output.open("x", encoding="utf-8") as stream:

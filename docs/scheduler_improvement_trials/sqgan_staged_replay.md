@@ -1,5 +1,7 @@
 # SQ-GAN integration and staged replay
 
+Update after receipt of the ZIP. The asset gate was resolved and the native pilot ran. See [native SQ-GAN results](native_sqgan_pilot.md). This page preserves the earlier JPEG control and preflight history.
+
 ## Status by stage
 
 | Stage | What ran | Decision |

@@ -68,3 +68,8 @@ def test_three_policies_replay_same_payloads_and_count_repeat_once():
         assert result["offered_positive_ids"] == result["timely_correct_positive_ids"] == 2
         assert result["critical_reference_available"] == 3
         assert {r["payload_sha256"] for r in result["timeline"]} == {"a" * 64}
+
+def test_native_pilot_checkpoint_pin_is_full_sha256():
+    from Evaluation.scheduler_codec_pilot import PINNED_SHA
+
+    assert len(bytes.fromhex(PINNED_SHA)) == 32

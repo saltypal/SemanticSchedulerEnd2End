@@ -15,7 +15,7 @@ from Codec.integration.sqgan_payload import SQGANDigitalCodec, sha256
 from Evaluation.scheduler_codec_replay import Observation, decode_cue, encode_cue, road_retention
 
 
-PINNED_SHA = "706396402d86e84276393ce3fe39f0b1b545ff024c0ecae3b8ab72d22f3d6d"
+PINNED_SHA = "706396402d86e84276393ce3fe39f0b0b1b545ff024c0ecae3b8ab72d22f3d6d"
 
 
 def elapsed(start):
