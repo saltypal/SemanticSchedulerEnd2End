@@ -1,0 +1,3053 @@
+{
+  "config": {
+    "seed": 511,
+    "max_ues": 60,
+    "messages": 48,
+    "capture_window": 8.0,
+    "failure_probability": 0.1,
+    "repeat_probability": 0.25,
+    "missing_spi_probability": 0.1,
+    "delay_cap": 10.0,
+    "service_mean": 1.0,
+    "service_log_sigma": 0.25,
+    "correlated_outage": false
+  },
+  "ues": [
+    {
+      "source_id": "ue000",
+      "profile_id": "response_car",
+      "device_description": "Emergency response vehicle camera",
+      "mission": "Observe approach route hazards and incident updates.",
+      "join": 0.0,
+      "leave": 6.004662337715587,
+      "pause": [
+        1.801398701314676,
+        2.401864935086235
+      ],
+      "origin": [
+        12.907403753937038,
+        77.49773763517894
+      ],
+      "velocity": [
+        -7.402374259205516e-06,
+        2.5101367896888574e-06
+      ]
+    },
+    {
+      "source_id": "ue001",
+      "profile_id": "incident_phone",
+      "device_description": "Citizen reporting phone",
+      "mission": "Document visible incident hazards and meaningful updates.",
+      "join": 0.0,
+      "leave": 7.24522555639849,
+      "pause": [
+        2.173567666919547,
+        2.8980902225593965
+      ],
+      "origin": [
+        12.9048557777611,
+        77.49563003261589
+      ],
+      "velocity": [
+        -9.661301242846167e-06,
+        -8.778048245912497e-06
+      ]
+    },
+    {
+      "source_id": "ue002",
+      "profile_id": "farm_drone",
+      "device_description": "Agricultural survey drone",
+      "mission": "Inspect visible field changes for routine agriculture.",
+      "join": 0.0,
+      "leave": 6.549556412733951,
+      "pause": [
+        1.9648669238201852,
+        2.6198225650935805
+      ],
+      "origin": [
+        12.89823367835909,
+        77.4994559710288
+      ],
+      "velocity": [
+        1.618633319555963e-06,
+        6.41570090670869e-06
+      ]
+    },
+    {
+      "source_id": "ue003",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 0.0,
+      "leave": 7.4390649192629095,
+      "pause": [
+        2.2317194757788728,
+        2.975625967705164
+      ],
+      "origin": [
+        12.89785197482869,
+        77.49787028613336
+      ],
+      "velocity": [
+        -9.718425656431005e-06,
+        -3.4628290433165537e-06
+      ]
+    },
+    {
+      "source_id": "ue004",
+      "profile_id": "maintenance",
+      "device_description": "Technician field camera",
+      "mission": "Document visible infrastructure condition and repair evidence.",
+      "join": 0.0,
+      "leave": 7.867579720311136,
+      "pause": [
+        2.3602739160933406,
+        3.1470318881244546
+      ],
+      "origin": [
+        12.90750601618539,
+        77.49774240667614
+      ],
+      "velocity": [
+        -3.0114573362376107e-06,
+        -6.645654408078326e-08
+      ]
+    },
+    {
+      "source_id": "ue005",
+      "profile_id": "incident_phone",
+      "device_description": "Citizen reporting phone",
+      "mission": "Document visible incident hazards and meaningful updates.",
+      "join": 0.0,
+      "leave": 7.521780184640048,
+      "pause": [
+        2.2565340553920143,
+        3.008712073856019
+      ],
+      "origin": [
+        12.898348093365883,
+        77.50351733051532
+      ],
+      "velocity": [
+        6.816129325320525e-06,
+        -5.833375120866882e-06
+      ]
+    },
+    {
+      "source_id": "ue006",
+      "profile_id": "water_camera",
+      "device_description": "Fixed river or underpass camera",
+      "mission": "Observe water coverage and access; physical depth is unknown.",
+      "join": 0.0,
+      "leave": 6.999044367982314,
+      "pause": [
+        2.0997133103946943,
+        2.7996177471929258
+      ],
+      "origin": [
+        12.894466437771335,
+        77.49196364992746
+      ],
+      "velocity": [
+        -1.6698357099998634e-06,
+        -3.891701592925301e-06
+      ]
+    },
+    {
+      "source_id": "ue007",
+      "profile_id": "flood_drone",
+      "device_description": "Flood survey drone",
+      "mission": "Observe inundation and evacuation route access changes.",
+      "join": 0.0,
+      "leave": 5.470791964690665,
+      "pause": [
+        1.6412375894071995,
+        2.188316785876266
+      ],
+      "origin": [
+        12.906923933013342,
+        77.49688913864105
+      ],
+      "velocity": [
+        3.891004811197763e-06,
+        -2.037686494596242e-06
+      ]
+    },
+    {
+      "source_id": "ue008",
+      "profile_id": "robot",
+      "device_description": "Industrial inspection robot camera",
+      "mission": "Inspect visible equipment and obstruction changes on the assigned route.",
+      "join": 0.0,
+      "leave": 5.715224312518458,
+      "pause": [
+        1.7145672937555374,
+        2.2860897250073835
+      ],
+      "origin": [
+        12.897143250686971,
+        77.49309999744735
+      ],
+      "velocity": [
+        5.275415119491415e-06,
+        -6.881065716556374e-06
+      ]
+    },
+    {
+      "source_id": "ue009",
+      "profile_id": "person_drone",
+      "device_description": "Aerial person-search camera",
+      "mission": "Search for visible people and relevant surroundings; do not assume distress.",
+      "join": 0.0,
+      "leave": 6.709143838650578,
+      "pause": [
+        2.0127431515951733,
+        2.6836575354602314
+      ],
+      "origin": [
+        12.90487357843006,
+        77.49416395200319
+      ],
+      "velocity": [
+        -4.8091032714530906e-06,
+        -4.15632665132335e-06
+      ]
+    },
+    {
+      "source_id": "ue010",
+      "profile_id": "maintenance",
+      "device_description": "Technician field camera",
+      "mission": "Document visible infrastructure condition and repair evidence.",
+      "join": 0.0,
+      "leave": 7.925817557483268,
+      "pause": [
+        2.3777452672449804,
+        3.170327022993307
+      ],
+      "origin": [
+        12.908902567665804,
+        77.49969375127532
+      ],
+      "velocity": [
+        1.439288575229018e-07,
+        -8.193551734890544e-06
+      ]
+    },
+    {
+      "source_id": "ue011",
+      "profile_id": "person_drone",
+      "device_description": "Aerial person-search camera",
+      "mission": "Search for visible people and relevant surroundings; do not assume distress.",
+      "join": 0.0,
+      "leave": 5.564651960641415,
+      "pause": [
+        1.6693955881924245,
+        2.225860784256566
+      ],
+      "origin": [
+        12.89956755929927,
+        77.49026257171232
+      ],
+      "velocity": [
+        3.941188085811169e-06,
+        7.156076704554521e-06
+      ]
+    },
+    {
+      "source_id": "ue012",
+      "profile_id": "incident_phone",
+      "device_description": "Citizen reporting phone",
+      "mission": "Document visible incident hazards and meaningful updates.",
+      "join": 0.0,
+      "leave": 6.160781994225904,
+      "pause": [
+        1.8482345982677713,
+        2.464312797690362
+      ],
+      "origin": [
+        12.907640368601133,
+        77.49673766623249
+      ],
+      "velocity": [
+        3.27035208533838e-06,
+        -7.648855194014232e-06
+      ]
+    },
+    {
+      "source_id": "ue013",
+      "profile_id": "public_cctv",
+      "device_description": "Fixed public-space camera",
+      "mission": "Observe visible access and safety changes without inferring danger from occupancy.",
+      "join": 0.0,
+      "leave": 7.802514518885218,
+      "pause": [
+        2.3407543556655654,
+        3.1210058075540874
+      ],
+      "origin": [
+        12.901006059972266,
+        77.49677846474475
+      ],
+      "velocity": [
+        3.6664297143612284e-06,
+        2.7853115719492876e-06
+      ]
+    },
+    {
+      "source_id": "ue014",
+      "profile_id": "water_camera",
+      "device_description": "Fixed river or underpass camera",
+      "mission": "Observe water coverage and access; physical depth is unknown.",
+      "join": 0.0,
+      "leave": 5.289181225646986,
+      "pause": [
+        1.5867543676940956,
+        2.1156724902587944
+      ],
+      "origin": [
+        12.894802355843618,
+        77.49892196910719
+      ],
+      "velocity": [
+        3.503781775190389e-06,
+        2.839346741723373e-06
+      ]
+    },
+    {
+      "source_id": "ue015",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 0.0,
+      "leave": 4.88980276879697,
+      "pause": [
+        1.4669408306390908,
+        1.955921107518788
+      ],
+      "origin": [
+        12.9017758380994,
+        77.49630957894878
+      ],
+      "velocity": [
+        5.497366517219551e-07,
+        4.99294430803482e-06
+      ]
+    },
+    {
+      "source_id": "ue016",
+      "profile_id": "response_car",
+      "device_description": "Emergency response vehicle camera",
+      "mission": "Observe approach route hazards and incident updates.",
+      "join": 0.0,
+      "leave": 5.50747583800384,
+      "pause": [
+        1.652242751401152,
+        2.202990335201536
+      ],
+      "origin": [
+        12.899734363298503,
+        77.4965549146554
+      ],
+      "velocity": [
+        4.793999275189359e-07,
+        -6.532042279242901e-06
+      ]
+    },
+    {
+      "source_id": "ue017",
+      "profile_id": "robot",
+      "device_description": "Industrial inspection robot camera",
+      "mission": "Inspect visible equipment and obstruction changes on the assigned route.",
+      "join": 0.0,
+      "leave": 6.703141151486327,
+      "pause": [
+        2.010942345445898,
+        2.681256460594531
+      ],
+      "origin": [
+        12.902948432167944,
+        77.49339054350504
+      ],
+      "velocity": [
+        -5.533666100671848e-06,
+        9.174676825426338e-06
+      ]
+    },
+    {
+      "source_id": "ue018",
+      "profile_id": "fire_drone",
+      "device_description": "Wildfire observation drone",
+      "mission": "Observe visible fire and smoke near routes and infrastructure.",
+      "join": 0.0,
+      "leave": 7.5997186607518215,
+      "pause": [
+        2.2799155982255463,
+        3.0398874643007288
+      ],
+      "origin": [
+        12.894328765528048,
+        77.4901579344524
+      ],
+      "velocity": [
+        -9.50285384416803e-06,
+        -6.060876659067694e-06
+      ]
+    },
+    {
+      "source_id": "ue019",
+      "profile_id": "damage_drone",
+      "device_description": "Aerial structural inspection camera",
+      "mission": "Inspect visible building damage and supported condition changes.",
+      "join": 0.0,
+      "leave": 5.059185657613942,
+      "pause": [
+        1.5177556972841826,
+        2.023674263045577
+      ],
+      "origin": [
+        12.903122664322176,
+        77.49959164033436
+      ],
+      "velocity": [
+        -7.5470930976847406e-06,
+        1.4562020812064498e-06
+      ]
+    },
+    {
+      "source_id": "ue020",
+      "profile_id": "damage_drone",
+      "device_description": "Aerial structural inspection camera",
+      "mission": "Inspect visible building damage and supported condition changes.",
+      "join": 0.7771504259769298,
+      "leave": 7.921878013711563,
+      "pause": [
+        2.9205687022973197,
+        3.6350414610707835
+      ],
+      "origin": [
+        12.903570533803197,
+        77.49618543695337
+      ],
+      "velocity": [
+        8.916395429451514e-06,
+        -7.196670732086175e-06
+      ]
+    },
+    {
+      "source_id": "ue021",
+      "profile_id": "road_drone",
+      "device_description": "Bridge and road inspection drone",
+      "mission": "Inspect visible structure and access obstructions.",
+      "join": 0.3888302001133341,
+      "leave": 6.314393145687759,
+      "pause": [
+        2.1664990837856615,
+        2.7590553783431035
+      ],
+      "origin": [
+        12.905298243988028,
+        77.5017995400945
+      ],
+      "velocity": [
+        -5.688901202152208e-06,
+        -7.918207538787389e-06
+      ]
+    },
+    {
+      "source_id": "ue022",
+      "profile_id": "public_cctv",
+      "device_description": "Fixed public-space camera",
+      "mission": "Observe visible access and safety changes without inferring danger from occupancy.",
+      "join": 0.1171360191964772,
+      "leave": 6.548394526858987,
+      "pause": [
+        2.04651357149523,
+        2.689639422261481
+      ],
+      "origin": [
+        12.906771602185064,
+        77.49320402617307
+      ],
+      "velocity": [
+        2.6097423362336024e-06,
+        1.163623878363686e-06
+      ]
+    },
+    {
+      "source_id": "ue023",
+      "profile_id": "flood_drone",
+      "device_description": "Flood survey drone",
+      "mission": "Observe inundation and evacuation route access changes.",
+      "join": 1.893126095031644,
+      "leave": 5.4121233143489,
+      "pause": [
+        2.948825260826821,
+        3.3007249827585463
+      ],
+      "origin": [
+        12.907214003555184,
+        77.50635383274513
+      ],
+      "velocity": [
+        2.9776950564483017e-06,
+        4.396454807930032e-06
+      ]
+    },
+    {
+      "source_id": "ue024",
+      "profile_id": "incident_phone",
+      "device_description": "Citizen reporting phone",
+      "mission": "Document visible incident hazards and meaningful updates.",
+      "join": 1.052357928464566,
+      "leave": 7.318261394832911,
+      "pause": [
+        2.9321289683750695,
+        3.5587193150119045
+      ],
+      "origin": [
+        12.906528085713552,
+        77.50974171860138
+      ],
+      "velocity": [
+        -1.6412944383947116e-06,
+        7.977209676238799e-07
+      ]
+    },
+    {
+      "source_id": "ue025",
+      "profile_id": "maintenance",
+      "device_description": "Technician field camera",
+      "mission": "Document visible infrastructure condition and repair evidence.",
+      "join": 0.6699067186314386,
+      "leave": 5.508362180538722,
+      "pause": [
+        2.1214433572036233,
+        2.6052889033943516
+      ],
+      "origin": [
+        12.89212627721905,
+        77.5059893903141
+      ],
+      "velocity": [
+        -5.848533452526306e-06,
+        6.526038188280259e-06
+      ]
+    },
+    {
+      "source_id": "ue026",
+      "profile_id": "road_drone",
+      "device_description": "Bridge and road inspection drone",
+      "mission": "Inspect visible structure and access obstructions.",
+      "join": 0.8489180364961229,
+      "leave": 6.159223699017632,
+      "pause": [
+        2.442009735252576,
+        2.9730403015047266
+      ],
+      "origin": [
+        12.894754210586633,
+        77.49818558076151
+      ],
+      "velocity": [
+        -7.072550107343791e-06,
+        6.457345539120196e-06
+      ]
+    },
+    {
+      "source_id": "ue027",
+      "profile_id": "road_drone",
+      "device_description": "Bridge and road inspection drone",
+      "mission": "Inspect visible structure and access obstructions.",
+      "join": 0.49553134154659434,
+      "leave": 5.932812392458814,
+      "pause": [
+        2.1267156568202603,
+        2.6704437619114825
+      ],
+      "origin": [
+        12.893853197864942,
+        77.49909946072214
+      ],
+      "velocity": [
+        -5.236945350081473e-06,
+        -3.623028575279404e-06
+      ]
+    },
+    {
+      "source_id": "ue028",
+      "profile_id": "road_drone",
+      "device_description": "Bridge and road inspection drone",
+      "mission": "Inspect visible structure and access obstructions.",
+      "join": 3.107102788132667,
+      "leave": 7.012522830672808,
+      "pause": [
+        4.278728800894709,
+        4.669270805148724
+      ],
+      "origin": [
+        12.893795075554788,
+        77.49197665767691
+      ],
+      "velocity": [
+        6.720187139428762e-06,
+        -9.144160642747522e-06
+      ]
+    },
+    {
+      "source_id": "ue029",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 0.2114664287776163,
+      "leave": 5.424507568273468,
+      "pause": [
+        1.7753787706263715,
+        2.2966828845759566
+      ],
+      "origin": [
+        12.899455036483214,
+        77.4910221906327
+      ],
+      "velocity": [
+        7.5524002144828884e-06,
+        -1.2839663537466173e-06
+      ]
+    },
+    {
+      "source_id": "ue030",
+      "profile_id": "fire_drone",
+      "device_description": "Wildfire observation drone",
+      "mission": "Observe visible fire and smoke near routes and infrastructure.",
+      "join": 2.9535372153842365,
+      "leave": 6.78914989364351,
+      "pause": [
+        4.1042210188620185,
+        4.487782286687946
+      ],
+      "origin": [
+        12.90690317931823,
+        77.49490811537132
+      ],
+      "velocity": [
+        1.7791579608345737e-06,
+        -7.672911019999538e-06
+      ]
+    },
+    {
+      "source_id": "ue031",
+      "profile_id": "response_car",
+      "device_description": "Emergency response vehicle camera",
+      "mission": "Observe approach route hazards and incident updates.",
+      "join": 1.4784139587544567,
+      "leave": 5.461856408461601,
+      "pause": [
+        2.6734466936666,
+        3.0717909386373146
+      ],
+      "origin": [
+        12.890893425828544,
+        77.49822836535802
+      ],
+      "velocity": [
+        8.952754236807689e-07,
+        -3.1772131843685104e-06
+      ]
+    },
+    {
+      "source_id": "ue032",
+      "profile_id": "response_car",
+      "device_description": "Emergency response vehicle camera",
+      "mission": "Observe approach route hazards and incident updates.",
+      "join": 1.5873646813651698,
+      "leave": 4.833407145985534,
+      "pause": [
+        2.561177420751279,
+        2.8857816672133154
+      ],
+      "origin": [
+        12.892359450133087,
+        77.50530086900609
+      ],
+      "velocity": [
+        -8.714982341466985e-06,
+        3.905607689660107e-06
+      ]
+    },
+    {
+      "source_id": "ue033",
+      "profile_id": "robot",
+      "device_description": "Industrial inspection robot camera",
+      "mission": "Inspect visible equipment and obstruction changes on the assigned route.",
+      "join": 1.489166210626768,
+      "leave": 6.725987996797387,
+      "pause": [
+        3.060212746477954,
+        3.5838949250950156
+      ],
+      "origin": [
+        12.899952783403858,
+        77.4968418372524
+      ],
+      "velocity": [
+        -5.140076042445017e-07,
+        -3.848666733668698e-06
+      ]
+    },
+    {
+      "source_id": "ue034",
+      "profile_id": "incident_phone",
+      "device_description": "Citizen reporting phone",
+      "mission": "Document visible incident hazards and meaningful updates.",
+      "join": 1.9698032446518094,
+      "leave": 6.606700419437346,
+      "pause": [
+        3.36087239708747,
+        3.8245621145660245
+      ],
+      "origin": [
+        12.89425509311914,
+        77.4908492104324
+      ],
+      "velocity": [
+        -3.1126663633246948e-06,
+        -6.1446880897726746e-06
+      ]
+    },
+    {
+      "source_id": "ue035",
+      "profile_id": "car",
+      "device_description": "Ordinary moving road camera",
+      "mission": "Observe routine road conditions and obstacles.",
+      "join": 1.2006921600839064,
+      "leave": 5.815582032269219,
+      "pause": [
+        2.5851591217395002,
+        3.0466481089580317
+      ],
+      "origin": [
+        12.90499161264035,
+        77.49694443971168
+      ],
+      "velocity": [
+        5.4148014170583375e-06,
+        -8.390559434231198e-06
+      ]
+    },
+    {
+      "source_id": "ue036",
+      "profile_id": "damage_drone",
+      "device_description": "Aerial structural inspection camera",
+      "mission": "Inspect visible building damage and supported condition changes.",
+      "join": 1.319973982306997,
+      "leave": 5.344787446072116,
+      "pause": [
+        2.5274180214365325,
+        2.9298993678130447
+      ],
+      "origin": [
+        12.898125413420011,
+        77.50065733499684
+      ],
+      "velocity": [
+        4.550760410256215e-06,
+        -2.256510135210999e-06
+      ]
+    },
+    {
+      "source_id": "ue037",
+      "profile_id": "maintenance",
+      "device_description": "Technician field camera",
+      "mission": "Document visible infrastructure condition and repair evidence.",
+      "join": 3.3563636001629082,
+      "leave": 6.494237204522635,
+      "pause": [
+        4.297725681470826,
+        4.611513041906799
+      ],
+      "origin": [
+        12.893607827781176,
+        77.4993136164992
+      ],
+      "velocity": [
+        -7.887402807310674e-06,
+        4.312693685456719e-06
+      ]
+    },
+    {
+      "source_id": "ue038",
+      "profile_id": "incident_phone",
+      "device_description": "Citizen reporting phone",
+      "mission": "Document visible incident hazards and meaningful updates.",
+      "join": 2.92665444609905,
+      "leave": 7.826968034006763,
+      "pause": [
+        4.396748522471364,
+        4.886779881262135
+      ],
+      "origin": [
+        12.89397957447655,
+        77.49650938230178
+      ],
+      "velocity": [
+        -6.594506433618669e-06,
+        6.610426083838716e-08
+      ]
+    },
+    {
+      "source_id": "ue039",
+      "profile_id": "damage_drone",
+      "device_description": "Aerial structural inspection camera",
+      "mission": "Inspect visible building damage and supported condition changes.",
+      "join": 2.76944229997469,
+      "leave": 5.105105391543021,
+      "pause": [
+        3.4701412274451893,
+        3.7037075366020225
+      ],
+      "origin": [
+        12.904037273150232,
+        77.49078968015041
+      ],
+      "velocity": [
+        4.247674360387166e-06,
+        -9.28321072291521e-06
+      ]
+    },
+    {
+      "source_id": "ue040",
+      "profile_id": "car",
+      "device_description": "Ordinary moving road camera",
+      "mission": "Observe routine road conditions and obstacles.",
+      "join": 1.985130742408066,
+      "leave": 5.324844965112639,
+      "pause": [
+        2.987045009219438,
+        3.3210164314898956
+      ],
+      "origin": [
+        12.900072494595658,
+        77.50095244971476
+      ],
+      "velocity": [
+        -5.441763333705366e-06,
+        6.6922622922904445e-06
+      ]
+    },
+    {
+      "source_id": "ue041",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 2.3334189864585912,
+      "leave": 7.233418389954235,
+      "pause": [
+        3.803418807507284,
+        4.293418747856848
+      ],
+      "origin": [
+        12.892573465610983,
+        77.5083672078603
+      ],
+      "velocity": [
+        9.429979681626082e-06,
+        9.263559855108563e-06
+      ]
+    },
+    {
+      "source_id": "ue042",
+      "profile_id": "public_cctv",
+      "device_description": "Fixed public-space camera",
+      "mission": "Observe visible access and safety changes without inferring danger from occupancy.",
+      "join": 1.6561856245834945,
+      "leave": 5.278007248039492,
+      "pause": [
+        2.7427321116202936,
+        3.1049142739658935
+      ],
+      "origin": [
+        12.892713743552052,
+        77.49970666818604
+      ],
+      "velocity": [
+        7.873456946021252e-06,
+        4.258076421204626e-06
+      ]
+    },
+    {
+      "source_id": "ue043",
+      "profile_id": "maintenance",
+      "device_description": "Technician field camera",
+      "mission": "Document visible infrastructure condition and repair evidence.",
+      "join": 2.963408371581836,
+      "leave": 6.968956452200896,
+      "pause": [
+        4.1650727957675535,
+        4.56562760382946
+      ],
+      "origin": [
+        12.89770577970581,
+        77.49708079030852
+      ],
+      "velocity": [
+        -1.4275724212651428e-06,
+        -9.087490502727063e-06
+      ]
+    },
+    {
+      "source_id": "ue044",
+      "profile_id": "response_car",
+      "device_description": "Emergency response vehicle camera",
+      "mission": "Observe approach route hazards and incident updates.",
+      "join": 1.587716063712173,
+      "leave": 6.2621830681049,
+      "pause": [
+        2.990056165029991,
+        3.457502865469264
+      ],
+      "origin": [
+        12.894988086435452,
+        77.49830860135431
+      ],
+      "velocity": [
+        -4.843782561209989e-06,
+        4.903648877298215e-06
+      ]
+    },
+    {
+      "source_id": "ue045",
+      "profile_id": "farm_drone",
+      "device_description": "Agricultural survey drone",
+      "mission": "Inspect visible field changes for routine agriculture.",
+      "join": 2.305756455994718,
+      "leave": 4.864378163802064,
+      "pause": [
+        3.073342968336922,
+        3.3292051391176565
+      ],
+      "origin": [
+        12.898800088770571,
+        77.49905693427299
+      ],
+      "velocity": [
+        6.0209301379653895e-06,
+        -5.1560330740851825e-06
+      ]
+    },
+    {
+      "source_id": "ue046",
+      "profile_id": "water_camera",
+      "device_description": "Fixed river or underpass camera",
+      "mission": "Observe water coverage and access; physical depth is unknown.",
+      "join": 2.712600319064109,
+      "leave": 5.104361856286012,
+      "pause": [
+        3.43012878023068,
+        3.66930493395287
+      ],
+      "origin": [
+        12.908683358636104,
+        77.49340639275103
+      ],
+      "velocity": [
+        -6.3814587532389476e-06,
+        -8.55270773544612e-06
+      ]
+    },
+    {
+      "source_id": "ue047",
+      "profile_id": "damage_drone",
+      "device_description": "Aerial structural inspection camera",
+      "mission": "Inspect visible building damage and supported condition changes.",
+      "join": 0.6352978323624251,
+      "leave": 5.055070236047283,
+      "pause": [
+        1.9612295534678825,
+        2.4032067938363686
+      ],
+      "origin": [
+        12.897237008801724,
+        77.49712876798343
+      ],
+      "velocity": [
+        9.525310588142329e-06,
+        2.0542497102977048e-07
+      ]
+    },
+    {
+      "source_id": "ue048",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 2.4724846655909305,
+      "leave": 6.5554411880846555,
+      "pause": [
+        3.6973716223390483,
+        4.105667274588421
+      ],
+      "origin": [
+        12.892966617488579,
+        77.49868124780315
+      ],
+      "velocity": [
+        5.146944683364508e-06,
+        7.837697381051959e-06
+      ]
+    },
+    {
+      "source_id": "ue049",
+      "profile_id": "fire_drone",
+      "device_description": "Wildfire observation drone",
+      "mission": "Observe visible fire and smoke near routes and infrastructure.",
+      "join": 0.5876173399735956,
+      "leave": 6.635602317516159,
+      "pause": [
+        2.4020128332363644,
+        3.0068113309906206
+      ],
+      "origin": [
+        12.893346957729632,
+        77.49207898708649
+      ],
+      "velocity": [
+        3.1996464858315642e-06,
+        6.542913502865861e-06
+      ]
+    },
+    {
+      "source_id": "ue050",
+      "profile_id": "water_camera",
+      "device_description": "Fixed river or underpass camera",
+      "mission": "Observe water coverage and access; physical depth is unknown.",
+      "join": 3.0026237107442646,
+      "leave": 7.193575875011691,
+      "pause": [
+        4.259909360024492,
+        4.679004576451235
+      ],
+      "origin": [
+        12.901596491334042,
+        77.50135511404095
+      ],
+      "velocity": [
+        -3.9180802227430455e-06,
+        5.343743355559088e-06
+      ]
+    },
+    {
+      "source_id": "ue051",
+      "profile_id": "maintenance",
+      "device_description": "Technician field camera",
+      "mission": "Document visible infrastructure condition and repair evidence.",
+      "join": 0.9303946760484841,
+      "leave": 5.312100967591156,
+      "pause": [
+        2.2449065635112855,
+        2.683077192665553
+      ],
+      "origin": [
+        12.899586941172737,
+        77.49049189920675
+      ],
+      "velocity": [
+        -8.01534397339077e-06,
+        7.6005389329239364e-06
+      ]
+    },
+    {
+      "source_id": "ue052",
+      "profile_id": "car",
+      "device_description": "Ordinary moving road camera",
+      "mission": "Observe routine road conditions and obstacles.",
+      "join": 3.1146294351743844,
+      "leave": 4.8545790946914416,
+      "pause": [
+        3.6366143330295015,
+        3.8106092989812073
+      ],
+      "origin": [
+        12.90050971349341,
+        77.49617163661725
+      ],
+      "velocity": [
+        -6.012088754101413e-06,
+        6.045176472773134e-06
+      ]
+    },
+    {
+      "source_id": "ue053",
+      "profile_id": "road_drone",
+      "device_description": "Bridge and road inspection drone",
+      "mission": "Inspect visible structure and access obstructions.",
+      "join": 0.4054754816541047,
+      "leave": 6.191430947702521,
+      "pause": [
+        2.1412621214686296,
+        2.7198576680734714
+      ],
+      "origin": [
+        12.893425912224577,
+        77.50810096068892
+      ],
+      "velocity": [
+        -7.185370548474593e-06,
+        -9.884819628260474e-06
+      ]
+    },
+    {
+      "source_id": "ue054",
+      "profile_id": "traffic_cctv",
+      "device_description": "Fixed intersection camera",
+      "mission": "Observe traffic obstruction and visible incidents.",
+      "join": 2.4610054140423925,
+      "leave": 7.330295851955594,
+      "pause": [
+        3.921792545416353,
+        4.408721589207673
+      ],
+      "origin": [
+        12.90640336688561,
+        77.4967968750641
+      ],
+      "velocity": [
+        5.340539064944309e-06,
+        9.415260447284987e-06
+      ]
+    },
+    {
+      "source_id": "ue055",
+      "profile_id": "damage_drone",
+      "device_description": "Aerial structural inspection camera",
+      "mission": "Inspect visible building damage and supported condition changes.",
+      "join": 0.2960376610847631,
+      "leave": 7.747369302922853,
+      "pause": [
+        2.53143715363619,
+        3.276570317819999
+      ],
+      "origin": [
+        12.90795752823468,
+        77.49298380542201
+      ],
+      "velocity": [
+        4.864077835909489e-06,
+        6.7679144003195954e-06
+      ]
+    },
+    {
+      "source_id": "ue056",
+      "profile_id": "farm_drone",
+      "device_description": "Agricultural survey drone",
+      "mission": "Inspect visible field changes for routine agriculture.",
+      "join": 1.5033409459778166,
+      "leave": 7.656874807987743,
+      "pause": [
+        3.349401104580794,
+        3.9647544907817873
+      ],
+      "origin": [
+        12.899457851150613,
+        77.50061245413974
+      ],
+      "velocity": [
+        -7.126187377138083e-06,
+        6.699155653679907e-06
+      ]
+    },
+    {
+      "source_id": "ue057",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 0.7235853415252894,
+      "leave": 5.048510737949379,
+      "pause": [
+        2.0210629604525163,
+        2.453555500094925
+      ],
+      "origin": [
+        12.893190602682113,
+        77.50452367344438
+      ],
+      "velocity": [
+        1.2370007608887565e-06,
+        1.3176033888206054e-06
+      ]
+    },
+    {
+      "source_id": "ue058",
+      "profile_id": "phone",
+      "device_description": "General purpose personal phone",
+      "mission": "Share ordinary everyday images without an assumed emergency mission.",
+      "join": 3.0877665174138946,
+      "leave": 6.513711335706363,
+      "pause": [
+        4.115549962901635,
+        4.458144444730882
+      ],
+      "origin": [
+        12.908833883199735,
+        77.50830068183292
+      ],
+      "velocity": [
+        6.700120699298423e-07,
+        -2.2374581153319894e-06
+      ]
+    },
+    {
+      "source_id": "ue059",
+      "profile_id": "fire_drone",
+      "device_description": "Wildfire observation drone",
+      "mission": "Observe visible fire and smoke near routes and infrastructure.",
+      "join": 1.2651969719290745,
+      "leave": 7.782598211865332,
+      "pause": [
+        3.2204173439099515,
+        3.8721574679035777
+      ],
+      "origin": [
+        12.902887063537928,
+        77.50142972914112
+      ],
+      "velocity": [
+        -9.8078276775934e-06,
+        -3.059570518652419e-06
+      ]
+    }
+  ],
+  "records": [
+    {
+      "message_id": "[\"ue001\",\"episode511\",0]",
+      "capture": 0.5845489177316796,
+      "extraction_ready": 0.6086840404458242,
+      "arrival": 0.6720566186189187,
+      "location": [
+        12.904850130257914,
+        77.49562490141729
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.6191028758208716,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232000585,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 6,
+          "categories": 2,
+          "largest_box_fraction": 0.3364249581764106,
+          "union_box_coverage": 0.6871453408858512
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact0",
+        "reference_priority": 3,
+        "reference_relevance": 0.7940667264346031,
+        "service_duration": 0.7454640416829266,
+        "failure_draw": 0.783169807747726,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue051\",\"episode511\",1]",
+      "capture": 0.9397602845099442,
+      "extraction_ready": 0.9877499238486521,
+      "arrival": 1.0287168838690517,
+      "location": [
+        12.899579408670805,
+        77.49049904189137
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.27380356338452805,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232000940,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 2,
+          "largest_box_fraction": 0.3399155590789476,
+          "union_box_coverage": 0.40881582210011935
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact1",
+        "reference_priority": 3,
+        "reference_relevance": 0.3387018909136996,
+        "service_duration": 1.1944459590780587,
+        "failure_draw": 0.5134831991041328,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue059\",\"episode511\",2]",
+      "capture": 1.295445224021975,
+      "extraction_ready": 1.3279632366547678,
+      "arrival": 1.3877171021827066,
+      "location": [
+        12.902874358034406,
+        77.5014257656351
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": -0.24827992248275477,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001295,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 3,
+          "largest_box_fraction": 0.08814715968407145,
+          "union_box_coverage": 0.4461732610128008
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact2",
+        "reference_priority": 3,
+        "reference_relevance": 0.3103883334743952,
+        "service_duration": 0.8528539709575108,
+        "failure_draw": 0.6334899940460775,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue008\",\"episode511\",3]",
+      "capture": 1.5307926070339732,
+      "extraction_ready": 1.5440694760673401,
+      "arrival": 1.56484238056003,
+      "location": [
+        12.897151326253436,
+        77.49308946396282
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.6764511962124333,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001531,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 0,
+          "largest_box_fraction": 0.07834370258552173,
+          "union_box_coverage": 0.8667091726807981
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact3",
+        "reference_priority": 3,
+        "reference_relevance": 0.8039856621064214,
+        "service_duration": 1.0961269900923953,
+        "failure_draw": 0.9622676999340657,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue047\",\"episode511\",4]",
+      "capture": 1.6418236236006525,
+      "extraction_ready": 1.6556817440221596,
+      "arrival": 1.7487356458563637,
+      "location": [
+        12.89725264768167,
+        77.497129105255
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.5726913293457976,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001642,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 9,
+          "categories": 3,
+          "largest_box_fraction": 0.35209081065877423,
+          "union_box_coverage": 0.9064477758450239
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact4",
+        "reference_priority": 3,
+        "reference_relevance": 0.8417373893904659,
+        "service_duration": 1.2883150621653956,
+        "failure_draw": 0.30401708882067013,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode511\",5]",
+      "capture": 1.6620141062046945,
+      "extraction_ready": 1.6928745092666018,
+      "arrival": 1.7604846918410946,
+      "location": [
+        12.897835822668158,
+        77.49786453086264
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.10596412631299651,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001662,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 4,
+          "largest_box_fraction": 0.34118019674827116,
+          "union_box_coverage": 0.6579412619062068
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact5",
+        "reference_priority": 1,
+        "reference_relevance": 0.4767793256013777,
+        "service_duration": 1.2796789777866098,
+        "failure_draw": 0.4380952466217264,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue059\",\"episode511\",6]",
+      "capture": 1.7409467893328388,
+      "extraction_ready": 1.7623089734061042,
+      "arrival": 1.7868139616577259,
+      "location": [
+        12.902869988631823,
+        77.50142440259165
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.7129578295542635,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232001741,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 6,
+          "categories": 2,
+          "largest_box_fraction": 0.18488499259461785,
+          "union_box_coverage": 0.9276308640148972
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact6",
+        "reference_priority": 1,
+        "reference_relevance": 0.16941276990834708,
+        "service_duration": 1.058273784777729,
+        "failure_draw": 0.6573359633971115,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue020\",\"episode511\",7]",
+      "capture": 1.7832275764229042,
+      "extraction_ready": 1.8141976611873634,
+      "arrival": 1.895564061794784,
+      "location": [
+        12.90358643376541,
+        77.49617260365166
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.6819365114545116,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001783,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 7,
+          "categories": 2,
+          "largest_box_fraction": 0.03940814610110608,
+          "union_box_coverage": 0.7288092384770126
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact7",
+        "reference_priority": 3,
+        "reference_relevance": 0.8556291695342461,
+        "service_duration": 1.2691417672100183,
+        "failure_draw": 0.8339273044293344,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode511\",8]",
+      "capture": 1.8313481942630792,
+      "extraction_ready": 1.8499819007878127,
+      "arrival": 1.9128903277722662,
+      "location": [
+        12.897834177007413,
+        77.49786394448765
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.09623528017866902,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232001831,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 0,
+          "categories": 1,
+          "largest_box_fraction": 0.058736606168470124,
+          "union_box_coverage": 0.6814898876647123
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact8",
+        "reference_priority": 3,
+        "reference_relevance": 0.531812494178392,
+        "service_duration": 1.1365147583499104,
+        "failure_draw": 0.03440683124608668,
+        "failed": true,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue005\",\"episode511\",9]",
+      "capture": 1.887500308841184,
+      "extraction_ready": 1.9160813043221596,
+      "arrival": 1.927866534107921,
+      "location": [
+        12.89836095881209,
+        77.50350632001798
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.6844591395991007,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232001888,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 4,
+          "largest_box_fraction": 0.04254462874251659,
+          "union_box_coverage": 0.647831647202732
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact9",
+        "reference_priority": 1,
+        "reference_relevance": 0.02303008424747144,
+        "service_duration": 0.9219278171347244,
+        "failure_draw": 0.7850508358150745,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue042\",\"episode511\",10]",
+      "capture": 2.2086187185565738,
+      "extraction_ready": 2.2425358856388407,
+      "arrival": 2.257973377023161,
+      "location": [
+        12.892731133016444,
+        77.49971607265333
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.7253621829767903,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002209,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 3,
+          "largest_box_fraction": 0.15623656636020045,
+          "union_box_coverage": 0.44151091477276716
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact10",
+        "reference_priority": 1,
+        "reference_relevance": 0.8933336970978126,
+        "service_duration": 1.6574539207703174,
+        "failure_draw": 0.7454367208126975,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue029\",\"episode511\",11]",
+      "capture": 2.2966828845759566,
+      "extraction_ready": 2.3189250965834605,
+      "arrival": 2.3523074730835347,
+      "location": [
+        12.899472381951524,
+        77.49101924176915
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.8325051934270338,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002297,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 2,
+          "largest_box_fraction": 0.01747236660408622,
+          "union_box_coverage": 0.8125694938569048
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact11",
+        "reference_priority": 2,
+        "reference_relevance": 0.8456738340202901,
+        "service_duration": 0.9201325387348667,
+        "failure_draw": 0.28199114544319015,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue007\",\"episode511\",12]",
+      "capture": 2.3569595787965687,
+      "extraction_ready": 2.369891603383813,
+      "arrival": 2.398809327480265,
+      "location": [
+        12.906933103954403,
+        77.49688433589635
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.7907882364553482,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002357,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 4,
+          "largest_box_fraction": 0.04389865390950401,
+          "union_box_coverage": 0.8855630224538569
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact12",
+        "reference_priority": 3,
+        "reference_relevance": 0.9720031438297881,
+        "service_duration": 1.0810396320381623,
+        "failure_draw": 0.42667671819906094,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue045\",\"episode511\",13]",
+      "capture": 2.388095795948561,
+      "extraction_ready": 2.413305631274725,
+      "arrival": 2.491058743982608,
+      "location": [
+        12.89881446732852,
+        77.49904462117208
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.035610227908082395,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002388,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 9,
+          "categories": 3,
+          "largest_box_fraction": 0.023419792245689266,
+          "union_box_coverage": 0.6861120659179636
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact13",
+        "reference_priority": 2,
+        "reference_relevance": 0.4330121609601283,
+        "service_duration": 0.8669365964329877,
+        "failure_draw": 0.340148876264604,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue000\",\"episode511\",14]",
+      "capture": 2.401864935086235,
+      "extraction_ready": 2.446510955750959,
+      "arrival": 2.473616607775902,
+      "location": [
+        12.907385974433868,
+        77.49774366418848
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.03537109087861046,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002402,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 5,
+          "categories": 3,
+          "largest_box_fraction": 0.2629075182064934,
+          "union_box_coverage": 0.428109747234924
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact5",
+        "reference_priority": 1,
+        "reference_relevance": 0.4767793256013777,
+        "service_duration": 0.7339181349137347,
+        "failure_draw": 0.054639187723507954,
+        "failed": true,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue014\",\"episode511\",15]",
+      "capture": 2.4385060905067104,
+      "extraction_ready": 2.4743371403857632,
+      "arrival": 2.5720403917603276,
+      "location": [
+        12.894810899836816,
+        77.4989288928715
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.16446357686868507,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002439,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 0,
+          "largest_box_fraction": 0.27436584522277596,
+          "union_box_coverage": 0.8746186437841748
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact14",
+        "reference_priority": 3,
+        "reference_relevance": 0.5044594727980928,
+        "service_duration": 1.1013030216443855,
+        "failure_draw": 0.3826143873374297,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue016\",\"episode511\",16]",
+      "capture": 2.5737900652669112,
+      "extraction_ready": 2.5996307404725756,
+      "arrival": 2.675195582272608,
+      "location": [
+        12.899735597173274,
+        77.49653810254988
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.42724630350169407,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002574,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 2,
+          "largest_box_fraction": 0.03683612907904861,
+          "union_box_coverage": 0.46829008929653826
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact1",
+        "reference_priority": 3,
+        "reference_relevance": 0.3387018909136996,
+        "service_duration": 0.7143449391157989,
+        "failure_draw": 0.6789884918275336,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue009\",\"episode511\",17]",
+      "capture": 2.7303429608855847,
+      "extraction_ready": 2.7526546395573885,
+      "arrival": 2.819562330616386,
+      "location": [
+        12.904860447928794,
+        77.49415260380597
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -1.0,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002730,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 7,
+          "categories": 3,
+          "largest_box_fraction": 0.33803800814893753,
+          "union_box_coverage": 0.8360678620510377
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact9",
+        "reference_priority": 1,
+        "reference_relevance": 0.02303008424747144,
+        "service_duration": 1.0302958092509573,
+        "failure_draw": 0.7173639883137336,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue008\",\"episode511\",18]",
+      "capture": 2.82024341150461,
+      "extraction_ready": 2.849718692104442,
+      "arrival": 2.875004198873665,
+      "location": [
+        12.897158128641705,
+        77.4930805911671
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": -0.14832061957819315,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232002820,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 3,
+          "largest_box_fraction": 0.2721508017968264,
+          "union_box_coverage": 0.6890753725472014
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact15",
+        "reference_priority": 1,
+        "reference_relevance": 0.4272368215087404,
+        "service_duration": 0.8120308551720681,
+        "failure_draw": 0.8745973447149745,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue026\",\"episode511\",19]",
+      "capture": 2.9730403015047266,
+      "extraction_ready": 2.9937888299624436,
+      "arrival": 3.0825997435915116,
+      "location": [
+        12.89473318361013,
+        77.49820477871005
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.2608687093686833,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232002973,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 6,
+          "categories": 0,
+          "largest_box_fraction": 0.1320069167356357,
+          "union_box_coverage": 0.7672872576009782
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact16",
+        "reference_priority": 3,
+        "reference_relevance": 0.6564758211651982,
+        "service_duration": 1.1614291260394765,
+        "failure_draw": 0.2204807811644227,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue018\",\"episode511\",20]",
+      "capture": 3.0398874643007288,
+      "extraction_ready": 3.064152248177398,
+      "arrival": 3.1195158555936824,
+      "location": [
+        12.894299877921771,
+        77.49013951006943
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 1.0,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003040,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 3,
+          "largest_box_fraction": 0.35099396030375063,
+          "union_box_coverage": 0.7679872660869644
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact17",
+        "reference_priority": 3,
+        "reference_relevance": 0.9441773901678175,
+        "service_duration": 0.8275347690859358,
+        "failure_draw": 0.5606112650385027,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue015\",\"episode511\",21]",
+      "capture": 3.080656254735998,
+      "extraction_ready": 3.1169032403791403,
+      "arrival": 3.1932867900923063,
+      "location": [
+        12.901777531649055,
+        77.4963249604939
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.011031507559609577,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003081,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 0,
+          "largest_box_fraction": 0.04623823986242526,
+          "union_box_coverage": 0.49425112258623327
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact8",
+        "reference_priority": 3,
+        "reference_relevance": 0.531812494178392,
+        "service_duration": 0.8646892956686426,
+        "failure_draw": 0.9398999526239549,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue018\",\"episode511\",22]",
+      "capture": 3.174124404180906,
+      "extraction_ready": 3.2219543217969213,
+      "arrival": 3.2979895743444967,
+      "location": [
+        12.894298602287751,
+        77.49013869647588
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.4286728112675539,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232003174,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 1,
+          "largest_box_fraction": 0.20582142146568813,
+          "union_box_coverage": 0.41740136390403415
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact13",
+        "reference_priority": 2,
+        "reference_relevance": 0.4330121609601283,
+        "service_duration": 0.780712035309518,
+        "failure_draw": 0.6155764517800739,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue049\",\"episode511\",23]",
+      "capture": 3.360051984394911,
+      "extraction_ready": 3.397596207104021,
+      "arrival": 3.414245962394783,
+      "location": [
+        12.893357708708155,
+        77.49210097161598
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.0840345467089904,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003360,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 0,
+          "largest_box_fraction": 0.3895298317696522,
+          "union_box_coverage": 0.45280933809671714
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact14",
+        "reference_priority": 3,
+        "reference_relevance": 0.5044594727980928,
+        "service_duration": 1.2440161944723456,
+        "failure_draw": 0.26664715503965564,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue025\",\"episode511\",24]",
+      "capture": 3.3635886703368465,
+      "extraction_ready": 3.3744236264108087,
+      "arrival": 3.4565065422124683,
+      "location": [
+        12.892106605158192,
+        77.5060113412222
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.049961182569953716,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003364,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 2,
+          "largest_box_fraction": 0.3247661083661242,
+          "union_box_coverage": 0.9923173662020578
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact18",
+        "reference_priority": 1,
+        "reference_relevance": 0.522339343987815,
+        "service_duration": 0.9020108769190275,
+        "failure_draw": 0.334592567953491,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue046\",\"episode511\",25]",
+      "capture": 3.66930493395287,
+      "extraction_ready": 3.699437802849622,
+      "arrival": 3.745414708795637,
+      "location": [
+        12.908659943118014,
+        77.49337501025833
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.6622318218917874,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003669,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 4,
+          "largest_box_fraction": 0.047867538913017295,
+          "union_box_coverage": 0.6221146101086749
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact19",
+        "reference_priority": 1,
+        "reference_relevance": 0.8683941699177903,
+        "service_duration": 0.8136685428299304,
+        "failure_draw": 0.4454589503707952,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue054\",\"episode511\",26]",
+      "capture": 3.8987869213123156,
+      "extraction_ready": 3.9384622220293086,
+      "arrival": 3.9750965624923866,
+      "location": [
+        12.90642418850947,
+        77.4968335831584
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.817532624067558,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003899,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 1,
+          "largest_box_fraction": 0.10631392618186074,
+          "union_box_coverage": 0.922480392282849
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact20",
+        "reference_priority": 1,
+        "reference_relevance": 0.9718196438944751,
+        "service_duration": 1.7831876280656846,
+        "failure_draw": 0.32254170156659545,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue043\",\"episode511\",27]",
+      "capture": 3.9948378894811647,
+      "extraction_ready": 4.016950681985947,
+      "arrival": 4.066783524131912,
+      "location": [
+        12.89770007678541,
+        77.49704448725714
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.7196619430410557,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232003995,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 9,
+          "categories": 1,
+          "largest_box_fraction": 0.07544884604643265,
+          "union_box_coverage": 0.40110129485852775
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact12",
+        "reference_priority": 3,
+        "reference_relevance": 0.9720031438297881,
+        "service_duration": 1.1382689898385447,
+        "failure_draw": 0.31090928516118943,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue026\",\"episode511\",28]",
+      "capture": 4.1005528591750995,
+      "extraction_ready": 4.13927608613991,
+      "arrival": 4.1542370051056325,
+      "location": [
+        12.894725209221068,
+        77.49821205944822
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.20948330821185396,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004101,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 1,
+          "largest_box_fraction": 0.2880947282474153,
+          "union_box_coverage": 0.624672582160956
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact21",
+        "reference_priority": 2,
+        "reference_relevance": 0.7175558939642955,
+        "service_duration": 0.7006839483484044,
+        "failure_draw": 0.3057715106132527,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue008\",\"episode511\",29]",
+      "capture": 4.109681031613428,
+      "extraction_ready": 4.152314055690867,
+      "arrival": 4.235678680767991,
+      "location": [
+        12.897164930960422,
+        77.49307171846209
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.1096976281553878,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004110,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 2,
+          "categories": 3,
+          "largest_box_fraction": 0.2534481692482603,
+          "union_box_coverage": 0.7684152245253657
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact22",
+        "reference_priority": 3,
+        "reference_relevance": 0.4770300917345466,
+        "service_duration": 1.069796535754183,
+        "failure_draw": 0.7143914532443135,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue045\",\"episode511\",30]",
+      "capture": 4.114782346284633,
+      "extraction_ready": 4.148251054403402,
+      "arrival": 4.2298623279062175,
+      "location": [
+        12.898824863587611,
+        77.49903571831912
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": -0.20462484932334912,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004115,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 2,
+          "largest_box_fraction": 0.1480246447201615,
+          "union_box_coverage": 0.5249307929374578
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact1",
+        "reference_priority": 3,
+        "reference_relevance": 0.3387018909136996,
+        "service_duration": 0.7741907458826544,
+        "failure_draw": 0.005797538661164059,
+        "failed": true,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue045\",\"episode511\",31]",
+      "capture": 4.21599983804748,
+      "extraction_ready": 4.2366042861756,
+      "arrival": 4.294966450635616,
+      "location": [
+        12.898825473011058,
+        77.49903519643838
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": -1.0,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004216,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 1,
+          "largest_box_fraction": 0.31087733918194793,
+          "union_box_coverage": 0.8161959517150883
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact23",
+        "reference_priority": 1,
+        "reference_relevance": 0.13210269120853124,
+        "service_duration": 0.9712747967696626,
+        "failure_draw": 0.24514988854790554,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue046\",\"episode511\",32]",
+      "capture": 4.226108196980812,
+      "extraction_ready": 4.25567015102688,
+      "arrival": 4.298446694342127,
+      "location": [
+        12.908656389900958,
+        77.49337024808275
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.44760715188862543,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004226,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 9,
+          "categories": 0,
+          "largest_box_fraction": 0.07675598801387609,
+          "union_box_coverage": 0.9317731118235006
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact24",
+        "reference_priority": 2,
+        "reference_relevance": 0.758251320425343,
+        "service_duration": 1.298497343378891,
+        "failure_draw": 0.2507459213153094,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue011\",\"episode511\",33]",
+      "capture": 4.276160481930554,
+      "extraction_ready": 4.325231769832524,
+      "arrival": 4.400828858474908,
+      "location": [
+        12.899584412452013,
+        77.49029317224473
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.5466339364706904,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232004276,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 11,
+          "categories": 3,
+          "largest_box_fraction": 0.24351446012610817,
+          "union_box_coverage": 0.9309838369463853
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact25",
+        "reference_priority": 1,
+        "reference_relevance": 0.8290978774332107,
+        "service_duration": 1.1222593761681856,
+        "failure_draw": 0.9349782282817779,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue055\",\"episode511\",34]",
+      "capture": 4.307309567810401,
+      "extraction_ready": 4.318099422248025,
+      "arrival": 4.393398340295698,
+      "location": [
+        12.907978479323681,
+        77.49301295692446
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.48966540899939653,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232004307,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 0,
+          "categories": 2,
+          "largest_box_fraction": 0.3814869684974589,
+          "union_box_coverage": 0.7043120858649052
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact26",
+        "reference_priority": 1,
+        "reference_relevance": 0.24724633233285964,
+        "service_duration": 1.0034845614439163,
+        "failure_draw": 0.9610108368239346,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue031\",\"episode511\",35]",
+      "capture": 4.3383872826958045,
+      "extraction_ready": 4.362427578025728,
+      "arrival": 4.39541101177481,
+      "location": [
+        12.890897309880057,
+        77.49821458137674
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": 0.30620365878319866,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232004338,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 5,
+          "categories": 3,
+          "largest_box_fraction": 0.0941384605844211,
+          "union_box_coverage": 0.5289707119968976
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact27",
+        "reference_priority": 3,
+        "reference_relevance": 0.5349787876978654,
+        "service_duration": 0.9799768494519477,
+        "failure_draw": 0.9239259841689627,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue042\",\"episode511\",36]",
+      "capture": 4.658756899378886,
+      "extraction_ready": 4.700103799026184,
+      "arrival": 4.791474734682269,
+      "location": [
+        12.892750424073922,
+        77.49972650552894
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.09539120393813608,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232004659,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 7,
+          "categories": 1,
+          "largest_box_fraction": 0.2105668356955318,
+          "union_box_coverage": 0.6346096753870966
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact28",
+        "reference_priority": 2,
+        "reference_relevance": 0.6687185069696152,
+        "service_duration": 0.9262782127655711,
+        "failure_draw": 0.029181916091593485,
+        "failed": true,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue051\",\"episode511\",37]",
+      "capture": 5.034846983740448,
+      "extraction_ready": 5.046617380653874,
+      "arrival": 5.105614239126183,
+      "location": [
+        12.899546585142309,
+        77.49053016675727
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.18593387831837366,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232005035,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 4,
+          "categories": 2,
+          "largest_box_fraction": 0.32903143660907563,
+          "union_box_coverage": 0.6420768309890967
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact29",
+        "reference_priority": 1,
+        "reference_relevance": 0.35771243999189506,
+        "service_duration": 0.8580982781357467,
+        "failure_draw": 0.9279719767466066,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue002\",\"episode511\",38]",
+      "capture": 5.108858030394453,
+      "extraction_ready": 5.133659163352813,
+      "arrival": 5.169927842688246,
+      "location": [
+        12.898241947726921,
+        77.4994887479339
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": null,
+        "spi_available": false,
+        "relevance": 0.7126729077475829,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232005109,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 3,
+          "categories": 0,
+          "largest_box_fraction": 0.2074135415218491,
+          "union_box_coverage": 0.7774270636242411
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact10",
+        "reference_priority": 1,
+        "reference_relevance": 0.8933336970978126,
+        "service_duration": 0.815653017274489,
+        "failure_draw": 0.15596493264581401,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue011\",\"episode511\",39]",
+      "capture": 5.287774226282932,
+      "extraction_ready": 5.3116634603828725,
+      "arrival": 5.361792380257085,
+      "location": [
+        12.89958839941205,
+        77.49030041143028
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": -0.5752823449728652,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232005288,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 5,
+          "categories": 2,
+          "largest_box_fraction": 0.1321212276703799,
+          "union_box_coverage": 0.6953225198524289
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact30",
+        "reference_priority": 1,
+        "reference_relevance": 0.28460058477264294,
+        "service_duration": 1.2641777990419407,
+        "failure_draw": 0.9426973457521869,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue024\",\"episode511\",40]",
+      "capture": 5.362751531019974,
+      "extraction_ready": 5.405367046453776,
+      "arrival": 5.457871860785652,
+      "location": [
+        12.90651928385929,
+        77.50974599658072
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": -0.5542683542039325,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232005363,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 3,
+          "largest_box_fraction": 0.39799106616230095,
+          "union_box_coverage": 0.6015256525703192
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact31",
+        "reference_priority": 2,
+        "reference_relevance": 0.19427691030277794,
+        "service_duration": 1.6478409059218373,
+        "failure_draw": 0.8031949362173758,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue054\",\"episode511\",41]",
+      "capture": 5.42922520155161,
+      "extraction_ready": 5.442019150651105,
+      "arrival": 5.5253444351887175,
+      "location": [
+        12.906432361874892,
+        77.4968479926334
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.37105103746657137,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232005429,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 1,
+          "largest_box_fraction": 0.3348139428641182,
+          "union_box_coverage": 0.6533333435606046
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact32",
+        "reference_priority": 3,
+        "reference_relevance": 0.40057418705595194,
+        "service_duration": 0.8412604996468175,
+        "failure_draw": 0.971282993009405,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue017\",\"episode511\",42]",
+      "capture": 5.627920446587411,
+      "extraction_ready": 5.663813022648573,
+      "arrival": 5.677635956913619,
+      "location": [
+        12.902917289135353,
+        77.49344217785634
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.13374535219057532,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232005628,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 8,
+          "categories": 4,
+          "largest_box_fraction": 0.12320530521082484,
+          "union_box_coverage": 0.679712595093153
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact27",
+        "reference_priority": 3,
+        "reference_relevance": 0.5349787876978654,
+        "service_duration": 1.1143398839100274,
+        "failure_draw": 0.2580756640452634,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue022\",\"episode511\",43]",
+      "capture": 5.792419666676858,
+      "extraction_ready": 5.816267227080372,
+      "arrival": 5.829749966155481,
+      "location": [
+        12.906786718907897,
+        77.49321076637091
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.7009848295448027,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232005792,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 10,
+          "categories": 0,
+          "largest_box_fraction": 0.05486796739724786,
+          "union_box_coverage": 0.6194762921699958
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact33",
+        "reference_priority": 3,
+        "reference_relevance": 0.25403658593858636,
+        "service_duration": 0.9816000255788099,
+        "failure_draw": 0.6287236336824288,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue001\",\"episode511\",44]",
+      "capture": 6.779515839360178,
+      "extraction_ready": 6.8142283922169264,
+      "arrival": 6.887664368838539,
+      "location": [
+        12.904790278816295,
+        77.49557052169877
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "High",
+        "spi_available": true,
+        "relevance": 0.42225812523753903,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232006780,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 0,
+          "categories": 1,
+          "largest_box_fraction": 0.2497048187958283,
+          "union_box_coverage": 0.7256938259637126
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact34",
+        "reference_priority": 1,
+        "reference_relevance": 0.771824832426704,
+        "service_duration": 0.6778088190987417,
+        "failure_draw": 0.869660722439414,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue038\",\"episode511\",45]",
+      "capture": 7.073089211732659,
+      "extraction_ready": 7.107019466042117,
+      "arrival": 7.195981677379491,
+      "location": [
+        12.893932930944237,
+        77.49650984986312
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.2696437390703785,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232007073,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 7,
+          "categories": 3,
+          "largest_box_fraction": 0.02544334636263721,
+          "union_box_coverage": 0.48645451320273647
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact2",
+        "reference_priority": 3,
+        "reference_relevance": 0.3103883334743952,
+        "service_duration": 0.7191918673411628,
+        "failure_draw": 0.6289320227935139,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue003\",\"episode511\",46]",
+      "capture": 7.394387682700614,
+      "extraction_ready": 7.439637852342269,
+      "arrival": 7.532179391523816,
+      "location": [
+        12.897780113021721,
+        77.49784468063294
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Medium",
+        "spi_available": true,
+        "relevance": 0.23300639592401262,
+        "novelty": 1.0,
+        "novelty_cold_start": false,
+        "capture_time_ms": 1793232007394,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 6,
+          "categories": 1,
+          "largest_box_fraction": 0.1479112337961282,
+          "union_box_coverage": 0.9504697404716381
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact16",
+        "reference_priority": 3,
+        "reference_relevance": 0.6564758211651982,
+        "service_duration": 0.899144963379103,
+        "failure_draw": 0.5741942940998905,
+        "failed": false,
+        "correlated_outage": false
+      }
+    },
+    {
+      "message_id": "[\"ue013\",\"episode511\",47]",
+      "capture": 7.7029337502964355,
+      "extraction_ready": 7.727571755787304,
+      "arrival": 7.741073323093813,
+      "location": [
+        12.901034302237456,
+        77.49679991981526
+      ],
+      "coordinate_system": "WGS84",
+      "location_accuracy_m": 10.0,
+      "metadata_origin": "simulated",
+      "runtime_parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Low",
+        "spi_available": true,
+        "relevance": -0.5419276720410804,
+        "novelty": 1.0,
+        "novelty_cold_start": true,
+        "capture_time_ms": 1793232007703,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 2,
+          "categories": 4,
+          "largest_box_fraction": 0.1977707165506143,
+          "union_box_coverage": 0.4330668510163426
+        }
+      },
+      "evaluator": {
+        "fact_id": "world511/fact35",
+        "reference_priority": 3,
+        "reference_relevance": 0.29494992716169244,
+        "service_duration": 0.7065411745681034,
+        "failure_draw": 0.786059081668564,
+        "failed": false,
+        "correlated_outage": false
+      }
+    }
+  ],
+  "schema": "synthetic_stream_v1",
+  "registry_hash": "324d60fb15ea0de10dfe557502ca3af9c68aff6159b890c14760a861fe8e892a",
+  "limitations": [
+    "No real RGB stream",
+    "Reference relevance is a constructed scalar, not actual mission inference",
+    "No SPI classifier",
+    "No real VLM",
+    "No codec or radio simulation"
+  ],
+  "sha256": "cd0db67cd0637727385eb83887363a40da9dac27f55d3489bcc383010047ffaa"
+}

@@ -1,0 +1,319 @@
+{
+  "score": 0.7361876914508494,
+  "epochs": 19,
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 1.3579558730125427,
+      "validation_macro_f1": 0.2977623825449912
+    },
+    {
+      "epoch": 2,
+      "training_loss": 1.146607980132103,
+      "validation_macro_f1": 0.44038890502085426
+    },
+    {
+      "epoch": 3,
+      "training_loss": 0.9101761355996132,
+      "validation_macro_f1": 0.49565434565434563
+    },
+    {
+      "epoch": 4,
+      "training_loss": 0.7809505313634872,
+      "validation_macro_f1": 0.5361262902246509
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.6868359073996544,
+      "validation_macro_f1": 0.5951246334310851
+    },
+    {
+      "epoch": 6,
+      "training_loss": 0.6117507666349411,
+      "validation_macro_f1": 0.610249204347565
+    },
+    {
+      "epoch": 7,
+      "training_loss": 0.49070100858807564,
+      "validation_macro_f1": 0.6766396462785557
+    },
+    {
+      "epoch": 8,
+      "training_loss": 0.41935548186302185,
+      "validation_macro_f1": 0.6792897497982244
+    },
+    {
+      "epoch": 9,
+      "training_loss": 0.3602866604924202,
+      "validation_macro_f1": 0.6467340848806367
+    },
+    {
+      "epoch": 10,
+      "training_loss": 0.32892315462231636,
+      "validation_macro_f1": 0.6909038040503558
+    },
+    {
+      "epoch": 11,
+      "training_loss": 0.27835009060800076,
+      "validation_macro_f1": 0.645539446185998
+    },
+    {
+      "epoch": 12,
+      "training_loss": 0.24185290187597275,
+      "validation_macro_f1": 0.6564650744735492
+    },
+    {
+      "epoch": 13,
+      "training_loss": 0.19787345733493567,
+      "validation_macro_f1": 0.6469047619047619
+    },
+    {
+      "epoch": 14,
+      "training_loss": 0.1749370200559497,
+      "validation_macro_f1": 0.7129158020499277
+    },
+    {
+      "epoch": 15,
+      "training_loss": 0.17070472240447998,
+      "validation_macro_f1": 0.6569074641205789
+    },
+    {
+      "epoch": 16,
+      "training_loss": 0.1318880170583725,
+      "validation_macro_f1": 0.6792897497982244
+    },
+    {
+      "epoch": 17,
+      "training_loss": 0.1251374026760459,
+      "validation_macro_f1": 0.6792897497982244
+    },
+    {
+      "epoch": 18,
+      "training_loss": 0.11284598056226969,
+      "validation_macro_f1": 0.7018904823989569
+    },
+    {
+      "epoch": 19,
+      "training_loss": 0.11127033876255155,
+      "validation_macro_f1": 0.7361876914508494
+    },
+    {
+      "epoch": 20,
+      "training_loss": 0.10144790448248386,
+      "validation_macro_f1": 0.6993541546173125
+    },
+    {
+      "epoch": 21,
+      "training_loss": 0.10348771419376135,
+      "validation_macro_f1": 0.6569074641205789
+    },
+    {
+      "epoch": 22,
+      "training_loss": 0.07650176575407386,
+      "validation_macro_f1": 0.7021427746190472
+    },
+    {
+      "epoch": 23,
+      "training_loss": 0.07246187934651971,
+      "validation_macro_f1": 0.6993541546173125
+    },
+    {
+      "epoch": 24,
+      "training_loss": 0.0629374529235065,
+      "validation_macro_f1": 0.6993541546173125,
+      "training_flops": {
+        "batch_profiles": {
+          "16": {
+            "supported_step_flops": 1233977345,
+            "operators_without_counts": [
+              "Optimizer.zero_grad#AdamW.zero_grad",
+              "aten::lift_fresh",
+              "aten::to",
+              "aten::_to_copy",
+              "aten::empty_strided",
+              "aten::copy_",
+              "cudaStreamIsCapturing",
+              "cudaMemcpyAsync",
+              "cudaStreamSynchronize",
+              "aten::detach_",
+              "detach_",
+              "aten::any",
+              "aten::as_strided",
+              "cudaLaunchKernel",
+              "aten::all",
+              "aten::is_nonzero",
+              "aten::item",
+              "aten::_local_scalar_dense",
+              "aten::linear",
+              "aten::view",
+              "aten::t",
+              "aten::transpose",
+              "cudaMemsetAsync",
+              "cudaOccupancyMaxActiveBlocksPerMultiprocessor",
+              "aten::unsqueeze",
+              "aten::sum",
+              "aten::div",
+              "aten::gelu",
+              "aten::dropout",
+              "aten::native_dropout",
+              "aten::empty_like",
+              "aten::cross_entropy_loss",
+              "aten::log_softmax",
+              "aten::_log_softmax",
+              "aten::nll_loss_nd",
+              "aten::nll_loss",
+              "aten::nll_loss_forward",
+              "aten::resize_",
+              "aten::isfinite",
+              "aten::abs",
+              "aten::empty",
+              "aten::ne",
+              "aten::eq",
+              "aten::ones_like",
+              "aten::fill_",
+              "autograd::engine::evaluate_function: NllLossBackward0",
+              "NllLossBackward0",
+              "aten::nll_loss_backward",
+              "aten::zero_",
+              "autograd::engine::evaluate_function: LogSoftmaxBackward0",
+              "LogSoftmaxBackward0",
+              "aten::_log_softmax_backward_data",
+              "autograd::engine::evaluate_function: AddmmBackward0",
+              "AddmmBackward0",
+              "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+              "torch::autograd::AccumulateGrad",
+              "aten::detach",
+              "detach",
+              "autograd::engine::evaluate_function: TBackward0",
+              "TBackward0",
+              "autograd::engine::evaluate_function: NativeDropoutBackward0",
+              "NativeDropoutBackward0",
+              "aten::native_dropout_backward",
+              "autograd::engine::evaluate_function: GeluBackward0",
+              "GeluBackward0",
+              "aten::gelu_backward",
+              "autograd::engine::evaluate_function: DivBackward0",
+              "DivBackward0",
+              "autograd::engine::evaluate_function: SumBackward1",
+              "SumBackward1",
+              "aten::expand",
+              "autograd::engine::evaluate_function: MulBackward0",
+              "MulBackward0",
+              "autograd::engine::evaluate_function: ViewBackward0",
+              "ViewBackward0",
+              "aten::reshape",
+              "Optimizer.step#AdamW.step",
+              "aten::zeros_like",
+              "aten::_foreach_add_",
+              "aten::add_",
+              "aten::_foreach_mul_",
+              "aten::_foreach_lerp_",
+              "aten::_foreach_addcmul_",
+              "aten::_foreach_sqrt",
+              "aten::_foreach_div_",
+              "aten::_foreach_addcdiv_"
+            ],
+            "status": "partial supported forward/backward/optimizer operators; 2 FLOPs/MAC"
+          },
+          "8": {
+            "supported_step_flops": 616988673,
+            "operators_without_counts": [
+              "Optimizer.zero_grad#AdamW.zero_grad",
+              "aten::lift_fresh",
+              "aten::to",
+              "aten::_to_copy",
+              "aten::empty_strided",
+              "aten::copy_",
+              "cudaStreamIsCapturing",
+              "cudaMemcpyAsync",
+              "cudaStreamSynchronize",
+              "aten::detach_",
+              "detach_",
+              "aten::any",
+              "aten::as_strided",
+              "cudaLaunchKernel",
+              "aten::all",
+              "aten::is_nonzero",
+              "aten::item",
+              "aten::_local_scalar_dense",
+              "aten::linear",
+              "aten::view",
+              "aten::t",
+              "aten::transpose",
+              "aten::unsqueeze",
+              "aten::sum",
+              "aten::div",
+              "aten::gelu",
+              "aten::dropout",
+              "aten::native_dropout",
+              "aten::empty_like",
+              "aten::cross_entropy_loss",
+              "aten::log_softmax",
+              "aten::_log_softmax",
+              "aten::nll_loss_nd",
+              "aten::nll_loss",
+              "aten::nll_loss_forward",
+              "aten::resize_",
+              "aten::isfinite",
+              "aten::abs",
+              "aten::empty",
+              "aten::ne",
+              "aten::eq",
+              "aten::ones_like",
+              "aten::fill_",
+              "autograd::engine::evaluate_function: NllLossBackward0",
+              "NllLossBackward0",
+              "aten::nll_loss_backward",
+              "aten::zero_",
+              "autograd::engine::evaluate_function: LogSoftmaxBackward0",
+              "LogSoftmaxBackward0",
+              "aten::_log_softmax_backward_data",
+              "autograd::engine::evaluate_function: AddmmBackward0",
+              "AddmmBackward0",
+              "cudaOccupancyMaxActiveBlocksPerMultiprocessor",
+              "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+              "torch::autograd::AccumulateGrad",
+              "aten::detach",
+              "detach",
+              "autograd::engine::evaluate_function: TBackward0",
+              "TBackward0",
+              "autograd::engine::evaluate_function: NativeDropoutBackward0",
+              "NativeDropoutBackward0",
+              "aten::native_dropout_backward",
+              "autograd::engine::evaluate_function: GeluBackward0",
+              "GeluBackward0",
+              "aten::gelu_backward",
+              "autograd::engine::evaluate_function: DivBackward0",
+              "DivBackward0",
+              "autograd::engine::evaluate_function: SumBackward1",
+              "SumBackward1",
+              "aten::expand",
+              "autograd::engine::evaluate_function: MulBackward0",
+              "MulBackward0",
+              "autograd::engine::evaluate_function: ViewBackward0",
+              "ViewBackward0",
+              "aten::reshape",
+              "cudaMemsetAsync",
+              "Optimizer.step#AdamW.step",
+              "aten::_foreach_add_",
+              "aten::add_",
+              "aten::_foreach_mul_",
+              "aten::_foreach_lerp_",
+              "aten::_foreach_addcmul_",
+              "aten::_foreach_sqrt",
+              "aten::_foreach_div_",
+              "aten::_foreach_addcdiv_"
+            ],
+            "status": "partial supported forward/backward/optimizer operators; 2 FLOPs/MAC"
+          }
+        },
+        "executed_step_counts": {
+          "16": 168,
+          "8": 24
+        },
+        "supported_operator_total_estimate": 222115922112,
+        "status": "partial sum extrapolated from measured steps of each batch size; excludes unsupported operators and frozen encoder extraction"
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "model": "yolo_world",
+  "checkpoint": "models/yolov8s-worldv2.pt",
+  "device": "cpu",
+  "vocabulary": [
+    "building",
+    "road",
+    "person",
+    "car",
+    "truck",
+    "bus",
+    "motorcycle",
+    "bicycle",
+    "debris",
+    "chair",
+    "couch",
+    "dining table",
+    "television",
+    "refrigerator",
+    "tree",
+    "water"
+  ],
+  "settings": [
+    {
+      "confidence": 0.15,
+      "iou": 0.3,
+      "image_size": 640,
+      "max_detections": 300
+    },
+    {
+      "confidence": 0.15,
+      "iou": 0.3,
+      "image_size": 960,
+      "max_detections": 300
+    }
+  ],
+  "records": [
+    {
+      "image_id": "local_diagnostic_1",
+      "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\parameter_finalization\\runs\\local_detector_20261028_yolo\\image_1.png"
+    },
+    {
+      "image_id": "local_diagnostic_4",
+      "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\parameter_finalization\\runs\\local_detector_20261028_yolo\\image_4.png"
+    }
+  ],
+  "scope": "development sensitivity only; no accuracy winner without reference boxes"
+}

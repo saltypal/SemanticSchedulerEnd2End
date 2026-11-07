@@ -1,0 +1,94 @@
+{
+  "status": "not_ready",
+  "runtime_promotion_allowed": false,
+  "release_checks": {
+    "export_parity": true,
+    "all_class_support": true,
+    "per_class_recall": false
+  },
+  "label_count": 300,
+  "class_counts": {
+    "Low": 131,
+    "Medium": 32,
+    "High": 116,
+    "Critical": 21
+  },
+  "validation": {
+    "n": 96,
+    "levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "ordinal_scale": "configured output order",
+    "accuracy": 0.5104166666666666,
+    "balanced_accuracy": 0.5738055166987236,
+    "macro_f1": 0.46370801725683597,
+    "brier_multiclass": 0.6216157139611652,
+    "critical_to_low_medium": 0,
+    "critical_to_low_medium_rate": 0.0,
+    "log_loss": 1.114520218339276,
+    "rps": 0.15037073644151255,
+    "ordinal_mae": 0.6770833333333334,
+    "confusion_true_rows_predicted_columns": [
+      [
+        23,
+        14,
+        2,
+        4
+      ],
+      [
+        2,
+        5,
+        1,
+        0
+      ],
+      [
+        8,
+        4,
+        16,
+        10
+      ],
+      [
+        0,
+        0,
+        2,
+        5
+      ]
+    ],
+    "high_critical_underpredictions": 14,
+    "per_class": {
+      "Low": {
+        "support": 43,
+        "precision": 0.696969696969697,
+        "recall": 0.5348837209302325,
+        "f1": 0.6052631578947368
+      },
+      "Medium": {
+        "support": 8,
+        "precision": 0.21739130434782608,
+        "recall": 0.625,
+        "f1": 0.3225806451612903
+      },
+      "High": {
+        "support": 38,
+        "precision": 0.7619047619047619,
+        "recall": 0.42105263157894735,
+        "f1": 0.5423728813559322
+      },
+      "Critical": {
+        "support": 7,
+        "precision": 0.2631578947368421,
+        "recall": 0.7142857142857143,
+        "f1": 0.38461538461538464
+      }
+    }
+  },
+  "recovery_scope": "same saved model and validation, no refitting or relabeling",
+  "input_hashes": {
+    "spi_classifier\\models\\spi.json": "1d5f2cb70941ca94b1ac6e9df2dcd16211bc3943abee6a5830bf3feb235069da",
+    "spi_classifier\\metrics\\validation.json": "7259de53ed4a1530e02bdc2e024fe598c19474480cb0ae0992a7fe8866bd4adc",
+    "spi_training\\labels.json": "1f5b3d78124d79c6fd43bb87ba2e7e94a0c18852bc45ca020aa550b40c7c75a5"
+  }
+}

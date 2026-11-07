@@ -1,0 +1,143 @@
+{
+  "model": "grounding_dino",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 1,
+      "categories": 1,
+      "largest_box_fraction": 0.16254748130658062,
+      "union_box_coverage": 0.16254748130658062
+    },
+    "people_vehicles": {
+      "instances": 3,
+      "categories": 1,
+      "largest_box_fraction": 0.0014232473676098045,
+      "union_box_coverage": 0.0021324370320032204
+    }
+  },
+  "horizontal_flip": true,
+  "boxes_original_coordinates": [
+    {
+      "label": "bridge",
+      "box": [
+        0.0,
+        187.00645446777344,
+        511.9610595703125,
+        242.43936157226562
+      ],
+      "score": 0.5091261267662048
+    },
+    {
+      "label": "car",
+      "box": [
+        18.91192626953125,
+        206.6143798828125,
+        29.1077880859375,
+        211.5201873779297
+      ],
+      "score": 0.4077656865119934
+    },
+    {
+      "label": "car",
+      "box": [
+        23.28662109375,
+        197.34359741210938,
+        34.33258056640625,
+        204.02476501464844
+      ],
+      "score": 0.4052751660346985
+    },
+    {
+      "label": "car",
+      "box": [
+        24.685882568359375,
+        180.94509887695312,
+        46.127410888671875,
+        192.5341796875
+      ],
+      "score": 0.37720394134521484
+    }
+  ],
+  "values": {
+    "instances": 4,
+    "categories": 2,
+    "largest_box_fraction": 0.16254748130658062,
+    "union_box_coverage": 0.16329187238727194
+  },
+  "audit": {
+    "category_counts": {
+      "bridge": 1,
+      "car": 3
+    },
+    "detections": [
+      {
+        "label": "bridge",
+        "box": [
+          0.0389404296875,
+          187.00645446777344,
+          512.0,
+          242.43936157226562
+        ],
+        "score": 0.5091261267662048
+      },
+      {
+        "label": "car",
+        "box": [
+          482.8922119140625,
+          206.6143798828125,
+          493.08807373046875,
+          211.5201873779297
+        ],
+        "score": 0.4077656865119934
+      },
+      {
+        "label": "car",
+        "box": [
+          477.66741943359375,
+          197.34359741210938,
+          488.71337890625,
+          204.02476501464844
+        ],
+        "score": 0.4052751660346985
+      },
+      {
+        "label": "car",
+        "box": [
+          465.8725891113281,
+          180.94509887695312,
+          487.3141174316406,
+          192.5341796875
+        ],
+        "score": 0.37720394134521484
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 341,
+    "producer": {
+      "producer": "grounding_dino",
+      "vocabulary": [
+        "bridge",
+        "car"
+      ],
+      "threshold": 0.35,
+      "text_threshold": 0.25,
+      "weights_sha256": {
+        "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+      },
+      "device": "cpu",
+      "interpretation": "box/text matching, not verified condition or priority",
+      "class_aware_nms_iou": 0.5,
+      "max_detections": 300,
+      "category_scope": "retained text phrases; no inferred urgency or merged taxonomy"
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency",
+    "raw_proposals": 4
+  },
+  "load_seconds": 15.589812000049278,
+  "first_inference_seconds": 46.275270999991335,
+  "warmed_latency": false,
+  "image_sha256": "08aa7a5dba89682a0d3c42cf03bd654c1fdbfbc7a24dc0dda50ba2d364e25df3",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

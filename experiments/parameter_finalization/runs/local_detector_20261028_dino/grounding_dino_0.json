@@ -1,0 +1,101 @@
+{
+  "model": "grounding_dino",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    },
+    "people_vehicles": {
+      "instances": 2,
+      "categories": 1,
+      "largest_box_fraction": 0.0001504132499715063,
+      "union_box_coverage": 0.0002914306730478937
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [
+    {
+      "label": "car",
+      "box": [
+        164.3308563232422,
+        34.35261154174805,
+        169.94032287597656,
+        39.03415298461914
+      ],
+      "score": 0.40398427844047546
+    },
+    {
+      "label": "car",
+      "box": [
+        170.91741943359375,
+        34.857635498046875,
+        176.72732543945312,
+        39.095314025878906
+      ],
+      "score": 0.40075770020484924
+    }
+  ],
+  "values": {
+    "instances": 2,
+    "categories": 1,
+    "largest_box_fraction": 0.0001504132499715063,
+    "union_box_coverage": 0.0002914306730478937
+  },
+  "audit": {
+    "category_counts": {
+      "car": 2
+    },
+    "detections": [
+      {
+        "label": "car",
+        "box": [
+          164.3308563232422,
+          34.35261154174805,
+          169.94032287597656,
+          39.03415298461914
+        ],
+        "score": 0.40398427844047546
+      },
+      {
+        "label": "car",
+        "box": [
+          170.91741943359375,
+          34.857635498046875,
+          176.72732543945312,
+          39.095314025878906
+        ],
+        "score": 0.40075770020484924
+      }
+    ],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 341,
+    "producer": {
+      "producer": "grounding_dino",
+      "vocabulary": [
+        "car"
+      ],
+      "threshold": 0.35,
+      "text_threshold": 0.25,
+      "weights_sha256": {
+        "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+      },
+      "device": "cpu",
+      "interpretation": "box/text matching, not verified condition or priority",
+      "class_aware_nms_iou": 0.5,
+      "max_detections": 300,
+      "category_scope": "retained text phrases; no inferred urgency or merged taxonomy"
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency",
+    "raw_proposals": 2
+  },
+  "load_seconds": 21.70931140007451,
+  "first_inference_seconds": 48.93072730000131,
+  "warmed_latency": false,
+  "image_sha256": "4c20141e53b0b115538e4aa2b9b36b54389020285e28fca4b58c1c210d194f25",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

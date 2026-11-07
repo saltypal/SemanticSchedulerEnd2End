@@ -1,0 +1,76 @@
+{
+  "model": "yolo_world",
+  "status": "ok",
+  "reason": null,
+  "mission_views": {
+    "infrastructure": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    },
+    "people_vehicles": {
+      "instances": 0,
+      "categories": 0,
+      "largest_box_fraction": null,
+      "union_box_coverage": 0.0
+    }
+  },
+  "horizontal_flip": false,
+  "boxes_original_coordinates": [],
+  "values": {
+    "instances": 0,
+    "categories": 0,
+    "largest_box_fraction": null,
+    "union_box_coverage": 0.0
+  },
+  "audit": {
+    "category_counts": {},
+    "detections": [],
+    "rejected_boxes": 0,
+    "width": 512,
+    "height": 341,
+    "producer": {
+      "checkpoint": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\models\\yolov8s-worldv2.pt",
+      "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+      "device": "cpu",
+      "vocabulary": [
+        "person",
+        "car",
+        "building",
+        "bridge"
+      ],
+      "settings": {
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "verbose": false
+      },
+      "settings_sha256": "e6de57b29ac266ce7a80f7e09dd5319325367c105ff2c4d1d27291b11f871312",
+      "effective_predict_settings": {
+        "task": "detect",
+        "mode": "predict",
+        "conf": 0.25,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "rect": true,
+        "batch": 1,
+        "device": "cpu"
+      }
+    },
+    "interpretation": "detector-dependent rectangular extents, not physical distance or urgency"
+  },
+  "load_seconds": 3.891638500033878,
+  "first_inference_seconds": 0.5033104000613093,
+  "warmed_latency": false,
+  "image_sha256": "08aa7a5dba89682a0d3c42cf03bd654c1fdbfbc7a24dc0dda50ba2d364e25df3",
+  "scope": "CPU detector output, not verified accuracy or urgency"
+}

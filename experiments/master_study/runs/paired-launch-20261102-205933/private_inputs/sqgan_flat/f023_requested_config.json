@@ -1,0 +1,29 @@
+{
+  "algorithm": "sqgan",
+  "manifest": "/kaggle/working/team_results/2/20261028T130100Z-eea4f3aa/common_dataset.json",
+  "device": "cuda:0",
+  "data_parallel": true,
+  "snr_db": 10,
+  "train_channel": "awgn",
+  "test_channel": "awgn",
+  "train_snr_db": 10,
+  "test_snr_db": 10,
+  "seed": 22,
+  "batch_size": 2,
+  "crop": 256,
+  "epochs": 150,
+  "max_seconds": 7200,
+  "learning_rate": 1.25e-05,
+  "from_scratch": true,
+  "trials": 3,
+  "workers": 2,
+  "dataset_adaptation": true,
+  "paper_convergence_reproduced": false,
+  "evaluation_tile": [
+    256,
+    512
+  ],
+  "teammate": "2",
+  "run_id": "20261028T130100Z-eea4f3aa",
+  "models_root": "/kaggle/working/models"
+}

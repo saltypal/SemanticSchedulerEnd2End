@@ -1,0 +1,126 @@
+--- SCHED-20261030-v2
++++ SCHED-20261030-v2.1
+@@ -1,9 +1,9 @@
+ # Locked specification: semantic-aware decoder scheduling
+ 
+-**Protocol ID: SCHED-20261030-v2. Date: 30 October 2026.**
++**Protocol ID: SCHED-20261030-v2.1. Date: 30 October 2026.**
+ This revision modifies the existing frozen plan; it does not discard its models, objectives, reference boundaries or negative results. The user has now explicitly adopted the final scene-array v2 contract and asked for diverse streams plus a VLM-supervised temporal scheduler as the first experiment. Those decisions supersede the former H0-only primary input, optional ARRAY16 comparison and D-first execution order. D/E losses, the sixteen previous learned methods, baselines, RL/RLAIF arms and resource ceilings remain. The v1 document and the supplied final cache specification are preserved under experiments/semantic_priority_design/runs/scene93-temporal-v2-20261030/.
+ 
+-This is a design specification, not a claim that new policies, broad datasets, teacher reliability or real inference have been validated. Qualified labels/assets and compute still determine whether an execution is complete, partial or blocked. No production code, parameter producer, SPI model, codec or remote job is changed by this document revision.
++Revision v2.1 adds the user-requested compact transmission/field-selection study in Section18. The full93-class extraction cache is retained; the selected transmitted profile can be smaller. This is a design specification, not a claim that new policies, broad datasets, teacher reliability or real inference have been validated. Qualified labels/assets and compute still determine whether an execution is complete, partial or blocked. No production code, parameter producer, SPI model, codec or remote job is changed by this document revision.
+ 
+ ## 1. Fixed system, revised main experiment and retained studies
+ 
+@@ -41,9 +41,9 @@
+ 
+ ## 2. Final scene-array v2 input and transport boundary
+ 
+-### 2.1 Final primary input: SCENE93_V2
+-
+-The authoritative producer contract is parameters/scene_arrays.py plus parameters/scene_vocabulary.py and the supplied final caching specification v2. This explicitly replaces ARRAY16 as the main input. H0 remains an ablation/control only where genuinely available; no invented global union coverage is reconstructed from largest rectangles.
++### 2.1 Full-cache and full-information reference input: SCENE93_V2
++
++The authoritative producer contract is parameters/scene_arrays.py plus parameters/scene_vocabulary.py and the supplied final caching specification v2. This replaces ARRAY16 as the full-information reference input. The smaller transmitted profile will be selected by Section18; the extraction/cache dictionary remains unchanged. H0 remains an ablation/control only where genuinely available; no invented global union coverage is reconstructed from largest rectangles.
+ 
+ The ordered vocabulary is complete COCO80 IDs0..79, countable extensions building/bridge/utility pole/traffic sign/animal IDs80..84, and regions road/water/debris/smoke/flame/snow/ground/grass IDs85..92. Use the exact exported registry, not a separately typed list. There are85 countable classes and8 region classes, with93 stored slots in each array. Region count slots are canonical zero with count masks clear.
+ 
+@@ -145,7 +145,7 @@
+ 
+ ### 6.1 Base models and shared information
+ 
+-The primary semantic vector x is387 entries from Section2. Append log1p(current receiver wait/d0) to current candidate tokens. Processed headers carry age-since-attempt and a history-role bit. Keep the most recent32 processed headers globally. Completion records an attempted job/header, not verified reconstructed meaning; no retry or semantic-success oracle is added.
++The full-reference semantic vector x is387 entries from Section2. A selected profile retaining K complete count/area class groups has4K+15 entries before timing/context; unequal count/area subsets use their exact versioned registry dimension. Losslessly sparse full93 transmission reconstructs the same387 entries. Append log1p(current receiver wait/d0) to current candidate tokens. Processed headers carry age-since-attempt and a history-role bit. Keep the most recent32 processed headers globally. Completion records an attempted job/header, not verified reconstructed meaning; no retry or semantic-success oracle is added.
+ 
+ Summary models retain the previous candidate, masked queue/history means, availability fractions, log1p sizes, empty-history flag and minimum comparable history distance with validity indicator. Only co-available standardized values enter distance; do not take distances over IDs or mix masks as image meaning. Exclude self. No comparable fields means missing comparison, not observed equality. A summary deliberately compresses legal history; its information loss is tested rather than hidden.
+ 
+@@ -395,7 +395,7 @@
+ 
+ **Systems:** context-build+select milliseconds and forward-only time separately; warmed hardware/backend/precision/thread count; p50/p95 with samples; peak memory; model parameters and supported-operator FLOPs. Count2 operations/MAC. Include pooling/attention scope and missing operators; teacher/quantized FLOPs unavailable is not zero. Profile queue sizes4/16/64/256 and actual observed large-backlog sizes with no truncation. CPU profiling budget5 minutes/model; partial timing scope is recorded.
+ 
+-**Transport:** standalone369-byte scene block plus measured complete parameter/envelope bytes, candidate profile/vocabulary hashes and serialization latency. Report JSON and binary alternatives separately rather than double-counting both as transmitted. Required scene-value ablations are SPI/relevance/novelty only, those fields plus93-class arrays, and those fields plus temporal history. Class-family ablations remove corresponding values AND masks/history-derived features, not a manual channel-importance formula. Count/area/mask-only and detector-unavailable controls test shortcuts. The primary model retains all93 channels; a successful ablation does not silently redefine the final vocabulary. No synthetic payload-size or radio-spectrum improvement claim. Selector overhead is measured; synthetic slot results are not milliseconds. Report a separate overhead-charged sensitivity once a measured selector-to-service scale exists.
++**Transport:** standalone369-byte scene block plus measured complete parameter/envelope bytes, candidate profile/vocabulary hashes and serialization latency. Report JSON and binary alternatives separately rather than double-counting both as transmitted. Required scene-value ablations are SPI/relevance/novelty only, those fields plus93-class arrays, and those fields plus temporal history. Class-family ablations remove corresponding values AND masks/history-derived features, not a manual channel-importance formula. Count/area/mask-only and detector-unavailable controls test shortcuts. The full-information reference retains all93 channels. A separately versioned compact model may use the train/validation-selected subset from Section18; this changes its transmitted feature profile, not the cache vocabulary. Untransmitted classes are excluded by profile, never reported as observed absence. No synthetic payload-size or radio-spectrum improvement claim. Selector overhead is measured; synthetic slot results are not milliseconds. Report a separate overhead-charged sensitivity once a measured selector-to-service scale exists.
+ 
+ ## 13. Model selection, splits, seeds and statistics
+ 
+@@ -409,7 +409,7 @@
+ 
+ Final evaluation uses locked test groups once after selection, on matched workloads. Bootstrap1,000 paired parent/duplicate groups and regenerate matched traces; queue seeds are not independent incidents. Report effect sizes/intervals, per-source failures, counts and all chosen seeds. Source-held-out and event-held-out are separate. FloodNet transfer is scheduler-unseen task only; vision-model exposure is disclosed.
+ 
+-No hyperparameter search in this fixed study. Budget/common-scale sensitivities are prespecified, not used to pick a favorite budget. If no model dominates timing and semantic outcomes, report the trade-off rather than invent a post-hoc overall winner. One-seed or tiny-label results remain feasibility evidence.
++No architecture/optimizer hyperparameter search in this fixed study. The explicitly user-authorized bounded transmitted-field selection in Section18 is a separate exception; it does not authorize an unrestricted sweep. Budget/common-scale sensitivities are prespecified, not used to pick a favorite budget. If no model dominates timing and semantic outcomes, report the trade-off rather than invent a post-hoc overall winner. One-seed or tiny-label results remain feasibility evidence.
+ 
+ ## 14. Acceptance checks and artifacts
+ 
+@@ -461,7 +461,7 @@
+ 
+ The current legacy pilot pre-spi-check-20261030-094517 records15 focused passes, eight fixture-trained learners, three blocked teacher arms and11 waiting-spec arithmetic checks. It does not validate these new D/E losses, Deep Sets/attention, scene arrays or model superiority. The finite J_time values refer to the legacy completion-coverage objective.
+ 
+-Revised specification status: SCENE93_V2 is the primary input; VLM-supervised temporal P is the first candidate; all sixteen previous models, exact D/E objectives, budgets and controls remain. The new temporal registry entry makes seventeen architecture IDs, with explicitly named target-source variants. Model registry, targets, losses, defaults, teacher allocation and metrics are fixed. Execution blockers are qualified labels, source assets, export implementation and measured resource availability. Record these as blocked_input/blocked_labels/partial_budget/failed_validation; do not relabel them as completed work.
++Revised specification status: SCENE93_V2 is the full-cache/full-information reference and Section18 selects the compact deployment profile; VLM-supervised temporal P is the first candidate; all sixteen previous models, exact D/E objectives, budgets and controls remain. The new temporal registry entry makes seventeen architecture IDs, with explicitly named target-source variants. Model registry, targets, losses, defaults, teacher allocation and metrics are fixed. Execution blockers are qualified labels, source assets, export implementation and measured resource availability. Record these as blocked_input/blocked_labels/partial_budget/failed_validation; do not relabel them as completed work.
+ 
+ ## 16. Literature basis and limits
+ 
+@@ -500,3 +500,62 @@
+ New or strengthened validity checks: exact387-entry adapter; wire-derived features; unknown detector evidence; per-UE GRU/session invariance; teacher/student history correspondence; broad-source and video grouping; source shortcuts; context-dependent cache keys; explicit silver-test pair role; exact-input ambiguity; measured context-building cost and complete parameter-byte accounting.
+ 
+ This revision is accepted only as a documented protocol update after source/contract inspection and focused assessment. No actual detector inference, teacher inference, learner training, codec work, dataset download or Kaggle launch is claimed. The preserved legacy pilot remains evidence only for its original completion-coverage objective. The next authorized implementation uses this revision; historical outputs retain their original protocol IDs.
++
++## 18. Compact transmitted parameters with the full extraction cache retained
++
++### 18.1 Decision and scope
++
++The user explicitly requested a smaller header selected empirically during scheduler training. Keep all93-class counts, areas, masks, statuses, raw/audit evidence, hashes and existing scalar parameters in the extraction cache. Do not rerun extraction or discard cache columns to make a smaller wire record. A projection/serializer chooses what is transmitted; training consumes the projected received representation. A compact profile requires a versioned registry/model, not relabeling old387-input weights.
++
++Keep the old369-byte scene-array serializer and results intact. It is a full self-describing scene block, not an established370-byte whole-message header. Whether it is expensive depends on the real payload and transport framing, which remain unmeasured. The controlled objective here is fewer transmitted parameter bytes with preserved measured scheduling behavior. Reducing transmitted fields does not reduce the current detector's extraction cost while full caching remains required.
++
++### 18.2 Save bytes without removing scene evidence
++
++The current369 bytes include64 bytes of registry/producer hashes. In a new COMPACT_SCENE_V3 profile, pre-provision an immutable uint16 profile-ID mapping to the full registry, producer, quantization and class-order manifest at both endpoints. Keep full hashes in cache/model/run artifacts. A profile ID is a lookup key, not a truncated hash or an authentication mechanism. Unknown/mismatched IDs reject; no guessing and no resource-grant/retry/online negotiation is introduced. Account for provisioning bytes separately and amortize them only over the actual messages sharing that mapping. Standalone records without the configured mapping retain the self-describing format.
++
++Use a4-byte prefix: version1, status/mode flags1, profile ID2. Full93 dense data then cost4+186+93+24=307 bytes. This preserves the current uint16 counts, uint8 areas, all93 count/area mask bits and detector/saturation status exactly after the original quantization. It saves62 bytes/message when the mapping is already installed.
++
++A sparse full-information alternative retains the24 mask bytes and encodes only classes whose received count or quantized area is nonzero. Store entry_count1, then sorted unique entries of class_id1/count_uint16_2/area_uint8_1 =4 bytes each. Size is29+4L bytes for L entries, including the4-byte prefix. Omitted slots reconstruct zero VALUES under the separately transmitted masks; they do not imply physical absence or unavailability. Successful zero detections and unavailable zeros remain different. Reject duplicate/unknown IDs, noncanonical entries, nonzero region counts, incompatible flags, missing bytes and excess entries. Preserve class-aware overlap semantics.
++
++Choose dense307 versus sparse29+4L per message using the explicit mode bit, whichever is shorter. Examples are arithmetic scenarios, not observed detector sparsity:
++
++| Representation | Scene bytes | Information retained |
++|---|---:|---|
++| Existing self-describing scene v2 |369|All93 channels, full hashes per record|
++| Configured compact dense93 |307|Same received scene measurements|
++| Configured compact sparse, L=10 |69|Same received scene measurements|
++| Configured compact sparse, L=20 |109|Same received scene measurements|
++| Configured compact sparse, L=30 |149|Same received scene measurements|
++
++The sparse mode preserves all available v2 MEASUREMENT VALUES, including already-quantized areas; it is not lossless relative to original floating-point box geometry. Its reconstructed feature vector and model decisions must equal dense v2 exactly when metadata resolves to the same producer. Full93 models need no semantic retraining for this lossless transport transform. Measure actual L distributions, bytes, parsing time and fallback to dense on cached real images before claiming a typical header size. No sparse serializer has been implemented by this document change.
++
++### 18.3 Empirically select a smaller semantic profile
++
++Use the temporal main model as the selection reference, not all17 architectures multiplied by every subset. Keep SPI/relevance/novelty and their availability/cold-start fields in the first deployment profile; evaluate their ablations but do not remove them from the interface in this first compaction study. Select scene class groups before exploring separate count-only/area-only fields.
++
++1. Fit the full-information reference with the existing targets/loss, grouped splits and compute budget. If it has no useful held-out behavior or the producer has inadequate coverage, do not interpret its feature importance as a reliable selection criterion.
++2. On grouped development folds only, screen each class by removing its count, area and corresponding availability channels from candidate, queue, UE-history and processed-history calculations together. Rebuild all derived summaries/distances. Perturbing one input while leaking the same field through history is invalid. This masked/full-model screen is a reliance diagnostic, not evidence a retrained compact model needs that class.
++3. Check overlapping/correlated groups jointly, especially animal plus specific animals and traffic sign plus stop sign. Low standalone importance does not establish uselessness. Do not rank by detector frequency, neural weight magnitude, raw attention or tree impurity alone. Rare emergency evidence is reported separately from common everyday cases. See [official permutation-importance limitations](https://scikit-learn.org/stable/modules/permutation_importance.html).
++4. Build fixed nested candidate subsets of K=8,16,24,32 scene class groups plus the full93 reference. Ranking uses only the development screen; ties use registry ID. Use three grouped folds within the training partition when group/label support permits. The outer validation set chooses among the resulting fixed profiles; the final test stays unopened. A fold missing required mission/reference support is explicitly insufficient, not replaced by queue seeds.
++5. Retrain each compact candidate from scratch under the same architecture/loss/defaults/seeds and teacher records. Temporal history is projected through that same candidate profile. Quantize/deserialize before fitting; no unavailable full-cache sidecars enter scoring. Only after a winning class subset is chosen, compare count-only versus area-only removal for that subset as a bounded additional development comparison, not an unrestricted186-field search.
++6. Freeze the profile, transforms and model before final evaluation. Retrain other retained algorithm comparisons on that same profile for a fair compact-suite table; keep the full-reference table separate. Do not choose a different favorable header for each algorithm in the main comparison.
++
++For K complete count/area pairs, an intentionally simple compact dense scene profile costs
++B_scene(K)=4+3K+2*ceil(K/8) bytes.
++The profile registry defines class membership/order, so per-entry class IDs are unnecessary. Region count slots remain zero/inapplicable if included. Example sizes: K8=30, K16=56, K24=82, K32=108 bytes. Those are scene-only proposed binary sizes, not complete headers and not measured implementation outputs. A later asymmetric count/area profile has exact cost4+2C+A+ceil(C/8)+ceil(A/8), where C/A are configured count/area slots; no unsupported scalar-size saving is presumed.
++
++### 18.4 Selection objective, preservation guards and insufficient labels
++
++For every candidate, report actual mean/p95/max transmitted scene and total-parameter bytes, then paired scheduling differences against full-information and SPI-FIFO references. Compare lossless sparse93 as well: a small class subset is not automatically the smallest observed packet if the full scene is naturally sparse.
++
++Freeze the initial engineering tolerance before results: choose the smallest mean-byte profile whose validation P preference agreement is no more than.01 below full-reference agreement. Where independently assessable D exists, also require J_D no more than1.02 times full-reference J_D (if full cost is zero, require zero), Critical within-budget fraction no lower and Critical restricted mean wait no higher than the full reference. Preserve the existing SPI-FIFO promotion guard too. Report High/Medium/Low, source/mission groups and E coverage where available; no broader semantic-retention claim follows when those reference cells are missing. These are sample-based engineering tolerances, not statistical guarantees. Print actual denominators; eight validation pairs cannot resolve a one-percentage-point difference.
++
++If evidence cannot support a trustworthy subset decision, retain all93 logical channels and use the lossless configured/sparse transport candidate after exact-parity validation. Do not permanently erase a category because of32 teacher pairs or one disaster-heavy cohort. Critical rare-channel support, source shifts and supervised performance are constraints on claims; cache completeness makes later reevaluation possible without detector reruns.
++
++No new task utility, model loss, reward or real-world deadline is invented for compaction. Existing P/D/E supervision stays unchanged. Compression selection uses training/development only; test labels never decide the subset. All selection fits/profiles remain inside the existing time/GPU ceiling; if the budget cannot finish, save partial evidence and do not call the header finalized by training.
++
++### 18.5 Required acceptance and ownership
++
++parameters/ retains producer/cache ownership. Scheduler training owns the selected feature registry; its projection removes fields from all context paths. A new compact serializer/receiver adapter must be agreed at that owner boundary, kept alongside v2, and pass exact reconstruction/parity for lossless dense/sparse forms, missing/zero/cold-start semantics, profile mismatch rejection, ordering, corruption/range checks, class-subset artifact compatibility and full lifecycle replay. The existing receiver history is rebuilt from received compact records, never enriched from the offline full cache. Scene-byte budgets do not include opaque payloads; encoder work remains paused.
++
++Artifacts add selection_manifest.json, grouped screen results, every fixed subset and retraining run, profile-ID/full-hash mapping, byte distributions, quality/latency Pareto tables, failed guards and the locked profile. No detector/cache fields, historical models,17 algorithm IDs or prior research results are removed by this revision. Current status: protocol and arithmetic only; compact serialization, actual field importance and performance-preserving subset selection are unimplemented/unmeasured.

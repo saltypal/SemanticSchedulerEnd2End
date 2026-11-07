@@ -1,0 +1,24 @@
+{
+  "v9_kernel": "satyapaladugu/crisismmd1000-spi-labeling/9",
+  "v9_status": "ERROR",
+  "v9_selection": "No frozen selection: all four balance matrices failed completeness before finalize; no test evaluation or cost profile completed. Partial candidate weights are not a selected model and were not retrieved.",
+  "v9_candidate_pairs": {
+    "original": "36/48",
+    "class_weighted": "33/44 (KNN excluded by design)",
+    "random_oversampling": "36/48",
+    "moderate_undersampling": "36/48"
+  },
+  "available_prior_model": {
+    "source_kernel_version": "satyapaladugu/crisismmd1000-spi-labeling/6",
+    "name": "SigLIP2 google/siglip2-base-patch16-224 + class-weighted RBF-SVM",
+    "local_path": "experiments/full_medic_labeling/runs/v6_results/experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/rbf_svm.joblib",
+    "local_bytes": 1990767,
+    "development_selected": true,
+    "reported_test_macro_f1": 0.5388,
+    "reported_test_accuracy": 0.8485,
+    "reported_test_medium_recall": 0.0,
+    "readiness": "development model only; not ready for four-class production"
+  },
+  "evidence": "experiments/full_medic_labeling/runs/v6_results/scheduler_handoff/POLICY_CODEX_HANDOFF.md",
+  "v9_model_weights_downloaded": false
+}

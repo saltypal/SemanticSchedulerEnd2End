@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "checks": {
+    "mid_service_arrival_and_unserved": {
+      "direct": 13.0,
+      "area": 13.0,
+      "expected": 13.0
+    },
+    "future_release_excluded": {
+      "direct": 0,
+      "area": 0.0,
+      "expected": 0.0
+    },
+    "immediate_service": {
+      "direct": 0.0,
+      "area": 0.0,
+      "expected": 0.0
+    },
+    "service_at_horizon": {
+      "direct": 8.0,
+      "area": 8.0,
+      "expected": 8.0
+    },
+    "coincident_events": {
+      "direct": 6.0,
+      "area": 6.0,
+      "expected": 6.0
+    },
+    "empty": {
+      "direct": 0,
+      "area": 0.0,
+      "expected": 0.0
+    },
+    "unknown_weight_rejected": {
+      "rejected": true
+    },
+    "pre_release_service_rejected": {
+      "rejected": true
+    },
+    "nan_service_rejected": {
+      "rejected": true
+    },
+    "same_spi_distinct_evidence": {
+      "repeat_first": 2,
+      "new_first": 1,
+      "class_mean_wait_both": 1.0
+    },
+    "greedy_not_universal_optimum": {
+      "greedy": 6,
+      "alternative": 5
+    }
+  },
+  "scope": "Independent specification arithmetic only; not production integration or semantic validation"
+}

@@ -1,0 +1,41 @@
+START REAL DATA SUITE {'archive': 'experiments/mini_dataset/runs/mini_spi_20261030_v1/downloads/Mini_dataset_6000.tar', 'output': 'experiments/stream_scheduler/runs/v22-real-integration-20261031T000527Z/results', 'epochs': 1, 'seeds': '1729', 'training_episodes': 2, 'samples': 32, 'model_seconds': 180, 'validation_traces': 1, 'arms': 'all', 'mission_text': False, 'device': 'cpu', 'rl_steps': 504, 'deadline_seconds': 14400.0, 'resume': False}
+Mission cosine unavailable in local no-download test; causal novelty computed from cached compatible vectors
+BASELINE fifo
+BASELINE round_robin
+BASELINE random
+BASELINE spi_fifo
+BASELINE relevance
+BASELINE novelty
+BASELINE spi_novelty
+BASELINE predicted_edf
+TRAIN linear_choice/1729
+EPOCH linear_choice 1729 0 loss 1.2271309947145397 validation -0.14893817746859536
+TRAIN mlp_choice/1729
+EPOCH mlp_choice 1729 0 loss 1.2399943265421638 validation -0.11508401080192869
+TRAIN delay_huber/1729
+EPOCH delay_huber 1729 0 loss 0.06411408475833014 validation -0.11117776080192869
+TRAIN ranknet/1729
+EPOCH ranknet 1729 0 loss 0.6933053433895111 validation -0.11508401080192869
+TRAIN lambdamart/1729
+TRAIN priority_classifier/1729
+EPOCH priority_classifier 1729 0 loss 1.3744678683578968 validation -0.13070901080192868
+TRAIN deepsets_ranknet/1729
+EPOCH deepsets_ranknet 1729 0 loss 0.6892394013702869 validation -0.18806238356275964
+TRAIN set_transformer_ranknet/1729
+EPOCH set_transformer_ranknet 1729 0 loss 0.6923342142254114 validation -0.15935484413526202
+TRAIN listmle/1729
+EPOCH listmle 1729 0 loss 1.7717973126305475 validation -0.17894780022942633
+TRAIN masked_ppo/1729
+PPO 504 updates 32 validation -0.13207280022942633
+TRAIN masked_double_dqn/1729
+RL masked_double_dqn 1729 504 updates 1 validation -0.18415613356275964
+TRAIN td_per/1729
+RL td_per 1729 504 updates 1 validation -0.18415613356275964
+TRAIN ranknet_warmstart_ppo/1729
+PPO 504 updates 32 validation -0.12816655022942633
+TRAIN rl_vlm_f/1729
+TRAIN vlm_replay/1729
+TRAIN visionprefer/1729
+TRAIN temporal_deepsets_ranknet/1729
+EPOCH temporal_deepsets_ranknet 1729 0 loss 0.6974772959947586 validation -0.16462488356275964
+FINISHED bounded method attempts; consult ledger experiments/stream_scheduler/runs/v22-real-integration-20261031T000527Z/results

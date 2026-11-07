@@ -1,0 +1,124 @@
+{
+  "linear_choice": {
+    "status": "fixture_trained",
+    "seconds": 3.1410000000032596,
+    "learning_records": 3,
+    "compute": {
+      "parameters": 57,
+      "forward_flops": 112,
+      "macs": 56,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/linear_choice/resume.pt",
+    "model": "models/linear_choice/portable.json"
+  },
+  "mlp_choice": {
+    "status": "fixture_trained",
+    "seconds": 0.4059999999954016,
+    "learning_records": 3,
+    "compute": {
+      "parameters": 5761,
+      "forward_flops": 11328,
+      "macs": 5664,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/mlp_choice/resume.pt",
+    "model": "models/mlp_choice/portable.json"
+  },
+  "ranknet": {
+    "status": "fixture_trained",
+    "seconds": 0.875,
+    "learning_records": 3,
+    "compute": {
+      "parameters": 5761,
+      "forward_flops": 11328,
+      "macs": 5664,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/ranknet/resume.pt",
+    "model": "models/ranknet/portable.json"
+  },
+  "lambdamart": {
+    "status": "fixture_trained",
+    "seconds": 11.43699999999808,
+    "learning_records": 0,
+    "compute": {
+      "parameters": null,
+      "forward_flops": null,
+      "scope": "tree traversal; dense FLOPs not applicable"
+    },
+    "checkpoint": "models/lambdamart/resume.pt",
+    "model": "models/lambdamart/portable.json"
+  },
+  "priority_classifier": {
+    "status": "fixture_trained",
+    "seconds": 0.4059999999954016,
+    "learning_records": 3,
+    "compute": {
+      "parameters": 5761,
+      "forward_flops": 11328,
+      "macs": 5664,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/priority_classifier/resume.pt",
+    "model": "models/priority_classifier/portable.json"
+  },
+  "masked_ppo": {
+    "status": "fixture_trained",
+    "seconds": 0.7649999999994179,
+    "learning_records": 2,
+    "compute": {
+      "parameters": 5761,
+      "forward_flops": 11328,
+      "macs": 5664,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/masked_ppo/resume.pt",
+    "model": "models/masked_ppo/portable.json"
+  },
+  "masked_double_dqn": {
+    "status": "fixture_trained",
+    "seconds": 1.5939999999973224,
+    "learning_records": 2,
+    "compute": {
+      "parameters": 5761,
+      "forward_flops": 11328,
+      "macs": 5664,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/masked_double_dqn/resume.pt",
+    "model": "models/masked_double_dqn/portable.json"
+  },
+  "td_per": {
+    "status": "fixture_trained",
+    "seconds": 1.4840000000040163,
+    "learning_records": 2,
+    "compute": {
+      "parameters": 5761,
+      "forward_flops": 11328,
+      "macs": 5664,
+      "candidates": 1,
+      "scope": "dense matrix products only; 1 MAC=2 FLOPs; excludes preprocessing/bias/ReLU and runtime overhead"
+    },
+    "checkpoint": "models/td_per/resume.pt",
+    "model": "models/td_per/portable.json"
+  },
+  "rl_vlm_f": {
+    "status": "blocked",
+    "reason": "No qualified real VLM labels; fixture labels are not impersonated as Qwen feedback"
+  },
+  "vlm_replay": {
+    "status": "blocked",
+    "reason": "No qualified real VLM labels; fixture labels are not impersonated as Qwen feedback"
+  },
+  "visionprefer": {
+    "status": "blocked",
+    "reason": "No qualified real VLM labels; fixture labels are not impersonated as Qwen feedback"
+  }
+}

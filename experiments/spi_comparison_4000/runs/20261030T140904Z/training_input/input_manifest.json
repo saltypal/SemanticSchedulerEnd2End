@@ -1,0 +1,68 @@
+{
+  "purpose": "Private managed input for authorized 4,000-record SPI classifier comparison",
+  "upstream": {
+    "kernel": "satyapaladugu/crisismmd1000-spi-labeling",
+    "version": 9,
+    "run": "20261030T055542Z"
+  },
+  "counts": {
+    "label_receipts": 4000,
+    "selected_records": 4000,
+    "comparison_records": 3933,
+    "available_joined_rows": 3933,
+    "unavailable_label_receipts": 67
+  },
+  "join_contract": "labels.item_id equals selected_manifest.image_id and records.image_id; all available-row hashes and levels match exactly",
+  "label_protocols": {
+    "v1_checkpoint": 2540,
+    "v3_qwen25_no_thinking": 1460
+  },
+  "usable_label_distribution": {
+    "Low": 1474,
+    "Medium": 688,
+    "High": 1669,
+    "Critical": 102
+  },
+  "files": [
+    {
+      "path": "label_distribution_summary.json",
+      "bytes": 2460,
+      "sha256": "16724DA71EC5DFF8A700346463CC0036C0B5B97AF0749ADE24F495CE671BE09D"
+    },
+    {
+      "path": "label_export_manifest.json",
+      "bytes": 2388,
+      "sha256": "35EE0DA4C83676A2FE3D42ABE9B5E5427D1C1CE6E85F2971E54F3713074946B2"
+    },
+    {
+      "path": "label_identity.json",
+      "bytes": 587,
+      "sha256": "F103B46CF2D6EE0B047E8AE74B6A577057A789A4508FA52496268DC57288B78C"
+    },
+    {
+      "path": "label_progress.json",
+      "bytes": 180,
+      "sha256": "21EF2E48A761FA5BA9E0890EEAB009E845219C15243B2445A05330B5D5288D53"
+    },
+    {
+      "path": "labels.jsonl",
+      "bytes": 5930164,
+      "sha256": "8B10CAA82B1DA1B688C4E2D12526FF1D3500CF497A0CDE9260FD0B9BF631DC0E"
+    },
+    {
+      "path": "model_availability_summary.json",
+      "bytes": 1298,
+      "sha256": "BD817CDA3E92AADA20B0CCC6C6453BF6951522CCFE600007C87B724DCB569684"
+    },
+    {
+      "path": "records.json",
+      "bytes": 1491343,
+      "sha256": "F4290A68205487B364EC395B30565A6880C6A7587D8BC459E5846404BCCE7487"
+    },
+    {
+      "path": "selected_manifest.json",
+      "bytes": 759106,
+      "sha256": "5ACA7A3FFF82CF2CD6602EC7F40ECC30813BB80BB111B9F050821AC4E1A5CAB9"
+    }
+  ]
+}

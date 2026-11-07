@@ -1,0 +1,81 @@
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+........................................................................ [ 67%]
+.........s...................ss......................................... [ 89%]
+........FF........................                                       [100%]
+=================================== FAILURES ===================================
+_________ test_prior_run_teacher_pipeline_records_blockers_without_gpu _________
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-1/test_prior_run_teacher_pipelin0')
+
+    def test_prior_run_teacher_pipeline_records_blockers_without_gpu(tmp_path):
+        from pathlib import Path
+        root=Path(__file__).resolve().parents[3]
+        prior=root/"experiments/stream_scheduler/runs/full-v22-launch-20261031T003706Z/retrieved/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results"
+        if not all(path.exists() for path in (prior/"teacher/responses.jsonl",prior/"teacher_prepared/contexts.pickle",prior/"teacher_prepared/requests.jsonl")):
+            pytest.skip("retrieved v4 teacher evidence not installed")
+        ledger=train_students(prior/"teacher_prepared",prior/"teacher",tmp_path/"prior-students")
+        assert len(ledger)==7
+        assert all(row["status"]=="blocked_labels" for row in ledger.values())
+        assert all(row.get("strict_train",0)<16 or row.get("strict_validation",0)<8 for row in ledger.values())
+>       assert max(row.get("strict_train",0) for row in ledger.values())>0,ledger
+E       AssertionError: {'linear_choice/1729': {'status': 'blocked_labels', 'reason': 'Teacher failed scheduling preference consistency: {"con... "qualified": false, "scope": "presentation consistency only; independent semantic correctness still required"}'}, ...}
+E       assert 0 > 0
+E        +  where 0 = max(<generator object test_prior_run_teacher_pipeline_records_blockers_without_gpu.<locals>.<genexpr> at 0x7ec33f70f920>)
+
+experiments/stream_scheduler/tests/test_teacher_and_supervisor.py:123: AssertionError
+_____________ test_complete_teacher_label_to_all_student_pipeline ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-1/test_complete_teacher_label_to0')
+
+    def test_complete_teacher_label_to_all_student_pipeline(tmp_path):
+        """Synthetic teacher replies exercise ingestion/training, not VLM accuracy."""
+        import pickle
+        episode=fixture()
+        pre=fit_normalizer([episode])
+        base=Environment(episode).snapshot()
+        prepared=tmp_path/"prepared";prepared.mkdir()
+        teacher=tmp_path/"teacher";teacher.mkdir()
+        queries=[];responses=[];samples={};roles={}
+        for category,n in (("strict",16),("tie",8),("unknown",8)):
+            for i in range(n):
+                ident="control-"+category+"-"+str(i)
+                expected=("A" if i%2==0 else "B") if category=="strict" else "tie" if category=="tie" else "uncertain"
+                queries.append({"id":ident,"task":"control","expected":expected})
+                responses.append({"id":ident,"status":"parsed","parsed":{"choice":expected},
+                                  "source":"synthetic_fixture"})
+        for role,n in (("train",16),("validation",8)):
+            for i in range(n):
+                ident=role+"-"+str(i)
+                state=base.pair_view([0,3] if i%2==0 else [3,0])
+                samples[ident]=Sample(state,np.zeros(2),np.full(2,-1),ident)
+                roles[ident]=role
+                for swapped in (False,True):
+                    prefer_a=(i%2==0)!=swapped
+                    choice="A" if prefer_a else "B"
+                    rating_hi=[4,4,4,4];rating_lo=[0,0,0,0]
+                    queries.append({"id":ident+"-"+str(int(swapped)),"task":"candidate"})
+                    responses.append({"id":ident+"-"+str(int(swapped)),"status":"parsed",
+                                      "source":"synthetic_fixture",
+                                      "parsed":{"choice":choice,"evidence":"synthetic fixture","unknowns":[],
+                                                "aspects":{"A":rating_hi if prefer_a else rating_lo,
+                                                           "B":rating_lo if prefer_a else rating_hi}}})
+        (prepared/"requests.jsonl").write_text("\n".join(map(json.dumps,queries)))
+        (teacher/"responses.jsonl").write_text("\n".join(map(json.dumps,responses)))
+        with (prepared/"contexts.pickle").open("wb") as handle:
+            pickle.dump({"samples":samples,"roles":roles,"preprocessing":pre},handle)
+        ledger=train_students(prepared,teacher,tmp_path/"students",epochs=2,model_seconds=30.)
+        assert len(ledger)==7
+>       assert all(row["status"]=="evaluated_silver_validation" for row in ledger.values()),ledger
+E       AssertionError: {'linear_choice/1729': {'status': 'blocked_labels', 'reason': "'context_id'"}, 'mlp_choice/1729': {'status': 'blocked_...bels', 'reason': "'context_id'"}, 'deepsets_ranknet/1729': {'status': 'blocked_labels', 'reason': "'context_id'"}, ...}
+E       assert False
+E        +  where False = all(<generator object test_complete_teacher_label_to_all_student_pipeline.<locals>.<genexpr> at 0x7ec33fc07ac0>)
+
+experiments/stream_scheduler/tests/test_teacher_and_supervisor.py:164: AssertionError
+=========================== short test summary info ============================
+SKIPPED [1] Test/tests/test_channel_mapping.py:28: requires two CUDA devices
+SKIPPED [1] Test/tests/test_exported_model_integration.py:12: set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory
+SKIPPED [1] Test/tests/test_exported_model_integration.py:21: set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory
+FAILED experiments/stream_scheduler/tests/test_teacher_and_supervisor.py::test_prior_run_teacher_pipeline_records_blockers_without_gpu
+FAILED experiments/stream_scheduler/tests/test_teacher_and_supervisor.py::test_complete_teacher_label_to_all_student_pipeline
+2 failed, 317 passed, 3 skipped in 382.87s (0:06:22)

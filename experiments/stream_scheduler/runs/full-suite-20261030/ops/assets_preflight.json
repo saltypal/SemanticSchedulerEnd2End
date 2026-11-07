@@ -1,0 +1,52 @@
+{
+  "scope": "bounded WSL metadata inspection only; no image extraction, encoder forward, model load, training, or inference",
+  "account": "satyapaladuguplus",
+  "kaggle_cli": "2.2.4",
+  "scheduler_kernel": "satyapaladuguplus/semantic-decoder-scheduler-20261030/1 COMPLETE",
+  "mini_source_kernel": "satyapaladuguplus/semantic-image-pool-scene-cache-20261030/5 COMPLETE",
+  "mini_dataset": "satyapaladuguplus/mini-spi-training-labels",
+  "mini_tar": "experiments/mini_dataset/runs/mini_spi_20261030_v1/downloads/Mini_dataset_6000.tar",
+  "managed_dataset_file_listing_access": true,
+  "quota_gpu_used_hours": 15.49,
+  "quota_gpu_remaining_hours": 14.51,
+  "quota_refresh_utc": "2026-10-31T00:00:00",
+  "global_encoder": {
+    "repo": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+    "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "download_checkpoint_bytes": 605247071,
+    "parameter_count": 87849216
+  },
+  "vectors_sqlite": {
+    "sha256": "6dbe5d501cf8bcd6873ab98b1825507ed76055210e63f889991eba907c8c4052",
+    "schema": "vectors(hash TEXT PRIMARY KEY, value BLOB)",
+    "rows": 3887,
+    "unique_raw_image_hashes_in_handoff": 5952,
+    "vector_keys_intersect_raw_image_hashes": 3887,
+    "payload_format": "NPY float32[512], all finite",
+    "ordered_decoded_payload_sha256": "2d45c593d5e36fcb8429e2b6eceb9a0fcb6757a0ba0a15aae50bda54756c1892"
+  },
+  "scene_cache_sqlite": {
+    "sha256": "326cdf984ed4c45c651ec3b6b2c6df9460e7ae0e5f2bca46bcee32d8c957a11e",
+    "tables": {
+      "meta": 1,
+      "outputs": 6000,
+      "previous_attempts": 0
+    },
+    "outputs_schema": "outputs(id TEXT, record TEXT, wire BLOB, checksum TEXT)"
+  },
+  "teacher_assets": {
+    "account_managed_qwen35_9b_model_found": false,
+    "historical_hf_model": "Qwen/Qwen3.5-9B",
+    "historical_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "historical_environment": {
+      "python": "3.13.15",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.3.0",
+      "quantization": "NF4; 358 Linear4bit modules"
+    },
+    "historical_spi_preflight": "10/10 teacher responses omitted required boolean available; no usable labels or student fit",
+    "limitation": "Historical revision/runtime are not verified as current or reproducible; no Qwen labels were produced and no model weights were downloaded."
+  }
+}

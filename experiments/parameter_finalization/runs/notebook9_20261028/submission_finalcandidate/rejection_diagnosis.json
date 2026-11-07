@@ -1,0 +1,16 @@
+{
+  "event": "save_kernel_400_not_accepted",
+  "captured_error": "400 Client Error: Bad Request for url: https://api.kaggle.com/v1/kernels.KernelsApiService/SaveKernel",
+  "http_response_body": "not exposed by Kaggle CLI stderr; not recovered",
+  "prior_latest_source_sha256": "52e4662df10ebc5656f38b83f9c4e1403cf947e3ffd163051a34c378c04dbc9d",
+  "candidate_notebook_bytes": 2883734,
+  "candidate_max_cell_bytes": 2861077,
+  "last_successful_v8_notebook_bytes": 922411,
+  "candidate_source_zip_bytes": 2136766,
+  "archived_python_total": 347,
+  "historical_results_python_count": 257,
+  "metadata_semantic_diff_from_v8": {},
+  "likely_cause": "oversized SaveKernel text payload due recursive parameters/results snapshots in source ZIP; hypothesis only, API response body unavailable",
+  "source_comparison": "Kaggle CLI 2.2.4 kernels_push sends notebook JSON as SaveKernelRequest.text; sidecar files are not referenced by the API request",
+  "no_further_retry": true
+}

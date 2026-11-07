@@ -1,0 +1,68 @@
+{
+  "run_id": "20261028_gemma_diagnostic_checked",
+  "notebook": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "notebook_id": 141089219,
+  "submitted_version": 6,
+  "submit_command": "kaggle kernels push -p experiments/parameter_finalization/runs/20261028_implementation/gemma_submission_checked",
+  "submit_exit": 0,
+  "submit_response": "Kernel version 6 successfully pushed",
+  "current_status": "COMPLETE",
+  "source_sha256": "db20d35e3e21f4a0c0a35dfcff4925c6c24adfe9f00f89bdc201ee9a010e9751",
+  "notebook_sha256": "75135135320acd54ff9b59e7a13da5dc277105dac33aedb5ec99d448fa4f9c6f",
+  "input": "satyapaladugu/betterscheduler-spiv2-inputs-20261027b",
+  "timeout_seconds": 3600,
+  "gpu_cap_hours": 2.0,
+  "accelerator": "NvidiaTeslaT4",
+  "scope": "Gemma only: 48 text controls plus 24 frozen visual cases; no training or bulk parameter cache",
+  "thinking": false,
+  "checks": {
+    "gemma_only_loader": true,
+    "intentional_stubs_verified": 3,
+    "working_tree_parity": "109/112; three documented isolated namespace stubs",
+    "code_cells_compile": true,
+    "archive_manifest": "112/112",
+    "embedded_archive_matches_external": true,
+    "notebook_nbformat": "4.5"
+  },
+  "terminal_status_check": "COMPLETE",
+  "retrieval": {
+    "campaign_manifest_entries": 230,
+    "outer_manifest_verified": 239,
+    "run_recovery_zip_crc": "pass",
+    "targeted_502_artifact_retry": "single exact-file retry succeeded",
+    "first_502_preserved": "retrieved_version6/retrieval_errors/text_low_03.special.txt.first_fetch_502.html",
+    "campaign_manifest_verified": 230,
+    "campaign_recovery_zip_crc": "pass",
+    "outer_manifest_entries": 239
+  },
+  "result": {
+    "text_controls_scope": "authored text-policy conformance only",
+    "changed_from_v3": 24,
+    "visual_valid": 24,
+    "independent_ground_truth": false,
+    "text_controls_n": 48,
+    "visual_abstained": 23,
+    "text_controls_macro_f1": 0.9372086247086246,
+    "training_allowed": false,
+    "visual_n": 24,
+    "visual_available": 1,
+    "promotion_allowed": false,
+    "visual_accuracy": null,
+    "per_class_recall": {
+      "High": 0.8333333333333334,
+      "Critical": 1.0,
+      "Low": 1.0,
+      "Medium": 0.9166666666666666
+    }
+  },
+  "timings": {
+    "visual_per_call_median_seconds": 4.5856956785000875,
+    "projected_300_plus_model_load_seconds": 1578.852734967,
+    "gemma_load_stage_seconds": 150.681454993,
+    "visual_stage_seconds": 114.253702398,
+    "visual_per_call_p90_seconds": 4.959801837999976,
+    "projected_300_visual_seconds": 1428.171279975,
+    "visual_per_call_mean_seconds": 4.700788488500024,
+    "text_stage_seconds": 227.185271216
+  }
+}

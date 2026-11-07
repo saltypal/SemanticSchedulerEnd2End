@@ -1,0 +1,134 @@
+{
+  "static": {
+    "image_id": "7",
+    "image_sha256": "1331fa4b606c271b8ed36cb6c2188ff45dc9074614dab7d0b5cebcbdd913003b",
+    "feature_signature": "4ba75c9ba701fe0a3206600535a8db42003232343353927351dc6f503a51d287",
+    "spi": {
+      "available": true,
+      "level": "Critical",
+      "ordinal_index": 3,
+      "output_index": 3,
+      "supported_levels": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "scheduling_class": 0,
+      "scores": {
+        "Low": 0.0003351253690198064,
+        "Medium": 0.0003351253690198064,
+        "High": 0.0003351253690198064,
+        "Critical": 0.9989946484565735
+      },
+      "score_interpretation": "student model scores; not human-calibrated urgency",
+      "rubric_sha256": "synthetic_fixture_only",
+      "model_sha256": "4f01168f9d2443d610d53a251cf0bc0343ab917550e7e256a1377754f202ae8c"
+    },
+    "scene": {
+      "instances": 1,
+      "categories": 1,
+      "largest_box_fraction": 0.25,
+      "union_box_coverage": 0.25
+    },
+    "scene_status": "ok",
+    "scene_reason": null,
+    "scene_audit": {
+      "category_counts": {
+        "object": 1
+      },
+      "detections": [
+        {
+          "label": "object",
+          "box": [
+            0.0,
+            0.0,
+            8.0,
+            8.0
+          ],
+          "score": 0.9
+        }
+      ],
+      "rejected_boxes": 0,
+      "width": 16,
+      "height": 16,
+      "producer": {},
+      "interpretation": "detector-dependent rectangular extents, not physical distance or urgency"
+    }
+  },
+  "timing": {
+    "image_id": "7",
+    "image_load_seconds": 0.0002609000075608492,
+    "visual_extract_including_preprocessing_first_mission_seconds": 0.000426500104367733,
+    "detector_and_measurement_seconds": 5.389994475990534e-05,
+    "spi_head_seconds": 0.00013599998783320189,
+    "end_to_end_seconds": 0.002253800048492849,
+    "flops": null,
+    "flops_status": "not_instrumented; not zero",
+    "cold_or_first_call": false
+  },
+  "streams": [
+    {
+      "image_id": "7",
+      "split": "validation",
+      "ue": "ue1",
+      "mission_version": "8037132f04e7bdea5511df5f92800444df4d8eb4463bd5b80f8855c373a9637b",
+      "sequence": 3,
+      "kb_version_before": 3,
+      "kb_version_after": 4,
+      "parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_display": "Critical",
+        "spi_available": true,
+        "spi_reason": null,
+        "relevance": 0.0,
+        "novelty": 0.5,
+        "novelty_cold_start": false,
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 1,
+          "largest_box_fraction": 0.25,
+          "union_box_coverage": 0.25
+        }
+      },
+      "header_hex": "021c01000100000008000000010000000000000000000000000080800f010001004040",
+      "header_bytes": 35,
+      "relevance_and_text_cache_seconds": 0.0003958001034334302,
+      "bundle_head_kb_serialization_commit_seconds": 0.0002207999350503087
+    },
+    {
+      "image_id": "7",
+      "split": "validation",
+      "ue": "ue2",
+      "mission_version": "e732926a34311ba89834d2cbfacdf574291545047f820ff914fa5c6c39b1ca4b",
+      "sequence": 3,
+      "kb_version_before": 3,
+      "kb_version_after": 4,
+      "parameters": {
+        "schema": "better_minimal_parameters_v2",
+        "spi": "Critical",
+        "spi_display": "Critical",
+        "spi_available": true,
+        "spi_reason": null,
+        "relevance": 0.0,
+        "novelty": 0.5,
+        "novelty_cold_start": false,
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "scene": {
+          "instances": 1,
+          "categories": 1,
+          "largest_box_fraction": 0.25,
+          "union_box_coverage": 0.25
+        }
+      },
+      "header_hex": "021c02000100000008000000020000000000000000000000000080800f010001004040",
+      "header_bytes": 35,
+      "relevance_and_text_cache_seconds": 0.00040819996502250433,
+      "bundle_head_kb_serialization_commit_seconds": 0.00017849996220320463
+    }
+  ]
+}

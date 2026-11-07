@@ -1,0 +1,31 @@
+{
+  "schema": "medic_spi_release_v2",
+  "runtime_promotion_allowed": false,
+  "final_test_gate_passed": false,
+  "independent_urgency_validated": false,
+  "checks": {
+    "all_class_support": false,
+    "per_class_recall": false,
+    "diagnostic_review": false,
+    "runtime_integration": false,
+    "export_parity": true
+  },
+  "temperature": 1.0,
+  "calibration": "not fitted for this research bundle; raw logistic probabilities",
+  "model_sha256": "30c6b8215e805ac4cc3b5c613d4629d05c32801d15ff5e4d4ce3520aba1552a2",
+  "identity": {
+    "repo": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+    "processor_sha256": "0094e0b8b16a62974d2d1841b500499ff905165b33a7b966973b381591322a54",
+    "weights_sha256": {
+      "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+    },
+    "download_checkpoint_bytes": 605247071,
+    "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+    "parameters": 87849216,
+    "encoder_name": "clip_b32"
+  },
+  "max_parity_error": 1.3733406446503338e-06,
+  "scope": "10 training-image cached-feature/runtime checks, not fresh urgency validation"
+}

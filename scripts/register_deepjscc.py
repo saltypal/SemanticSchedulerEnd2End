@@ -1,25 +1,15 @@
-"""Register and validate the DeepJSCC component."""
-
-from __future__ import annotations
-
-import sys
+"""Compatibility alias; canonical implementation: scripts.codecs.register_deepjscc."""
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-from EncDecPipeline.Models.DeepJSCC.adapter import register_deepjscc
-from INFRA.Registries import ENCDEC_REGISTRY
-
-
-def main() -> None:
-    register_deepjscc()
-    if not ENCDEC_REGISTRY.contains("deepjscc"):
-        raise RuntimeError("DeepJSCC was not registered.")
-    print("DeepJSCC registry integration OK")
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    from runpy import run_module
+    run_module('scripts.codecs.register_deepjscc', run_name='__main__')
+else:
+    from importlib import import_module
+    import sys
+    sys.modules[__name__] = import_module('scripts.codecs.register_deepjscc')

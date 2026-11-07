@@ -1,0 +1,1444 @@
+[{"stream_name":"stderr","time":6.6049162070000005,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.604966077,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.604972504,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.604976649,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.183488455,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.183524335,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.183529663,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.18353365,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":8.399182388,"data":"SETUP START /usr/bin/python3 3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]\n"}
+,{"stream_name":"stdout","time":8.422618134,"data":"SOURCE VERIFIED 6c5758f5a9da0b4b433e1ae6eda07557187a84b885bd493d154fadd874b0b364\n"}
+,{"stream_name":"stdout","time":13.532046964,"data":"HARDWARE 2.11.0+cu128 2 ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stdout","time":13.533046781,"data":"DEPENDENCIES START 0\n"}
+,{"stream_name":"stdout","time":35.20467776,"data":"DEPENDENCIES END 0\n"}
+,{"stream_name":"stdout","time":35.205473621,"data":"DEPENDENCIES START 1\n"}
+,{"stream_name":"stdout","time":39.891286916,"data":"DEPENDENCIES END 1\n"}
+,{"stream_name":"stdout","time":39.902292065,"data":"SETUP END /kaggle/working/experiments/spi_classifier_repair/runs/medic_spi_20261028T221515Z\n"}
+,{"stream_name":"stdout","time":39.922647053,"data":"EXACT MEDIC COHORT LOAD START\n"}
+,{"stream_name":"stdout","time":109.69030433,"data":"RESTORED CHECKPOINTS /kaggle/input/semanticscheduler-spi-resume-v19/checkpoint.bin\n"}
+,{"stream_name":"stdout","time":109.752630637,"data":"EXACT MEDIC COHORT LOAD END 300\n"}
+,{"stream_name":"stdout","time":109.770986999,"data":"SPI LABEL/TRAIN/PROFILE START\n"}
+,{"stream_name":"stdout","time":114.622500211,"data":"SPI LABELS 1 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.625078045,"data":"SPI LABELS 2 / 300 High\n"}
+,{"stream_name":"stdout","time":114.627448848,"data":"SPI LABELS 3 / 300 High\n"}
+,{"stream_name":"stdout","time":114.629555775,"data":"SPI LABELS 4 / 300 High\n"}
+,{"stream_name":"stdout","time":114.63166896,"data":"SPI LABELS 5 / 300 High\n"}
+,{"stream_name":"stdout","time":114.633866014,"data":"SPI LABELS 6 / 300 High\n"}
+,{"stream_name":"stdout","time":114.636460202,"data":"SPI LABELS 7 / 300 High\n"}
+,{"stream_name":"stdout","time":114.638974179,"data":"SPI LABELS 8 / 300 High\n"}
+,{"stream_name":"stdout","time":114.641520897,"data":"SPI LABELS 9 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.644064397,"data":"SPI LABELS 10 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.646783425,"data":"SPI LABELS 11 / 300 High\n"}
+,{"stream_name":"stdout","time":114.649491876,"data":"SPI LABELS 12 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.652440648,"data":"SPI LABELS 13 / 300 High\n"}
+,{"stream_name":"stdout","time":114.6552759,"data":"SPI LABELS 14 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.657985277,"data":"SPI LABELS 15 / 300 Medium\n"}
+,{"stream_name":"stdout","time":114.660799639,"data":"SPI LABELS 16 / 300 High\n"}
+,{"stream_name":"stdout","time":114.66401362,"data":"SPI LABELS 17 / 300 Medium\n"}
+,{"stream_name":"stdout","time":114.666402636,"data":"SPI LABELS 18 / 300 High\n"}
+,{"stream_name":"stdout","time":114.669486024,"data":"SPI LABELS 19 / 300 High\n"}
+,{"stream_name":"stdout","time":114.672571238,"data":"SPI LABELS 20 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.675364695,"data":"SPI LABELS 21 / 300 High\n"}
+,{"stream_name":"stdout","time":114.678159367,"data":"SPI LABELS 22 / 300 High\n"}
+,{"stream_name":"stdout","time":114.681308279,"data":"SPI LABELS 23 / 300 High\n"}
+,{"stream_name":"stdout","time":114.684444427,"data":"SPI LABELS 24 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.68795104,"data":"SPI LABELS 25 / 300 High\n"}
+,{"stream_name":"stdout","time":114.69105772,"data":"SPI LABELS 26 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.69507607,"data":"SPI LABELS 27 / 300 High\n"}
+,{"stream_name":"stdout","time":114.698641215,"data":"SPI LABELS 28 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.702420796,"data":"SPI LABELS 29 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.706309621,"data":"SPI LABELS 30 / 300 High\n"}
+,{"stream_name":"stdout","time":114.709895588,"data":"SPI LABELS 31 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.71317024,"data":"SPI LABELS 32 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.716868255,"data":"SPI LABELS 33 / 300 High\n"}
+,{"stream_name":"stdout","time":114.720177195,"data":"SPI LABELS 34 / 300 High\n"}
+,{"stream_name":"stdout","time":114.723454625,"data":"SPI LABELS 35 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.726718988,"data":"SPI LABELS 36 / 300 High\n"}
+,{"stream_name":"stdout","time":114.730552857,"data":"SPI LABELS 37 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.733952443,"data":"SPI LABELS 38 / 300 High\n"}
+,{"stream_name":"stdout","time":114.73781315,"data":"SPI LABELS 39 / 300 High\n"}
+,{"stream_name":"stdout","time":114.74115402,"data":"SPI LABELS 40 / 300 High\n"}
+,{"stream_name":"stdout","time":114.744960648,"data":"SPI LABELS 41 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.748621204,"data":"SPI LABELS 42 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.752286803,"data":"SPI LABELS 43 / 300 High\n"}
+,{"stream_name":"stdout","time":114.756266663,"data":"SPI LABELS 44 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.760450203,"data":"SPI LABELS 45 / 300 High\n"}
+,{"stream_name":"stdout","time":114.763885158,"data":"SPI LABELS 46 / 300 High\n"}
+,{"stream_name":"stdout","time":114.76818483,"data":"SPI LABELS 47 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.772087541,"data":"SPI LABELS 48 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.776074498,"data":"SPI LABELS 49 / 300 High\n"}
+,{"stream_name":"stdout","time":114.779694737,"data":"SPI LABELS 50 / 300 High\n"}
+,{"stream_name":"stdout","time":114.78387511,"data":"SPI LABELS 51 / 300 High\n"}
+,{"stream_name":"stdout","time":114.78817038,"data":"SPI LABELS 52 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.792404466,"data":"SPI LABELS 53 / 300 Medium\n"}
+,{"stream_name":"stdout","time":114.796405277,"data":"SPI LABELS 54 / 300 High\n"}
+,{"stream_name":"stdout","time":114.800682436,"data":"SPI LABELS 55 / 300 Medium\n"}
+,{"stream_name":"stdout","time":114.804777007,"data":"SPI LABELS 56 / 300 High\n"}
+,{"stream_name":"stdout","time":114.809145883,"data":"SPI LABELS 57 / 300 High\n"}
+,{"stream_name":"stdout","time":114.813688468,"data":"SPI LABELS 58 / 300 High\n"}
+,{"stream_name":"stdout","time":114.818049778,"data":"SPI LABELS 59 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.82239825,"data":"SPI LABELS 60 / 300 High\n"}
+,{"stream_name":"stdout","time":114.826978714,"data":"SPI LABELS 61 / 300 High\n"}
+,{"stream_name":"stdout","time":114.831397102,"data":"SPI LABELS 62 / 300 High\n"}
+,{"stream_name":"stdout","time":114.836144467,"data":"SPI LABELS 63 / 300 High\n"}
+,{"stream_name":"stdout","time":114.841102306,"data":"SPI LABELS 64 / 300 High\n"}
+,{"stream_name":"stdout","time":114.845882295,"data":"SPI LABELS 65 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.850692385,"data":"SPI LABELS 66 / 300 High\n"}
+,{"stream_name":"stdout","time":114.855106779,"data":"SPI LABELS 67 / 300 High\n"}
+,{"stream_name":"stdout","time":114.860213475,"data":"SPI LABELS 68 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.865192157,"data":"SPI LABELS 69 / 300 High\n"}
+,{"stream_name":"stdout","time":114.870197117,"data":"SPI LABELS 70 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.875168102,"data":"SPI LABELS 71 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.880294525,"data":"SPI LABELS 72 / 300 High\n"}
+,{"stream_name":"stdout","time":114.885006579,"data":"SPI LABELS 73 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.890434524,"data":"SPI LABELS 74 / 300 High\n"}
+,{"stream_name":"stdout","time":114.895158167,"data":"SPI LABELS 75 / 300 Medium\n"}
+,{"stream_name":"stdout","time":114.900462199,"data":"SPI LABELS 76 / 300 High\n"}
+,{"stream_name":"stdout","time":114.906510404,"data":"SPI LABELS 77 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.911849797,"data":"SPI LABELS 78 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.916898479,"data":"SPI LABELS 79 / 300 High\n"}
+,{"stream_name":"stdout","time":114.922360042,"data":"SPI LABELS 80 / 300 High\n"}
+,{"stream_name":"stdout","time":114.927502077,"data":"SPI LABELS 81 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.933163501,"data":"SPI LABELS 82 / 300 High\n"}
+,{"stream_name":"stdout","time":114.938943717,"data":"SPI LABELS 83 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.944327221,"data":"SPI LABELS 84 / 300 Medium\n"}
+,{"stream_name":"stdout","time":114.949981174,"data":"SPI LABELS 85 / 300 High\n"}
+,{"stream_name":"stdout","time":114.955567505,"data":"SPI LABELS 86 / 300 High\n"}
+,{"stream_name":"stdout","time":114.961143076,"data":"SPI LABELS 87 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.96662736,"data":"SPI LABELS 88 / 300 Critical\n"}
+,{"stream_name":"stdout","time":114.972078735,"data":"SPI LABELS 89 / 300 High\n"}
+,{"stream_name":"stdout","time":114.977979635,"data":"SPI LABELS 90 / 300 High\n"}
+,{"stream_name":"stdout","time":114.983750829,"data":"SPI LABELS 91 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.989702552,"data":"SPI LABELS 92 / 300 Low\n"}
+,{"stream_name":"stdout","time":114.995555803,"data":"SPI LABELS 93 / 300 High\n"}
+,{"stream_name":"stdout","time":115.001204431,"data":"SPI LABELS 94 / 300 High\n"}
+,{"stream_name":"stdout","time":115.007422366,"data":"SPI LABELS 95 / 300 Critical\n"}
+,{"stream_name":"stdout","time":115.013286995,"data":"SPI LABELS 96 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.019892278,"data":"SPI LABELS 97 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.026293963,"data":"SPI LABELS 98 / 300 High\n"}
+,{"stream_name":"stdout","time":115.031829229,"data":"SPI LABELS 99 / 300 High\n"}
+,{"stream_name":"stdout","time":115.038199085,"data":"SPI LABELS 100 / 300 High\n"}
+,{"stream_name":"stdout","time":115.044285442,"data":"SPI LABELS 101 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.050570355,"data":"SPI LABELS 102 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.056921823,"data":"SPI LABELS 103 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.063275514,"data":"SPI LABELS 104 / 300 High\n"}
+,{"stream_name":"stdout","time":115.069748776,"data":"SPI LABELS 105 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.075654891,"data":"SPI LABELS 106 / 300 High\n"}
+,{"stream_name":"stdout","time":115.082250989,"data":"SPI LABELS 107 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.088820582,"data":"SPI LABELS 108 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.095184525,"data":"SPI LABELS 109 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.10157302,"data":"SPI LABELS 110 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.108254339,"data":"SPI LABELS 111 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.115041923,"data":"SPI LABELS 112 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.121457958,"data":"SPI LABELS 113 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.127748094,"data":"SPI LABELS 114 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.133979064,"data":"SPI LABELS 115 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.141280733,"data":"SPI LABELS 116 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.148244459,"data":"SPI LABELS 117 / 300 High\n"}
+,{"stream_name":"stdout","time":115.155141339,"data":"SPI LABELS 118 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.161482541,"data":"SPI LABELS 119 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.168409847,"data":"SPI LABELS 120 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.175215114,"data":"SPI LABELS 121 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.182184663,"data":"SPI LABELS 122 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.189214432,"data":"SPI LABELS 123 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.195581927,"data":"SPI LABELS 124 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.20207536,"data":"SPI LABELS 125 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.209043422,"data":"SPI LABELS 126 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.216247024,"data":"SPI LABELS 127 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.223407076,"data":"SPI LABELS 128 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.230912323,"data":"SPI LABELS 129 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.238197802,"data":"SPI LABELS 130 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.244781782,"data":"SPI LABELS 131 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.252406449,"data":"SPI LABELS 132 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.260182244,"data":"SPI LABELS 133 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.267827968,"data":"SPI LABELS 134 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.27544203,"data":"SPI LABELS 135 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.282532747,"data":"SPI LABELS 136 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.290217016,"data":"SPI LABELS 137 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.297846072,"data":"SPI LABELS 138 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.305398502,"data":"SPI LABELS 139 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.313216572,"data":"SPI LABELS 140 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.320728909,"data":"SPI LABELS 141 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.328052874,"data":"SPI LABELS 142 / 300 High\n"}
+,{"stream_name":"stdout","time":115.335821716,"data":"SPI LABELS 143 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.343265588,"data":"SPI LABELS 144 / 300 High\n"}
+,{"stream_name":"stdout","time":115.351607204,"data":"SPI LABELS 145 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.359408427,"data":"SPI LABELS 146 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.367382691,"data":"SPI LABELS 147 / 300 High\n"}
+,{"stream_name":"stdout","time":115.375254892,"data":"SPI LABELS 148 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.382841538,"data":"SPI LABELS 149 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.391203388,"data":"SPI LABELS 150 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.399419532,"data":"SPI LABELS 151 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.408490407,"data":"SPI LABELS 152 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.416127284,"data":"SPI LABELS 153 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.423840676,"data":"SPI LABELS 154 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.431863707,"data":"SPI LABELS 155 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.440097541,"data":"SPI LABELS 156 / 300 High\n"}
+,{"stream_name":"stdout","time":115.448273693,"data":"SPI LABELS 157 / 300 Critical\n"}
+,{"stream_name":"stdout","time":115.456563064,"data":"SPI LABELS 158 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.464528391,"data":"SPI LABELS 159 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.473328273,"data":"SPI LABELS 160 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.481952638,"data":"SPI LABELS 161 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.490439415,"data":"SPI LABELS 162 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.502219687,"data":"SPI LABELS 163 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.510700759,"data":"SPI LABELS 164 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.519177433,"data":"SPI LABELS 165 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.527735433,"data":"SPI LABELS 166 / 300 High\n"}
+,{"stream_name":"stdout","time":115.535666893,"data":"SPI LABELS 167 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.544335284,"data":"SPI LABELS 168 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.553217337,"data":"SPI LABELS 169 / 300 High\n"}
+,{"stream_name":"stdout","time":115.561928457,"data":"SPI LABELS 170 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.571068795,"data":"SPI LABELS 171 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.579854924,"data":"SPI LABELS 172 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.589114768,"data":"SPI LABELS 173 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.598002296,"data":"SPI LABELS 174 / 300 High\n"}
+,{"stream_name":"stdout","time":115.607334717,"data":"SPI LABELS 175 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.616496873,"data":"SPI LABELS 176 / 300 High\n"}
+,{"stream_name":"stdout","time":115.625352696,"data":"SPI LABELS 177 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.634218151,"data":"SPI LABELS 178 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.643345049,"data":"SPI LABELS 179 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.652347018,"data":"SPI LABELS 180 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.661369622,"data":"SPI LABELS 181 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.670672655,"data":"SPI LABELS 182 / 300 High\n"}
+,{"stream_name":"stdout","time":115.679630116,"data":"SPI LABELS 183 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.689187949,"data":"SPI LABELS 184 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.699182776,"data":"SPI LABELS 185 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.708477174,"data":"SPI LABELS 186 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.717711906,"data":"SPI LABELS 187 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.727864279,"data":"SPI LABELS 188 / 300 Critical\n"}
+,{"stream_name":"stdout","time":115.737821179,"data":"SPI LABELS 189 / 300 Critical\n"}
+,{"stream_name":"stdout","time":115.747552126,"data":"SPI LABELS 190 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.757181313,"data":"SPI LABELS 191 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.7664621,"data":"SPI LABELS 192 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.776348879,"data":"SPI LABELS 193 / 300 Critical\n"}
+,{"stream_name":"stdout","time":115.7863663,"data":"SPI LABELS 194 / 300 Critical\n"}
+,{"stream_name":"stdout","time":115.79616619,"data":"SPI LABELS 195 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.805623305,"data":"SPI LABELS 196 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.815413155,"data":"SPI LABELS 197 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.82567499,"data":"SPI LABELS 198 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.835189814,"data":"SPI LABELS 199 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.845587982,"data":"SPI LABELS 200 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.856447701,"data":"SPI LABELS 201 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.86677146,"data":"SPI LABELS 202 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.877243296,"data":"SPI LABELS 203 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.887970532,"data":"SPI LABELS 204 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.898329141,"data":"SPI LABELS 205 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.908576415,"data":"SPI LABELS 206 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.918407598,"data":"SPI LABELS 207 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.929103315,"data":"SPI LABELS 208 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.939597692,"data":"SPI LABELS 209 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.950651255,"data":"SPI LABELS 210 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.960692466,"data":"SPI LABELS 211 / 300 Medium\n"}
+,{"stream_name":"stdout","time":115.971035085,"data":"SPI LABELS 212 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.981122374,"data":"SPI LABELS 213 / 300 Low\n"}
+,{"stream_name":"stdout","time":115.992084635,"data":"SPI LABELS 214 / 300 Medium\n"}
+,{"stream_name":"stdout","time":116.003334484,"data":"SPI LABELS 215 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.014020575,"data":"SPI LABELS 216 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.025272368,"data":"SPI LABELS 217 / 300 Critical\n"}
+,{"stream_name":"stdout","time":116.035814673,"data":"SPI LABELS 218 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.046329297,"data":"SPI LABELS 219 / 300 High\n"}
+,{"stream_name":"stdout","time":116.05803576,"data":"SPI LABELS 220 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.069618418,"data":"SPI LABELS 221 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.080396586,"data":"SPI LABELS 222 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.091071006,"data":"SPI LABELS 223 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.101635037,"data":"SPI LABELS 224 / 300 High\n"}
+,{"stream_name":"stdout","time":116.112278731,"data":"SPI LABELS 225 / 300 High\n"}
+,{"stream_name":"stdout","time":116.123437712,"data":"SPI LABELS 226 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.135629247,"data":"SPI LABELS 227 / 300 High\n"}
+,{"stream_name":"stdout","time":116.147792481,"data":"SPI LABELS 228 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.159739387,"data":"SPI LABELS 229 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.171795316,"data":"SPI LABELS 230 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.183111614,"data":"SPI LABELS 231 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.194209082,"data":"SPI LABELS 232 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.206174051,"data":"SPI LABELS 233 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.216343686,"data":"SPI LABELS 234 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.227473844,"data":"SPI LABELS 235 / 300 High\n"}
+,{"stream_name":"stdout","time":116.238384512,"data":"SPI LABELS 236 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.249345826,"data":"SPI LABELS 237 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.26091102,"data":"SPI LABELS 238 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.272273919,"data":"SPI LABELS 239 / 300 Critical\n"}
+,{"stream_name":"stdout","time":116.283628486,"data":"SPI LABELS 240 / 300 High\n"}
+,{"stream_name":"stdout","time":116.295148585,"data":"SPI LABELS 241 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.306577497,"data":"SPI LABELS 242 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.317691791,"data":"SPI LABELS 243 / 300 High\n"}
+,{"stream_name":"stdout","time":116.328860137,"data":"SPI LABELS 244 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.340251286,"data":"SPI LABELS 245 / 300 High\n"}
+,{"stream_name":"stdout","time":116.351544547,"data":"SPI LABELS 246 / 300 High\n"}
+,{"stream_name":"stdout","time":116.363296487,"data":"SPI LABELS 247 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.374433529,"data":"SPI LABELS 248 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.386044871,"data":"SPI LABELS 249 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.397422065,"data":"SPI LABELS 250 / 300 Medium\n"}
+,{"stream_name":"stdout","time":116.408996459,"data":"SPI LABELS 251 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.420448003,"data":"SPI LABELS 252 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.432472754,"data":"SPI LABELS 253 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.444200254,"data":"SPI LABELS 254 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.455873286,"data":"SPI LABELS 255 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.467583163,"data":"SPI LABELS 256 / 300 High\n"}
+,{"stream_name":"stdout","time":116.480302573,"data":"SPI LABELS 257 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.492381431,"data":"SPI LABELS 258 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.507556142,"data":"SPI LABELS 259 / 300 High\n"}
+,{"stream_name":"stdout","time":116.520117158,"data":"SPI LABELS 260 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.533990906,"data":"SPI LABELS 261 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.549739617,"data":"SPI LABELS 262 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.5638293,"data":"SPI LABELS 263 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.577688258,"data":"SPI LABELS 264 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.592122399,"data":"SPI LABELS 265 / 300 Medium\n"}
+,{"stream_name":"stdout","time":116.60608437,"data":"SPI LABELS 266 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.620045381,"data":"SPI LABELS 267 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.633919048,"data":"SPI LABELS 268 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.647628531,"data":"SPI LABELS 269 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.660300525,"data":"SPI LABELS 270 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.673290861,"data":"SPI LABELS 271 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.686219179,"data":"SPI LABELS 272 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.699073365,"data":"SPI LABELS 273 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.711969221,"data":"SPI LABELS 274 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.724622826,"data":"SPI LABELS 275 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.737859543,"data":"SPI LABELS 276 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.751525275,"data":"SPI LABELS 277 / 300 High\n"}
+,{"stream_name":"stdout","time":116.764058617,"data":"SPI LABELS 278 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.777511864,"data":"SPI LABELS 279 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.790331181,"data":"SPI LABELS 280 / 300 High\n"}
+,{"stream_name":"stdout","time":116.803419564,"data":"SPI LABELS 281 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.817344457,"data":"SPI LABELS 282 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.830328642,"data":"SPI LABELS 283 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.843683733,"data":"SPI LABELS 284 / 300 Medium\n"}
+,{"stream_name":"stdout","time":116.857101074,"data":"SPI LABELS 285 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.871013717,"data":"SPI LABELS 286 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.884604168,"data":"SPI LABELS 287 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.898317071,"data":"SPI LABELS 288 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.9116706,"data":"SPI LABELS 289 / 300 High\n"}
+,{"stream_name":"stdout","time":116.925593758,"data":"SPI LABELS 290 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.94043649,"data":"SPI LABELS 291 / 300 Medium\n"}
+,{"stream_name":"stdout","time":116.95515346,"data":"SPI LABELS 292 / 300 Critical\n"}
+,{"stream_name":"stdout","time":116.971127292,"data":"SPI LABELS 293 / 300 Low\n"}
+,{"stream_name":"stdout","time":116.985837601,"data":"SPI LABELS 294 / 300 Low\n"}
+,{"stream_name":"stdout","time":117.00008632,"data":"SPI LABELS 295 / 300 Low\n"}
+,{"stream_name":"stdout","time":117.015354563,"data":"SPI LABELS 296 / 300 Low\n"}
+,{"stream_name":"stdout","time":117.031849676,"data":"SPI LABELS 297 / 300 Low\n"}
+,{"stream_name":"stdout","time":117.046324908,"data":"SPI LABELS 298 / 300 Low\n"}
+,{"stream_name":"stdout","time":117.060796285,"data":"SPI LABELS 299 / 300 Low\n"}
+,{"stream_name":"stdout","time":117.075175418,"data":"SPI LABELS 300 / 300 Critical\n"}
+,{"stream_name":"stderr","time":133.783711366,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":133.783735821,"data":"\n"}
+,{"stream_name":"stderr","time":133.783740069,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":136.964648829,"data":"The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend=\"torchvision\"` instead of `use_fast=True`, or `backend=\"pil\"` instead of `use_fast=False`.\n"}
+,{"stream_name":"stderr","time":136.964676948,"data":"\n"}
+,{"stream_name":"stderr","time":136.964680933,"data":"The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend=\"torchvision\"` instead of `use_fast=True`, or `backend=\"pil\"` instead of `use_fast=False`.\n"}
+,{"stream_name":"stderr","time":139.698702808,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":139.698729385,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":139.698733948,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":139.698747432,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":139.698752973,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":139.698773262,"data":"\n"}
+,{"stream_name":"stderr","time":139.69877724,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":139.698781355,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":139.698785747,"data":"\n"}
+,{"stream_name":"stderr","time":139.698789762,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":139.698794271,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":139.698798467,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":139.698802395,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":139.698806476,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":139.698810454,"data":"\n"}
+,{"stream_name":"stderr","time":139.698814208,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":139.698818134,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":142.330971696,"data":"ENCODER clip_b32 8\n"}
+,{"stream_name":"stdout","time":142.528144582,"data":"ENCODER clip_b32 16\n"}
+,{"stream_name":"stdout","time":142.74738796,"data":"ENCODER clip_b32 24\n"}
+,{"stream_name":"stdout","time":142.955848169,"data":"ENCODER clip_b32 32\n"}
+,{"stream_name":"stdout","time":143.5573397,"data":"ENCODER clip_b32 40\n"}
+,{"stream_name":"stdout","time":143.759349116,"data":"ENCODER clip_b32 48\n"}
+,{"stream_name":"stdout","time":144.162510449,"data":"ENCODER clip_b32 56\n"}
+,{"stream_name":"stdout","time":144.394562179,"data":"ENCODER clip_b32 64\n"}
+,{"stream_name":"stdout","time":144.604216515,"data":"ENCODER clip_b32 72\n"}
+,{"stream_name":"stdout","time":144.847551583,"data":"ENCODER clip_b32 80\n"}
+,{"stream_name":"stdout","time":145.054257975,"data":"ENCODER clip_b32 88\n"}
+,{"stream_name":"stdout","time":145.368188518,"data":"ENCODER clip_b32 96\n"}
+,{"stream_name":"stdout","time":145.588345225,"data":"ENCODER clip_b32 104\n"}
+,{"stream_name":"stdout","time":145.790736019,"data":"ENCODER clip_b32 112\n"}
+,{"stream_name":"stdout","time":146.016378065,"data":"ENCODER clip_b32 120\n"}
+,{"stream_name":"stdout","time":146.20970296,"data":"ENCODER clip_b32 128\n"}
+,{"stream_name":"stdout","time":146.441047661,"data":"ENCODER clip_b32 136\n"}
+,{"stream_name":"stdout","time":146.646872833,"data":"ENCODER clip_b32 144\n"}
+,{"stream_name":"stdout","time":146.870225617,"data":"ENCODER clip_b32 152\n"}
+,{"stream_name":"stdout","time":147.058202798,"data":"ENCODER clip_b32 160\n"}
+,{"stream_name":"stdout","time":147.269387141,"data":"ENCODER clip_b32 168\n"}
+,{"stream_name":"stdout","time":147.493396412,"data":"ENCODER clip_b32 176\n"}
+,{"stream_name":"stdout","time":147.715960222,"data":"ENCODER clip_b32 184\n"}
+,{"stream_name":"stdout","time":147.92780488,"data":"ENCODER clip_b32 192\n"}
+,{"stream_name":"stdout","time":148.160979314,"data":"ENCODER clip_b32 200\n"}
+,{"stream_name":"stdout","time":148.386981081,"data":"ENCODER clip_b32 208\n"}
+,{"stream_name":"stdout","time":148.605831272,"data":"ENCODER clip_b32 216\n"}
+,{"stream_name":"stdout","time":148.826943936,"data":"ENCODER clip_b32 224\n"}
+,{"stream_name":"stdout","time":149.008472716,"data":"ENCODER clip_b32 232\n"}
+,{"stream_name":"stdout","time":149.200975396,"data":"ENCODER clip_b32 240\n"}
+,{"stream_name":"stdout","time":149.434100369,"data":"ENCODER clip_b32 248\n"}
+,{"stream_name":"stdout","time":149.670607275,"data":"ENCODER clip_b32 256\n"}
+,{"stream_name":"stdout","time":149.873830893,"data":"ENCODER clip_b32 264\n"}
+,{"stream_name":"stdout","time":150.090404539,"data":"ENCODER clip_b32 272\n"}
+,{"stream_name":"stdout","time":150.344377754,"data":"ENCODER clip_b32 280\n"}
+,{"stream_name":"stdout","time":150.570505307,"data":"ENCODER clip_b32 288\n"}
+,{"stream_name":"stdout","time":150.769955508,"data":"ENCODER clip_b32 296\n"}
+,{"stream_name":"stdout","time":150.873872178,"data":"ENCODER clip_b32 300\n"}
+,{"stream_name":"stderr","time":157.855580691,"data":"/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.\n"}
+,{"stream_name":"stderr","time":157.855639487,"data":"  _warn_once(\n"}
+,{"stream_name":"stderr","time":157.855645926,"data":"\n"}
+,{"stream_name":"stderr","time":157.855650785,"data":"/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.\n"}
+,{"stream_name":"stderr","time":157.85565708,"data":"  _warn_once(\n"}
+,{"stream_name":"stdout","time":158.534670831,"data":"HEAD clip_b32 logistic 0.5119014690515705\n"}
+,{"stream_name":"stdout","time":158.648730485,"data":"HEAD clip_b32 ridge 0.4882744495647722\n"}
+,{"stream_name":"stdout","time":158.852749196,"data":"HEAD clip_b32 linear_svm 0.51900290632685\n"}
+,{"stream_name":"stdout","time":159.038335584,"data":"HEAD clip_b32 rbf_svm 0.5616424352567015\n"}
+,{"stream_name":"stdout","time":159.244270018,"data":"HEAD clip_b32 knn 0.5138888888888888\n"}
+,{"stream_name":"stdout","time":161.602788583,"data":"HEAD clip_b32 random_forest 0.5921052631578947\n"}
+,{"stream_name":"stdout","time":163.227913818,"data":"HEAD clip_b32 extra_trees 0.5556244830438378\n"}
+,{"stream_name":"stdout","time":168.608013017,"data":"HEAD clip_b32 hist_boost 0.5476482976482977\n"}
+,{"stream_name":"stdout","time":169.638223155,"data":"HEAD clip_b32 mlp 0.46710526315789475\n"}
+,{"stream_name":"stdout","time":171.508278509,"data":"ENCODER CACHE HIT siglip2_b16\n"}
+,{"stream_name":"stdout","time":171.5239868,"data":"CLASSIFIER CACHE HIT siglip2_b16 logistic\n"}
+,{"stream_name":"stdout","time":171.538172134,"data":"CLASSIFIER CACHE HIT siglip2_b16 ridge\n"}
+,{"stream_name":"stdout","time":171.552597583,"data":"CLASSIFIER CACHE HIT siglip2_b16 linear_svm\n"}
+,{"stream_name":"stdout","time":171.569434018,"data":"CLASSIFIER CACHE HIT siglip2_b16 rbf_svm\n"}
+,{"stream_name":"stdout","time":171.585377886,"data":"CLASSIFIER CACHE HIT siglip2_b16 knn\n"}
+,{"stream_name":"stdout","time":171.600269854,"data":"CLASSIFIER CACHE HIT siglip2_b16 random_forest\n"}
+,{"stream_name":"stdout","time":171.616339904,"data":"CLASSIFIER CACHE HIT siglip2_b16 extra_trees\n"}
+,{"stream_name":"stdout","time":171.634602285,"data":"CLASSIFIER CACHE HIT siglip2_b16 hist_boost\n"}
+,{"stream_name":"stdout","time":171.800460953,"data":"CLASSIFIER CACHE HIT siglip2_b16 mlp\n"}
+,{"stream_name":"stdout","time":172.7431679,"data":"TOKEN CLASSIFIER CACHE HIT siglip2_b16 mean_mlp\n"}
+,{"stream_name":"stdout","time":173.510270393,"data":"TOKEN CLASSIFIER CACHE HIT siglip2_b16 gated_abmil\n"}
+,{"stream_name":"stdout","time":174.009373673,"data":"TOKEN CLASSIFIER CACHE HIT siglip2_b16 single_query_cross_attention\n"}
+,{"stream_name":"stdout","time":175.291463069,"data":"ENCODER CACHE HIT dino\n"}
+,{"stream_name":"stdout","time":175.308137939,"data":"CLASSIFIER CACHE HIT dino logistic\n"}
+,{"stream_name":"stdout","time":175.323868346,"data":"CLASSIFIER CACHE HIT dino ridge\n"}
+,{"stream_name":"stdout","time":175.33903765,"data":"CLASSIFIER CACHE HIT dino linear_svm\n"}
+,{"stream_name":"stdout","time":175.355926458,"data":"CLASSIFIER CACHE HIT dino rbf_svm\n"}
+,{"stream_name":"stdout","time":175.371875809,"data":"CLASSIFIER CACHE HIT dino knn\n"}
+,{"stream_name":"stdout","time":175.388491347,"data":"CLASSIFIER CACHE HIT dino random_forest\n"}
+,{"stream_name":"stdout","time":175.405365051,"data":"CLASSIFIER CACHE HIT dino extra_trees\n"}
+,{"stream_name":"stdout","time":175.423019431,"data":"CLASSIFIER CACHE HIT dino hist_boost\n"}
+,{"stream_name":"stdout","time":175.441564938,"data":"CLASSIFIER CACHE HIT dino mlp\n"}
+,{"stream_name":"stdout","time":176.161738271,"data":"TOKEN CLASSIFIER CACHE HIT dino mean_mlp\n"}
+,{"stream_name":"stdout","time":176.69056861,"data":"TOKEN CLASSIFIER CACHE HIT dino gated_abmil\n"}
+,{"stream_name":"stdout","time":177.030576219,"data":"TOKEN CLASSIFIER CACHE HIT dino single_query_cross_attention\n"}
+,{"stream_name":"stderr","time":178.759632069,"data":"\u001b[1mConvNextV2Model LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--facebook--convnextv2-tiny-22k-224/snapshots/9cba4896e97bb86b1eb609e482a2149d84f345bc\n"}
+,{"stream_name":"stderr","time":178.759664562,"data":"Key               | Status     |  | \n"}
+,{"stream_name":"stderr","time":178.759670717,"data":"------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":178.759675614,"data":"classifier.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":178.759680342,"data":"classifier.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":178.759684861,"data":"\n"}
+,{"stream_name":"stderr","time":178.759697859,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":178.759703257,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":178.759708381,"data":"\n"}
+,{"stream_name":"stderr","time":178.759713499,"data":"\u001b[1mConvNextV2Model LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--facebook--convnextv2-tiny-22k-224/snapshots/9cba4896e97bb86b1eb609e482a2149d84f345bc\n"}
+,{"stream_name":"stderr","time":178.75971993,"data":"Key               | Status     |  | \n"}
+,{"stream_name":"stderr","time":178.759724849,"data":"------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":178.759730896,"data":"classifier.bias   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":178.759736803,"data":"classifier.weight | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":178.759742329,"data":"\n"}
+,{"stream_name":"stderr","time":178.759748139,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":178.759753719,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":182.777824969,"data":"ENCODER convnextv2_tiny 8\n"}
+,{"stream_name":"stdout","time":183.001642356,"data":"ENCODER convnextv2_tiny 16\n"}
+,{"stream_name":"stdout","time":183.230810741,"data":"ENCODER convnextv2_tiny 24\n"}
+,{"stream_name":"stdout","time":183.459237086,"data":"ENCODER convnextv2_tiny 32\n"}
+,{"stream_name":"stdout","time":184.085720901,"data":"ENCODER convnextv2_tiny 40\n"}
+,{"stream_name":"stdout","time":184.309679703,"data":"ENCODER convnextv2_tiny 48\n"}
+,{"stream_name":"stdout","time":184.720585552,"data":"ENCODER convnextv2_tiny 56\n"}
+,{"stream_name":"stdout","time":184.974124949,"data":"ENCODER convnextv2_tiny 64\n"}
+,{"stream_name":"stdout","time":185.203940542,"data":"ENCODER convnextv2_tiny 72\n"}
+,{"stream_name":"stdout","time":185.472191619,"data":"ENCODER convnextv2_tiny 80\n"}
+,{"stream_name":"stdout","time":185.704467193,"data":"ENCODER convnextv2_tiny 88\n"}
+,{"stream_name":"stdout","time":186.164460423,"data":"ENCODER convnextv2_tiny 96\n"}
+,{"stream_name":"stdout","time":186.397870721,"data":"ENCODER convnextv2_tiny 104\n"}
+,{"stream_name":"stdout","time":186.617389774,"data":"ENCODER convnextv2_tiny 112\n"}
+,{"stream_name":"stdout","time":186.863188124,"data":"ENCODER convnextv2_tiny 120\n"}
+,{"stream_name":"stdout","time":187.071015251,"data":"ENCODER convnextv2_tiny 128\n"}
+,{"stream_name":"stdout","time":187.31357797,"data":"ENCODER convnextv2_tiny 136\n"}
+,{"stream_name":"stdout","time":187.542325875,"data":"ENCODER convnextv2_tiny 144\n"}
+,{"stream_name":"stdout","time":187.78551432,"data":"ENCODER convnextv2_tiny 152\n"}
+,{"stream_name":"stdout","time":188.004696424,"data":"ENCODER convnextv2_tiny 160\n"}
+,{"stream_name":"stdout","time":188.233423073,"data":"ENCODER convnextv2_tiny 168\n"}
+,{"stream_name":"stdout","time":188.487119316,"data":"ENCODER convnextv2_tiny 176\n"}
+,{"stream_name":"stdout","time":188.721413349,"data":"ENCODER convnextv2_tiny 184\n"}
+,{"stream_name":"stdout","time":188.948502305,"data":"ENCODER convnextv2_tiny 192\n"}
+,{"stream_name":"stdout","time":189.199325803,"data":"ENCODER convnextv2_tiny 200\n"}
+,{"stream_name":"stdout","time":189.461024976,"data":"ENCODER convnextv2_tiny 208\n"}
+,{"stream_name":"stdout","time":189.696234906,"data":"ENCODER convnextv2_tiny 216\n"}
+,{"stream_name":"stdout","time":189.934913928,"data":"ENCODER convnextv2_tiny 224\n"}
+,{"stream_name":"stdout","time":190.129579371,"data":"ENCODER convnextv2_tiny 232\n"}
+,{"stream_name":"stdout","time":190.337339562,"data":"ENCODER convnextv2_tiny 240\n"}
+,{"stream_name":"stdout","time":190.582549277,"data":"ENCODER convnextv2_tiny 248\n"}
+,{"stream_name":"stdout","time":190.837152224,"data":"ENCODER convnextv2_tiny 256\n"}
+,{"stream_name":"stdout","time":191.069798041,"data":"ENCODER convnextv2_tiny 264\n"}
+,{"stream_name":"stdout","time":191.322658837,"data":"ENCODER convnextv2_tiny 272\n"}
+,{"stream_name":"stdout","time":191.595373486,"data":"ENCODER convnextv2_tiny 280\n"}
+,{"stream_name":"stdout","time":191.837335155,"data":"ENCODER convnextv2_tiny 288\n"}
+,{"stream_name":"stdout","time":192.063307037,"data":"ENCODER convnextv2_tiny 296\n"}
+,{"stream_name":"stdout","time":194.074183221,"data":"ENCODER convnextv2_tiny 300\n"}
+,{"stream_name":"stdout","time":203.402880409,"data":"HEAD convnextv2_tiny logistic 0.4359375\n"}
+,{"stream_name":"stdout","time":203.501386997,"data":"HEAD convnextv2_tiny ridge 0.45168738071963876\n"}
+,{"stream_name":"stdout","time":203.728840168,"data":"HEAD convnextv2_tiny linear_svm 0.45590277777777777\n"}
+,{"stream_name":"stdout","time":203.932557217,"data":"HEAD convnextv2_tiny rbf_svm 0.5529411764705883\n"}
+,{"stream_name":"stdout","time":204.133842015,"data":"HEAD convnextv2_tiny knn 0.4104709104709105\n"}
+,{"stream_name":"stdout","time":206.604941403,"data":"HEAD convnextv2_tiny random_forest 0.4811063218390804\n"}
+,{"stream_name":"stdout","time":208.242428262,"data":"HEAD convnextv2_tiny extra_trees 0.43458781362007165\n"}
+,{"stream_name":"stdout","time":215.949560888,"data":"HEAD convnextv2_tiny hist_boost 0.44653679653679657\n"}
+,{"stream_name":"stdout","time":217.295559795,"data":"HEAD convnextv2_tiny mlp 0.4836562800034913\n"}
+,{"stream_name":"stdout","time":218.478829353,"data":"CALIBRATION AND COMPLETE PIPELINE START\n"}
+,{"stream_name":"stdout","time":224.757012822,"data":"WARNING ⚠️ user config directory '/kaggle/working/experiments/spi_classifier_repair/runs/medic_spi_20261028T221515Z/yolo_config/Ultralytics' is not writable, using '/tmp/Ultralytics'. Set YOLO_CONFIG_DIR to override.\n"}
+,{"stream_name":"stdout","time":224.763194674,"data":"Creating new Ultralytics Settings v0.0.6 file ✅ \n"}
+,{"stream_name":"stdout","time":224.763214189,"data":"View Ultralytics Settings with 'yolo settings' or at '/tmp/Ultralytics/settings.json'\n"}
+,{"stream_name":"stdout","time":224.763219002,"data":"Update Settings with 'yolo settings key=value', i.e. 'yolo settings runs_dir=path/to/dir'. For help see https://docs.ultralytics.com/quickstart/#ultralytics-settings.\n"}
+,{"stream_name":"stdout","time":225.291804794,"data":"\r\u001b[KDownloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s-worldv2.pt to 'yolov8s-worldv2.pt': 38% ━━━━╸─────── 9.5/24.7MB 95.2MB/s 0.1s\u003c0.2s\r\u001b[KDownloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s-worldv2.pt to 'yolov8s-worldv2.pt': 100% ━━━━━━━━━━━━ 24.7MB 126.6MB/s 0.2s\r\u001b[KDownloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s-worldv2.pt to 'yolov8s-worldv2.pt': 100% ━━━━━━━━━━━━ 24.7MB 125.9MB/s 0.2s\n"}
+,{"stream_name":"stderr","time":229.2782513,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":229.278284376,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":229.278290017,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":229.278294004,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":229.278298901,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":229.278304167,"data":"\n"}
+,{"stream_name":"stderr","time":229.278308417,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":229.278312641,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":229.278316946,"data":"\n"}
+,{"stream_name":"stderr","time":229.27832057,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":229.278325661,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":229.278340748,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":229.2783449,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":229.278349242,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":229.278353354,"data":"\n"}
+,{"stream_name":"stderr","time":229.278356999,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":229.278360945,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":234.311689972,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":234.311722327,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":234.311726919,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":234.311730792,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":234.311742035,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":234.311745834,"data":"\n"}
+,{"stream_name":"stderr","time":234.3117494,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":234.311752961,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":234.31177089,"data":"\n"}
+,{"stream_name":"stderr","time":234.3119085,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":234.311916966,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":234.311921015,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":234.311925084,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":234.311928969,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":234.311932555,"data":"\n"}
+,{"stream_name":"stderr","time":234.311935659,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":234.311939712,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":236.557597541,"data":"/usr/local/lib/python3.13/dist-packages/clip/clip.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools\u003c81.\n"}
+,{"stream_name":"stderr","time":236.557623068,"data":"  from pkg_resources import packaging\n"}
+,{"stream_name":"stderr","time":236.55762734,"data":"\n"}
+,{"stream_name":"stderr","time":236.557630527,"data":"/usr/local/lib/python3.13/dist-packages/clip/clip.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools\u003c81.\n"}
+,{"stream_name":"stderr","time":236.55763401,"data":"  from pkg_resources import packaging\n"}
+,{"stream_name":"stderr","time":236.789155959,"data":"\r  0%|                                               | 0.00/338M [00:00\u003c?, ?iB/s]\n"}
+,{"stream_name":"stderr","time":236.892572367,"data":"\r  0%|                                               | 0.00/338M [00:00\u003c?, ?iB/s]\r  0%|                                       | 448k/338M [00:00\u003c01:19, 4.46MiB/s]\n"}
+,{"stream_name":"stderr","time":236.994559913,"data":"\r  0%|                                       | 448k/338M [00:00\u003c01:19, 4.46MiB/s]\r  2%|▊                                     | 7.36M/338M [00:00\u003c00:07, 44.1MiB/s]\n"}
+,{"stream_name":"stderr","time":237.094147045,"data":"\r  2%|▊                                     | 7.36M/338M [00:00\u003c00:07, 44.1MiB/s]\r  7%|██▊                                    | 24.0M/338M [00:00\u003c00:03, 103MiB/s]\n"}
+,{"stream_name":"stderr","time":237.204104997,"data":"\r  7%|██▊                                    | 24.0M/338M [00:00\u003c00:03, 103MiB/s]\r 10%|███▊                                  | 33.9M/338M [00:00\u003c00:03, 99.8MiB/s]\n"}
+,{"stream_name":"stderr","time":237.303996074,"data":"\r 10%|███▊                                  | 33.9M/338M [00:00\u003c00:03, 99.8MiB/s]\r 13%|█████▎                                 | 45.5M/338M [00:00\u003c00:02, 107MiB/s]\n"}
+,{"stream_name":"stderr","time":237.403431748,"data":"\r 13%|█████▎                                 | 45.5M/338M [00:00\u003c00:02, 107MiB/s]\r 17%|██████▍                                | 56.3M/338M [00:00\u003c00:02, 109MiB/s]\n"}
+,{"stream_name":"stderr","time":237.516479666,"data":"\r 17%|██████▍                                | 56.3M/338M [00:00\u003c00:02, 109MiB/s]\r 20%|███████▋                               | 66.7M/338M [00:00\u003c00:02, 105MiB/s]\n"}
+,{"stream_name":"stderr","time":237.63164833,"data":"\r 20%|███████▋                               | 66.7M/338M [00:00\u003c00:02, 105MiB/s]\r 23%|████████▊                              | 76.7M/338M [00:00\u003c00:02, 100MiB/s]\n"}
+,{"stream_name":"stderr","time":237.731574641,"data":"\r 23%|████████▊                              | 76.7M/338M [00:00\u003c00:02, 100MiB/s]\r 26%|██████████▏                            | 88.1M/338M [00:00\u003c00:02, 106MiB/s]\n"}
+,{"stream_name":"stderr","time":237.838731841,"data":"\r 26%|██████████▏                            | 88.1M/338M [00:00\u003c00:02, 106MiB/s]\r 29%|███████████▎                           | 98.3M/338M [00:01\u003c00:02, 104MiB/s]\n"}
+,{"stream_name":"stderr","time":237.942996257,"data":"\r 29%|███████████▎                           | 98.3M/338M [00:01\u003c00:02, 104MiB/s]\r 32%|████████████▊                           | 108M/338M [00:01\u003c00:02, 103MiB/s]\n"}
+,{"stream_name":"stderr","time":238.043261933,"data":"\r 32%|████████████▊                           | 108M/338M [00:01\u003c00:02, 103MiB/s]\r 35%|██████████████                          | 119M/338M [00:01\u003c00:02, 105MiB/s]\n"}
+,{"stream_name":"stderr","time":238.159253404,"data":"\r 35%|██████████████                          | 119M/338M [00:01\u003c00:02, 105MiB/s]\r 38%|███████████████▎                        | 129M/338M [00:01\u003c00:02, 101MiB/s]\n"}
+,{"stream_name":"stderr","time":238.259160724,"data":"\r 38%|███████████████▎                        | 129M/338M [00:01\u003c00:02, 101MiB/s]\r 42%|████████████████▊                       | 141M/338M [00:01\u003c00:01, 109MiB/s]\n"}
+,{"stream_name":"stderr","time":238.364789695,"data":"\r 42%|████████████████▊                       | 141M/338M [00:01\u003c00:01, 109MiB/s]\r 45%|██████████████████                      | 152M/338M [00:01\u003c00:01, 108MiB/s]\n"}
+,{"stream_name":"stderr","time":238.478044638,"data":"\r 45%|██████████████████                      | 152M/338M [00:01\u003c00:01, 108MiB/s]\r 48%|███████████████████▏                    | 162M/338M [00:01\u003c00:01, 104MiB/s]\n"}
+,{"stream_name":"stderr","time":238.589526559,"data":"\r 48%|███████████████████▏                    | 162M/338M [00:01\u003c00:01, 104MiB/s]\r 51%|████████████████████▍                   | 172M/338M [00:01\u003c00:01, 101MiB/s]\n"}
+,{"stream_name":"stderr","time":238.695187282,"data":"\r 51%|████████████████████▍                   | 172M/338M [00:01\u003c00:01, 101MiB/s]\r 54%|█████████████████████                  | 182M/338M [00:01\u003c00:01, 99.4MiB/s]\n"}
+,{"stream_name":"stderr","time":238.800161705,"data":"\r 54%|█████████████████████                  | 182M/338M [00:01\u003c00:01, 99.4MiB/s]\r 57%|██████████████████████▏                | 192M/338M [00:02\u003c00:01, 98.1MiB/s]\n"}
+,{"stream_name":"stderr","time":238.913022278,"data":"\r 57%|██████████████████████▏                | 192M/338M [00:02\u003c00:01, 98.1MiB/s]\r 60%|███████████████████████▏               | 201M/338M [00:02\u003c00:01, 94.7MiB/s]\n"}
+,{"stream_name":"stderr","time":239.030775007,"data":"\r 60%|███████████████████████▏               | 201M/338M [00:02\u003c00:01, 94.7MiB/s]\r 62%|████████████████████████▎              | 210M/338M [00:02\u003c00:01, 90.3MiB/s]\n"}
+,{"stream_name":"stderr","time":239.131179172,"data":"\r 62%|████████████████████████▎              | 210M/338M [00:02\u003c00:01, 90.3MiB/s]\r 66%|██████████████████████████▍             | 223M/338M [00:02\u003c00:01, 103MiB/s]\n"}
+,{"stream_name":"stderr","time":239.240327561,"data":"\r 66%|██████████████████████████▍             | 223M/338M [00:02\u003c00:01, 103MiB/s]\r 69%|███████████████████████████▌            | 233M/338M [00:02\u003c00:01, 100MiB/s]\n"}
+,{"stream_name":"stderr","time":239.340155828,"data":"\r 69%|███████████████████████████▌            | 233M/338M [00:02\u003c00:01, 100MiB/s]\r 72%|████████████████████████████▊           | 243M/338M [00:02\u003c00:00, 103MiB/s]\n"}
+,{"stream_name":"stderr","time":239.444106938,"data":"\r 72%|████████████████████████████▊           | 243M/338M [00:02\u003c00:00, 103MiB/s]\r 75%|██████████████████████████████          | 254M/338M [00:02\u003c00:00, 104MiB/s]\n"}
+,{"stream_name":"stderr","time":239.544221876,"data":"\r 75%|██████████████████████████████          | 254M/338M [00:02\u003c00:00, 104MiB/s]\r 78%|███████████████████████████████▎        | 264M/338M [00:02\u003c00:00, 105MiB/s]\n"}
+,{"stream_name":"stderr","time":239.656712048,"data":"\r 78%|███████████████████████████████▎        | 264M/338M [00:02\u003c00:00, 105MiB/s]\r 81%|████████████████████████████████▍       | 274M/338M [00:02\u003c00:00, 102MiB/s]\n"}
+,{"stream_name":"stderr","time":239.76527227,"data":"\r 81%|████████████████████████████████▍       | 274M/338M [00:02\u003c00:00, 102MiB/s]\r 84%|████████████████████████████████▊      | 284M/338M [00:02\u003c00:00, 99.4MiB/s]\n"}
+,{"stream_name":"stderr","time":239.89809543,"data":"\r 84%|████████████████████████████████▊      | 284M/338M [00:02\u003c00:00, 99.4MiB/s]\r 87%|█████████████████████████████████▉     | 293M/338M [00:03\u003c00:00, 91.2MiB/s]\n"}
+,{"stream_name":"stderr","time":239.997838021,"data":"\r 87%|█████████████████████████████████▉     | 293M/338M [00:03\u003c00:00, 91.2MiB/s]\r 90%|███████████████████████████████████    | 304M/338M [00:03\u003c00:00, 96.6MiB/s]\n"}
+,{"stream_name":"stderr","time":240.118567874,"data":"\r 90%|███████████████████████████████████    | 304M/338M [00:03\u003c00:00, 96.6MiB/s]\r 93%|████████████████████████████████████▏  | 313M/338M [00:03\u003c00:00, 92.2MiB/s]\n"}
+,{"stream_name":"stderr","time":240.216387071,"data":"\r 93%|████████████████████████████████████▏  | 313M/338M [00:03\u003c00:00, 92.2MiB/s]\r 97%|██████████████████████████████████████▋ | 326M/338M [00:03\u003c00:00, 105MiB/s]\n"}
+,{"stream_name":"stderr","time":240.339880164,"data":"\r 97%|██████████████████████████████████████▋ | 326M/338M [00:03\u003c00:00, 105MiB/s]\r100%|██████████████████████████████████████▉| 337M/338M [00:03\u003c00:00, 98.7MiB/s]\n"}
+,{"stream_name":"stderr","time":240.345613624,"data":"\r100%|██████████████████████████████████████▉| 337M/338M [00:03\u003c00:00, 98.7MiB/s]\r100%|███████████████████████████████████████| 338M/338M [00:03\u003c00:00, 99.6MiB/s]\n"}
+,{"stream_name":"stderr","time":240.418839788,"data":"\r100%|███████████████████████████████████████| 338M/338M [00:03\u003c00:00, 99.6MiB/s]\n"}
+,{"stream_name":"stderr","time":240.418872702,"data":"\n"}
+,{"stream_name":"stderr","time":240.418877078,"data":"\n"}
+,{"stream_name":"stderr","time":258.272282586,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":258.272327929,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":258.272333285,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":258.272337148,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.272340642,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.272344193,"data":"\n"}
+,{"stream_name":"stderr","time":258.272347503,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":258.272351086,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":258.272355393,"data":"\n"}
+,{"stream_name":"stderr","time":258.272364404,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":258.272368142,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":258.272383358,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":258.272385914,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.2723882,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":258.272390516,"data":"\n"}
+,{"stream_name":"stderr","time":258.272392764,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":258.272395025,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":260.377659362,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":260.377693074,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":260.377697165,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":260.377700184,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":260.377703159,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":260.377705789,"data":"\n"}
+,{"stream_name":"stderr","time":260.377708278,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":260.377710823,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":260.377713746,"data":"\n"}
+,{"stream_name":"stderr","time":260.377716244,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":260.37771911,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":260.377721702,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":260.377724313,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":260.377726859,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":260.377729428,"data":"\n"}
+,{"stream_name":"stderr","time":260.377731858,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":260.377734461,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":303.184572628,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":303.184614897,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":303.184619368,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":303.184622349,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":303.184638623,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":303.184643557,"data":"\n"}
+,{"stream_name":"stderr","time":303.184648253,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":303.184652513,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":303.18465806,"data":"\n"}
+,{"stream_name":"stderr","time":303.184679708,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":303.184683474,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":303.184688532,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":303.184694924,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":303.184697173,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":303.184699465,"data":"\n"}
+,{"stream_name":"stderr","time":303.184701558,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":303.184703743,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":306.075327989,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075359378,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075363916,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075368052,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075372317,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075376731,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075380707,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075385128,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075388983,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075393043,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075396328,"data":"\n"}
+,{"stream_name":"stderr","time":306.075399464,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075403231,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075406669,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075410228,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075413544,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075417023,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075420398,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.075423838,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.075474259,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.07547912,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.42749519,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.427523172,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.427527914,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.427531994,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.427535871,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.427539728,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.427543227,"data":"\n"}
+,{"stream_name":"stderr","time":306.427547112,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.427551686,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.427556519,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.427560848,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.427565018,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.427568933,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.770284689,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.770311688,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.770317146,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.770321495,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.770325089,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.770328705,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.770332067,"data":"\n"}
+,{"stream_name":"stderr","time":306.77033521,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.77033879,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.770342197,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.770345803,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":306.770394779,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":306.770400009,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121326871,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.121351638,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.12135621,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.121360043,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121363598,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.121367143,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121370577,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.121374057,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121377404,"data":"\n"}
+,{"stream_name":"stderr","time":307.121381705,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.121385954,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121389772,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.121394343,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121415804,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.12142031,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.121424632,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.12142943,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.33755078,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337580714,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337585928,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337590455,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337594586,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337598774,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337624531,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337627896,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337630545,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337633274,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337636063,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337638803,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.33764145,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337644251,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337646913,"data":"\n"}
+,{"stream_name":"stderr","time":307.337649375,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337652185,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337654803,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337657524,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337660134,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337662964,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.3376656,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337669997,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337672684,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.33768559,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.337688833,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337691687,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.33769429,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.337697132,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.590231939,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.590260849,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.590266185,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.590285955,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.590291255,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.590296122,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.590300731,"data":"\n"}
+,{"stream_name":"stderr","time":307.590305152,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.590309072,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.590312891,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.59031687,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.590320676,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.590324637,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856870172,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856894608,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856902737,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856905405,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.85690884,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856926425,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856930585,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856935083,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856939574,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856943735,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856947709,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.85695168,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856955149,"data":"\n"}
+,{"stream_name":"stderr","time":307.856958342,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.85696214,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856983115,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856985928,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.85698822,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856990535,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856992805,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.856995102,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.856997387,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.857000643,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":307.857002875,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":307.857005269,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111055825,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111081709,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111086323,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111090349,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111095062,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111099383,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111103686,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111108659,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111113711,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111118565,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111122205,"data":"\n"}
+,{"stream_name":"stderr","time":308.111125927,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111129723,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111133226,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111136964,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111140661,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111157317,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111161043,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.111164823,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.111168422,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.11117205,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375275044,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375324648,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375330312,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375335003,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375338756,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375342662,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.37534628,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375350004,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375353613,"data":"\n"}
+,{"stream_name":"stderr","time":308.375356974,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375361377,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375364854,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375369122,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375373004,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375376882,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.375380542,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.375384232,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598542103,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598572126,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598578651,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598597749,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598600885,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598618441,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598622463,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598626677,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598630223,"data":"\n"}
+,{"stream_name":"stderr","time":308.59863395,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598638032,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598641395,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598644882,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598648213,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598651647,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.598655062,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.598658476,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867057652,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.867086955,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867092218,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.867096384,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867100482,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.867104737,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867108494,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.867112329,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867115845,"data":"\n"}
+,{"stream_name":"stderr","time":308.867119163,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.867122794,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867126392,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.86714711,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.86715056,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.867155598,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":308.867164237,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":308.86718533,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121637076,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.12166697,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121673036,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.12167863,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121682922,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121687315,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121691466,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121695559,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121699544,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121703784,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121707754,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121712107,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121715987,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121720109,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121724228,"data":"\n"}
+,{"stream_name":"stderr","time":309.121729876,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121737844,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121740514,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121743436,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121764559,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121801447,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121806434,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121811916,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121815864,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.12181997,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121823885,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121829085,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.121832978,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.121837082,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.354901555,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.354932646,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.354958933,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.354963254,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.354983018,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.355125473,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.355131036,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.355136492,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.355142051,"data":"\n"}
+,{"stream_name":"stderr","time":309.355147642,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.355153209,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.355158686,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.355164225,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.355169765,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.355175279,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.355180723,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.355186245,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578824064,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578854668,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578859257,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578863082,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578866631,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578870232,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578873696,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578877188,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578881202,"data":"\n"}
+,{"stream_name":"stderr","time":309.578884944,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578889006,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578893086,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578897123,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578900548,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578904128,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.578907625,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.578911231,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.81960049,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819644929,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819650745,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819655325,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819659498,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819663174,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819666699,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819670229,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819688893,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819692534,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.81969589,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819699391,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819702805,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819712101,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819714925,"data":"\n"}
+,{"stream_name":"stderr","time":309.819717058,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819719392,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819721579,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819724864,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819739051,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819743183,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819747308,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819752917,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819756451,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819760561,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819777366,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819781014,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":309.819786561,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":309.819791048,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123116961,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123145261,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123148488,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123151105,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123165648,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123168186,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123171034,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123187357,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123191257,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123196219,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.12319986,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123204193,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123208012,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123211578,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123214917,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123218446,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123221721,"data":"\n"}
+,{"stream_name":"stderr","time":310.123224946,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123228537,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123233577,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123240095,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123242447,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123245638,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123247979,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123263319,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123267236,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123270537,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123274466,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123278406,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123282791,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123291258,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.123294695,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.123298249,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.354663364,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.354692263,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.354696838,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.35470062,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.354704087,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.354707707,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.354711752,"data":"\n"}
+,{"stream_name":"stderr","time":310.354715179,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.354719862,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.354723862,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.354728277,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.354732473,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.35473622,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.561270623,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.561298247,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.561308971,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.56132886,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.561333335,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.561338432,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.561342745,"data":"\n"}
+,{"stream_name":"stderr","time":310.561346896,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.561351717,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.561356193,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.561380692,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.561385622,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.561389777,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.83464891,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834674419,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834687224,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834691265,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834694885,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834698583,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834702134,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834705652,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.83470896,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834726234,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834730064,"data":"\n"}
+,{"stream_name":"stderr","time":310.834732226,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834734615,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834736964,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834739507,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834741869,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834744298,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834746489,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834749578,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":310.834780196,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":310.834784922,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079169859,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079202766,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079208603,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079212652,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079216153,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079219767,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079223116,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079226692,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079230039,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079233587,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.07923704,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079246525,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079249095,"data":"\n"}
+,{"stream_name":"stderr","time":311.079251236,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079253543,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079255747,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.07925805,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079260302,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079262603,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079264768,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079267044,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079269383,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.079272535,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.079275702,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.07929228,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288790932,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288840527,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288847073,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288851791,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288855662,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288859569,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288863529,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288867538,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288871392,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288875381,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288879161,"data":"\n"}
+,{"stream_name":"stderr","time":311.288882716,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288886829,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288890763,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288894844,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288904374,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288908171,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288910774,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288914675,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.288933596,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.288938454,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571681991,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571716528,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571723204,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571728828,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571733849,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571775368,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571780975,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571786254,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571794352,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.57179933,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571803352,"data":"\n"}
+,{"stream_name":"stderr","time":311.571807086,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.57181117,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.57181505,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571819107,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571822983,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571827017,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571831055,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571835342,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.571839247,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.571843407,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.973158541,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.973196136,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.973200368,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.973204211,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.973207803,"data":"\n"}
+,{"stream_name":"stderr","time":311.973216575,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.973232356,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":311.973236301,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":311.973240708,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181002494,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181066525,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181074285,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.18107914,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181083405,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181087612,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181091735,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181096038,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181100195,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181104454,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181108422,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181112621,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181116684,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181120883,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181124922,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181129141,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181133249,"data":"\n"}
+,{"stream_name":"stderr","time":312.181136908,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181141288,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181145516,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181149782,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181153902,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181159918,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.18116395,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181168302,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181172422,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.18118621,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181197297,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181201799,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181205984,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181210164,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.181214131,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.181218391,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.482959174,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.482992875,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.48299843,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483005209,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483010115,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483015431,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483020559,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.48302574,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483030249,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483034755,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483038745,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483042869,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483046733,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483050924,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483054877,"data":"\n"}
+,{"stream_name":"stderr","time":312.483058522,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483062609,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483066516,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483070545,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483121125,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483126713,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483131403,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483136747,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483140622,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483144823,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483148638,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.483152612,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.483156522,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.48316053,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756808299,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756835626,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756839994,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756850536,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756867915,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756872141,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756876343,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756880376,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756884385,"data":"\n"}
+,{"stream_name":"stderr","time":312.756888023,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756891871,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756895939,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756899914,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.756903633,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756907495,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.75691174,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.756931292,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970902741,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.970933301,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970937989,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.970955138,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970959926,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.97096497,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970969518,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.970973768,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970977792,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.97098149,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970985064,"data":"\n"}
+,{"stream_name":"stderr","time":312.970988394,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.970992095,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.970995575,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.970999798,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.971009094,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.971012034,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.971014434,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.971016896,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":312.971019258,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":312.97102182,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.243104855,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.243183268,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.243188818,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.243210928,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.243214917,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.243218674,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.243222097,"data":"\n"}
+,{"stream_name":"stderr","time":313.24322525,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.243228737,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.243232187,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.243237522,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.243244727,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.243247099,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450612037,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450637692,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450643085,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450647564,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450651197,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450655433,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450658882,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450662669,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450667705,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450671725,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450674992,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450678477,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450683744,"data":"\n"}
+,{"stream_name":"stderr","time":313.450686949,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450691052,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450695169,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.45073016,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450734021,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450737855,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450741443,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450745313,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450748906,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450785343,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.450793687,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.450798064,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686496289,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686553218,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686559254,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686563798,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686567911,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686571942,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686575806,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686579806,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686583716,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686587828,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686591626,"data":"\n"}
+,{"stream_name":"stderr","time":313.68659581,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686600047,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686604048,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686607909,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686611824,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686628635,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686633041,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686637482,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":313.686641668,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":313.686645772,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.020271011,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.020327051,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.020332204,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.020336376,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.02034022,"data":"\n"}
+,{"stream_name":"stderr","time":314.020343627,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.020347405,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.020351226,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.020355036,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.253975306,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.25400179,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.254006761,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.254012744,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.254020131,"data":"\n"}
+,{"stream_name":"stderr","time":314.254022548,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.254026026,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.254042834,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.254047508,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467000403,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.46703374,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467039272,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.467059508,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.46706345,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.467067341,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467070958,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.46707465,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467078208,"data":"\n"}
+,{"stream_name":"stderr","time":314.4670815,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.467085162,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467088778,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.467092508,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467097614,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.467116726,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.467120916,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.467125688,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715261722,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715301114,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715305021,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715308017,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715310704,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715313409,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715316398,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715334984,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715339893,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715344627,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715348732,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715370056,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715374139,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715378129,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715382055,"data":"\n"}
+,{"stream_name":"stderr","time":314.71539195,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715394745,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715397364,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715421383,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715425922,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715430294,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715435238,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.71544154,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715446093,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715451373,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715455309,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715459312,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.715463178,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.715467084,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.96967888,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969706592,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969710962,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969714781,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969718362,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969721939,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969727052,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969730593,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969752554,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969757049,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969760764,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969776359,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969780239,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969786128,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969789628,"data":"\n"}
+,{"stream_name":"stderr","time":314.969792765,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969796241,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969799686,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969803247,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969806595,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969810152,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969813514,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969818324,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969821735,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969825177,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969828473,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969833674,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":314.969840953,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":314.969843387,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.447341305,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.4473783,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.447382972,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.447386692,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.447400297,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.44740501,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.447408949,"data":"\n"}
+,{"stream_name":"stderr","time":315.447412688,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.447416848,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.447420435,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.447424295,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.447428068,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.447431978,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656222536,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656245853,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656250457,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.65625599,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656263411,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656265848,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656268186,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656270616,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656272836,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656275201,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656277432,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656279809,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656282036,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656284358,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656286661,"data":"\n"}
+,{"stream_name":"stderr","time":315.656288771,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656291168,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.65630154,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656304039,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.65630624,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656308556,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656310757,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656314408,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656316762,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656319062,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656321307,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656323591,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":315.656325767,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":315.656328129,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030365341,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030392414,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030396997,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030406197,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030409777,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030422277,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030426659,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030430704,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030434816,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.03043891,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.03044232,"data":"\n"}
+,{"stream_name":"stderr","time":316.030445469,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030449022,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030469955,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030473487,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.0304769,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030480355,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030483927,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030487417,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.030490787,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.030495984,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290581174,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290607954,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290612402,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290616262,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290619833,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290623518,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290627034,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290631164,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290635499,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290639372,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290642928,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290647263,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290651026,"data":"\n"}
+,{"stream_name":"stderr","time":316.290654116,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290657649,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290661088,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.29066482,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290668176,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290686559,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290690055,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290693556,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290698483,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290706734,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.290709024,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.290711343,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.525966812,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.526002112,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.526005609,"data":"\n"}
+,{"stream_name":"stderr","time":316.526007885,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true\n"}
+,{"stream_name":"stderr","time":316.526010429,"data":"  warnings.warn(\"y_pred contains classes not in y_true\")\n"}
+,{"stream_name":"stderr","time":316.727114738,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":316.727144721,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":316.727149773,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":316.727154975,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":316.727159783,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":316.727163764,"data":"\n"}
+,{"stream_name":"stderr","time":316.727166822,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":316.72716997,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":316.727173545,"data":"\n"}
+,{"stream_name":"stderr","time":316.727185263,"data":"\u001b[1mCLIPModel LOAD REPORT\u001b[0m from: /root/.cache/huggingface/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268\n"}
+,{"stream_name":"stderr","time":316.727190669,"data":"Key                                  | Status     |  | \n"}
+,{"stream_name":"stderr","time":316.727194733,"data":"-------------------------------------+------------+--+-\n"}
+,{"stream_name":"stderr","time":316.727198944,"data":"vision_model.embeddings.position_ids | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":316.727203681,"data":"text_model.embeddings.position_ids   | UNEXPECTED |  | \n"}
+,{"stream_name":"stderr","time":316.727208215,"data":"\n"}
+,{"stream_name":"stderr","time":316.727211891,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":316.727215412,"data":"- UNEXPECTED:\tcan be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stdout","time":321.211024809,"data":"CAMPAIGN ELAPSED 209.39896728499997\n"}
+,{"stream_name":"stdout","time":321.211956531,"data":"RECOVERY PACKAGING START\n"}
+,{"stream_name":"stdout","time":325.472001184,"data":"RECOVERY PACKAGING END 1672\n"}
+,{"stream_name":"stderr","time":331.127144736,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":331.127173292,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":331.284373727,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":331.284399067,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":332.057514317,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":332.539489286,"data":"[NbConvertApp] Writing 784595 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":335.058222778,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":335.939441407,"data":"[NbConvertApp] Writing 1029498 bytes to __results__.html\n"}
+]

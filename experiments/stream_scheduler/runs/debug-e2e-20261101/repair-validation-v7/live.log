@@ -1,0 +1,91 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+START 01_environment output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z
+{
+  "interpreter": "/usr/bin/python3",
+  "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "cpu_count": 4,
+  "execution_target": "Kaggle managed GPU requested; submitted from WSL",
+  "gpu_requested": true,
+  "dependencies": "managed torch retained; pinned Transformers4.57.6/bitsandbytes0.49.2/lm-format-enforcer0.11.3 installed in active runtime",
+  "run_dir": "/kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z"
+}
+END 01_environment complete 0.002389832000005754
+START 02_source_snapshot output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z
+Verified source/input files 163 3
+END 02_source_snapshot complete 0.03486434500001678
+START 03_input_and_regression output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z
+Input archive /kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar bytes 941352960
+test_bad_sparse_entries (test_compact_scene_transport.CompactSceneTests.test_bad_sparse_entries) ... ok
+test_dense_exact (test_compact_scene_transport.CompactSceneTests.test_dense_exact) ... ok
+test_profile_and_versions (test_compact_scene_transport.CompactSceneTests.test_profile_and_versions) ... ok
+test_sparse_exact (test_compact_scene_transport.CompactSceneTests.test_sparse_exact) ... ok
+test_unavailable_and_regions (test_compact_scene_transport.CompactSceneTests.test_unavailable_and_regions) ... ok
+test_zero_vs_failed (test_compact_scene_transport.CompactSceneTests.test_zero_vs_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+test_bad_sparse_entries (test_compact_scene_transport.CompactSceneTests.test_bad_sparse_entries) ... ok
+test_dense_exact (test_compact_scene_transport.CompactSceneTests.test_dense_exact) ... ok
+test_profile_and_versions (test_compact_scene_transport.CompactSceneTests.test_profile_and_versions) ... ok
+test_sparse_exact (test_compact_scene_transport.CompactSceneTests.test_sparse_exact) ... ok
+test_unavailable_and_regions (test_compact_scene_transport.CompactSceneTests.test_unavailable_and_regions) ... ok
+test_zero_vs_failed (test_compact_scene_transport.CompactSceneTests.test_zero_vs_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+
+test_bad_sparse_entries (test_compact_scene_transport.CompactSceneTests.test_bad_sparse_entries) ... ok
+test_dense_exact (test_compact_scene_transport.CompactSceneTests.test_dense_exact) ... ok
+test_profile_and_versions (test_compact_scene_transport.CompactSceneTests.test_profile_and_versions) ... ok
+test_sparse_exact (test_compact_scene_transport.CompactSceneTests.test_sparse_exact) ... ok
+test_unavailable_and_regions (test_compact_scene_transport.CompactSceneTests.test_unavailable_and_regions) ... ok
+test_zero_vs_failed (test_compact_scene_transport.CompactSceneTests.test_zero_vs_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+Archive SHA256 verified 0f8c6186b09dcf6ab87911df642612919377157bb1585082bed1c93b1506fe2c
+END 03_input_and_regression complete 9.537882702000047
+START 04_isolated_channel_regression output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z
+{'cuda': True, 'devices': 2, 'torch': '2.11.0+cu128'}
+...                                                                      [100%]
+- generated xml file: /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z/channel_junit.xml -
+3 passed in 2.23s
+ 
+END 04_isolated_channel_regression complete 15.175002802999984
+START 05_report_and_recovery output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z
+{
+  "exit": 0,
+  "hardware": {
+    "cuda": true,
+    "devices": 2,
+    "torch": "2.11.0+cu128"
+  },
+  "scope": "existing CUDA channel regression only; no codec inference"
+}
+END 05_report_and_recovery complete 0.0033654180000439737
+START 06_artifact_inventory output /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z
+Hashed immutable artifacts 218 logs/status remain mutable until closed
+END 06_artifact_inventory complete 0.02253283800001782
+OUTPUT /kaggle/working/experiments/stream_scheduler/runs/repair-followup-20261101T041008Z bytes 1119938
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 522750 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 839200 bytes to __results__.html

@@ -1,0 +1,217 @@
+{
+  "J_time": 0.17289964341786354,
+  "coverage_at_horizon": 0.2894736842105263,
+  "offered_weight": 38.0,
+  "covered_weight": 11.0,
+  "useful_weight_deferred": 27.0,
+  "redundant_weight_fraction": 0.08333333333333333,
+  "exposure_delays": [
+    1.733909946336882,
+    1.7261089912860896,
+    1.517751094454244,
+    3.6879880520439565,
+    1.208675765784796,
+    3.195374570798819,
+    5.9039982379034575,
+    3.8743755149198504,
+    8.011173042326757,
+    11.308449918795556,
+    13.463143603516055,
+    11.523172998135431,
+    13.146177366493717
+  ],
+  "undelivered_fact_count": 34,
+  "failures": 2,
+  "unfinished": 1,
+  "attempts": 17,
+  "reward_sum": 0.17289964341786354,
+  "curve": [
+    {
+      "time": 2.2777946361939407,
+      "covered_weight": 0.0
+    },
+    {
+      "time": 3.2582016563243683,
+      "covered_weight": 2.0
+    },
+    {
+      "time": 4.2132804055495905,
+      "covered_weight": 3.0
+    },
+    {
+      "time": 5.22371153416209,
+      "covered_weight": 5.0
+    },
+    {
+      "time": 6.4001102892922495,
+      "covered_weight": 6.0
+    },
+    {
+      "time": 7.256929940438523,
+      "covered_weight": 8.0
+    },
+    {
+      "time": 8.465212397589841,
+      "covered_weight": 8.0
+    },
+    {
+      "time": 9.16948204153334,
+      "covered_weight": 9.0
+    },
+    {
+      "time": 9.755207570527164,
+      "covered_weight": 10.0
+    },
+    {
+      "time": 10.643558345887357,
+      "covered_weight": 10.0
+    },
+    {
+      "time": 11.486146064702686,
+      "covered_weight": 10.0
+    },
+    {
+      "time": 12.678059899164849,
+      "covered_weight": 10.0
+    },
+    {
+      "time": 13.988538377010016,
+      "covered_weight": 10.0
+    },
+    {
+      "time": 14.693709710800986,
+      "covered_weight": 10.0
+    },
+    {
+      "time": 15.563422806988578,
+      "covered_weight": 11.0
+    },
+    {
+      "time": 16.568394238616705,
+      "covered_weight": 11.0
+    },
+    {
+      "time": 17.287226315348178,
+      "covered_weight": 11.0
+    }
+  ],
+  "scope": "synthetic_world_fixture_not_image_semantics",
+  "distinct_useful_at_completions": {
+    "1": 0.0,
+    "5": 6.0,
+    "10": 10.0,
+    "20": null
+  },
+  "coverage_at_completions": {
+    "1": 0.0,
+    "5": 0.15789473684210525,
+    "10": 0.2631578947368421,
+    "20": null
+  },
+  "mean_first_exposure_delay_capped": 9.88942700500173,
+  "first_useful_completion_time": 2.2777946361939407,
+  "outcomes_by_official_source_split": {
+    "unknown": {
+      "offered_fact_count": 47,
+      "offered_weight": 38.0,
+      "coverage": 0.2894736842105263,
+      "J_time": 0.17289964341786354
+    }
+  },
+  "delay_scope": "First successful distinct-fact exposure; undelivered facts capped at horizon",
+  "coverage_at_fractions": {
+    "0.25": 0.07894736842105263,
+    "0.5": 0.21052631578947367,
+    "0.75": 0.2631578947368421,
+    "1.0": 0.2894736842105263
+  },
+  "waiting_times": [
+    0.0,
+    0.7457019711556621,
+    0.5626723452290219,
+    2.6775569234314567,
+    0.005384835923579523,
+    1.3039752814251964,
+    2.0654954169310695,
+    5.199728593959958,
+    3.2886499859260274,
+    7.122822266966564,
+    8.195846207313249,
+    7.095405393039546,
+    9.261843054671045,
+    11.780832535115376,
+    10.057005550728464,
+    12.14120593486559,
+    10.013454739167024
+  ],
+  "undelivered_message_fraction": 0.78125,
+  "header_bytes_offered": 20764,
+  "payload_bytes": "opaque reference; measured only in actual codec replay",
+  "priority": {
+    "reference_scope": [
+      "synthetic_world_fixture_not_image_semantics"
+    ],
+    "delay_cap": 10.0,
+    "cap_is_evaluation_budget_not_operational_deadline": true,
+    "completion_budget": 10,
+    "completed_attempts": 16,
+    "unknown_reference_messages": 0,
+    "by_reference_class": {
+      "critical": {
+        "offered_distinct_reports": 7,
+        "successfully_exposed": 2,
+        "mean_capped_completion_delay": 9.715881863189537,
+        "exposure_within_evaluation_budget": 0.14285714285714285,
+        "undelivered_fraction": 0.7142857142857143,
+        "delivered_only_mean_wait": 8.560396853958476,
+        "distinct_recall_at_completions": 0.14285714285714285
+      },
+      "high": {
+        "offered_distinct_reports": 11,
+        "successfully_exposed": 3,
+        "mean_capped_completion_delay": 8.05540651037535,
+        "exposure_within_evaluation_budget": 0.2727272727272727,
+        "undelivered_fraction": 0.7272727272727273,
+        "delivered_only_mean_wait": 1.9206046047465548,
+        "distinct_recall_at_completions": 0.2727272727272727
+      },
+      "medium": {
+        "offered_distinct_reports": 12,
+        "successfully_exposed": 6,
+        "mean_capped_completion_delay": 7.708733384421862,
+        "exposure_within_evaluation_budget": 0.3333333333333333,
+        "undelivered_fraction": 0.5,
+        "delivered_only_mean_wait": 5.415793351240428,
+        "distinct_recall_at_completions": 0.3333333333333333
+      },
+      "normal": {
+        "offered_distinct_reports": 17,
+        "successfully_exposed": 2,
+        "mean_capped_completion_delay": 9.513759408608053,
+        "exposure_within_evaluation_budget": 0.058823529411764705,
+        "undelivered_fraction": 0.8823529411764706,
+        "delivered_only_mean_wait": 6.070602967432795,
+        "distinct_recall_at_completions": 0.058823529411764705
+      }
+    },
+    "primary": "critical.mean_capped_completion_delay; report critical exposure and all class outcomes alongside it"
+  },
+  "accounting": {
+    "offered": 64,
+    "selected": 17,
+    "succeeded": 14,
+    "failed": 2,
+    "in_flight_at_horizon": 1,
+    "queued_at_horizon": 47,
+    "not_arrived": 0
+  },
+  "selection_ms": {
+    "p50": 2.2664,
+    "p95": 2.9775799999999997,
+    "n": 17,
+    "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+  },
+  "fallback_count": 0,
+  "events_sha256": "e9c618f7afc074e9b064e5f159df0bbe5f164103d400c7954ab9198a1daf7950",
+  "input_stream_sha256": "f78ce6c97d9c88fd496a5c6836de4cbce239620142fb998bdcc0756e9ca379df"
+}

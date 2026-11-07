@@ -1,0 +1,46 @@
+{
+  "updated": "2026-11-02T22:10:15.4828731Z",
+  "notebooks": [
+    {
+      "profile": "wsl",
+      "owner": "satyapaladuguplus",
+      "slug": "semantic-decoder-scheduler-20261030",
+      "version": 12,
+      "status": "COMPLETE",
+      "input_dataset": "satyapaladuguplus/semantic-scheduler-paired-inputs-20261102",
+      "source_capsule_sha256": "1aea11bce37676b35629b4520800a6e4b452b393fa81939c812a2defd38168a0",
+      "notebook_sha256": "0e5d6e58ed451f1c9e382fef4a68ee069cf898d6cde69abd026c62a4335bf61f",
+      "failure": null,
+      "corrected_bundle_dataset": "satyapaladuguplus/semantic-scheduler-sqgan-bundle-20261102",
+      "corrected_bundle_status": "remote flat manifest and 29/29 file names/sizes verified; last.pt exact expected size; remote SHA not downloaded",
+      "remote_inventory_verification": "sqgan_remote_verification.json",
+      "run_id": "wsl-20261102T162419Z",
+      "failure_evidence": "wsl-v11-follow.log",
+      "previous_version_failure": "v11 cell06 sidecar mapping object used as path; no training",
+      "startup_evidence": "terminal; 10/10 supervised development methods recorded; 9 teacher arms blocked; teacher and rate_study stage failures; final test unopened",
+      "push_receipt": "push-wsl-v12.log",
+      "push_exit_code": 0,
+      "runtime_seconds": 10572,
+      "check_report": "checks/paired-check-20261102T220621Z/CHECK_REPORT.md",
+      "research_status": "partial_or_blocked"
+    },
+    {
+      "profile": "windows",
+      "owner": "satyapaladugu",
+      "slug": "semantic-decoder-scheduler-rl",
+      "version": 1,
+      "status": "COMPLETE",
+      "notebook_run_id": "windows-20261102T154257Z",
+      "input_dataset": "satyapaladugu/semantic-scheduler-paired-inputs-20261102",
+      "source_capsule_sha256": "1aea11bce37676b35629b4520800a6e4b452b393fa81939c812a2defd38168a0",
+      "notebook_sha256": "70d924e0b3111e15094b0671092a640aceaf3c78ff4d4004ead930fe1e535831",
+      "verified_devices": "2x Tesla T4",
+      "verified_startup": "terminal; 4 RL methods reached 20000 decisions/steps; Deep Sets initialization 50 epochs; stage_failures=[]; final scientific evaluation false",
+      "evidence": "windows_startup/follow-health-20261102T213541.summary.json",
+      "runtime_seconds": 9933,
+      "check_report": "checks/paired-check-20261102T220621Z/CHECK_REPORT.md",
+      "research_status": "complete_method_attempts; not scientific final evaluation",
+      "run_id": "windows-20261102T154257Z"
+    }
+  ]
+}

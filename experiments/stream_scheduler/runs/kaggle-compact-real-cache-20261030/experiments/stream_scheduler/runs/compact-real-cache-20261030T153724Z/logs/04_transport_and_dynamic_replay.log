@@ -1,0 +1,29 @@
+START 04_transport_and_dynamic_replay output /kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T153724Z
+Command ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T153724Z/source/experiments/stream_scheduler/mini_kaggle_run.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T153724Z/results']
+START real cached scene transport + dynamic baseline replay
+TRANSPORT 1000 /6000 exact roundtrips
+TRANSPORT 2000 /6000 exact roundtrips
+TRANSPORT 3000 /6000 exact roundtrips
+TRANSPORT 4000 /6000 exact roundtrips
+TRANSPORT 5000 /6000 exact roundtrips
+TRANSPORT 6000 /6000 exact roundtrips
+REPLAY 4 48 0.5
+REPLAY 50 256 0.9
+REPLAY 100 512 1.2
+COMPLETE /kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T153724Z/results
+
+{
+  "status": "complete",
+  "scene_roundtrips": 6000,
+  "scene_bytes_mean": 34.45133333333333,
+  "scene_bytes_p95": 45,
+  "scene_bytes_max": 73,
+  "profiles": 1,
+  "scene_bytes_scope": "actual encoded scene blocks only; SPI/relevance/novelty/routing/payload and provisioning excluded",
+  "channels_retained": 93,
+  "field_selection": "not performed; lossless sparse transport retains all channels",
+  "training": "not performed; this CPU component run is not the P/neural/RL study",
+  "relevance_novelty": "stream-dependent inputs; unavailable in cache; not needed by these four baselines",
+  "elapsed_seconds": 11.735557857999993
+}
+END 04_transport_and_dynamic_replay complete 11.966510163999999

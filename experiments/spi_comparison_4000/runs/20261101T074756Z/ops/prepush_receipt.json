@@ -1,0 +1,62 @@
+{
+  "kaggle_identity": {
+    "gpu": true,
+    "dataset_sources": [
+      "satyapaladugu/spi-4000-training-input"
+    ],
+    "is_private": true,
+    "internet": true,
+    "machine_shape": "NvidiaTeslaT4",
+    "id": "satyapaladugu/crisismmd1000-spi-labeling",
+    "metadata_sha256": "9331B89CC49BC8182B4D0AAEBE3C7A91F22678322F1ABB9F49CFF5E9A49FEFCA",
+    "title": "CrisisMMD1000 SPI Labeling"
+  },
+  "canonical_notebook": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_comparison_4000\\SPI_4000_Comparison.ipynb",
+  "nbformat_valid": true,
+  "quota": {
+    "gpu_remaining_hours": 30,
+    "refresh_utc": "2026-11-07T00:00:00Z",
+    "gpu_total_hours": 30,
+    "gpu_used_hours": 0,
+    "checked_utc": "2026-11-01T07:46:33Z",
+    "source": "KaggleApi.quota_view"
+  },
+  "staged_notebook": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_comparison_4000\\runs\\20261101T074756Z\\submission\\SPI_4000_Comparison.ipynb",
+  "checksums": {
+    "dataset_manifest_equals_prior": true,
+    "notebook_canonical_equals_snapshot": true
+  },
+  "source_fix_detected": "crisis_study.prepare(..., frozen_records=...) reads exact saved records and writes split_protocol mode exact_saved_assignments",
+  "frozen_split_fixture": {
+    "test_owner": "main",
+    "reported_result": "passed: exact saved split preservation, rejects cross-role group leakage",
+    "local_fixture_artifacts_present": true,
+    "path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_comparison_4000\\runs\\frozen_split_check_dmxsfzqk"
+  },
+  "cell_count": 17,
+  "normal_python_cells_compiled": 3,
+  "input_dataset": {
+    "metadata_sha256": "70728CBFDCAD4213BD840A9FD2D562A90D7D0A6B185D887D2127466CC19C8CDD",
+    "dataset_id": "satyapaladugu/spi-4000-training-input",
+    "prior_metadata_sha256": "70728CBFDCAD4213BD840A9FD2D562A90D7D0A6B185D887D2127466CC19C8CDD",
+    "matches_prior_run_metadata": true,
+    "prior_metadata_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_comparison_4000\\runs\\20261030T140904Z\\training_input\\dataset-metadata.json",
+    "metadata_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_comparison_4000\\runs\\20261101T074756Z\\ops\\dataset-metadata.json"
+  },
+  "submission": {
+    "expected_timeout_seconds": 24000,
+    "command": "kaggle kernels push -p <run>/submission -t 24000 --accelerator NvidiaTeslaT4",
+    "authorized_by": "parent task: ReadyPUSH latest canonical new v11 same Windows identity",
+    "accelerator": "NvidiaTeslaT4",
+    "target_version": 11
+  },
+  "notebook_bytes": 154559,
+  "previous_version": {
+    "version": 10,
+    "status_command": "kaggle kernels status satyapaladugu/crisismmd1000-spi-labeling",
+    "status": "ERROR"
+  },
+  "magic_cells_skipped": 13,
+  "notebook_sha256": "8979A7E9E19C0CD8D29C46EACFA13F3CC0872E59441CB478E402A69467C96166",
+  "checked_utc": "2026-11-01T07:47:56Z"
+}

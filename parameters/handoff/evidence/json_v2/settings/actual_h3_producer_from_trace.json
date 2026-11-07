@@ -1,0 +1,227 @@
+{
+  "source_run": "satyapaladugu/betterscheduler-semantic-validation-20261026h3",
+  "source_trace_sha256": "723a005c0788e9d958effbaaad3a8df5f5867b97a5a4ebbabf129ac7e7d878a5",
+  "provenance_serialized_in_reused_h3_trace": true,
+  "observation_count": 15,
+  "common_provenance_consistency": {
+    "clip": true,
+    "detector": true,
+    "image_claim_producer": true
+  },
+  "clip": {
+    "backbone": "clip",
+    "model_id": "openai/clip-vit-base-patch32",
+    "model_path": "/kaggle/temp/better_hf/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "config_sha256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+    "producer_scope": "frozen pretrained embeddings; prompt similarities are not probabilities",
+    "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "preprocessing": "checkpoint_native",
+    "processor_sha256": "a69d3a60cc3d402f739e3748f6d239b538680fbbf43b67ce6d5087ec0011f304",
+    "device": "cuda:0",
+    "data_parallel_requested": false,
+    "model_load_seconds": 2.5868936870000425,
+    "detector_provenance": {
+      "detector": "YOLO-Worldv2-small",
+      "checkpoint": "yolov8s-worldv2.pt",
+      "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+      "vocabulary": [
+        "building",
+        "road",
+        "person",
+        "car",
+        "truck",
+        "bus",
+        "motorcycle",
+        "bicycle",
+        "debris",
+        "chair",
+        "couch",
+        "dining table",
+        "television",
+        "refrigerator",
+        "tree",
+        "water"
+      ],
+      "vocabulary_sha256": "018cee83870de2b7615ef1ca7986f4dd2fc7ccf8a74afb214d33535849c99f7e",
+      "conf_threshold": 0.05,
+      "nms_iou": 0.5,
+      "inference_size": 640,
+      "settings_sha256": "512d1ec24619cb552ddf30d080469701a56f3962b9a9fe16c09f80c6f07367b1",
+      "predict_settings": {
+        "conf": 0.05,
+        "iou": 0.5,
+        "imgsz": 640,
+        "max_det": 300,
+        "agnostic_nms": false,
+        "half": false,
+        "augment": false,
+        "verbose": false
+      },
+      "device": "cuda:0",
+      "classes_are_not_emergency_truth": true
+    },
+    "image_claim_producer": {
+      "model_id": "MITLL/LADI-v2-classifier-small-reference",
+      "revision": "6ba5a0300601284bc6b69dddb46c8991a8ac196c",
+      "weights_sha256": {
+        "model.safetensors": "57288c631557ec80d9d50e4f4b7f5b11aeb1c3fd9905fc3c6c6d59e7cbf45213"
+      },
+      "architecture": "bit",
+      "labels": {
+        "0": "bridges_any",
+        "1": "buildings_any",
+        "2": "buildings_affected_or_greater",
+        "3": "buildings_minor_or_greater",
+        "4": "debris_any",
+        "5": "flooding_any",
+        "6": "flooding_structures",
+        "7": "roads_any",
+        "8": "roads_damage",
+        "9": "trees_any",
+        "10": "trees_damage",
+        "11": "water_any"
+      },
+      "preprocessing": {
+        "_processor_class": null,
+        "image_processor_type": "BitImageProcessor",
+        "do_resize": true,
+        "size": {
+          "shortest_edge": 448
+        },
+        "resample": 2,
+        "do_center_crop": true,
+        "crop_size": {
+          "height": 448,
+          "width": 448
+        },
+        "do_rescale": true,
+        "rescale_factor": 0.00392156862745098,
+        "do_normalize": true,
+        "image_mean": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "image_std": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "do_convert_rgb": true
+      },
+      "input_policy": "checkpoint_native",
+      "preprocessing_sha256": "e86d96d8a1be47f9fbb157548eb4037502b30231de7a6413e4769b4c8bb6a2d5",
+      "declared_domain": "aerial disaster imagery",
+      "training_exposure": "official LADI training split",
+      "threshold": 0.5,
+      "threshold_source": "published default",
+      "calibrated": false,
+      "load_seconds": 2.034707463000018,
+      "device": "cuda:0"
+    }
+  },
+  "detector": {
+    "detector": "YOLO-Worldv2-small",
+    "checkpoint": "yolov8s-worldv2.pt",
+    "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+    "vocabulary": [
+      "building",
+      "road",
+      "person",
+      "car",
+      "truck",
+      "bus",
+      "motorcycle",
+      "bicycle",
+      "debris",
+      "chair",
+      "couch",
+      "dining table",
+      "television",
+      "refrigerator",
+      "tree",
+      "water"
+    ],
+    "vocabulary_sha256": "018cee83870de2b7615ef1ca7986f4dd2fc7ccf8a74afb214d33535849c99f7e",
+    "conf_threshold": 0.05,
+    "nms_iou": 0.5,
+    "inference_size": 640,
+    "settings_sha256": "512d1ec24619cb552ddf30d080469701a56f3962b9a9fe16c09f80c6f07367b1",
+    "predict_settings": {
+      "conf": 0.05,
+      "iou": 0.5,
+      "imgsz": 640,
+      "max_det": 300,
+      "agnostic_nms": false,
+      "half": false,
+      "augment": false,
+      "verbose": false
+    },
+    "device": "cuda:0",
+    "classes_are_not_emergency_truth": true
+  },
+  "image_claim_producer": {
+    "model_id": "MITLL/LADI-v2-classifier-small-reference",
+    "revision": "6ba5a0300601284bc6b69dddb46c8991a8ac196c",
+    "weights_sha256": {
+      "model.safetensors": "57288c631557ec80d9d50e4f4b7f5b11aeb1c3fd9905fc3c6c6d59e7cbf45213"
+    },
+    "architecture": "bit",
+    "labels": {
+      "0": "bridges_any",
+      "1": "buildings_any",
+      "2": "buildings_affected_or_greater",
+      "3": "buildings_minor_or_greater",
+      "4": "debris_any",
+      "5": "flooding_any",
+      "6": "flooding_structures",
+      "7": "roads_any",
+      "8": "roads_damage",
+      "9": "trees_any",
+      "10": "trees_damage",
+      "11": "water_any"
+    },
+    "preprocessing": {
+      "_processor_class": null,
+      "image_processor_type": "BitImageProcessor",
+      "do_resize": true,
+      "size": {
+        "shortest_edge": 448
+      },
+      "resample": 2,
+      "do_center_crop": true,
+      "crop_size": {
+        "height": 448,
+        "width": 448
+      },
+      "do_rescale": true,
+      "rescale_factor": 0.00392156862745098,
+      "do_normalize": true,
+      "image_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "image_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "do_convert_rgb": true
+    },
+    "input_policy": "checkpoint_native",
+    "preprocessing_sha256": "e86d96d8a1be47f9fbb157548eb4037502b30231de7a6413e4769b4c8bb6a2d5",
+    "declared_domain": "aerial disaster imagery",
+    "training_exposure": "official LADI training split",
+    "threshold": 0.5,
+    "threshold_source": "published default",
+    "calibrated": false,
+    "load_seconds": 2.034707463000018,
+    "device": "cuda:0"
+  },
+  "limitations": {
+    "predict_settings_are_explicit_overrides": true,
+    "effective_predict_settings_recorded": false,
+    "runtime_ultralytics_effective_args_not_available_in_trace": true
+  }
+}

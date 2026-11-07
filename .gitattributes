@@ -1,2 +1,7 @@
 *.pt filter=lfs diff=lfs merge=lfs -text
 *.pkl filter=lfs diff=lfs merge=lfs -text
+
+# Small experiment checkpoints use ordinary Git; large artifacts remain local.
+experiments/**/*.pt -filter -diff -merge -text
+experiments/**/*.pkl -filter -diff -merge -text
+models/yolov8s-worldv2.pt -filter -diff -merge -text

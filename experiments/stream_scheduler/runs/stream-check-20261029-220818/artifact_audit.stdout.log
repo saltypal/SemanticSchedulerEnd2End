@@ -1,0 +1,104 @@
+{
+  "status": {
+    "status": "complete_with_blocked_teacher_arms",
+    "episodes": 3,
+    "learner_failures": [],
+    "scope": "synthetic plumbing/training pilot; NOT real image or VLM evidence"
+  },
+  "trained_arms": [
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "td_per"
+  ],
+  "blocked_arms": [
+    "rl_vlm_f",
+    "visionprefer",
+    "vlm_replay"
+  ],
+  "metric_files": 42,
+  "policies": [
+    "fifo",
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "novelty",
+    "priority_classifier",
+    "random",
+    "ranknet",
+    "relevance",
+    "rr",
+    "spi",
+    "td_per"
+  ],
+  "checks": {
+    "accounting_records": 42,
+    "reward_records": 42,
+    "decision_logs": 42,
+    "decision_rows": 742,
+    "log_count_matches_selected": 42
+  },
+  "optimization_histories": {
+    "lambdamart": {
+      "present": true,
+      "entries": 0
+    },
+    "linear_choice": {
+      "present": true,
+      "entries": 3
+    },
+    "masked_double_dqn": {
+      "present": true,
+      "entries": 2
+    },
+    "masked_ppo": {
+      "present": true,
+      "entries": 2
+    },
+    "mlp_choice": {
+      "present": true,
+      "entries": 3
+    },
+    "priority_classifier": {
+      "present": true,
+      "entries": 3
+    },
+    "ranknet": {
+      "present": true,
+      "entries": 3
+    },
+    "td_per": {
+      "present": true,
+      "entries": 2
+    }
+  },
+  "portable_reloaded": [
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "td_per"
+  ],
+  "checkpoints_reloaded_cpu": [
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "td_per"
+  ],
+  "issues": [
+    "lambdamart: empty or missing learning history"
+  ]
+}

@@ -1,0 +1,15 @@
+START 03_text_conformance_qwen35_9b output /kaggle/working/experiments/spi_four_class/runs/run20261028_spi_grounding_v1/campaign
+Traceback (most recent call last):
+  File "/kaggle/working/spi_source_run20261028_spi_grounding_v1/parameters/artifacts.py", line 72, in stage
+    try:yield
+        ^^^^^
+  File "/kaggle/working/spi_source_run20261028_spi_grounding_v1/experiments/spi_four_class/visual_reliability.py", line 95, in execute
+    value = assess(reviewer, [], {'hypothetical_scene': control['description']},
+        'text_' + control['id'], run.path / 'raw' / spec['name'], True)
+  File "/kaggle/working/spi_source_run20261028_spi_grounding_v1/experiments/spi_four_class/visual_reliability.py", line 51, in assess
+    execution = reviewer.review_structured(paths, payload, prompt, parse_evidence,
+        case_id, output, protocol='spi_grounding_diagnostic_v1')
+  File "/kaggle/working/spi_source_run20261028_spi_grounding_v1/parameters/qwen_reviewer.py", line 110, in review_structured
+    raise ValueError('supply images for visual review, or explicitly request the text-only diagnostic')
+ValueError: supply images for visual review, or explicitly request the text-only diagnostic
+END 03_text_conformance_qwen35_9b {'stage': '03_text_conformance_qwen35_9b', 'status': 'failed', 'seconds': 0.0041867659999752505}

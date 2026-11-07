@@ -1,0 +1,22 @@
+{
+  "scope": "pre-submit local validation only",
+  "environment": {
+    "os": "WSL Ubuntu-26.04",
+    "python": "/home/Satya/.venvs/semantic-scheduler/bin/python",
+    "device": "CPU"
+  },
+  "checks": {
+    "dynamic_churn_burst": "PASS: 50/60/100 UEs with 256/384/512 offers; matching source-session availability, reset cold-start masks, retained queue after departure, deterministic regeneration, fixed service/failure outcomes, and full offer accounting",
+    "ndcg_reference": "PASS: hand-computed ideal order scores 1.0 at @1/@3/@5; reversed order scores below 1",
+    "empty_singleton_diagnostic": "PASS with reporting limitation: n=0 and n=1 both increment singletons; candidate_counts preserves [0,1,3]",
+    "compileall": "PASS",
+    "pytest": "PASS: Test/tests/test_compact_scene_transport.py Test/tests/test_stream_learning.py; 8 passed"
+  },
+  "no_production_edits": true,
+  "no_kaggle_submission": true,
+  "source_hashes": {
+    "Evaluation/semantic_learning_env.py": "fbcc0acfd9da8f976710d3b0304f382ce9b8b9d99af7702c2566db03f91e8d9c",
+    "experiments/stream_scheduler/train_real_suite.py": "a46be6b728b285142a5628ca1843f1e7d902b9f912e3c3f5b3bc51ae64d8ce70",
+    "experiments/stream_scheduler/semantic_suite_data.py": "0735ba9667edbfff981f2477437fa2f149acd8d27130b7f4a79bdaa434ce1b64"
+  }
+}

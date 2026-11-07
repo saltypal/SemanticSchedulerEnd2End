@@ -1,0 +1,578 @@
+{
+  "fifo": {
+    "score": -0.11638609413526202,
+    "episodes": [
+      {
+        "J_D": 0.11638609413526202,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.44046189251988643,
+            "median_selected_wait": 0.44046189251988643,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.44046189251988643,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.7420712138149068,
+            "median_selected_wait": 0.5794565779483634,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.7420712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.4805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.2015523060807116,
+            "median_selected_wait": 0.17644019965547386,
+            "p95_selected_wait": 5.799999999999997,
+            "restricted_mean_wait": 1.2015523060807116,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.000818,
+          "p95": 0.0012701499999999998,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "round_robin": {
+    "score": -0.16195901080192868,
+    "episodes": [
+      {
+        "J_D": 0.16195901080192868,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.44046189251988643,
+            "median_selected_wait": 0.44046189251988643,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.44046189251988643,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 1.1795712138149068,
+            "median_selected_wait": 0.5527760057206095,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.1795712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 0.875
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.0805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.0805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.0015523060807117,
+            "median_selected_wait": 0.17644019965547386,
+            "p95_selected_wait": 3.799999999999997,
+            "restricted_mean_wait": 1.0015523060807117,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.0046675,
+          "p95": 0.0063682,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "random": {
+    "score": -0.146395716896093,
+    "episodes": [
+      {
+        "J_D": 0.146395716896093,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 1.4404618925198864,
+            "median_selected_wait": 1.4404618925198864,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.4404618925198864,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 0.5
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.7420712138149068,
+            "median_selected_wait": 0.20789277575252285,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.7420712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 0.9375
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.0805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.0805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.2015523060807116,
+            "median_selected_wait": 0.17644019965547386,
+            "p95_selected_wait": 5.599999999999994,
+            "restricted_mean_wait": 1.2015523060807116,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.011644999999999999,
+          "p95": 0.0147414,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "spi_fifo": {
+    "score": -0.10076109413526202,
+    "episodes": [
+      {
+        "J_D": 0.10076109413526202,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.44046189251988643,
+            "median_selected_wait": 0.44046189251988643,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.44046189251988643,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.4920712138149068,
+            "median_selected_wait": 0.06628335854445133,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4920712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.4805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.3615523060807118,
+            "median_selected_wait": 0.5814699330056499,
+            "p95_selected_wait": 5.799999999999997,
+            "restricted_mean_wait": 1.3615523060807118,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.010278,
+          "p95": 0.031890949999999994,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "relevance": {
+    "score": -0.11638609413526202,
+    "episodes": [
+      {
+        "J_D": 0.11638609413526202,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.44046189251988643,
+            "median_selected_wait": 0.44046189251988643,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.44046189251988643,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.7420712138149068,
+            "median_selected_wait": 0.5794565779483634,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.7420712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.4805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.2015523060807116,
+            "median_selected_wait": 0.17644019965547386,
+            "p95_selected_wait": 5.799999999999997,
+            "restricted_mean_wait": 1.2015523060807116,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.002909,
+          "p95": 0.008026199999999994,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "novelty": {
+    "score": -0.13597905022942633,
+    "episodes": [
+      {
+        "J_D": 0.13597905022942633,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 1.4404618925198864,
+            "median_selected_wait": 1.4404618925198864,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.4404618925198864,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 0.5
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.6170712138149068,
+            "median_selected_wait": 0.20789277575252285,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.6170712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.4805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.2015523060807116,
+            "median_selected_wait": 0.17644019965547386,
+            "p95_selected_wait": 5.799999999999997,
+            "restricted_mean_wait": 1.2015523060807116,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.004711,
+          "p95": 0.00917105,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "spi_novelty": {
+    "score": -0.09685484413526202,
+    "episodes": [
+      {
+        "J_D": 0.09685484413526202,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.44046189251988643,
+            "median_selected_wait": 0.44046189251988643,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.44046189251988643,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.4295712138149068,
+            "median_selected_wait": 0.06628335854445133,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4295712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.4805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.4015523060807118,
+            "median_selected_wait": 0.5814699330056499,
+            "p95_selected_wait": 5.799999999999997,
+            "restricted_mean_wait": 1.4015523060807118,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.013122,
+          "p95": 0.035499699999999995,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  },
+  "predicted_edf": {
+    "score": -0.10076109413526202,
+    "episodes": [
+      {
+        "J_D": 0.10076109413526202,
+        "L_E": null,
+        "offered": 48,
+        "selected": 48,
+        "queued_at_horizon": 0,
+        "not_arrived": 0,
+        "completed": 48,
+        "failed": 0,
+        "in_flight": 0,
+        "by_reference_tier": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.44046189251988643,
+            "median_selected_wait": 0.44046189251988643,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.44046189251988643,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 16,
+            "selected": 16,
+            "unselected": 0,
+            "mean_selected_wait": 0.4920712138149068,
+            "median_selected_wait": 0.06628335854445133,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4920712138149068,
+            "followup_count": 16,
+            "eligible": 16,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.4805764679391217,
+            "median_selected_wait": 0.0,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4805764679391217,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 25,
+            "selected": 25,
+            "unselected": 0,
+            "mean_selected_wait": 1.3615523060807118,
+            "median_selected_wait": 0.5814699330056499,
+            "p95_selected_wait": 5.799999999999997,
+            "restricted_mean_wait": 1.3615523060807118,
+            "followup_count": 25,
+            "eligible": 25,
+            "within_budget": 1.0
+          }
+        },
+        "selection_ms": {
+          "p50": 0.014943,
+          "p95": 0.032296899999999996,
+          "n": 48
+        },
+        "reference_scope": "mixed-protocol image VLM silver tiers; not independent emergency correctness"
+      }
+    ]
+  }
+}

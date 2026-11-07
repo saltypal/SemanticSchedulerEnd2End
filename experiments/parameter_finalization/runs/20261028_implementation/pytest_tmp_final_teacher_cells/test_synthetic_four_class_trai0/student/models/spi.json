@@ -1,0 +1,56 @@
+{
+  "schema": "better_spi_linear_v1",
+  "levels": [
+    "Low",
+    "Medium",
+    "High",
+    "Critical"
+  ],
+  "unsupported_levels": [],
+  "input_dimension": 4,
+  "feature_signature": "synthetic_fixture",
+  "rubric_sha256": "synthetic_fixture",
+  "label_source": "vlm_pseudo",
+  "target": "visible response attention under fixed rubric",
+  "human_calibrated": false,
+  "score_calibration": "uncalibrated",
+  "class_order": "Low,Medium,High,Critical",
+  "training_config": {
+    "family": "linear",
+    "C": 0.1,
+    "balanced": false
+  },
+  "w2": [
+    [
+      0.6637618541717529,
+      -0.221253901720047,
+      -0.221253901720047,
+      -0.2212539166212082
+    ],
+    [
+      -0.22125396132469177,
+      0.6637617349624634,
+      -0.22125396132469177,
+      -0.22125396132469177
+    ],
+    [
+      -0.22125396132469177,
+      -0.22125396132469177,
+      0.6637617349624634,
+      -0.22125396132469177
+    ],
+    [
+      -0.2212539166212082,
+      -0.2212539166212082,
+      -0.221253901720047,
+      0.6637617945671082
+    ]
+  ],
+  "b2": [
+    -1.2898776446945703e-07,
+    -1.1512446462802473e-07,
+    -9.69001590078733e-08,
+    -1.9883520963048795e-07
+  ],
+  "sha256": "cffb537846f936d21fe7bab3d7d5da89ee10ae39d83b79610365740172f5827d"
+}

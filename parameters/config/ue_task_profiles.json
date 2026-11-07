@@ -1,0 +1,53 @@
+{
+  "schema": "better_ue_tasks_v1",
+  "missions": [
+    {
+      "mission_id": "building_damage",
+      "paragraph": "Document visible damage to buildings for post-event infrastructure assessment. Do not infer occupancy, structural safety, cause, or rescue urgency.",
+      "conditions": [["building_damage", "a photograph documenting visible damage to buildings"]],
+      "target_entities": ["building"],
+      "allowed_delay_ms": null,
+      "region": null
+    },
+    {
+      "mission_id": "road_blockage",
+      "paragraph": "Document visible obstructions on roads for an access survey. Keep an obstruction on the road distinct from debris beside it; do not infer conditions outside the view.",
+      "conditions": [["road_blockage", "a photograph of a road blocked by an obstruction"]],
+      "target_entities": ["road", "vehicle", "debris"],
+      "allowed_delay_ms": null,
+      "region": null
+    },
+    {
+      "mission_id": "road_damage",
+      "paragraph": "Document visible physical damage to roads for an infrastructure survey. Distinguish damage from obstruction and do not infer repair urgency or trafficability.",
+      "conditions": [["road_damage", "a photograph documenting visible physical damage to a road"]],
+      "target_entities": ["road"],
+      "allowed_delay_ms": null,
+      "region": null
+    },
+    {
+      "mission_id": "household_inventory",
+      "paragraph": "Photograph visible household furniture and appliances for a personal inventory. Record what is present without assigning emergency importance.",
+      "conditions": [["household_inventory", "a photograph documenting household furniture and appliances"]],
+      "target_entities": ["chair", "couch", "dining table", "television", "refrigerator"],
+      "allowed_delay_ms": null,
+      "region": null
+    },
+    {
+      "mission_id": "incident_informativeness",
+      "paragraph": "Collect informative visual documentation of disaster-related incidents. Report visible evidence and uncertainty without inventing injury, identity, cause, or operational urgency.",
+      "conditions": [["incident_informativeness", "a photograph providing informative visual evidence about a disaster incident"]],
+      "target_entities": ["person", "building", "road", "vehicle", "debris"],
+      "allowed_delay_ms": null,
+      "region": null
+    }
+  ],
+  "ues": [
+    {"ue_id": "ue01", "device_type": "drone", "mission_id": "building_damage", "description": "Building inspection drone A with its own observation history"},
+    {"ue_id": "ue02", "device_type": "drone", "mission_id": "building_damage", "description": "Building inspection drone B with a separate observation history"},
+    {"ue_id": "ue03", "device_type": "drone", "mission_id": "road_blockage", "description": "Road access survey drone"},
+    {"ue_id": "ue04", "device_type": "vehicle_camera", "mission_id": "road_damage", "description": "Road infrastructure documentation camera"},
+    {"ue_id": "ue05", "device_type": "phone", "mission_id": "household_inventory", "description": "Personal household inventory phone"},
+    {"ue_id": "ue06", "device_type": "phone", "mission_id": "incident_informativeness", "description": "Field incident documentation phone"}
+  ]
+}

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="17" skipped="3" tests="215" time="130.289" timestamp="2026-11-01T02:36:22.307476+00:00" hostname="SATYASPALADUGU"><testcase classname="parameters.tests.test_annotation_pilot" name="test_reference_unknowns_and_damage_not_blockage" time="0.017" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_control_truth_and_answer_key_isolation" time="0.029" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_review_parser_rejects_string_bools_and_inconsistent_verdicts" time="0.001" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_v2_controls_use_new_groups_without_repairing_omissions" time="0.006" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_degenerate_reviewer_fails_both_control_endpoints" time="0.006" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_kb_observation_sidecar_and_concept_rarity_are_causal" time="0.008" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_aliases_vehicle_groups_and_union_area_have_numerical_reference" time="0.007" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_missing_detection_not_confused_with_available_zero" time="0.007" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_reference_poisoning_cannot_change_runtime_extraction" time="0.008" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_control_output_identity_and_invalid_fact_values_do_not_disappear" time="0.008" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_orchestrator_never_loads_producer_when_reviewer_fails[False]" time="9.331" /><testcase classname="parameters.tests.test_annotation_pilot" name="test_orchestrator_never_loads_producer_when_reviewer_fails[True]" time="11.029" /><testcase classname="parameters.tests.test_campaign" name="test_tee_survives_stale_closed_stage_stream" time="0.003" /><testcase classname="parameters.tests.test_campaign" name="test_logger_retains_stream_after_notebook_stage_closes" time="0.003" /><testcase classname="parameters.tests.test_campaign" name="test_exposure_propagates_through_duplicate_components" time="0.008" /><testcase classname="parameters.tests.test_campaign" name="test_notebook_logs_and_failure_are_preserved" time="0.014"><failure message="ModuleNotFoundError: No module named 'nbformat'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_notebook_logs_and_failure0')
+
+    def test_notebook_logs_and_failure_are_preserved(tmp_path):
+&gt;       recorder=CellRecorder(['print(1)','raise ValueError()'],tmp_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_campaign.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/cloud_notebook.py:14: in __init__
+    self.results={};self.flush()
+                    ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;parameters.cloud_notebook.CellRecorder object at 0x730415a38980&gt;
+
+    def flush(self):
+&gt;       import nbformat as nbf
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/cloud_notebook.py:17: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_cloud_guards" name="test_fresh_final_requires_explicit_exposure_ledger" time="0.003" /><testcase classname="parameters.tests.test_cloud_guards" name="test_pooled_comparison_requires_known_tasks_and_complete_policy_support" time="0.004" /><testcase classname="parameters.tests.test_cloud_guards" name="test_portable_images_are_content_verified" time="0.003" /><testcase classname="parameters.tests.test_cloud_model_grid" name="test_detection_cache_parity_detects_changed_boxes_or_missing_predictions" time="0.001" /><testcase classname="parameters.tests.test_cloud_model_grid" name="test_campaign_control_groups_exclude_all_prior_reviews" time="0.007" /><testcase classname="parameters.tests.test_cloud_model_grid" name="test_grid_notebook_records_executed_grid_cells_and_bounded_resources" time="0.012"><failure message="ModuleNotFoundError: No module named 'nbformat'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_grid_notebook_records_exe0')
+
+    def test_grid_notebook_records_executed_grid_cells_and_bounded_resources(tmp_path):
+&gt;       import nbformat as nbf
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_cloud_model_grid.py:28: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_extraction" name="test_query_before_commit_and_novelty_not_rarity" time="0.004" /><testcase classname="parameters.tests.test_extraction" name="test_semantic_delta_when_appearance_is_same" time="0.003" /><testcase classname="parameters.tests.test_extraction" name="test_failed_serialization_does_not_commit" time="0.005" /><testcase classname="parameters.tests.test_extraction" name="test_temporal_fields_and_region_are_metadata_not_urgency" time="0.003" /><testcase classname="parameters.tests.test_extraction" name="test_runtime_truth_rejected_and_long_paragraph_preserved" time="0.003" /><testcase classname="parameters.tests.test_extraction" name="test_missing_is_not_zero_and_target_area_is_not_distance" time="0.006" /><testcase classname="parameters.tests.test_extraction" name="test_wire_roundtrip_corruption_and_exact_size[8]" time="0.004" /><testcase classname="parameters.tests.test_extraction" name="test_wire_roundtrip_corruption_and_exact_size[16]" time="0.005" /><testcase classname="parameters.tests.test_extraction" name="test_batch_provider_computation_and_explicit_memory_ownership" time="0.004" /><testcase classname="parameters.tests.test_extraction" name="test_identity_and_invalid_predictions" time="0.003" /><testcase classname="parameters.tests.test_extraction" name="test_wire_rejects_another_extraction_specification" time="0.005" /><testcase classname="parameters.tests.test_extraction" name="test_exported_heads_and_streamed_kb_reproduce_runtime_inputs" time="0.006" /><testcase classname="parameters.tests.test_extraction_public_path" name="test_public_image_api_propagates_mission_and_uses_operator_paragraph" time="0.025" /><testcase classname="parameters.tests.test_extraction_public_path" name="test_context_failure_does_not_turn_into_zero_relevance" time="0.009" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_batch_is_read_only_and_transmission_is_serial" time="0.005" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_empty_and_missing_are_different" time="0.002" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_exact_union_clipping_alias_and_rejected" time="0.001" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_final_extractor_emits_v2_even_without_detector" time="0.002" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_four_class_selection_export_and_sealed_labels" time="21.586" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_invalid_context_and_future_time_preserve_other_fields" time="0.003" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_legacy_four_class_artifact_still_loads" time="0.002" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_missing_yolo_checkpoint_is_explicitly_unavailable" time="0.002" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_persisted_kb_rejects_different_ue_and_mission" time="0.004" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_review_parser_and_corrupt_controls" time="0.002" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_saturation_and_nested_overlap" time="0.002" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_text_preflight_does_not_skip_visual_preflight" time="7.044" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_unknown_class_is_rejected_when_vocabulary_is_known" time="0.001" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_v2_prompt_has_balanced_definitions_and_parser_contract" time="0.009" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_wire_roundtrip_masks_quantization_and_v1" time="0.001" /><testcase classname="parameters.tests.test_final_parameters.SceneTests" name="test_zero_context_embedding_is_unavailable_not_nan" time="0.017" /><testcase classname="parameters.tests.test_handoff_tools" name="test_portable_fixture_metadata_matches_its_manifest" time="0.275" /><testcase classname="parameters.tests.test_handoff_tools" name="test_restore_requires_an_explicit_image_source_before_creating_output" time="0.002" /><testcase classname="parameters.tests.test_handoff_tools" name="test_restore_from_existing_images_preserves_exact_pinned_metadata" time="0.821" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_non_detection_and_raw_text_contrasts_cannot_be_native_absence_or_damage" time="0.023" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_image_classifier_can_supply_true_and_false_without_boxes" time="0.014" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_malformed_or_inconsistent_classifier_decision_cannot_be_published" time="0.002" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_abstention_cannot_improve_all_fact_score_by_hiding_mistakes" time="0.002" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_repair_metrics_compare_class_balance_and_penalize_unknowns" time="0.002" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_classifier_outage_is_not_historical_negative_condition_evidence" time="0.020" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_summary_preserves_all_reference_denominators" time="0.002" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_shared_provider_can_keep_unvalidated_localization_explicitly_disabled" time="0.017" /><testcase classname="parameters.tests.test_image_claim_repair" name="test_model_load_produces_runtime_valid_provenance_with_string_class_ids" time="0.023"><failure message="ModuleNotFoundError: No module named 'transformers'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_model_load_produces_runti0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x73042ffd9d90&gt;
+
+    def test_model_load_produces_runtime_valid_provenance_with_string_class_ids(tmp_path,monkeypatch):
+        from types import SimpleNamespace
+&gt;       from transformers import AutoImageProcessor,AutoModelForImageClassification
+E       ModuleNotFoundError: No module named 'transformers'
+
+parameters/tests/test_image_claim_repair.py:121: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_model_configuration_search" name="test_detector_threshold_is_carried_to_downstream_and_kb_signature" time="0.021" /><testcase classname="parameters.tests.test_model_configuration_search" name="test_appearance_kb_does_not_mix_native_crop_and_pad" time="0.025" /><testcase classname="parameters.tests.test_model_configuration_search" name="test_reviewer_settings_cannot_claim_high_resolution_after_small_resize" time="0.003" /><testcase classname="parameters.tests.test_model_configuration_search" name="test_reviewer_uses_effective_size_and_rejects_pixel_budget_overrun" time="0.029"><failure message="ModuleNotFoundError: No module named 'transformers'">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x73040f580270&gt;
+
+    def test_reviewer_uses_effective_size_and_rejects_pixel_budget_overrun(monkeypatch):
+        import torch
+&gt;       from transformers import AutoProcessor
+E       ModuleNotFoundError: No module named 'transformers'
+
+parameters/tests/test_model_configuration_search.py:51: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_model_configuration_search" name="test_review_scope_is_explicit_without_deleting_inconvenient_claims" time="0.012" /><testcase classname="parameters.tests.test_model_configuration_search" name="test_search_plan_is_staged_and_never_selects_from_exposed_test" time="0.007" /><testcase classname="parameters.tests.test_model_configuration_search" name="test_parameter_combinations_preserve_missingness_and_existing_claim_values" time="0.003" /><testcase classname="parameters.tests.test_model_configuration_search" name="test_reviewer_grid_reuses_model_and_scores_all_control_failures" time="0.062" /><testcase classname="parameters.tests.test_review_only" name="test_pinned_cache_rebased_without_changing_candidate_or_reference" time="1.594" /><testcase classname="parameters.tests.test_review_only" name="test_largest_actual_preflight_once_then_all_remaining_cases" time="0.001" /><testcase classname="parameters.tests.test_review_only" name="test_review_only_notebook_contains_one_reviewer_and_bounded_budget" time="0.009"><failure message="ModuleNotFoundError: No module named 'nbformat'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_review_only_notebook_cont0')
+
+    def test_review_only_notebook_contains_one_reviewer_and_bounded_budget(tmp_path):
+&gt;       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_review_only.py:39: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_reviewer_followup" name="test_followup_keeps_fresh_groups_outside_all_prior_controls" time="0.007" /><testcase classname="parameters.tests.test_reviewer_followup" name="test_followup_records_text_modality_and_scores_unmodified_callback" time="0.007" /><testcase classname="parameters.tests.test_reviewer_followup" name="test_new_prompt_is_versioned_and_empty_images_require_explicit_diagnostic" time="0.001" /><testcase classname="parameters.tests.test_reviewer_followup" name="test_followup_notebook_embeds_exact_cells_and_resource_caps" time="0.008"><failure message="ModuleNotFoundError: No module named 'nbformat'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_followup_notebook_embeds_0')
+
+    def test_followup_notebook_embeds_exact_cells_and_resource_caps(tmp_path):
+&gt;       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_reviewer_followup.py:58: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[machine]" time="0.009"><failure message="ModuleNotFoundError: No module named 'jsonschema'">domain = 'machine'
+
+    @pytest.mark.parametrize('domain', ['machine', 'cup', 'animal'])
+    def test_schema_is_domain_independent_and_no_detection_does_not_assert_absence(domain):
+        mission, evidence, bundle, _, _ = fixture(domain)
+        document, audit = build_scene_document(bundle, evidence, mission, source_id='sender')
+&gt;       validate_document(document)
+
+parameters/tests/test_scene_json.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[cup]" time="0.011"><failure message="ModuleNotFoundError: No module named 'jsonschema'">domain = 'cup'
+
+    @pytest.mark.parametrize('domain', ['machine', 'cup', 'animal'])
+    def test_schema_is_domain_independent_and_no_detection_does_not_assert_absence(domain):
+        mission, evidence, bundle, _, _ = fixture(domain)
+        document, audit = build_scene_document(bundle, evidence, mission, source_id='sender')
+&gt;       validate_document(document)
+
+parameters/tests/test_scene_json.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[animal]" time="0.010"><failure message="ModuleNotFoundError: No module named 'jsonschema'">domain = 'animal'
+
+    @pytest.mark.parametrize('domain', ['machine', 'cup', 'animal'])
+    def test_schema_is_domain_independent_and_no_detection_does_not_assert_absence(domain):
+        mission, evidence, bundle, _, _ = fixture(domain)
+        document, audit = build_scene_document(bundle, evidence, mission, source_id='sender')
+&gt;       validate_document(document)
+
+parameters/tests/test_scene_json.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_explicit_false_is_available_and_history_cold_start_is_not_maximum_novelty" time="0.008"><failure message="ModuleNotFoundError: No module named 'jsonschema'">def test_explicit_false_is_available_and_history_cold_start_is_not_maximum_novelty():
+        mission, evidence, bundle, memory, extractor = fixture(predictions={
+            'machine.present': prediction(False), 'machine.damaged': prediction(True)})
+        ontology = {'id': 'fixture-logic', 'rules': [
+            {'id': 'damaged-implies-present', 'if': ['machine.damaged', True], 'then': ['machine.present', True]}]}
+        document, _ = build_scene_document(bundle, evidence, mission, source_id='sender', ontology=ontology)
+&gt;       validate_document(document)
+
+parameters/tests/test_scene_json.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_raw_counts_and_producer_disagreement_are_retained_without_silent_fusion" time="0.027"><failure message="ModuleNotFoundError: No module named 'jsonschema'">def test_raw_counts_and_producer_disagreement_are_retained_without_silent_fusion():
+        boxes = [dict(label='machine', score=.1, box=[0, 0, 50, 50])]*150
+        mission, evidence, bundle, _, _ = fixture(boxes=boxes, predictions={'machine.present': prediction(False)})
+        document, _ = build_scene_document(bundle, evidence, mission, source_id='sender')
+&gt;       validate_document(document)
+
+parameters/tests/test_scene_json.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_validator_rejects_masks_bad_geometry_nan_duplicate_and_evaluator_content" time="0.036" /><testcase classname="parameters.tests.test_scene_json" name="test_single_visual_pass_and_failed_export_do_not_commit_memory" time="0.008"><failure message="ModuleNotFoundError: No module named 'jsonschema'">def test_single_visual_pass_and_failed_export_do_not_commit_memory():
+        mission, evidence, _, memory, _ = fixture()
+        calls = []
+        class Provider:
+            def extract_batch(self, images, missions):
+                calls.append((images, missions)); return [evidence]
+        extractor = PilotParameterExtractor(provider=Provider())
+&gt;       doc, audit = extract_document(extractor, object(), mission, {'source_id': 'sender', 'image_token': 'one'}, memory)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_json.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/scene_json.py:207: in extract_document
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_json" name="test_custom_detector_vocabulary_is_validated_and_does_not_claim_other_categories" time="0.002" /><testcase classname="parameters.tests.test_scene_json" name="test_schema_generation_matches_checked_in_definition" time="0.050" /><testcase classname="parameters.tests.test_scene_review" name="test_explicit_negative_unknown_and_masks_do_not_borrow_reference_values" time="0.001" /><testcase classname="parameters.tests.test_scene_review" name="test_operator_policy_time_boundaries_and_unknown_are_not_low_urgency" time="0.002" /><testcase classname="parameters.tests.test_scene_review" name="test_44_cases_keep_actual_predictions_and_route_information_isolation" time="1.417"><failure message="ModuleNotFoundError: No module named 'jsonschema'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_44_cases_keep_actual_pred0')
+
+    def test_44_cases_keep_actual_predictions_and_route_information_isolation(tmp_path):
+&gt;       cases=prepared(tmp_path)
+              ^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_review.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/tests/test_scene_review.py:38: in prepared
+    return prepare(source,tmp_path/'run',spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+parameters/scene_review_run.py:41: in prepare
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'UE-A-0', 'image_id': '355354192671d5ab667cdcfa5f05e905...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_review" name="test_controls_are_independent_constructions_not_model_accuracy_claims" time="1.558"><failure message="ModuleNotFoundError: No module named 'jsonschema'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_controls_are_independent_0')
+
+    def test_controls_are_independent_constructions_not_model_accuracy_claims(tmp_path):
+&gt;       cases=prepared(tmp_path)
+              ^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_review.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/tests/test_scene_review.py:38: in prepared
+    return prepare(source,tmp_path/'run',spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+parameters/scene_review_run.py:41: in prepare
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'UE-A-0', 'image_id': '355354192671d5ab667cdcfa5f05e905...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_review" name="test_parser_keeps_strict_unknown_and_duplicate_key_semantics" time="0.003" /><testcase classname="parameters.tests.test_scene_review" name="test_scores_do_not_mix_routes_or_exclude_failed_responses" time="1.055"><failure message="ModuleNotFoundError: No module named 'jsonschema'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_scores_do_not_mix_routes_0')
+
+    def test_scores_do_not_mix_routes_or_exclude_failed_responses(tmp_path):
+&gt;       cases=prepared(tmp_path)
+              ^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_review.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/tests/test_scene_review.py:38: in prepared
+    return prepare(source,tmp_path/'run',spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+parameters/scene_review_run.py:41: in prepare
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'UE-A-0', 'image_id': '355354192671d5ab667cdcfa5f05e905...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+&gt;       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_review" name="test_notebook_uses_new_protocol_not_the_legacy_run_path" time="0.008"><failure message="ModuleNotFoundError: No module named 'nbformat'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_notebook_uses_new_protoco0')
+
+    def test_notebook_uses_new_protocol_not_the_legacy_run_path(tmp_path):
+&gt;       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_scene_review.py:99: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_scene_review" name="test_policy_following_is_not_penalized_as_reference_correctness_when_json_is_wrong" time="0.001" /><testcase classname="parameters.tests.test_semantic_contract" name="test_absence_recovers_condition_but_presence_does_not" time="0.001" /><testcase classname="parameters.tests.test_semantic_contract" name="test_derived_predictions_are_not_ground_truth_and_conflicts_never_overwrite" time="0.001" /><testcase classname="parameters.tests.test_semantic_contract" name="test_unknown_missingness_masks_and_non_detection_stay_unavailable" time="0.001" /><testcase classname="parameters.tests.test_semantic_contract" name="test_exhaustive_three_state_decoder_matches_independent_allowed_worlds" time="0.001" /><testcase classname="parameters.tests.test_semantic_contract" name="test_panel_balances_states_and_genuine_omissions_separately" time="0.003" /><testcase classname="parameters.tests.test_semantic_contract" name="test_balanced_controls_exercise_masks_with_stale_values" time="0.004" /><testcase classname="parameters.tests.test_semantic_contract" name="test_thinking_disable_is_enforced_and_checked_in_rendered_template" time="0.001" /><testcase classname="parameters.tests.test_semantic_validation_run" name="test_refreshed_asset_metadata_is_checked_before_pixels_reach_extraction" time="6.955" /><testcase classname="parameters.tests.test_semantic_validation_run" name="test_worker_logs_and_nonzero_exit_are_retained" time="2.005" /><testcase classname="parameters.tests.test_semantic_validation_run" name="test_official_states_and_near_duplicate_reference" time="0.001" /><testcase classname="parameters.tests.test_semantic_validation_run" name="test_budget_review_subset_retains_three_states_and_full_extraction_cases" time="0.025" /><testcase classname="parameters.tests.test_semantic_validation_run" name="test_semantic_notebook_records_actual_workers_and_isolated_runtime" time="0.010"><failure message="ModuleNotFoundError: No module named 'nbformat'">tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_semantic_notebook_records0')
+
+    def test_semantic_notebook_records_actual_workers_and_isolated_runtime(tmp_path):
+&gt;       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_semantic_validation_run.py:72: ModuleNotFoundError</failure></testcase><testcase classname="parameters.tests.test_spi.SPITests" name="test_available_is_derived_without_changing_or_inventing_level" time="0.002" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_bad_source_or_leaking_group_is_rejected" time="0.011" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_campaign_preflight_failure_saves_status_and_closes_teacher" time="8.635" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_explicit_three_class_training_and_canonical_header_mapping" time="13.904" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_hand_computed_ordinal_score" time="0.004" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_missing_class_is_not_fabricated" time="0.009" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_parser_abstains_instead_of_forcing_low" time="0.002" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_teacher_adapter_uses_shared_tuple_parser_without_truth_inputs" time="0.009" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_three_class_metrics_and_invalid_level_contracts" time="0.004" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_training_export_and_heldout_poisoning" time="20.253" /><testcase classname="parameters.tests.test_spi.SPITests" name="test_zip_and_kaggle_expansion_preserve_exact_image_identity" time="0.007" /><testcase classname="parameters.tests.test_spi.MinimalHeaderTests" name="test_query_before_commit_and_no_fake_timestamp" time="0.003" /><testcase classname="parameters.tests.test_spi.MinimalHeaderTests" name="test_roundtrip_masks_identity_and_quantization" time="0.004" /><testcase classname="parameters.tests.test_study" name="test_independent_coverage_reference_and_runtime_truth_boundary" time="0.012" /><testcase classname="parameters.tests.test_study" name="test_real_fit_portable_export_and_history_ablation[linear]" time="0.311" /><testcase classname="parameters.tests.test_study" name="test_real_fit_portable_export_and_history_ablation[tree]" time="0.212" /><testcase classname="parameters.tests.test_study" name="test_grouped_split_never_separates_derivatives" time="0.005" /><testcase classname="parameters.tests.test_study" name="test_head_training_does_not_read_heldout_labels" time="0.213" /><testcase classname="parameters.tests.test_study" name="test_selection_prefers_simpler_near_best" time="0.006" /><testcase classname="parameters.tests.test_study" name="test_quantized_replay_can_change_ties_and_must_be_measured" time="0.017" /><testcase classname="parameters.tests.test_trecis_audit.TrecisAuditTests" name="test_merged_parent_is_not_an_extra_vote_and_copies_do_not_cross_grain" time="0.050" /><testcase classname="parameters.tests.test_trecis_audit.TrecisAuditTests" name="test_missing_data_cannot_produce_an_empty_successful_audit" time="0.003" /><testcase classname="parameters.tests.test_trecis_audit.TrecisAuditTests" name="test_topics_are_concatenated_blocks_and_preserve_text" time="0.007" /><testcase classname="parameters.tests.test_trecis_audit.TrecisAuditTests" name="test_unclosed_topic_is_an_error" time="0.004" /><testcase classname="parameters.tests.test_ue_profiles" name="test_six_ues_share_five_fixed_missions_without_priority_weights" time="0.029" /><testcase classname="parameters.tests.test_ue_profiles" name="test_same_task_relevance_same_image_different_sender_novelty" time="0.013" /><testcase classname="parameters.tests.test_ue_profiles" name="test_same_image_different_mission_uses_matching_task_evidence" time="0.014" /><testcase classname="parameters.tests.test_ue_profiles" name="test_registry_rejects_duplicate_ues_and_unknown_missions" time="0.033" /><testcase classname="Scheduler.tests.test_contextual_decoder_scheduler" name="test_context_features_hand_reference_and_permutation" time="0.043" /><testcase classname="Scheduler.tests.test_contextual_decoder_scheduler" name="test_excluded_fields_cannot_leak_through_history_or_distance" time="0.004" /><testcase classname="Scheduler.tests.test_contextual_decoder_scheduler" name="test_artifact_failure_and_nonfinite_fallback" time="0.005" /><testcase classname="Scheduler.tests.test_contextual_decoder_scheduler" name="test_unvisited_malformed_branches_and_fractional_indices_fail_before_admission" time="0.005" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_header_parse_is_authoritative_and_identity_is_not_a_feature" time="0.004" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_empty_ties_and_profile_errors" time="0.007" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_selection_does_not_mutate_queue_and_missing_has_fifo_fallback" time="0.003" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_round_robin_advances_only_on_select" time="0.004" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_seeded_random_is_input_order_invariant" time="0.004" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_numpy_network_matches_explicit_formula_and_checks_shapes" time="0.008" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_artifact_checksum_and_feature_compatibility" time="0.010" /><testcase classname="Scheduler.tests.test_decoder_scheduler" name="test_scheduler_import_does_not_load_torch" time="0.939" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[fifo]" time="0.002" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[round_robin]" time="0.002" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[fixed_priority]" time="0.001" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[priority_edf]" time="0.001" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[edf]" time="0.003" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[sjf]" time="0.001" /><testcase classname="Scheduler.tests.test_policies" name="test_empty_and_zero_budget[aging]" time="0.002" /><testcase classname="Scheduler.tests.test_policies" name="test_tie_break_arrival_and_id_not_input_order" time="0.001" /><testcase classname="Scheduler.tests.test_policies" name="test_class_then_deadline_not_global_edf" time="0.001" /><testcase classname="Scheduler.tests.test_policies" name="test_round_robin_rotates_users_and_resets" time="0.001" /><testcase classname="Scheduler.tests.test_policies" name="test_resources_skip_oversize_and_enforce_batch_cap" time="0.002" /><testcase classname="Scheduler.tests.test_policies" name="test_arrivals_deadlines_and_horizon" time="0.002" /><testcase classname="Scheduler.tests.test_policies" name="test_replay_is_deterministic_except_measured_runtime" time="0.066" /><testcase classname="Scheduler.tests.test_policies" name="test_reject_invalid_contracts_and_policy" time="0.002" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[fifo]" time="0.132" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[ue_round_robin]" time="0.007" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[fixed_priority]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[edf]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[priority_edf]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[sjf]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[aging]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[semantic_greedy]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[semantic_weighted]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_classical_and_semantic_policies_run[semantic_lexicographic]" time="0.004" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_dqn_state_shape_and_mask_excludes_padded_slots" time="0.002" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_privileged_priority_mapping_is_explicit" time="0.003" /><testcase classname="Scheduler.tests.test_semantic_policies" name="test_privileged_utility_reference_uses_reviewed_facts_and_tracks_success" time="0.004" /><testcase classname="Test.tests.test_channel_mapping" name="test_complex_symbol_pairing_never_crosses_image_boundaries" time="0.004" /><testcase classname="Test.tests.test_channel_mapping" name="test_per_image_mapping_matches_independently_sharded_batches" time="0.002" /><testcase classname="Test.tests.test_channel_mapping" name="test_data_parallel_shards_preserve_per_image_symbols" time="0.001"><skipped type="pytest.skip" message="requires two CUDA devices">/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Test/tests/test_channel_mapping.py:28: requires two CUDA devices</skipped></testcase><testcase classname="Test.tests.test_compact_scene_transport.CompactSceneTests" name="test_bad_sparse_entries" time="0.002" /><testcase classname="Test.tests.test_compact_scene_transport.CompactSceneTests" name="test_dense_exact" time="0.002" /><testcase classname="Test.tests.test_compact_scene_transport.CompactSceneTests" name="test_profile_and_versions" time="0.002" /><testcase classname="Test.tests.test_compact_scene_transport.CompactSceneTests" name="test_sparse_exact" time="0.001" /><testcase classname="Test.tests.test_compact_scene_transport.CompactSceneTests" name="test_unavailable_and_regions" time="0.001" /><testcase classname="Test.tests.test_compact_scene_transport.CompactSceneTests" name="test_zero_vs_failed" time="0.003" /><testcase classname="Test.tests.test_digital_frame" name="test_digital_frame_records_and_checks_crc" time="0.002" /><testcase classname="Test.tests.test_digital_frame" name="test_digital_frame_does_not_hide_corruption" time="0.002" /><testcase classname="Test.tests.test_exported_model_integration" name="test_full_and_split_tensor_state_artifacts_validate_and_load" time="0.001"><skipped type="pytest.skip" message="set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory">/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Test/tests/test_exported_model_integration.py:12: set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory</skipped></testcase><testcase classname="Test.tests.test_exported_model_integration" name="test_encoder_only_then_decoder_only_round_trip" time="0.001"><skipped type="pytest.skip" message="set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory">/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Test/tests/test_exported_model_integration.py:21: set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory</skipped></testcase><testcase classname="Test.tests.test_manifest_guard" name="test_manifest_rejects_missing_required_fields" time="0.004" /><testcase classname="Test.tests.test_semantic_codebook" name="test_semantic_parameter_codebook_is_deterministic_and_separate_from_communication_vq" time="0.293" /><testcase classname="Test.tests.test_semantic_codebook" name="test_semantic_parameter_codebook_uses_its_own_registry" time="0.002" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_repeated_image_lowers_novelty_and_uses_one_embedding_per_observation" time="0.010" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_unrelated_image_raises_novelty_after_a_repeat" time="0.008" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_changing_task_changes_relevance" time="0.004" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_older_timestamp_lowers_freshness" time="0.004" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_urgency_is_unavailable_without_deadline_or_context" time="0.004" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_external_oran_value_can_be_preserved_without_ue_fabrication" time="0.003" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_semantic_header_preserves_unavailability_without_fake_zero" time="0.005" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_packet_report_orders_semantic_header_before_payload_sections" time="0.007" /><testcase classname="Test.tests.test_stage1b_semantic_pipeline" name="test_clip_adapter_accepts_transformers_v5_pooler_output" time="0.002" /><testcase classname="Test.tests.test_stream_learning" name="test_pairwise_learning_prefers_supported_candidate_and_reloads[linear_choice]" time="0.238" /><testcase classname="Test.tests.test_stream_learning" name="test_pairwise_learning_prefers_supported_candidate_and_reloads[ranknet]" time="0.750" /><testcase classname="Test.tests.test_stream_simulator" name="test_seeded_outcomes_and_no_classifier_import" time="0.023" /><testcase classname="Test.tests.test_stream_simulator" name="test_policy_independent_inputs_and_accounting" time="0.088" /><testcase classname="Test.tests.test_stream_simulator" name="test_failure_never_enters_success_history_and_busy_dispatch" time="0.014" /><testcase classname="Test.tests.test_stream_simulator" name="test_ingress_missing_zero_cold_start_and_no_truth" time="0.009" /><testcase classname="Test.tests.test_stream_simulator" name="test_detector_cross_field_contract_and_zero_utility" time="0.015" /><testcase classname="Test.tests.test_stream_simulator" name="test_controller_lifecycle_and_arrival_during_service" time="0.009" /><testcase classname="Test.tests.test_stream_simulator" name="test_no_backlog_invariance" time="0.024" /><testcase classname="Test.tests.test_stream_simulator" name="test_external_stream_without_references_does_not_invent_truth" time="0.010" /><testcase classname="Test.tests.test_stream_simulator" name="test_bad_configuration_rejected[change0]" time="0.002" /><testcase classname="Test.tests.test_stream_simulator" name="test_bad_configuration_rejected[change1]" time="0.001" /><testcase classname="Test.tests.test_stream_simulator" name="test_bad_configuration_rejected[change2]" time="0.002" /><testcase classname="Test.tests.test_stream_simulator" name="test_bad_configuration_rejected[change3]" time="0.001" /><testcase classname="Test.tests.test_stream_simulator" name="test_bad_configuration_rejected[change4]" time="0.002" /></testsuite></testsuites>

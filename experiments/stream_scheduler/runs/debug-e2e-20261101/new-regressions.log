@@ -1,0 +1,27 @@
+..........................................F..............                [100%]
+=================================== FAILURES ===================================
+______________ test_teacher_json_schema_and_validation[candidate] ______________
+
+task = 'candidate'
+
+    @pytest.mark.parametrize("task", ["control", "candidate", "prefix", "replay", "tier"])
+    def test_teacher_json_schema_and_validation(task):
+        row = {"choice": "tie", "evidence": "Visible evidence only.", "unknowns": []}
+        if task == "replay":
+            row = {"value": "neutral", "evidence": "Visible evidence only.", "unknowns": []}
+        if task == "tier":
+            row = {"value": "Low", "evidence": "Visible evidence only.", "unknowns": []}
+        if task == "candidate":
+            row["aspects"] = {"A": [0, 1, 2, 3], "B": None}
+        value = json.dumps(row)
+        parser = JsonSchemaParser(answer_schema(task))
+        for char in value:
+>           assert char in parser.get_allowed_characters()
+E           AssertionError: assert ',' in '] \t\n\r'
+E            +  where '] \t\n\r' = get_allowed_characters()
+E            +    where get_allowed_characters = <lmformatenforcer.jsonschemaparser.JsonSchemaParser object at 0x760340193d50>.get_allowed_characters
+
+experiments/stream_scheduler/tests/test_teacher_and_supervisor.py:29: AssertionError
+=========================== short test summary info ============================
+FAILED experiments/stream_scheduler/tests/test_teacher_and_supervisor.py::test_teacher_json_schema_and_validation[candidate]
+1 failed, 56 passed in 209.12s (0:03:29)

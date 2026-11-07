@@ -1,0 +1,336 @@
+...............F.....F.........................................F...F.... [ 33%]
+..F...FFFFFF.F....FF.FF............F.................................... [ 66%]
+.................................s........ss...........................  [100%]
+=================================== FAILURES ===================================
+_________________ test_notebook_logs_and_failure_are_preserved _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_notebook_logs_and_failure0')
+
+    def test_notebook_logs_and_failure_are_preserved(tmp_path):
+>       recorder=CellRecorder(['print(1)','raise ValueError()'],tmp_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_campaign.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/cloud_notebook.py:14: in __init__
+    self.results={};self.flush()
+                    ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <parameters.cloud_notebook.CellRecorder object at 0x730415a38980>
+
+    def flush(self):
+>       import nbformat as nbf
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/cloud_notebook.py:17: ModuleNotFoundError
+_____ test_grid_notebook_records_executed_grid_cells_and_bounded_resources _____
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_grid_notebook_records_exe0')
+
+    def test_grid_notebook_records_executed_grid_cells_and_bounded_resources(tmp_path):
+>       import nbformat as nbf
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_cloud_model_grid.py:28: ModuleNotFoundError
+___ test_model_load_produces_runtime_valid_provenance_with_string_class_ids ____
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_model_load_produces_runti0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x73042ffd9d90>
+
+    def test_model_load_produces_runtime_valid_provenance_with_string_class_ids(tmp_path,monkeypatch):
+        from types import SimpleNamespace
+>       from transformers import AutoImageProcessor,AutoModelForImageClassification
+E       ModuleNotFoundError: No module named 'transformers'
+
+parameters/tests/test_image_claim_repair.py:121: ModuleNotFoundError
+______ test_reviewer_uses_effective_size_and_rejects_pixel_budget_overrun ______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x73040f580270>
+
+    def test_reviewer_uses_effective_size_and_rejects_pixel_budget_overrun(monkeypatch):
+        import torch
+>       from transformers import AutoProcessor
+E       ModuleNotFoundError: No module named 'transformers'
+
+parameters/tests/test_model_configuration_search.py:51: ModuleNotFoundError
+______ test_review_only_notebook_contains_one_reviewer_and_bounded_budget ______
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_review_only_notebook_cont0')
+
+    def test_review_only_notebook_contains_one_reviewer_and_bounded_budget(tmp_path):
+>       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_review_only.py:39: ModuleNotFoundError
+_________ test_followup_notebook_embeds_exact_cells_and_resource_caps __________
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_followup_notebook_embeds_0')
+
+    def test_followup_notebook_embeds_exact_cells_and_resource_caps(tmp_path):
+>       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_reviewer_followup.py:58: ModuleNotFoundError
+_ test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[machine] _
+
+domain = 'machine'
+
+    @pytest.mark.parametrize('domain', ['machine', 'cup', 'animal'])
+    def test_schema_is_domain_independent_and_no_detection_does_not_assert_absence(domain):
+        mission, evidence, bundle, _, _ = fixture(domain)
+        document, audit = build_scene_document(bundle, evidence, mission, source_id='sender')
+>       validate_document(document)
+
+parameters/tests/test_scene_json.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+_ test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[cup] _
+
+domain = 'cup'
+
+    @pytest.mark.parametrize('domain', ['machine', 'cup', 'animal'])
+    def test_schema_is_domain_independent_and_no_detection_does_not_assert_absence(domain):
+        mission, evidence, bundle, _, _ = fixture(domain)
+        document, audit = build_scene_document(bundle, evidence, mission, source_id='sender')
+>       validate_document(document)
+
+parameters/tests/test_scene_json.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+_ test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[animal] _
+
+domain = 'animal'
+
+    @pytest.mark.parametrize('domain', ['machine', 'cup', 'animal'])
+    def test_schema_is_domain_independent_and_no_detection_does_not_assert_absence(domain):
+        mission, evidence, bundle, _, _ = fixture(domain)
+        document, audit = build_scene_document(bundle, evidence, mission, source_id='sender')
+>       validate_document(document)
+
+parameters/tests/test_scene_json.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+_ test_explicit_false_is_available_and_history_cold_start_is_not_maximum_novelty _
+
+    def test_explicit_false_is_available_and_history_cold_start_is_not_maximum_novelty():
+        mission, evidence, bundle, memory, extractor = fixture(predictions={
+            'machine.present': prediction(False), 'machine.damaged': prediction(True)})
+        ontology = {'id': 'fixture-logic', 'rules': [
+            {'id': 'damaged-implies-present', 'if': ['machine.damaged', True], 'then': ['machine.present', True]}]}
+        document, _ = build_scene_document(bundle, evidence, mission, source_id='sender', ontology=ontology)
+>       validate_document(document)
+
+parameters/tests/test_scene_json.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+_ test_raw_counts_and_producer_disagreement_are_retained_without_silent_fusion _
+
+    def test_raw_counts_and_producer_disagreement_are_retained_without_silent_fusion():
+        boxes = [dict(label='machine', score=.1, box=[0, 0, 50, 50])]*150
+        mission, evidence, bundle, _, _ = fixture(boxes=boxes, predictions={'machine.present': prediction(False)})
+        document, _ = build_scene_document(bundle, evidence, mission, source_id='sender')
+>       validate_document(document)
+
+parameters/tests/test_scene_json.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+________ test_single_visual_pass_and_failed_export_do_not_commit_memory ________
+
+    def test_single_visual_pass_and_failed_export_do_not_commit_memory():
+        mission, evidence, _, memory, _ = fixture()
+        calls = []
+        class Provider:
+            def extract_batch(self, images, missions):
+                calls.append((images, missions)); return [evidence]
+        extractor = PilotParameterExtractor(provider=Provider())
+>       doc, audit = extract_document(extractor, object(), mission, {'source_id': 'sender', 'image_token': 'one'}, memory)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_json.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/scene_json.py:207: in extract_document
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'one', 'image_id': None, 'source_id': 'sender', 'width_...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+____ test_44_cases_keep_actual_predictions_and_route_information_isolation _____
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_44_cases_keep_actual_pred0')
+
+    def test_44_cases_keep_actual_predictions_and_route_information_isolation(tmp_path):
+>       cases=prepared(tmp_path)
+              ^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_review.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/tests/test_scene_review.py:38: in prepared
+    return prepare(source,tmp_path/'run',spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+parameters/scene_review_run.py:41: in prepare
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'UE-A-0', 'image_id': '355354192671d5ab667cdcfa5f05e905...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+____ test_controls_are_independent_constructions_not_model_accuracy_claims _____
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_controls_are_independent_0')
+
+    def test_controls_are_independent_constructions_not_model_accuracy_claims(tmp_path):
+>       cases=prepared(tmp_path)
+              ^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_review.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/tests/test_scene_review.py:38: in prepared
+    return prepare(source,tmp_path/'run',spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+parameters/scene_review_run.py:41: in prepare
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'UE-A-0', 'image_id': '355354192671d5ab667cdcfa5f05e905...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+__________ test_scores_do_not_mix_routes_or_exclude_failed_responses ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_scores_do_not_mix_routes_0')
+
+    def test_scores_do_not_mix_routes_or_exclude_failed_responses(tmp_path):
+>       cases=prepared(tmp_path)
+              ^^^^^^^^^^^^^^^^^^
+
+parameters/tests/test_scene_review.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+parameters/tests/test_scene_review.py:38: in prepared
+    return prepare(source,tmp_path/'run',spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+parameters/scene_review_run.py:41: in prepare
+    validate_document(document)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'schema': 'semantic_scene_evidence_v2', 'observation': {'id': 'UE-A-0', 'image_id': '355354192671d5ab667cdcfa5f05e905...alue': None, 'status': 'unavailable', 'reason': 'no relationship producer enabled', 'method': 'not_implemented'}}, ...}
+
+    def validate_document(document):
+        """Validate shape plus cross-field invariants without a neural dependency."""
+        import json
+        from pathlib import Path
+>       from jsonschema import Draft202012Validator
+E       ModuleNotFoundError: No module named 'jsonschema'
+
+parameters/scene_json.py:215: ModuleNotFoundError
+___________ test_notebook_uses_new_protocol_not_the_legacy_run_path ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_notebook_uses_new_protoco0')
+
+    def test_notebook_uses_new_protocol_not_the_legacy_run_path(tmp_path):
+>       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_scene_review.py:99: ModuleNotFoundError
+______ test_semantic_notebook_records_actual_workers_and_isolated_runtime ______
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_semantic_notebook_records0')
+
+    def test_semantic_notebook_records_actual_workers_and_isolated_runtime(tmp_path):
+>       import nbformat
+E       ModuleNotFoundError: No module named 'nbformat'
+
+parameters/tests/test_semantic_validation_run.py:72: ModuleNotFoundError
+=========================== short test summary info ============================
+SKIPPED [1] Test/tests/test_channel_mapping.py:28: requires two CUDA devices
+SKIPPED [1] Test/tests/test_exported_model_integration.py:12: set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory
+SKIPPED [1] Test/tests/test_exported_model_integration.py:21: set STAGE1_MODEL_DIR to a Kaggle-exported models/SwinJSCC directory
+FAILED parameters/tests/test_campaign.py::test_notebook_logs_and_failure_are_preserved
+FAILED parameters/tests/test_cloud_model_grid.py::test_grid_notebook_records_executed_grid_cells_and_bounded_resources
+FAILED parameters/tests/test_image_claim_repair.py::test_model_load_produces_runtime_valid_provenance_with_string_class_ids
+FAILED parameters/tests/test_model_configuration_search.py::test_reviewer_uses_effective_size_and_rejects_pixel_budget_overrun
+FAILED parameters/tests/test_review_only.py::test_review_only_notebook_contains_one_reviewer_and_bounded_budget
+FAILED parameters/tests/test_reviewer_followup.py::test_followup_notebook_embeds_exact_cells_and_resource_caps
+FAILED parameters/tests/test_scene_json.py::test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[machine]
+FAILED parameters/tests/test_scene_json.py::test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[cup]
+FAILED parameters/tests/test_scene_json.py::test_schema_is_domain_independent_and_no_detection_does_not_assert_absence[animal]
+FAILED parameters/tests/test_scene_json.py::test_explicit_false_is_available_and_history_cold_start_is_not_maximum_novelty
+FAILED parameters/tests/test_scene_json.py::test_raw_counts_and_producer_disagreement_are_retained_without_silent_fusion
+FAILED parameters/tests/test_scene_json.py::test_single_visual_pass_and_failed_export_do_not_commit_memory
+FAILED parameters/tests/test_scene_review.py::test_44_cases_keep_actual_predictions_and_route_information_isolation
+FAILED parameters/tests/test_scene_review.py::test_controls_are_independent_constructions_not_model_accuracy_claims
+FAILED parameters/tests/test_scene_review.py::test_scores_do_not_mix_routes_or_exclude_failed_responses
+FAILED parameters/tests/test_scene_review.py::test_notebook_uses_new_protocol_not_the_legacy_run_path
+FAILED parameters/tests/test_semantic_validation_run.py::test_semantic_notebook_records_actual_workers_and_isolated_runtime
+17 failed, 195 passed, 3 skipped in 130.30s (0:02:10)

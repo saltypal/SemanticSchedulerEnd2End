@@ -1,0 +1,494 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:better-scheduler:semantic-scene-evidence:2",
+  "title": "Domain-independent image evidence, not a universal recognition guarantee",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "observation",
+    "mission",
+    "scene",
+    "measurements",
+    "similarity_signals",
+    "diagnostics",
+    "provenance"
+  ],
+  "$defs": {
+    "datum": {
+      "type": "object",
+      "required": [
+        "value",
+        "status",
+        "reason",
+        "method"
+      ],
+      "properties": {
+        "value": {},
+        "status": {
+          "enum": [
+            "available",
+            "unavailable",
+            "cold_start"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producer_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "available"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "not": {
+                  "type": "null"
+                }
+              },
+              "reason": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "value": {
+                "type": "null"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "claim": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/datum"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "name",
+        "subject",
+        "predicate",
+        "producer_ref",
+        "score"
+      ],
+      "properties": {
+        "value": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject": {
+          "type": "object",
+          "required": [
+            "kind",
+            "name"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "minLength": 1
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "predicate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "score": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/score"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "score": {
+      "type": "object",
+      "required": [
+        "value",
+        "kind",
+        "calibrated"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "calibrated": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema": {
+      "const": "semantic_scene_evidence_v2"
+    },
+    "observation": {
+      "type": "object",
+      "required": [
+        "id",
+        "image_id",
+        "source_id",
+        "width_px",
+        "height_px"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "image_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "width_px": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height_px": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "mission": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "context",
+        "observable_clauses",
+        "targets",
+        "unsupported_clauses"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observable_clauses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unsupported_clauses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "required": [
+        "claims",
+        "detections",
+        "relations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "detections": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/datum"
+            }
+          ],
+          "properties": {
+            "non_detection_is_absence": {
+              "const": false
+            },
+            "value": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "required": [
+                  "category",
+                  "detection_count",
+                  "largest_box_area_fraction",
+                  "box_union_fraction",
+                  "max_detection_score"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detection_count": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "largest_box_area_fraction": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "box_union_fraction": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "max_detection_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "relations": {
+          "$ref": "#/$defs/datum"
+        }
+      }
+    },
+    "measurements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_alignment",
+        "novelty",
+        "concept_rarity",
+        "spatial",
+        "complexity",
+        "temporal",
+        "geographic"
+      ],
+      "properties": {
+        "context_alignment": {
+          "$ref": "#/$defs/datum"
+        },
+        "novelty": {
+          "$ref": "#/$defs/datum"
+        },
+        "concept_rarity": {
+          "$ref": "#/$defs/datum"
+        },
+        "spatial": {
+          "$ref": "#/$defs/datum"
+        },
+        "complexity": {
+          "$ref": "#/$defs/datum"
+        },
+        "geographic": {
+          "$ref": "#/$defs/datum"
+        },
+        "temporal": {
+          "type": "object"
+        }
+      }
+    },
+    "similarity_signals": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/datum"
+        }
+      ],
+      "required": [
+        "calibrated",
+        "producer_ref",
+        "not_probabilities"
+      ],
+      "properties": {
+        "calibrated": {
+          "const": false
+        },
+        "not_probabilities": {
+          "const": true
+        },
+        "value": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "units",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "number"
+              },
+              "units": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "predictions_modified"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "predictions_modified": {
+            "const": false
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "extraction_specification",
+        "ontology",
+        "producers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "extraction_specification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ontology": {
+          "type": "object",
+          "required": [
+            "id",
+            "rules"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "rules": {
+              "type": "array"
+            }
+          }
+        },
+        "producers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "kind",
+              "settings"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "settings": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

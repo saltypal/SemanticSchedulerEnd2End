@@ -1,0 +1,91 @@
+{
+  "dataset": "QCRI/MEDIC",
+  "features": [
+    {
+      "feature_idx": 0,
+      "name": "image_id",
+      "type": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    {
+      "feature_idx": 1,
+      "name": "event_name",
+      "type": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    {
+      "feature_idx": 2,
+      "name": "image_path",
+      "type": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    {
+      "feature_idx": 3,
+      "name": "damage_severity",
+      "type": {
+        "names": [
+          "little_or_none",
+          "mild",
+          "severe"
+        ],
+        "_type": "ClassLabel"
+      }
+    },
+    {
+      "feature_idx": 4,
+      "name": "informative",
+      "type": {
+        "names": [
+          "informative",
+          "not_informative"
+        ],
+        "_type": "ClassLabel"
+      }
+    },
+    {
+      "feature_idx": 5,
+      "name": "humanitarian",
+      "type": {
+        "names": [
+          "affected_injured_or_dead_people",
+          "infrastructure_and_utility_damage",
+          "not_humanitarian",
+          "rescue_volunteering_or_donation_effort"
+        ],
+        "_type": "ClassLabel"
+      }
+    },
+    {
+      "feature_idx": 6,
+      "name": "disaster_types",
+      "type": {
+        "names": [
+          "earthquake",
+          "flood",
+          "hurricane",
+          "fire",
+          "landslide",
+          "not_disaster",
+          "other_disaster"
+        ],
+        "_type": "ClassLabel"
+      }
+    },
+    {
+      "feature_idx": 7,
+      "name": "image",
+      "type": {
+        "_type": "Image"
+      }
+    }
+  ],
+  "source_url": "https://datasets-server.huggingface.co/rows?dataset=QCRI%2FMEDIC&config=default&split=train&offset=29800&length=1",
+  "source_row": 29800,
+  "source_revision": null
+}

@@ -1,0 +1,142 @@
+{
+  "kernel": {
+    "owner": "satyapaladuguplus",
+    "slug": "semantic-image-pool-scene-cache-20261030",
+    "version": 5,
+    "run_id": "20261030T130620Z",
+    "status": "COMPLETE"
+  },
+  "acceptance": {
+    "mode": "real",
+    "acquired_images": 6000,
+    "parameters_complete": true,
+    "all_requested_sources_available": true,
+    "status": "complete_for_acquired_sources",
+    "scene_only": false,
+    "spi_pending": false,
+    "missing_sources": [],
+    "scene_accuracy": "unmeasured",
+    "SPI_domain_accuracy": "unmeasured",
+    "native_category_is_priority": false
+  },
+  "sources": {
+    "open_images": 1000,
+    "places365": 1000,
+    "crisismmd": 4000
+  },
+  "images": {
+    "acquired_records": 6000,
+    "unique_ids": 6000,
+    "tar_image_files": 6000,
+    "tar_members": 6136,
+    "source_status": []
+  },
+  "scene_cache": {
+    "stored": 6000,
+    "expected": 6000,
+    "successful": 6000,
+    "failed": 0,
+    "coverage_complete": true,
+    "all_successful": true,
+    "wire_bytes_per_scene_block": 369,
+    "accuracy_status": "not measured; no reference boxes supplied"
+  },
+  "parameter_handoff": {
+    "expected": 6000,
+    "complete": 6000,
+    "failed_or_partial": 0,
+    "all_complete": true,
+    "SPI_semantic_accuracy": "not established on these domains",
+    "relevance_novelty": "deliberately not cached as fixedimage values"
+  },
+  "spi_predictions": {
+    "records": 6000,
+    "unique_ids": 6000,
+    "available": 6000,
+    "distribution": {
+      "Low": 3189,
+      "High": 1539,
+      "Medium": 1053,
+      "Critical": 219
+    },
+    "artifact_sha256": "949e7b0a57d5451baba248a3b309d9c13dcf5646cfd495a062531f7e7b5bd7ef",
+    "test_domain_accuracy": "unmeasured"
+  },
+  "provisional_training": {
+    "scope": "provisional CLIP classifier; not completed full encoder study",
+    "labels": "mixed-protocol VLM pseudo-labels; not independent urgency truth",
+    "selection": "validation macro-F1 over C=0.1/1/10; selected C=10.0",
+    "splits": {
+      "train": 2068,
+      "validation": 1037,
+      "test": 828
+    },
+    "development_macro_f1": 0.6024501725140623,
+    "test_macro_f1_vs_pseudolabels": 0.5999677936621949,
+    "test_accuracy_vs_pseudolabels": 0.6485507246376812,
+    "per_class_test_recall_vs_pseudolabels": {
+      "Low": 0.7948717948717948,
+      "Medium": 0.36,
+      "High": 0.6953846153846154,
+      "Critical": 0.7333333333333333
+    }
+  },
+  "profiles": {
+    "GPU": {
+      "warmups": 10,
+      "measured_calls": 100,
+      "p50_ms": 28.561689500065768,
+      "p95_ms": 38.84069249993445,
+      "scope": "rawimage to SPI, no scene inference or simulator calculations",
+      "supported_flops": 8730109440,
+      "flops_status": "partial"
+    },
+    "CPU": {
+      "warmups": 10,
+      "measured_calls": 30,
+      "p50_ms": 104.74004299999251,
+      "p95_ms": 112.45643074996678,
+      "scope": "rawimage to SPI, no scene inference or simulator calculations",
+      "supported_flops": 8730109440,
+      "flops_status": "partial"
+    }
+  },
+  "archive": {
+    "path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\mini_dataset\\runs\\mini_spi_20261030_v1\\downloads\\Mini_dataset_6000.tar",
+    "bytes": 941352960,
+    "sha256": "0F8C6186B09DCF6AB87911DF642612919377157BB1585082BED1C93B1506FE2C",
+    "remote_receipt": {
+      "path": "/kaggle/working/experiments/image_pool/runs/Mini_dataset_6000.tar",
+      "bytes": 941352960,
+      "sha256": "0f8c6186b09dcf6ab87911df642612919377157bb1585082bed1c93b1506fe2c",
+      "images": 6000,
+      "claim": "provisional scheduler development pool, not verified urgency truth"
+    },
+    "download_verification": {
+      "kernel": "satyapaladuguplus/semantic-image-pool-scene-cache-20261030/5",
+      "version": 5,
+      "remote_path": "experiments/image_pool/runs/Mini_dataset_6000.tar",
+      "local_path": "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/mini_dataset/runs/mini_spi_20261030_v1/downloads/Mini_dataset_6000.tar",
+      "bytes": 941352960,
+      "sha256": "0F8C6186B09DCF6AB87911DF642612919377157BB1585082BED1C93B1506FE2C",
+      "receipt_match": true,
+      "free_bytes_before": 10058551296,
+      "verified_utc": "2026-10-30T13:57:02.326846+00:00"
+    }
+  },
+  "interpretation_limits": [
+    "SPI labels are mixed-protocol VLM pseudo-labels; classifier metrics measure pseudo-label agreement, not independent urgency truth.",
+    "SPI domain accuracy on the 6000-image pool is unmeasured.",
+    "Profiling scope is raw image to SPI only; it excludes scene inference and simulator calculations.",
+    "FLOPs report is partial and omits unsupported operators."
+  ],
+  "coverage_verification": {
+    "prediction_ids_exact_match_inputs": true,
+    "prediction_missing_ids": 0,
+    "prediction_extra_ids": 0,
+    "prediction_hash_mismatches": 0,
+    "scene_ids_exact_match_inputs": true,
+    "scene_missing_or_failed": 0,
+    "scene_extra_ids": 0
+  }
+}

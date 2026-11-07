@@ -1,0 +1,31 @@
+{
+  "schema": "external_stream_replay_v1",
+  "config": {
+    "seed": 0,
+    "delay_cap": 10.0,
+    "failure_probability": 0.0,
+    "service_seconds": "synthetic 1",
+    "observation_end": 60.0,
+    "endpoint_scope": "predeclared independent of realized arrivals"
+  },
+  "records": [
+    {
+      "message_id": "[\"ue000\",\"episode510\",0]",
+      "arrival": 0.6926246193501857,
+      "evaluator": {
+        "fact_id": "[\"ue000\",\"episode510\",0]",
+        "reference_priority": null,
+        "failed": false,
+        "failure_draw": 0.6369616873214543
+      }
+    }
+  ],
+  "runtime_sha256": "18d50afda5c5bc3cb92929c75a08b806a34f9f29e453e934c23d943fe92e6943",
+  "reference_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "limitations": [
+    "External reference provenance must be audited before research claims",
+    "No training or automatic dataset split",
+    "Service and failures are simulated"
+  ],
+  "sha256": "515d74e657932f8da2a43540d815262cbc4f8102bd69fcd5e5d538468a8f4794"
+}

@@ -1,0 +1,28 @@
+CELL START 0 log /kaggle/working/experiments/spi_classifier_repair/runs/notebook9_20261028_v15/cell_evidence/cell_0.log
+START environment preflight
+RUN pinned active-kernel dependency install ['/usr/bin/python3', '-m', 'pip', 'install', '--disable-pip-version-check', '--no-deps', 'scikit-learn==1.7.2']
+Collecting scikit-learn==1.7.2
+  Downloading scikit_learn-1.7.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (11 kB)
+Downloading scikit_learn-1.7.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.4/9.4 MB 42.7 MB/s  0:00:00
+Installing collected packages: scikit-learn
+  Attempting uninstall: scikit-learn
+    Found existing installation: scikit-learn 1.6.1
+    Uninstalling scikit-learn-1.6.1:
+      Successfully uninstalled scikit-learn-1.6.1
+Successfully installed scikit-learn-1.7.2
+
+RUN pinned active-kernel dependency install ['/usr/bin/python3', '-m', 'pip', 'install', '--disable-pip-version-check', '--no-deps', 'nbformat==5.10.4']
+Collecting nbformat==5.10.4
+  Downloading nbformat-5.10.4-py3-none-any.whl.metadata (3.6 kB)
+Downloading nbformat-5.10.4-py3-none-any.whl (78 kB)
+Installing collected packages: nbformat
+  Attempting uninstall: nbformat
+    Found existing installation: nbformat 5.11.1
+    Uninstalling nbformat-5.11.1:
+      Successfully uninstalled nbformat-5.11.1
+Successfully installed nbformat-5.10.4
+
+Observed environment {'python': '3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]', 'interpreter': '/usr/bin/python3', 'torch': '2.11.0+cu128', 'torchvision': '0.26.0+cu128', 'torch_cuda': '12.8', 'numpy': '2.1.3', 'scikit-learn': '1.7.2', 'Pillow': '13.0.0', 'nbformat': '5.10.4', 'gpus': ['Tesla T4', 'Tesla T4'], 'train_device': 'cuda:0', 'device_parallelism': False}
+END environment preflight
+CELL END 0 seconds 21.7514124490001

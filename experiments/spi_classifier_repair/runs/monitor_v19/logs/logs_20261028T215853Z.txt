@@ -1,0 +1,70 @@
+﻿[{"stream_name":"stderr","time":8.544449218,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.544524286,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.544531475,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.544535669,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.258601561,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.258635616,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.258641061,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.258650175,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.75418151,"data":"SETUP START /usr/bin/python3 3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]\n"}
+,{"stream_name":"stdout","time":10.783700683,"data":"SOURCE VERIFIED 6c5758f5a9da0b4b433e1ae6eda07557187a84b885bd493d154fadd874b0b364\n"}
+,{"stream_name":"stdout","time":19.48284867,"data":"HARDWARE 2.11.0+cu128 2 ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stdout","time":19.483784495,"data":"DEPENDENCIES START 0\n"}
+,{"stream_name":"stdout","time":44.576602263,"data":"DEPENDENCIES END 0\n"}
+,{"stream_name":"stdout","time":44.577614701,"data":"DEPENDENCIES START 1\n"}
+,{"stream_name":"stdout","time":50.005868961,"data":"DEPENDENCIES END 1\n"}
+,{"stream_name":"stdout","time":50.023222037,"data":"SETUP END /kaggle/working/experiments/spi_classifier_repair/runs/medic_spi_20261028T214226Z\n"}
+,{"stream_name":"stderr","time":848.601151206,"data":"[W1028 21:56:24.879627437 util.cpp:742] Warning: Failed to compute flops for op aten::conv2d because it requires padding, stride, and dilation values. (function computeFlops)\n"}
+,{"stream_name":"stderr","time":959.228428414,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":959.229103379,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":959.229123546,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=4500)\n"}
+,{"stream_name":"stderr","time":959.22913012,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":959.22913477,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":959.229139669,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":959.229143878,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":959.229147834,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":959.229152157,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":959.229156234,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":959.229160347,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":959.229174714,"data":"Exception encountered at \"In [3]\":\n"}
+,{"stream_name":"stderr","time":959.229178117,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":959.229181379,"data":"RuntimeError                              Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":959.229185009,"data":"/tmp/ipykernel_24/3943025391.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":959.229188123,"data":"      3 started=time.monotonic()\n"}
+,{"stream_name":"stderr","time":959.229193558,"data":"      4 try:\n"}
+,{"stream_name":"stderr","time":959.229197477,"data":"----\u003e 5  run(RUN/'data/records.json',PROJECT/'parameters/results/spi_inputs_v2_20261027b/panel.json',PROJECT/'parameters/config/final_labeling_teacher.json',RUN/'campaign')\n"}
+,{"stream_name":"stderr","time":959.229201658,"data":"      6 except BaseException:\n"}
+,{"stream_name":"stderr","time":959.229204889,"data":"      7  (RUN/'failure.txt').write_text(traceback.format_exc());raise\n"}
+,{"stream_name":"stderr","time":959.229208868,"data":"\n"}
+,{"stream_name":"stderr","time":959.229211783,"data":"/kaggle/working/project/experiments/spi_classifier_repair/medic_campaign.py in run(records_path, exposure_path, teacher_selection, output)\n"}
+,{"stream_name":"stderr","time":959.229214918,"data":"    428     rows,receipt=assign_roles(rows,[r['image_sha256'] for r in exposed]);write_json(out/'records.json',rows);write_json(out/'splits.json',receipt)\n"}
+,{"stream_name":"stderr","time":959.229218129,"data":"    429     labels=teacher_labels(rows,out/'labeling',json.loads(Path(teacher_selection).read_text()))\n"}
+,{"stream_name":"stderr","time":959.229221566,"data":"--\u003e 430     winner,test=compare(rows,labels,out/'comparison')\n"}
+,{"stream_name":"stderr","time":959.229225276,"data":"    431     print('CALIBRATION AND COMPLETE PIPELINE START',flush=True)\n"}
+,{"stream_name":"stderr","time":959.229230066,"data":"    432     from huggingface_hub import snapshot_download\n"}
+,{"stream_name":"stderr","time":959.229234746,"data":"\n"}
+,{"stream_name":"stderr","time":959.229238574,"data":"/usr/lib/python3.13/contextlib.py in inner(*args, **kwds)\n"}
+,{"stream_name":"stderr","time":959.229241991,"data":"     83         def inner(*args, **kwds):\n"}
+,{"stream_name":"stderr","time":959.229246585,"data":"     84             with self._recreate_cm():\n"}
+,{"stream_name":"stderr","time":959.229249494,"data":"---\u003e 85                 return func(*args, **kwds)\n"}
+,{"stream_name":"stderr","time":959.229252781,"data":"     86         return inner\n"}
+,{"stream_name":"stderr","time":959.229255981,"data":"     87 \n"}
+,{"stream_name":"stderr","time":959.229259193,"data":"\n"}
+,{"stream_name":"stderr","time":959.229262088,"data":"/kaggle/working/project/experiments/spi_classifier_repair/medic_campaign.py in compare(rows, labels, out)\n"}
+,{"stream_name":"stderr","time":959.229265356,"data":"    384     missing=sorted(expected-actual)\n"}
+,{"stream_name":"stderr","time":959.229268437,"data":"    385     write_json(out/'coverage.json',{'required_candidates':len(expected),'completed_candidates':len(actual),'missing':missing,'complete':not missing})\n"}
+,{"stream_name":"stderr","time":959.229271964,"data":"--\u003e 386     if missing:raise RuntimeError('classifier matrix incomplete; locked test remains closed: '+str(missing))\n"}
+,{"stream_name":"stderr","time":959.229275574,"data":"    387     if not candidates:raise RuntimeError('no classifier fitted successfully')\n"}
+,{"stream_name":"stderr","time":959.229278891,"data":"    388     winner=max(candidates,key=lambda r:r['development']['macro_f1']);write_json(out/'selection_frozen.json',winner)\n"}
+,{"stream_name":"stderr","time":959.229288234,"data":"\n"}
+,{"stream_name":"stderr","time":959.229292779,"data":"RuntimeError: classifier matrix incomplete; locked test remains closed: [('clip_b32', 'extra_trees'), ('clip_b32', 'hist_boost'), ('clip_b32', 'knn'), ('clip_b32', 'linear_svm'), ('clip_b32', 'logistic'), ('clip_b32', 'mlp'), ('clip_b32', 'random_forest'), ('clip_b32', 'rbf_svm'), ('clip_b32', 'ridge'), ('convnextv2_tiny', 'extra_trees'), ('convnextv2_tiny', 'hist_boost'), ('convnextv2_tiny', 'knn'), ('convnextv2_tiny', 'linear_svm'), ('convnextv2_tiny', 'logistic'), ('convnextv2_tiny', 'mlp'), ('convnextv2_tiny', 'random_forest'), ('convnextv2_tiny', 'rbf_svm'), ('convnextv2_tiny', 'ridge')]\n"}
+,{"stream_name":"stderr","time":959.229297901,"data":"\n"}
+,{"stream_name":"stderr","time":962.475498147,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":962.475530266,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":962.794042142,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":962.794066862,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":964.20720901,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":964.622138922,"data":"[NbConvertApp] Writing 671864 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":967.239603792,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":968.513152529,"data":"[NbConvertApp] Writing 935653 bytes to __results__.html\n"}
+]

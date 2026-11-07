@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Draft parameter-first audit record; not the existing wire format",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_kind", "schema_version", "evidence_kind", "run_id", "record_id", "image_id", "observation_id", "mission_version", "history_digest", "parameters"],
+  "properties": {
+    "record_kind": {"const": "parameter_audit"},
+    "schema_version": {"const": "parameter_audit_draft_v1"},
+    "evidence_kind": {"enum": ["measured", "illustrative_fixture"]},
+    "run_id": {"type": "string", "minLength": 1},
+    "record_id": {"type": "string", "minLength": 1},
+    "image_id": {"type": "string", "minLength": 1},
+    "observation_id": {"type": "string", "minLength": 1},
+    "mission_version": {"type": "string", "minLength": 1},
+    "history_digest": {"type": "string", "minLength": 1},
+    "parameters": {"type": "array", "items": {"$ref": "#/$defs/parameter"}},
+    "note": {"type": "string"}
+  },
+  "$defs": {
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "available", "units", "method_version", "evidence_refs", "reason"],
+      "properties": {
+        "name": {"enum": ["context_relevance", "novelty", "scarcity", "task_importance", "temporal", "spatial_prominence", "scene_complexity", "reliability", "scene_evidence", "geographic", "source_context", "complementarity"]},
+        "value": {"type": ["null", "number", "integer", "boolean", "object", "array"]},
+        "available": {"type": "boolean"},
+        "units": {"type": "string", "minLength": 1},
+        "method_version": {"type": "string", "minLength": 1},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "reason": {"type": ["null", "string"]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"available": {"const": false}}},
+          "then": {"properties": {"value": {"type": "null"}, "reason": {"type": "string", "minLength": 1}}},
+          "else": {"properties": {"value": {"not": {"type": "null"}}}}
+        }
+      ]
+    }
+  }
+}

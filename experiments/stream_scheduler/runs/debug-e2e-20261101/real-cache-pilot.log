@@ -1,0 +1,46 @@
+START REAL DATA SUITE {'archive': 'experiments/mini_dataset/runs/mini_spi_20261030_v1/downloads/Mini_dataset_6000.tar', 'output': 'experiments/stream_scheduler/runs/debug-e2e-20261101/real-cache-pilot', 'epochs': 2, 'seeds': '1729', 'training_episodes': 5, 'samples': 32, 'model_seconds': 90, 'validation_traces': 3, 'arms': 'all', 'mission_text': False, 'device': 'cpu', 'rl_steps': 504, 'deadline_seconds': 2400.0, 'resume': False, 'dynamic_ues': True, 'burst': True, 'vector_extension': 'experiments/stream_scheduler/runs/full-v22-launch-20261031T003706Z/retrieved_selected/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion/vectors.npz', 'mission_vectors': 'experiments/stream_scheduler/runs/full-v22-launch-20261031T003706Z/retrieved_selected/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared/data/mission_vectors.npy', 'mission_vectors_sha256': '922de6b1984732e5b4d7c6d14fec26594b54aa420215a3740d465bb2e026688f'}
+BASELINE fifo
+BASELINE round_robin
+BASELINE random
+BASELINE spi_fifo
+BASELINE relevance
+BASELINE novelty
+BASELINE spi_novelty
+BASELINE predicted_edf
+TRAIN linear_choice/1729
+EPOCH linear_choice 1729 0 loss 2.3450695537030697 validation -1.9549944723661101
+EPOCH linear_choice 1729 1 loss 2.3409291058778763 validation -1.9221337368420433
+TRAIN mlp_choice/1729
+EPOCH mlp_choice 1729 0 loss 2.360931873321533 validation -2.0643777632400244
+EPOCH mlp_choice 1729 1 loss 2.351095996797085 validation -2.129964162999365
+TRAIN delay_huber/1729
+EPOCH delay_huber 1729 0 loss 0.06304642994655296 validation -2.0444448478534745
+EPOCH delay_huber 1729 1 loss 0.03110051737166941 validation -2.0644568408007484
+TRAIN ranknet/1729
+EPOCH ranknet 1729 0 loss 0.6936986744403839 validation -2.0515329653088403
+EPOCH ranknet 1729 1 loss 0.6866962146013975 validation -1.8913523685813054
+TRAIN lambdamart/1729
+TRAIN priority_classifier/1729
+EPOCH priority_classifier 1729 0 loss 1.3930927217006683 validation -2.3514803012967564
+EPOCH priority_classifier 1729 1 loss 1.3766771033406258 validation -2.264146451607715
+TRAIN deepsets_ranknet/1729
+EPOCH deepsets_ranknet 1729 0 loss 0.7017342709004879 validation -1.8677034886505137
+EPOCH deepsets_ranknet 1729 1 loss 0.6928750891238451 validation -1.8506680353477425
+TRAIN set_transformer_ranknet/1729
+EPOCH set_transformer_ranknet 1729 0 loss 0.6941001582890749 validation -1.8020158790479721
+EPOCH set_transformer_ranknet 1729 1 loss 0.68716099858284 validation -1.872010646814842
+TRAIN listmle/1729
+EPOCH listmle 1729 0 loss 1.805437121540308 validation -1.8628686113722583
+EPOCH listmle 1729 1 loss 1.7820803187787533 validation -1.8311904231440816
+TRAIN masked_ppo/1729
+PPO 504 updates 32 validation -1.794683534549723
+TRAIN masked_double_dqn/1729
+RL masked_double_dqn 1729 504 updates 1 validation -1.729823549412335
+TRAIN td_per/1729
+RL td_per 1729 504 updates 1 validation -1.729823549412335
+TRAIN ranknet_warmstart_ppo/1729
+PPO 504 updates 32 validation -1.739527646234019
+TRAIN temporal_deepsets_ranknet/1729
+EPOCH temporal_deepsets_ranknet 1729 0 loss 0.6920779440551996 validation -1.9403022818152749
+EPOCH temporal_deepsets_ranknet 1729 1 loss 0.6833293102681637 validation -1.9307256003593085
+FINISHED bounded method attempts; consult ledger experiments/stream_scheduler/runs/debug-e2e-20261101/real-cache-pilot

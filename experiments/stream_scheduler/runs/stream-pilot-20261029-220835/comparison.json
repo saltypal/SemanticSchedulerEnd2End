@@ -1,0 +1,1262 @@
+[
+  {
+    "policy": "fifo",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.37114781336054153,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 1,
+      "mean_capped_completion_delay": 6.697938554172344,
+      "exposure_within_evaluation_budget": 0.5,
+      "undelivered_fraction": 0.5,
+      "delivered_only_mean_wait": 2.5873405132907745,
+      "distinct_recall_at_completions": 0.5
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 14,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0318,
+      "p95": 0.03744,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "fifo",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.08966569084652937,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 14,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0401,
+      "p95": 0.0706,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "fifo",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.09076772226204306,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 9.699162162173318,
+      "exposure_within_evaluation_budget": 0.2857142857142857,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 7.965392135715976,
+      "distinct_recall_at_completions": 0.14285714285714285
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 47,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0439,
+      "p95": 0.09033999999999998,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "rr",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.3768794058209592,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 1,
+      "mean_capped_completion_delay": 5.54712201421614,
+      "exposure_within_evaluation_budget": 0.5,
+      "undelivered_fraction": 0.5,
+      "delivered_only_mean_wait": 0.28570743337836735,
+      "distinct_recall_at_completions": 0.5
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 14,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0359,
+      "p95": 0.07812,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "rr",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.09625830623662741,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 18,
+      "succeeded": 16,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 30,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0521,
+      "p95": 0.0991599999999999,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "rr",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.13880919315988557,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 3,
+      "mean_capped_completion_delay": 8.472545301010497,
+      "exposure_within_evaluation_budget": 0.2857142857142857,
+      "undelivered_fraction": 0.5714285714285714,
+      "delivered_only_mean_wait": 6.026337382956605,
+      "distinct_recall_at_completions": 0.2857142857142857
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0612,
+      "p95": 0.08178999999999997,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "random",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.48500897497782,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 2.0970556803602554,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 1.3156997880500652,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 18,
+      "succeeded": 17,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 14,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0349,
+      "p95": 0.06487,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "random",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.19424335258395098,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0469,
+      "p95": 0.09511999999999995,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "random",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.11897021003565648,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 8.748418777397786,
+      "exposure_within_evaluation_budget": 0.14285714285714285,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 5.587029079190841,
+      "distinct_recall_at_completions": 0.14285714285714285
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 18,
+      "succeeded": 16,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 46,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.06345,
+      "p95": 0.08577499999999996,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "spi",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.5895831559430396,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.5042252391781785,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.7228693468679879,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.1063,
+      "p95": 0.16328,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "spi",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.19683048766643813,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.1637,
+      "p95": 0.22299999999999995,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "spi",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.05783000995688574,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 4,
+      "mean_capped_completion_delay": 7.158291344102741,
+      "exposure_within_evaluation_budget": 0.5714285714285714,
+      "undelivered_fraction": 0.4285714285714286,
+      "delivered_only_mean_wait": 4.101945314535576,
+      "distinct_recall_at_completions": 0.2857142857142857
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 17,
+      "succeeded": 12,
+      "failed": 4,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 47,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.2574,
+      "p95": 0.30596,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "relevance",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.4458168488704811,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 5.54712201421614,
+      "exposure_within_evaluation_budget": 0.5,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 5.3859822603153,
+      "distinct_recall_at_completions": 0.5
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 18,
+      "succeeded": 15,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 14,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.03995,
+      "p95": 0.05356999999999999,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "relevance",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.15145719543231956,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0481,
+      "p95": 0.08441999999999997,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "relevance",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.14535053326628125,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": 10.0,
+      "exposure_within_evaluation_budget": 0.0,
+      "undelivered_fraction": 1.0,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": 0.0
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 18,
+      "succeeded": 15,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 46,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.05985,
+      "p95": 0.11101999999999995,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "novelty",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.4153210473445188,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 1,
+      "mean_capped_completion_delay": 6.3360458275725104,
+      "exposure_within_evaluation_budget": 0.5,
+      "undelivered_fraction": 0.5,
+      "delivered_only_mean_wait": 1.863555060091108,
+      "distinct_recall_at_completions": 0.5
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 14,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0348,
+      "p95": 0.061459999999999994,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "novelty",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.16729917498028313,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 29,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.0542,
+      "p95": 0.07215999999999989,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "novelty",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.09334513406009937,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": 10.0,
+      "exposure_within_evaluation_budget": 0.0,
+      "undelivered_fraction": 1.0,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": 0.0
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.076,
+      "p95": 0.12011,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "linear_choice",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.47028830365850166,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 2.2637769753210994,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 1.4824210830109092,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 0.9109,
+      "p95": 1.620899999999999,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "linear_choice",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.13269923341863046,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.2584,
+      "p95": 1.8393599999999997,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "linear_choice",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.10605558769715584,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 1,
+      "mean_capped_completion_delay": 8.746134911713659,
+      "exposure_within_evaluation_budget": 0.14285714285714285,
+      "undelivered_fraction": 0.8571428571428572,
+      "delivered_only_mean_wait": 0.40609664576761073,
+      "distinct_recall_at_completions": 0.14285714285714285
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 20,
+      "succeeded": 16,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 44,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.63255,
+      "p95": 2.523355,
+      "n": 20,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "mlp_choice",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.498177861839937,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.4376358588005922,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.6562799664904015,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.1438,
+      "p95": 1.4629199999999993,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "mlp_choice",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.234418766365172,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.914,
+      "p95": 2.57666,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "mlp_choice",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.13264301909083512,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 7.523218927297182,
+      "exposure_within_evaluation_budget": 0.2857142857142857,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 0.4786669897460396,
+      "distinct_recall_at_completions": 0.2857142857142857
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 2.233,
+      "p95": 2.5608299999999993,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "ranknet",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.498177861839937,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.4376358588005922,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.6562799664904015,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.1504,
+      "p95": 1.6032599999999997,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "ranknet",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.234418766365172,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.7776,
+      "p95": 1.9259399999999998,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "ranknet",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.13380091607734632,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 7.523218927297182,
+      "exposure_within_evaluation_budget": 0.2857142857142857,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 0.4786669897460396,
+      "distinct_recall_at_completions": 0.2857142857142857
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 2.4432,
+      "p95": 2.903549999999998,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "lambdamart",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.488259928818935,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 2.539373565228715,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 1.7580176729185246,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 18,
+      "succeeded": 15,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 14,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 8.45965,
+      "p95": 12.193014999999997,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "lambdamart",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.31954043294635487,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 18,
+      "succeeded": 15,
+      "failed": 2,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 30,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 17.95075,
+      "p95": 23.39908,
+      "n": 18,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "lambdamart",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.13867083336850278,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": 10.0,
+      "exposure_within_evaluation_budget": 0.0,
+      "undelivered_fraction": 1.0,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": 0.0
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 25.0572,
+      "p95": 27.81502,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "priority_classifier",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.498177861839937,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.4376358588005922,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.6562799664904015,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.0247,
+      "p95": 1.2008399999999997,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "priority_classifier",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.234418766365172,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.5068,
+      "p95": 1.79562,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "priority_classifier",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.12946113559693448,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 3,
+      "mean_capped_completion_delay": 7.389071517080085,
+      "exposure_within_evaluation_budget": 0.42857142857142855,
+      "undelivered_fraction": 0.5714285714285714,
+      "delivered_only_mean_wait": 2.9026078767090753,
+      "distinct_recall_at_completions": 0.2857142857142857
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 2.0311,
+      "p95": 2.5278899999999997,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "masked_ppo",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.49931880614402996,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.4376358588005922,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.6562799664904015,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 16,
+      "succeeded": 14,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 16,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.15755,
+      "p95": 1.97915,
+      "n": 16,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "masked_ppo",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.2079022715701622,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 16,
+      "succeeded": 15,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 32,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.6508,
+      "p95": 1.988025,
+      "n": 16,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "masked_ppo",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.1352592588548399,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 7.523218927297182,
+      "exposure_within_evaluation_budget": 0.2857142857142857,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 0.4786669897460396,
+      "distinct_recall_at_completions": 0.2857142857142857
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 15,
+      "failed": 3,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 2.1539,
+      "p95": 2.5624899999999986,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "masked_double_dqn",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.498177861839937,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.4376358588005922,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.6562799664904015,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.1361,
+      "p95": 1.4532,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "masked_double_dqn",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.2134956185215391,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.9905,
+      "p95": 2.86678,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "masked_double_dqn",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.14285011641505274,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 8.777756331599281,
+      "exposure_within_evaluation_budget": 0.14285714285714285,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 6.349051658583528,
+      "distinct_recall_at_completions": 0.14285714285714285
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 14,
+      "failed": 4,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 2.1711,
+      "p95": 2.9101199999999987,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "td_per",
+    "episode": 0,
+    "max_ues": 4,
+    "J_time": 0.498177861839937,
+    "critical": {
+      "offered_distinct_reports": 2,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 1.4376358588005922,
+      "exposure_within_evaluation_budget": 1.0,
+      "undelivered_fraction": 0.0,
+      "delivered_only_mean_wait": 0.6562799664904015,
+      "distinct_recall_at_completions": 1.0
+    },
+    "accounting": {
+      "offered": 32,
+      "selected": 17,
+      "succeeded": 15,
+      "failed": 1,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 15,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.1226,
+      "p95": 1.4634999999999998,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "td_per",
+    "episode": 1,
+    "max_ues": 60,
+    "J_time": 0.2134956185215391,
+    "critical": {
+      "offered_distinct_reports": 0,
+      "successfully_exposed": 0,
+      "mean_capped_completion_delay": null,
+      "exposure_within_evaluation_budget": null,
+      "undelivered_fraction": null,
+      "delivered_only_mean_wait": null,
+      "distinct_recall_at_completions": null
+    },
+    "accounting": {
+      "offered": 48,
+      "selected": 17,
+      "succeeded": 16,
+      "failed": 0,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 31,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 1.7245,
+      "p95": 2.1319199999999996,
+      "n": 17,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  },
+  {
+    "policy": "td_per",
+    "episode": 2,
+    "max_ues": 100,
+    "J_time": 0.14285011641505274,
+    "critical": {
+      "offered_distinct_reports": 7,
+      "successfully_exposed": 2,
+      "mean_capped_completion_delay": 8.777756331599281,
+      "exposure_within_evaluation_budget": 0.14285714285714285,
+      "undelivered_fraction": 0.7142857142857143,
+      "delivered_only_mean_wait": 5.753094741352447,
+      "distinct_recall_at_completions": 0.14285714285714285
+    },
+    "accounting": {
+      "offered": 64,
+      "selected": 19,
+      "succeeded": 14,
+      "failed": 4,
+      "in_flight_at_horizon": 1,
+      "queued_at_horizon": 45,
+      "not_arrived": 0
+    },
+    "selection_ms": {
+      "p50": 2.3601,
+      "p95": 2.708979999999997,
+      "n": 19,
+      "scope": "CPU context build + selection; unbatched; overhead not charged to synthetic service time"
+    }
+  }
+]

@@ -1,0 +1,571 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+START 01_environment output /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z
+{
+  "interpreter": "/usr/bin/python3",
+  "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "cpu_count": 4,
+  "execution_target": "Kaggle managed GPU requested; submitted from WSL",
+  "gpu_requested": true,
+  "dependencies": "managed torch retained; pinned Transformers4.57.6/bitsandbytes0.49.2/lm-format-enforcer0.11.3 installed in active runtime",
+  "run_dir": "/kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z"
+}
+END 01_environment complete 0.0024938889999930325
+START 02_source_snapshot output /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z
+Verified source/input files 131 2
+END 02_source_snapshot complete 0.03071979899999633
+START 03_input_and_regression output /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z
+Input archive /kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar bytes 941352960
+test_bad_sparse_entries (test_compact_scene_transport.CompactSceneTests.test_bad_sparse_entries) ... ok
+test_dense_exact (test_compact_scene_transport.CompactSceneTests.test_dense_exact) ... ok
+test_profile_and_versions (test_compact_scene_transport.CompactSceneTests.test_profile_and_versions) ... ok
+test_sparse_exact (test_compact_scene_transport.CompactSceneTests.test_sparse_exact) ... ok
+test_unavailable_and_regions (test_compact_scene_transport.CompactSceneTests.test_unavailable_and_regions) ... ok
+test_zero_vs_failed (test_compact_scene_transport.CompactSceneTests.test_zero_vs_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+test_bad_sparse_entries (test_compact_scene_transport.CompactSceneTests.test_bad_sparse_entries) ... ok
+test_dense_exact (test_compact_scene_transport.CompactSceneTests.test_dense_exact) ... ok
+test_profile_and_versions (test_compact_scene_transport.CompactSceneTests.test_profile_and_versions) ... ok
+test_sparse_exact (test_compact_scene_transport.CompactSceneTests.test_sparse_exact) ... ok
+test_unavailable_and_regions (test_compact_scene_transport.CompactSceneTests.test_unavailable_and_regions) ... ok
+test_zero_vs_failed (test_compact_scene_transport.CompactSceneTests.test_zero_vs_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+
+test_bad_sparse_entries (test_compact_scene_transport.CompactSceneTests.test_bad_sparse_entries) ... ok
+test_dense_exact (test_compact_scene_transport.CompactSceneTests.test_dense_exact) ... ok
+test_profile_and_versions (test_compact_scene_transport.CompactSceneTests.test_profile_and_versions) ... ok
+test_sparse_exact (test_compact_scene_transport.CompactSceneTests.test_sparse_exact) ... ok
+test_unavailable_and_regions (test_compact_scene_transport.CompactSceneTests.test_unavailable_and_regions) ... ok
+test_zero_vs_failed (test_compact_scene_transport.CompactSceneTests.test_zero_vs_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+Archive SHA256 verified 0f8c6186b09dcf6ab87911df642612919377157bb1585082bed1c93b1506fe2c
+END 03_input_and_regression complete 12.904132548000035
+START 04_hardware_repair_validation output /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z
+Installing pinned teacher grammar/runtime; managed Torch retained
+Collecting transformers==4.57.6
+  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)
+Collecting transformers==4.57.6
+  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)
+Collecting bitsandbytes==0.49.2
+  Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting lm-format-enforcer==0.11.3
+  Downloading lm_format_enforcer-0.11.3-py3-none-any.whl.metadata (17 kB)
+Requirement already satisfied: accelerate<2,>=1.2 in /usr/local/lib/python3.13/dist-packages (1.14.0)
+Collecting bitsandbytes==0.49.2
+  Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting lm-format-enforcer==0.11.3
+  Downloading lm_format_enforcer-0.11.3-py3-none-any.whl.metadata (17 kB)
+Requirement already satisfied: accelerate<2,>=1.2 in /usr/local/lib/python3.13/dist-packages (1.14.0)
+Collecting Pillow<13,>=11.3
+  Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (3.32.5)
+Collecting huggingface-hub<1.0,>=0.34.0 (from transformers==4.57.6)
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: numpy>=1.17 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2.1.3)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (26.3)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (6.0.3)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2025.11.3)
+Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2.34.2)
+Collecting Pillow<13,>=11.3
+  Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (3.32.5)
+Collecting huggingface-hub<1.0,>=0.34.0 (from transformers==4.57.6)
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: numpy>=1.17 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2.1.3)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (26.3)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (6.0.3)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2025.11.3)
+Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (2.34.2)
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers==4.57.6)
+  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (0.8.0)
+Requirement already satisfied: tqdm>=4.27 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (4.67.3)
+Requirement already satisfied: torch<3,>=2.3 in /usr/local/lib/python3.13/dist-packages (from bitsandbytes==0.49.2) (2.11.0+cu128)
+Collecting interegular>=0.3.2 (from lm-format-enforcer==0.11.3)
+  Downloading interegular-0.3.3-py37-none-any.whl.metadata (3.0 kB)
+Requirement already satisfied: pydantic>=1.10.8 in /usr/local/lib/python3.13/dist-packages (from lm-format-enforcer==0.11.3) (2.13.5)
+Requirement already satisfied: psutil in /usr/local/lib/python3.13/dist-packages (from accelerate<2,>=1.2) (5.9.5)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6) (2025.12.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.1.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6) (1.6.0)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6) (4.16.0)
+Requirement already satisfied: setuptools<82 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (81.0.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.1.6)
+Requirement already satisfied: cuda-toolkit==12.8.1 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.1)
+Requirement already satisfied: cuda-bindings<13,>=12.9.4 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (12.9.7)
+Requirement already satisfied: nvidia-cudnn-cu12==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.6.0)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.4.1)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.90)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (11.3.3.83)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (1.13.1.3)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.90)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.5.8.93)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.93)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.93)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.90)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings<13,>=12.9.4->torch<3,>=2.3->bitsandbytes==0.49.2) (1.8.0)
+Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic>=1.10.8->lm-format-enforcer==0.11.3) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.5 in /usr/local/lib/python3.13/dist-packages (from pydantic>=1.10.8->lm-format-enforcer==0.11.3) (2.46.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.13/dist-packages (from pydantic>=1.10.8->lm-format-enforcer==0.11.3) (0.4.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy>=1.13.3->torch<3,>=2.3->bitsandbytes==0.49.2) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2->torch<3,>=2.3->bitsandbytes==0.49.2) (3.0.3)
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers==4.57.6)
+  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (0.8.0)
+Requirement already satisfied: tqdm>=4.27 in /usr/local/lib/python3.13/dist-packages (from transformers==4.57.6) (4.67.3)
+Requirement already satisfied: torch<3,>=2.3 in /usr/local/lib/python3.13/dist-packages (from bitsandbytes==0.49.2) (2.11.0+cu128)
+Collecting interegular>=0.3.2 (from lm-format-enforcer==0.11.3)
+  Downloading interegular-0.3.3-py37-none-any.whl.metadata (3.0 kB)
+Requirement already satisfied: pydantic>=1.10.8 in /usr/local/lib/python3.13/dist-packages (from lm-format-enforcer==0.11.3) (2.13.5)
+Requirement already satisfied: psutil in /usr/local/lib/python3.13/dist-packages (from accelerate<2,>=1.2) (5.9.5)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6) (2025.12.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.1.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6) (1.6.0)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6) (4.16.0)
+Requirement already satisfied: setuptools<82 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (81.0.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.1.6)
+Requirement already satisfied: cuda-toolkit==12.8.1 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.1)
+Requirement already satisfied: cuda-bindings<13,>=12.9.4 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (12.9.7)
+Requirement already satisfied: nvidia-cudnn-cu12==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch<3,>=2.3->bitsandbytes==0.49.2) (3.6.0)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.4.1)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.90)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (11.3.3.83)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (1.13.1.3)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.90)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.5.8.93)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.93)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.93)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==12.8.1; platform_system == "Linux"->torch<3,>=2.3->bitsandbytes==0.49.2) (12.8.90)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings<13,>=12.9.4->torch<3,>=2.3->bitsandbytes==0.49.2) (1.8.0)
+Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic>=1.10.8->lm-format-enforcer==0.11.3) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.5 in /usr/local/lib/python3.13/dist-packages (from pydantic>=1.10.8->lm-format-enforcer==0.11.3) (2.46.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.13/dist-packages (from pydantic>=1.10.8->lm-format-enforcer==0.11.3) (0.4.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy>=1.13.3->torch<3,>=2.3->bitsandbytes==0.49.2) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2->torch<3,>=2.3->bitsandbytes==0.49.2) (3.0.3)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (3.4.9)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (3.19)
+Requirement already satisfied: urllib3<3,>=1.26 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (2.8.0)
+Requirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (2026.10.19)
+Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (3.4.9)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (3.19)
+Requirement already satisfied: urllib3<3,>=1.26 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (2.8.0)
+Requirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.13/dist-packages (from requests->transformers==4.57.6) (2026.10.19)
+Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 32.0 MB/s  0:00:00
+Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl (60.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 32.0 MB/s  0:00:00
+Downloading bitsandbytes-0.49.2-py3-none-manylinux_2_24_x86_64.whl (60.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.7/60.7 MB 121.9 MB/s  0:00:00
+Downloading lm_format_enforcer-0.11.3-py3-none-any.whl (45 kB)
+Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 146.0 MB/s  0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 18.3 MB/s  0:00:00
+Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 117.4 MB/s  0:00:00
+Downloading interegular-0.3.3-py37-none-any.whl (23 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.7/60.7 MB 121.9 MB/s  0:00:00
+Downloading lm_format_enforcer-0.11.3-py3-none-any.whl (45 kB)
+Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 146.0 MB/s  0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 18.3 MB/s  0:00:00
+Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 117.4 MB/s  0:00:00
+Downloading interegular-0.3.3-py37-none-any.whl (23 kB)
+Installing collected packages: Pillow, interegular, huggingface-hub, tokenizers, lm-format-enforcer, transformers, bitsandbytes
+  Attempting uninstall: Pillow
+    Found existing installation: pillow 13.0.0
+    Uninstalling pillow-13.0.0:
+      Successfully uninstalled pillow-13.0.0
+Installing collected packages: Pillow, interegular, huggingface-hub, tokenizers, lm-format-enforcer, transformers, bitsandbytes
+  Attempting uninstall: Pillow
+    Found existing installation: pillow 13.0.0
+    Uninstalling pillow-13.0.0:
+      Successfully uninstalled pillow-13.0.0
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface_hub 1.29.0
+    Uninstalling huggingface_hub-1.29.0:
+      Successfully uninstalled huggingface_hub-1.29.0
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface_hub 1.29.0
+    Uninstalling huggingface_hub-1.29.0:
+      Successfully uninstalled huggingface_hub-1.29.0
+  Attempting uninstall: tokenizers
+    Found existing installation: tokenizers 0.23.1
+    Uninstalling tokenizers-0.23.1:
+      Successfully uninstalled tokenizers-0.23.1
+  Attempting uninstall: tokenizers
+    Found existing installation: tokenizers 0.23.1
+    Uninstalling tokenizers-0.23.1:
+      Successfully uninstalled tokenizers-0.23.1
+  Attempting uninstall: transformers
+    Found existing installation: transformers 5.16.1
+  Attempting uninstall: transformers
+    Found existing installation: transformers 5.16.1
+    Uninstalling transformers-5.16.1:
+    Uninstalling transformers-5.16.1:
+      Successfully uninstalled transformers-5.16.1
+      Successfully uninstalled transformers-5.16.1
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+gradio 6.26.0 requires huggingface-hub<2.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+diffusers 0.40.0 requires huggingface-hub<2.0,>=1.23.0, but you have huggingface-hub 0.36.2 which is incompatible.
+Successfully installed Pillow-12.3.0 bitsandbytes-0.49.2 huggingface-hub-0.36.2 interegular-0.3.3 lm-format-enforcer-0.11.3 tokenizers-0.22.2 transformers-4.57.6
+
+Successfully installed Pillow-12.3.0 bitsandbytes-0.49.2 huggingface-hub-0.36.2 interegular-0.3.3 lm-format-enforcer-0.11.3 tokenizers-0.22.2 transformers-4.57.6
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+gradio 6.26.0 requires huggingface-hub<2.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+diffusers 0.40.0 requires huggingface-hub<2.0,>=1.23.0, but you have huggingface-hub 0.36.2 which is incompatible.
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+gradio 6.26.0 requires huggingface-hub<2.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+diffusers 0.40.0 requires huggingface-hub<2.0,>=1.23.0, but you have huggingface-hub 0.36.2 which is incompatible.
+{'torch': '2.11.0+cu128', 'numpy': '2.1.3', 'lightgbm': '4.6.0', 'transformers': '4.57.6', 'bitsandbytes': '0.49.2', 'lm-format-enforcer': '0.11.3', 'cuda_available': True, 'gpu_count': 2, 'gpu_names': ['Tesla T4', 'Tesla T4']}
+RUN MODE repair_validation ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z/source/experiments/stream_scheduler/run_guarded.py', '--seconds', '1000', '--log-dir', '/kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z/logs/supervisor', '--', '/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z/source/experiments/stream_scheduler/gpu_repair_validation.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z/results', '--cached-inputs', '/kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z/source/repair_inputs', '--seconds', '980']
+EPOCH linear_choice 1729 0 loss 2.2040762901306152 validation -0.34117000111094503
+EPOCH linear_choice 1729 1 loss 2.1681816577911377 validation -0.28868404816443916
+CUDA_CHECK linear_choice passed
+EPOCH mlp_choice 1729 0 loss 2.0669689178466797 validation 0.11240600762171399
+EPOCH mlp_choice 1729 1 loss 2.0086143016815186 validation 0.23151465840137553
+CUDA_CHECK mlp_choice passed
+EPOCH delay_huber 1729 0 loss 0.06722581386566162 validation 0.03330661263823101
+EPOCH delay_huber 1729 1 loss 0.04324079304933548 validation 0.06813525194176151
+CUDA_CHECK delay_huber passed
+EPOCH ranknet 1729 0 loss 0.6939695477485657 validation 0.11724582218011433
+EPOCH ranknet 1729 1 loss 0.6691233515739441 validation 0.22270195910776597
+CUDA_CHECK ranknet passed
+EPOCH priority_classifier 1729 0 loss 1.4002695083618164 validation 0.00486105877808507
+EPOCH priority_classifier 1729 1 loss 1.3692958354949951 validation 0.00920088684954451
+CUDA_CHECK priority_classifier passed
+EPOCH deepsets_ranknet 1729 0 loss 0.7023783326148987 validation 0.007784200925771173
+EPOCH deepsets_ranknet 1729 1 loss 0.6789173483848572 validation 0.10476191935800033
+CUDA_CHECK deepsets_ranknet passed
+EPOCH set_transformer_ranknet 1729 0 loss 0.6754943132400513 validation 0.08368011596407401
+EPOCH set_transformer_ranknet 1729 1 loss 0.657413125038147 validation 0.15239898001048258
+CUDA_CHECK set_transformer_ranknet passed
+EPOCH listmle 1729 0 loss 1.8825924396514893 validation 0.013091779141518406
+EPOCH listmle 1729 1 loss 1.7945524454116821 validation 0.11909924249421833
+CUDA_CHECK listmle passed
+EPOCH temporal_deepsets_ranknet 1729 0 loss 0.7015063762664795 validation 0.015764235122409487
+EPOCH temporal_deepsets_ranknet 1729 1 loss 0.6792567372322083 validation 0.07812157245684845
+CUDA_CHECK temporal_deepsets_ranknet passed
+EPOCH visionprefer 1729 0 loss 0.7526606321334839 validation 0.028033341750261676
+EPOCH visionprefer 1729 1 loss 0.6792287230491638 validation 0.13205905183399788
+CUDA_CHECK visionprefer passed
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRanker was fitted with feature names
+  warnings.warn(
+RL masked_double_dqn 1729 504 updates 1 validation -0.08955542876793623
+CUDA_CHECK masked_double_dqn passed
+RL td_per 1729 504 updates 1 validation -0.08955542908822857
+CUDA_CHECK td_per passed
+RL rl_vlm_f 1729 504 updates 1 validation -0.09008843038158382
+CUDA_CHECK rl_vlm_f passed
+RL vlm_replay 1729 504 updates 1 validation -0.09081876796681565
+CUDA_CHECK vlm_replay passed
+PPO 64 updates 4 validation -0.013283601800144207
+CUDA_CHECK masked_ppo passed
+PPO 64 updates 4 validation 0.40628351812457575
+CUDA_CHECK ranknet_warmstart_ppo passed
+
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]
+Fetching 8 files:  12%|█▎        | 1/8 [00:00<00:01,  4.42it/s]
+Fetching 8 files:  50%|█████     | 4/8 [00:03<00:03,  1.04it/s]
+Fetching 8 files: 100%|██████████| 8/8 [00:03<00:00,  2.20it/s]
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+MISSING_CLIP 32 2065
+MISSING_CLIP 64 2065
+MISSING_CLIP 96 2065
+MISSING_CLIP 128 2065
+MISSING_CLIP 160 2065
+MISSING_CLIP 192 2065
+MISSING_CLIP 224 2065
+MISSING_CLIP 256 2065
+MISSING_CLIP 288 2065
+MISSING_CLIP 320 2065
+MISSING_CLIP 352 2065
+MISSING_CLIP 384 2065
+MISSING_CLIP 416 2065
+MISSING_CLIP 448 2065
+MISSING_CLIP 480 2065
+MISSING_CLIP 512 2065
+MISSING_CLIP 544 2065
+MISSING_CLIP 576 2065
+MISSING_CLIP 608 2065
+MISSING_CLIP 640 2065
+MISSING_CLIP 672 2065
+MISSING_CLIP 704 2065
+MISSING_CLIP 736 2065
+MISSING_CLIP 768 2065
+MISSING_CLIP 800 2065
+MISSING_CLIP 832 2065
+MISSING_CLIP 864 2065
+MISSING_CLIP 896 2065
+MISSING_CLIP 928 2065
+MISSING_CLIP 960 2065
+MISSING_CLIP 992 2065
+MISSING_CLIP 1024 2065
+MISSING_CLIP 1056 2065
+MISSING_CLIP 1088 2065
+MISSING_CLIP 1120 2065
+MISSING_CLIP 1152 2065
+MISSING_CLIP 1184 2065
+MISSING_CLIP 1216 2065
+MISSING_CLIP 1248 2065
+MISSING_CLIP 1280 2065
+MISSING_CLIP 1312 2065
+MISSING_CLIP 1344 2065
+MISSING_CLIP 1376 2065
+MISSING_CLIP 1408 2065
+MISSING_CLIP 1440 2065
+MISSING_CLIP 1472 2065
+MISSING_CLIP 1504 2065
+MISSING_CLIP 1536 2065
+MISSING_CLIP 1568 2065
+MISSING_CLIP 1600 2065
+MISSING_CLIP 1632 2065
+MISSING_CLIP 1664 2065
+MISSING_CLIP 1696 2065
+MISSING_CLIP 1728 2065
+MISSING_CLIP 1760 2065
+MISSING_CLIP 1792 2065
+MISSING_CLIP 1824 2065
+MISSING_CLIP 1856 2065
+MISSING_CLIP 1888 2065
+MISSING_CLIP 1920 2065
+MISSING_CLIP 1952 2065
+MISSING_CLIP 1984 2065
+MISSING_CLIP 2016 2065
+MISSING_CLIP 2048 2065
+MISSING_CLIP 2065 2065
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files:  20%|██        | 1/5 [00:52<03:28, 52.19s/it]
+Fetching 5 files:  40%|████      | 2/5 [01:02<01:21, 27.30s/it]
+Fetching 5 files:  60%|██████    | 3/5 [01:08<00:35, 17.92s/it]
+Fetching 5 files: 100%|██████████| 5/5 [01:08<00:00, 13.76s/it]
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+
+Loading checkpoint shards:  20%|██        | 1/5 [00:06<00:27,  6.93s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:17<00:27,  9.05s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:25<00:17,  8.56s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:42<00:11, 11.84s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:46<00:00,  9.10s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:46<00:00,  9.31s/it]
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+TEACHER control-strict-0-0 parsed 21.190841688999967
+TEACHER control-strict-0-1 parsed 19.555724157999975
+TEACHER control-strict-1-0 parsed 17.543581200000062
+TEACHER control-strict-1-1 parsed 22.571356515000048
+TEACHER control-strict-2-0 parsed 22.310532792000004
+TEACHER control-strict-2-1 parsed 21.280275947000064
+TEACHER control-strict-3-0 parsed 15.347890086999996
+TEACHER control-strict-3-1 parsed 19.19632892300001
+TEACHER control-strict-4-0 parsed 19.167042154
+TEACHER control-strict-4-1 parsed 19.541117049000036
+TEACHER control-strict-5-0 parsed 19.046943084999953
+TEACHER control-strict-5-1 parsed 13.415805014000057
+TEACHER control-strict-6-0 parsed 17.160867940000003
+TEACHER control-strict-6-1 parsed 19.413639150999984
+TEACHER control-strict-7-0 parsed 19.087014676999956
+TEACHER control-strict-7-1 parsed 22.79411388099993
+TEACHER control-tie-0 parsed 25.86839884799997
+TEACHER control-unknown-0 parsed 17.187756701000012
+TEACHER control-tie-1 parsed 20.751189805999957
+TEACHER control-unknown-1 parsed 15.01308350499994
+TEACHER control-tie-2 parsed 16.656618159000004
+TEACHER control-unknown-2 parsed 14.892323875999864
+TEACHER control-tie-3 parsed 14.84696205299997
+TEACHER control-unknown-3 parsed 14.026676052999846
+TEACHER control-tie-4 parsed 18.150876244000074
+TEACHER control-unknown-4 parsed 14.404223304000197
+TEACHER control-tie-5 parsed 14.763614019999977
+TEACHER control-unknown-5 parsed 14.88007964999997
+TEACHER control-tie-6 parsed 18.73634957100012
+TEACHER control-unknown-6 parsed 14.497687808000137
+TEACHER control-tie-7 parsed 15.86655146499993
+TEACHER control-unknown-7 parsed 14.951115412000036
+TEACHER train-0-0 parsed 32.444659237999986
+TEACHER train-0-1 parsed 32.12873955700002
+GPU_REPAIR_CHECK_FINISHED {"scope": "hardware repair validation; not full training, convergence or final evaluation", "seconds": 974.1401027670001, "status_counts": {"failed": 1, "passed": 17, "failed_or_partial": 1}, "cuda_devices": ["Tesla T4", "Tesla T4"]}
+Validation driver exit 1 inspect validation.json and raw teacher outputs
+END 04_hardware_repair_validation complete 1000.2689960700001
+START 05_report_and_recovery output /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z
+{
+  "cuda_channel_regression": {
+    "status": "failed",
+    "exit": 2
+  },
+  "linear_choice": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "mlp_choice": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "delay_huber": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "priority_classifier": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "deepsets_ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "set_transformer_ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "listmle": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "temporal_deepsets_ranknet": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "visionprefer": {
+    "status": "passed",
+    "updates_checked": true,
+    "device": "cuda:0"
+  },
+  "lambdamart": {
+    "status": "passed",
+    "device": "cpu",
+    "scope": "tree native/export parity"
+  },
+  "masked_double_dqn": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "td_per": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "rl_vlm_f": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "vlm_replay": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 504,
+    "updates": 1,
+    "scope": "synthetic mechanism check"
+  },
+  "masked_ppo": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 64,
+    "updates": 4
+  },
+  "ranknet_warmstart_ppo": {
+    "status": "passed",
+    "device": "cuda:0",
+    "decisions": 64,
+    "updates": 4
+  },
+  "teacher": {
+    "status": "failed_or_partial",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "requested": 39,
+    "responses": 34,
+    "parsed_by_task": {
+      "control": 32,
+      "candidate": 2
+    },
+    "qualification": {
+      "qualified": true,
+      "schema_valid_fraction": 1.0,
+      "accuracy": {
+        "strict": 1.0,
+        "tie": 1.0,
+        "unknown": 1.0
+      },
+      "scope": "visible-person relevance/identical/blank controls; not emergency-priority ground truth"
+    },
+    "scope": "schema/GPU and narrow controls only; not enough labels for training or emergency-priority validation"
+  }
+}
+END 05_report_and_recovery complete 0.0033748159999049676
+START 06_artifact_inventory output /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z
+Hashed immutable artifacts 817 logs/status remain mutable until closed
+END 06_artifact_inventory complete 1.7276040019999073
+OUTPUT /kaggle/working/experiments/stream_scheduler/runs/repair-validation-20261101T030831Z bytes 288901174
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 561855 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 875922 bytes to __results__.html

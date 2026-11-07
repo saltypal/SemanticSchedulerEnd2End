@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/master_study/runs/repair-20261102/pilot_cache.py", line 15, in <module>
+    rows,features,vectors,profile,audit=load_pool(archive,out/"data")
+                                        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/stream_scheduler/semantic_suite_data.py", line 72, in load_pool
+    targets=labels_by_hash.get(raw,set());tier=next(iter(targets)) if len(targets)==1 else -1
+TypeError: cannot use 'numpy.ndarray' as a dict key (unhashable type: 'numpy.ndarray')

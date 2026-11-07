@@ -1,0 +1,27 @@
+# Hardware repair validation
+
+{
+  "cuda_channel_regression": {
+    "status": "failed",
+    "exit": 2
+  },
+  "teacher_formats": {
+    "status": "passed",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "requested": 5,
+    "responses": 5,
+    "tasks": [
+      "candidate",
+      "candidate",
+      "prefix",
+      "prefix",
+      "replay"
+    ],
+    "weights_match_v5": true,
+    "prior_controls_qualified": true,
+    "no_training_or_label_promotion": true,
+    "scope": "isolated structured-output hardware checks; prior narrow controls are not emergency-priority truth"
+  }
+}
+
+Synthetic fixture optimization and real-image schema/control checks only; full training and emergency-priority accuracy are not certified.

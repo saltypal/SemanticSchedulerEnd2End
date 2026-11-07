@@ -1,0 +1,232 @@
+{
+  "coverage": {
+    "complete": true,
+    "completed_candidates": 42,
+    "missing": [],
+    "required_candidates": 42
+  },
+  "final_parameter_cache": {
+    "checks": {
+      "all_class_support": false,
+      "diagnostic_review": false,
+      "export_parity": true,
+      "per_class_recall": false,
+      "runtime_integration": true
+    },
+    "final_test_gate_passed": false,
+    "records": 0,
+    "status": "not_started_readiness_failed"
+  },
+  "input": {
+    "event_independence_verified": false,
+    "grouping": "parent/exact/dHash components; event independence unverified",
+    "records_sha256": "1b0feb7ec30c3d9fb033d9df8456daf37e56b5941f35e40aeb684d02e98845ae",
+    "split_actual_counts": {
+      "test": 60,
+      "train": 180,
+      "validation": 60
+    },
+    "split_seed": 17,
+    "verified_images": 300
+  },
+  "locked_test": {
+    "acceptance": {
+      "calibration_frozen": true,
+      "complete_pipeline_profiled": true,
+      "export_verified": true,
+      "runtime_integration_verified": true
+    },
+    "metrics": {
+      "accuracy": 0.7833333333333333,
+      "balanced_accuracy": 0.4,
+      "brier_multiclass": 0.29496581048420883,
+      "class_recall_defined": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "class_support": [
+        35,
+        2,
+        20,
+        3
+      ],
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          12,
+          1
+        ],
+        [
+          2,
+          0,
+          1,
+          0
+        ]
+      ],
+      "critical_to_low_medium": 2,
+      "ece_10_equal_width_bins": 0.12275717715136782,
+      "f1": [
+        0.8641975308641975,
+        0.0,
+        0.7272727272727273,
+        0.0
+      ],
+      "high_critical_underprediction": 10,
+      "macro_f1": 0.3978675645342312,
+      "nll": 0.5692084457469725,
+      "ordinal_mae": 0.4,
+      "precision": [
+        0.7608695652173914,
+        0.0,
+        0.9230769230769231,
+        0.0
+      ],
+      "recall": [
+        1.0,
+        0.0,
+        0.6,
+        0.0
+      ],
+      "rps": 0.07410795624677759,
+      "worst_class_recall": 0.0
+    },
+    "scope": "classification-heldout teacher targets; prior detector-study exposure disclosed",
+    "test_rows": 60
+  },
+  "notebook": {
+    "notebook_sha256": "0e0ecd835562f9bc64867c437628666fb6c1523c5dd560148cf9379ca1554fc4",
+    "owner_slug": "satyapaladugu/betterscheduler-spi-20261027finalc",
+    "source_sha256": "6c5758f5a9da0b4b433e1ae6eda07557187a84b885bd493d154fadd874b0b364",
+    "version": 20
+  },
+  "observed_utc": "2026-10-28T22:28:20.994424+00:00",
+  "readiness": {
+    "checks": {
+      "all_class_support": false,
+      "diagnostic_review": false,
+      "export_parity": true,
+      "per_class_recall": false,
+      "runtime_integration": true
+    },
+    "diagnostic_review": {
+      "accepted": false,
+      "reason": "No accepted independent diagnostic receipt provided",
+      "unresolved_decisive_contradictions": null
+    },
+    "final_test_class_support": {
+      "Critical": 3,
+      "High": 20,
+      "Low": 35,
+      "Medium": 2
+    },
+    "final_test_gate_passed": false,
+    "runtime_promotion_allowed": false,
+    "validation_critical_support": {
+      "groups": 2,
+      "passes": false,
+      "rows": 2
+    }
+  },
+  "retrieval": {
+    "artifact_manifest_path": "experiments/spi_classifier_repair/runs/monitor_v20/artifact_manifest_v20.json",
+    "bytes": 5001318,
+    "files": 51,
+    "logs_path": "experiments/spi_classifier_repair/runs/monitor_v20/logs_raw_v20.json",
+    "no_images_or_recovery_zip_downloaded": true,
+    "recovery_manifest_files": 1672,
+    "recovery_manifest_uncompressed_bytes": 900292816
+  },
+  "reused_comparison_caches": {
+    "token_candidate": {
+      "common_files": 18,
+      "identical_common_hashes": 18,
+      "new_v20_files": 0,
+      "v19_files": 18,
+      "v20_files": 18
+    },
+    "token_fold": {
+      "common_files": 72,
+      "identical_common_hashes": 72,
+      "new_v20_files": 0,
+      "v19_files": 72,
+      "v20_files": 72
+    },
+    "vector_candidate": {
+      "common_files": 54,
+      "identical_common_hashes": 54,
+      "new_v20_files": 54,
+      "v19_files": 54,
+      "v20_files": 108
+    }
+  },
+  "runtime": {
+    "elapsed_seconds": 335.939441407,
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "python": "3.13.15",
+    "run_id": "medic_spi_20261028T221515Z",
+    "source_sha256_in_logs": "6c5758f5a9da0b4b433e1ae6eda07557187a84b885bd493d154fadd874b0b364",
+    "status": "COMPLETE",
+    "torch": "2.11.0+cu128"
+  },
+  "selected_bundle_model": {
+    "bytes": 330873,
+    "path": "campaign/release/bundle/model.joblib",
+    "sha256": "a416e1df52ead727325f659969c1bcbc0e5ea7fddfd9c1f184e856d14495bb70"
+  },
+  "selection": {
+    "development_accuracy": 0.8166666666666667,
+    "development_balanced_accuracy": 0.5625,
+    "development_macro_f1": 0.5921052631578947,
+    "development_worst_class_recall": 0.0,
+    "encoder": "clip_b32",
+    "head": "random_forest",
+    "kind": "vector",
+    "selected_model_bytes": 330873
+  },
+  "stale_failures_json": {
+    "byte_identical_to_v19": true,
+    "interpretation": "v20 failures.json preserves the v19 Tee traceback and is not current failure evidence",
+    "v19_sha256": "085aedfba576b1fb26b883bc2feea34e877bd3e1d92f4bf6a2a710231bf43c32",
+    "v20_coverage_complete": true,
+    "v20_sha256": "085aedfba576b1fb26b883bc2feea34e877bd3e1d92f4bf6a2a710231bf43c32"
+  },
+  "teacher_labels": {
+    "all_checkpoint_and_raw_hashes_identical": true,
+    "all_labels_reused": true,
+    "count": 300,
+    "label_checkpoint_files_v19": 600,
+    "label_checkpoint_files_v20": 600,
+    "labels_sha256_v19": "1389c5a031a067a7484543e365472e01c559709604f9bb936af43fc8a7819eb4",
+    "labels_sha256_v20": "1389c5a031a067a7484543e365472e01c559709604f9bb936af43fc8a7819eb4",
+    "raw_files_v19": 600,
+    "raw_files_v20": 600
+  },
+  "unexpected_model_load_keys": {
+    "CLIPModel": [
+      "text_model.embeddings.position_ids",
+      "vision_model.embeddings.position_ids"
+    ],
+    "ConvNextV2Model": [
+      "classifier.bias",
+      "classifier.weight"
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+**I would change the design in this direction: broader data, operator-defined context, and scene-specific evidence produced by a shared vision system.** We should replace several current scalar formulas. We also need to distinguish *what the image contains* from *why decoding it now would be useful*.
+
+I checked original papers, dataset documentation, and our existing extraction code. My recommendations below are a proposed experiment; they have not been implemented or shown to outperform the baseline.
+
+**First, your dataset concern is valid, but disaster images are not automatically important.** MEDIC already includes non-disaster, non-informative, and little/no-damage categories. The problem is how we select queues and define useful evidence. Our five-image codec demonstration had five building-positive images, so it could not meaningfully test relevance discrimination. [MEDIC schema](https://crisisnlp.qcri.org/medic/)
+
+Adding ordinary images will help, but we need harder comparisons too:
+
+| Comparison | What it tests |
+|---|---|
+| Disaster scene versus an unrelated portrait | Basic relevance filtering |
+| Actual collision versus an intact car on the same kind of road | Recognizing the event rather than the background |
+| Two equally relevant incidents | Ordering within relevant material |
+| Same building, same visible information | Redundancy |
+| Same building, new view revealing additional damage | Complementary evidence |
+| Same photograph under two different mission descriptions | Whether context genuinely changes relevance |
+
+If the benchmark contains mostly obvious disaster-versus-unrelated-photo decisions, a scene classifier could solve much of it. That would leave the harder semantic scheduling question unanswered.
+
+**A particularly relevant dataset is Incidents1M.** It has 43 incident categories and 49 place categories, with overlapping labels and explicitly annotated category negatives. Its model uses a shared ResNet-50 with separate prediction branches. Adding negative examples improved incident mAP from **62.83 to 67.19** in its reported experiment. This directly supports your suggestion to broaden the collection and include hard confusions. A negative label for one incident does not certify that the whole image is harmless. [Incidents1M, dataset and experiments](https://arxiv.org/html/2201.04236v1)
+
+I recommend testing a small audited subset of **Incidents1M + MEDIC**, while retaining LADI/xBD/RescueNet for detailed building evidence and controlled overlap. We should include relevant and irrelevant examples *within sources*, so camera style or dataset identity does not become the shortcut for importance.
+
+**Your scene classifier should allow several labels at once.** The proposed categories—disaster, road emergency, person, person in distress—overlap. A road scene can contain flooding, people, damaged buildings, and vehicles simultaneously.
+
+A cleaner description has several layers:
+
+| Layer | Example outputs |
+|---|---|
+| **Environment** | Road, residential area, forest, indoor |
+| **Entities** | Person, vehicle, building, bridge |
+| **Events** | Collision, fire, flooding, collapse |
+| **Conditions and relationships** | Road blocked, building damaged, person on roof |
+| **Mission context** | Find blocked routes; identify damaged buildings; locate affected people |
+
+This matches the multilabel structure used in Incidents1M. It also avoids an early “this is a road image” decision preventing the system from recognizing flooding or people.
+
+A person detector only establishes a predicted person location. **“Person in distress” requires additional evidence and suitable labels.** Prompting an open-vocabulary detector with that phrase does not establish reliable distress recognition.
+
+**We do not need a separate resident YOLO for every scene.** I recommend starting with:
+
+```text
+Operator context paragraph
+        ↓
+Supported mission conditions + time/region constraints
+
+Image → Shared image representation
+              ├── Context relevance
+              ├── Incident/place predictions
+              ├── Embedding for KB retrieval
+              └── Optional localized evidence from ONE detector
+                              ↓
+                    Header evidence + masks
+                              ↓
+               Receiver's contextual scheduler
+```
+
+One image-text encoder can supply embeddings for relevance, knowledge-base retrieval, and small supervised classification heads. A separate detector can be added when object locations or attributes improve decisions.
+
+**YOLO-World** supports a configurable text vocabulary with precomputed text embeddings; changing the vocabulary does not require a new visual model for every domain. **Grounding DINO** is another candidate for locating objects specified by phrases. Neither paper establishes reliable emergency triage. Their accuracy, memory, and latency on our images and laptop remain unmeasured. [YOLO-World](https://arxiv.org/html/2401.17270v3) · [Grounding DINO](https://arxiv.org/html/2303.05499v4)
+
+The global encoder and an optional pretrained detector would still be separate visual models unless we explicitly redesign them to share weights. We should not claim that all their computation is automatically shared.
+
+**Here is what I would do with each current parameter.**
+
+| Current item | Recommendation | Reason |
+|---|---|---|
+| **Context relevance** | **Keep and improve** | The operator’s context paragraph is a meaningful input. Test whether matching supported entities, events, and relationships works better than one global cosine score. |
+| **Novelty** | **Keep the transmitter KB; improve what novelty means** | New useful evidence is central. Global embedding difference is only an approximation and can prioritize irrelevant changes. |
+| **Scarcity** | **Keep as an experimental rarity signal** | Rare information can be useful, but rarity alone should not automatically increase importance. Its incremental value needs an ablation. |
+| **Current weighted task-importance score** | **Retire as the proposed primary definition; retain as a comparison baseline** | The hand-designed weighted probability sum does not establish operational importance. |
+| **Exponential freshness** | **Replace with timestamp and explicit allowed age/deadline** | The default decay constant has no established justification for our missions. |
+| **Spatial prominence** | **Make optional and target-specific** | Relevant-object visibility and scale may help. Largest box area alone is a weak priority signal. |
+| **Scene complexity** | **Remove raw count/entropy from the initial core** | A dense scene can contain many irrelevant objects. Test supported task entities or evidence instead. |
+| **Confidence/reliability** | **Attach it to specific predictions** | Confidence should describe uncertainty in an event or condition, rather than become generic importance. |
+| **Geographic/source context** | **Use when trustworthy and applicable** | A mission’s region or a verified event association can matter. Missing location must remain unknown. |
+
+Your context-paragraph idea has relevant precedent: personalized semantic communication has used user queries and scene-graph relationships to select information matching user interests. That supports the mechanism, but not our exact relevance formula. [Personalized saliency for task-oriented communication](https://arxiv.org/abs/2209.12274)
+
+For a long paragraph, we should retain its original text and identify supported conditions such as “flooding,” “blocked road,” and “within this region.” The original CLIP implementation has a 77-token context limit, so an unrestricted paragraph needs explicit handling rather than silent truncation. [Official CLIP tokenizer](https://github.com/openai/CLIP/blob/main/clip/clip.py)
+
+**Novelty, scarcity, and a changed angle need separate meanings.**
+
+| Situation | What it tells us |
+|---|---|
+| A concept rarely appears in the sender’s history | **Scarcity/rarity** |
+| The current observation differs from remembered observations | **Novelty** |
+| Another view reveals a previously hidden useful attribute | **Complementary evidence** |
+| Another angle reveals the same facts with different lighting | Visual change; potentially little additional task evidence |
+
+Your building-angle example belongs mainly to **complementary evidence**. The angle matters when it reveals something useful: an additional damaged wall, a blocked entrance, another person, or a previously obscured condition.
+
+For that, I recommend a knowledge-base process that retrieves similar prior observations, then compares their **predicted entities and conditions** where we have reliable extractors. Embedding similarity can propose matches; it cannot certify physical building identity.
+
+The transmitter KB also has a boundary: **one sender’s novelty does not reveal what another sender already reported.** The receiver needs enough transmitted information to estimate overlap with successful decodes. If scalar headers discard that distinction, a larger ranker cannot recover it. That is the reason to test a compact evidence/descriptor extension—not to assume one is necessary immediately.
+
+**I agree with your timestamp and allowed-delay proposal.** For a capture time \(c\), allowed age \(D\), and current receiver time \(t\):
+
+\[
+\text{age}=t-c,\qquad \text{deadline}=c+D.
+\]
+
+If decoder service time can be estimated:
+
+\[
+\text{completion slack}
+=
+\text{deadline}-t-\mathbb{E}[T_{\text{decode}}].
+\]
+
+The application/operator supplies \(D\); the scene classifier does not invent it. A queue waiting-time limit is a different constraint. We can evaluate deadline handling without introducing an exponential decay score.
+
+**Removing the old task-importance formula still leaves a necessary question: what outcome should a good order achieve?** For example, these are different missions:
+
+- Find new damaged buildings.
+- Find blocked access routes.
+- Find evidence of affected people.
+
+The system can learn from incident and condition predictions without manually declaring “disaster = 0.9 importance.” But training and evaluation still need a declared mission and independent evidence of progress. Published damage labels support damage assessment; they do not automatically supply rescue urgency.
+
+Also, raw class probabilities remain useful for expressing uncertainty. A predicted 0.9 probability of fire should not be interpreted as “0.9 importance.” Confidence itself needs validation because neural networks can be miscalibrated. [Calibration of modern neural networks](https://proceedings.mlr.press/v70/guo17a.html)
+
+**The experiment I recommend before freezing new fields is:**
+
+1. Audit a mixed collection containing incidents, matched ordinary scenes, and hard confusions.
+2. Compare **context relevance + KB novelty + timestamp/deadline metadata** against the existing baseline.
+3. Add rarity, multilabel scene/event evidence, and localized measurements **one at a time**.
+4. Compare a shared scorer with scene conditioning against separate experts only if the shared scorer shows a specific weakness.
+5. Report background filtering separately from ordering among relevant images, including repeated and complementary evidence.
+6. Keep a simple incident-filtering policy as a baseline. Measure actual extraction cost and header bytes alongside scheduling benefit.
+
+We cannot yet assume that a richer evidence header fits the existing 32 bytes. Its size should follow from the information that earns its place in those experiments.
+
+I saved the evidence, decisions, limitations, and proposed comparisons in [PARAMETER_RECONSIDERATION.md](D:/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerBuild/docs/decoder_context/PARAMETER_RECONSIDERATION.md). The implemented eight-field system remains preserved as the baseline.

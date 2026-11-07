@@ -1,0 +1,78 @@
+{
+  "student": {
+    "n": 8,
+    "levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "ordinal_scale": "configured output order",
+    "accuracy": 0.25,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.20833333333333331,
+    "brier_multiclass": 0.7525622121535132,
+    "critical_to_low_medium": 2,
+    "critical_to_low_medium_rate": 1.0,
+    "log_loss": 1.3910761325710794,
+    "rps": 0.2107993686346461,
+    "ordinal_mae": 1.25,
+    "confusion_true_rows_predicted_columns": [
+      [
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ]
+    ],
+    "high_critical_underpredictions": 3,
+    "per_class": {
+      "Low": {
+        "support": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "Medium": {
+        "support": 2,
+        "precision": 0.25,
+        "recall": 0.5,
+        "f1": 0.3333333333333333
+      },
+      "High": {
+        "support": 2,
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5
+      },
+      "Critical": {
+        "support": 2,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "loss": 1.391076147556305
+  },
+  "selected_epochs": 1,
+  "runtime_promotion_allowed": false,
+  "claim": "development teacher agreement only"
+}

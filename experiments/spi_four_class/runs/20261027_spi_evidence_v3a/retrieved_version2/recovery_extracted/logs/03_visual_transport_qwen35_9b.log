@@ -1,0 +1,21 @@
+START 03_visual_transport_qwen35_9b output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3a/campaign
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Visual preflight qwen35_9b 1 /10 parse_failed
+Visual preflight qwen35_9b 2 /10 parse_failed
+Visual preflight qwen35_9b 3 /10 parse_failed
+Visual preflight qwen35_9b 4 /10 parse_failed
+Visual preflight qwen35_9b 5 /10 parse_failed
+Visual preflight qwen35_9b 6 /10 parse_failed
+Visual preflight qwen35_9b 7 /10 parse_failed
+Visual preflight qwen35_9b 8 /10 parse_failed
+Visual preflight qwen35_9b 9 /10 parse_failed
+Visual preflight qwen35_9b 10 /10 parse_failed
+Traceback (most recent call last):
+  File "/kaggle/working/spi_source_20261027_spi_evidence_v3a/parameters/artifacts.py", line 72, in stage
+    try:yield
+        ^^^^^
+  File "/kaggle/working/spi_source_20261027_spi_evidence_v3a/parameters/spi_pipeline.py", line 132, in execute
+    raise RuntimeError('image transport/response preflight failed; inspect receipts')
+RuntimeError: image transport/response preflight failed; inspect receipts
+END 03_visual_transport_qwen35_9b {'stage': '03_visual_transport_qwen35_9b', 'status': 'failed', 'seconds': 73.209320961}

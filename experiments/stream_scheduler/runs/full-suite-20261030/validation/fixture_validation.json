@@ -1,0 +1,103 @@
+{
+  "scope": "CPU fixtures only; no real data, training, inference, GPU or cloud",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "checks": [
+    {
+      "name": "D_cost_midservice_telescoping_unselected_horizon",
+      "status": "PASS",
+      "seconds": 0.016737396999999987,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "terminal_cost": 0.40625,
+        "reward_telescoping": 0.40625,
+        "selected": {
+          "0": 0.0,
+          "1": 1.5
+        },
+        "unselected_wait_cost": 0.15625
+      },
+      "error": null
+    },
+    {
+      "name": "target_A_B",
+      "status": "PASS",
+      "seconds": 0.007388500999994108,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "A": 0.75,
+        "B": 0.0625
+      },
+      "error": null
+    },
+    {
+      "name": "illegal_retry_failure_history_future_labels_387",
+      "status": "PASS",
+      "seconds": 0.008683829000005971,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": {
+        "illegal_choice_rejected": true,
+        "retry_rejected": true,
+        "failed_attempt_in_history": true,
+        "future_labels_not_snapshot_fields": true,
+        "features": 387
+      },
+      "error": null
+    },
+    {
+      "name": "six_torch_numpy_parity_candidate_permutation_identity_relabel_temporal_order",
+      "status": "FAIL",
+      "seconds": 0.19595805400000188,
+      "source_sha256_before": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_sha256_after": {
+        "Evaluation/semantic_learning_env.py": "9794b652ac3da6d0f2bd97584ecb78d9cc26d287ba9222fd86007fbc6ae7f272",
+        "Scheduler/semantic_learning_policy.py": "36755b546407bc44e17c7a326dc1b39b5726ea7089b807fbb227d02520912b10",
+        "Scheduler/training/semantic_learning_models.py": "d95049b4655741b9e30843ecc9b1d458801a59d2142b30d52c33b700bfbc8501",
+        "experiments/stream_scheduler/runtime_bootstrap.py": "e9a15e0545b7de1bd997a6b8d940c230cb3667447936e537166fdec4158d23ab"
+      },
+      "source_changed_during_check": false,
+      "result": null,
+      "error": "Traceback (most recent call last):\n  File \"/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/stream_scheduler/runs/full-suite-20261030/validation/run_fixtures.py\", line 94, in <module>\n    try:v=fn();status='PASS';err=None\n          ~~^^\n  File \"/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/stream_scheduler/runs/full-suite-20261030/validation/run_fixtures.py\", line 53, in parity\n    torch.manual_seed(121+len(rows));m=lm.Scorer(k);a=lm.export(m,pre,'fixture',{});p=lm.parity(m,a,[s]);n=NumpyRanker(a);base=n.scores(s)\n                                                                                      ~~~~~~~~~^^^^^^^^^\n  File \"/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/Scheduler/training/semantic_learning_models.py\", line 92, in parity\n    if not np.allclose(y,z,rtol=tol,atol=tol):raise ValueError('Torch/NumPy raw prediction mismatch '+str(np.max(np.abs(y-z))))\n                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Torch/NumPy raw prediction mismatch 0.01280437344322051\n"
+    }
+  ]
+}

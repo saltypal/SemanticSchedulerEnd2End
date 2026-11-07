@@ -1,0 +1,84 @@
+{
+  "schema": "medic_spi_release_v2",
+  "checks": {
+    "all_class_support": false,
+    "per_class_recall": false,
+    "export_parity": true,
+    "runtime_integration": true,
+    "diagnostic_review": false
+  },
+  "runtime_promotion_allowed": false,
+  "final_test_gate_passed": false,
+  "class_support": {
+    "train": {
+      "Low": {
+        "rows": 94,
+        "groups": 94,
+        "passes": true
+      },
+      "Medium": {
+        "rows": 17,
+        "groups": 17,
+        "passes": true
+      },
+      "High": {
+        "rows": 43,
+        "groups": 43,
+        "passes": true
+      },
+      "Critical": {
+        "rows": 26,
+        "groups": 26,
+        "passes": true
+      }
+    },
+    "validation": {
+      "Low": {
+        "rows": 33,
+        "groups": 33,
+        "passes": true
+      },
+      "Medium": {
+        "rows": 5,
+        "groups": 5,
+        "passes": true
+      },
+      "High": {
+        "rows": 20,
+        "groups": 20,
+        "passes": true
+      },
+      "Critical": {
+        "rows": 2,
+        "groups": 2,
+        "passes": false
+      }
+    }
+  },
+  "max_parity_error": 0.0,
+  "diagnostic_review": {
+    "accepted": false,
+    "unresolved_decisive_contradictions": null,
+    "reason": "No accepted independent diagnostic receipt provided"
+  },
+  "model_sha256": "a416e1df52ead727325f659969c1bcbc0e5ea7fddfd9c1f184e856d14495bb70",
+  "identity": {
+    "repo": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+    "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+    "weights_sha256": {},
+    "download_checkpoint_bytes": 0,
+    "parameters": 87849216,
+    "encoder_name": "clip_b32"
+  },
+  "temperature": 0.42044820762685725,
+  "reference": "teacher agreement",
+  "independent_urgency_validated": false,
+  "final_test_class_support": {
+    "Low": 35,
+    "Medium": 2,
+    "High": 20,
+    "Critical": 3
+  }
+}

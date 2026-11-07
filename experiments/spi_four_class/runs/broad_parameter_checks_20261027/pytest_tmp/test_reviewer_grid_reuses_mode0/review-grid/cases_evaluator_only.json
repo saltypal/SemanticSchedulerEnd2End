@@ -1,0 +1,1170 @@
+[
+  {
+    "case_id": "control-0-complete",
+    "image_id": "0",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-0-incomplete",
+    "image_id": "0",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-0-contradicted",
+    "image_id": "0",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g0",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-1-complete",
+    "image_id": "2",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-1-incomplete",
+    "image_id": "2",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-1-contradicted",
+    "image_id": "2",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "2",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g2",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-2-complete",
+    "image_id": "4",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-2-incomplete",
+    "image_id": "4",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-2-contradicted",
+    "image_id": "4",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "4",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g4",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-3-complete",
+    "image_id": "6",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "6",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g6",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-3-incomplete",
+    "image_id": "6",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "6",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g6",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-3-contradicted",
+    "image_id": "6",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "6",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g6",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-4-complete",
+    "image_id": "1",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-4-incomplete",
+    "image_id": "1",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-4-contradicted",
+    "image_id": "1",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g1",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-5-complete",
+    "image_id": "3",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-5-incomplete",
+    "image_id": "3",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-5-contradicted",
+    "image_id": "3",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "3",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g3",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-6-complete",
+    "image_id": "5",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-6-incomplete",
+    "image_id": "5",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-6-contradicted",
+    "image_id": "5",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "5",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g5",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-7-complete",
+    "image_id": "7",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "7",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g7",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "complete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "control-7-incomplete",
+    "image_id": "7",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "7",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g7",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true
+      },
+      "parameters": {}
+    },
+    "control_arm": "incomplete",
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": false
+    }
+  },
+  {
+    "case_id": "control-7-contradicted",
+    "image_id": "7",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_reviewer_grid_reuses_mode0\\fixture.png",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "7",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "g7",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "mission_id": "building_damage",
+    "rubric": {
+      "rubric_id": "b5d2e8d87bd2edadb19ea2f15d36b0fd564715e09f310da835e2b54db8db1ab9",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_supported_facts": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "reference_grading_available": true,
+      "rule": "consistent = no contradicted assessed claim; sufficient = consistent and all required facts represented",
+      "numerical_checks": "exact cosine,geometry,frequency,clock and calibration are code/reference checks,not visual truth"
+    },
+    "candidate": {
+      "representation": "structured_control",
+      "claims": {
+        "building.present": true,
+        "building.affected_or_greater": false
+      },
+      "parameters": {}
+    },
+    "control_arm": "contradicted",
+    "expected": {
+      "parameters_consistent": false,
+      "representation_sufficient": false
+    }
+  }
+]

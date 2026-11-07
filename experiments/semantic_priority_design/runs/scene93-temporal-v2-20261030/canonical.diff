@@ -1,0 +1,485 @@
+--- SCHED-20261030-v1
++++ SCHED-20261030-v2
+@@ -1,68 +1,79 @@
+ # Locked specification: semantic-aware decoder scheduling
+ 
+-**Protocol ID: SCHED-20261030-v1. Date: 30 October 2026.**
+-This is the single executable study specification. It replaces conflicting earlier design alternatives. The source before this freeze is preserved under experiments/semantic_priority_design/runs/locked-spec-20261030/. Algorithm, target and metric choices below are fixed. Missing qualified labels/assets cause an explicit blocked result, not a new model-selection discussion or fabricated truth. This document specifies work; it does not claim that the new objectives/models have been implemented or trained.
+-
+-## 1. Fixed objective, system and roles
+-
+-Select one complete ready message for one nonpreemptive decoder. New messages arrive during service. Each received message gets one attempt; poor reconstruction remains poor. No radio grants, retransmissions, retry action, preemption, encoder redesign or live VLM inference.
+-
+-**Primary study D:** minimize importance-sensitive waiting and lateness under declared simulator delay budgets. The proposed policy family is contextual Deep Sets scoring. Its RankNet-trained member is the main supervised candidate; same-information PPO/DDQN are sequential comparisons.
+-**Required semantic study E:** minimize first-service delay of distinct supported task evidence on annotation-backed overlap data.
+-**Teacher-supervision study P:** compare accepted VLM preferences/aspect supervision with reference-derived supervision.
+-
+-These are named tasks, not interchangeable metrics. Every result records task_id, input_profile, architecture, target_source, reward_source, seed and model hash. D supplies the primary checkpoint/leaderboard criterion. E/P establish what the D cost alone cannot show about novelty and semantic selection.
+-
+-Ownership: parameters/ owns extraction, SPI, vocabulary, transmitter KB and serialization; Scheduler/ owns inference and training modules; Evaluation/ owns lifecycle, simulator and references; Codec/ is paused; experiments/ contains scripts/notebooks and unique run artifacts. No second codebase.
++**Protocol ID: SCHED-20261030-v2. Date: 30 October 2026.**
++This revision modifies the existing frozen plan; it does not discard its models, objectives, reference boundaries or negative results. The user has now explicitly adopted the final scene-array v2 contract and asked for diverse streams plus a VLM-supervised temporal scheduler as the first experiment. Those decisions supersede the former H0-only primary input, optional ARRAY16 comparison and D-first execution order. D/E losses, the sixteen previous learned methods, baselines, RL/RLAIF arms and resource ceilings remain. The v1 document and the supplied final cache specification are preserved under experiments/semantic_priority_design/runs/scene93-temporal-v2-20261030/.
++
++This is a design specification, not a claim that new policies, broad datasets, teacher reliability or real inference have been validated. Qualified labels/assets and compute still determine whether an execution is complete, partial or blocked. No production code, parameter producer, SPI model, codec or remote job is changed by this document revision.
++
++## 1. Fixed system, revised main experiment and retained studies
++
++Select one complete ready message for one nonpreemptive decoder. New messages arrive during service. Each message receives one attempt; poor reconstruction remains poor. No radio grants, retransmissions, retry action, preemption, encoder redesign or live VLM inference.
++
++**First experiment P: VLM-only supervision of a parameter-only temporal ranker.** Qwen sees actual candidate images, each UE mission, a fixed receiver objective and bounded causal image histories offline. The student sees only received SPI, relevance, novelty, scene-array v2, timing and header history. Its main loss is accepted teacher pairwise preference loss; no delay target, published priority or manually weighted semantic formula is secretly added to that arm. VLM-only describes the source of scheduler supervision, not a 9B model running on every dispatch or new VLM fine-tuning.
++
++**Retained D study:** minimize importance-sensitive waiting/lateness under the existing declared simulator budgets. Delay-trained regression, choice, classifier, neural ranking and RL comparisons remain as specified below. D is the operational cost criterion on cohorts with valid references; P is the first training experiment, not a substitute definition of delay.
++
++**Retained E study:** minimize first-service delay of distinct independently supported facts. It is required for claims about useful novelty/redundancy. A shuffled broad pool cannot manufacture physical correspondence.
++
++The main proposed model is a shared temporal encoder plus Deep Sets contextual scoring, trained with RankNet-style Qwen preferences. Static Deep Sets and the former summary MLP remain direct controls. All sixteen former methods are retained; the temporal model is the seventeenth architecture/registry entry. A model's D/P/E variants are label/reward experiments, not separate discoveries.
++
++Every artifact records task_id, input_profile, architecture, target_source, reward_source, seed and source/model hashes. The broad receiver objective is fixed for the first revised experiment: multi-source visual situational awareness, giving earlier service to supported time-sensitive incidents and mission-useful additional evidence while monitoring neglect of routine messages. It replaces building-damage-only receiver purpose; the original building-damage cohort remains a separately reported restricted comparison. UE mission relevance is evidence, not permission for device identity to dictate priority. A neutral phone can show a critical incident; a disaster drone can send a routine repeat.
++
++Ownership remains parameters/ for extraction/SPI/vocabulary/sender KB/serialization; Scheduler/ for inference/training; Evaluation/ for lifecycle/simulator/references; Codec/ paused. All experiments and new outputs stay under the canonical repository's experiments/ hierarchy.
+ 
+ ~~~mermaid
+ flowchart TD
+- A[Fixed UE missions and ordered source observations] --> B[Frozen extractor and causal sender KB]
+- B --> C[Complete parameter record and opaque payload]
+- C --> D[Receiver buffer]
+- D --> E[Immutable ready snapshot and processed headers]
+- E --> F[Shared neural scorer]
+- F --> G[Select one ready message]
+- G --> H[One nonpreemptive attempt]
++ A[Broad image manifests and real sequence sources] --> B[15 UE missions; causal offered streams]
++ B --> C[Frozen parameter producers and sender KB]
++ C --> D[Complete parameter record and opaque payload]
++ D --> E[Receiver buffer; arrivals continue]
++ E --> F[Current candidates; per-UE header windows; processed history]
++ F --> G[Shared temporal encoder and set scorer]
++ G --> H[Select one; one nonpreemptive attempt]
+  H --> I[Processed-header log; no retry]
+- I --> E
+- J[Separate references, budgets and annotated facts] --> K[Training targets and evaluator]
+- G --> K
+- Q[Offline Qwen, actual images and causal context] --> R[Versioned weak labels]
+- R --> K
++ I --> F
++ J[Offline RGB and corresponding causal histories] --> Q[Qualified Qwen preferences]
++ Q --> K[Train parameter-only student]
++ K --> G
++ R[Separate references and fixed D/E evaluators] --> S[Delay; ranking; evidence; compute report]
++ H --> S
+ ~~~
+ 
+-## 2. Input contracts: two fixed profiles
+-
+-The user's explicit H0-only restriction remains the primary runtime boundary. The later proposed class arrays are a fixed additional comparison, not assumed already implemented or silently inserted into H0.
+-
+-### 2.1 H0 primary
+-
+-Ten numerical values: four supplied SPI one-hot values (Critical, High, Medium, Low), raw mission relevance, transmitter novelty, global retained detection count, distinct category count, largest-box fraction and union-box fraction. Add explicit availability masks and novelty cold-start. Unknown SPI is not Low. Normalize display Normal to Low only when SPI availability is true.
+-
+-No images, latent contents, raw embeddings, annotations, reference budgets/tiers, fact IDs, filenames, source IDs, future arrivals/outcomes or remaining episode horizon enter learned features. Routing identity is used only for legal selection, exclusion of self in comparisons, duplicate handling and deterministic ties.
+-
+-Runtime timing is receiver arrival/current wait and processed-header age. UE mission paragraphs affect the upstream relevance producer and offline teacher. Arbitrary language understanding is not inferred from a mission ID. Start with fixed receiver purpose: building-damage situational awareness.
+-
+-### 2.2 SCENE_ARRAY16 comparison
+-
+-Append two fixed-length arrays to H0: retained box counts per class and largest normalized box fraction per class. Freeze the existing producer vocabulary and order:
+-
+-0 building; 1 road; 2 person; 3 car; 4 truck; 5 bus; 6 motorcycle; 7 bicycle; 8 debris; 9 chair; 10 couch; 11 dining table; 12 television; 13 refrigerator; 14 tree; 15 water.
+-
+-Counts describe retained detector boxes, not physical water/road/debris instances. Largest area is rectangular image extent, not distance or segmentation. Count zero means no retained detection, not proven physical absence; absent-class area zero is padding with count/presence semantics. Detector failure leaves values unavailable. Record vocabulary hash, detector status and cap/saturation flags. Do not infer region counts as urgency.
+-
+-Use one pinned YOLO-World checkpoint from the producer release, conf=.25, IoU=.5, imgsz=640, max_det=300, agnostic_nms=False. No threshold search or expanded vocabulary in this study. The previous 300-image grid established behavior/cost, not an accuracy optimum. A different vocabulary is outside this frozen release.
+-
+-The existing parser must reject SCENE_ARRAY16 until its versioned schema adapter is implemented. The parameter workstream supplies the arrays; this plan does not alter its producer. Report blocked_input if absent. Keep comparison cohorts identical across profiles. Different-dimensional models are trained/exported separately.
+-
+-Primary interchange is canonical JSON with actual UTF-8 byte counts. Do not call this the historical 35-byte wire header. A proposed uint16 count/uint8 area encoding would add 48 array bytes for K=16, but binary quantization is not implemented by this specification. Payload bytes are measured only when actual payloads exist; synthetic references have no claimed image-payload size.
+-
+-### 2.3 Processing and preprocessing
+-
+-Sender KB uses the upstream release's causal per-UE/mission history (current experiment FIFO128). Query, serialize, then commit each offered observation; receiver decisions never change sender KB. Recompute history-dependent parameters when the offered sequence changes. Reset across splits/sessions according to explicit metadata.
+-
+-Preprocessing is fitted on training groups only: log1p counts, retain bounded fractions/cosine, median imputation for missing values and training mean/std standardization; constant std becomes one. Append masks and cold-start flags. Do not standardize masks into guessed values. Audit all-missing field groups. Models may ignore uninformative fields; forced scene weights are prohibited.
++## 2. Final scene-array v2 input and transport boundary
++
++### 2.1 Final primary input: SCENE93_V2
++
++The authoritative producer contract is parameters/scene_arrays.py plus parameters/scene_vocabulary.py and the supplied final caching specification v2. This explicitly replaces ARRAY16 as the main input. H0 remains an ablation/control only where genuinely available; no invented global union coverage is reconstructed from largest rectangles.
++
++The ordered vocabulary is complete COCO80 IDs0..79, countable extensions building/bridge/utility pole/traffic sign/animal IDs80..84, and regions road/water/debris/smoke/flame/snow/ground/grass IDs85..92. Use the exact exported registry, not a separately typed list. There are85 countable classes and8 region classes, with93 stored slots in each array. Region count slots are canonical zero with count masks clear.
++
++For each class retain detection count where applicable and largest clipped XYXY rectangle divided by the EXIF-upright image area. Count/area masks, detector_ok and saturated preserve availability. No retained box does not prove absence or safety. Rectangular area does not establish distance, severity, condition, relationship or segmentation. Animal/specific-animal and traffic-sign/stop-sign channels can overlap; they must not be summed as unique assets. Region areas are detector hypotheses, not measured physical extent.
++
++Frozen upstream detector: yolov8s-worldv2.pt SHA256 9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792; Ultralytics8.3.237; FP32; conf.25; class-aware NMS IoU.5; imgsz640; max_det300; no augmentation. Explicit set_classes() uses the93-class registry. CLIP setup source is a1d071733d7111c9c014f024669f959182114e33; actual text-feature/producer hashes must match. Class text encoding is one setup cost. The scheduler does not retune or replace this producer.
++
++The fixed scene feature block is374 entries in this order:
++log1p(counts)[93], largest_area[93], count_masks[93], area_masks[93], detector_ok, saturated.
++Join by image/raw hash and producer identity outside inference. Features are derived by deserializing the received scene bytes, not by using higher-precision sidecars that the actor would never receive. Float arrays are an audit comparison only. A failed detector produces unavailable measurements, not an apparently empty scene.
++
++Add four received SPI one-hot entries, one relevance and one novelty scalar, their six availability masks, and novelty-cold-start. Unknown SPI has four zero values with all four masks clear; known SPI has exactly one active value and all four masks set. Thus the base semantic student vector is374+6+6+1=387 entries. SPI confidence is not silently added when the finalized record contains only a class. Normal aliases Low only when available. New parameters require an explicit version, not dynamic field discovery.
++
++Current wait, history time gaps and status flags are derived receiver context, not new detector outputs. Never put images, raw boxes, embeddings, payload contents, producer hashes, source labels, annotations, true delay budgets, fact identities, future arrivals/outcomes or remaining episode horizon into learned features. Full routing identity groups history and routes selection but is not a learned UE ID embedding.
++
++### 2.2 Exact bytes and compatibility
++
++The standalone scene block is369 bytes =2,952 bits:
++2 version/status +32 vocabulary SHA256 +32 producer SHA256 +186 uint16 count slots +93 uint8 area slots +24 mask bytes.
++Area rounding error is at most.5/255. Vocabulary/producer/order mismatches reject before inference. Mask padding, illegal region counts, invalid flags, length and incompatible models must reject. The current historical35-byte header is not declared integrated with this block. 35+369=404 bytes is merely arithmetic until a real composite wire envelope exists. Actual total parameters equal serialized routing/envelope plus SPI/relevance/novelty plus this block; report measured bytes and avoid adding the scene block twice when also exporting JSON. Codec payload bytes remain unknown while Codec is paused.
++
++The374-feature block and387-entry augmented vector have different meanings from byte length; tensor float32 memory is not radio payload size. Temporal context is receiver memory, not automatically transmitted on every message. Profile/version/hash metadata belongs in artifacts and compatibility checks, never predictive features. All previous H0/ARRAY16 weights are dimensionally incompatible and require distinct artifacts/retraining.
++
++### 2.3 Causal preprocessing and caching
++
++The existing4,000-record CrisisMMD cache selection remains an upstream extraction workload, not evidence of broad coverage or completed93-class inference. Its supplied report states software tests/fixture notebook passed; actual expanded-vocabulary accuracy, all4,000 detections and CPU/GPU costs remain unmeasured. Reuse successful rows only after raw-image, scene-registry and producer hashes match. Do not restart extraction or mutate that notebook from this scheduler revision.
++
++Image-only scene arrays can be cached once and reused under new compatible missions. Mission relevance and transmitter novelty cannot be reused across changed missions/source-prefix histories. Sender KB follows the producer's causal per-UE/mission contract (current experiment FIFO128): query -> serialize -> commit each offered observation; reset across incompatible sessions/splits. Receiver policy must not alter this sender stream. A broader image pool does not authorize replacing the upstream KB algorithm.
++
++The scene producer has already applied log1p to its returned count features. Apply it exactly once. Fit missing-value imputation and standardization on training groups only. Constant standard deviation becomes one; masks/status flags remain explicit. Registered always-inapplicable region counts have zero storage/masks, not invented negatives. Freeze feature order and preprocessing per artifact; no dynamic vocabulary expansion from evaluation data.
+ 
+ ## 3. Reference labels and leakage boundary
+ 
+@@ -80,7 +91,11 @@
+ 
+ Group exact/near duplicates, parent derivatives, annotated assets/conditions and available event/site identity before splitting. Use 60/20/20 group train/validation/test with seed1729; retain whole groups and report actual sizes. Use existing official source roles where required. Existing 300-image MEDIC and historical exposed panels are development-exposed; they do not become a fresh final test by reshuffling. Prefer out-of-fold SPI predictions; disclose frozen producer exposure separately.
+ 
+-Dataset roles are fixed: LADI and MEDIC/CrisisMMD for compatibility/priority/task evidence; xBD controlled building overlap for E; RescueNet source transfer; FloodNet structural-flooding scheduler-task transfer, withheld from fitting and selection. An unavailable source is marked unavailable, not replaced with guessed labels. Start source access with 20 records and retain the 2GB new-source-image download cap. Prior 240-group 144/48/48 counts are a feasibility target, not confirmed assets or a power calculation.
++The original dataset roles remain: LADI and MEDIC/CrisisMMD for compatibility and supported task labels, xBD controlled building overlap for E, RescueNet source transfer, and FloodNet structural-flooding scheduler-task transfer withheld from fitting/selection. Broader everyday/sequence sources are added in Section11; dataset category, anomaly or caption labels do not become emergency priority. An unavailable source remains unavailable, not replaced with guessed labels. Audit20 records/source and retain the2GB new-source-image download cap. Prior240-group144/48/48 counts remain a restricted-cohort feasibility target, not a cap on a logical image manifest or confirmed new assets. Materializing or teacher-labeling a huge pool is not free.
++
++The new main P arm uses only Qwen preferences for scheduler optimization. Native annotations serve independent controls/evaluation, and train the separately named D/E comparator arms where valid. Do not mix them into P and still call it VLM-only. Reusing images from SPI training is allowed only in development with exposure disclosed; those parent/duplicate groups cannot serve as fresh independent final scheduler evaluation. No source's missing annotation is converted to Low.
++
++The teacher's images are privileged training information. There is no guarantee that their distinctions survive into387 parameter features. Audit exact collisions of received features AND permitted history/timing with inconsistent preferences. For repeated identical binary inputs, the empirical majority-label accuracy is an identifiable ceiling on that sample, not a proof about near-neighbor cases. Near-collision disagreement is an ambiguity diagnostic only. If rescue versus recreation or a screenshot fault is absent from all supplied signals, report an information limitation rather than claiming a smarter ranker recovers missing visual relations.
+ 
+ ## 4. Primary D objective: declared budgets, exact training targets
+ 
+@@ -104,7 +119,7 @@
+ ymax=2d0/delta_min for the active budget configuration
+ v_i=y_i/ymax in [0,1].
+ 
+-y_i is the exact cost of one-slot deferral under the convention, not a globally optimal action value. Use Huber regression or ordering losses on this target. Scalar importance cannot be read from H0 by a hand formula; the network predicts the reference-derived target using its inputs.
++y_i is the exact cost of one-slot deferral under the convention, not a globally optimal action value. Use Huber regression or ordering losses on this target. The finalized parameter record is not assigned importance by a hand formula; the network predicts the reference-derived target using its inputs.
+ 
+ For RL, event reward is:
+ r_k = -(L_D(t_next)-L_D(t_k))/100.
+@@ -124,27 +139,41 @@
+ 
+ P contains accepted Qwen A/B/tie preferences under the declared purpose and causal context. No invented continuous utility or complete ranking is inferred from arbitrary disconnected pairs. P loss and teacher agreement are weak-supervision results. D checkpoint selection and independent E outcomes are still reported wherever valid.
+ 
+-Core task schedule: all feasible learned arms below run D; Deep Sets RankNet, PPO and DDQN also run E when assets are valid; Deep Sets RankNet-P and VisionPrefer compare weak semantic supervision. This is the fixed comparison set, not a giant task-by-model sweep.
+-
+-## 6. One shared observation architecture
+-
+-For p value fields, immutable semantic vector x has standardized values, p masks and novelty-cold-start. Thus semantic width is 2p+1 (H0 p=10; ARRAY16 p=42). Add log1p(wait/d0) at decision time. Historical tokens use log1p(age-since-processing/d0) and a history-role bit; this age is not a new source parameter.
+-
+-Keep the most recent32 processed headers, oldest removed at capacity. Update after an attempt completes; do not assert reconstructed facts or inspect quality. Failed exceptions and poor visual outcomes do not create retries. Log status outside semantic scoring. Empty-history and availability indicators are explicit.
+-
+-Summary feature input for scalar models contains candidate x/wait, masked queue/history means, availability fractions, log1p queue/history size, empty-history flag, minimum comparable history distance and its validity flag. Distances use training-scaled co-available fields; no comparison gives zero plus invalid, not observed similarity. No self-distance is used. Routing IDs only associate records.
+-
+-MLP scorer: shared64/32 ReLU layers, one scalar, no dropout/batchnorm. Linear scorer: one affine scalar.
+-
+-Deep Sets: shared phi with32/32 ReLU layers encodes header/time/role tokens into32 dimensions. Mean-pool ready and historical embeddings separately; concatenate candidate raw features/embedding, ready mean, history mean, set sizes and empty flags into64/32 ReLU head. Mean plus set size preserves cardinality information. No list position encodings. Candidate input permutation must permute associated outputs, not alter identity-associated scores.
+-
+-Set Transformer comparator: token dimension32, two self-attention blocks, four heads, feedforward64, layernorm, dropout0; ready/history role bits and padding masks; candidate token outputs feed the same64/32 score head. No routing/array-position embedding and no silent candidate truncation. Full attention cost is quadratic; measure actual observed queue lengths.
+-
+-All learned policies select argmax among ready messages at deployment. Training PPO samples a masked categorical distribution. Ties: arrival, sequence, full source/session/token. Empty queue waits only for a real future arrival. Busy decoder cannot dispatch. Invalid artifacts fail before service; unexpected nonfinite scores use FIFO and increment a fallback counter.
++Core task schedule: first run static Deep Sets-P and temporal Deep Sets-P against the fixed untrained references on the same real teacher labels; train a summary MLP-P on those same pairs as the small distillation control. The temporal P arm is the new main candidate. The original sixteen feasible arms remain in D, and original Deep Sets/PPO/DDQN also run E where assets are valid. VisionPrefer remains a separately named weak-supervision comparison. Temporal-D is a matched mechanism comparison only on a valid D cohort; this avoids a full architecture-by-task factorial. No new urgency labels or rewards are inferred merely because the image pool is larger.
++
++## 6. Shared set scoring and causal temporal extension
++
++### 6.1 Base models and shared information
++
++The primary semantic vector x is387 entries from Section2. Append log1p(current receiver wait/d0) to current candidate tokens. Processed headers carry age-since-attempt and a history-role bit. Keep the most recent32 processed headers globally. Completion records an attempted job/header, not verified reconstructed meaning; no retry or semantic-success oracle is added.
++
++Summary models retain the previous candidate, masked queue/history means, availability fractions, log1p sizes, empty-history flag and minimum comparable history distance with validity indicator. Only co-available standardized values enter distance; do not take distances over IDs or mix masks as image meaning. Exclude self. No comparable fields means missing comparison, not observed equality. A summary deliberately compresses legal history; its information loss is tested rather than hidden.
++
++MLP remains64/32 ReLU, scalar output, no dropout/batchnorm. Linear remains one affine score. Static Deep Sets retains phi32/32 ReLU, separate ready and processed mean pools, candidate skip features, set sizes/empty flags, and rho64/32 ReLU. Set Transformer remains two blocks, dimension32, four heads, FF64, layernorm, dropout0 and legal masks. All models receive the same eligible messages and frozen producer; static/temporal context representations are an explicit factor.
++
++### 6.2 Main temporal ranker
++
++Use one shared GRU, not one trained model per UE. At decision t, construct H_i(t) from the three most recent complete receiver arrivals of candidate i's source/session before t, excluding i itself. Retain a four-record recent-arrival ring per UE so excluding a recent candidate still permits up to three records; an older candidate uses the latest three. Mark each history item as waiting/processed/in-flight using current lifecycle state. This prevents 'has arrived at receiver' from becoming 'already decoded'. Source capture order is used only when trusted and consistent; otherwise order by receiver arrival/sequence and record temporal_order_source. The same ordering rule feeds teacher and student. All history records have arrived by t; no future source frame appears.
++
++Take the selected three records in that declared order. Project each x through shared phi into32 dimensions, append log1p(time gap/d0), lifecycle status and gap/availability indicators, then encode with one GRU hidden width32. Reset the GRU to zero for each bounded window: hidden state cannot secretly retain older images after a split/session reset. Empty history has a zero state and explicit flag. Full routing IDs are dictionary lookup keys only, never numeric/embedding inputs. Retain independent source/session rings so churn and session reuse cannot cross-contaminate history.
++
++Let h_i=GRU(H_i), e_i=phi(x_i), q=mean_ready(e), g=mean_processed(phi(x)), and u=mean over active UE history encodings. Construct u from one canonical recent three-arrival window per active UE, not once per queued candidate; otherwise a chatty UE is over-counted. A shared rho64/32 scorer returns:
++s_i=rho(e_i, x_i, h_i, q, g, u, wait_i, sizes, masks).
++The active-UE pool uses received evidence from active UE sessions, not simulator-only future captures. A UE with no received evidence has an explicit empty token. Active-state joins/departures are lifecycle metadata; if a departure signal is unavailable, keep the last session until its declared timeout and log this rule.
++
++The architecture has no fixed UE slots or fixed candidate output layer. Parameters are shared for N=4,50,60,100 and other positive counts. Set means/sizes are permutation-invariant across UEs/candidates, while history order is intentionally meaningful inside each UE. No claim of infinite-scale constant cost follows: storage is O(4N +32 +Q) headers and queue inference is linear in Q for fixed hidden width/history length, with an O(N) UE pool. Cached encodings must be invalidated when history membership, age/status inputs or model weights change. Simply reusing a state after those inputs change would be incorrect.
++
++Use history_length=3 for the frozen first experiment; do not search16/32/128 windows. It permits a bounded actual-image teacher request. The existing32-item global processed history remains. A separately identified zero-history ablation removes temporal features and uses the static set model; a header-window mean control distinguishes temporal order from merely more records. A flat ordered-window MLP control receives the same three header records/gaps/status masks and padding, avoiding an architecture comparison against a deliberately deprived input.
++
++### 6.3 Selection, export and causality
++
++Deploy argmax over currently ready candidates, with ties by arrival/sequence/full identity. Busy means no dispatch. Training PPO samples only legal candidates. Empty ready queues wait for actual arrivals, never a learned WAIT. Invalid model artifacts fail before service; unexpected nonfinite scores invoke FIFO plus counter.
++
++Export the full387-feature registry, transforms, shared phi, exact GRU equations/gate order/bias convention, pooling and rho. PyTorch and NumPy GRU formulations must agree at gate boundaries, empty windows and mixed window lengths; do not assume the existing dense exporter implements recurrence. Include activation/gate FLOPs and context rebuilding in measured cost. Pending/history state and source rings are part of resumable environment checkpoints; weights-only is not a full resume.
+ 
+ ## 7. Locked learned-method registry and losses
+ 
+-All existing IDs remain recognizable; objective/profile versions distinguish new experiments from historical fixture models. Old binary fact-gain classifiers or completion-coverage checkpoints are never relabeled as newly trained methods.
++All sixteen existing IDs remain recognizable; objective/profile versions distinguish new experiments from historical fixture models. Old binary fact-gain classifiers or completion-coverage checkpoints are never relabeled as newly trained methods.
+ 
+ For decision s with q candidates, let y_i be D risk (or valid E gain in the named E arm). Best-tie target p_i=1/|B| for i in B=argmax y, zero otherwise.
+ Choice CE: L_choice=-sum_i p_i log softmax(score)_i.
+@@ -160,7 +189,7 @@
+ | ranknet | Shared MLP summary scorer | L_pair from exact y comparisons |
+ | lambdamart | LightGBM grouped LambdaMART | Pair logistic lambdas weighted by abs Delta NDCG; explicit linear label gains |
+ | priority_classifier | MLP four-class reference-deferral head | Class-balanced multiclass CE on z; inference scores expected y_i over predicted tier probabilities and current wait |
+-| deepsets_ranknet | Deep Sets scorer | L_pair; main D member, separate E/P label versions |
++| deepsets_ranknet | Static Deep Sets scorer | L_pair; retained D model and matched P/E controls |
+ | set_transformer_ranknet | Attention set scorer | Same L_pair and sampled pairs as Deep Sets |
+ | listmle | Deep Sets scorer | ListMLE on deterministically sampled strict three-candidate reference orders |
+ | masked_ppo | Deep Sets actor and pooled critic | Clipped PPO + value MSE - entropy |
+@@ -170,6 +199,9 @@
+ | rl_vlm_f | Same DDQN architecture | Double-DQN TD loss using preference-learned reward, not D reward |
+ | vlm_replay | Same DDQN architecture | D reward fixed, guided sampling only |
+ | visionprefer | Deep Sets scorer | L_pair from four-aspect average teacher preferences |
++| temporal_deepsets_ranknet | Shared GRU plus Deep Sets scorer | L_pair from qualified Qwen P labels; new main arm; matched D version only on valid references |
++
++For the first P comparison, linear-P and summary-MLP-P are the existing linear_choice/mlp_choice architectures with task_id=P and a two-candidate teacher target p_A=t, p_B=1-t. Their two-way choice cross-entropy is exactly the RankNet binary preference loss on s_A-s_B, including t=.5 ties. This preserves their choice-loss definition while matching the accepted pair labels; do not reuse D-best-tie targets in the P arm. Static/temporal RankNet-P directly use L_pair. Priority-classifier labels still require four-tier supervision; LambdaMART/ListMLE still require their supported grades/orders, not guessed targets from disconnected pairs.
+ 
+ LambdaMART quantization: g_i=floor(255*v_i+.5), integer0..255, label_gain[g]=g/255. This is an explicit approximation of continuous D risk. E uses integer uncovered unit-fact gains and label_gain[g]=g. No grades from arbitrary P pairs. Preserve quantization ties; do not silently replace the D target with SPI class.
+ 
+@@ -213,7 +245,11 @@
+ 
+ Backend: Qwen/Qwen3.5-9B, the existing registered NF4 setup, direct Transformers subprocess, thinking disabled. Resolve/store exact checkpoint revision, processor, prompt, quantization and environment hashes before labels. No model/provider switching or prompt hunting on validation/final results. A technical incompatibility blocks the run until a diagnosed correction is recorded.
+ 
+-Teacher sees actual RGB images, declared receiver purpose, UE missions, trusted/simulated metadata clearly distinguished, and bounded causal context. Hide predicted SPI/H0 values, scheduler outputs and reference facts. It must return structured JSON with choice/tie/uncertain, concise visible evidence and unknowns. Never request invented numeric real-world deadlines or use self-rated confidence as validated correctness.
++Teacher sees actual RGB images, declared receiver purpose, UE mission paragraphs, trusted/simulated metadata clearly distinguished, current receiver wait and bounded causal context. Hide received SPI/relevance/novelty/scene scores, scheduler predictions and independent reference facts. Show up to two current candidate images, their H_i windows of up to three source images each, and up to two most recently processed images: at most ten unique RGB images/request. Reuse a displayed current image by reference if it also occurs in another window. Every image has neutral role/time/status labels; never concatenate them into an unmarked collage that destroys chronology. Teacher context is bounded, not a claim of complete receiver knowledge.
++
++At deployed replay the student retains the32-header processed context and the full ready/active-UE pools, while Qwen never receives an unbounded queue. A processed image is shown as source evidence from an attempted job, not as a verified decoder reconstruction. For the first P optimizer and held-out teacher-agreement probes, construct an explicit PAIR_VIEW: queue pool q contains only the two displayed candidates, processed pool g only the two displayed processed records, and UE pool u only the displayed candidate-source histories. Build both teacher and student views from the same immutable snapshot; do not let hidden extra UEs/candidates enter those pooled inputs. This removes the false claim that merely capping g makes full contexts equal. Static/temporal/flat-history controls use the same projection; removing history is an intentional information ablation. At deployment the same shared scorer receives the full legal queue, and the expansion from paired training contexts to large queues is a generalization test, not already validated behavior. Report pair-view agreement and full-queue D/E outcomes separately. Teacher-local pairs do not certify a full-queue optimal choice.
++
++Upstream novelty may summarize longer sender history; it remains an allowed producer feature. The offline teacher is not granted unseen future or unsent source frames, and must abstain when the displayed history cannot justify a claimed novelty distinction. The RGB-versus-parameter representation difference remains privileged distillation, even after visible context membership is matched. It must return structured JSON with choice/tie/uncertain, concise visible evidence and unknowns. Never request invented numeric real-world deadlines or use self-rated confidence as validated correctness.
+ 
+ Deferral tier labels provide D budgets; source-prefix-dependent tiers require matching context cache keys. Pair labels supply P. Teacher costs include every call/reversal/failed parse; no free uncapped retries.
+ 
+@@ -228,9 +264,9 @@
+ | Replay training-value clips |24|
+ | Diagnosed technical recovery reserve, no prompt search |8|
+ 
+-This allows at most48 newly tier-labeled context-records absent reusable compatible labels. It is a feasibility label budget, not evidence of a sufficiently powered journal cohort. Reuse independently compatible cached labels only with verified provenance. Never pretend48 contexts or repeated queues equal240 independent images. Candidate/prefix pairs use24 training and8 held-out validation groups before collection; retain rejected/uncertain counts. Candidate responses also include aspect ratings, avoiding a separate unlimited aspect-label campaign.
+-
+-Largest planned teacher request is preflighted before collection. At most2 current images plus bounded necessary causal context per tier call; resize/image-token settings are pinned from the working registered backend and recorded. If planned context exceeds the measured envelope, skip/mark insufficient rather than silently omit relevant history or exceed resources.
++This allows at most48 newly tier-labeled context-records absent reusable compatible labels. It is a feasibility label budget, not evidence of a sufficiently powered journal cohort. Reuse independently compatible cached labels only with verified provenance. Never pretend48 contexts or repeated queues equal240 independent images. Candidate pairs use16 training,8 validation and8 locked pilot-test context groups before collection. Prefix pairs retain24 training and8 validation groups; they are reward-model feasibility labels and supply no separate teacher test claim. Group allocation applies to source/video/incident components, not just pair-row IDs. If overlapping pair components prevent these roles, retain components and mark missing-role support rather than split the same source history across roles; retain rejected/uncertain counts. Candidate responses also include aspect ratings, avoiding a separate unlimited aspect-label campaign.
++
++Largest planned teacher request (up to ten unique images) is preflighted before collection at the actual registered image-token settings. The one/two/ten-image checks and reversals consume the declared control/recovery budgets, not uncapped extra inference. At most2 current images plus bounded necessary causal context per tier call; resize/image-token settings are pinned from the working registered backend and recorded. If planned context exceeds the measured envelope, skip/mark insufficient rather than silently omit relevant history or exceed resources.
+ 
+ Controls require independently defensible expected answers. Gates: >=95% valid schema, >=.80 balanced strict-preference accuracy, >=.75 tie and unanswerable handling; report denominators and uncertainty. Accepted oriented pairs must agree after swapping; disagreement is uncertain, not a forced majority. Unsupported factual assertions invalidate the affected label where independently detectable. These gates do not certify real triage accuracy.
+ 
+@@ -246,6 +282,12 @@
+ 
+ **VisionPrefer-inspired arm.** Adapt only its multi-aspect preference-construction mechanism. Rate mission usefulness, visible evidence clarity, additional information under the shown context, and condition specificity on integers0..4; allow uncertain. Average four supported aspects, derive strict preferences/ties, train Deep Sets L_pair. Equal averaging is an explicit weak-supervision convention. No aesthetics or text-to-image generator tuning is introduced. This is not reproduction of the original VisionPrefer benchmark.
+ 
++First P execution uses the control, tier and candidate-pair portions only, with unused prefix/replay call slots reserved for the retained RL studies. It does not spend an additional216 calls per model. All static, temporal, linear/MLP P models and VisionPrefer reuse the same eligible pair/context records. There are only32 unique candidate pairs in this first budget: it is a feasibility experiment, not enough evidence for a broad journal ranking claim. A large image manifest does not multiply teacher labels. Qualified existing labels may be reused only with matching task/mission/history/schema provenance. Further collection requires a separately budgeted run.
++
++The main P learner uses L_pair only, optimizer weight decay as specified, and lambda_D=lambda_E=0. Qwen pair output is A/B/tie/uncertain, plus concise supported evidence and named change/additional-information/mission factors. An explicit tie maps to target.5, uncertainty is skipped. Do not convert self-reported confidence or explanation length into a label weight. Every queried comparison belongs to an actual causal ready snapshot or a declared common probe; its pair label is not an assertion that one candidate is globally best among100 unseen alternatives. Train P on PAIR_VIEW contexts as defined above. Validate deployed full-queue next-choice behavior separately by D/E on supported cohorts and through qualified small-set choices where separately labeled. Do not claim pair accuracy proves globally consistent selection. D/E learners continue to train on full simulator contexts under their own independent targets.
++
++Temporal labeling is identical except that the ordered H_i image windows are visible. There is no extra no-history teacher labeling pass in this216-call run: the32 swapped candidate pairs already consume64 calls. Student no-history, flat-history and mean-history controls reuse those same accepted labels without extra inference. Reversing A/B preserves each UE window and roles. History-order perturbation is a student diagnostic on real ordered streams; arbitrary time reversal is not automatically a physically valid labeled trajectory.
++
+ Round0: controls, compatible tier labels and initial candidate/prefix labels. Train initial models. Round1: remaining training-only prefix/replay requests from their experience, within the same216 cap. The actor never waits for Qwen. Missing replay guidance stays neutral. Rejected teacher feedback does not stop reference-supported methods.
+ 
+ ## 10. Fixed baselines and fair comparisons
+@@ -256,38 +298,85 @@
+ 
+ Privileged diagnostics: true-budget EDF (not claimed optimal); exact tiny legal-sequence optimum; reference marginal-fact greedy. None is a fair deployed competitor. A greedy schedule is not a lower bound. No WAIT or future observations are added to deployed actors.
+ 
+-D core comparison uses all16 feasible learned arms and the baseline set. P/teacher arms differ in label/reward source by design. Architecture comparisons match reference targets/pair budgets. Replay comparisons match actor/reward/training steps and the uniform-mixture setting. Warmstart comparisons count pretraining and RL decisions. Never call multiple losses on the same architecture independent new algorithmic discoveries.
+-
+-## 11. Data streams, UE profiles and randomized metadata
+-
+-Use the existing15 profile definitions, with fixed device-description/mission hashes:
+-ordinary phone; incident phone; structural drone; person-search drone; flood/evacuation drone; wildfire drone; road/bridge drone; ordinary car; emergency vehicle; traffic CCTV; public-space CCTV; river/underpass camera; industrial robot; agricultural drone; maintenance camera.
+-These are project templates, not standardized15 6G device classes. Device identity is never semantic priority.
+-
+-Episodes are ordered incident observations with profile-compatible background traffic, not random unrelated image bags. Keep real sequence replay, controlled correspondence/crops, and synthetic chronology labeled separately. Repeated images retain parent/group identity; changed conditions require annotation support.
+-
+-Fixed workload axes:
+-- populations4/12/50/100 and within-episode join/pause/resume/leave;
+-- training32–512 messages total, variable per-source lengths;
+-- required scale cases50 images per UE (2,500 and5,000 messages for50/100 UEs);
+-- service d0=1 in primary; separate lognormal(mean1, log-std.5) stress;
+-- offered-load ratios .5/.9/1.2 versus nominal one-job-per-slot capacity;
+-- initial backlog min(8,N), plus a separate all-at-once contention control;
+-- chronological uniform arrivals or two incident bursts containing70% of offered messages in20% of the arrival-window duration.
+-
+-Compute arrival window from offered count/load and report realized rates, backlog and active counts. Hold total load fixed when changing UE count; population and congestion are different experiments. At fixed arrival window, separately report load growth. Episode endpoint is fixed before policy replay, arrival-window end plus32d0; actor excludes remaining horizon. All methods use identical message-qualified arrivals/durations/outcomes.
+-
+-Timestamp chain: capture -> extraction-ready -> complete receiver arrival -> dispatch -> finish. Synthetic clock, coordinate system and accuracy are explicit. Stationary cameras do not wander. Generated phone/robot/drone/car trajectories follow bounded synthetic paths (illustrative speed caps2/2/15/20 m/s), with metadata marked simulated. No geographic truth is inferred from assigned coordinates.
+-
+-A UE leaving does not delete received messages; session restart and sender-KB reset are explicit. Reset clears queue/in-flight/policy rotations/receiver history. Account for every offered job as not-arrived, queued, in-flight, processed or explicitly excluded.
+-
+-Core has all normally completed attempts. A separate fixed5% processing-exception stress and .01/.10 sensitivities use hidden identity-qualified draws, not selection order. No retries. At unchanged durations and no outcome features, outcome flags alone must not alter selection-cost trajectories. Poor reconstruction is not automatically an exception or observed semantic failure.
+-
+-Perform demand/capacity checks before interpreting missed budgets: only three jobs can start by time2 under unit service at times0,1,2. Impossible simultaneous deadlines remain documented overload, not proof a learner is defective.
++The first P comparison contains FIFO/RR/random, SPI-FIFO, relevance-only, novelty-only, SPI-then-novelty and predicted-budget EDF; linear-P, summary-MLP-P, static-Deep-Sets-P and temporal-Deep-Sets-P train on identical accepted pairs. The flat-history MLP and mean-history controls isolate representation. None of the rule baselines is trained on hidden reference priority. Delay-trained neural/ranking models are reported as target-source comparisons when ready, not misrepresented as P learners.
++
++D core comparison retains all16 former feasible learned arms and the baseline set; the temporal-D mechanism control is additional. P/teacher arms differ in label/reward source by design. Architecture comparisons match reference targets/pair budgets. Replay comparisons match actor/reward/training steps and the uniform-mixture setting. Warmstart comparisons count pretraining and RL decisions. Never call multiple losses on the same architecture independent new algorithmic discoveries.
++
++## 11. Broad image pools, dynamic UE missions and stream construction
++
++### 11.1 Source roles: broad manifest, selective acquisition
++
++Use diverse established sources, not an indiscriminate web scrape. The selected core additions are COCO and Open Images for everyday mixed scenes, plus BDD100K for real temporal streams when an authorized image/clip subset is accessible. ImageNet and Places365 add object/scene breadth when existing assets or access permit. Their category labels support sampling and detector checks, not scheduler priority. Screenshots need an explicit separate UI source; a laptop detector class cannot prove an operational error.
++
++| Source and primary reference | Added value | Use/limit |
++|---|---|---|
++| [COCO](https://cocodataset.org/) | People, objects, indoor/outdoor clutter, food/sports/furniture with annotations | Core everyday pool; no urgency labels or temporal order |
++| [Open Images V7](https://storage.googleapis.com/openimages/web/download_v7.html) | Diverse scenes, labels/boxes and selected relationships | Core broad pool; published relationships may test a missing signal, never leak into actor |
++| [ImageNet](https://www.image-net.org/download-images.php) | Wide object-category coverage | Optional sampled slice; official image access may require login; not natural UE sequences |
++| [Places365](https://github.com/CSAILVision/places365) | Indoor/outdoor scene diversity | Optional scene slice; category breadth is not emergency evidence; archive access preflight required |
++| [BDD100K](https://github.com/bdd100k/bdd100k) | Actual ordered driving videos with varied conditions | Core temporal source if accessible; single annotated keyframes alone are not a sequence |
++| [DoTA](https://github.com/MoonBlvd/Detection-of-Traffic-Anomaly) | Traffic-anomaly temporal boundaries and clips | Targeted temporal stress; anomaly is not a calibrated four-tier priority; released frame archive is large |
++| [UCF-Crime](https://www.crcv.ucf.edu/research/real-world-anomaly-detection-in-surveillance-videos/) | Normal/anomalous surveillance episodes | Optional CCTV temporal stress; coarse training video labels do not label every frame |
++| [CrisisMMD](https://crisisnlp.qcri.org/crisismmd) / MEDIC | Existing disaster observations and compatibility assets | Preserve pinned4,000 selection and known exposure; not general93-class coverage |
++| [xBD/xView2](https://github.com/DIUx-xView/xView2_baseline) | Annotated buildings/conditions and controlled overlap | Original independent E arm; not two independent datasets |
++| [RescueNet](https://github.com/BinaLab/RescueNet-A-High-Resolution-UAV-Semantic-Segmentation-Dataset) | Aerial disaster scene/source transfer | Preserve supported label mapping and source-held-out report |
++| [FloodNet](https://github.com/BinaLab/FloodNet-Supervised_v1.0) | Structural-flooding task transfer | Still withheld from scheduler fitting/selection for the original transfer claim |
++
++These are evaluated source choices, not a claim of downloaded assets. Official ImageNet image downloads are access-controlled; several Places/BDD host requests did not resolve during this inspection, although their author repositories describe the sources. DoTA's author release describes55GB of extracted frames, exceeding this block's2GB acquisition cap. Do not download a giant archive to obtain a handful of frames or silently use an unverified mirror. Preflight schema, image bytes, licenses/terms, annotation validity and source identity for20 records before making a source active. The BDD paper/toolkit source supports the temporal choice; it does not establish that a particular local archive is available.
++
++Keep one source manifest scalable to large pools: source/version, original identifier, content hash, parent/video/event group, official split, annotation provenance, acquisition status and license/attribution metadata. Selective caching, not the manifest length, determines compute/storage. Target an additional2,000 static parent images for feasibility (800COCO,600Open Images,400Places365,200ImageNet), plus at most120 real clips with up to8 extracted frames each if small authorized assets fit the same2GB new-source cap. Existing disaster rows are additional; intended totals are not counts of materialized independent groups. Access failure leaves the quota unmet and source unavailable; no silent redistribution or claim of completion. These caps are workload choices, not power calculations.
++
++Source metadata and grouping remain outside learned features. Audit duplicates across all collections before splitting, including disaster copies reproduced in general-image sources. Split whole video/incident/parent components60/20/20 before selecting frames or episode construction. An official held-out source split is not casually repurposed as training. Final family/held-out-task tests cannot be used to adjust the source mixture.
++
++### 11.2 Three named stream families
++
++**MIXED_IID (40% of first training traces):** independently sample diverse images into queues. This directly tests the user's ordinary-photo/traffic/disaster/food/person-near-fire mix. It is a valid synthetic mixed-workload stress, but assigned ordering/location is not a real trajectory. Mark capture geography unknown or simulated; do not describe random unrelated pictures as repeated views of a place.
++
++**CAUSAL_SEQUENCE (40%):** assign real source clips to compatible UE missions, preserve frame order, and interleave multiple UEs by receiver arrival time. Sample up to8 source frames per clip using declared source timestamps; arrival jitter never exposes a frame before its own capture/extraction/transport readiness. Repeated adjacent frames, changed appearance and changed condition are distinct cases. Only annotations/declared exact-copy construction establish shared facts or actual change; appearance difference alone does not.
++
++**MISSION_CONTEXT (20%):** use eligible parent images under different mission paragraphs in separate grouped traces, recomputing relevance/novelty. Include high-SPI/low-relevance, low-SPI/clear incident, high-novelty irrelevant content and crowded-routine versus sparse-critical comparisons. These are challenge strata, not automatic preference labels. If the evidence does not support the contrast, Qwen may tie/abstain. Keep matched image derivatives in one split. The common receiver objective stays fixed; UE mission changes do not create fifteen unrelated definitions of global priority.
++
++Sample sources by the frozen per-family manifest and report realized proportions. Do not label all COCO images routine or all CrisisMMD images urgent. Include source-matched positives/negatives and source-held-out results; a learned source shortcut can survive removal of source IDs. Never route all critical images to one UE type. Keep cold starts, local exact repeats, cross-UE repeats, long unserved histories and all-empty detector scenes. Exact-copy parent identity is evaluator-only. Random pool diversity and temporally meaningful novelty are separate mechanisms and separate reported strata.
++
++### 11.3 Fifteen retained UE templates
++
++Each template supplies device description, mission paragraph, capture-rate/trajectory metadata and availability. These are project templates informed by IMT-2030 use-case families, not fifteen standardized6G classes. Device type never grants priority.
++
++| Device | Fixed mission intent |
++|---|---|
++| General smartphone | Share user-selected visual observations; no presumption of emergency |
++| Citizen incident phone | Report visible incidents and changes useful to local response |
++| Structural survey drone | Inspect buildings for visible damage and newly exposed structural evidence |
++| Person-search drone | Locate visible people and evidence relevant to a search task |
++| Flood/evacuation drone | Observe inundation and passable/blocked evacuation routes |
++| Wildfire drone | Monitor visible smoke/flame and supported changes in fire conditions |
++| Road/bridge drone | Inspect transport structures and visible obstruction/damage |
++| Ordinary vehicle camera | Record immediate road scene and obstacles relevant to travel |
++| Emergency vehicle camera | Report response access and visible incident developments |
++| Traffic-intersection CCTV | Observe flow, collisions and obstructions at a stationary intersection |
++| Public-space CCTV | Observe visible public-space incidents and crowd changes |
++| River/underpass camera | Monitor water/route conditions from a fixed viewpoint |
++| Industrial inspection robot | Report equipment/area conditions relevant to its inspection mission |
++| Agricultural drone | Observe crop/field conditions and supported changes |
++| Maintenance field camera | Document infrastructure inspection findings and relevant change |
++
++The complete actual paragraphs are versioned extractor inputs, not labels generated afresh for each scheduler. All learning arms use the same paragraphs/parameters. Because the student receives relevance rather than raw mission language, this study tests the selected task-relative parameterization; it does not establish arbitrary language-instructed scheduling. If a changed mission yields identical permitted features but requires opposite behavior, record an information collision, not an invented hidden mission embedding.
++
++### 11.4 Workload, timing and outcomes retained
++
++Populations4/12/50/60/100 with join/pause/resume/leave; variable per-source message counts. Train on32..512 offered messages/trace and test scaling with50 images/UE (2,500/3,000/5,000 for50/60/100). One hundred active UEs need not mean100 queued messages. Population, load, source distribution and history length are independent declared axes, not one giant factorial.
++
++Retain service d0=1 primary; lognormal(mean1,log-std.5) stress; offered loads.5/.9/1.2; initial backlog min(8,N); separate all-at-once control; uniform arrivals or two bursts containing70% of traffic in20% of the arrival window. Compute window from offered count/load and report realized backlog/rates. Hold total load fixed for population comparisons; report load-growth experiments separately. T=arrival-window end+32d0 is fixed before replay and hidden from actor.
++
++Capture -> extraction-ready -> complete arrival -> dispatch -> finish are distinct timestamps. Use real source timestamps where known, otherwise clearly simulated times with uncertainty. Stationary cameras do not move; bounded synthetic speed caps2/2/15/20m/s for phone/robot/drone/car remain illustrative. Unrelated internet photos receive no fabricated claim of coherent physical GPS. Missing capture time/location stays unavailable; inference runtime is measured rather than silently subtracted from a deadline.
++
++UE departure does not delete received jobs. Session resets clear the correct rings/KB and never merge identities. Every offered message is accounted as not-arrived, queued, in-flight, processed or explicitly excluded. Hidden identity-qualified outcomes/service realizations are generated once and shared across policies. All-success core;5% exception stress and1/10% sensitivities; unchanged durations/outcome-hidden policies must have unchanged selection-cost trajectories. No retry and no reconstructed-quality feedback. Only three unit-duration jobs can start by time2 at0,1,2: infeasible simultaneous budgets are recorded overload, not a fabricated training failure.
+ 
+ ## 12. Evaluation metrics, exact definitions
+ 
+-**D primary:** macro-average J_D across matched episodes/load strata; lower is better. Pair with independently reference-tier-conditioned timing/misses. Do not claim urgent performance from an unweighted mean across all images.
++**P first-experiment report:** held-out qualified pair agreement, strict/tie/uncertain counts and per-family/mission/source breakdown. A teacher-labeled pilot test is silver agreement, not independently verified triage. Report D timing and E evidence where valid on the same replay; absent references mean those cells are unavailable, not a zero score. Compare temporal versus static/flat-history/mean-history under identical labels before attributing gains to temporal reasoning.
++
++**D operational criterion retained:** macro-average J_D across matched episodes/load strata; lower is better. Pair with independently reference-tier-conditioned timing/misses. Do not claim urgent performance from an unweighted mean across all images.
+ 
+ For each reference tier:
+ - offered, assessed, selected and never-selected counts;
+@@ -306,15 +395,15 @@
+ 
+ **Systems:** context-build+select milliseconds and forward-only time separately; warmed hardware/backend/precision/thread count; p50/p95 with samples; peak memory; model parameters and supported-operator FLOPs. Count2 operations/MAC. Include pooling/attention scope and missing operators; teacher/quantized FLOPs unavailable is not zero. Profile queue sizes4/16/64/256 and actual observed large-backlog sizes with no truncation. CPU profiling budget5 minutes/model; partial timing scope is recorded.
+ 
+-**Transport:** actual parameter JSON bytes, candidate profile/vocabulary hashes and serialization latency. No synthetic payload-size or radio-spectrum improvement claim. Selector overhead is measured; synthetic slot results are not milliseconds. Report a separate overhead-charged sensitivity once a measured selector-to-service scale exists.
++**Transport:** standalone369-byte scene block plus measured complete parameter/envelope bytes, candidate profile/vocabulary hashes and serialization latency. Report JSON and binary alternatives separately rather than double-counting both as transmitted. Required scene-value ablations are SPI/relevance/novelty only, those fields plus93-class arrays, and those fields plus temporal history. Class-family ablations remove corresponding values AND masks/history-derived features, not a manual channel-importance formula. Count/area/mask-only and detector-unavailable controls test shortcuts. The primary model retains all93 channels; a successful ablation does not silently redefine the final vocabulary. No synthetic payload-size or radio-spectrum improvement claim. Selector overhead is measured; synthetic slot results are not milliseconds. Report a separate overhead-charged sensitivity once a measured selector-to-service scale exists.
+ 
+ ## 13. Model selection, splits, seeds and statistics
+ 
+ Training seeds1729/2718/31415. Separate RNG streams for model, training traces, validation, test and service outcomes. The correctness run is fixed2–3 episodes,3 epochs,64 RL decisions/arm,1 seed; it is never merged with study-performance results.
+ 
+-Validation set:12 matched traces covering populations4/12/50/100 and three loads; message counts48/96/256/512 by population. Same validation trace IDs across arms. Validate supervised models each epoch and RL each2,000 decisions.
+-
+-Checkpoint rule for each arm: lowest validation macro J_D. Ties within1e-6: higher assessable Critical within-budget fraction if defined, then fewer parameters, then registry ID. No test results enter selection. P-only and E-specific checkpoints select their named validation objective (P accepted-pair accuracy; E cost); D results are still reported where assessable. Learned-reward RL is selected by independent D validation, never by its own learned reward. Missing independent selection references block that claim.
++Validation set:15 matched traces covering populations4/12/50/60/100 and three loads; message counts48/96/256/384/512 by population (15 matched traces). Same validation trace IDs across arms. Validate supervised models each epoch and RL each2,000 decisions.
++
++Checkpoint rule for each arm: lowest validation macro J_D. Ties within1e-6: higher assessable Critical within-budget fraction if defined, then fewer parameters, then registry ID. No test results enter selection. P-only and E-specific checkpoints select their named validation objective (P accepted-pair accuracy, ties by lower held-out pair BCE then fewer parameters; E cost); D results are still reported where assessable. Learned-reward RL is selected by independent D validation, never by its own learned reward. Missing independent selection references block that claim.
+ 
+ Promotion rule across selected D policies: a learned policy is eligible as the recommended operational candidate only if, on the same validation traces, its Critical within-budget fraction is no lower and its Critical restricted mean wait no higher than predicted-SPI-FIFO. Among eligible policies choose the lowest macro J_D with the tie rule above. If none qualify, retain the baseline and report the negative result; do not change the threshold or hide failed arms. If Critical references/follow-up are absent, a Critical-service recommendation is undefined, not passed. This is a fixed sample-based engineering guard, not a statistical guarantee or a promise of feasible deadlines during overload. Final test results report all preregistered methods even if they fail promotion.
+ 
+@@ -340,6 +429,13 @@
+ 13. Torch/LightGBM versus portable NumPy predictions and selected identities, including tree threshold boundaries.
+ 14. Outcome-only stress invariance at fixed service/no outcome actor input.
+ 15. Artifact checksums, model/profile/target compatibility and rejection of legacy weights under new semantics.
++16. Scene v2 exact369-byte roundtrip,93 order,374 scene features/387 semantic entries, region mask semantics, wire-derived area quantization and one-time log1p.
++17. Temporal ring/window construction, lifecycle status, source/session isolation, history membership at decision time and no future images in teacher views.
++18. UE/candidate permutation invariance with history order preserved; intentional history-order changes can change temporal output without introducing array-position IDs.
++19. Static/flat-history/mean-history versus GRU same-context controls, NumPy GRU parity and reset/checkpoint continuation.
++20. Broad-pool source/clip grouping, MIXED_IID versus CAUSAL_SEQUENCE provenance, mission-dependent cache recomputation and scene-cache reuse checks.
++21. Teacher request unique-image cap, swap consistency with histories intact, pair split component isolation and final silver-test access log.
++22. Exact feature/history collisions and source-predictability diagnostics; no claim that93 classes recover unencoded visual relationships.
+ 
+ Do not run the same smoke repeatedly without new changes. Existing focused suites remain in Test/tests. New research checks/benchmarks and their results stay in experiments/. No data/parameter-team sources are modified by scheduler work.
+ 
+@@ -347,24 +443,25 @@
+ 
+ ## 15. Fixed execution order, resources and implementation status
+ 
+-Execution order is dependency-driven, not a new architecture-selection stage:
+-1. Freeze current source/input artifacts, preserve dirty working tree and old results.
+-2. Implement D/E evaluators and typed targets beside the legacy completion objective.
+-3. Implement processed-header adapter and exact observation profiles.
+-4. Run acceptance/numerical checks and the fixed2–3-episode correctness run.
+-5. Connect qualified reference/teacher records; blocked arms retain explicit statuses.
+-6. Train registered models under fixed defaults; validate/export/resume.
+-7. Run locked comparisons, scaling, ablations and report.
++Execution order now implements the user's VLM-first request without discarding the rest:
++1. Freeze supplied scene-v2 source/artifacts, preserve dirty working tree and old results; consume upstream outputs without launching/replacing its cache job.
++2. Implement the387-entry adapter, per-UE windows, same-context teacher records and broad source/trace manifests. Dataset access audits are selective and within the existing cap.
++3. Implement retained D/E evaluators/typed labels beside the legacy completion objective so every trained model has a valid operational report where references exist.
++4. Run meaningful scene/lifecycle/temporal/leakage/numerical/export tests and the fixed2–3-episode correctness run. A synthetic label fixture validates plumbing only.
++5. Qualify Qwen on the exact ten-image request envelope, then collect bounded P preferences. Failure blocks real VLM training; do not silently substitute synthetic preferences as real labels.
++6. Train the static/MLP/temporal P comparison first under identical labels; validation/export/resume and independent D/E outcomes where assessable. No SPI classifier or codec work is included.
++7. Run the retained delay-trained/classifier/tree and RL/RLAIF/replay arms under their exact original losses and budget. Prefix/replay feedback stays within the same216-call allocation.
++8. Run the locked scaling/ablation/transfer comparisons and report all partial, unavailable and negative results. No claim of learned superiority follows from a2–3-episode software pilot.
+ 
+ Main Sol owns code/integration and the canonical record. Medium assesses completed consequential slices without edits. Luna High runs pinned tests, operational monitoring and authorized Kaggle actions. Agents do not reset/pull/move a live checkout. No permanent supervisor or redundant full surveys.
+ 
+-Reuse the project .venv locally; training frameworks stay outside deployed Scheduler inference. Portable artifacts include preprocessing, schema/profile/vocabulary hashes, architecture, objective/label/reward source and weights. Deep Sets/attention exporters require parity before deployment; existing dense exporters are not assumed sufficient.
++Reuse the project .venv locally; training frameworks stay outside deployed Scheduler inference. Portable artifacts include preprocessing, schema/profile/vocabulary hashes, architecture, objective/label/reward source and weights. Deep Sets/attention/GRU exporters require parity before deployment; existing dense exporters are not assumed sufficient.
+ 
+ CPU first. Six aggregate GPU-hours remains the prior execution ceiling, not a new quota claim:3h extraction/teacher,2h justified accelerator work,1h diagnosed contingency; actual codec work remains paused. Count allocated idle GPUs and loading. Recheck current access/quota before any submission. Reuse established Kaggle notebook identities and parameters/KAGGLE_RUNS.md; no healthy run is interrupted to add logs. Preflight hardware and ten-image/call cost before expensive work. A cap stops execution with a checkpoint/partial status; it does not authorize silent model or label substitution.
+ 
+ The current legacy pilot pre-spi-check-20261030-094517 records15 focused passes, eight fixture-trained learners, three blocked teacher arms and11 waiting-spec arithmetic checks. It does not validate these new D/E losses, Deep Sets/attention, scene arrays or model superiority. The finite J_time values refer to the legacy completion-coverage objective.
+ 
+-Final specification status: model registry, targets, losses, defaults, teacher allocation and metrics are fixed. Execution blockers are qualified labels, source assets, export implementation and measured resource availability. Record these as blocked_input/blocked_labels/partial_budget/failed_validation; do not relabel them as completed work.
++Revised specification status: SCENE93_V2 is the primary input; VLM-supervised temporal P is the first candidate; all sixteen previous models, exact D/E objectives, budgets and controls remain. The new temporal registry entry makes seventeen architecture IDs, with explicitly named target-source variants. Model registry, targets, losses, defaults, teacher allocation and metrics are fixed. Execution blockers are qualified labels, source assets, export implementation and measured resource availability. Record these as blocked_input/blocked_labels/partial_budget/failed_validation; do not relabel them as completed work.
+ 
+ ## 16. Literature basis and limits
+ 
+@@ -386,6 +483,20 @@
+ - [Min-sum Set Cover, 2003](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-2003-21.pdf): first-cover delay; no direct online approximation guarantee inherited.
+ - [Novelty and Diversity in IR Evaluation, 2008](https://cormack.uwaterloo.ca/novelty.pdf): independent nugget-level redundancy evaluation.
+ - [YOLO-World documentation](https://docs.ultralytics.com/models/yolo-world/): custom vocabulary support, not verified detection of every hazard.
++- [GRU / RNN Encoder-Decoder, 2014](https://aclanthology.org/D14-1179/): shared recurrent encoding of ordered observations. Its language experiment does not validate our temporal scheduler.
++- [Unifying distillation and privileged information, ICLR2016](https://leon.bottou.org/publications/pdf/iclr-2016.pdf): teacher-only representations during learning versus student inputs at inference. It motivates the RGB-teacher/header-student boundary, not a guarantee that omitted visual distinctions are recoverable.
++- [COCO paper](https://arxiv.org/abs/1405.0312), [Open Images description](https://storage.googleapis.com/openimages/web/factsfigures_v7.html), [Places365 author repository](https://github.com/CSAILVision/places365), [official ImageNet access](https://www.image-net.org/challenges/LSVRC/2012/2012-downloads.php), [BDD100K author repository](https://github.com/bdd100k/bdd100k), [DoTA author release](https://github.com/MoonBlvd/Detection-of-Traffic-Anomaly): source diversity and sequence/annotation roles, not independent scheduler-priority truth.
++- [Qwen3.5-9B official model card](https://huggingface.co/Qwen/Qwen3.5-9B): multimodal backend and supported invocation; local task-specific reliability/cost still requires the declared controls.
++- [ITU IMT-2030](https://www.itu.int/en/ITU-R/study-groups/rsg5/rwp5d/imt-2030/pages/default.aspx): broad use-case context, not an official list of these fifteen UE templates.
+ 
+ The budget mapping, piecewise D penalty, profile templates, aspect rubric and numerical defaults are declared design conventions. Literature does not prove these are universally best, clinically safe, novel, converged or journal-ready. The scientific claim must remain tied to the executed sources, labels, operating regime and checks.
+ 
++## 17. Change record and acceptance evidence for this revision
++
++Retained from v1: one-shot complete-message nonpreemptive service; all sixteen method IDs and their losses; exact D waiting/lateness equations and E fact-delay objective; no invented real-world deadlines; qualified weak teacher labels;216 total calls; same-policy traces; seeds; train-only preprocessing; independent references; failures/misses; NumPy export/resume; paired-group evaluation; local-first execution and six aggregate GPU-hour ceiling; encoder/SPI ownership boundaries.
++
++Changed by explicit user instruction: primary H0/optional16-class input becomes finalized93-class scene v2; P temporal distillation runs before the retained D/RL suite; broad IID pools are added as legitimate synthetic workload alongside real causal streams;50/60/100 UE scales and fifteen missions remain; bounded per-UE image histories teach the parameter-only temporal scorer. The source/vocabulary is not dismissed because some channels lack disaster relevance.
++
++New or strengthened validity checks: exact387-entry adapter; wire-derived features; unknown detector evidence; per-UE GRU/session invariance; teacher/student history correspondence; broad-source and video grouping; source shortcuts; context-dependent cache keys; explicit silver-test pair role; exact-input ambiguity; measured context-building cost and complete parameter-byte accounting.
++
++This revision is accepted only as a documented protocol update after source/contract inspection and focused assessment. No actual detector inference, teacher inference, learner training, codec work, dataset download or Kaggle launch is claimed. The preserved legacy pilot remains evidence only for its original completion-coverage objective. The next authorized implementation uses this revision; historical outputs retain their original protocol IDs.

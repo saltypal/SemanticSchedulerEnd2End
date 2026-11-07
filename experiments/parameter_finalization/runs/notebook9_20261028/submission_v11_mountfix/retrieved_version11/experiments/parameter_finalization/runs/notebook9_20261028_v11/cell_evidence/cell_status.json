@@ -1,0 +1,70 @@
+{
+  "0": {
+    "status": "complete",
+    "log": "/kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v11/cell_evidence/cell_0.log",
+    "seconds": 73.86270151399998
+  },
+  "1": {
+    "status": "complete",
+    "log": "/kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v11/cell_evidence/cell_1.log",
+    "seconds": 0.018835175999981857
+  },
+  "2": {
+    "status": "complete",
+    "log": "/kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v11/cell_evidence/cell_2.log",
+    "seconds": 0.007965920000003734
+  },
+  "3": {
+    "status": "complete",
+    "log": "/kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v11/cell_evidence/cell_3.log",
+    "seconds": 0.9548736499999677
+  },
+  "4": {
+    "status": "failed",
+    "log": "/kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v11/cell_evidence/cell_4.log",
+    "seconds": 65.442654232,
+    "error": "AttributeError",
+    "message": "'Tee' object has no attribute 'isatty'",
+    "traceback": [
+      "Traceback (most recent call last):",
+      "  File \"/kaggle/working/project/parameters/cloud_notebook.py\", line 37, in cell",
+      "    try:yield",
+      "        ^^^^^",
+      "  File \"/tmp/ipykernel_22/4277908829.py\", line 16, in <cell line: 0>",
+      "    exec(compile(INPUT_PREFLIGHT, \"input_detector_preflight\", \"exec\"), globals())",
+      "    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"input_detector_preflight\", line 28, in <module>",
+      "  File \"/kaggle/working/project/parameters/vision.py\", line 42, in load",
+      "    self.model = AutoModel.from_pretrained(self.model_path, local_files_only=self.local_files_only).to(self.device).eval()",
+      "                 ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"/usr/local/lib/python3.13/dist-packages/transformers/models/auto/auto_factory.py\", line 387, in from_pretrained",
+      "    return model_class.from_pretrained(",
+      "           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^",
+      "        pretrained_model_name_or_path, *model_args, config=config, **hub_kwargs, **kwargs",
+      "        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "    )",
+      "    ^",
+      "  File \"/usr/local/lib/python3.13/dist-packages/transformers/modeling_utils.py\", line 4133, in from_pretrained",
+      "    loading_info = cls._finalize_model_loading(model, load_config, loading_info)",
+      "  File \"/usr/local/lib/python3.13/dist-packages/transformers/modeling_utils.py\", line 4295, in _finalize_model_loading",
+      "    log_state_dict_report(",
+      "    ~~~~~~~~~~~~~~~~~~~~~^",
+      "        model=model,",
+      "        ^^^^^^^^^^^^",
+      "    ...<3 lines>...",
+      "        logger=logger,",
+      "        ^^^^^^^^^^^^^^",
+      "    )",
+      "    ^",
+      "  File \"/usr/local/lib/python3.13/dist-packages/transformers/utils/loading_report.py\", line 262, in log_state_dict_report",
+      "    report = loading_info.create_loading_report()",
+      "  File \"/usr/local/lib/python3.13/dist-packages/transformers/utils/loading_report.py\", line 181, in create_loading_report",
+      "    tips += f\"\\n- {_style('UNEXPECTED:', 'orange')}\\t\" + _style(",
+      "                   ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"/usr/local/lib/python3.13/dist-packages/transformers/utils/loading_report.py\", line 123, in _style",
+      "    if sys.stdout.isatty():",
+      "       ^^^^^^^^^^^^^^^^^",
+      "AttributeError: 'Tee' object has no attribute 'isatty'"
+    ]
+  }
+}

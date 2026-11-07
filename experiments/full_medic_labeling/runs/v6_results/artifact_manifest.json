@@ -1,0 +1,2844 @@
+{
+  "status": "major_v6_results_retrieved_and_scheduler_handoff_split_joined",
+  "kernel": "satyapaladugu/crisismmd1000-spi-labeling",
+  "kernel_id": 141416127,
+  "version": 6,
+  "accepted_source_sha256": "8AD229ADB25034DDB0673EC5A26D88C8AD8E33CF5A3D714BB106E3FF3DF97C85",
+  "remote_runtime_prefix": "experiments/full_medic_labeling/runs/main_20261029T154606Z/",
+  "retrieved_utc": "2026-10-29T18:29:13.417953+00:00",
+  "hard_cap_bytes": 5368709120,
+  "total_actual_bytes": 1343810542,
+  "file_count": 399,
+  "cap_respected": true,
+  "extension_counts": {
+    ".md": 3,
+    ".log": 1,
+    ".json": 191,
+    ".joblib": 140,
+    ".pt": 48,
+    ".jsonl": 8,
+    ".npz": 4,
+    ".sqlite": 1,
+    ".txt": 1,
+    ".ipynb": 1,
+    ".html": 1
+  },
+  "coverage": {
+    "verified_training_data": [
+      "comparison/records.json",
+      "comparison/split_protocol.json",
+      "comparison/exclusions.json",
+      "root labels.jsonl",
+      "root label_cache.sqlite",
+      "selected_manifest.json",
+      "four encoder features.npz banks",
+      "selected SigLIP2 RBF model"
+    ],
+    "verified_model_artifacts": "188 unique direct classifiers: 140 joblib and 48 pt; checkpoint duplicates excluded",
+    "verified_comparison": "4 balances x candidate/failure/coverage/selection/frozen-test/FLoppy files; final pair selections/profiles; 48 token-head curve JSONs",
+    "verified_full_pipeline_profiles": "96 profiles across 4 balances x 4 encoders x 6 configs",
+    "verified_encoder_metadata": "15 runtime and encoder identity/profile/extraction/prompt metadata files",
+    "verified_notebook": "Executed version-6 notebook export, 26 cells / 24 executed code / 20 outputs, plus Kaggle rendered HTML.",
+    "scheduler_handoff": "1000 detector rows; v6 split/group joined on image_id+image_sha256 for 983 rows (462 train, 224 validation, 297 test); 17 unmatched remain null with explicit status. Pre-join bytes backed up and receipt/checksums updated."
+  },
+  "limitations": [
+    "Exact accepted upload-source bytes were not independently retrievable because Kaggle GetKernel returned HTTP 403; executed notebook preserves source cells and captured outputs.",
+    "Current /6 status alias may refer to v7; no historical v6 status inferred from that endpoint.",
+    "No images, raw encoder weights, or duplicate checkpoint trees retrieved."
+  ],
+  "files": [
+    {
+      "path": "ANALYSIS.md",
+      "bytes": 1444,
+      "sha256": "32B46B487129128809EBA0429C5FFD6BBDE4B42D2758F6F0C6BBDA922FCAB5EC",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "crisismmd1000-spi-labeling.log",
+      "bytes": 1111193,
+      "sha256": "426BA10DCB2A6181FD0C7BAE0151FAED11FB0F198DF8783DC3875188005326FD",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/candidates.json",
+      "bytes": 767002,
+      "sha256": "DA15B2C98CE981D272AEBEE1419E61604CC8A11454524082E3168327B18EBA44",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/candidates.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/extra_trees.joblib",
+      "bytes": 1244489,
+      "sha256": "9B506F19622EC0694F7A480810FCFEB72206ACA6AF232BB6AF1066B7D5C3040C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "DBD92C3E6D2804E7A749504E21EFAFFB0B58EE69B1DCDF67F481D824CFD0A821",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/gated_abmil_curves.json",
+      "bytes": 49168,
+      "sha256": "1096ACF9B30BD7EDC4757977CDB61B7205FB9F47DC04A43E2ABBDB9948F242D2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/hist_boost.joblib",
+      "bytes": 1433216,
+      "sha256": "0663C5E3D7C6FF7F34523E32B7E807DAD2ADD7D316F00A9B8F302EA80A4CABA5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/linear_svm.joblib",
+      "bytes": 17219,
+      "sha256": "EDAD0AB560D14549B0D63DE532B8A10A94C777550E1FA3E6E34FEC72D293CE32",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/logistic.joblib",
+      "bytes": 17383,
+      "sha256": "844817597A88F2AF26857173E170F7A3971B6F85E93DFDC148A8E5F1CEEB3EB6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "798A1F30386565D5C374108197BFFD254A1644B7A5E608BE9102B700DE6309B0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/mean_mlp_curves.json",
+      "bytes": 38813,
+      "sha256": "C643A4079B133C15A83E20DC43357033D23C52BDC2CCAA65905ED2F3D231C49B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/mlp.joblib",
+      "bytes": 274896,
+      "sha256": "EDA0FE44D66E6796214E71B1958D5E9DBD9E3761D25733B4027D6F4FBEFEAADA",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/random_forest.joblib",
+      "bytes": 611481,
+      "sha256": "7E687B219C4F7C6A8F7C7A667264CA6DD23457D6D1F1E2CBA328C43C29A70507",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/rbf_svm.joblib",
+      "bytes": 1358255,
+      "sha256": "8B903646B83C458A3BE6BD9055952722185954347ACEC13ECB4B9BFCBDC08F91",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/ridge.joblib",
+      "bytes": 9152,
+      "sha256": "CD785A0F8D2FEB0DB6012AC2861A6D2C04FAF6900A5F3D46ACECCDD4C7A47FFC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "528B8CF5F7F8884BF18911992061C87BDE17CFA92C810850395FF5341727007D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/single_query_cross_attention_curves.json",
+      "bytes": 58902,
+      "sha256": "4F64E2A85513AED94546B2B0D106B90F2CF5E248BF4F3DA97FF95AE934B37F4B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/clip_b32/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/extra_trees.joblib",
+      "bytes": 1306697,
+      "sha256": "2C452157C69EE9717BD13777CB46FDB023F346A83FA14E4EC15BAA4CF4E4C250",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "8AC0276AC1D5AB862AB8986250E9B395FC3D04A7C11DE9715FAB00E6A38376B0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/gated_abmil_curves.json",
+      "bytes": 47471,
+      "sha256": "CAD2E9B81BADF4F62B756DC33F02677C0CFEA0FF15E5F9A47E7EAAB56F48AFEF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/hist_boost.joblib",
+      "bytes": 1966976,
+      "sha256": "D89C94170B1B520E65E3EDAB6873A2B8444F55E03F1CDFD7D289E4AC0A74BAFB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "EA2E08EA7DD6DB96BD24400BD17DD0F06E1B44896C5FDB2F2A921A810E3CD6BE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "2F3AFA9CD895FFAE02B70C06B975DA75A86C443F204639CB40DC31D2046FE4A3",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "AC7922F4B964B1018D76D4365DC6B21554BD14F3FA095065A6C5AEF8ED3EF335",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/mean_mlp_curves.json",
+      "bytes": 39140,
+      "sha256": "3D8E209CAD4F6C2FF4C9838120606AB7495E0BF471F1BF3C9A47AB8097246596",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/mlp.joblib",
+      "bytes": 405968,
+      "sha256": "B5170E4D2A704AFEDAA25ED66663EB8ADAC97F333ED66B3BA63BC32C84F35201",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/random_forest.joblib",
+      "bytes": 670041,
+      "sha256": "45F88041FEF99ED89469D4AC139045656DEF2A95FA28C74AC0EB3FDA4D76187A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/rbf_svm.joblib",
+      "bytes": 2616559,
+      "sha256": "1631BF9AEE4D9277639714408EDF0FDAAAFDFA362B00472028E26B67494BFE25",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "A7AD53A696657D21EA4F840343BB3CE6E9371A3EB5D46C42AB37C2414A39540D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "8B70825387ABF7C7B385830879E23606982CAC0689C47C8B61F3CB5D85C4D950",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/single_query_cross_attention_curves.json",
+      "bytes": 57347,
+      "sha256": "884FD310AE7FE6852119A455D216E1AEBDC024D3834EF110D3AECFF3D79A7FA4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/convnextv2_tiny/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/coverage.json",
+      "bytes": 98,
+      "sha256": "6CD63E3BE4928652D7D48730942A3AA6BC497C75756239B382FA6C022E8ED31E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/coverage.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/extra_trees.joblib",
+      "bytes": 1276937,
+      "sha256": "84498483D8548BD6737397194E0257B1DB3694E663918D55457AD0AADBAB8B59",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/gated_abmil.pt",
+      "bytes": 335941,
+      "sha256": "30F21FCF708A5517DFD4FF7E974226B363896DCA07EF3E64F18CC5A66BC565F9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/gated_abmil_curves.json",
+      "bytes": 47427,
+      "sha256": "63651E16BC8366109767F57646DEA0895992FD7505AB3A7821BDB9373EC256D6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/hist_boost.joblib",
+      "bytes": 1166224,
+      "sha256": "EB53EB4C849559AA23EADF1DD2AB112437E276144D9613A8807B58B9AD826E63",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/linear_svm.joblib",
+      "bytes": 13123,
+      "sha256": "055DD4C0D982529B3F6DE8D64E35DC650C4487C6C8BB0CD9D67822C2D669C7F7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/logistic.joblib",
+      "bytes": 13287,
+      "sha256": "CD0534CC4F200EAD6E068E3122B36A5D7E666219E93E67245A6B85C7F23805B1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/mean_mlp.pt",
+      "bytes": 201703,
+      "sha256": "F854F601E58CC166A7E8E94337859ACDFE83E69B9B56D89DE04D0C8CFA7C22BF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/mean_mlp_curves.json",
+      "bytes": 39046,
+      "sha256": "B742F6970D74EDE8E42670E1DFC8F6B000C67D5D0B756035F6357149512A489D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/mlp.joblib",
+      "bytes": 209360,
+      "sha256": "930D3E0FFECA3289DDAF611E865B7BE68C3B47F824B4D9509A426C6C803C0813",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/random_forest.joblib",
+      "bytes": 651993,
+      "sha256": "81332152B23A95042F297AF590CC5BFB42326FC5A87F839FDC5058EB32DF2FF9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/rbf_svm.joblib",
+      "bytes": 1182719,
+      "sha256": "11C7D7D06230FE6C097BB00B46E832027362010429FC3481F8565431715C25A8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/ridge.joblib",
+      "bytes": 7104,
+      "sha256": "ACFC7505DD45394FA63DA728E0B098EA094821117C9C3E141AC8F380533AC5E9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/single_query_cross_attention.pt",
+      "bytes": 468228,
+      "sha256": "42433D39303C42A19503CF0A8B4D01A840CDA2AEEFD7ECB220DD394FCB75EA4F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/single_query_cross_attention_curves.json",
+      "bytes": 56419,
+      "sha256": "8805EA495E148A435B2EB9400350A867FE7245CC7CE45092B250D16065D7637F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/dino/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/failures.json",
+      "bytes": 2,
+      "sha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/failures.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/locked_test_status.json",
+      "bytes": 155,
+      "sha256": "AAFE00AA21D193584A6C898B0AF024B839C1F963EB2133B7B3AF1F2AE90B73E1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/locked_test_status.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/selection_frozen.json",
+      "bytes": 2657,
+      "sha256": "7D80D2638F481C0F05616341687162E5578781F266EB526D538DDBC4A88C5B47",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/selection_frozen.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/extra_trees.joblib",
+      "bytes": 1231817,
+      "sha256": "03D269E8F58F652302B845A314E0A3206BB1371E3B0AFA347ECB3FDE1FBEE88B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "B6AFB3C4A0B545EF02AB4560D1C07C49AE9AC9C29DA95931C57B2DAF35C63481",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/gated_abmil_curves.json",
+      "bytes": 49039,
+      "sha256": "37EA537E34EE15C620E92EF165F1C373F0E11645FBF7DC405F3CA3BAB6731158",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/hist_boost.joblib",
+      "bytes": 1789792,
+      "sha256": "F15AC4944F83063FD46F9E87C37EE549EA86F0871123556DB6808C8BDE2718CB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "85985C62A0A8690D4338A778596D26A6FCAD00DF1CDA4BBA1B16A51D891DF979",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "85ABEB53B27FFE7C7C702EFCA48563AB9B5723735B4C6E2D64C2DAD10CEB2A3C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "15337A2F069B07BB637574727A9D49815989C0E068A85005652FBF8D3DC4151C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/mean_mlp_curves.json",
+      "bytes": 41218,
+      "sha256": "41191A73942F1FE2C25AF42E61CF11F4508559573ACCF25BCC0679F12B42F1CE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/mlp.joblib",
+      "bytes": 405968,
+      "sha256": "AF4B52B2C4DE4DEFBA17B1E2ADFB6E614E001D4B9312302A94CA8D72401CCBFD",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/random_forest.joblib",
+      "bytes": 593433,
+      "sha256": "F7108685724758C451F30FE6590B88E770187F119AEB4936ABD8A43375014A80",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/rbf_svm.joblib",
+      "bytes": 1990767,
+      "sha256": "471CB7D085ADF7B648B0636A88714D9FA5619C41FCCDD88582033D1079FCD025",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "6630A4384E8D4FB875CF3F449A313BD64CE5D64C1E35A27FE267D10B78F7FE56",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "CD341589773A5DD5DC3E5F7F59869F9E6753F97FF3EE4231CE0F183D4E09CA5E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/single_query_cross_attention_curves.json",
+      "bytes": 57273,
+      "sha256": "1D9C3D2943F95F2E6D2C1B4DF6763A6B7DE91B230E9DDF916EC345E98C6336F6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/siglip2_b16/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/sklearn_floppy_estimates.jsonl",
+      "bytes": 192003,
+      "sha256": "FB79F0ECF337DDFAFC263575E596582451A59E66A2F5CA44DB9A8B6319D36669",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/class_weighted/sklearn_floppy_estimates.jsonl"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/cost_scope.json",
+      "bytes": 542,
+      "sha256": "7DE5F58838C79CB8D5C451B1052D95D556AB09278F84389FF01416C221D2D549",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/cost_scope.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/exclusions.json",
+      "bytes": 1345,
+      "sha256": "75EB63814C2B9F48E81A84AB18FA90A89B13BB5F92AD86904A0BC3ED76C081A3",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/exclusions.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/extraction_times.json",
+      "bytes": 239219,
+      "sha256": "6B8ABBD451C143F83DF5DACD33B634A4C1BD7EC5D8C1510D8C0BE7D86F208580",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/extraction_times.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/features.npz",
+      "bytes": 139184678,
+      "sha256": "E6728372C2E84F1BAAE1EEA075BAB11664877E17C7561DC4B20AFFBD8F21732E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/features.npz"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/identity.json",
+      "bytes": 627,
+      "sha256": "BDBA86586E22CC62E4E5EDB4BEAA3C13763B085E77B1A50AC2D31538DD8E679F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/identity.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/profile.json",
+      "bytes": 5931,
+      "sha256": "12063EB6F7F876418A9DD5059DCF67EEDEDF3F6A275BAE430D853991B90769DD",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/clip_b32/profile.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/extraction_times.json",
+      "bytes": 239191,
+      "sha256": "53E997E494820E345EE30FA9DE6B99A98529111121FE3A3F17CD5E31A4474BCB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/extraction_times.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/features.npz",
+      "bytes": 140254894,
+      "sha256": "56B0CA2436FF6B65173814CEBC91131DECD48250C6658E39F814DA6095A3BD7F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/features.npz"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/identity.json",
+      "bytes": 731,
+      "sha256": "78529AE6F268EEA55CD3D172C694E53DD3A16C41F71F2B511D437B98EB4595A7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/identity.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/profile.json",
+      "bytes": 5838,
+      "sha256": "D58777A6B9C26AB34744A05181392E338173DFA92B481E777F3D6EACA43ED88B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/convnextv2_tiny/profile.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/extraction_times.json",
+      "bytes": 238998,
+      "sha256": "78733AEDFC46FCF6CC22AE1EF17F931598D52580454C15AB2DB582AB992F831D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/extraction_times.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/features.npz",
+      "bytes": 360581246,
+      "sha256": "B793189A6F9C54E26719F4F97B32A3F88FC22CCF779DB37B7A3E4FFEC2A3C450",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/features.npz"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/identity.json",
+      "bytes": 709,
+      "sha256": "6B1A75658D8173B3DC00B8B3EF5817E24663B10E4468673FBED6E93557D04D95",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/identity.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/profile.json",
+      "bytes": 5898,
+      "sha256": "EED6AE7F962AD6C8F92131E87113D4D9BD49FBB9198DBEE2479D1B6F3C78B6DB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/dino/profile.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/extraction_times.json",
+      "bytes": 238504,
+      "sha256": "42F3D764783C5BE142A7F67F374FD7D089B7E24AF24BED929B98F2E3F91B5E66",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/extraction_times.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/features.npz",
+      "bytes": 553103873,
+      "sha256": "1439FF282532176E399146D0495CA3B937F50B71165E2EB735CADE100C6C6850",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/features.npz"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/identity.json",
+      "bytes": 634,
+      "sha256": "24FF108FC32A4EFFC0415FEC3EEACE1C2AC742181D980AC24225ED5798F0B971",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/identity.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/profile.json",
+      "bytes": 6311,
+      "sha256": "B63AC55E7705E473490B01E9983120CABED196C3F80C53FC1D7FC0E8FDE97041",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/features/siglip2_b16/profile.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/final_test_and_head_profiles.json",
+      "bytes": 166445,
+      "sha256": "CD1518742D946C12B33421D75820DB4A242D1BF5FC7DFB733AFFA62528FECEB1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/final_test_and_head_profiles.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/frozen_pair_selections.json",
+      "bytes": 779327,
+      "sha256": "1917E5C1E93CB36FEDA83E062C785300BE09C1BA934C0BDAB76612BBA319AEAC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/frozen_pair_selections.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_extra_trees_cpu.json",
+      "bytes": 14370,
+      "sha256": "F118D0BE37CF1698C531C0466F743DE7D8B9A5326A9317B961F41492F3B13EEF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_extra_trees_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_extra_trees_cuda_0.json",
+      "bytes": 37291,
+      "sha256": "6DBB0CE6F59BD17191E3D58A1F87AB15841991DFF820ECD8DA04C1053BF69FE1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_extra_trees_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_gated_abmil_cpu.json",
+      "bytes": 15282,
+      "sha256": "D0600161F718AF2B5F4C217DE1D90B6D1A70235C4FE3296F1862ABEE75D086D1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_gated_abmil_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_gated_abmil_cuda_0.json",
+      "bytes": 38285,
+      "sha256": "9EB12E41FE2DD1385814F412587D259E8FA85B9483FB61270127EBA6217AC60F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_gated_abmil_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_hist_boost_cpu.json",
+      "bytes": 14398,
+      "sha256": "F44FA386258209D876E16842034E52507C9E8A4F05C7AB7BADB60E10C30097AB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_hist_boost_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_hist_boost_cuda_0.json",
+      "bytes": 37346,
+      "sha256": "F6FF4C22ECFD86C180432B6A024AE216FEC1C14FEA8324A77E016A4FFC0E57C4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_hist_boost_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_knn_cpu.json",
+      "bytes": 14378,
+      "sha256": "9B5538DB389979CD3C7E0B629036E12EDA2AB8A86EE9E4B1D28EE8BC5A8BF3EB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_knn_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_knn_cuda_0.json",
+      "bytes": 37372,
+      "sha256": "D5EBD7A8A69D14E49C20E9B2E02CE084301F7AC01E21D4A988D53FD43AC37ECF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_knn_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_linear_svm_cpu.json",
+      "bytes": 14417,
+      "sha256": "23627D6F917990EEC05C7502A287C45B885FAE54B51D54210342DF7FCC844A3C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_linear_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_linear_svm_cuda_0.json",
+      "bytes": 37450,
+      "sha256": "D9B12020FEC67FE012B87B3D34F3CD299F3F54ADB024859C292961FF9366A351",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_linear_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_logistic_cpu.json",
+      "bytes": 14407,
+      "sha256": "770315B64E987BBD006B09D9F03434AD3244839A84A4707CD944C92DEEBACEFB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_logistic_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_logistic_cuda_0.json",
+      "bytes": 37442,
+      "sha256": "E1A3675D80E0DAEE00F0B48E64A5A9A6301E0AF4C62BCE30B11D1F6233A7CB8F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_logistic_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mean_mlp_cpu.json",
+      "bytes": 15102,
+      "sha256": "F3C09889120064B970662D21A8B3D31624105CB9C8838E2F7048287F0B9F0C6E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mean_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mean_mlp_cuda_0.json",
+      "bytes": 38107,
+      "sha256": "65CB035AB24E8597D03D6A538C1EA63FE3149F82B155C74D8B788A53B2F151C2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mean_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mlp_cpu.json",
+      "bytes": 14399,
+      "sha256": "481C2407D29EC91701027971BBE8F895BDCE1EA26311A8DF3E89118138211AE0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mlp_cuda_0.json",
+      "bytes": 37469,
+      "sha256": "DF485C4A29D8C7E6C36B4DD02E857F1AEF5E86995C8C709E7E2E410D36CB78A9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_random_forest_cpu.json",
+      "bytes": 14370,
+      "sha256": "AD91B4CA1D7913EFB8C147D8EF914D9F5B3125408358884CC5922013F0A3BD0B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_random_forest_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_random_forest_cuda_0.json",
+      "bytes": 37321,
+      "sha256": "F45FA1475DB602CCAB4251881F0C03EE1CA5EDF30841B39C568FA12B11AC7EA4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_random_forest_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_rbf_svm_cpu.json",
+      "bytes": 14400,
+      "sha256": "EA656CAD8510D46758128C031285F105E814242187D1533372CA9256B5C6E6EB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_rbf_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_rbf_svm_cuda_0.json",
+      "bytes": 37394,
+      "sha256": "D8C18FAFCD3D29380B57BF8E476C486A1FED8B0A1B371736CDB24BC9FF2719F0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_rbf_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_ridge_cpu.json",
+      "bytes": 14400,
+      "sha256": "272FA116797D90BA3060D854778E70B0D15992456B9B31645DED1213400232DC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_ridge_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_ridge_cuda_0.json",
+      "bytes": 37457,
+      "sha256": "9880B5384D609BB9C616D42DF2368383D2ABDBC6017D424F1940A98365CB12CD",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_ridge_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_single_query_cross_attention_cpu.json",
+      "bytes": 15525,
+      "sha256": "7AE3C38D4293CDBC7562B23D71D5AA43A3A379F642425385CACCD1C33DD7295A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_single_query_cross_attention_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_single_query_cross_attention_cuda_0.json",
+      "bytes": 38709,
+      "sha256": "7DA23E8B7127FE83EEBE42ADF3382680226E9749A485261A0DEB85116A5C8E3E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/clip_b32_single_query_cross_attention_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_extra_trees_cpu.json",
+      "bytes": 17236,
+      "sha256": "7106B5DBC808702E97DC5705040C3B519CD6117B50D9F0F328AA08DC236448A0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_extra_trees_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_extra_trees_cuda_0.json",
+      "bytes": 47081,
+      "sha256": "386B0F593EA0777115135C83C54C1AA08A3A3E30F575F55B9EAC3B28E74940C0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_extra_trees_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_gated_abmil_cpu.json",
+      "bytes": 18178,
+      "sha256": "8B3FA443A33D62EB1FF31713807ADD0F0FDECF0AE2BAA75B3AD2BDDFDE83C17E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_gated_abmil_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_gated_abmil_cuda_0.json",
+      "bytes": 48074,
+      "sha256": "9837A203B31DB9651550C7271FBD6EED821BC4C304FE75C6B16951B79236825E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_gated_abmil_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_hist_boost_cpu.json",
+      "bytes": 17250,
+      "sha256": "0640FE84F7EDA60C58A5EEF3DA3E0AB6E22954F3B8F00C45B8D4ACF4CE287548",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_hist_boost_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_hist_boost_cuda_0.json",
+      "bytes": 47104,
+      "sha256": "F574B6E1BAC1D9B4AEF45A47113249109F3AB5AC11DC0A71200EB09EA8005BF4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_hist_boost_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_knn_cpu.json",
+      "bytes": 17253,
+      "sha256": "B5B51EE3034CBC63DD76D75EB1C666D10DB67C5741DD61303A8BB46FC2A077D5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_knn_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_knn_cuda_0.json",
+      "bytes": 47089,
+      "sha256": "A1A0D6FCA43F757C4356AC76FD7E30DCF2595D91681F9B80F7C6B554BADCC851",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_knn_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_linear_svm_cpu.json",
+      "bytes": 17283,
+      "sha256": "CF8264AC4ADEC3E455B4A6CBCD2BF424491DCEA5D9B398166A87DF56C1D07B6E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_linear_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_linear_svm_cuda_0.json",
+      "bytes": 47219,
+      "sha256": "B283F31CF258E1EF81B10C5EF47FD77EBB42CB57BFE4498DF3C3E7EFB06E8D46",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_linear_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_logistic_cpu.json",
+      "bytes": 17289,
+      "sha256": "765DB867E3AC2C021724696F2C3217C04890A2B689FAD5485EDDD4A03583A51D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_logistic_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_logistic_cuda_0.json",
+      "bytes": 47188,
+      "sha256": "BD9F89B9B381F50805A0ED894375AEF56F6418F86EF34D18C9159609EAACF430",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_logistic_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mean_mlp_cpu.json",
+      "bytes": 17984,
+      "sha256": "0CBC6E5EEF1B6FBC8CD897AFEF08DD28186ADE3A87D830FCF2DEAE5DE901D702",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mean_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mean_mlp_cuda_0.json",
+      "bytes": 47843,
+      "sha256": "FFFAA7FA8E1D2B3DF2B5A03F43EB80EBFA58C072477752F45969A976399DB798",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mean_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mlp_cpu.json",
+      "bytes": 17279,
+      "sha256": "314E35814D98AA7BA6C025C7A813F5C8DCAC72D35FE990B4ED5469FF1F6844EB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mlp_cuda_0.json",
+      "bytes": 47220,
+      "sha256": "351C9173032A71E77B113A51A2A384202DD6F857E1125E415893131CCF8F2BA9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_random_forest_cpu.json",
+      "bytes": 17260,
+      "sha256": "7FF01FCC2A8F11CF64D12C437F825F5A4D166AE29B82DBA25B636154056EE9FD",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_random_forest_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_random_forest_cuda_0.json",
+      "bytes": 47074,
+      "sha256": "A3E0DAB4CCF470DB20542B83913EEE5E5D35F498DC362D0C5428C48C052F37DE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_random_forest_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_rbf_svm_cpu.json",
+      "bytes": 17280,
+      "sha256": "96A2DA62C50FD430D3F2A13B37163D0C59296E450C6D56BC31EF73EAB2D27C2D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_rbf_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_rbf_svm_cuda_0.json",
+      "bytes": 47175,
+      "sha256": "A16CB55057E62CCE7F79532D17B033F6DBB9ADA95D9A0930A323BEEEDC7E553A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_rbf_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_ridge_cpu.json",
+      "bytes": 17271,
+      "sha256": "24490EC1D701C7E04ACF5119CFD5776383024326641E5468C42644B607345007",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_ridge_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_ridge_cuda_0.json",
+      "bytes": 47224,
+      "sha256": "50D57660DD94699E74924A45BCD485BD7D0AB809BDDB543A385F37433B1C4ACB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_ridge_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_single_query_cross_attention_cpu.json",
+      "bytes": 18413,
+      "sha256": "311910C0DD8546793BADFF9A094CB8B2B1F6032847E429657BFAAB74416E3A45",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_single_query_cross_attention_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_single_query_cross_attention_cuda_0.json",
+      "bytes": 48497,
+      "sha256": "CAEB75ECB290768F0498162A4EAA9AF87A142EE28DFE3C201ACC4211D7703E4C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/convnextv2_tiny_single_query_cross_attention_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_extra_trees_cpu.json",
+      "bytes": 17329,
+      "sha256": "AA481809F6782F33A113C3BCC9BA7B52FBAD6A9FC24D915FB88B2C76C96C2A65",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_extra_trees_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_extra_trees_cuda_0.json",
+      "bytes": 47155,
+      "sha256": "B939FC782213A81EC7F6A1B92D41C452ECCE08B573EF6B358D0A3A40FF54FF22",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_extra_trees_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_gated_abmil_cpu.json",
+      "bytes": 18241,
+      "sha256": "11850D4BDB37C83B15E7FA145AD3FB49A54A20C8AC0FC98D5BFA4D248DDAB254",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_gated_abmil_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_gated_abmil_cuda_0.json",
+      "bytes": 48217,
+      "sha256": "779C2E2C5AB0B379C6D4A3433AE9B63C12FB350BD9BD6495EE9F298BF8264BD6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_gated_abmil_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_hist_boost_cpu.json",
+      "bytes": 17323,
+      "sha256": "C94D4A7F9127950794E3B50A6C624D7B71734EE70D6F8D19C4689910AA7596FC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_hist_boost_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_hist_boost_cuda_0.json",
+      "bytes": 47191,
+      "sha256": "E540669387467AC8B615330245C516D968F913DA467F7D86E7EA3ADF59B8330C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_hist_boost_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_knn_cpu.json",
+      "bytes": 17338,
+      "sha256": "D392AA9809C13F34F9B7BB7E77FA4C47C7E4673DC9BD6FF1D1365B66F0A20C4A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_knn_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_knn_cuda_0.json",
+      "bytes": 47230,
+      "sha256": "F3F7D9E5E5D0A6DAC568A25E00A8863783CDD6DB5E744D6DEF2A2335E6DD09BC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_knn_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_linear_svm_cpu.json",
+      "bytes": 17371,
+      "sha256": "10B96BF3B35E4ABC44E9F8E3BB55476AB2826900C645F1751D39ABDFE56DBA76",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_linear_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_linear_svm_cuda_0.json",
+      "bytes": 47339,
+      "sha256": "AB142958F7C3D21DB180762161DEDFE41C4EE88796FC499F4F1B51A9C16401F6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_linear_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_logistic_cpu.json",
+      "bytes": 17370,
+      "sha256": "A45356D5EE93E8386E493082E8A2F3EA61CC821AAA9D8A515468C95C83D3F839",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_logistic_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_logistic_cuda_0.json",
+      "bytes": 47300,
+      "sha256": "C5DAAE88CB9AFAD3F5329A684833B89D1E09D07E0ADDF4FB180F943A0CB7DB0F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_logistic_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mean_mlp_cpu.json",
+      "bytes": 18041,
+      "sha256": "780AF659F7C3D555F05242A8E9DEB92E5A2BF3556AF80FAFF943B650836152C9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mean_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mean_mlp_cuda_0.json",
+      "bytes": 47978,
+      "sha256": "34349E3744452B5657CE6F13998F758F0B43FE29B5033A4454DB479982E10AB4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mean_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mlp_cpu.json",
+      "bytes": 17370,
+      "sha256": "33573598C79DB48B44132B58F96B23D5243F1BF83613F59B5396E95781DB2EA5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mlp_cuda_0.json",
+      "bytes": 47281,
+      "sha256": "2B9F04972EA14F6B0CBA7DB290C6FD3BE3873EFF5781F23FB0D0440B84C7CC4F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_random_forest_cpu.json",
+      "bytes": 17317,
+      "sha256": "2272909A76969DF2AD58210166757C7D9DB7B72F95265401CEE4B8ACBFB2F316",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_random_forest_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_random_forest_cuda_0.json",
+      "bytes": 47164,
+      "sha256": "450252A134243CC3809279B2B76856A0BE0F3CCC95C8AC978FE6FF5679086994",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_random_forest_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_rbf_svm_cpu.json",
+      "bytes": 17357,
+      "sha256": "B3270B2AADDB3D3F41D6BDA2D5DBB3627EF86614F03C7472192A4A65F225AA4A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_rbf_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_rbf_svm_cuda_0.json",
+      "bytes": 47292,
+      "sha256": "33B991F81543853FCB1C8E47FE13678A7BE05FFD60AF901768AA998222CFFC06",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_rbf_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_ridge_cpu.json",
+      "bytes": 17358,
+      "sha256": "EC076A010B01BCA89EDD58A97BC4640B7603512FC83A425E73F298BCDC00E4E7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_ridge_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_ridge_cuda_0.json",
+      "bytes": 47327,
+      "sha256": "2ABF98D2E35C1385430AA2CBFD147B0D908A90D6B2FA1295430DF0C8F7998DDE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_ridge_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_single_query_cross_attention_cpu.json",
+      "bytes": 18470,
+      "sha256": "1B979CFCFC4F25286E048D2CE55E8187BB3169A922DCE29B1CC0C85946285756",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_single_query_cross_attention_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_single_query_cross_attention_cuda_0.json",
+      "bytes": 48533,
+      "sha256": "86CAED59F467826875E4D64AA20B81F0AE5E09002EBAB4986C155BB6F0B2A572",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/dino_single_query_cross_attention_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_extra_trees_cpu.json",
+      "bytes": 17723,
+      "sha256": "FA4CF126413C37EF25DBB2749550AED148A2C1D994BDBFFBFEE00124C479997F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_extra_trees_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_extra_trees_cuda_0.json",
+      "bytes": 47596,
+      "sha256": "5132F97386FD7294D53D27043490C71B0C14447B3C546BA2E398FBDA0C019DB2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_extra_trees_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_gated_abmil_cpu.json",
+      "bytes": 18641,
+      "sha256": "998D5503A24F59B3E281FF24755FD7A6F1EC5668E4A1AD83216CFD315CF08047",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_gated_abmil_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_gated_abmil_cuda_0.json",
+      "bytes": 48654,
+      "sha256": "FF35FB22EF383F58C828BBEC9B72842D37ACD22C85A86FE4182A4F3023E4FC96",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_gated_abmil_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_hist_boost_cpu.json",
+      "bytes": 17757,
+      "sha256": "2E386003A082F1B1EA637CE7F8A527AE1DE4779E29CB8B53D0F16C868B2B2779",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_hist_boost_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_hist_boost_cuda_0.json",
+      "bytes": 47647,
+      "sha256": "4DBB950A3AD8FC7467B97D6DAD44E6C601BFF7BF68702571A8DDDDA724BCE602",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_hist_boost_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_knn_cpu.json",
+      "bytes": 17723,
+      "sha256": "84EABEED82ADC42238E022E9F3799BF407BABEB3B5DEB3F8861FF7338BB88B45",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_knn_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_knn_cuda_0.json",
+      "bytes": 47647,
+      "sha256": "725CD1EFA455352A116F07C635F52AAAEA620920F8348E46373CA8640CA56CF2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_knn_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_linear_svm_cpu.json",
+      "bytes": 17769,
+      "sha256": "149D7D4E026AAC7B6F198CD4AA490FF5A2F742C4D103ABA9726FCD15BF80753B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_linear_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_linear_svm_cuda_0.json",
+      "bytes": 47770,
+      "sha256": "DACE0BEA1A39B55470589254CF38DDFC306B886AD23092B658A78670845AADCF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_linear_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_logistic_cpu.json",
+      "bytes": 17761,
+      "sha256": "98587084BD5EDC7AB9C97F48203E4FE8761F7932A26D8A0A183CEBFFD0B5CD5C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_logistic_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_logistic_cuda_0.json",
+      "bytes": 47750,
+      "sha256": "42474FA24D0D8BB1B5728A06A45BCB094AC08D5080412034B13371C5F14864A4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_logistic_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mean_mlp_cpu.json",
+      "bytes": 18453,
+      "sha256": "49779999B7505BDBBBF2B0E0758F083BB8035496D9F8E388CE06491000400B73",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mean_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mean_mlp_cuda_0.json",
+      "bytes": 48460,
+      "sha256": "A1656E3BCE7CE86C7F59CFC71BC70CE225C06CBD57BE59A8AEF42D94753811CB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mean_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mlp_cpu.json",
+      "bytes": 17741,
+      "sha256": "FB1A38B75D2DF9D485B353B802C10AE8C98096D2FBB96D97DB526FAB6B6F6AA8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mlp_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mlp_cuda_0.json",
+      "bytes": 47784,
+      "sha256": "80C0FD3BDA111563979A8EF0EE8968F24BB5BED86FE00A1A751AD1EAA026B9C5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_mlp_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_random_forest_cpu.json",
+      "bytes": 17732,
+      "sha256": "CD3989B911489B6CF67CBA68BE94C2255FE6FDDCDCC7383AEFA797278E88FBDA",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_random_forest_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_random_forest_cuda_0.json",
+      "bytes": 47593,
+      "sha256": "552129BFBC0374D4DE1353DB993E41E2BCDFD53512496A40554A59694C4DE722",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_random_forest_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_rbf_svm_cpu.json",
+      "bytes": 17735,
+      "sha256": "951597F4480228AC5000BC488DB32CD5EF99B56BA670DBC8FEC678672C08D1FC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_rbf_svm_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_rbf_svm_cuda_0.json",
+      "bytes": 47692,
+      "sha256": "3D4541267F38E466FF9CB1D5AE2207F9344F4295261392B5A4B63FFA0A928F6D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_rbf_svm_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_ridge_cpu.json",
+      "bytes": 17768,
+      "sha256": "86B8525AA30D900495B62D640CA68DA1BA1517FF0009CAB6D0C1DBAFC6FE77D0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_ridge_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_ridge_cuda_0.json",
+      "bytes": 47783,
+      "sha256": "AAB8D6A397FDADF4FEBE1838C2834975F7321700E215060F6498CC3AB3856644",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_ridge_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_single_query_cross_attention_cpu.json",
+      "bytes": 18875,
+      "sha256": "308943028C059E650DDE31D1F2B7BFED81E0E86EE2773140AC4D6FF1EDD26A74",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_single_query_cross_attention_cpu.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_single_query_cross_attention_cuda_0.json",
+      "bytes": 49074,
+      "sha256": "09C2CF0C2F4071DB5E645800316721FED70D3BA0BAB8936FA92760977CBDF3EE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/full_pipeline_profiles/siglip2_b16_single_query_cross_attention_cuda_0.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/candidates.json",
+      "bytes": 791051,
+      "sha256": "D48C9D57F3BF719CB86C93F2B64C86CED177466B53057F2ED55A6D36C048428C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/candidates.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/extra_trees.joblib",
+      "bytes": 893129,
+      "sha256": "D46D80EDC2CAC76E3CC5A7EA280174C1BF1172C3A79DAA47D74D8639CD783F7B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "2A5A4C3C933D5C00218386A1E156658126F9FA303EED9E6CD50F9AFD88D6A9CC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/gated_abmil_curves.json",
+      "bytes": 51123,
+      "sha256": "1236987C841860401F2B4751C60C0F9272FC8B8E70871733A5E65F7CEF876498",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/hist_boost.joblib",
+      "bytes": 992832,
+      "sha256": "66E6D8A6190101FB585660E37D0FDC686F203B8A3C513446C5D9118D183C1CA2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/knn.joblib",
+      "bytes": 393603,
+      "sha256": "00F60DF3A65DF35EDC66F1D889A957A9E98C7C0DDECCF9EC529C87793BCF3A44",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/linear_svm.joblib",
+      "bytes": 17219,
+      "sha256": "E9ED10A52EED8EB9625059633486FC1DD87697CD488690EB1A104D66A3BE6708",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/logistic.joblib",
+      "bytes": 17383,
+      "sha256": "0B1145B09CF947B18155A7BD0859EB385D614A66C63007F53E04B93A2BB3E1CE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "4E0A512A65D9FA35764DA36290D9C2784867229DD3BEE6821FE6F14B11C02FF4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/mean_mlp_curves.json",
+      "bytes": 40032,
+      "sha256": "7F0A097DAD1125BABD534A04E5B62B1815300338D9876984D5DCF89BB8A50BC6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/mlp.joblib",
+      "bytes": 274608,
+      "sha256": "52876C0356A3B80CF62AC892914DE71AB0B5722526B35E212F8032664490DE56",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/random_forest.joblib",
+      "bytes": 285833,
+      "sha256": "6DE26025DC2A63D7ECCF0C4FB39260113A605BB69EC0295D920B71F604E6669D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/rbf_svm.joblib",
+      "bytes": 657231,
+      "sha256": "636860A3117847D9EE50332EE8ABA687A5C3B14F6754667CFB2F8AF02A21EB87",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/ridge.joblib",
+      "bytes": 9152,
+      "sha256": "43267F52768C08D815F063371F444F359FF1AB443AB4BAB6B654F54471CC7D3E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "A3DA39D5ED8540AACD884B88AF1FA3F5BC57A7B5E719E441347EF0944BB20359",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/single_query_cross_attention_curves.json",
+      "bytes": 61561,
+      "sha256": "4A0A8B025E535AF86CDCA588FAA52DF4E0B06418688C80D6FA35EC3D130BB937",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/clip_b32/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/extra_trees.joblib",
+      "bytes": 943433,
+      "sha256": "5FB809CD9CD2BD94C0FFD4C3A0C4F84ED45A008EA7A74367E45BE60694E19AED",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "D0722676108A3AD7FAD426D55D758E354FC2B83C5B922B2A2DD6BAE70248DE54",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/gated_abmil_curves.json",
+      "bytes": 48773,
+      "sha256": "107D524B710BBF737B15440016F9161B19BDD24B14AECB28A0A268B094477845",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/hist_boost.joblib",
+      "bytes": 1395424,
+      "sha256": "2D3F80F2B4B80BD34C8E40F40E4CE61B20A1A60BA9666C021CAA5544DE3BEC5E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/knn.joblib",
+      "bytes": 589187,
+      "sha256": "B6AEF5FFC33EC055FF5E2C9351A5DD425081F0268340B437B586FDF27D4F256F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "3CD0CA3B7F150077A31E577F404AAEFBAA43B6974B53B875C94EB01066001BF1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "1E93B8E8F130895B88E2EA810E7C75D6720F8C14523B325669EFB8F8E27A7D4E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "48122CC4ACBA9194C0CC3A4168768C4546F6225F5970A54B5D35D7D0D7B96F1E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/mean_mlp_curves.json",
+      "bytes": 43456,
+      "sha256": "36CBD298217B1DB216B9629060738610925D3BFFAC4EBEE7730BCE267B8D3793",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/mlp.joblib",
+      "bytes": 1593008,
+      "sha256": "A76850896DE37F33687D6B63ED8BD956379836A37877CBB532A3BD7924EEA115",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/random_forest.joblib",
+      "bytes": 302921,
+      "sha256": "469899CB708C21167DC6F598538D91F43471501D0293F81FBB686C521C769FBF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/rbf_svm.joblib",
+      "bytes": 1179087,
+      "sha256": "89593FBA6B2CDD0B64A58FF7553B8AD3909E42D9E60AC583B555F26594C1FBC0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "6BB0C1D9202DDE901A86BFD9B77D6BC630AA3DD1024505D2A6674FA2DAF1A016",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "369B562704960F983C23196B519C9B69300B1057A97575CDDC5F6AA51933E6E7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/single_query_cross_attention_curves.json",
+      "bytes": 57775,
+      "sha256": "C78528B09899A3C3E98DBDB10EAC72FD252843FC6E7FB7194C1952EF209FBDFF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/convnextv2_tiny/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/coverage.json",
+      "bytes": 98,
+      "sha256": "6CDEF26454F32712E37BE760F56B78ECC65E080701FB3DDA8B4A46E46F945076",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/coverage.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/extra_trees.joblib",
+      "bytes": 967241,
+      "sha256": "CAED27157CCC469EC7FC8F9708CB54D682E65E2D431C7163B58A6B041DB95273",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/gated_abmil.pt",
+      "bytes": 335941,
+      "sha256": "01EA46D25109A9D2869305D631BC198A13621D600E70F769A1E5139447E9893B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/gated_abmil_curves.json",
+      "bytes": 48233,
+      "sha256": "C464D21EE09CB60C855D9609E2BC52EF90DEF6271D6116D60866AF132545F96E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/hist_boost.joblib",
+      "bytes": 791504,
+      "sha256": "F4CA2CBB567178F0E3F11EAA82AEECC31498494A0C86C1F41AE723FA8184CC3A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/knn.joblib",
+      "bytes": 295811,
+      "sha256": "4E77DEBEEE01BFE3FBC1440E0215989223D020A7CAAF7932A78087EFA201E711",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/linear_svm.joblib",
+      "bytes": 13123,
+      "sha256": "8DC4716D36B513401869A56DFA7850A94FF05A3A83843151307D1E2974D1E8AA",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/logistic.joblib",
+      "bytes": 13287,
+      "sha256": "D92F871BE7C4F7DC96966862601AEF860AD129ABDEAE7D67E5A02069A1AAF94A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/mean_mlp.pt",
+      "bytes": 201703,
+      "sha256": "E24FBCB386E562883AED2314A75A2A8361BEECE7CFBBDEAA53968D6B965655E9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/mean_mlp_curves.json",
+      "bytes": 41644,
+      "sha256": "3F30B93D67E09B3086E9FEEE6C71A9CF290EC36A119F55022EB4AD05309DA44A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/mlp.joblib",
+      "bytes": 209072,
+      "sha256": "9B38E5347B84428D5CFEC65FD66A6755946BEA68ACC591BC4C54D20EA0DEDBD0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/random_forest.joblib",
+      "bytes": 431369,
+      "sha256": "752D49304C60C956EBAD59A07CAA1B6E820009F74362452BBC1AB7C1D1F16308",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/rbf_svm.joblib",
+      "bytes": 567295,
+      "sha256": "7BC181664D9C670A53B53146F966AE74AAF70240CF4C5D19E708045AF1C12EE5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/ridge.joblib",
+      "bytes": 7104,
+      "sha256": "9F7CC69AE7EE042C10EF3A541F1A50DC6D2E525EAA161ACEE5D8BFD32055C38A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/single_query_cross_attention.pt",
+      "bytes": 468228,
+      "sha256": "C46800A510EF3024ED33547DCBC7378E49AC17D24713DA4FDB87773AADD363B2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/single_query_cross_attention_curves.json",
+      "bytes": 55858,
+      "sha256": "2B2C784309A348F12B15C018EE08C06AB2A8C80CE2D9D88A998BD79D5FEB3833",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/dino/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/failures.json",
+      "bytes": 2,
+      "sha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/failures.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/locked_test_status.json",
+      "bytes": 155,
+      "sha256": "AAFE00AA21D193584A6C898B0AF024B839C1F963EB2133B7B3AF1F2AE90B73E1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/locked_test_status.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/selection_frozen.json",
+      "bytes": 2670,
+      "sha256": "DEB405CAFB9755408B17D25E067B9F6FD49F9095036B161059DDA968C779A600",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/selection_frozen.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/extra_trees.joblib",
+      "bytes": 848393,
+      "sha256": "D5FDB3267F5ED881DDBBAA8BB664C6805BF389CE36746D0E0E11F8EAB2EED01D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "F62E5D3C062F7C52B0D3985DC563ACDCCD801668D35EBD7002B38A844B491607",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/gated_abmil_curves.json",
+      "bytes": 46667,
+      "sha256": "6F8A4114F98A97047F0B21647A43EC7E7947B576B2EF586C1D9970097375CFA1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/hist_boost.joblib",
+      "bytes": 1395424,
+      "sha256": "650A586EC4AEC194629D34893021891320EC222C75FE27FEFC2954D1813A3F00",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/knn.joblib",
+      "bytes": 589187,
+      "sha256": "D0047EFC156B1A07BF3FBA9893A72095304396852B0C703292845B44AE36660A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "77F5B488F5FB3B47D8CE1FAB0487576A35AF33AB9A99917F35879B2F211599B8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "D8E223CC9EE1D4B88767C5898C24748FB041B00165AA7AEB2B892B83990750FF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "B25964EDC0005306683CD69C8A95C9FD1DE4937E48DEA833BFEDBB4C5F1CDAE6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/mean_mlp_curves.json",
+      "bytes": 38047,
+      "sha256": "F016DE25E9C6ADC852FA992B3F7F83915F2AB9F6BE50F08C451B6A547BFFF66A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/mlp.joblib",
+      "bytes": 405680,
+      "sha256": "C389E7468873B202E5FA6F2A91193EB8BABE614A037C129EE2EEA69849C4074B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/random_forest.joblib",
+      "bytes": 391241,
+      "sha256": "AB88A38955C6966FD70F2960FA8E82901C5560377B23345EF9F926A116D18A90",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/rbf_svm.joblib",
+      "bytes": 949839,
+      "sha256": "11933DCE8780ADF1A5B305D19A39FC4A4AFD6B414CB03E7F153711BBCA0B41A2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "E8F70222379615F29FE1A3BF1A48D508DED7CDB421B9F849E896BA3BFA6FBC19",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "DEC174C95170E3C6D27D4ACFA8F8E4F298C7B04C772E2D9E89DF6445710D0BC5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/single_query_cross_attention_curves.json",
+      "bytes": 59886,
+      "sha256": "20671C089C424EF8BE3F3F9F212D35EF041F503105736DA9405025B7B2046F9F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/siglip2_b16/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/sklearn_floppy_estimates.jsonl",
+      "bytes": 217598,
+      "sha256": "7517F0F0A3675D304D5A852B61419760EB24999635D21DDD62F5A3E14E59C00D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/moderate_undersampling/sklearn_floppy_estimates.jsonl"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/candidates.json",
+      "bytes": 786187,
+      "sha256": "E3D86083406AF0F4CE95B605BDB00DD60A68DA750D4B3E97611652BEB005CBBA",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/candidates.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/extra_trees.joblib",
+      "bytes": 1806089,
+      "sha256": "0805B16FFC6F945C67B912DB325AFD7B826865247B7D35719E6E4E9D1B14DF43",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "DAC9573AEFA5529154A51716081ACA8A258949CA30D4072E4731F3FE2D03B23A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/gated_abmil_curves.json",
+      "bytes": 48248,
+      "sha256": "D803DF9BCD93A9C509A76BD47C920E269F674EA22CC4A6CA7ED16245CE8B5E7E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/hist_boost.joblib",
+      "bytes": 1420544,
+      "sha256": "92BDE4726E5406FE007F86B34DB2B7B53795769250BF790DA23E4C14C73D75E9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/knn.joblib",
+      "bytes": 950772,
+      "sha256": "B2C40CE56D6777AD26B05CB83768EFAEFDB2DB195D56B235FE47F5B621B87DD5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/linear_svm.joblib",
+      "bytes": 17219,
+      "sha256": "39EBA80792E0511B832BFC8199E87DE3E97139ED70016EC08BA9865A395BB587",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/logistic.joblib",
+      "bytes": 17383,
+      "sha256": "02D21D60D29E9504F99F4F9DA288B3F4B7EF27278D452043AD5C5BC632D30DC5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "60243A02843AE7ABF18D2651B0DC6F9C2E9DA156392DF83E952FFFCFD0A31219",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/mean_mlp_curves.json",
+      "bytes": 42112,
+      "sha256": "6577E44B1161C00197A05019B9A941B44189C646E4643D1AAE3AD5F294FF0B17",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/mlp.joblib",
+      "bytes": 274608,
+      "sha256": "9088C71DA206C38A46B599193156540BA74537C841DDD947C1164509BEF4C168",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/random_forest.joblib",
+      "bytes": 542345,
+      "sha256": "5F437AEE36E7856589A6B402190A596DA89A1C696B0F41CF3CE0176AC3C1E313",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/rbf_svm.joblib",
+      "bytes": 1229663,
+      "sha256": "2669785A3A1685372F9BBA2BEB39C2632164628D779B3A1E6ED643608FA963D7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/ridge.joblib",
+      "bytes": 9152,
+      "sha256": "86861A5606A68A5B69248AD4E9AD5DCAAD015E43F562474194D503174CC9B421",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "DCAAB023F208309CD06962F939DFBEA16DB29DF6B8F5DA13E40564E6A734B019",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/single_query_cross_attention_curves.json",
+      "bytes": 61901,
+      "sha256": "9B29A6DB1DD74F90D867B44F38C5CE2ED653E1C6F888D3D91DCE18D6C44E8259",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/clip_b32/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/extra_trees.joblib",
+      "bytes": 1956233,
+      "sha256": "42611F797B9E03202C0CC74ECDC7ABBF5B6280D26A5095608DC1762FA1EED221",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "D237F05A917B24D11258889B1C5F64D8265DDA5B24111A022E8FB0D7923AA6B1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/gated_abmil_curves.json",
+      "bytes": 46609,
+      "sha256": "C9649BB02F225B2E2BD719C96E1F47567E0874997C3EF7A5E1A220DCD6E3E1F2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/hist_boost.joblib",
+      "bytes": 1789216,
+      "sha256": "B13130BC73859D885E73FCE0D00DAD670C30EDFB2DBB3B2FD85DC600836FF127",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/knn.joblib",
+      "bytes": 1423860,
+      "sha256": "F4CCFAB7E85E36D955B81D6573E62B12DC8C6C1E5D2F1E0DC6B7A23F0D3F7106",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "43F4B7A566FF1D0123D3AA03E3C9A9195A8770AA56F7D98AFBFB3479E9B02D65",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "F21CC9132CBDE5E4818219C27983477BE37B1E139EA94D16EF9582F9662367F4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "AC0A86FD990F71A0A006BBB83E7623F59A771789A0404A3E4FBB2869393BA18A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/mean_mlp_curves.json",
+      "bytes": 38702,
+      "sha256": "CA2730B7641907B987152E6B8ABB4E932050B65F437D45E40F34E95774BCDA17",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/mlp.joblib",
+      "bytes": 405680,
+      "sha256": "E0B81579AD197EA7D590E7A34CE1492F61EC0149B0EACF1235906FC814C7713D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/random_forest.joblib",
+      "bytes": 835913,
+      "sha256": "CEE93E2384B774FE5CFCA4197208AE28038FA1D6EEF58F55D5BDAE514B3736A5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/rbf_svm.joblib",
+      "bytes": 2554607,
+      "sha256": "FFAF7CF4196190F7B783764044B1704DECB2E97A22C1C6F42F945A1FD156CF23",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "2421CA73AF89C5E12597DB9C728D937BA4BD033BBADC83FB9053AF321EBBA0BB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "7587AA9C4AE06643CDD17684D8A8992A6BD8A6175C25A10B3FE5828B3988623B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/single_query_cross_attention_curves.json",
+      "bytes": 56478,
+      "sha256": "F10300D9CDAFBE72AD62AF1AAF28E315B5A2A3BECFED0C702838E63DF97B8216",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/convnextv2_tiny/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/coverage.json",
+      "bytes": 98,
+      "sha256": "6CDEF26454F32712E37BE760F56B78ECC65E080701FB3DDA8B4A46E46F945076",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/coverage.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/extra_trees.joblib",
+      "bytes": 1183625,
+      "sha256": "996677112D180952115FFAFA62A47CBFF317C6829AA6657C35C94CCCED5BC2F1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/gated_abmil.pt",
+      "bytes": 335941,
+      "sha256": "AE8E1769686B308E6C1020391C5EC9A65ECEC7B4A09D1349B1D092774F770C55",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/gated_abmil_curves.json",
+      "bytes": 49676,
+      "sha256": "ADF548EC15F2FDB2B02CDA0E4EB2537F1D81C6BEC34E4E5209E02F88DA9AFEA8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/hist_boost.joblib",
+      "bytes": 1155232,
+      "sha256": "BFA204D484AA5975C7A20F7B3C96F2DDFB785E2844420DF85F198173C2256CF4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/knn.joblib",
+      "bytes": 714228,
+      "sha256": "C727A6B5B4961C8561AC68BD3C01161471C49B3400A9ECE33BC285D755870915",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/linear_svm.joblib",
+      "bytes": 13123,
+      "sha256": "CD0D94699807D4A1118EA81847AA7267CBFE4A0CC9095086048E384B58981D35",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/logistic.joblib",
+      "bytes": 13287,
+      "sha256": "6EE17E01A442C046E8259F3B95E176D58E7A02AC5660E5793808AE80AB6C854C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/mean_mlp.pt",
+      "bytes": 201703,
+      "sha256": "69E5EF639026A56CB61ACD7E7FB6CDC5F31C4F7D82C231BE7C396BF5495C9C3A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/mean_mlp_curves.json",
+      "bytes": 40795,
+      "sha256": "A2199910957E34AC80C55C5555F41F6BC45ECCA60180970FDFC5640EEE5F4038",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/mlp.joblib",
+      "bytes": 209072,
+      "sha256": "2679C1289DF93FEA97FE53B1BD2C9F4A84D3F31D0DBE43459CA968499A1618F3",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/random_forest.joblib",
+      "bytes": 809993,
+      "sha256": "BC33FE3736703DE0C7B884B5BF6EE1CEC5D8825968AA804D6C7E18015392B4DC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/rbf_svm.joblib",
+      "bytes": 1129615,
+      "sha256": "29DCD4D14292373C8E4B90FBC081ED27AE6537976011C76DE9FC452AFCA14C4F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/ridge.joblib",
+      "bytes": 7104,
+      "sha256": "380392D48F774FAA493F9FA4E069989E4DF2173EC4FBEF6F597B0C60FFAC536B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/single_query_cross_attention.pt",
+      "bytes": 468228,
+      "sha256": "E7235111018ABD2A13934676A6BE401CBE070B54FAA8173420C350E95497F4E6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/single_query_cross_attention_curves.json",
+      "bytes": 57725,
+      "sha256": "404D271723BF419D2C7BD0FE126970F520AC4128334599AFEE6B1B1F6F74F4EF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/dino/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/failures.json",
+      "bytes": 2,
+      "sha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/failures.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/locked_test_status.json",
+      "bytes": 155,
+      "sha256": "AAFE00AA21D193584A6C898B0AF024B839C1F963EB2133B7B3AF1F2AE90B73E1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/locked_test_status.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/selection_frozen.json",
+      "bytes": 66236,
+      "sha256": "DDA287269DF78789A6DCF27952A5F4050D3E11EABF959ACB5C3B625FBA7AA175",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/selection_frozen.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/extra_trees.joblib",
+      "bytes": 1709513,
+      "sha256": "5493684FEC2852265A8EC97DC992679461A76C1BFCDBB988D38E3129A03B791F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "B9E8E8C3AEE80FC1085574ABF528EB293E062CCDD23126546C7A3228A39E5972",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/gated_abmil_curves.json",
+      "bytes": 48854,
+      "sha256": "573E6E1DE3D140365E11698CDC3230386133842156EC8DCBA194EC5B61481C88",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/hist_boost.joblib",
+      "bytes": 1789328,
+      "sha256": "71379C431F218DFF259FA5733EC4A729793C594991CB975A3DAD606514E74B30",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/knn.joblib",
+      "bytes": 1423860,
+      "sha256": "A8E19B269CD730B92D32A33FA932F90EE0DDE630F6339214C23FEDC44DBFFB77",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "AC7A7357D1D5C20BC08856E2287D5B7ED9A1FA088CF423952A3246061793E69A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "088142484527BEEE2354A011DC328B8E2A69989E4573C2286A39A2A07011CD0D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "CC36FF9E4E76336815CA8BCC6341AD1A83F44EEBE6F08A830AC86F41AF54E072",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/mean_mlp_curves.json",
+      "bytes": 41957,
+      "sha256": "558603B9ED30CD47B19E29F86591CFC56160C22A52595CAB8D306F53D0BE5E95",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/mlp.joblib",
+      "bytes": 1593008,
+      "sha256": "2646D7AA1C4EF4312E4861977A340843050A3BBC87D3ADAF295D77618E709F23",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/random_forest.joblib",
+      "bytes": 717065,
+      "sha256": "37B742C04085F384E164F24AC8954C0AF9231C556AAA9F6DDEC348DF1386D855",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/rbf_svm.joblib",
+      "bytes": 1823471,
+      "sha256": "AB31A86FDE76B64644313D879021762FC72F09F5B820D8CED08FD02FE29823C3",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "805ABCB882D2F689569CF4998CD6DBCCA75BF18AD091A8DE0BC510296E0E2BC0",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "CEF4F20863123AFE0BBE752F0BD1325EDB08160DC18FA845F26179AFF547220A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/single_query_cross_attention_curves.json",
+      "bytes": 56704,
+      "sha256": "0030EFC64357E5046E87E74C5C48AEFD35E260B6F4D38DEE27C1DC6FDA73C17B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/siglip2_b16/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/sklearn_floppy_estimates.jsonl",
+      "bytes": 215468,
+      "sha256": "E8EF0D55D6B0FEA252206FF9AC03ECB31EFBED5F66CC4849F5A6AB3B6B095D93",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/original/sklearn_floppy_estimates.jsonl"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/candidates.json",
+      "bytes": 762847,
+      "sha256": "888B30BECE9E4B4CD269B69BE8F6ED4A274DD9420BC37D746F8758D97B83F25D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/candidates.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/extra_trees.joblib",
+      "bytes": 1483145,
+      "sha256": "CE3BD8466BCD07A511EE5CBDE6BE569C964A668FF4F5219D4B82A85E69DA3C9A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "8924555EAEEA39EC9343CCE4E655C59C11C6C9E325D12D7A66139144C0DA40E4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/gated_abmil_curves.json",
+      "bytes": 47206,
+      "sha256": "B432811E1D37378472E21606E8105F931CB31CAA1EAC86E65E93AD9EB4176886",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/hist_boost.joblib",
+      "bytes": 1256016,
+      "sha256": "3FED679B417B876F31CE2DC8489E993F759550C2944227D1E8D3D4A77B551AC2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/knn.joblib",
+      "bytes": 2287172,
+      "sha256": "A51A6D2FA475763DC4A1E6A8AAB24BE569A4D66C22464997F72503F887F5C786",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/linear_svm.joblib",
+      "bytes": 17219,
+      "sha256": "9B83B851DB0DFDA6CB68C26232169AEE82D14B331CA758F6373E196B14C1FA7F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/logistic.joblib",
+      "bytes": 17383,
+      "sha256": "DBAE05B050775CD76B9FED46D507A26DCB224213F9E37BC201027FF2240517B2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "0D505B389D72BA6812429AA7A8FC2D96D788D293CEDA462DDF94B688B7D4C9EC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/mean_mlp_curves.json",
+      "bytes": 38719,
+      "sha256": "D84A82CB63BBE99730EFEFFC17A7500FC45A066AD8963705DA053D67DB4D1114",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/mlp.joblib",
+      "bytes": 274608,
+      "sha256": "97FCF8D519182B1FBF12494694725FDE468F9D86CB02A57DC17048D94D41C80C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/random_forest.joblib",
+      "bytes": 732617,
+      "sha256": "3196B9F1FA3522F11035047D13A462597B6EB2646E9229806BDCA859D24624D3",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/rbf_svm.joblib",
+      "bytes": 1229663,
+      "sha256": "24BEF1EAC9660E4644A9083B39A4AB95FC37F23C5FBE07F99B09082DE80E4DEE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/ridge.joblib",
+      "bytes": 9152,
+      "sha256": "20D8F732E4FDE71C4367C2D5D15F2DC9268833868B407FCB5D452669E03EDE02",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "518F5F69D6665E3F53ECDD3970C3B6178009F437CF13614989094ACB253EFD50",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/single_query_cross_attention_curves.json",
+      "bytes": 58093,
+      "sha256": "083CE9715B9AD125F2568F6620A259DE60DB0561F4184D26DBC0B72E82AB875C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/clip_b32/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/extra_trees.joblib",
+      "bytes": 1556297,
+      "sha256": "F4BB4DAF603A03331B6C7EB6BBDFC4980E15CF8740CD03A46A8E079FB5CEFD99",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "9BDD74C01240048135ED6FA9F2F1C8D86FEA2432C11FF741627FC863DEBDE2E2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/gated_abmil_curves.json",
+      "bytes": 45557,
+      "sha256": "B65EBCA5C91CCDF8AC9E76FA812D38711739529DEB050CD710C7110A52085FDB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/hist_boost.joblib",
+      "bytes": 1789776,
+      "sha256": "EC5A92054FA50C5755F51BA15A420131846965C55D1FB807B7AFD8131C2879C4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/knn.joblib",
+      "bytes": 3425860,
+      "sha256": "AFF9CD6DD07AF30CFBB1EF50B8E4B972F68F5990929AA4B56E8B3462AB6110E6",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "AA171E50C3EBFC7E9F9382BE10444498EC74D5FAF8F4A0F9F6A47EA6F0B1894A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "BFAD1BDF1D982F559464C2014DFBC93EFF40DEBA2D4C57965ECB84794D95500F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "3F243FA43FAF715CBA1462C83615176F483B0F670FB46E685FEC62ABAF39CF64",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/mean_mlp_curves.json",
+      "bytes": 37501,
+      "sha256": "A2E6DA108AD1943B342ECAFBDC14742118BC5C28D728418A52B86E88E9C1FF16",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/mlp.joblib",
+      "bytes": 405680,
+      "sha256": "CB90E5523A53A4D0392CDBD16D4AF3F70E12576CDEFA0ABC58FB5CE00092653B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/random_forest.joblib",
+      "bytes": 1036169,
+      "sha256": "A70ADC9F4217497CDBE967DAB882E3C25A5F1498950104CD1D853FB90C1D7CD8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/rbf_svm.joblib",
+      "bytes": 2821039,
+      "sha256": "3B1423C8709AEC37E9E2428084C0BAC9A1EB55ED3E9EFB6C29C45BFA13AFA12F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "D7BF22F036FE856D99DEE877AEB9859E6D157275785EE8933B9797BEA1553063",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "0395F0BB0DDF051EC5123B9549F018D8C2980B12EB8B960B47343DA0DF5B3A61",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/single_query_cross_attention_curves.json",
+      "bytes": 56594,
+      "sha256": "10FBA5C6F3E913738F8F20C638FFC2541B8A125B63E74F3B57E14C269FEB7876",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/convnextv2_tiny/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/coverage.json",
+      "bytes": 98,
+      "sha256": "6CDEF26454F32712E37BE760F56B78ECC65E080701FB3DDA8B4A46E46F945076",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/coverage.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/extra_trees.joblib",
+      "bytes": 1519625,
+      "sha256": "B0E1378D089CB038744E4F8F1B50FC1CFA6416B6953863011B904B8703840AF7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/gated_abmil.pt",
+      "bytes": 335941,
+      "sha256": "18CC02D9D7B77265ED8057CF7202E636847AF5C1ADD38A95AA5F57CF560DA88E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/gated_abmil_curves.json",
+      "bytes": 46059,
+      "sha256": "648F131CF27467D5AA4B5ED5D6AE9CA27A3AE92A8AAB4CD9511837577B776D1F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/hist_boost.joblib",
+      "bytes": 989136,
+      "sha256": "D7E7786F882D3C10BE122CA7728E97813A8C4D0A95B7C543EA531D0E769D7EAE",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/knn.joblib",
+      "bytes": 1717828,
+      "sha256": "3066B06B9752AE1203E9986D1B3340823B70232234B5B499E1124FFD6D872360",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/linear_svm.joblib",
+      "bytes": 13123,
+      "sha256": "09558EC3FDBAC011010DCF8656A5D52AB0ECB0751D50FA8A1A16F8DD22D6D01A",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/logistic.joblib",
+      "bytes": 13287,
+      "sha256": "AA9E6E47C1A9288F44E34D801637F2DD79A848EFD65C763C4113FBD098CA1E56",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/mean_mlp.pt",
+      "bytes": 201703,
+      "sha256": "0CC75553954A679E325A0FF0EFAE61F645E3D473C90CF109F5AAC6CF657CB817",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/mean_mlp_curves.json",
+      "bytes": 39659,
+      "sha256": "34A9C8D6F3FF543F0DC3973E9E9FDDD7EE885999FAFD8706D93D425B4C85F571",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/mlp.joblib",
+      "bytes": 209072,
+      "sha256": "42C2C74DF81779B7261F23603751D4E1BE0AE9AFF21BB0C2876491A280214EE5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/random_forest.joblib",
+      "bytes": 769097,
+      "sha256": "2B9A7072191846C441B198BEB7A04947FD88488B361129C3F526FFC3EBDFA7AB",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/rbf_svm.joblib",
+      "bytes": 1251455,
+      "sha256": "DAA63D0A8BAC8FDBE882356C4855A86CAA8337658A8DCF0CD6A0065320E2C2FC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/ridge.joblib",
+      "bytes": 7104,
+      "sha256": "51B53DD29BBCCFB7D7159ECF0376D07A4BDFC4019D6B32D91155E31E6BA84596",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/single_query_cross_attention.pt",
+      "bytes": 468228,
+      "sha256": "C8FF212C5FFFDD12CD3C2B9CF11A07A9216DC385B04D1EC1044536B3BDE2E9C7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/single_query_cross_attention_curves.json",
+      "bytes": 56182,
+      "sha256": "EEFCB5DE77005185F596EED9E0361441AA92D50AB19DC6760BC39026F26A0CCA",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/dino/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/failures.json",
+      "bytes": 2,
+      "sha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/failures.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/locked_test_status.json",
+      "bytes": 155,
+      "sha256": "AAFE00AA21D193584A6C898B0AF024B839C1F963EB2133B7B3AF1F2AE90B73E1",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/locked_test_status.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/selection_frozen.json",
+      "bytes": 50837,
+      "sha256": "51B2E9FDF50E6431211D900FF4029C075D23A01305F75857EB5D0478877120CF",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/selection_frozen.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/extra_trees.joblib",
+      "bytes": 1432457,
+      "sha256": "BD5200FEBE45B55A844B66B39E9A3DCA5D3177F2D4E9EED4BC4077F999D646F5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/extra_trees.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/gated_abmil.pt",
+      "bytes": 532549,
+      "sha256": "5B59B7D2E24E27CD2E2846C7CC3DF6B8CD54DA34BD10A8DDE5E7326A6BDAE302",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/gated_abmil.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/gated_abmil_curves.json",
+      "bytes": 46053,
+      "sha256": "961AD501759F74107EEB3F8012524F6203B3D79DD3A81CE9599364531B1E124C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/gated_abmil_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/hist_boost.joblib",
+      "bytes": 1967072,
+      "sha256": "940E118CCC9AAFDEAF6243602861B0EE2571CF024A2178FFAA6ABBA0225BC42B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/hist_boost.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/knn.joblib",
+      "bytes": 3425860,
+      "sha256": "74E4B86413E1959239A06F91F29BE4C924B0B645F942822879A9271775E62971",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/knn.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/linear_svm.joblib",
+      "bytes": 25411,
+      "sha256": "DC7E89F665EB0C5D1BE213C0237C8223FAD44F58DFE5B32B8F268D2909336DC4",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/linear_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/logistic.joblib",
+      "bytes": 25575,
+      "sha256": "E76965EDDEACEA98E5092881ABFB117D3C12887457D265BEAB73D16DBF1121F2",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/logistic.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/mean_mlp.pt",
+      "bytes": 398375,
+      "sha256": "98FA2F7631AA4EF8BEA142A7E55B85184407839CF8CA3C2CF79643850B885234",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/mean_mlp.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/mean_mlp_curves.json",
+      "bytes": 39090,
+      "sha256": "67D9B2D050762A4275FD041FC425A35508451A8F8823E5B75FA7005C1897857C",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/mean_mlp_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/mlp.joblib",
+      "bytes": 405680,
+      "sha256": "A4A71C47D86BFD5AAE73EF0711E32D8A3188B8986730E3776F4F99660F86BA00",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/mlp.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/random_forest.joblib",
+      "bytes": 709193,
+      "sha256": "F9B23106D49F51A6279857A3955447A26287DD76D5A551FFC50D52284BD59422",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/random_forest.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/rbf_svm.joblib",
+      "bytes": 1829679,
+      "sha256": "74D86A38F30EFD3D4DF641DBAB4FB57F4B0D5168AE7E4517E36895021157FD8D",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/rbf_svm.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/ridge.joblib",
+      "bytes": 13248,
+      "sha256": "8F4FD13EAB0773D86CF8DFD5565709FA3A76AADE57683AC6BDF73F423316DACC",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/ridge.joblib"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/single_query_cross_attention.pt",
+      "bytes": 664836,
+      "sha256": "033308A8183FB973A9716AAA69FF9E0E5573E2C45176D7D36286B36A7ACA777E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/single_query_cross_attention.pt"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/single_query_cross_attention_curves.json",
+      "bytes": 56591,
+      "sha256": "D020C37A580BA9F4F6493A76FBD6176F0C33ECAD269CF456D0976F6C7676297B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/siglip2_b16/single_query_cross_attention_curves.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/sklearn_floppy_estimates.jsonl",
+      "bytes": 217665,
+      "sha256": "3F38B3A531EE5C137318FEC35116E4ACF0A1EF1757B090701C94C65CD5C02E70",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/random_oversampling/sklearn_floppy_estimates.jsonl"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/records.json",
+      "bytes": 372146,
+      "sha256": "3AF6D4A0913883E84A045251510F0D6CFE428C38EB7C54C93823CE623EBF39E7",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/records.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/split_protocol.json",
+      "bytes": 246,
+      "sha256": "017BB7479CD5F8522B5A5B000B9C907EC5A37702198C140BA4E274759B2049F5",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/split_protocol.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/study_status.json",
+      "bytes": 135741,
+      "sha256": "45761216AC3807823B6941269D3E7E8CD1AB461CE3231A16C963DADCE976903F",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/study_status.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/support.json",
+      "bytes": 262,
+      "sha256": "B8B34F1BC93761A0D151156836C6CE5EC5CB1B2ADA4E1C32FB5327393DB44664",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/support.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/teacher_costs/teacher_prefill_decode_profiles.json",
+      "bytes": 63910,
+      "sha256": "13E6C079B925382BF490DEB884C506DEECE613510AC9070DB82A4892FE58512E",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/comparison/teacher_costs/teacher_prefill_decode_profiles.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/identity.json",
+      "bytes": 513,
+      "sha256": "D74548C0FA0701735553A497A498140E79A79C116334A0DB181DBDA97D4D77A8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/identity.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/label_cache.sqlite",
+      "bytes": 462848,
+      "sha256": "4AA8986B319A6BCA68055F075F198C9E72F9EF87E016ADADAC7D5A80B893EAED",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/label_cache.sqlite"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/labels.jsonl",
+      "bytes": 285242,
+      "sha256": "DD74570B375EEC11DF42CF88EACEED709206B7F1843C4EE5DEF1D38E5D4F9B87",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/labels.jsonl"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/progress.json",
+      "bytes": 182,
+      "sha256": "D299D32F16D45DE6F153999FCBA18CBA000352282A142A8DB193F7075AFD4AF9",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/progress.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/selected_manifest.json",
+      "bytes": 228254,
+      "sha256": "282185ED3B9BBC17670CDD524B851CB02FF704AD960EBFFD71D5DE0328C7C81B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/selected_manifest.json"
+    },
+    {
+      "path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/SYSTEM_PROMPT.txt",
+      "bytes": 2374,
+      "sha256": "FD732EAFBA52DDC09BAAFF9C6D4F5F968FC24EC9FF273EFD8980FFC005DAB035",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "experiments/full_medic_labeling/runs/main_20261029T154606Z/SYSTEM_PROMPT.txt"
+    },
+    {
+      "path": "kaggle_export_v6/__notebook__.ipynb",
+      "bytes": 2123663,
+      "sha256": "110CEC4A4B7E1B050FC0CCB527A1EFF19985F047BC65DA7833D2F32A6979CF3B",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "__notebook__.ipynb"
+    },
+    {
+      "path": "kaggle_export_v6/__results__.html",
+      "bytes": 4102643,
+      "sha256": "52281D4CE383DC893953EB6ED7B20C08661CC34D51037D65F17A9F6C1956F2A8",
+      "origin": "kaggle_v6_verified",
+      "remote_path": "__results__.html"
+    },
+    {
+      "path": "kaggle_export_v6/download_manifest.json",
+      "bytes": 943,
+      "sha256": "19386ED98EABEAB03952354481B1DCC8C78A0A988894EDEDCEB62BE1EB60C027",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/image_records.jsonl",
+      "bytes": 1127480,
+      "sha256": "561372292C8F64C68C92FFCEB81238ACDC1763AC296F99A005843DF609C77477",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/image_records_pre_v6_split_join.jsonl",
+      "bytes": 1117769,
+      "sha256": "5463403634ED1AC34F32A360066DD1F7756A3332A93E2D632D4EFA3BEC86E2D2",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/manifest.json",
+      "bytes": 931,
+      "sha256": "EA13F2EA62C33DD13A86F92A921605C9FE46430B1FF882ACBFBFAE3C612755F7",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/offline_references.jsonl",
+      "bytes": 532194,
+      "sha256": "7BC62036324EFD2C5F843323F3148216EC7A292BB2262AC40524E7F518CD2132",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/POLICY_CODEX_HANDOFF.md",
+      "bytes": 2578,
+      "sha256": "890B74A44ACB01D927E2037FFED5D2DAF2F0D5922CB76F1B8F8F38EE27E84564",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/README.md",
+      "bytes": 2159,
+      "sha256": "9195E23A257B4D6F5F6ECC70865E68E1AF9843A6AE3E651F03C6765CD636EFA0",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    },
+    {
+      "path": "scheduler_handoff/v6_split_join_receipt.json",
+      "bytes": 1159,
+      "sha256": "DB641FD33E483DE642D9771E9B19A3D61174E9D36AAF52C4CAED78C88FA665B7",
+      "origin": "preexisting_or_derived_local_v6_handoff",
+      "remote_path": null
+    }
+  ]
+}

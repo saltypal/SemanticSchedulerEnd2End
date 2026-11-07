@@ -1,0 +1,86 @@
+CELL START 2 log /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/cell_evidence/cell_2.log
+START 01_input_and_reference_manifest output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+END 01_input_and_reference_manifest {'stage': '01_input_and_reference_manifest', 'status': 'complete', 'seconds': 28.03049635100001}
+START 02_load_qwen35_9b output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+Loading teacher qwen35_9b revision c202236235762e1c871ad0ccb60c8ee5ba337b9a
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+END 02_load_qwen35_9b {'stage': '02_load_qwen35_9b', 'status': 'complete', 'seconds': 212.248260094}
+START 03_visual_transport_qwen35_9b output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+/usr/local/lib/python3.13/dist-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+Visual preflight qwen35_9b 1 /10 complete
+Visual preflight qwen35_9b 2 /10 complete
+Visual preflight qwen35_9b 3 /10 complete
+Visual preflight qwen35_9b 4 /10 complete
+Visual preflight qwen35_9b 5 /10 complete
+Visual preflight qwen35_9b 6 /10 complete
+Visual preflight qwen35_9b 7 /10 complete
+Visual preflight qwen35_9b 8 /10 complete
+Visual preflight qwen35_9b 9 /10 complete
+Visual preflight qwen35_9b 10 /10 complete
+END 03_visual_transport_qwen35_9b {'stage': '03_visual_transport_qwen35_9b', 'status': 'complete', 'seconds': 74.20300825200002}
+START 04_controls_qwen35_9b_evidence output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+Controls qwen35_9b evidence 1 /48
+Controls qwen35_9b evidence 12 /48
+Controls qwen35_9b evidence 24 /48
+Controls qwen35_9b evidence 36 /48
+Controls qwen35_9b evidence 48 /48
+Teacher candidate {'teacher': 'qwen35_9b', 'protocol': 'evidence', 'passed': True, 'n': 48, 'valid_fraction': 1.0, 'macro_f1': 1.0, 'critical_to_low_medium': 0.0, 'per_class': {'Low': {'support': 12, 'recall': 1.0}, 'Medium': {'support': 12, 'recall': 1.0}, 'High': {'support': 12, 'recall': 1.0}, 'Critical': {'support': 12, 'recall': 1.0}}, 'scope': 'authored text policy conformance; not image urgency accuracy'}
+END 04_controls_qwen35_9b_evidence {'stage': '04_controls_qwen35_9b_evidence', 'status': 'complete', 'seconds': 216.32877961600002}
+START 04_controls_qwen35_9b_direct output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+Controls qwen35_9b direct 1 /48
+Controls qwen35_9b direct 12 /48
+Controls qwen35_9b direct 24 /48
+Controls qwen35_9b direct 36 /48
+Controls qwen35_9b direct 48 /48
+Teacher candidate {'teacher': 'qwen35_9b', 'protocol': 'direct', 'passed': False, 'n': 48, 'valid_fraction': 0.08333333333333333, 'macro_f1': 0.13846153846153847, 'critical_to_low_medium': 0.0, 'per_class': {'Low': {'support': 12, 'recall': 0.25}, 'Medium': {'support': 12, 'recall': 0.08333333333333333}, 'High': {'support': 12, 'recall': 0.0}, 'Critical': {'support': 12, 'recall': 0.0}}, 'scope': 'authored text policy conformance; not image urgency accuracy'}
+END 04_controls_qwen35_9b_direct {'stage': '04_controls_qwen35_9b_direct', 'status': 'complete', 'seconds': 197.70175056200003}
+START 04_visual_panel_qwen35_9b_evidence output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+Visual panel qwen35_9b evidence 1 / 80
+Visual panel qwen35_9b evidence 10 / 80
+Visual panel qwen35_9b evidence 20 / 80
+Visual panel qwen35_9b evidence 30 / 80
+Visual panel qwen35_9b evidence 40 / 80
+Visual panel qwen35_9b evidence 50 / 80
+Visual panel qwen35_9b evidence 60 / 80
+Visual panel qwen35_9b evidence 70 / 80
+Visual panel qwen35_9b evidence 80 / 80
+END 04_visual_panel_qwen35_9b_evidence {'stage': '04_visual_panel_qwen35_9b_evidence', 'status': 'complete', 'seconds': 579.905522141}
+START 05_visual_panel_and_labeling output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+SPI labels 1 / 300 {'Low': 1, 'Medium': 0, 'High': 0, 'Critical': 0}
+SPI labels 10 / 300 {'Low': 8, 'Medium': 1, 'High': 0, 'Critical': 1}
+SPI labels 20 / 300 {'Low': 15, 'Medium': 1, 'High': 0, 'Critical': 4}
+SPI labels 30 / 300 {'Low': 23, 'Medium': 1, 'High': 1, 'Critical': 5}
+SPI labels 40 / 300 {'Low': 27, 'Medium': 1, 'High': 3, 'Critical': 9}
+SPI labels 50 / 300 {'Low': 30, 'Medium': 1, 'High': 4, 'Critical': 15}
+SPI labels 60 / 300 {'Low': 35, 'Medium': 1, 'High': 5, 'Critical': 19}
+SPI labels 70 / 300 {'Low': 37, 'Medium': 1, 'High': 5, 'Critical': 27}
+SPI labels 80 / 300 {'Low': 44, 'Medium': 2, 'High': 5, 'Critical': 29}
+SPI labels 90 / 300 {'Low': 50, 'Medium': 2, 'High': 5, 'Critical': 33}
+SPI labels 100 / 300 {'Low': 57, 'Medium': 3, 'High': 5, 'Critical': 35}
+SPI labels 110 / 300 {'Low': 58, 'Medium': 3, 'High': 5, 'Critical': 44}
+SPI labels 120 / 300 {'Low': 62, 'Medium': 4, 'High': 5, 'Critical': 49}
+SPI labels 130 / 300 {'Low': 63, 'Medium': 4, 'High': 5, 'Critical': 58}
+SPI labels 140 / 300 {'Low': 63, 'Medium': 4, 'High': 6, 'Critical': 66}
+SPI labels 150 / 300 {'Low': 65, 'Medium': 4, 'High': 6, 'Critical': 73}
+SPI labels 160 / 300 {'Low': 69, 'Medium': 4, 'High': 7, 'Critical': 78}
+SPI labels 170 / 300 {'Low': 75, 'Medium': 4, 'High': 8, 'Critical': 81}
+SPI labels 180 / 300 {'Low': 81, 'Medium': 4, 'High': 10, 'Critical': 83}
+SPI labels 190 / 300 {'Low': 87, 'Medium': 4, 'High': 11, 'Critical': 86}
+SPI labels 200 / 300 {'Low': 93, 'Medium': 4, 'High': 12, 'Critical': 89}
+SPI labels 210 / 300 {'Low': 100, 'Medium': 4, 'High': 12, 'Critical': 92}
+SPI labels 220 / 300 {'Low': 109, 'Medium': 4, 'High': 12, 'Critical': 93}
+SPI labels 230 / 300 {'Low': 115, 'Medium': 4, 'High': 13, 'Critical': 95}
+SPI labels 240 / 300 {'Low': 121, 'Medium': 4, 'High': 13, 'Critical': 99}
+SPI labels 250 / 300 {'Low': 126, 'Medium': 4, 'High': 14, 'Critical': 103}
+SPI labels 260 / 300 {'Low': 132, 'Medium': 4, 'High': 14, 'Critical': 107}
+SPI labels 270 / 300 {'Low': 140, 'Medium': 4, 'High': 14, 'Critical': 109}
+SPI labels 280 / 300 {'Low': 146, 'Medium': 4, 'High': 14, 'Critical': 113}
+SPI labels 290 / 300 {'Low': 153, 'Medium': 5, 'High': 14, 'Critical': 115}
+SPI labels 300 / 300 {'Low': 159, 'Medium': 5, 'High': 14, 'Critical': 119}
+END 05_visual_panel_and_labeling {'stage': '05_visual_panel_and_labeling', 'status': 'complete', 'seconds': 1588.9923285220002}
+START 06_four_class_support output /kaggle/working/experiments/spi_four_class/runs/20261027_spi_evidence_v3b/campaign
+END 06_four_class_support {'stage': '06_four_class_support', 'status': 'complete', 'seconds': 0.09131762900005924}
+ACTUAL SPI OUTCOME {'status': 'four_class_support_failed', 'four_class_model': False, 'independent_urgency_validation': False, 'reason': 'do not invent/remove classes; inspect support by class/group', 'labelled_images': 300}
+CELL END 2 seconds 2898.964658951

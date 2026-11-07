@@ -1,10 +1,10 @@
-"""Compatibility import; use INFRA.Artifacts.semantic_params_artifact."""
+"""Compatibility import; use Evaluation.Artifacts.semantic_params_artifact."""
 import importlib as _importlib
 import sys as _sys
 from pathlib import Path as _Path
 _root = _Path(__file__).resolve().parents[3]
 if str(_root) not in _sys.path:
     _sys.path.insert(0, str(_root))
-_target = _importlib.import_module('INFRA.Artifacts.semantic_params_artifact')
+_target = _importlib.import_module('Evaluation.Artifacts.semantic_params_artifact')
 
 _sys.modules[__name__] = _target

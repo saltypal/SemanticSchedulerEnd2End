@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/master_study/runs/launch-20261101/v9/monitor.py", line 14, in <module>
+    result=subprocess.run([cli,"kernels","output",slug,"--path",str(out/"retrieved"),"--file-pattern",".*[.]json$","--force"],capture_output=True,text=True,timeout=600)
+  File "/usr/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/home/Satya/.venvs/semantic-kaggle/bin/kaggle', 'kernels', 'output', 'satyapaladuguplus/semantic-decoder-scheduler-20261030', '--path', '/mnt/d/Bunker/BaseCamp/WirelessCommunication/SemanticCommunication/SemanticSchedulerEnd2End/experiments/master_study/runs/launch-20261101/v9/retrieved', '--file-pattern', '.*[.]json$', '--force']' timed out after 600 seconds

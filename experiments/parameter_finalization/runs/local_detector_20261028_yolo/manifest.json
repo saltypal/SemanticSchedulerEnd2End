@@ -1,0 +1,76 @@
+{
+  "source_commit": "032c23a3dafc7bfeb39a84ba55193b6b6f3a22a0",
+  "images": [
+    {
+      "image_id": "067728640b32124e09c5165ec8e0127dec67a6c4a3cbca053cb2c799bdc758e9",
+      "image_path": "images/4c20141e53b0b115538e4aa2b9b36b54389020285e28fca4b58c1c210d194f25.png",
+      "image_sha256": "4c20141e53b0b115538e4aa2b9b36b54389020285e28fca4b58c1c210d194f25",
+      "group": "duplicate_component:067728640b32124e09c5165ec8e0127dec67a6c4a3cbca053cb2c799bdc758e9",
+      "split": "train",
+      "source": "ladi",
+      "level": "Critical",
+      "evidence": "A large dam structure is shown with a massive, turbulent release of water, indicating a significant failure or emergency discharge event."
+    },
+    {
+      "image_id": "1203c91f2d39ac670d4159d0e4f0377538a6ae96975e360ace4358129364e922",
+      "image_path": "images/08aa7a5dba89682a0d3c42cf03bd654c1fdbfbc7a24dc0dda50ba2d364e25df3.png",
+      "image_sha256": "08aa7a5dba89682a0d3c42cf03bd654c1fdbfbc7a24dc0dda50ba2d364e25df3",
+      "group": "duplicate_component:1203c91f2d39ac670d4159d0e4f0377538a6ae96975e360ace4358129364e922",
+      "split": "validation",
+      "source": "ladi",
+      "level": "Critical",
+      "evidence": "A bridge is submerged by a large volume of brown floodwater, indicating a critical failure of the crossing and a substantial hazard to infrastructure and potential traffic."
+    },
+    {
+      "image_id": "01adbd5612ed4272802ad95437bab3c6e929d0b89d0f2def8a76baead7c03f7d",
+      "image_sha256": "b0d7808c50b32ab0047192ab2182e17e98b984693a7085c89adf8f7c4e5ae2f4",
+      "image_path": "images/b0d7808c50b32ab0047192ab2182e17e98b984693a7085c89adf8f7c4e5ae2f4.png",
+      "group": "duplicate_component:01adbd5612ed4272802ad95437bab3c6e929d0b89d0f2def8a76baead7c03f7d",
+      "split": "validation",
+      "source": "ladi",
+      "development_exposed": true
+    },
+    {
+      "image_id": "fa0a011bd6af793651d14db3065f9c476b1856b2456c17aeab8ca9b1ba5f4b3e",
+      "image_sha256": "d12b48f3f58c1818a58501afb2158a7271a4e7e413423c965f1214aa49b36b5f",
+      "image_path": "images/d12b48f3f58c1818a58501afb2158a7271a4e7e413423c965f1214aa49b36b5f.png",
+      "group": "duplicate_component:fa0a011bd6af793651d14db3065f9c476b1856b2456c17aeab8ca9b1ba5f4b3e",
+      "split": "train",
+      "source": "medic",
+      "development_exposed": true
+    },
+    {
+      "image_id": "8be286a38ec3b1a7e460e4e73e5ed1fd19cab2a18aad16e9e94d6f0f682fcb99",
+      "image_sha256": "54c48c062b0dcf70d3688cf1d8ada0bdbdb12df288dbea5586bc31fb425b4847",
+      "image_path": "images/54c48c062b0dcf70d3688cf1d8ada0bdbdb12df288dbea5586bc31fb425b4847.png",
+      "group": "duplicate_component:8be286a38ec3b1a7e460e4e73e5ed1fd19cab2a18aad16e9e94d6f0f682fcb99",
+      "split": "validation",
+      "source": "medic",
+      "development_exposed": true
+    },
+    {
+      "image_id": "c40233fcdff57e1d2cf0a8cd7d434ee96da6eafd2c6c4125ebead36a8e3f0793",
+      "image_sha256": "b6d674d4d21c3867e42436bc80eb0794e346ff7f848a48d9ede6f301bef7f3ae",
+      "image_path": "images/b6d674d4d21c3867e42436bc80eb0794e346ff7f848a48d9ede6f301bef7f3ae.png",
+      "group": "duplicate_component:c40233fcdff57e1d2cf0a8cd7d434ee96da6eafd2c6c4125ebead36a8e3f0793",
+      "split": "validation",
+      "source": "medic",
+      "development_exposed": true
+    }
+  ],
+  "vocabulary": [
+    "person",
+    "car",
+    "building",
+    "bridge"
+  ],
+  "python": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe",
+  "timeout_seconds_per_process": 120,
+  "scope": "six exposed images; no detection ground truth",
+  "environment_threads": 1,
+  "model": "yolo_world",
+  "source_run": "local_detector_20261028_dino",
+  "worker": "experiments/parameter_finalization/offline_yolo_worker.py",
+  "clip_checkpoint_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af",
+  "per_process_timeout_seconds": 120
+}

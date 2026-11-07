@@ -1,0 +1,117 @@
+{
+  "run_status": {
+    "status": "complete_with_blocked_teacher_arms",
+    "episodes": 3,
+    "learner_failures": [],
+    "scope": "synthetic plumbing/training pilot; NOT real image or VLM evidence"
+  },
+  "trained_arms": [
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "td_per"
+  ],
+  "blocked_arms": [
+    "rl_vlm_f",
+    "visionprefer",
+    "vlm_replay"
+  ],
+  "policies": [
+    "fifo",
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "novelty",
+    "priority_classifier",
+    "random",
+    "ranknet",
+    "relevance",
+    "rr",
+    "spi",
+    "td_per"
+  ],
+  "metric_records": 42,
+  "issues": [],
+  "stream_checks": {
+    "accounting": 42,
+    "rewards": 42,
+    "decision_files": 42,
+    "decision_rows": 742,
+    "logs_match_selected": 42
+  },
+  "optimization_histories": {
+    "lambdamart": {
+      "present": true,
+      "entries": 0
+    },
+    "linear_choice": {
+      "present": true,
+      "entries": 3
+    },
+    "masked_double_dqn": {
+      "present": true,
+      "entries": 2
+    },
+    "masked_ppo": {
+      "present": true,
+      "entries": 2
+    },
+    "mlp_choice": {
+      "present": true,
+      "entries": 3
+    },
+    "priority_classifier": {
+      "present": true,
+      "entries": 3
+    },
+    "ranknet": {
+      "present": true,
+      "entries": 3
+    },
+    "td_per": {
+      "present": true,
+      "entries": 2
+    }
+  },
+  "portable_reloaded": [
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "td_per"
+  ],
+  "checkpoints_reloaded_cpu": [
+    "lambdamart",
+    "linear_choice",
+    "masked_double_dqn",
+    "masked_ppo",
+    "mlp_choice",
+    "priority_classifier",
+    "ranknet",
+    "td_per"
+  ],
+  "tree_fitting": {
+    "status": "verified",
+    "run_id": "stream-pilot-20261029-220835",
+    "history_note": "No per-epoch loss is applicable; fit_lambdamart returns an empty history and stores the fitted Booster text in resume.pt.",
+    "checkpoint": "models/lambdamart/resume.pt",
+    "booster_text_present": true,
+    "num_trees": 100,
+    "portable_tree_count": 100,
+    "leaf_count": 683,
+    "nontrivial_leaf_count": 683,
+    "prediction_rows_compared": 744,
+    "max_abs_prediction_difference": 2.6645352591003757e-15,
+    "saved_examples": "data/training_examples.json",
+    "source_sha256": "5cfa4a298aad3981a7278761a0d89f29c16a9ed9d6a4224270d7a77dc45635d5"
+  }
+}

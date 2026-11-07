@@ -1,0 +1,44 @@
+{
+  "config": {
+    "archive": "experiments/mini_dataset/runs/mini_spi_20261030_v1/downloads/Mini_dataset_6000.tar",
+    "vector_extension": "experiments/stream_scheduler/runs/full-v22-launch-20261031T003706Z/retrieved_selected/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/vector_completion/vectors.npz",
+    "mission_vectors": "experiments/stream_scheduler/runs/full-v22-launch-20261031T003706Z/retrieved_selected/experiments/stream_scheduler/runs/full-v22-20261031T004032Z/results/teacher_prepared/data/mission_vectors.npy",
+    "annotations": null,
+    "output": "experiments/ue_streams/runs/rate-pilot-20261101",
+    "duration": 200.0,
+    "ues": "12,50,100",
+    "seeds": "1729"
+  },
+  "source_hashes": {
+    "Evaluation/ue_scenarios.py": "51a3dda10a2bc15bc4acc21772f197ab43be6c0fa4f823a7179dd8a157414077",
+    "Evaluation/semantic_learning_env.py": "db746175ff9c563e33494c6ff4c0e8ba824d023c4b0aef9cc438d5c7654fccab",
+    "experiments/stream_scheduler/ue_rate_study.py": "af3c261c521928fe61a065e2abb44e37b7b5fcc96f7797801ec376ca283763b1"
+  },
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "input_profile": {
+    "schema": "scene93_received387_v1",
+    "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+    "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+    "feature_order": "scene374+SPI4+R+N+availability6+cold1",
+    "semantic_producer": {
+      "repo": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+      "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+      "weights_sha256": {
+        "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+      },
+      "download_checkpoint_bytes": 605247071,
+      "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+      "parameters": 87849216
+    },
+    "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+    "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+    "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+    "sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+  },
+  "pool_scope": "CLIP mission sampling proxy only; no real incident correspondence",
+  "reference_scope": "development-exposed VLM silver tiers; not independent emergency truth",
+  "incident_status": "unavailable: no supported incident/sequence labels"
+}

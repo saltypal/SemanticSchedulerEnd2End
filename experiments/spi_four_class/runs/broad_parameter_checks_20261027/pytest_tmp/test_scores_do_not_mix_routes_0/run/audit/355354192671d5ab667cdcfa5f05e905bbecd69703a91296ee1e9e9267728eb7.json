@@ -1,0 +1,1809 @@
+{
+  "schema": "semantic_scene_audit_v2",
+  "document_sha256": "6d88ca872821abe4a9040c20c9496f3bddc834f8a053455890ebd6579767e1a7",
+  "raw_bundle": {
+    "image_token": "UE-A-0",
+    "mission_id": "building_damage",
+    "mission_version": "dbb557160175764c9eb9d54e4020b0a5c266cbe670e2420aabb89503c5a33c02",
+    "specification_sha256": "c710280da5cc3048858b2094e757ea7d30ab929563cda595489c1f7d8d471730",
+    "kb_version": 0,
+    "parameters": {
+      "relevance": {
+        "value": 0.638649508357048,
+        "available": true,
+        "method": "operator_paragraph_cosine_v1",
+        "reason": null,
+        "supporting": {
+          "text_source": "operator_paragraph",
+          "paragraph_sha256": "616094cce132b82492f820d0d4fc3331c2e18a587efe871c82f8526028b5e8eb",
+          "raw_cosine": 0.27729901671409607,
+          "is_probability": false
+        }
+      },
+      "novelty": {
+        "value": {
+          "distance": 1.0,
+          "cold_start": 1.0,
+          "new_concept_fraction": 1.0
+        },
+        "available": true,
+        "method": "appearance_and_predicted_concept_delta_v2",
+        "reason": null,
+        "supporting": {
+          "history_count": 0,
+          "interpretation": "cold start, not proof of new event",
+          "asset_identity_verified": false,
+          "concept_history_count": 0,
+          "concept_delta_not_new_asset_truth": true,
+          "concept_delta_available": true,
+          "concept_delta_reason": null
+        }
+      },
+      "rarity": {
+        "value": 1.0,
+        "available": true,
+        "method": "concept_bernoulli_surprisal_v2",
+        "reason": null,
+        "supporting": {
+          "reference": "causal predicted UE observations",
+          "concept_sources": "positive detections and optional native image claims",
+          "valid_history_count": 0,
+          "probabilities": {
+            "building": 0.5,
+            "car": 0.5,
+            "condition:building.affected_or_greater": 0.5,
+            "condition:building.minor_or_greater": 0.5,
+            "condition:tree.damaged": 0.5,
+            "debris": 0.5,
+            "road": 0.5,
+            "truck": 0.5
+          },
+          "surprisal_nats": {
+            "building": 0.6931471805599453,
+            "car": 0.6931471805599453,
+            "condition:building.affected_or_greater": 0.6931471805599453,
+            "condition:building.minor_or_greater": 0.6931471805599453,
+            "condition:tree.damaged": 0.6931471805599453,
+            "debris": 0.6931471805599453,
+            "road": 0.6931471805599453,
+            "truck": 0.6931471805599453
+          },
+          "cold_start": true,
+          "not_importance": true
+        }
+      },
+      "scene": {
+        "value": {
+          "road": 0.604276031255722,
+          "residential": 0.6136861592531204,
+          "indoor": 0.5812317281961441,
+          "forest": 0.5911527052521706,
+          "water": 0.6139279678463936,
+          "people": 0.6054371893405914,
+          "vehicle": 0.6100180521607399,
+          "fire": 0.6106651276350021,
+          "claim_bridge.present": 0.000837600149679929,
+          "claim_building.present": 0.9946720004081726,
+          "claim_building.affected_or_greater": 0.5413047671318054,
+          "claim_building.minor_or_greater": 0.8526273369789124,
+          "claim_debris.present": 0.9520895481109619,
+          "claim_flooding.present": 9.08164383872645e-06,
+          "claim_building.flooded": 0.0001556311472086236,
+          "claim_road.present": 0.9689599275588989,
+          "claim_road.damaged": 8.704792708158493e-05,
+          "claim_tree.present": 0.43808501958847046,
+          "claim_tree.damaged": 0.6934773325920105,
+          "claim_water.present": 0.004707688465714455,
+          "entity_presence": {
+            "building": true,
+            "truck": true,
+            "car": true,
+            "bridge": false,
+            "debris": true,
+            "flooding": false,
+            "road": true,
+            "tree": false,
+            "water": false
+          },
+          "detector_observation": {
+            "building": "detected",
+            "road": "not_detected",
+            "person": "not_detected",
+            "car": "detected",
+            "truck": "detected",
+            "bus": "not_detected",
+            "motorcycle": "not_detected",
+            "bicycle": "not_detected",
+            "debris": "not_detected",
+            "chair": "not_detected",
+            "couch": "not_detected",
+            "dining table": "not_detected",
+            "television": "not_detected",
+            "refrigerator": "not_detected",
+            "tree": "not_detected",
+            "water": "not_detected"
+          },
+          "producer_conflicts": [],
+          "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+          "image_claim_predictions": {
+            "bridge.present": {
+              "value": false,
+              "score": 0.000837600149679929,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "bridges_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.present": {
+              "value": true,
+              "score": 0.9946720004081726,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "buildings_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.affected_or_greater": {
+              "value": true,
+              "score": 0.5413047671318054,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "buildings_affected_or_greater",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.minor_or_greater": {
+              "value": true,
+              "score": 0.8526273369789124,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "buildings_minor_or_greater",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "debris.present": {
+              "value": true,
+              "score": 0.9520895481109619,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "debris_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "flooding.present": {
+              "value": false,
+              "score": 9.08164383872645e-06,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "flooding_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.flooded": {
+              "value": false,
+              "score": 0.0001556311472086236,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "flooding_structures",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "road.present": {
+              "value": true,
+              "score": 0.9689599275588989,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "roads_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "road.damaged": {
+              "value": false,
+              "score": 8.704792708158493e-05,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "roads_damage",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "tree.present": {
+              "value": false,
+              "score": 0.43808501958847046,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "trees_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "tree.damaged": {
+              "value": true,
+              "score": 0.6934773325920105,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "trees_damage",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "water.present": {
+              "value": false,
+              "score": 0.004707688465714455,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "water_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            }
+          },
+          "condition_predictions": {
+            "building.affected_or_greater": true,
+            "building.minor_or_greater": true,
+            "building.flooded": false,
+            "road.damaged": false,
+            "tree.damaged": true
+          },
+          "condition_contrast_evidence": {
+            "building.affected_or_greater": {
+              "positive_similarity": 0.27907395362854004,
+              "negative_similarity": 0.21840013563632965,
+              "positive_text": "a photograph of a building affected by a disaster",
+              "negative_text": "a photograph of an unaffected intact building",
+              "decision_threshold_margin": 0.0,
+              "calibrated": false,
+              "is_native_label_probability": false,
+              "margin": 0.06067381799221039
+            },
+            "road.damaged": {
+              "positive_similarity": 0.24556976556777954,
+              "negative_similarity": 0.24239329993724823,
+              "positive_text": "a photograph of a physically damaged road",
+              "negative_text": "a photograph of an intact undamaged road",
+              "decision_threshold_margin": 0.0,
+              "calibrated": false,
+              "is_native_label_probability": false,
+              "margin": 0.003176465630531311
+            },
+            "road.blocked": {
+              "positive_similarity": 0.21355941891670227,
+              "negative_similarity": 0.23326504230499268,
+              "positive_text": "a photograph of a road blocked by an obstruction",
+              "negative_text": "a photograph of a clear unobstructed road",
+              "decision_threshold_margin": 0.0,
+              "calibrated": false,
+              "is_native_label_probability": false,
+              "margin": -0.019705623388290405
+            },
+            "incident.informative": {
+              "positive_similarity": 0.2830183506011963,
+              "negative_similarity": 0.2114916443824768,
+              "positive_text": "an informative photograph showing a disaster incident",
+              "negative_text": "an unrelated decorative photograph with no incident information",
+              "decision_threshold_margin": 0.0,
+              "calibrated": false,
+              "is_native_label_probability": false,
+              "margin": 0.07152670621871948
+            }
+          }
+        },
+        "available": true,
+        "method": "structured_scene_candidate_v2",
+        "reason": null,
+        "supporting": {
+          "detector_non_detection_is_not_absence": true,
+          "raw_CLIP_contrasts_are_not_binary_native_claims": true
+        }
+      },
+      "spatial": {
+        "value": {
+          "largest_area": 0.010109554593803154,
+          "union_area": 0.015320657806124332,
+          "target_count": 0.02
+        },
+        "available": true,
+        "method": "canonical_target_box_extent_v1",
+        "reason": null,
+        "supporting": {
+          "raw_target_count": 2,
+          "physical_distance_available": false,
+          "extent_kind": "bounding boxes,not masks"
+        }
+      },
+      "complexity": {
+        "value": {
+          "target_count_scaled": 0.02,
+          "target_box_coverage": 0.015320657806124332,
+          "class_diversity": 0.7662780644919215,
+          "all_count_scaled": 0.31
+        },
+        "available": true,
+        "method": "task_count_coverage_v1",
+        "reason": null,
+        "supporting": {
+          "raw_count": 31,
+          "raw_target_count": 2,
+          "class_counts": {
+            "car": 19,
+            "truck": 10,
+            "building": 2
+          },
+          "not_semantic_depth_truth": true
+        }
+      },
+      "geographic": {
+        "value": null,
+        "available": false,
+        "method": "trusted_geofence",
+        "reason": "trusted coordinates and mission region required",
+        "supporting": {}
+      },
+      "reliability": {
+        "value": {
+          "detection_scores": {
+            "car": 0.4023737609386444,
+            "truck": 0.16505210101604462,
+            "building": 0.057310353964567184
+          },
+          "image_claim_scores": {
+            "bridge.present": {
+              "value": false,
+              "score": 0.000837600149679929,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "bridges_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.present": {
+              "value": true,
+              "score": 0.9946720004081726,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "buildings_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.affected_or_greater": {
+              "value": true,
+              "score": 0.5413047671318054,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "buildings_affected_or_greater",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.minor_or_greater": {
+              "value": true,
+              "score": 0.8526273369789124,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "buildings_minor_or_greater",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "debris.present": {
+              "value": true,
+              "score": 0.9520895481109619,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "debris_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "flooding.present": {
+              "value": false,
+              "score": 9.08164383872645e-06,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "flooding_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "building.flooded": {
+              "value": false,
+              "score": 0.0001556311472086236,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "flooding_structures",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "road.present": {
+              "value": true,
+              "score": 0.9689599275588989,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "roads_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "road.damaged": {
+              "value": false,
+              "score": 8.704792708158493e-05,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "roads_damage",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "tree.present": {
+              "value": false,
+              "score": 0.43808501958847046,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "trees_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "tree.damaged": {
+              "value": true,
+              "score": 0.6934773325920105,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "trees_damage",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            },
+            "water.present": {
+              "value": false,
+              "score": 0.004707688465714455,
+              "threshold": 0.5,
+              "calibrated": false,
+              "native_label": "water_any",
+              "method": "ladi_reference_multilabel_sigmoid_v1"
+            }
+          },
+          "calibrated": false,
+          "detector_available": true
+        },
+        "available": true,
+        "method": "per_claim_and_detection_scores_v2",
+        "reason": null,
+        "supporting": {
+          "not_image_importance": true
+        }
+      }
+    },
+    "temporal": {
+      "capture_time_ms": null,
+      "allowed_delay_ms": null,
+      "age_ms": null,
+      "deadline_ms": null,
+      "completion_slack_ms": null,
+      "available": false,
+      "reason": "trusted capture/current timestamps required"
+    },
+    "producer": {
+      "backbone": "clip",
+      "model_id": "openai/clip-vit-base-patch32",
+      "model_path": "/kaggle/temp/better_hf/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "config_sha256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+      "producer_scope": "frozen pretrained embeddings; prompt similarities are not probabilities",
+      "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+      "preprocessing": "checkpoint_native",
+      "processor_sha256": "a69d3a60cc3d402f739e3748f6d239b538680fbbf43b67ce6d5087ec0011f304",
+      "device": "cuda:0",
+      "data_parallel_requested": false,
+      "model_load_seconds": 2.5868936870000425,
+      "detector_provenance": {
+        "detector": "YOLO-Worldv2-small",
+        "checkpoint": "yolov8s-worldv2.pt",
+        "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+        "vocabulary": [
+          "building",
+          "road",
+          "person",
+          "car",
+          "truck",
+          "bus",
+          "motorcycle",
+          "bicycle",
+          "debris",
+          "chair",
+          "couch",
+          "dining table",
+          "television",
+          "refrigerator",
+          "tree",
+          "water"
+        ],
+        "vocabulary_sha256": "018cee83870de2b7615ef1ca7986f4dd2fc7ccf8a74afb214d33535849c99f7e",
+        "conf_threshold": 0.05,
+        "nms_iou": 0.5,
+        "inference_size": 640,
+        "settings_sha256": "512d1ec24619cb552ddf30d080469701a56f3962b9a9fe16c09f80c6f07367b1",
+        "predict_settings": {
+          "conf": 0.05,
+          "iou": 0.5,
+          "imgsz": 640,
+          "max_det": 300,
+          "agnostic_nms": false,
+          "half": false,
+          "augment": false,
+          "verbose": false
+        },
+        "device": "cuda:0",
+        "classes_are_not_emergency_truth": true
+      },
+      "condition_contrasts": {
+        "building.affected_or_greater": {
+          "positive_similarity": 0.27907395362854004,
+          "negative_similarity": 0.21840013563632965,
+          "positive_text": "a photograph of a building affected by a disaster",
+          "negative_text": "a photograph of an unaffected intact building",
+          "decision_threshold_margin": 0.0,
+          "calibrated": false
+        },
+        "road.damaged": {
+          "positive_similarity": 0.24556976556777954,
+          "negative_similarity": 0.24239329993724823,
+          "positive_text": "a photograph of a physically damaged road",
+          "negative_text": "a photograph of an intact undamaged road",
+          "decision_threshold_margin": 0.0,
+          "calibrated": false
+        },
+        "road.blocked": {
+          "positive_similarity": 0.21355941891670227,
+          "negative_similarity": 0.23326504230499268,
+          "positive_text": "a photograph of a road blocked by an obstruction",
+          "negative_text": "a photograph of a clear unobstructed road",
+          "decision_threshold_margin": 0.0,
+          "calibrated": false
+        },
+        "incident.informative": {
+          "positive_similarity": 0.2830183506011963,
+          "negative_similarity": 0.2114916443824768,
+          "positive_text": "an informative photograph showing a disaster incident",
+          "negative_text": "an unrelated decorative photograph with no incident information",
+          "decision_threshold_margin": 0.0,
+          "calibrated": false
+        }
+      },
+      "image_claim_predictions": {
+        "bridge.present": {
+          "value": false,
+          "score": 0.000837600149679929,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "bridges_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "building.present": {
+          "value": true,
+          "score": 0.9946720004081726,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "buildings_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "building.affected_or_greater": {
+          "value": true,
+          "score": 0.5413047671318054,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "buildings_affected_or_greater",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "building.minor_or_greater": {
+          "value": true,
+          "score": 0.8526273369789124,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "buildings_minor_or_greater",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "debris.present": {
+          "value": true,
+          "score": 0.9520895481109619,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "debris_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "flooding.present": {
+          "value": false,
+          "score": 9.08164383872645e-06,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "flooding_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "building.flooded": {
+          "value": false,
+          "score": 0.0001556311472086236,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "flooding_structures",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "road.present": {
+          "value": true,
+          "score": 0.9689599275588989,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "roads_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "road.damaged": {
+          "value": false,
+          "score": 8.704792708158493e-05,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "roads_damage",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "tree.present": {
+          "value": false,
+          "score": 0.43808501958847046,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "trees_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "tree.damaged": {
+          "value": true,
+          "score": 0.6934773325920105,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "trees_damage",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        },
+        "water.present": {
+          "value": false,
+          "score": 0.004707688465714455,
+          "threshold": 0.5,
+          "calibrated": false,
+          "native_label": "water_any",
+          "method": "ladi_reference_multilabel_sigmoid_v1"
+        }
+      },
+      "image_claim_producer": {
+        "model_id": "MITLL/LADI-v2-classifier-small-reference",
+        "revision": "6ba5a0300601284bc6b69dddb46c8991a8ac196c",
+        "weights_sha256": {
+          "model.safetensors": "57288c631557ec80d9d50e4f4b7f5b11aeb1c3fd9905fc3c6c6d59e7cbf45213"
+        },
+        "architecture": "bit",
+        "labels": {
+          "0": "bridges_any",
+          "1": "buildings_any",
+          "2": "buildings_affected_or_greater",
+          "3": "buildings_minor_or_greater",
+          "4": "debris_any",
+          "5": "flooding_any",
+          "6": "flooding_structures",
+          "7": "roads_any",
+          "8": "roads_damage",
+          "9": "trees_any",
+          "10": "trees_damage",
+          "11": "water_any"
+        },
+        "preprocessing": {
+          "_processor_class": null,
+          "image_processor_type": "BitImageProcessor",
+          "do_resize": true,
+          "size": {
+            "shortest_edge": 448
+          },
+          "resample": 2,
+          "do_center_crop": true,
+          "crop_size": {
+            "height": 448,
+            "width": 448
+          },
+          "do_rescale": true,
+          "rescale_factor": 0.00392156862745098,
+          "do_normalize": true,
+          "image_mean": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "image_std": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "do_convert_rgb": true
+        },
+        "input_policy": "checkpoint_native",
+        "preprocessing_sha256": "e86d96d8a1be47f9fbb157548eb4037502b30231de7a6413e4769b4c8bb6a2d5",
+        "declared_domain": "aerial disaster imagery",
+        "training_exposure": "official LADI training split",
+        "threshold": 0.5,
+        "threshold_source": "published default",
+        "calibrated": false,
+        "load_seconds": 2.034707463000018,
+        "device": "cuda:0"
+      }
+    },
+    "schema": "better_scheduler_evidence_v1"
+  },
+  "raw_visual_evidence": {
+    "embedding": [
+      -0.03476374223828316,
+      0.03141559287905693,
+      -0.021600795909762383,
+      -0.015801934525370598,
+      0.012600608170032501,
+      0.012094192206859589,
+      0.018062379211187363,
+      0.031295254826545715,
+      0.04662430286407471,
+      0.029010500758886337,
+      0.010882513597607613,
+      0.006054062396287918,
+      -0.008070150390267372,
+      0.03462008386850357,
+      -0.018782563507556915,
+      -0.0011487961746752262,
+      -0.052972014993429184,
+      0.005365646444261074,
+      -0.07266844809055328,
+      -0.010662964545190334,
+      0.06440765410661697,
+      -0.004203053656965494,
+      0.03376450017094612,
+      0.045309651643037796,
+      -0.0029479125514626503,
+      0.02658805064857006,
+      -0.02649621106684208,
+      0.00459747388958931,
+      -0.005392139311879873,
+      -0.015992632135748863,
+      -0.016458740457892418,
+      0.015675518661737442,
+      0.0446518212556839,
+      0.011597325094044209,
+      -0.010834635235369205,
+      -0.042259521782398224,
+      0.020565301179885864,
+      -0.017076952382922173,
+      -0.05633082613348961,
+      0.13912689685821533,
+      -0.052235670387744904,
+      -0.03396659716963768,
+      -0.01620837301015854,
+      0.025465987622737885,
+      0.018819227814674377,
+      0.009065180085599422,
+      0.041173629462718964,
+      0.03375057876110077,
+      -0.01591195911169052,
+      0.04033932089805603,
+      0.00891405250877142,
+      0.012385173700749874,
+      0.020138030871748924,
+      0.018828677013516426,
+      -0.003540982725098729,
+      -0.006141655147075653,
+      -0.013882307335734367,
+      0.012528934516012669,
+      0.03430674225091934,
+      0.07805808633565903,
+      -0.044020239263772964,
+      -0.015025567263364792,
+      0.02365550398826599,
+      0.014096515253186226,
+      0.0087434696033597,
+      0.011621607467532158,
+      0.008602557703852654,
+      -0.054128967225551605,
+      -0.04609224945306778,
+      -0.04315360262989998,
+      -0.0389421209692955,
+      -0.00993323978036642,
+      -0.017806461080908775,
+      0.010707113891839981,
+      -0.033698245882987976,
+      0.02837246097624302,
+      -0.011230218224227428,
+      -0.0025606625713407993,
+      0.007126855663955212,
+      0.005202306900173426,
+      -0.029659666121006012,
+      -0.010084499605000019,
+      -0.011609094217419624,
+      -0.01848856918513775,
+      -0.014630182646214962,
+      0.03546591475605965,
+      0.045716218650341034,
+      -0.012282165698707104,
+      -0.046130381524562836,
+      -0.031098507344722748,
+      0.026553981006145477,
+      0.005427076481282711,
+      -0.508024275302887,
+      -0.028762035071849823,
+      0.003004511585459113,
+      -0.019704168662428856,
+      0.004324400797486305,
+      0.011365738697350025,
+      -0.027407076209783554,
+      -0.1145704984664917,
+      -0.02360314503312111,
+      0.007463145535439253,
+      -0.007844483479857445,
+      -0.005068051163107157,
+      -0.09007847309112549,
+      0.004012403544038534,
+      -0.24914297461509705,
+      0.033690039068460464,
+      -0.016401926055550575,
+      -0.004546244163066149,
+      0.02416595071554184,
+      -0.06230105459690094,
+      0.03152698278427124,
+      0.012634370476007462,
+      -0.04003734886646271,
+      0.022855069488286972,
+      0.018564775586128235,
+      -0.02395883947610855,
+      -0.0047357771545648575,
+      0.0242634117603302,
+      -0.006674319971352816,
+      -0.008257855661213398,
+      0.02484358474612236,
+      -0.008232150226831436,
+      -0.019418912008404732,
+      0.03623238950967789,
+      0.03563035652041435,
+      0.010134614072740078,
+      -0.04228275641798973,
+      0.026374172419309616,
+      0.009168104268610477,
+      0.0036526224575936794,
+      -0.018055900931358337,
+      0.07563725858926773,
+      0.02785748615860939,
+      0.010160506702959538,
+      0.003140623914077878,
+      -0.007889821194112301,
+      -0.035790398716926575,
+      -0.0424351803958416,
+      0.03832235932350159,
+      0.05232207477092743,
+      -0.02626119926571846,
+      0.014220654033124447,
+      -0.0034440213348716497,
+      -0.026144901290535927,
+      -0.017933405935764313,
+      -0.02271857112646103,
+      -0.04564515873789787,
+      0.0214670542627573,
+      0.027319760993123055,
+      -0.000991685432381928,
+      0.02148575708270073,
+      0.01294098049402237,
+      -0.0016768682980909944,
+      -0.03992769494652748,
+      0.0041685630567371845,
+      0.044761959463357925,
+      -0.016957487910985947,
+      0.022206339985132217,
+      0.0034828470088541508,
+      -0.003044080687686801,
+      0.004111443180590868,
+      -0.024267133325338364,
+      -0.06985877454280853,
+      -0.035883985459804535,
+      0.0169236920773983,
+      -0.010694337077438831,
+      0.01955464482307434,
+      0.055087730288505554,
+      0.035539157688617706,
+      -0.0008927139570005238,
+      -0.026201194152235985,
+      0.018925761803984642,
+      -0.00781896710395813,
+      -0.0070116580463945866,
+      -0.016022710129618645,
+      -0.04489365592598915,
+      -0.023391997441649437,
+      0.014922011643648148,
+      0.04699832573533058,
+      0.006500160787254572,
+      0.04229945316910744,
+      0.035656966269016266,
+      0.027880948036909103,
+      0.018181705847382545,
+      0.026381779462099075,
+      0.02361820824444294,
+      0.023877905681729317,
+      0.002366091823205352,
+      -0.020221004262566566,
+      -0.009817990474402905,
+      0.019416019320487976,
+      0.04031459242105484,
+      -0.08360572904348373,
+      -0.011389004997909069,
+      0.02063014730811119,
+      -0.0071753268130123615,
+      0.03210683539509773,
+      0.03390464186668396,
+      0.013980133458971977,
+      -0.004898481070995331,
+      -0.020569073036313057,
+      -0.07488054782152176,
+      0.04232475906610489,
+      -0.001302798860706389,
+      0.010069862008094788,
+      -0.018939319998025894,
+      0.021166035905480385,
+      0.04705649986863136,
+      0.016160888597369194,
+      0.012320281937718391,
+      0.021671928465366364,
+      -0.006182240787893534,
+      0.031021375209093094,
+      -0.021630700677633286,
+      0.0031748581677675247,
+      0.009166042320430279,
+      0.010694540105760098,
+      -0.032313864678144455,
+      -0.0017420637886971235,
+      0.0070813121274113655,
+      0.013200443238019943,
+      0.02212526649236679,
+      0.04720102623105049,
+      0.018842879682779312,
+      -0.031721681356430054,
+      -0.036881498992443085,
+      0.021422535181045532,
+      0.0157531276345253,
+      -0.06762456893920898,
+      -0.02895459346473217,
+      0.023983575403690338,
+      -0.008941816166043282,
+      0.017877671867609024,
+      0.01652757078409195,
+      -0.002822760958224535,
+      -0.05840957164764404,
+      0.017024878412485123,
+      0.025070402771234512,
+      0.01509973406791687,
+      0.0111625287681818,
+      -0.0367240309715271,
+      0.01275402121245861,
+      -0.06641943007707596,
+      -0.019841672852635384,
+      -0.003627156373113394,
+      -0.014472580514848232,
+      -0.0017040036618709564,
+      0.006896039005368948,
+      -0.037993963807821274,
+      0.025837929919362068,
+      -0.03302948921918869,
+      -0.012560063041746616,
+      -0.07940147817134857,
+      0.017844004556536674,
+      -0.03605499863624573,
+      0.033129945397377014,
+      0.23398710787296295,
+      0.04477449506521225,
+      -0.001697888015769422,
+      0.014977159909904003,
+      -0.001000055344775319,
+      -0.04646700248122215,
+      0.025241758674383163,
+      0.05232648923993111,
+      -0.005168179050087929,
+      0.0067755295895040035,
+      0.013326933607459068,
+      0.01899847388267517,
+      -0.01997119002044201,
+      0.0038965491112321615,
+      0.03600111976265907,
+      -0.013704059645533562,
+      -0.0056844437494874,
+      3.154553269268945e-05,
+      0.02261234074831009,
+      -0.005037013441324234,
+      -0.03574090451002121,
+      -0.017912602052092552,
+      0.015185150317847729,
+      0.007753489539027214,
+      0.007482415530830622,
+      -0.04320146143436432,
+      -0.03745846077799797,
+      0.054759275168180466,
+      -0.13235622644424438,
+      0.02854941040277481,
+      0.035093970596790314,
+      -0.02593286707997322,
+      0.01256658136844635,
+      0.011397825554013252,
+      0.08829982578754425,
+      -0.003971646074205637,
+      0.001743075205013156,
+      -0.01241256669163704,
+      -0.08043857663869858,
+      0.02528354525566101,
+      0.06155123561620712,
+      0.036704156547784805,
+      0.012142841704189777,
+      -0.052468862384557724,
+      -0.0849679633975029,
+      -0.01899435557425022,
+      -0.02295484021306038,
+      -0.06600258499383926,
+      -0.026417922228574753,
+      0.0298107098788023,
+      0.029073184356093407,
+      0.018683195114135742,
+      -0.00731990672647953,
+      0.025258513167500496,
+      0.07556525617837906,
+      0.009501277469098568,
+      0.016596710309386253,
+      0.02842096984386444,
+      0.0394633449614048,
+      -0.017102384939789772,
+      0.016688590869307518,
+      -7.871849811635911e-05,
+      0.03834955394268036,
+      -0.02580218017101288,
+      0.023377398028969765,
+      -0.01346475351601839,
+      0.0024153562262654305,
+      0.0030363386031240225,
+      0.022310931235551834,
+      0.013481559231877327,
+      0.029421653598546982,
+      -0.05036761239171028,
+      -0.019777126610279083,
+      -0.04167303442955017,
+      -0.03401027247309685,
+      -0.0010496934410184622,
+      -0.033894848078489304,
+      0.0031455783173441887,
+      0.0025416945572942495,
+      0.03762795776128769,
+      -0.019772285595536232,
+      0.003177495440468192,
+      -0.0074145132675766945,
+      0.022149933502078056,
+      -0.050820935517549515,
+      0.004105165135115385,
+      0.0011967989848926663,
+      0.009397334419190884,
+      -0.06791926920413971,
+      -0.050457485020160675,
+      -0.002432015724480152,
+      -0.046410590410232544,
+      0.0016800158191472292,
+      -0.016779005527496338,
+      0.018784472718834877,
+      -0.04371129721403122,
+      -0.0006640961510129273,
+      0.03287964686751366,
+      -0.06817635148763657,
+      -0.04316165670752525,
+      -0.04099354147911072,
+      -0.016720931977033615,
+      -0.004664178472012281,
+      -0.022876879200339317,
+      -0.028004243969917297,
+      0.03279796615242958,
+      -0.09259407222270966,
+      0.03888019919395447,
+      -0.025583704933524132,
+      0.004040200263261795,
+      0.015170718543231487,
+      -0.003324425546452403,
+      0.059222474694252014,
+      0.04668126255273819,
+      -0.02855718322098255,
+      0.02997676469385624,
+      -0.021197710186243057,
+      0.0013324773171916604,
+      0.028110304847359657,
+      -0.015697065740823746,
+      -0.0248307753354311,
+      0.000791183381807059,
+      0.032640617340803146,
+      0.009739349596202374,
+      -0.028609994798898697,
+      -0.022857284173369408,
+      0.016017865389585495,
+      -0.05057627335190773,
+      -0.0033181312028318644,
+      -0.03131575882434845,
+      -0.03539840131998062,
+      -0.3084411919116974,
+      -0.04302715137600899,
+      0.04885098338127136,
+      0.013943726196885109,
+      -0.009793120436370373,
+      0.027665605768561363,
+      0.01900847628712654,
+      -0.019302338361740112,
+      0.06324081122875214,
+      0.031026506796479225,
+      -0.00875477958470583,
+      -0.02906634472310543,
+      0.036032725125551224,
+      -0.005207493435591459,
+      0.0573589913547039,
+      -0.011621588841080666,
+      0.04512331262230873,
+      -0.0014949345495551825,
+      0.00506241200491786,
+      -0.029975876212120056,
+      -0.011227003298699856,
+      0.00030277660698629916,
+      -0.004251375328749418,
+      -0.0035186440218240023,
+      0.021673019975423813,
+      -0.01818631775677204,
+      -0.025387169793248177,
+      0.04601702466607094,
+      -0.012267411686480045,
+      -0.032384492456912994,
+      -0.005645039491355419,
+      0.01045878417789936,
+      -0.07314764708280563,
+      0.011862319894134998,
+      0.006398691330105066,
+      -0.0009623281075619161,
+      -0.009544562548398972,
+      0.04507601633667946,
+      0.025682788342237473,
+      -0.0281269159168005,
+      0.009746523573994637,
+      0.01238780003041029,
+      -0.020441344007849693,
+      -0.0707629844546318,
+      0.008361545391380787,
+      0.0329548604786396,
+      -0.0319368913769722,
+      -0.05353078618645668,
+      0.0026479132939130068,
+      0.021271415054798126,
+      -0.015278927981853485,
+      0.014312444254755974,
+      -0.05571890249848366,
+      0.0616435781121254,
+      0.025989102199673653,
+      0.01566138304769993,
+      -0.02552902325987816,
+      0.02653796225786209,
+      0.0333988219499588,
+      -0.012610483914613724,
+      -0.0467958077788353,
+      -0.002933938754722476,
+      -0.007605056744068861,
+      0.027407819405198097,
+      -0.01725873351097107,
+      -0.017354106530547142,
+      -0.0006839145207777619,
+      0.01383000984787941,
+      -0.00992205273360014,
+      0.006500025745481253,
+      -0.06444074958562851,
+      -0.014322739094495773,
+      -0.00990199949592352,
+      0.011823986656963825,
+      -0.040146082639694214,
+      0.012638624757528305,
+      -0.079029381275177,
+      -0.011305954307317734,
+      -0.051316097378730774,
+      -0.02211369201540947,
+      -0.025020349770784378,
+      0.0076946476474404335,
+      0.031234515830874443,
+      0.025321686640381813,
+      -0.05524106323719025,
+      0.021003255620598793,
+      0.022627415135502815,
+      0.015487059950828552,
+      -0.0027763962280005217,
+      -0.03511876240372658,
+      0.0328090600669384,
+      0.046487558633089066,
+      -0.010465051047503948,
+      -0.03275567665696144,
+      -0.0043245283886790276,
+      0.08603527396917343,
+      0.003146849339827895,
+      -0.015772385522723198,
+      -0.038736727088689804,
+      0.007233673706650734,
+      -0.05420757457613945,
+      0.01769876480102539,
+      -0.003936338238418102,
+      0.02493405155837536,
+      -0.04659918695688248,
+      0.0008024403941817582,
+      -0.071302130818367,
+      0.01405986025929451,
+      0.005315251648426056,
+      0.019391067326068878,
+      0.05258104205131531,
+      -0.041046593338251114,
+      -0.024498265236616135,
+      -0.009857164695858955,
+      0.03347451239824295,
+      0.02910502254962921,
+      -0.015755414962768555,
+      -0.03493097051978111,
+      -0.014449011534452438,
+      0.044165872037410736,
+      0.02637329138815403,
+      -0.03815951198339462,
+      -0.03933190926909447
+    ],
+    "similarities": {
+      "affected_people": 0.2896142899990082,
+      "building_damage": 0.28676217794418335,
+      "mission_context:dbb557160175764c9eb9d54e4020b0a5c266cbe670e2420aabb89503c5a33c02": 0.27729901671409607,
+      "road_damage": 0.23606827855110168,
+      "structural_flooding": 0.23794423043727875
+    },
+    "probabilities": {
+      "bridge.present": 0.000837600149679929,
+      "building.affected_or_greater": 0.5413047671318054,
+      "building.flooded": 0.0001556311472086236,
+      "building.minor_or_greater": 0.8526273369789124,
+      "building.present": 0.9946720004081726,
+      "debris.present": 0.9520895481109619,
+      "flooding.present": 9.08164383872645e-06,
+      "road.damaged": 8.704792708158493e-05,
+      "road.present": 0.9689599275588989,
+      "tree.damaged": 0.6934773325920105,
+      "tree.present": 0.43808501958847046,
+      "water.present": 0.004707688465714455
+    },
+    "scene_scores": {
+      "fire": 0.6106651276350021,
+      "forest": 0.5911527052521706,
+      "indoor": 0.5812317281961441,
+      "people": 0.6054371893405914,
+      "residential": 0.6136861592531204,
+      "road": 0.604276031255722,
+      "vehicle": 0.6100180521607399,
+      "water": 0.6139279678463936
+    },
+    "detections": [
+      {
+        "box": [
+          686.9006958007812,
+          1026.8575439453125,
+          718.1925048828125,
+          1058.2249755859375
+        ],
+        "label": "car",
+        "score": 0.4023737609386444
+      },
+      {
+        "box": [
+          1179.0096435546875,
+          1174.6484375,
+          1236.9488525390625,
+          1197.733154296875
+        ],
+        "label": "car",
+        "score": 0.34757083654403687
+      },
+      {
+        "box": [
+          310.595458984375,
+          1024.0,
+          373.53802490234375,
+          1057.1787109375
+        ],
+        "label": "car",
+        "score": 0.27347642183303833
+      },
+      {
+        "box": [
+          974.1093139648438,
+          1165.4403076171875,
+          1016.3330078125,
+          1187.5718994140625
+        ],
+        "label": "car",
+        "score": 0.263662725687027
+      },
+      {
+        "box": [
+          119.85736083984375,
+          1111.945068359375,
+          168.75033569335938,
+          1139.6998291015625
+        ],
+        "label": "car",
+        "score": 0.2576402723789215
+      },
+      {
+        "box": [
+          1629.4727783203125,
+          777.87548828125,
+          1665.4832763671875,
+          798.9417724609375
+        ],
+        "label": "car",
+        "score": 0.2030622661113739
+      },
+      {
+        "box": [
+          1672.802001953125,
+          667.904541015625,
+          1725.3839111328125,
+          691.3848876953125
+        ],
+        "label": "car",
+        "score": 0.16721828281879425
+      },
+      {
+        "box": [
+          403.2694396972656,
+          1031.1978759765625,
+          445.6878356933594,
+          1053.2203369140625
+        ],
+        "label": "truck",
+        "score": 0.16505210101604462
+      },
+      {
+        "box": [
+          16.49553108215332,
+          1134.888916015625,
+          154.53335571289062,
+          1198.37060546875
+        ],
+        "label": "truck",
+        "score": 0.1446801722049713
+      },
+      {
+        "box": [
+          334.482666015625,
+          1124.58984375,
+          381.174072265625,
+          1150.1341552734375
+        ],
+        "label": "car",
+        "score": 0.13792818784713745
+      },
+      {
+        "box": [
+          1628.427490234375,
+          777.3015747070312,
+          1667.0802001953125,
+          799.370361328125
+        ],
+        "label": "truck",
+        "score": 0.13673588633537292
+      },
+      {
+        "box": [
+          1514.4576416015625,
+          1046.01318359375,
+          1651.899658203125,
+          1175.4039306640625
+        ],
+        "label": "truck",
+        "score": 0.1251082718372345
+      },
+      {
+        "box": [
+          1374.0887451171875,
+          1139.54736328125,
+          1400.4576416015625,
+          1165.3123779296875
+        ],
+        "label": "car",
+        "score": 0.10866161435842514
+      },
+      {
+        "box": [
+          1275.318359375,
+          332.7935485839844,
+          1314.71142578125,
+          355.90655517578125
+        ],
+        "label": "car",
+        "score": 0.10100671648979187
+      },
+      {
+        "box": [
+          363.5330505371094,
+          428.4678649902344,
+          474.7958984375,
+          510.375244140625
+        ],
+        "label": "truck",
+        "score": 0.09705232083797455
+      },
+      {
+        "box": [
+          1728.116455078125,
+          1087.4395751953125,
+          1771.95458984375,
+          1134.8603515625
+        ],
+        "label": "car",
+        "score": 0.09035210311412811
+      },
+      {
+        "box": [
+          1353.92041015625,
+          933.0530395507812,
+          1448.063232421875,
+          1000.6809692382812
+        ],
+        "label": "truck",
+        "score": 0.08601310849189758
+      },
+      {
+        "box": [
+          96.97457885742188,
+          829.9729614257812,
+          133.4425811767578,
+          852.7297973632812
+        ],
+        "label": "car",
+        "score": 0.08361675590276718
+      },
+      {
+        "box": [
+          684.1668701171875,
+          1088.0848388671875,
+          714.71826171875,
+          1125.609619140625
+        ],
+        "label": "truck",
+        "score": 0.07947763055562973
+      },
+      {
+        "box": [
+          1703.92236328125,
+          608.1488647460938,
+          1797.879150390625,
+          653.8097534179688
+        ],
+        "label": "truck",
+        "score": 0.07772843539714813
+      },
+      {
+        "box": [
+          0.0,
+          797.6055297851562,
+          41.10173797607422,
+          820.5855102539062
+        ],
+        "label": "car",
+        "score": 0.06666750460863113
+      },
+      {
+        "box": [
+          201.62660217285156,
+          1106.1602783203125,
+          271.9266052246094,
+          1142.0921630859375
+        ],
+        "label": "car",
+        "score": 0.0649520605802536
+      },
+      {
+        "box": [
+          145.0607147216797,
+          835.650146484375,
+          182.72390747070312,
+          884.3223266601562
+        ],
+        "label": "car",
+        "score": 0.0633729100227356
+      },
+      {
+        "box": [
+          760.66796875,
+          1151.360107421875,
+          879.4033813476562,
+          1199.2330322265625
+        ],
+        "label": "car",
+        "score": 0.06148586422204971
+      },
+      {
+        "box": [
+          1660.55126953125,
+          732.0980224609375,
+          1800.0,
+          888.6906127929688
+        ],
+        "label": "building",
+        "score": 0.057310353964567184
+      },
+      {
+        "box": [
+          144.37808227539062,
+          847.0321044921875,
+          181.52166748046875,
+          885.4270629882812
+        ],
+        "label": "truck",
+        "score": 0.053876399993896484
+      },
+      {
+        "box": [
+          1676.4385986328125,
+          867.1608276367188,
+          1701.4290771484375,
+          890.4298706054688
+        ],
+        "label": "car",
+        "score": 0.05368542671203613
+      },
+      {
+        "box": [
+          1733.9927978515625,
+          511.22607421875,
+          1773.751953125,
+          530.58544921875
+        ],
+        "label": "car",
+        "score": 0.05355732887983322
+      },
+      {
+        "box": [
+          1661.29931640625,
+          733.5029907226562,
+          1800.0,
+          890.061767578125
+        ],
+        "label": "truck",
+        "score": 0.051025815308094025
+      },
+      {
+        "box": [
+          110.00945281982422,
+          203.67257690429688,
+          147.8697509765625,
+          226.01751708984375
+        ],
+        "label": "car",
+        "score": 0.050413019955158234
+      },
+      {
+        "box": [
+          617.44384765625,
+          760.9369506835938,
+          766.9589233398438,
+          836.22021484375
+        ],
+        "label": "building",
+        "score": 0.05011015012860298
+      }
+    ],
+    "width": 1800,
+    "height": 1200,
+    "statuses": {
+      "detector": "ok",
+      "encoder": "ok",
+      "image_claim_classifier": "ok"
+    },
+    "provenance": {
+      "backbone": "clip",
+      "condition_contrasts": {
+        "building.affected_or_greater": {
+          "calibrated": false,
+          "decision_threshold_margin": 0.0,
+          "negative_similarity": 0.21840013563632965,
+          "negative_text": "a photograph of an unaffected intact building",
+          "positive_similarity": 0.27907395362854004,
+          "positive_text": "a photograph of a building affected by a disaster"
+        },
+        "incident.informative": {
+          "calibrated": false,
+          "decision_threshold_margin": 0.0,
+          "negative_similarity": 0.2114916443824768,
+          "negative_text": "an unrelated decorative photograph with no incident information",
+          "positive_similarity": 0.2830183506011963,
+          "positive_text": "an informative photograph showing a disaster incident"
+        },
+        "road.blocked": {
+          "calibrated": false,
+          "decision_threshold_margin": 0.0,
+          "negative_similarity": 0.23326504230499268,
+          "negative_text": "a photograph of a clear unobstructed road",
+          "positive_similarity": 0.21355941891670227,
+          "positive_text": "a photograph of a road blocked by an obstruction"
+        },
+        "road.damaged": {
+          "calibrated": false,
+          "decision_threshold_margin": 0.0,
+          "negative_similarity": 0.24239329993724823,
+          "negative_text": "a photograph of an intact undamaged road",
+          "positive_similarity": 0.24556976556777954,
+          "positive_text": "a photograph of a physically damaged road"
+        }
+      },
+      "config_sha256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+      "data_parallel_requested": false,
+      "detector_provenance": {
+        "checkpoint": "yolov8s-worldv2.pt",
+        "classes_are_not_emergency_truth": true,
+        "conf_threshold": 0.05,
+        "detector": "YOLO-Worldv2-small",
+        "device": "cuda:0",
+        "inference_size": 640,
+        "nms_iou": 0.5,
+        "predict_settings": {
+          "agnostic_nms": false,
+          "augment": false,
+          "conf": 0.05,
+          "half": false,
+          "imgsz": 640,
+          "iou": 0.5,
+          "max_det": 300,
+          "verbose": false
+        },
+        "settings_sha256": "512d1ec24619cb552ddf30d080469701a56f3962b9a9fe16c09f80c6f07367b1",
+        "vocabulary": [
+          "building",
+          "road",
+          "person",
+          "car",
+          "truck",
+          "bus",
+          "motorcycle",
+          "bicycle",
+          "debris",
+          "chair",
+          "couch",
+          "dining table",
+          "television",
+          "refrigerator",
+          "tree",
+          "water"
+        ],
+        "vocabulary_sha256": "018cee83870de2b7615ef1ca7986f4dd2fc7ccf8a74afb214d33535849c99f7e",
+        "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792"
+      },
+      "device": "cuda:0",
+      "image_claim_predictions": {
+        "bridge.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "bridges_any",
+          "score": 0.000837600149679929,
+          "threshold": 0.5,
+          "value": false
+        },
+        "building.affected_or_greater": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "buildings_affected_or_greater",
+          "score": 0.5413047671318054,
+          "threshold": 0.5,
+          "value": true
+        },
+        "building.flooded": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "flooding_structures",
+          "score": 0.0001556311472086236,
+          "threshold": 0.5,
+          "value": false
+        },
+        "building.minor_or_greater": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "buildings_minor_or_greater",
+          "score": 0.8526273369789124,
+          "threshold": 0.5,
+          "value": true
+        },
+        "building.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "buildings_any",
+          "score": 0.9946720004081726,
+          "threshold": 0.5,
+          "value": true
+        },
+        "debris.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "debris_any",
+          "score": 0.9520895481109619,
+          "threshold": 0.5,
+          "value": true
+        },
+        "flooding.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "flooding_any",
+          "score": 9.08164383872645e-06,
+          "threshold": 0.5,
+          "value": false
+        },
+        "road.damaged": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "roads_damage",
+          "score": 8.704792708158493e-05,
+          "threshold": 0.5,
+          "value": false
+        },
+        "road.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "roads_any",
+          "score": 0.9689599275588989,
+          "threshold": 0.5,
+          "value": true
+        },
+        "tree.damaged": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "trees_damage",
+          "score": 0.6934773325920105,
+          "threshold": 0.5,
+          "value": true
+        },
+        "tree.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "trees_any",
+          "score": 0.43808501958847046,
+          "threshold": 0.5,
+          "value": false
+        },
+        "water.present": {
+          "calibrated": false,
+          "method": "ladi_reference_multilabel_sigmoid_v1",
+          "native_label": "water_any",
+          "score": 0.004707688465714455,
+          "threshold": 0.5,
+          "value": false
+        }
+      },
+      "image_claim_producer": {
+        "architecture": "bit",
+        "calibrated": false,
+        "declared_domain": "aerial disaster imagery",
+        "device": "cuda:0",
+        "input_policy": "checkpoint_native",
+        "labels": {
+          "0": "bridges_any",
+          "1": "buildings_any",
+          "10": "trees_damage",
+          "11": "water_any",
+          "2": "buildings_affected_or_greater",
+          "3": "buildings_minor_or_greater",
+          "4": "debris_any",
+          "5": "flooding_any",
+          "6": "flooding_structures",
+          "7": "roads_any",
+          "8": "roads_damage",
+          "9": "trees_any"
+        },
+        "load_seconds": 2.034707463000018,
+        "model_id": "MITLL/LADI-v2-classifier-small-reference",
+        "preprocessing": {
+          "_processor_class": null,
+          "crop_size": {
+            "height": 448,
+            "width": 448
+          },
+          "do_center_crop": true,
+          "do_convert_rgb": true,
+          "do_normalize": true,
+          "do_rescale": true,
+          "do_resize": true,
+          "image_mean": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "image_processor_type": "BitImageProcessor",
+          "image_std": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "resample": 2,
+          "rescale_factor": 0.00392156862745098,
+          "size": {
+            "shortest_edge": 448
+          }
+        },
+        "preprocessing_sha256": "e86d96d8a1be47f9fbb157548eb4037502b30231de7a6413e4769b4c8bb6a2d5",
+        "revision": "6ba5a0300601284bc6b69dddb46c8991a8ac196c",
+        "threshold": 0.5,
+        "threshold_source": "published default",
+        "training_exposure": "official LADI training split",
+        "weights_sha256": {
+          "model.safetensors": "57288c631557ec80d9d50e4f4b7f5b11aeb1c3fd9905fc3c6c6d59e7cbf45213"
+        }
+      },
+      "model_id": "openai/clip-vit-base-patch32",
+      "model_load_seconds": 2.5868936870000425,
+      "model_path": "/kaggle/temp/better_hf/hub/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "preprocessing": "checkpoint_native",
+      "processor_sha256": "a69d3a60cc3d402f739e3748f6d239b538680fbbf43b67ce6d5087ec0011f304",
+      "producer_scope": "frozen pretrained embeddings; prompt similarities are not probabilities",
+      "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+    }
+  },
+  "conversion": "typed runtime evidence only; no predictions repaired; cold-start sentinels withheld"
+}

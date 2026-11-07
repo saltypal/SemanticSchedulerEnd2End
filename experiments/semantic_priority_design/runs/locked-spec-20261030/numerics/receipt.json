@@ -1,0 +1,394 @@
+{
+  "ambiguities": [],
+  "case_count": 620,
+  "check_count": 6,
+  "checks": [
+    {
+      "cases": 2,
+      "detail": "Specified A/B one-slot costs",
+      "inputs": {
+        "A": {
+          "budget": 2.0,
+          "d0": 1.0,
+          "wait": 1.5
+        },
+        "B": {
+          "budget": 16.0,
+          "d0": 1.0,
+          "wait": 3.0
+        }
+      },
+      "name": "D_examples",
+      "outputs": {
+        "y_A": 0.75,
+        "y_B": 0.0625
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 330,
+      "detail": "Across multiple positive budget configurations and waits on, below, and above deadlines; v=y/ymax stayed in [0,1].",
+      "inputs": {
+        "budget_cases": [
+          [
+            [
+              2,
+              4,
+              8,
+              16
+            ],
+            1
+          ],
+          [
+            [
+              1,
+              3.5,
+              19
+            ],
+            0.25
+          ],
+          [
+            [
+              0.125,
+              0.5,
+              2
+            ],
+            0.0625
+          ],
+          [
+            [
+              100,
+              250
+            ],
+            3.0
+          ]
+        ],
+        "wait_factor_grid": [
+          0,
+          0.25,
+          0.5,
+          0.999999,
+          1,
+          1.000001,
+          1.5,
+          4,
+          32
+        ]
+      },
+      "name": "normalized_one_slot_bounds",
+      "outputs": {
+        "max_v": 1.000000000000038,
+        "min_v": 0.02631578947368418
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 5,
+      "detail": "Event rewards telescope to terminal loss; mid-service arrival accrues after arrival; dispatched costs remain frozen; unselected job accrues through T.",
+      "inputs": {
+        "T": 5.0,
+        "events": [
+          0.0,
+          0.5,
+          1.0,
+          1.5,
+          3.0,
+          5.0
+        ],
+        "items": [
+          {
+            "arrival": 0.0,
+            "budget": 2.0,
+            "dispatch": 1.0,
+            "id": "dispatched_early"
+          },
+          {
+            "arrival": 0.5,
+            "budget": 4.0,
+            "dispatch": 3.0,
+            "id": "mid_service_arrival"
+          },
+          {
+            "arrival": 1.5,
+            "budget": 16.0,
+            "dispatch": null,
+            "id": "unselected_terminal"
+          }
+        ]
+      },
+      "name": "event_reward_telescoping_and_lifecycle",
+      "outputs": {
+        "frozen_cost_residual_at_t4": 0.15625,
+        "increments": [
+          0.25,
+          0.375,
+          0.125,
+          0.46875,
+          0.125
+        ],
+        "losses_at_events": [
+          0.0,
+          0.25,
+          0.625,
+          0.75,
+          1.21875,
+          1.34375
+        ],
+        "reward_sum": -0.0134375,
+        "terminal_loss": 1.34375,
+        "unselected_terminal_cost": 0.21875
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 263,
+      "detail": "floor(255*v+0.5) yields grades 0..255; declared D label_gain is g/255, monotone with endpoints 0 and 1.",
+      "inputs": {
+        "gain_rule": "g/255",
+        "rule": "floor(255*v + .5)",
+        "sample_v": [
+          0.0,
+          0.00196078431372549,
+          0.00392156862745098,
+          0.25,
+          0.5,
+          0.999,
+          1.0
+        ]
+      },
+      "name": "lambdamart_grade_mapping",
+      "outputs": {
+        "gain_endpoints": [
+          0.0,
+          1.0
+        ],
+        "sample_gains": [
+          0.0,
+          0.00392156862745098,
+          0.00392156862745098,
+          0.25098039215686274,
+          0.5019607843137255,
+          1.0,
+          1.0
+        ],
+        "sample_grades": [
+          0,
+          1,
+          1,
+          64,
+          128,
+          255,
+          255
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 8,
+      "detail": "Tie targets are uniform over tied maxima; CE gradient softmax-target matches finite differences; strict pair preference gradient descent raises preferred score difference; equal-score justified tie has zero pair gradient.",
+      "inputs": {
+        "choice_cases": [
+          [
+            [
+              2.0,
+              2.0,
+              0.0
+            ],
+            [
+              0.5,
+              0.5,
+              0.0
+            ]
+          ],
+          [
+            [
+              1.0,
+              0.0,
+              -2.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0
+            ]
+          ]
+        ],
+        "pair_strict": {
+          "score_difference": -0.4,
+          "target": 1.0
+        },
+        "pair_tie": {
+          "score_difference": 0,
+          "target": 0.5
+        }
+      },
+      "name": "masked_softmax_tie_ce_and_pair_gradient",
+      "outputs": {
+        "ce_gradient_max_abs_error": 9.33080279708065e-11,
+        "pair_finite_difference": -0.5986876601693503,
+        "pair_gradient": -0.598687660112452,
+        "tie_gradient": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "cases": 12,
+      "detail": "Mixed probabilities sum to one and have full support; importance uses actual mixed P; neutral guidance g=1 exactly matches TD-only g=1.",
+      "inputs": {
+        "alpha": 0.6,
+        "beta": [
+          0.4,
+          1.0
+        ],
+        "guidance_example": [
+          0.5,
+          1,
+          1.5,
+          1,
+          0.5
+        ],
+        "guidance_neutral": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "priorities": [
+          0.2,
+          1.0,
+          3.0,
+          0.05,
+          2.5
+        ]
+      },
+      "name": "replay_mixture_support_and_importance",
+      "outputs": {
+        "P_guided": [
+          0.11858205133963101,
+          0.19761254901279826,
+          0.38305424066734484,
+          0.11617661526091329,
+          0.1845745437193126
+        ],
+        "P_neutral": [
+          0.13652095539737646,
+          0.19592330479459913,
+          0.2854372105194358,
+          0.11589666914664937,
+          0.26622186014193927
+        ],
+        "P_td_only": [
+          0.13652095539737646,
+          0.19592330479459913,
+          0.2854372105194358,
+          0.11589666914664937,
+          0.26622186014193927
+        ],
+        "importance_weights": {
+          "guided:0.4": {
+            "batch_max_normalized": [
+              0.9918360837471675,
+              0.8085775511671756,
+              0.6205022746854284,
+              1.0,
+              0.8309574126729509
+            ],
+            "raw_from_actual_mixture_P": [
+              1.2325496273047163,
+              1.0048151863691546,
+              0.7710950024280538,
+              1.2426948842677012,
+              1.0326265257730012
+            ]
+          },
+          "guided:1.0": {
+            "batch_max_normalized": [
+              0.9797150070221987,
+              0.5879010004237595,
+              0.30329024698568574,
+              1.0,
+              0.6294292426239784
+            ],
+            "raw_from_actual_mixture_P": [
+              1.68659588648184,
+              1.0120814745780498,
+              0.5221192686747611,
+              1.721516843564717,
+              1.0835730430093617
+            ]
+          },
+          "td_only:0.4": {
+            "batch_max_normalized": [
+              0.9365881405647568,
+              0.8105763769606577,
+              0.6973071950608877,
+              1.0,
+              0.7170193836487901
+            ],
+            "raw_from_actual_mixture_P": [
+              1.1650170215977982,
+              1.0082716570538799,
+              0.8673767223218237,
+              1.2438946972949072,
+              0.8918966091783928
+            ]
+          },
+          "td_only:1.0": {
+            "batch_max_normalized": [
+              0.8489295200821351,
+              0.5915410076823296,
+              0.4060320969916352,
+              1.0,
+              0.43533866484464395
+            ],
+            "raw_from_actual_mixture_P": [
+              1.464976562886282,
+              1.0208076073934889,
+              0.7006794931748456,
+              1.725675133484042,
+              0.7512531085665455
+            ]
+          }
+        },
+        "max_neutral_td_abs_diff": 0.0,
+        "p_alpha": [
+          0.3807307877431757,
+          1.0,
+          1.9331820449317627,
+          0.16572270086699936,
+          1.7328621078878659
+        ]
+      },
+      "status": "PASS"
+    }
+  ],
+  "classification": "specification arithmetic only; not production, model, training, or deployment validation",
+  "command": "& 'D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe' 'D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\locked-spec-20261030\\numerics\\numerics_check.py'",
+  "elapsed_seconds": 0.0008068000024650246,
+  "limitations": [
+    "Arithmetic implements only equations read in the frozen design; no code was imported from production.",
+    "This is one mutable-checkout snapshot and does not validate model learning, simulator implementation, production behavior, or empirical performance."
+  ],
+  "overall": "PASS",
+  "repo": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End",
+  "runtime": {
+    "backend": "CPU; pure Python standard library; no model/GPU/network",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python_executable": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "script_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\locked-spec-20261030\\numerics\\numerics_check.py",
+  "script_sha256": "b6325d33d17898e7acc1fa2c3495874ace4c4ea8afd5d449d788aaa2173a4cc0",
+  "sections_read": [
+    4,
+    7,
+    8,
+    9
+  ],
+  "source_revision": "not pinned; mutable checkout snapshot, source commit intentionally not inferred",
+  "spec_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\docs\\decoder_context\\SEMANTIC_RANKING_RESEARCH_DESIGN.md",
+  "spec_sha256": "117bb4b04050cc5af9d2f122627f3b610ed3f7d92114b7af35f69bf0d43e0636",
+  "title": "Independent frozen-spec arithmetic validation"
+}

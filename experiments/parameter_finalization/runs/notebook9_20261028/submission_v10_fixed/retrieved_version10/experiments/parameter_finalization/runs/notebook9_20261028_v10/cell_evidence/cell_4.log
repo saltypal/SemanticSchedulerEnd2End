@@ -1,0 +1,23 @@
+CELL START 4 log /kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v10/cell_evidence/cell_4.log
+Traceback (most recent call last):
+  File "/kaggle/working/project/parameters/cloud_notebook.py", line 37, in cell
+    try:yield
+        ^^^^^
+  File "/tmp/ipykernel_22/843791608.py", line 16, in <cell line: 0>
+    exec(compile(INPUT_PREFLIGHT, "input_detector_preflight", "exec"), globals())
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "input_detector_preflight", line 9, in <module>
+  File "/kaggle/working/project/parameters/spi_campaign.py", line 74, in verify_inputs
+    rows=json.loads((input_root/"panel.json").read_text(encoding="utf8"))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/kaggle/input/betterscheduler-spiv2-inputs-20261027b/panel.json'
+CELL END 4 seconds 0.03367479500002446

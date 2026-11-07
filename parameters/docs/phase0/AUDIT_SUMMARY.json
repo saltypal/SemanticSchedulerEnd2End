@@ -1,0 +1,252 @@
+{
+  "scope": "All downloaded consolidated annotation rows; not all archive pixels",
+  "source_hashes": {
+    "annotations_2018_2020B.json.gz": "6f101d78d59dd2e57f1c25e1f374e1c04951443cb2c58e18093ad7de7ec88df9",
+    "annotations_2021A_2021B.json.gz": "0979b4dca87ae7ee68037a98a4f8dca02799ea1ba841323bbb48b601b45c2487"
+  },
+  "combined": {
+    "unique_post_ids": 135052,
+    "unique_leaf_records": 163236,
+    "leaf_priority_distribution": {
+      "Low": 118971,
+      "High": 15535,
+      "Medium": 24519,
+      "Critical": 4206,
+      "Unknown": 5
+    },
+    "posts_with_conflicting_top_level_priority": 670,
+    "posts_with_conflicting_leaf_priority": 8606,
+    "posts_in_multiple_event_ids": 1209,
+    "posts_with_multiple_text_versions": 593,
+    "posts_in_both_annotation_files": 1149,
+    "distinct_event_ids": 100,
+    "unique_event_post_pairs": 136263,
+    "leaf_assessor_keys": 162176,
+    "assessor_keys_with_multiple_record_versions": 969,
+    "assessor_keys_with_priority_conflict": 359,
+    "top_level_priority_set_counts": {
+      "Low": 95362,
+      "High": 13599,
+      "Medium": 21383,
+      "High|Medium": 134,
+      "Low|Medium": 231,
+      "Critical": 4035,
+      "Critical|High": 80,
+      "High|Low": 191,
+      "Critical|Low": 17,
+      "Critical|Medium": 17,
+      "Unknown": 3
+    }
+  },
+  "image_annotation_proxy": {
+    "definition": "At least one observed image-category label, not proof of all image-bearing posts or complete annotation",
+    "categories": [
+      "Crowds",
+      "Damage",
+      "Infographic",
+      "Informative",
+      "RecoveryEfforts",
+      "Satellite",
+      "Screenshot",
+      "Victims",
+      "WeatherForecast",
+      "WeatherPhoto"
+    ],
+    "unique_posts_with_any": 8217,
+    "category_unique_posts": {
+      "Crowds": 381,
+      "Damage": 2593,
+      "Infographic": 2065,
+      "Informative": 2295,
+      "RecoveryEfforts": 734,
+      "Satellite": 692,
+      "Screenshot": 1383,
+      "Victims": 706,
+      "WeatherForecast": 1840,
+      "WeatherPhoto": 1471
+    },
+    "multimedia_share_unique_posts": 32712
+  },
+  "candidate_event_components": {
+    "definition": "Same-post linkage only, excluding 2021atraining; titles/sites/near-duplicate media still require reconciliation",
+    "count": 80,
+    "multi_event_components": [
+      [
+        "brooklynBlockPartyShooting2020",
+        "trecisCBbrooklynblockpartyshooting2019"
+      ],
+      [
+        "covidAtlanta2020",
+        "covidDC2020",
+        "covidHouston2020",
+        "covidJacksonville2020",
+        "covidMelbourne2020",
+        "covidNYC2020",
+        "covidPhoenix2020",
+        "covidSeattle2020",
+        "covidWashingtonState2020"
+      ],
+      [
+        "cycloneKenneth2019",
+        "southAfricaFloods2019"
+      ],
+      [
+        "daytonOhioShooting2020",
+        "elPasoWalmartShooting2020"
+      ],
+      [
+        "houstonExplosion2020",
+        "trecisCB20200127houstonexplosion2020"
+      ],
+      [
+        "southeastTornadoOutbreak2020",
+        "trecisCB20200210mideasttornadoesday1mississipi2020",
+        "trecisCB20200210mideasttornadoesday2al2020",
+        "trecisCB20200210mideasttornadoesday3md2019"
+      ],
+      [
+        "tennesseeDerecho2020",
+        "trecisCB20200506tnderecho2020"
+      ],
+      [
+        "tennesseeTornadoOutbreak2020",
+        "trecisSB2020tornadooutbreakofmarch"
+      ],
+      [
+        "trecisSB20171204thomaswildfire2017",
+        "trecisSB20171207lilacwildfire2017"
+      ],
+      [
+        "typhoonKrosa2020",
+        "typhoonLekima2020"
+      ]
+    ],
+    "calibration_panel_posts": 64,
+    "panel_only_posts": 0
+  },
+  "audit_source_sha256": "8600615473c30b2c4a1cf226ca164bbcdeae676b9b643ad2c6756a1b49ca1d3f",
+  "files": {
+    "annotations_2018_2020B.json.gz": {
+      "event_records": 71,
+      "top_level_rows": 97577,
+      "unique_post_ids": 72935,
+      "unique_event_post_pairs": 72983,
+      "priority_rows": {
+        "Low": 64090,
+        "High": 11413,
+        "Medium": 20487,
+        "Critical": 1585,
+        "Unknown": 2
+      },
+      "category_rows": {
+        "Irrelevant": 27302,
+        "Location": 36727,
+        "MultimediaShare": 33259,
+        "ContextualInformation": 10422,
+        "Weather": 12199,
+        "Discussion": 9521,
+        "Hashtags": 22162,
+        "News": 31621,
+        "Official": 5792,
+        "EmergingThreats": 11192,
+        "FirstPartyObservation": 6913,
+        "Factoid": 20594,
+        "ThirdPartyObservation": 24144,
+        "MovePeople": 1045,
+        "Sentiment": 17109,
+        "OriginalEvent": 5187,
+        "NewSubEvent": 3993,
+        "Advice": 5709,
+        "GoodsServices": 358,
+        "Volunteer": 454,
+        "ServiceAvailable": 3788,
+        "Donations": 1571,
+        "SearchAndRescue": 410,
+        "CleanUp": 628,
+        "InformationWanted": 609
+      },
+      "blank_text_rows": 21118,
+      "unknown_priority_rows": 2
+    },
+    "annotations_2021A_2021B.json.gz": {
+      "event_records": 29,
+      "top_level_rows": 66586,
+      "unique_post_ids": 63266,
+      "unique_event_post_pairs": 63280,
+      "priority_rows": {
+        "High": 6984,
+        "Medium": 8249,
+        "Critical": 3546,
+        "Low": 47806,
+        "Unknown": 1
+      },
+      "category_rows": {
+        "Weather": 6409,
+        "Location": 19309,
+        "EmergingThreats": 4372,
+        "MultimediaShare": 9198,
+        "Factoid": 7566,
+        "News": 6841,
+        "Informative": 2995,
+        "Satellite": 864,
+        "NewSubEvent": 1278,
+        "WeatherForecast": 2134,
+        "Infographic": 2262,
+        "ContextualInformation": 2186,
+        "Sentiment": 5925,
+        "Screenshot": 1421,
+        "ThirdPartyObservation": 6256,
+        "OriginalEvent": 3824,
+        "General": 933,
+        "Citizen": 1110,
+        "ServiceAvailable": 2652,
+        "Donations": 684,
+        "Hashtags": 9732,
+        "Victims": 854,
+        "FirstPartyObservation": 2099,
+        "Official": 3298,
+        "Crowds": 464,
+        "PrivateOrg": 112,
+        "WeatherPhoto": 1553,
+        "Local": 798,
+        "NewsOrg": 344,
+        "Advice": 4355,
+        "MovePeople": 1668,
+        "Damage": 2794,
+        "InformationWanted": 801,
+        "Volunteer": 360,
+        "CleanUp": 326,
+        "RecoveryEfforts": 841,
+        "Discussion": 789,
+        "GoodsServices": 472,
+        "Irrelevant": 37390,
+        "GovtOrg": 57,
+        "Journalist": 217,
+        "Useful": 24,
+        "Bot": 35,
+        "PublicOfficial": 35,
+        "SearchAndRescue": 153
+      },
+      "blank_text_rows": 0,
+      "unknown_priority_rows": 1
+    }
+  },
+  "topic_counts": {
+    "topics_1_75.xml": 75,
+    "topics_76_122.xml": 47
+  },
+  "media_listing": {
+    "scope": "First public Drive listing page; pagination not exhausted",
+    "listed_files": 50,
+    "listed_bytes": 1990189611,
+    "pixels_audited": 0
+  },
+  "validation": {
+    "reference_tests_passed": 4,
+    "full_snapshot_invariants": "passed",
+    "checked_utc": "2026-10-26T14:10:26.215204+00:00",
+    "source_revision_before_uncommitted_audit": "1b45ab60c9e72ec5b426ff4488a92ab0c4fd043d",
+    "training_run": false,
+    "full_media_audit": false
+  }
+}

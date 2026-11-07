@@ -1,0 +1,3240 @@
+[
+  {
+    "case_id": "actual-0",
+    "image_id": "355354192671d5ab667cdcfa5f05e905bbecd69703a91296ee1e9e9267728eb7",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_pinned_cache_rebased_with0\\reused\\data\\images\\355354192671d5ab667cdcfa5f05e905bbecd69703a91296ee1e9e9267728eb7.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "355354192671d5ab667cdcfa5f05e905bbecd69703a91296ee1e9e9267728eb7",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true,
+        "road.present": true,
+        "road.damaged": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater",
+        "road.present": "roads_any",
+        "road.damaged": "roads_damage"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "exact_sha256:355354192671d5ab667cdcfa5f05e905bbecd69703a91296ee1e9e9267728eb7",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "structured",
+      "is_ablation": false,
+      "output_role": "full_extractor_output",
+      "parameters": {
+        "relevance": {
+          "value": 0.638649508357048,
+          "available": true,
+          "method": "operator_paragraph_cosine_v1",
+          "reason": null
+        },
+        "novelty": {
+          "value": {
+            "distance": 1.0,
+            "cold_start": 1.0,
+            "new_concept_fraction": 1.0
+          },
+          "available": true,
+          "method": "appearance_and_predicted_concept_delta_v2",
+          "reason": null
+        },
+        "rarity": {
+          "value": 1.0,
+          "available": true,
+          "method": "concept_bernoulli_surprisal_v2",
+          "reason": null
+        },
+        "scene": {
+          "value": {
+            "road": 0.604276031255722,
+            "residential": 0.6136861592531204,
+            "indoor": 0.5812317281961441,
+            "forest": 0.5911527052521706,
+            "water": 0.6139279678463936,
+            "people": 0.6054371893405914,
+            "vehicle": 0.6100180521607399,
+            "fire": 0.6106651276350021,
+            "claim_bridge.present": 0.000837600149679929,
+            "claim_building.present": 0.9946720004081726,
+            "claim_building.affected_or_greater": 0.5413047671318054,
+            "claim_building.minor_or_greater": 0.8526273369789124,
+            "claim_debris.present": 0.9520895481109619,
+            "claim_flooding.present": 9.08164383872645e-06,
+            "claim_building.flooded": 0.0001556311472086236,
+            "claim_road.present": 0.9689599275588989,
+            "claim_road.damaged": 8.704792708158493e-05,
+            "claim_tree.present": 0.43808501958847046,
+            "claim_tree.damaged": 0.6934773325920105,
+            "claim_water.present": 0.004707688465714455,
+            "entity_presence": {
+              "building": true,
+              "truck": true,
+              "car": true,
+              "bridge": false,
+              "debris": true,
+              "flooding": false,
+              "road": true,
+              "tree": false,
+              "water": false
+            },
+            "detector_observation": {
+              "building": "detected",
+              "road": "not_detected",
+              "person": "not_detected",
+              "car": "detected",
+              "truck": "detected",
+              "bus": "not_detected",
+              "motorcycle": "not_detected",
+              "bicycle": "not_detected",
+              "debris": "not_detected",
+              "chair": "not_detected",
+              "couch": "not_detected",
+              "dining table": "not_detected",
+              "television": "not_detected",
+              "refrigerator": "not_detected",
+              "tree": "not_detected",
+              "water": "not_detected"
+            },
+            "producer_conflicts": [],
+            "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+            "image_claim_predictions": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.000837600149679929,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.9946720004081726,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": true,
+                "score": 0.5413047671318054,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": true,
+                "score": 0.8526273369789124,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": true,
+                "score": 0.9520895481109619,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 9.08164383872645e-06,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 0.0001556311472086236,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.9689599275588989,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 8.704792708158493e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": false,
+                "score": 0.43808501958847046,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": true,
+                "score": 0.6934773325920105,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.004707688465714455,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "condition_predictions": {
+              "building.affected_or_greater": true,
+              "building.minor_or_greater": true,
+              "building.flooded": false,
+              "road.damaged": false,
+              "tree.damaged": true
+            },
+            "condition_contrast_evidence": {
+              "building.affected_or_greater": {
+                "positive_similarity": 0.27907395362854004,
+                "negative_similarity": 0.21840013563632965,
+                "positive_text": "a photograph of a building affected by a disaster",
+                "negative_text": "a photograph of an unaffected intact building",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.06067381799221039
+              },
+              "road.damaged": {
+                "positive_similarity": 0.24556976556777954,
+                "negative_similarity": 0.24239329993724823,
+                "positive_text": "a photograph of a physically damaged road",
+                "negative_text": "a photograph of an intact undamaged road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.003176465630531311
+              },
+              "road.blocked": {
+                "positive_similarity": 0.21355941891670227,
+                "negative_similarity": 0.23326504230499268,
+                "positive_text": "a photograph of a road blocked by an obstruction",
+                "negative_text": "a photograph of a clear unobstructed road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.019705623388290405
+              },
+              "incident.informative": {
+                "positive_similarity": 0.2830183506011963,
+                "negative_similarity": 0.2114916443824768,
+                "positive_text": "an informative photograph showing a disaster incident",
+                "negative_text": "an unrelated decorative photograph with no incident information",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.07152670621871948
+              }
+            }
+          },
+          "available": true,
+          "method": "structured_scene_candidate_v2",
+          "reason": null
+        },
+        "spatial": {
+          "value": {
+            "largest_area": 0.010109554593803154,
+            "union_area": 0.015320657806124332,
+            "target_count": 0.02
+          },
+          "available": true,
+          "method": "canonical_target_box_extent_v1",
+          "reason": null
+        },
+        "complexity": {
+          "value": {
+            "target_count_scaled": 0.02,
+            "target_box_coverage": 0.015320657806124332,
+            "class_diversity": 0.7662780644919215,
+            "all_count_scaled": 0.31
+          },
+          "available": true,
+          "method": "task_count_coverage_v1",
+          "reason": null
+        },
+        "geographic": {
+          "value": null,
+          "available": false,
+          "method": "trusted_geofence",
+          "reason": "trusted coordinates and mission region required"
+        },
+        "reliability": {
+          "value": {
+            "detection_scores": {
+              "car": 0.4023737609386444,
+              "truck": 0.16505210101604462,
+              "building": 0.057310353964567184
+            },
+            "image_claim_scores": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.000837600149679929,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.9946720004081726,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": true,
+                "score": 0.5413047671318054,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": true,
+                "score": 0.8526273369789124,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": true,
+                "score": 0.9520895481109619,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 9.08164383872645e-06,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 0.0001556311472086236,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.9689599275588989,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 8.704792708158493e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": false,
+                "score": 0.43808501958847046,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": true,
+                "score": 0.6934773325920105,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.004707688465714455,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "calibrated": false,
+            "detector_available": true
+          },
+          "available": true,
+          "method": "per_claim_and_detection_scores_v2",
+          "reason": null
+        }
+      },
+      "claims": {
+        "building.present": true,
+        "road.present": true,
+        "building.affected_or_greater": true,
+        "building.minor_or_greater": true,
+        "building.flooded": false,
+        "road.damaged": false,
+        "tree.damaged": true,
+        "bridge.present": false,
+        "debris.present": true,
+        "flooding.present": false,
+        "tree.present": false,
+        "water.present": false
+      },
+      "claim_availability": {
+        "building.present": {
+          "available": true,
+          "reason": null
+        },
+        "building.affected_or_greater": {
+          "available": true,
+          "reason": null
+        }
+      },
+      "temporal": {
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "age_ms": null,
+        "deadline_ms": null,
+        "completion_slack_ms": null,
+        "available": false,
+        "reason": "trusted capture/current timestamps required"
+      },
+      "definitions": {
+        "relevance": "(CLIP image-task cosine+1)/2;not probability or priority",
+        "novelty": "appearance distance and predicted concept change under supplied sender history",
+        "rarity": "normalized predicted-concept Bernoulli surprisal over causal sender history",
+        "spatial": "normalized target bounding-box extent/count;not physical distance",
+        "complexity": "predicted task-count/box-coverage/diversity proxies",
+        "claims": "positive detector observations or image-classifier decisions; raw CLIP contrasts stay descriptive evidence"
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "actual_extractor",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "actual-1",
+    "image_id": "0a64500139ac24e8a1e8d8b4fadb3478b301523c61cb110be0780845dbd74a01",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_pinned_cache_rebased_with0\\reused\\data\\images\\0a64500139ac24e8a1e8d8b4fadb3478b301523c61cb110be0780845dbd74a01.jpg",
+    "mission_id": "building_damage",
+    "stratum": "affected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "0a64500139ac24e8a1e8d8b4fadb3478b301523c61cb110be0780845dbd74a01",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": true,
+        "road.present": true,
+        "road.damaged": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater",
+        "road.present": "roads_any",
+        "road.damaged": "roads_damage"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "exact_sha256:0a64500139ac24e8a1e8d8b4fadb3478b301523c61cb110be0780845dbd74a01",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "structured",
+      "is_ablation": false,
+      "output_role": "full_extractor_output",
+      "parameters": {
+        "relevance": {
+          "value": 0.6354116201400757,
+          "available": true,
+          "method": "operator_paragraph_cosine_v1",
+          "reason": null
+        },
+        "novelty": {
+          "value": {
+            "distance": 1.0,
+            "cold_start": 1.0,
+            "new_concept_fraction": 1.0
+          },
+          "available": true,
+          "method": "appearance_and_predicted_concept_delta_v2",
+          "reason": null
+        },
+        "rarity": {
+          "value": 1.0,
+          "available": true,
+          "method": "concept_bernoulli_surprisal_v2",
+          "reason": null
+        },
+        "scene": {
+          "value": {
+            "road": 0.5905379056930542,
+            "residential": 0.6013540476560593,
+            "indoor": 0.5793071910738945,
+            "forest": 0.5718817636370659,
+            "water": 0.6001056134700775,
+            "people": 0.601218193769455,
+            "vehicle": 0.602784126996994,
+            "fire": 0.5943440794944763,
+            "claim_bridge.present": 7.880270277382806e-05,
+            "claim_building.present": 0.9994387030601501,
+            "claim_building.affected_or_greater": 0.9998971223831177,
+            "claim_building.minor_or_greater": 0.9998170733451843,
+            "claim_debris.present": 0.9999628067016602,
+            "claim_flooding.present": 0.0006593783036805689,
+            "claim_building.flooded": 0.015239959582686424,
+            "claim_road.present": 0.9710710644721985,
+            "claim_road.damaged": 0.015982570126652718,
+            "claim_tree.present": 0.11351364105939865,
+            "claim_tree.damaged": 0.7952181696891785,
+            "claim_water.present": 0.008400690741837025,
+            "entity_presence": {
+              "building": true,
+              "truck": true,
+              "car": true,
+              "person": true,
+              "bridge": false,
+              "debris": true,
+              "flooding": false,
+              "road": true,
+              "tree": false,
+              "water": false
+            },
+            "detector_observation": {
+              "building": "detected",
+              "road": "not_detected",
+              "person": "detected",
+              "car": "detected",
+              "truck": "detected",
+              "bus": "not_detected",
+              "motorcycle": "not_detected",
+              "bicycle": "not_detected",
+              "debris": "not_detected",
+              "chair": "not_detected",
+              "couch": "not_detected",
+              "dining table": "not_detected",
+              "television": "not_detected",
+              "refrigerator": "not_detected",
+              "tree": "not_detected",
+              "water": "not_detected"
+            },
+            "producer_conflicts": [],
+            "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+            "image_claim_predictions": {
+              "bridge.present": {
+                "value": false,
+                "score": 7.880270277382806e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.9994387030601501,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": true,
+                "score": 0.9998971223831177,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": true,
+                "score": 0.9998170733451843,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": true,
+                "score": 0.9999628067016602,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 0.0006593783036805689,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 0.015239959582686424,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.9710710644721985,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.015982570126652718,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": false,
+                "score": 0.11351364105939865,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": true,
+                "score": 0.7952181696891785,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.008400690741837025,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "condition_predictions": {
+              "building.affected_or_greater": true,
+              "building.minor_or_greater": true,
+              "building.flooded": false,
+              "road.damaged": false,
+              "tree.damaged": true
+            },
+            "condition_contrast_evidence": {
+              "building.affected_or_greater": {
+                "positive_similarity": 0.266164094209671,
+                "negative_similarity": 0.21245503425598145,
+                "positive_text": "a photograph of a building affected by a disaster",
+                "negative_text": "a photograph of an unaffected intact building",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.053709059953689575
+              },
+              "road.damaged": {
+                "positive_similarity": 0.22489449381828308,
+                "negative_similarity": 0.22245213389396667,
+                "positive_text": "a photograph of a physically damaged road",
+                "negative_text": "a photograph of an intact undamaged road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.0024423599243164062
+              },
+              "road.blocked": {
+                "positive_similarity": 0.1960228979587555,
+                "negative_similarity": 0.21333187818527222,
+                "positive_text": "a photograph of a road blocked by an obstruction",
+                "negative_text": "a photograph of a clear unobstructed road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.017308980226516724
+              },
+              "incident.informative": {
+                "positive_similarity": 0.2694745361804962,
+                "negative_similarity": 0.20468491315841675,
+                "positive_text": "an informative photograph showing a disaster incident",
+                "negative_text": "an unrelated decorative photograph with no incident information",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.06478962302207947
+              }
+            }
+          },
+          "available": true,
+          "method": "structured_scene_candidate_v2",
+          "reason": null
+        },
+        "spatial": {
+          "value": {
+            "largest_area": 0.04148341859989256,
+            "union_area": 0.04148341859989256,
+            "target_count": 0.01
+          },
+          "available": true,
+          "method": "canonical_target_box_extent_v1",
+          "reason": null
+        },
+        "complexity": {
+          "value": {
+            "target_count_scaled": 0.01,
+            "target_box_coverage": 0.04148341859989256,
+            "class_diversity": 0.5184195430370031,
+            "all_count_scaled": 0.34
+          },
+          "available": true,
+          "method": "task_count_coverage_v1",
+          "reason": null
+        },
+        "geographic": {
+          "value": null,
+          "available": false,
+          "method": "trusted_geofence",
+          "reason": "trusted coordinates and mission region required"
+        },
+        "reliability": {
+          "value": {
+            "detection_scores": {
+              "car": 0.40127694606781006,
+              "truck": 0.1019449532032013,
+              "building": 0.09794206917285919,
+              "person": 0.06276211142539978
+            },
+            "image_claim_scores": {
+              "bridge.present": {
+                "value": false,
+                "score": 7.880270277382806e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.9994387030601501,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": true,
+                "score": 0.9998971223831177,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": true,
+                "score": 0.9998170733451843,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": true,
+                "score": 0.9999628067016602,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 0.0006593783036805689,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 0.015239959582686424,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.9710710644721985,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.015982570126652718,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": false,
+                "score": 0.11351364105939865,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": true,
+                "score": 0.7952181696891785,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.008400690741837025,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "calibrated": false,
+            "detector_available": true
+          },
+          "available": true,
+          "method": "per_claim_and_detection_scores_v2",
+          "reason": null
+        }
+      },
+      "claims": {
+        "building.present": true,
+        "road.present": true,
+        "building.affected_or_greater": true,
+        "building.minor_or_greater": true,
+        "building.flooded": false,
+        "road.damaged": false,
+        "tree.damaged": true,
+        "bridge.present": false,
+        "debris.present": true,
+        "flooding.present": false,
+        "tree.present": false,
+        "water.present": false
+      },
+      "claim_availability": {
+        "building.present": {
+          "available": true,
+          "reason": null
+        },
+        "building.affected_or_greater": {
+          "available": true,
+          "reason": null
+        }
+      },
+      "temporal": {
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "age_ms": null,
+        "deadline_ms": null,
+        "completion_slack_ms": null,
+        "available": false,
+        "reason": "trusted capture/current timestamps required"
+      },
+      "definitions": {
+        "relevance": "(CLIP image-task cosine+1)/2;not probability or priority",
+        "novelty": "appearance distance and predicted concept change under supplied sender history",
+        "rarity": "normalized predicted-concept Bernoulli surprisal over causal sender history",
+        "spatial": "normalized target bounding-box extent/count;not physical distance",
+        "complexity": "predicted task-count/box-coverage/diversity proxies",
+        "claims": "positive detector observations or image-classifier decisions; raw CLIP contrasts stay descriptive evidence"
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "actual_extractor",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": true,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": true
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "actual-2",
+    "image_id": "1090e730c2bded165e32502f6050bddbbc4c84d187227e121e493602f4f4b95a",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_pinned_cache_rebased_with0\\reused\\data\\images\\1090e730c2bded165e32502f6050bddbbc4c84d187227e121e493602f4f4b95a.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "1090e730c2bded165e32502f6050bddbbc4c84d187227e121e493602f4f4b95a",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false,
+        "road.present": false,
+        "road.damaged": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater",
+        "road.present": "roads_any",
+        "road.damaged": "roads_damage"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "exact_sha256:1090e730c2bded165e32502f6050bddbbc4c84d187227e121e493602f4f4b95a",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "structured",
+      "is_ablation": false,
+      "output_role": "full_extractor_output",
+      "parameters": {
+        "relevance": {
+          "value": 0.6071529909968376,
+          "available": true,
+          "method": "operator_paragraph_cosine_v1",
+          "reason": null
+        },
+        "novelty": {
+          "value": {
+            "distance": 0.2113799001270556,
+            "cold_start": 0.0,
+            "new_concept_fraction": 0.5
+          },
+          "available": true,
+          "method": "appearance_and_predicted_concept_delta_v2",
+          "reason": null
+        },
+        "rarity": {
+          "value": 0.6845351232142712,
+          "available": true,
+          "method": "concept_bernoulli_surprisal_v2",
+          "reason": null
+        },
+        "scene": {
+          "value": {
+            "road": 0.6026740819215775,
+            "residential": 0.5975448340177536,
+            "indoor": 0.6000863760709763,
+            "forest": 0.6413443982601166,
+            "water": 0.6288616210222244,
+            "people": 0.6201693788170815,
+            "vehicle": 0.609757199883461,
+            "fire": 0.6121785193681717,
+            "claim_bridge.present": 6.558217137353495e-05,
+            "claim_building.present": 5.8326801081420854e-05,
+            "claim_building.affected_or_greater": 0.0005354356835596263,
+            "claim_building.minor_or_greater": 3.097638182225637e-05,
+            "claim_debris.present": 0.06513962894678116,
+            "claim_flooding.present": 2.0622066585929133e-05,
+            "claim_building.flooded": 1.381605034111999e-05,
+            "claim_road.present": 0.008427552878856659,
+            "claim_road.damaged": 0.00028780821594409645,
+            "claim_tree.present": 0.9726948738098145,
+            "claim_tree.damaged": 0.7748266458511353,
+            "claim_water.present": 0.036199264228343964,
+            "entity_presence": {
+              "bridge": false,
+              "building": false,
+              "debris": false,
+              "flooding": false,
+              "road": false,
+              "tree": true,
+              "water": false
+            },
+            "detector_observation": {
+              "building": "not_detected",
+              "road": "not_detected",
+              "person": "not_detected",
+              "car": "not_detected",
+              "truck": "not_detected",
+              "bus": "not_detected",
+              "motorcycle": "not_detected",
+              "bicycle": "not_detected",
+              "debris": "not_detected",
+              "chair": "not_detected",
+              "couch": "not_detected",
+              "dining table": "not_detected",
+              "television": "not_detected",
+              "refrigerator": "not_detected",
+              "tree": "not_detected",
+              "water": "not_detected"
+            },
+            "producer_conflicts": [],
+            "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+            "image_claim_predictions": {
+              "bridge.present": {
+                "value": false,
+                "score": 6.558217137353495e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": false,
+                "score": 5.8326801081420854e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.0005354356835596263,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 3.097638182225637e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 0.06513962894678116,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 2.0622066585929133e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 1.381605034111999e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": false,
+                "score": 0.008427552878856659,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.00028780821594409645,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.9726948738098145,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": true,
+                "score": 0.7748266458511353,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.036199264228343964,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "condition_predictions": {
+              "building.affected_or_greater": false,
+              "building.minor_or_greater": false,
+              "building.flooded": false,
+              "road.damaged": false,
+              "tree.damaged": true
+            },
+            "condition_contrast_evidence": {
+              "building.affected_or_greater": {
+                "positive_similarity": 0.23820860683918,
+                "negative_similarity": 0.22376829385757446,
+                "positive_text": "a photograph of a building affected by a disaster",
+                "negative_text": "a photograph of an unaffected intact building",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.01444031298160553
+              },
+              "road.damaged": {
+                "positive_similarity": 0.2373225837945938,
+                "negative_similarity": 0.2479337900876999,
+                "positive_text": "a photograph of a physically damaged road",
+                "negative_text": "a photograph of an intact undamaged road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.010611206293106079
+              },
+              "road.blocked": {
+                "positive_similarity": 0.2556617856025696,
+                "negative_similarity": 0.23268678784370422,
+                "positive_text": "a photograph of a road blocked by an obstruction",
+                "negative_text": "a photograph of a clear unobstructed road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.022974997758865356
+              },
+              "incident.informative": {
+                "positive_similarity": 0.24384813010692596,
+                "negative_similarity": 0.22574621438980103,
+                "positive_text": "an informative photograph showing a disaster incident",
+                "negative_text": "an unrelated decorative photograph with no incident information",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.01810191571712494
+              }
+            }
+          },
+          "available": true,
+          "method": "structured_scene_candidate_v2",
+          "reason": null
+        },
+        "spatial": {
+          "value": {
+            "largest_area": 0.0,
+            "union_area": 0.0,
+            "target_count": 0.0
+          },
+          "available": true,
+          "method": "canonical_target_box_extent_v1",
+          "reason": null
+        },
+        "complexity": {
+          "value": {
+            "target_count_scaled": 0.0,
+            "target_box_coverage": 0.0,
+            "class_diversity": 0.0,
+            "all_count_scaled": 0.0
+          },
+          "available": true,
+          "method": "task_count_coverage_v1",
+          "reason": null
+        },
+        "geographic": {
+          "value": null,
+          "available": false,
+          "method": "trusted_geofence",
+          "reason": "trusted coordinates and mission region required"
+        },
+        "reliability": {
+          "value": {
+            "detection_scores": {},
+            "image_claim_scores": {
+              "bridge.present": {
+                "value": false,
+                "score": 6.558217137353495e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": false,
+                "score": 5.8326801081420854e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.0005354356835596263,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 3.097638182225637e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 0.06513962894678116,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 2.0622066585929133e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 1.381605034111999e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": false,
+                "score": 0.008427552878856659,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.00028780821594409645,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.9726948738098145,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": true,
+                "score": 0.7748266458511353,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.036199264228343964,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "calibrated": false,
+            "detector_available": true
+          },
+          "available": true,
+          "method": "per_claim_and_detection_scores_v2",
+          "reason": null
+        }
+      },
+      "claims": {
+        "building.present": false,
+        "road.present": false,
+        "building.affected_or_greater": false,
+        "building.minor_or_greater": false,
+        "building.flooded": false,
+        "road.damaged": false,
+        "tree.damaged": true,
+        "bridge.present": false,
+        "debris.present": false,
+        "flooding.present": false,
+        "tree.present": true,
+        "water.present": false
+      },
+      "claim_availability": {
+        "building.present": {
+          "available": true,
+          "reason": null
+        },
+        "building.affected_or_greater": {
+          "available": true,
+          "reason": null
+        }
+      },
+      "temporal": {
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "age_ms": null,
+        "deadline_ms": null,
+        "completion_slack_ms": null,
+        "available": false,
+        "reason": "trusted capture/current timestamps required"
+      },
+      "definitions": {
+        "relevance": "(CLIP image-task cosine+1)/2;not probability or priority",
+        "novelty": "appearance distance and predicted concept change under supplied sender history",
+        "rarity": "normalized predicted-concept Bernoulli surprisal over causal sender history",
+        "spatial": "normalized target bounding-box extent/count;not physical distance",
+        "complexity": "predicted task-count/box-coverage/diversity proxies",
+        "claims": "positive detector observations or image-classifier decisions; raw CLIP contrasts stay descriptive evidence"
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "actual_extractor",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "actual-3",
+    "image_id": "ef2f9d3296481f175fe4474b2eaf656d58bcc390340de33928194f685bbd014d",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_pinned_cache_rebased_with0\\reused\\data\\images\\ef2f9d3296481f175fe4474b2eaf656d58bcc390340de33928194f685bbd014d.jpg",
+    "mission_id": "building_damage",
+    "stratum": "absent",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "ef2f9d3296481f175fe4474b2eaf656d58bcc390340de33928194f685bbd014d",
+      "facts": {
+        "building.present": false,
+        "building.affected_or_greater": false,
+        "road.present": false,
+        "road.damaged": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater",
+        "road.present": "roads_any",
+        "road.damaged": "roads_damage"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "exact_sha256:ef2f9d3296481f175fe4474b2eaf656d58bcc390340de33928194f685bbd014d",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "structured",
+      "is_ablation": false,
+      "output_role": "full_extractor_output",
+      "parameters": {
+        "relevance": {
+          "value": 0.6250572502613068,
+          "available": true,
+          "method": "operator_paragraph_cosine_v1",
+          "reason": null
+        },
+        "novelty": {
+          "value": {
+            "distance": 0.15494238236117908,
+            "cold_start": 0.0,
+            "new_concept_fraction": 0.5
+          },
+          "available": true,
+          "method": "appearance_and_predicted_concept_delta_v2",
+          "reason": null
+        },
+        "rarity": {
+          "value": 0.6845351232142712,
+          "available": true,
+          "method": "concept_bernoulli_surprisal_v2",
+          "reason": null
+        },
+        "scene": {
+          "value": {
+            "road": 0.6004601567983627,
+            "residential": 0.5974433943629265,
+            "indoor": 0.5876633897423744,
+            "forest": 0.6262415051460266,
+            "water": 0.6226535439491272,
+            "people": 0.6078261733055115,
+            "vehicle": 0.6056204289197922,
+            "fire": 0.6118203699588776,
+            "claim_bridge.present": 0.00013603504339698702,
+            "claim_building.present": 0.0017593279480934143,
+            "claim_building.affected_or_greater": 0.0058838683180511,
+            "claim_building.minor_or_greater": 8.796052861725911e-05,
+            "claim_debris.present": 0.0005643952172249556,
+            "claim_flooding.present": 0.006549517158418894,
+            "claim_building.flooded": 6.770442996639758e-05,
+            "claim_road.present": 0.004126162268221378,
+            "claim_road.damaged": 0.0001323429896729067,
+            "claim_tree.present": 0.8874359130859375,
+            "claim_tree.damaged": 0.11471991240978241,
+            "claim_water.present": 0.15154241025447845,
+            "entity_presence": {
+              "person": true,
+              "bridge": false,
+              "building": false,
+              "debris": false,
+              "flooding": false,
+              "road": false,
+              "tree": true,
+              "water": false
+            },
+            "detector_observation": {
+              "building": "not_detected",
+              "road": "not_detected",
+              "person": "detected",
+              "car": "not_detected",
+              "truck": "not_detected",
+              "bus": "not_detected",
+              "motorcycle": "not_detected",
+              "bicycle": "not_detected",
+              "debris": "not_detected",
+              "chair": "not_detected",
+              "couch": "not_detected",
+              "dining table": "not_detected",
+              "television": "not_detected",
+              "refrigerator": "not_detected",
+              "tree": "not_detected",
+              "water": "not_detected"
+            },
+            "producer_conflicts": [],
+            "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+            "image_claim_predictions": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.00013603504339698702,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": false,
+                "score": 0.0017593279480934143,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.0058838683180511,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 8.796052861725911e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 0.0005643952172249556,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 0.006549517158418894,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 6.770442996639758e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": false,
+                "score": 0.004126162268221378,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.0001323429896729067,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.8874359130859375,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": false,
+                "score": 0.11471991240978241,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.15154241025447845,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "condition_predictions": {
+              "building.affected_or_greater": false,
+              "building.minor_or_greater": false,
+              "building.flooded": false,
+              "road.damaged": false,
+              "tree.damaged": false
+            },
+            "condition_contrast_evidence": {
+              "building.affected_or_greater": {
+                "positive_similarity": 0.25114905834198,
+                "negative_similarity": 0.23187106847763062,
+                "positive_text": "a photograph of a building affected by a disaster",
+                "negative_text": "a photograph of an unaffected intact building",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.019277989864349365
+              },
+              "road.damaged": {
+                "positive_similarity": 0.26438507437705994,
+                "negative_similarity": 0.2659485936164856,
+                "positive_text": "a photograph of a physically damaged road",
+                "negative_text": "a photograph of an intact undamaged road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.0015635192394256592
+              },
+              "road.blocked": {
+                "positive_similarity": 0.25469619035720825,
+                "negative_similarity": 0.23564130067825317,
+                "positive_text": "a photograph of a road blocked by an obstruction",
+                "negative_text": "a photograph of a clear unobstructed road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.019054889678955078
+              },
+              "incident.informative": {
+                "positive_similarity": 0.2618587017059326,
+                "negative_similarity": 0.2216585874557495,
+                "positive_text": "an informative photograph showing a disaster incident",
+                "negative_text": "an unrelated decorative photograph with no incident information",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.040200114250183105
+              }
+            }
+          },
+          "available": true,
+          "method": "structured_scene_candidate_v2",
+          "reason": null
+        },
+        "spatial": {
+          "value": {
+            "largest_area": 0.0,
+            "union_area": 0.0,
+            "target_count": 0.0
+          },
+          "available": true,
+          "method": "canonical_target_box_extent_v1",
+          "reason": null
+        },
+        "complexity": {
+          "value": {
+            "target_count_scaled": 0.0,
+            "target_box_coverage": 0.0,
+            "class_diversity": 0.0,
+            "all_count_scaled": 0.01
+          },
+          "available": true,
+          "method": "task_count_coverage_v1",
+          "reason": null
+        },
+        "geographic": {
+          "value": null,
+          "available": false,
+          "method": "trusted_geofence",
+          "reason": "trusted coordinates and mission region required"
+        },
+        "reliability": {
+          "value": {
+            "detection_scores": {
+              "person": 0.12406743317842484
+            },
+            "image_claim_scores": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.00013603504339698702,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": false,
+                "score": 0.0017593279480934143,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.0058838683180511,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 8.796052861725911e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 0.0005643952172249556,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 0.006549517158418894,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 6.770442996639758e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": false,
+                "score": 0.004126162268221378,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.0001323429896729067,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.8874359130859375,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": false,
+                "score": 0.11471991240978241,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.15154241025447845,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "calibrated": false,
+            "detector_available": true
+          },
+          "available": true,
+          "method": "per_claim_and_detection_scores_v2",
+          "reason": null
+        }
+      },
+      "claims": {
+        "building.present": false,
+        "road.present": false,
+        "building.affected_or_greater": false,
+        "building.minor_or_greater": false,
+        "building.flooded": false,
+        "road.damaged": false,
+        "tree.damaged": false,
+        "bridge.present": false,
+        "debris.present": false,
+        "flooding.present": false,
+        "tree.present": true,
+        "water.present": false
+      },
+      "claim_availability": {
+        "building.present": {
+          "available": true,
+          "reason": null
+        },
+        "building.affected_or_greater": {
+          "available": true,
+          "reason": null
+        }
+      },
+      "temporal": {
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "age_ms": null,
+        "deadline_ms": null,
+        "completion_slack_ms": null,
+        "available": false,
+        "reason": "trusted capture/current timestamps required"
+      },
+      "definitions": {
+        "relevance": "(CLIP image-task cosine+1)/2;not probability or priority",
+        "novelty": "appearance distance and predicted concept change under supplied sender history",
+        "rarity": "normalized predicted-concept Bernoulli surprisal over causal sender history",
+        "spatial": "normalized target bounding-box extent/count;not physical distance",
+        "complexity": "predicted task-count/box-coverage/diversity proxies",
+        "claims": "positive detector observations or image-classifier decisions; raw CLIP contrasts stay descriptive evidence"
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "actual_extractor",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": false
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": false,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "actual-6",
+    "image_id": "9fe28008bc39eaf3fdf3c189528cb70645e3b9787602c42e9afbe70b1fe898bf",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_pinned_cache_rebased_with0\\reused\\data\\images\\9fe28008bc39eaf3fdf3c189528cb70645e3b9787602c42e9afbe70b1fe898bf.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "9fe28008bc39eaf3fdf3c189528cb70645e3b9787602c42e9afbe70b1fe898bf",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false,
+        "road.present": true,
+        "road.damaged": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater",
+        "road.present": "roads_any",
+        "road.damaged": "roads_damage"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "exact_sha256:9fe28008bc39eaf3fdf3c189528cb70645e3b9787602c42e9afbe70b1fe898bf",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "structured",
+      "is_ablation": false,
+      "output_role": "full_extractor_output",
+      "parameters": {
+        "relevance": {
+          "value": 0.61765156686306,
+          "available": true,
+          "method": "operator_paragraph_cosine_v1",
+          "reason": null
+        },
+        "novelty": {
+          "value": {
+            "distance": 0.05327239234225456,
+            "cold_start": 0.0,
+            "new_concept_fraction": 0.2857142857142857
+          },
+          "available": true,
+          "method": "appearance_and_predicted_concept_delta_v2",
+          "reason": null
+        },
+        "rarity": {
+          "value": 0.6563839390314918,
+          "available": true,
+          "method": "concept_bernoulli_surprisal_v2",
+          "reason": null
+        },
+        "scene": {
+          "value": {
+            "road": 0.608701080083847,
+            "residential": 0.6103969812393188,
+            "indoor": 0.5870685875415802,
+            "forest": 0.6198142319917679,
+            "water": 0.6231416314840317,
+            "people": 0.6016312465071678,
+            "vehicle": 0.612898975610733,
+            "fire": 0.5972372591495514,
+            "claim_bridge.present": 0.0009126667282544076,
+            "claim_building.present": 0.600929856300354,
+            "claim_building.affected_or_greater": 0.03208008408546448,
+            "claim_building.minor_or_greater": 0.0014428590657189488,
+            "claim_debris.present": 0.0016336807748302817,
+            "claim_flooding.present": 0.010052639059722424,
+            "claim_building.flooded": 0.0010995289776474237,
+            "claim_road.present": 0.519784152507782,
+            "claim_road.damaged": 0.004234716761857271,
+            "claim_tree.present": 0.968424379825592,
+            "claim_tree.damaged": 0.2858317196369171,
+            "claim_water.present": 0.15131732821464539,
+            "entity_presence": {
+              "car": true,
+              "bus": true,
+              "truck": true,
+              "person": true,
+              "bridge": false,
+              "building": true,
+              "debris": false,
+              "flooding": false,
+              "road": true,
+              "tree": true,
+              "water": false
+            },
+            "detector_observation": {
+              "building": "not_detected",
+              "road": "not_detected",
+              "person": "detected",
+              "car": "detected",
+              "truck": "detected",
+              "bus": "detected",
+              "motorcycle": "not_detected",
+              "bicycle": "not_detected",
+              "debris": "not_detected",
+              "chair": "not_detected",
+              "couch": "not_detected",
+              "dining table": "not_detected",
+              "television": "not_detected",
+              "refrigerator": "not_detected",
+              "tree": "not_detected",
+              "water": "not_detected"
+            },
+            "producer_conflicts": [],
+            "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+            "image_claim_predictions": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.0009126667282544076,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.600929856300354,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.03208008408546448,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 0.0014428590657189488,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 0.0016336807748302817,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 0.010052639059722424,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 0.0010995289776474237,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.519784152507782,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.004234716761857271,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.968424379825592,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": false,
+                "score": 0.2858317196369171,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.15131732821464539,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "condition_predictions": {
+              "building.affected_or_greater": false,
+              "building.minor_or_greater": false,
+              "building.flooded": false,
+              "road.damaged": false,
+              "tree.damaged": false
+            },
+            "condition_contrast_evidence": {
+              "building.affected_or_greater": {
+                "positive_similarity": 0.2433948516845703,
+                "negative_similarity": 0.23274868726730347,
+                "positive_text": "a photograph of a building affected by a disaster",
+                "negative_text": "a photograph of an unaffected intact building",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.010646164417266846
+              },
+              "road.damaged": {
+                "positive_similarity": 0.22879967093467712,
+                "negative_similarity": 0.24428047239780426,
+                "positive_text": "a photograph of a physically damaged road",
+                "negative_text": "a photograph of an intact undamaged road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.015480801463127136
+              },
+              "road.blocked": {
+                "positive_similarity": 0.2416081428527832,
+                "negative_similarity": 0.24201491475105286,
+                "positive_text": "a photograph of a road blocked by an obstruction",
+                "negative_text": "a photograph of a clear unobstructed road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.0004067718982696533
+              },
+              "incident.informative": {
+                "positive_similarity": 0.23382778465747833,
+                "negative_similarity": 0.216940775513649,
+                "positive_text": "an informative photograph showing a disaster incident",
+                "negative_text": "an unrelated decorative photograph with no incident information",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.016887009143829346
+              }
+            }
+          },
+          "available": true,
+          "method": "structured_scene_candidate_v2",
+          "reason": null
+        },
+        "spatial": {
+          "value": {
+            "largest_area": 0.0,
+            "union_area": 0.0,
+            "target_count": 0.0
+          },
+          "available": true,
+          "method": "canonical_target_box_extent_v1",
+          "reason": null
+        },
+        "complexity": {
+          "value": {
+            "target_count_scaled": 0.0,
+            "target_box_coverage": 0.0,
+            "class_diversity": 0.5700338813359286,
+            "all_count_scaled": 0.17
+          },
+          "available": true,
+          "method": "task_count_coverage_v1",
+          "reason": null
+        },
+        "geographic": {
+          "value": null,
+          "available": false,
+          "method": "trusted_geofence",
+          "reason": "trusted coordinates and mission region required"
+        },
+        "reliability": {
+          "value": {
+            "detection_scores": {
+              "truck": 0.6399986743927002,
+              "bus": 0.6164119243621826,
+              "car": 0.34296876192092896,
+              "person": 0.07876602560281754
+            },
+            "image_claim_scores": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.0009126667282544076,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.600929856300354,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.03208008408546448,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 0.0014428590657189488,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 0.0016336807748302817,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 0.010052639059722424,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 0.0010995289776474237,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.519784152507782,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 0.004234716761857271,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.968424379825592,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": false,
+                "score": 0.2858317196369171,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": false,
+                "score": 0.15131732821464539,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "calibrated": false,
+            "detector_available": true
+          },
+          "available": true,
+          "method": "per_claim_and_detection_scores_v2",
+          "reason": null
+        }
+      },
+      "claims": {
+        "building.present": true,
+        "road.present": true,
+        "building.affected_or_greater": false,
+        "building.minor_or_greater": false,
+        "building.flooded": false,
+        "road.damaged": false,
+        "tree.damaged": false,
+        "bridge.present": false,
+        "debris.present": false,
+        "flooding.present": false,
+        "tree.present": true,
+        "water.present": false
+      },
+      "claim_availability": {
+        "building.present": {
+          "available": true,
+          "reason": null
+        },
+        "building.affected_or_greater": {
+          "available": true,
+          "reason": null
+        }
+      },
+      "temporal": {
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "age_ms": null,
+        "deadline_ms": null,
+        "completion_slack_ms": null,
+        "available": false,
+        "reason": "trusted capture/current timestamps required"
+      },
+      "definitions": {
+        "relevance": "(CLIP image-task cosine+1)/2;not probability or priority",
+        "novelty": "appearance distance and predicted concept change under supplied sender history",
+        "rarity": "normalized predicted-concept Bernoulli surprisal over causal sender history",
+        "spatial": "normalized target bounding-box extent/count;not physical distance",
+        "complexity": "predicted task-count/box-coverage/diversity proxies",
+        "claims": "positive detector observations or image-classifier decisions; raw CLIP contrasts stay descriptive evidence"
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "actual_extractor",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  },
+  {
+    "case_id": "actual-8",
+    "image_id": "b2640de3bdc548b79e8a44f719200e05e9739297b2b29a47a32657038654283f",
+    "image_path": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\spi_four_class\\runs\\broad_parameter_checks_20261027\\pytest_tmp\\test_pinned_cache_rebased_with0\\reused\\data\\images\\b2640de3bdc548b79e8a44f719200e05e9739297b2b29a47a32657038654283f.jpg",
+    "mission_id": "building_damage",
+    "stratum": "present_unaffected",
+    "reference": {
+      "schema": "native_reference_v1",
+      "image_id": "b2640de3bdc548b79e8a44f719200e05e9739297b2b29a47a32657038654283f",
+      "facts": {
+        "building.present": true,
+        "building.affected_or_greater": false,
+        "road.present": true,
+        "road.damaged": false
+      },
+      "source_fields": {
+        "building.present": "buildings_any",
+        "building.affected_or_greater": "buildings_affected_or_greater",
+        "road.present": "roads_any",
+        "road.damaged": "roads_damage"
+      },
+      "complete_scene_annotation": false,
+      "source": "ladi",
+      "group": "exact_sha256:b2640de3bdc548b79e8a44f719200e05e9739297b2b29a47a32657038654283f",
+      "definition": "published native image-level observations; affected_or_greater is not a verified any-visible-damage equivalence; not urgency or full scene truth"
+    },
+    "candidate": {
+      "representation": "structured",
+      "is_ablation": false,
+      "output_role": "full_extractor_output",
+      "parameters": {
+        "relevance": {
+          "value": 0.6229209750890732,
+          "available": true,
+          "method": "operator_paragraph_cosine_v1",
+          "reason": null
+        },
+        "novelty": {
+          "value": {
+            "distance": 0.09227619007694032,
+            "cold_start": 0.0,
+            "new_concept_fraction": 0.14285714285714285
+          },
+          "available": true,
+          "method": "appearance_and_predicted_concept_delta_v2",
+          "reason": null
+        },
+        "rarity": {
+          "value": 0.4838361153192203,
+          "available": true,
+          "method": "concept_bernoulli_surprisal_v2",
+          "reason": null
+        },
+        "scene": {
+          "value": {
+            "road": 0.6139936372637749,
+            "residential": 0.6257994472980499,
+            "indoor": 0.5827318429946899,
+            "forest": 0.6000910252332687,
+            "water": 0.6409758180379868,
+            "people": 0.6033804342150688,
+            "vehicle": 0.6100017726421356,
+            "fire": 0.5919302552938461,
+            "claim_bridge.present": 0.042365662753582,
+            "claim_building.present": 0.9989074468612671,
+            "claim_building.affected_or_greater": 0.0010641432600095868,
+            "claim_building.minor_or_greater": 1.8047619960270822e-05,
+            "claim_debris.present": 8.938963219407015e-06,
+            "claim_flooding.present": 5.830110967508517e-05,
+            "claim_building.flooded": 5.072340354672633e-05,
+            "claim_road.present": 0.9698683619499207,
+            "claim_road.damaged": 3.8596379454247653e-05,
+            "claim_tree.present": 0.9983115196228027,
+            "claim_tree.damaged": 0.0001513607130618766,
+            "claim_water.present": 0.9999566078186035,
+            "entity_presence": {
+              "tree": true,
+              "truck": true,
+              "car": true,
+              "person": true,
+              "bridge": false,
+              "building": true,
+              "debris": false,
+              "flooding": false,
+              "road": true,
+              "water": true
+            },
+            "detector_observation": {
+              "building": "not_detected",
+              "road": "not_detected",
+              "person": "detected",
+              "car": "detected",
+              "truck": "detected",
+              "bus": "not_detected",
+              "motorcycle": "not_detected",
+              "bicycle": "not_detected",
+              "debris": "not_detected",
+              "chair": "not_detected",
+              "couch": "not_detected",
+              "dining table": "not_detected",
+              "television": "not_detected",
+              "refrigerator": "not_detected",
+              "tree": "detected",
+              "water": "not_detected"
+            },
+            "producer_conflicts": [],
+            "presence_fusion_policy": "native_classifier_priority; conflicts retained, no silent OR fusion",
+            "image_claim_predictions": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.042365662753582,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.9989074468612671,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.0010641432600095868,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 1.8047619960270822e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 8.938963219407015e-06,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 5.830110967508517e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 5.072340354672633e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.9698683619499207,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 3.8596379454247653e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.9983115196228027,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": false,
+                "score": 0.0001513607130618766,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": true,
+                "score": 0.9999566078186035,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "condition_predictions": {
+              "building.affected_or_greater": false,
+              "building.minor_or_greater": false,
+              "building.flooded": false,
+              "road.damaged": false,
+              "tree.damaged": false
+            },
+            "condition_contrast_evidence": {
+              "building.affected_or_greater": {
+                "positive_similarity": 0.23686102032661438,
+                "negative_similarity": 0.21543079614639282,
+                "positive_text": "a photograph of a building affected by a disaster",
+                "negative_text": "a photograph of an unaffected intact building",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.021430224180221558
+              },
+              "road.damaged": {
+                "positive_similarity": 0.22057217359542847,
+                "negative_similarity": 0.22876384854316711,
+                "positive_text": "a photograph of a physically damaged road",
+                "negative_text": "a photograph of an intact undamaged road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.008191674947738647
+              },
+              "road.blocked": {
+                "positive_similarity": 0.22222359478473663,
+                "negative_similarity": 0.23134221136569977,
+                "positive_text": "a photograph of a road blocked by an obstruction",
+                "negative_text": "a photograph of a clear unobstructed road",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": -0.009118616580963135
+              },
+              "incident.informative": {
+                "positive_similarity": 0.2482365369796753,
+                "negative_similarity": 0.21734777092933655,
+                "positive_text": "an informative photograph showing a disaster incident",
+                "negative_text": "an unrelated decorative photograph with no incident information",
+                "decision_threshold_margin": 0.0,
+                "calibrated": false,
+                "is_native_label_probability": false,
+                "margin": 0.030888766050338745
+              }
+            }
+          },
+          "available": true,
+          "method": "structured_scene_candidate_v2",
+          "reason": null
+        },
+        "spatial": {
+          "value": {
+            "largest_area": 0.0,
+            "union_area": 0.0,
+            "target_count": 0.0
+          },
+          "available": true,
+          "method": "canonical_target_box_extent_v1",
+          "reason": null
+        },
+        "complexity": {
+          "value": {
+            "target_count_scaled": 0.0,
+            "target_box_coverage": 0.0,
+            "class_diversity": 0.7959585933443496,
+            "all_count_scaled": 0.16
+          },
+          "available": true,
+          "method": "task_count_coverage_v1",
+          "reason": null
+        },
+        "geographic": {
+          "value": null,
+          "available": false,
+          "method": "trusted_geofence",
+          "reason": "trusted coordinates and mission region required"
+        },
+        "reliability": {
+          "value": {
+            "detection_scores": {
+              "car": 0.3724875748157501,
+              "truck": 0.20591911673545837,
+              "person": 0.08432154357433319,
+              "tree": 0.06680186092853546
+            },
+            "image_claim_scores": {
+              "bridge.present": {
+                "value": false,
+                "score": 0.042365662753582,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "bridges_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.present": {
+                "value": true,
+                "score": 0.9989074468612671,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.affected_or_greater": {
+                "value": false,
+                "score": 0.0010641432600095868,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_affected_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.minor_or_greater": {
+                "value": false,
+                "score": 1.8047619960270822e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "buildings_minor_or_greater",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "debris.present": {
+                "value": false,
+                "score": 8.938963219407015e-06,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "debris_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "flooding.present": {
+                "value": false,
+                "score": 5.830110967508517e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "building.flooded": {
+                "value": false,
+                "score": 5.072340354672633e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "flooding_structures",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.present": {
+                "value": true,
+                "score": 0.9698683619499207,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "road.damaged": {
+                "value": false,
+                "score": 3.8596379454247653e-05,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "roads_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.present": {
+                "value": true,
+                "score": 0.9983115196228027,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "tree.damaged": {
+                "value": false,
+                "score": 0.0001513607130618766,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "trees_damage",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              },
+              "water.present": {
+                "value": true,
+                "score": 0.9999566078186035,
+                "threshold": 0.5,
+                "calibrated": false,
+                "native_label": "water_any",
+                "method": "ladi_reference_multilabel_sigmoid_v1"
+              }
+            },
+            "calibrated": false,
+            "detector_available": true
+          },
+          "available": true,
+          "method": "per_claim_and_detection_scores_v2",
+          "reason": null
+        }
+      },
+      "claims": {
+        "building.present": true,
+        "road.present": true,
+        "building.affected_or_greater": false,
+        "building.minor_or_greater": false,
+        "building.flooded": false,
+        "road.damaged": false,
+        "tree.damaged": false,
+        "bridge.present": false,
+        "debris.present": false,
+        "flooding.present": false,
+        "tree.present": true,
+        "water.present": true
+      },
+      "claim_availability": {
+        "building.present": {
+          "available": true,
+          "reason": null
+        },
+        "building.affected_or_greater": {
+          "available": true,
+          "reason": null
+        }
+      },
+      "temporal": {
+        "capture_time_ms": null,
+        "allowed_delay_ms": null,
+        "age_ms": null,
+        "deadline_ms": null,
+        "completion_slack_ms": null,
+        "available": false,
+        "reason": "trusted capture/current timestamps required"
+      },
+      "definitions": {
+        "relevance": "(CLIP image-task cosine+1)/2;not probability or priority",
+        "novelty": "appearance distance and predicted concept change under supplied sender history",
+        "rarity": "normalized predicted-concept Bernoulli surprisal over causal sender history",
+        "spatial": "normalized target bounding-box extent/count;not physical distance",
+        "complexity": "predicted task-count/box-coverage/diversity proxies",
+        "claims": "positive detector observations or image-classifier decisions; raw CLIP contrasts stay descriptive evidence"
+      }
+    },
+    "rubric": {
+      "rubric_id": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "required_fact_names": [
+        "building.present",
+        "building.affected_or_greater"
+      ],
+      "rule": "Decode only using the supplied contract, then compare to known native reference facts.",
+      "numerical_checks": "literal completeness and logical closure are checked independently by code",
+      "decoding_contract": {
+        "id": "ladi_building_logic_v1",
+        "scope": "native LADI building presence and affected-or-greater claims only",
+        "required": [
+          "building.present",
+          "building.affected_or_greater"
+        ],
+        "unknown": "missing key, null, or availability=false; never detector non-detection",
+        "rules": [
+          {
+            "id": "affected_implies_present",
+            "if": [
+              "building.affected_or_greater",
+              true
+            ],
+            "then": [
+              "building.present",
+              true
+            ]
+          },
+          {
+            "id": "absent_implies_unaffected",
+            "if": [
+              "building.present",
+              false
+            ],
+            "then": [
+              "building.affected_or_greater",
+              false
+            ]
+          }
+        ],
+        "truth_caution": "Deriving a claim from a prediction does not establish its factual correctness."
+      }
+    },
+    "arm": "actual_extractor",
+    "audit": {
+      "contract_id": "ladi_building_logic_v1",
+      "contract_sha256": "f6f85ee1e2683b01cadd813bc9610016797fb8a7bf0b662733adc3480441f39e",
+      "explicit_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "decoded_claims": {
+        "building.affected_or_greater": false,
+        "building.present": true
+      },
+      "origins": {
+        "building.affected_or_greater": {
+          "kind": "explicit",
+          "field": "claims.building.affected_or_greater"
+        },
+        "building.present": {
+          "kind": "explicit",
+          "field": "claims.building.present"
+        }
+      },
+      "literal_complete": true,
+      "literal_missing": [],
+      "semantic_complete": true,
+      "semantic_missing": [],
+      "conflicts": [],
+      "unavailable_input_claims": [],
+      "factual": {
+        "known_reference_facts": {
+          "building.present": true,
+          "building.affected_or_greater": false
+        },
+        "compared": {
+          "building.present": {
+            "prediction": true,
+            "reference": true,
+            "correct": true
+          },
+          "building.affected_or_greater": {
+            "prediction": false,
+            "reference": false,
+            "correct": true
+          }
+        },
+        "wrong_fields": [],
+        "known_subset_consistent": true,
+        "all_required_verified": true,
+        "reference_unknown": []
+      },
+      "assessment_scope": "declared native facts, not full scene truth"
+    },
+    "expected": {
+      "parameters_consistent": true,
+      "representation_sufficient": true
+    }
+  }
+]

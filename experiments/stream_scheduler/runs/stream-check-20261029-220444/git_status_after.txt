@@ -1,0 +1,569 @@
+ M .gitignore
+ M AGENTS.md
+ M E2EMain.py
+ D EncDec/Baselines/JPEG/__init__.py
+ D EncDec/Baselines/JPEG/jpeg_bitstream.py
+ D EncDec/Baselines/JPEG/jpeg_codec.py
+ D EncDec/Baselines/JPEG/jpeg_pipeline.py
+ D EncDec/Baselines/__init__.py
+ D EncDec/Codebooks/__init__.py
+ D EncDec/Codebooks/codebook_codec.py
+ D EncDec/Codebooks/codebook_metrics.py
+ D EncDec/Codebooks/grouped_vq.py
+ D EncDec/Codebooks/index_codec.py
+ D EncDec/Codebooks/kmeans_vq.py
+ D EncDec/Codebooks/minibatch_kmeans_vq.py
+ D EncDec/Codebooks/product_vq.py
+ D EncDec/Evaluation/Communication/__init__.py
+ D EncDec/Evaluation/Communication/bandwidth.py
+ D EncDec/Evaluation/Communication/ber.py
+ D EncDec/Evaluation/Communication/cbr.py
+ D EncDec/Evaluation/Communication/channel_uses.py
+ D EncDec/Evaluation/Communication/ser.py
+ D EncDec/Evaluation/Compression/__init__.py
+ D EncDec/Evaluation/Compression/codebook_size.py
+ D EncDec/Evaluation/Compression/compression_ratio.py
+ D EncDec/Evaluation/Compression/latent_size.py
+ D EncDec/Evaluation/Compression/raw_size.py
+ D EncDec/Evaluation/Image/__init__.py
+ D EncDec/Evaluation/Image/ms_ssim.py
+ D EncDec/Evaluation/Image/psnr.py
+ D EncDec/Evaluation/Image/ssim.py
+ D EncDec/Evaluation/Reporting/__init__.py
+ D EncDec/Evaluation/Reporting/comparison_runner.py
+ D EncDec/Evaluation/Reporting/plotting.py
+ D EncDec/Evaluation/Reporting/report_builder.py
+ D EncDec/Evaluation/Reporting/result_table.py
+ D EncDec/Evaluation/__init__.py
+ D EncDec/Evaluation/audited_benchmark.py
+ D EncDec/Evaluation/benchmark_report.py
+ D EncDec/Evaluation/image_evaluator.py
+ D EncDec/Evaluation/kodak_benchmark.py
+ D EncDec/Evaluation/repaired_notebook_models.py
+ D EncDec/Models/DeepJSCC/__init__.py
+ D EncDec/Models/DeepJSCC/adapter.py
+ D EncDec/Models/DeepJSCC/channel_wrapper.py
+ D EncDec/Models/SwinJSCC/__init__.py
+ D EncDec/Models/SwinJSCC/adapter.py
+ D EncDec/Models/SwinJSCC/checkpoint_manager.py
+ D EncDec/Models/SwinJSCC/codebook_adapter.py
+ D EncDec/Models/SwinJSCC/decoder_runtime.py
+ D EncDec/Models/SwinJSCC/encoder_runtime.py
+ D EncDec/Models/SwinJSCC/features.py
+ D EncDec/Models/SwinJSCC/latent_extractor.py
+ D EncDec/Models/SwinJSCC/model_loader.py
+ D EncDec/Models/SwinJSCC/stage1_runner.py
+ D EncDec/Models/SwinJSCC/swin_config.py
+ D EncDec/Models/SwinJSCC/symbol_extractor.py
+ D EncDec/Models/SwinJSCC/trainer.py
+ D EncDec/Models/SwinJSCC/training_utils.py
+ D EncDec/Models/__init__.py
+ D EncDec/Postprocessing/__init__.py
+ D EncDec/Postprocessing/denormalization.py
+ D EncDec/Postprocessing/reconstruction.py
+ D EncDec/Postprocessing/tensor_to_image.py
+ D EncDec/Preprocessing/__init__.py
+ D EncDec/Preprocessing/image_loader.py
+ D EncDec/Preprocessing/normalization.py
+ D EncDec/Preprocessing/patch_utils.py
+ D EncDec/Preprocessing/resize.py
+ D EncDec/README.md
+ D EncDec/Research/__init__.py
+ D EncDec/Research/codebooks.py
+ D EncDec/Research/compressai_1_2_compat.py
+ D EncDec/Research/digital_phy.py
+ D EncDec/Research/metrics.py
+ D EncDec/Research/model_wrappers.py
+ D EncDec/Research/ntscc_rate_codebook.py
+ D EncDec/Research/ntscc_rate_conditioned_vq.py
+ D EncDec/Research/reporting.py
+ D EncDec/Research/session.py
+ D EncDec/__init__.py
+ D EncDec/catalog.py
+ D EncDec/config/defaults.yaml
+ D EncDec/environment/requirements-model-inference.txt
+ D EncDec/environment/requirements.txt
+ D EncDec/integration/__init__.py
+ D EncDec/integration/latent_transport.py
+ D EncDec/integration/scheduler_replay.py
+ D EncDec/notebooks/01_validate_and_demo.ipynb
+ D EncDec/notebooks/02_kodak_benchmark.ipynb
+ D EncDec/notebooks/03_portable_training.ipynb
+ D EncDec/notebooks/historical/Kodak24_All_Model_Benchmark.ipynb
+ D EncDec/notebooks/historical/Nandini_DeepJSCC_NTSCC_Integration.ipynb
+ D EncDec/notebooks/historical/Stage1A/01_stage1a_complete_kaggle.ipynb
+ D EncDec/notebooks/historical/Stage1A/SwinJSCC_Practical_Inspection.ipynb
+ D EncDec/notebooks/historical/Stage1A/SwinJSCC_Practical_Inspection_Local.ipynb
+ D EncDec/notebooks/historical/SwinJSCC_DIV2K_Kodak_T4x2_WITH_CODEBOOK.ipynb
+ D EncDec/notebooks/historical/SwinJSCC_Kaggle_T4x2_DataParallel_Training.ipynb
+ D EncDec/notebooks/historical/SwinJSCC_Official_DIV2K_Kodak_Kaggle_T4x2_DataParallel_FINAL.ipynb
+ D EncDec/notebooks/historical/notebookbf0f6f4129.ipynb
+ D EncDec/runtime.py
+ D EncDec/tests/test_latent_transport.py
+ D EncDec/tests/test_reporting.py
+ D EncDec/tests/test_team_benchmark_merge.py
+ D EncDec/tests/test_training_backend.py
+ D EncDec/training.py
+ D EncDec/worker.py
+ D INFRA/Artifacts/__init__.py
+ D INFRA/Artifacts/evaluation_artifact.py
+ D INFRA/Artifacts/image_artifact.py
+ D INFRA/Artifacts/knowledge_artifact.py
+ D INFRA/Artifacts/latent_artifact.py
+ D INFRA/Artifacts/observation_artifact.py
+ D INFRA/Artifacts/scheduling_artifact.py
+ D INFRA/Artifacts/semantic_packet_artifact.py
+ D INFRA/Artifacts/semantic_params_artifact.py
+ D INFRA/Artifacts/transmission_artifact.py
+ D INFRA/Channels/__init__.py
+ D INFRA/Channels/awgn.py
+ D INFRA/Channels/channel_factory.py
+ D INFRA/Channels/channel_utils.py
+ D INFRA/Channels/qam.py
+ D INFRA/Channels/qpsk.py
+ D INFRA/Channels/rayleigh.py
+ D INFRA/Channels/rician.py
+ D INFRA/Core/__init__.py
+ D INFRA/Core/execution_plan.py
+ D INFRA/Core/lifecycle_manager.py
+ D INFRA/Core/pipeline_manager.py
+ D INFRA/Core/runtime_context.py
+ D INFRA/Core/stage_controller.py
+ D INFRA/Deployment/__init__.py
+ D INFRA/Deployment/unavailable_adapters.py
+ D INFRA/Interfaces/__init__.py
+ D INFRA/Interfaces/channel_interface.py
+ D INFRA/Interfaces/codebook_interface.py
+ D INFRA/Interfaces/deployment_interface.py
+ D INFRA/Interfaces/encdec_interface.py
+ D INFRA/Interfaces/evaluator_interface.py
+ D INFRA/Interfaces/knowledge_interface.py
+ D INFRA/Interfaces/latent_interface.py
+ D INFRA/Interfaces/param_extractor_interface.py
+ D INFRA/Interfaces/scheduler_interface.py
+ D INFRA/README.md
+ D INFRA/Registries/__init__.py
+ D INFRA/Registries/base_registry.py
+ D INFRA/Registries/channel_registry.py
+ D INFRA/Registries/codebook_registry.py
+ D INFRA/Registries/encdec_registry.py
+ D INFRA/Registries/evaluator_registry.py
+ D INFRA/Registries/knowledge_registry.py
+ D INFRA/Registries/parameter_codebook_registry.py
+ D INFRA/Registries/scheduler_registry.py
+ D INFRA/Registries/transformer_registry.py
+ D INFRA/Runtime/__init__.py
+ D INFRA/Runtime/artifact_store.py
+ D INFRA/Runtime/checkpoint_context.py
+ D INFRA/Runtime/result_manager.py
+ D INFRA/Runtime/runtime_logger.py
+ D INFRA/Runtime/timing_profiler.py
+ D INFRA/Transport/DigitalPHY/__init__.py
+ D INFRA/Transport/DigitalPHY/bit_utils.py
+ D INFRA/Transport/DigitalPHY/channel_coding.py
+ D INFRA/Transport/DigitalPHY/qam_modem.py
+ D INFRA/Transport/DigitalPHY/qpsk_modem.py
+ D INFRA/Transport/__init__.py
+ D INFRA/__init__.py
+ D INFRA/cli.py
+ D INFRA/config/defaults.yaml
+ D INFRA/config/semantic_scheduler_demo.yaml
+ D INFRA/config/semantic_scheduler_dynamic260.yaml
+ D INFRA/config/ue_profiles.yaml
+ D INFRA/configuration.py
+ D INFRA/contracts.py
+ D INFRA/data/__init__.py
+ D INFRA/data/feature_cache.py
+ D INFRA/data/kaggle_bundle.py
+ D INFRA/data/ladi_manifest.py
+ D INFRA/dependencies.py
+ D INFRA/environment/requirements.txt
+ D INFRA/errors.py
+ D INFRA/evaluation/__init__.py
+ D INFRA/evaluation/semantic.py
+ D INFRA/event_simulation.py
+ D INFRA/experiments/__init__.py
+ D INFRA/experiments/semantic_scheduler_experiment.py
+ D INFRA/experiments/semantic_showcase.py
+ D INFRA/experiments/static_latent_experiment.py
+ D INFRA/feature_cache.py
+ D INFRA/features.py
+ D INFRA/hashing.py
+ D INFRA/kaggle_dataset_bundle.py
+ D INFRA/ladi_manifest.py
+ D INFRA/latent/README.md
+ D INFRA/latent/__init__.py
+ D INFRA/latent/cli.py
+ D INFRA/latent/contracts.py
+ D INFRA/latent/evaluation.py
+ D INFRA/latent/experiment.py
+ D INFRA/latent/simulation.py
+ D INFRA/learning/__init__.py
+ D INFRA/learning/dqn_training.py
+ D INFRA/learning/supervised_training.py
+ D INFRA/legacy_cli.py
+ D INFRA/notebooks.py
+ D INFRA/notebooks/01_validate_and_demo.ipynb
+ D INFRA/runs.py
+ D INFRA/scheduling/README.md
+ D INFRA/scheduling/__init__.py
+ D INFRA/scheduling/contracts.py
+ D INFRA/scheduling/event_simulation.py
+ D INFRA/scheduling/requests.py
+ D INFRA/scheduling/semantic_contracts.py
+ D INFRA/scheduling/simulation.py
+ D INFRA/scheduling/streams.py
+ D INFRA/scheduling_requests.py
+ D INFRA/semantic_config.py
+ D INFRA/semantic_contracts.py
+ D INFRA/semantic_evaluator.py
+ D INFRA/semantic_streams.py
+ D INFRA/simulation.py
+ D INFRA/tests/test_event_simulation.py
+ D INFRA/tests/test_external_worker.py
+ D INFRA/tests/test_kaggle_dataset_bundle.py
+ D INFRA/tests/test_ladi_manifest.py
+ D INFRA/tests/test_latent_scheduler.py
+ D INFRA/tests/test_layout_compatibility.py
+ D INFRA/tests/test_modular_runtime.py
+ D INFRA/tests/test_priority_match_objective.py
+ D INFRA/tests/test_semantic_config.py
+ D INFRA/tests/test_semantic_experiment_integration.py
+ D INFRA/tests/test_semantic_stream_order.py
+ D INFRA/tests/test_training_exports.py
+ D INFRA/tests/test_transport_selection.py
+ D INFRA/utils/__init__.py
+ D INFRA/utils/config_loader.py
+ D INFRA/utils/device_utils.py
+ D INFRA/utils/logging_utils.py
+ D INFRA/utils/path_utils.py
+ D INFRA/utils/seed.py
+ D INFRA/utils/serialization.py
+ D INFRA/workers.py
+ M PROJECT_MAP.md
+ M README.md
+ M Scheduler/README.md
+ M Scheduler/__init__.py
+ M Scheduler/baselines/fixtures.py
+ M Scheduler/baselines/policies.py
+ M Scheduler/latent/policies.py
+ M Scheduler/semantic/features.py
+ M Scheduler/semantic/policies.py
+ M Scheduler/tests/test_policies.py
+ M Scheduler/tests/test_semantic_policies.py
+ D SemParam/Codebooks/__init__.py
+ D SemParam/Codebooks/pipeline.py
+ D SemParam/Codebooks/semantic_codebook.py
+ D SemParam/Codebooks/swin_representation.py
+ D SemParam/KnowledgeBases/__init__.py
+ D SemParam/KnowledgeBases/networkx_baseline.py
+ D SemParam/KnowledgeBases/scalable_placeholders.py
+ D SemParam/README.md
+ D SemParam/TransformerParam/__init__.py
+ D SemParam/__init__.py
+ D SemParam/benchmark.py
+ D SemParam/catalog.py
+ D SemParam/clip_backbone.py
+ D SemParam/config/codebook_training.yaml
+ D SemParam/config/defaults.yaml
+ D SemParam/config/extraction.yaml
+ D SemParam/config/scheduling_features_v2.yaml
+ D SemParam/config/task_profiles/post_disaster_access_v1.yaml
+ D SemParam/delivered_history.py
+ D SemParam/environment/requirements.txt
+ D SemParam/evaluation/__init__.py
+ D SemParam/evaluation/coverage.py
+ D SemParam/extractors.py
+ D SemParam/features/README.md
+ D SemParam/features/__init__.py
+ D SemParam/features/clip.py
+ D SemParam/features/extractors.py
+ D SemParam/features/ladi_prediction.py
+ D SemParam/features/latent.py
+ D SemParam/features/observation.py
+ D SemParam/features/scheduler.py
+ D SemParam/headers/__init__.py
+ D SemParam/headers/packet.py
+ D SemParam/headers/semantic.py
+ D SemParam/history/__init__.py
+ D SemParam/history/delivered.py
+ D SemParam/ladi_prediction_provider.py
+ D SemParam/notebooks/01_validate_and_demo.ipynb
+ D SemParam/notebooks/02_image_extraction.ipynb
+ D SemParam/notebooks/03_codebook_training.ipynb
+ D SemParam/notebooks/historical/Stage1B/02_transformer_vs_codebook_semantic_header.ipynb
+ D SemParam/notebooks/historical/Stage1C/01_train_parameter_codebook_local.ipynb
+ D SemParam/observation_builder.py
+ D SemParam/packet_builder.py
+ D SemParam/pipeline.py
+ D SemParam/runtime.py
+ D SemParam/scheduler_features.py
+ D SemParam/semantic_header.py
+ D SemParam/showcase.py
+ D SemParam/tests/test_independence.py
+ D SemParam/tests/test_ladi_prediction_provider.py
+ D SemParam/tests/test_latent_features.py
+ D SemParam/tests/test_scheduler_features.py
+ D SemParam/tests/test_semantic_header_v2.py
+ D SemParam/training.py
+ M config.yaml
+ M docs/README.md
+ D graphify-out/cost.json
+ D graphify-out/manifest.json
+ M pyproject.toml
+ M scripts/codecs/register_deepjscc.py
+ M scripts/codecs/run_deepjscc.py
+ M scripts/codecs/test_deepjscc_registry.py
+ M scripts/data/build_ladi_review_page.py
+ M scripts/data/curate_ladi260.py
+ M scripts/data/curate_ladi60.py
+ M scripts/data/freeze_ladi60_prototype.py
+ M scripts/data/package_ladi260_dataset.py
+ M scripts/data/package_ladi_review_dataset.py
+ M scripts/kaggle/package_semantic_payload_costs.py
+ M scripts/kaggle/prepare_static_latent_kaggle.py
+ M scripts/maintenance/refresh_graph.py
+ M scripts/maintenance/restructure_repository.py
+ M scripts/reports/build_scheduler_explanation_doc.py
+ M scripts/reports/plot_dynamic_priority_matches.py
+ M scripts/run_static_latent_scheduler.py
+ M scripts/scheduler/evaluate_downloaded_scheduler.py
+ M scripts/scheduler/evaluate_dynamic_overload_frozen_dqn.py
+ M scripts/scheduler/evaluate_fixed_decision_matches.py
+ M scripts/scheduler/replay_static_latent_schedule.py
+ M scripts/scheduler/train_class_priority_dqn.py
+ M scripts/semparam/train_parameter_codebook.py
+ M semcom_benchmark/__init__.py
+ M semcom_benchmark/codebooks.py
+ M semcom_benchmark/compressai_1_2_compat.py
+ M semcom_benchmark/digital_phy.py
+ M semcom_benchmark/metrics.py
+ M semcom_benchmark/model_wrappers.py
+ M semcom_benchmark/ntscc_rate_codebook.py
+ M semcom_benchmark/ntscc_rate_conditioned_vq.py
+ M semcom_benchmark/reporting.py
+ M semcom_benchmark/session.py
+ M setup.py
+ M src/Baselines/DigitalPHY/__init__.py
+ M src/Baselines/DigitalPHY/bit_utils.py
+ M src/Baselines/DigitalPHY/channel_coding.py
+ M src/Baselines/DigitalPHY/qam_modem.py
+ M src/Baselines/DigitalPHY/qpsk_modem.py
+ M src/Baselines/JPEG/__init__.py
+ M src/Baselines/JPEG/jpeg_bitstream.py
+ M src/Baselines/JPEG/jpeg_codec.py
+ M src/Baselines/JPEG/jpeg_pipeline.py
+ M src/Baselines/__init__.py
+ M src/Channels/__init__.py
+ M src/Channels/awgn.py
+ M src/Channels/channel_factory.py
+ M src/Channels/channel_utils.py
+ M src/Channels/qam.py
+ M src/Channels/qpsk.py
+ M src/Channels/rayleigh.py
+ M src/Channels/rician.py
+ M src/CodebookParam/__init__.py
+ M src/CodebookParam/pipeline.py
+ M src/CodebookParam/semantic_codebook.py
+ M src/CodebookParam/swin_representation.py
+ M src/EncDecPipeline/Codebooks/__init__.py
+ M src/EncDecPipeline/Codebooks/codebook_codec.py
+ M src/EncDecPipeline/Codebooks/codebook_metrics.py
+ M src/EncDecPipeline/Codebooks/grouped_vq.py
+ M src/EncDecPipeline/Codebooks/index_codec.py
+ M src/EncDecPipeline/Codebooks/kmeans_vq.py
+ M src/EncDecPipeline/Codebooks/minibatch_kmeans_vq.py
+ M src/EncDecPipeline/Codebooks/product_vq.py
+ M src/EncDecPipeline/Models/DeepJSCC/__init__.py
+ M src/EncDecPipeline/Models/DeepJSCC/adapter.py
+ M src/EncDecPipeline/Models/DeepJSCC/channel_wrapper.py
+ M src/EncDecPipeline/Models/SwinJSCC/__init__.py
+ M src/EncDecPipeline/Models/SwinJSCC/adapter.py
+ M src/EncDecPipeline/Models/SwinJSCC/checkpoint_manager.py
+ M src/EncDecPipeline/Models/SwinJSCC/codebook_adapter.py
+ M src/EncDecPipeline/Models/SwinJSCC/decoder_runtime.py
+ M src/EncDecPipeline/Models/SwinJSCC/encoder_runtime.py
+ M src/EncDecPipeline/Models/SwinJSCC/latent_extractor.py
+ M src/EncDecPipeline/Models/SwinJSCC/model_loader.py
+ M src/EncDecPipeline/Models/SwinJSCC/stage1_runner.py
+ M src/EncDecPipeline/Models/SwinJSCC/swin_config.py
+ M src/EncDecPipeline/Models/SwinJSCC/symbol_extractor.py
+ M src/EncDecPipeline/Models/SwinJSCC/trainer.py
+ M src/EncDecPipeline/Models/SwinJSCC/training_utils.py
+ M src/EncDecPipeline/Models/__init__.py
+ M src/EncDecPipeline/Postprocessing/__init__.py
+ M src/EncDecPipeline/Postprocessing/denormalization.py
+ M src/EncDecPipeline/Postprocessing/reconstruction.py
+ M src/EncDecPipeline/Postprocessing/tensor_to_image.py
+ M src/EncDecPipeline/Preprocessing/__init__.py
+ M src/EncDecPipeline/Preprocessing/image_loader.py
+ M src/EncDecPipeline/Preprocessing/normalization.py
+ M src/EncDecPipeline/Preprocessing/patch_utils.py
+ M src/EncDecPipeline/Preprocessing/resize.py
+ M src/EncDecPipeline/__init__.py
+ D src/Evaluation/Communication/__init__.py
+ D src/Evaluation/Communication/bandwidth.py
+ D src/Evaluation/Communication/ber.py
+ D src/Evaluation/Communication/cbr.py
+ D src/Evaluation/Communication/channel_uses.py
+ D src/Evaluation/Communication/ser.py
+ D src/Evaluation/Compression/__init__.py
+ D src/Evaluation/Compression/codebook_size.py
+ D src/Evaluation/Compression/compression_ratio.py
+ D src/Evaluation/Compression/latent_size.py
+ D src/Evaluation/Compression/raw_size.py
+ D src/Evaluation/Image/__init__.py
+ D src/Evaluation/Image/ms_ssim.py
+ D src/Evaluation/Image/psnr.py
+ D src/Evaluation/Image/ssim.py
+ D src/Evaluation/Reporting/__init__.py
+ D src/Evaluation/Reporting/comparison_runner.py
+ D src/Evaluation/Reporting/plotting.py
+ D src/Evaluation/Reporting/report_builder.py
+ D src/Evaluation/Reporting/result_table.py
+ D src/Evaluation/__init__.py
+ D src/Evaluation/image_evaluator.py
+ D src/Evaluation/kodak_benchmark.py
+ D src/Evaluation/repaired_notebook_models.py
+ M src/INFRA/Artifacts/__init__.py
+ M src/INFRA/Artifacts/evaluation_artifact.py
+ M src/INFRA/Artifacts/image_artifact.py
+ M src/INFRA/Artifacts/knowledge_artifact.py
+ M src/INFRA/Artifacts/latent_artifact.py
+ M src/INFRA/Artifacts/observation_artifact.py
+ M src/INFRA/Artifacts/scheduling_artifact.py
+ M src/INFRA/Artifacts/semantic_packet_artifact.py
+ M src/INFRA/Artifacts/semantic_params_artifact.py
+ M src/INFRA/Artifacts/transmission_artifact.py
+ M src/INFRA/Core/__init__.py
+ M src/INFRA/Core/execution_plan.py
+ M src/INFRA/Core/lifecycle_manager.py
+ M src/INFRA/Core/pipeline_manager.py
+ M src/INFRA/Core/runtime_context.py
+ M src/INFRA/Core/stage_controller.py
+ M src/INFRA/Deployment/__init__.py
+ M src/INFRA/Deployment/unavailable_adapters.py
+ M src/INFRA/Interfaces/__init__.py
+ M src/INFRA/Interfaces/channel_interface.py
+ M src/INFRA/Interfaces/codebook_interface.py
+ M src/INFRA/Interfaces/deployment_interface.py
+ M src/INFRA/Interfaces/encdec_interface.py
+ M src/INFRA/Interfaces/evaluator_interface.py
+ M src/INFRA/Interfaces/knowledge_interface.py
+ M src/INFRA/Interfaces/latent_interface.py
+ M src/INFRA/Interfaces/param_extractor_interface.py
+ M src/INFRA/Interfaces/scheduler_interface.py
+ M src/INFRA/Registries/__init__.py
+ M src/INFRA/Registries/base_registry.py
+ M src/INFRA/Registries/channel_registry.py
+ M src/INFRA/Registries/codebook_registry.py
+ M src/INFRA/Registries/encdec_registry.py
+ M src/INFRA/Registries/evaluator_registry.py
+ M src/INFRA/Registries/knowledge_registry.py
+ M src/INFRA/Registries/parameter_codebook_registry.py
+ M src/INFRA/Registries/scheduler_registry.py
+ M src/INFRA/Registries/transformer_registry.py
+ M src/INFRA/Runtime/__init__.py
+ M src/INFRA/Runtime/artifact_store.py
+ M src/INFRA/Runtime/checkpoint_context.py
+ M src/INFRA/Runtime/result_manager.py
+ M src/INFRA/Runtime/runtime_logger.py
+ M src/INFRA/Runtime/timing_profiler.py
+ M src/INFRA/__init__.py
+ M src/INFRA/errors.py
+ M src/TransformerPipeline/KnowledgeBases/__init__.py
+ M src/TransformerPipeline/KnowledgeBases/networkx_baseline.py
+ M src/TransformerPipeline/KnowledgeBases/scalable_placeholders.py
+ M src/TransformerPipeline/TransformerParam/__init__.py
+ M src/TransformerPipeline/__init__.py
+ M src/TransformerPipeline/benchmark.py
+ M src/TransformerPipeline/catalog.py
+ M src/TransformerPipeline/clip_backbone.py
+ M src/TransformerPipeline/extractors.py
+ M src/TransformerPipeline/observation_builder.py
+ M src/TransformerPipeline/packet_builder.py
+ M src/TransformerPipeline/pipeline.py
+ M src/TransformerPipeline/runtime.py
+ M src/TransformerPipeline/semantic_header.py
+ M src/TransformerPipeline/showcase.py
+ M src/utils/__init__.py
+ M src/utils/config_loader.py
+ M src/utils/device_utils.py
+ M src/utils/logging_utils.py
+ M src/utils/path_utils.py
+ M src/utils/seed.py
+ M src/utils/serialization.py
+?? Codec/
+?? Evaluation/
+?? Notebooks/teaching/
+?? Scheduler/ALGORITHMS.md
+?? Scheduler/contextual_decoder_scheduler.py
+?? Scheduler/decoder_scheduler.py
+?? Scheduler/disaster_rankers.py
+?? Scheduler/latent_policies.py
+?? Scheduler/notebooks/03_review_downloaded_run.ipynb
+?? Scheduler/scene_policy.py
+?? Scheduler/spi_policy.py
+?? Scheduler/tests/test_contextual_decoder_scheduler.py
+?? Scheduler/tests/test_decoder_scheduler.py
+?? Scheduler/training/
+?? Test/tests/test_stream_simulator.py
+?? data/car_Fire.jpg
+?? data/car_fire_extinguish.jpg
+?? data/car_fire_extinguish2.jpg
+?? docs/CONSOLIDATION_20261027.md
+?? docs/FINAL_PARAMETER_SPECIFICATION.html
+?? docs/FINAL_PARAMETER_SPECIFICATION.md
+?? docs/PARAMETER_SPECIFICATION_V2.md
+?? docs/PHASE1_EXTRACTION_RESEARCH.md
+?? docs/PHASE1_IMPLEMENTATION_PLAN.md
+?? docs/PHASE1_LITERATURE_SURVEY.md
+?? docs/SEMANTIC_COMMUNICATION_PROJECT_REPORT.docx
+?? docs/SEMANTIC_COMMUNICATION_PROJECT_REPORT.md
+?? docs/SEMANTIC_EVIDENCE_EXTRACTION_PIPELINE.md
+?? docs/SEMANTIC_LATENT_SCHEDULER_FINAL_PLAN.md
+?? docs/SEMANTIC_SCHEDULER_EXPLANATION_GUIDE.docx
+?? "docs/Semantic Aware Scheduler Presentation.pdf"
+?? docs/Semantic_Aware_Latent_Scheduler_Final_Approach.docx
+?? docs/Semantic_Parameters_11_Slides.pptx
+?? docs/decoder_context/
+?? docs/decoder_scheduler_redesign/
+?? docs/disaster_decoder_v3/
+?? docs/parameter_audit/
+?? docs/scheduler_review/
+?? docs/semantic_parameter_extraction_architecture.svg
+?? docs/semantic_parameter_presentation_outline.md
+?? docs/semantic_scheduler_guide_render/
+?? environment/requirements-scene-suite.txt
+?? experiments/
+?? models/clip_openai/
+?? models/yolov8s-worldv2.pt
+?? parameters/
+?? project_compat.py
+?? scripts/audit_qwen_repair.py
+?? scripts/audit_scene_suite_run.py
+?? scripts/audit_trecis_reference.py
+?? scripts/build_decoder_v3_handoff.py
+?? scripts/build_decoder_v3_notebook.py
+?? scripts/build_disaster_ranking_notebook.py
+?? scripts/build_downloaded_run_review.py
+?? scripts/build_parameter_extraction_demo_notebook.py
+?? scripts/build_qwen_diagnostic.py
+?? scripts/build_scene_suite_notebooks.py
+?? scripts/build_scheduler_explanation_doc.py
+?? scripts/build_scheduler_teaching_notebook.py
+?? scripts/compare_original_schedulers.py
+?? scripts/demo_decoder_scheduler.py
+?? scripts/evaluate_downloaded_scheduler.py
+?? scripts/evaluate_dynamic_overload_frozen_dqn.py
+?? scripts/evaluate_fixed_decision_matches.py
+?? scripts/evaluate_scene_receiver_hybrid.py
+?? scripts/export_scheduler_session.py
+?? scripts/package_decoder_context_delivery.py
+?? scripts/plot_dynamic_priority_matches.py
+?? scripts/plot_static_dynamic_scheduler_comparison.py
+?? scripts/prepare_scheduler_publication.py
+?? scripts/run_scene_correction_study.py
+?? scripts/run_scheduler_teaching_notebook.py
+?? scripts/train_class_priority_dqn.py
+?? scripts/update_kodak_compact_comparison.py

@@ -1,0 +1,66 @@
+{
+  "run_id": "20261028_under10b_comparison_v8_checked",
+  "notebook": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "notebook_id": 141089219,
+  "submitted_version": 8,
+  "submit_exit": 0,
+  "status": "COMPLETE",
+  "source_sha256": "36c5ec35ed09d6a7621d598fc39eeffae727beb73106a840d2fcbad19df7dcb7",
+  "notebook_sha256": "443938978aa04b30d5a6f0ad2b149e6d5dff6b93280b0e977e4cf372f07757f1",
+  "input": "satyapaladugu/betterscheduler-spiv2-inputs-20261027b",
+  "server_seconds": 7200,
+  "aggregate_gpu_hour_cap": 4.0,
+  "accelerator": "NvidiaTeslaT4",
+  "purpose": "fixed-panel under-10B five-VLM direct four-class prompt comparison",
+  "candidates": [
+    "gemma4_e4b",
+    "qwen35_9b",
+    "qwen3vl_8b",
+    "qwen25_7b",
+    "internvl3_8b"
+  ],
+  "visual_panel_size": 24,
+  "text_controls": 48,
+  "training_allowed": false,
+  "promotion_allowed": false,
+  "bulk_parameter_cache": false,
+  "automated_winner": false,
+  "thinking": false,
+  "preflight": {
+    "namespace_stubs_exact": 3,
+    "notebook_compiles": true,
+    "nbformat": "4.5",
+    "current_nonstub_match": "113/113",
+    "comparison_specs": 5,
+    "embedded_source_match": true,
+    "driver": "experiments.spi_four_class.compare_vlms.execute",
+    "archive_sources": "116/116"
+  },
+  "retrieval": {
+    "run_recovery_zip": "retrieved_version8/run_recovery.zip",
+    "campaign_manifest": "973/973",
+    "full_recovery_retrieved": true,
+    "outer_manifest": "982/982",
+    "zip_crc": "pass",
+    "expanded_path": "retrieved_version8/recovery_expanded",
+    "run_recovery_sha256": "21bb4ff008e0ae49ea85f92f13fd050f61a7a997dcf37e8953ec2e0eb3c736eb"
+  },
+  "results": {
+    "text_controls_per_candidate": "48/48",
+    "visual_per_candidate": "24/24",
+    "text_macro_f1": {
+      "internvl3_8b": 0.7370588235294118,
+      "qwen25_7b": 0.5952731092436975,
+      "qwen35_9b": 0.9163752913752914,
+      "qwen3vl_8b": 0.6931372549019608,
+      "gemma4_e4b": 0.6454954954954956
+    },
+    "all_candidates_completed": 5,
+    "visual_accuracy": "undefined: no independent urgency reference",
+    "winner_selected": false,
+    "text_gate_only_qwen35_passed": true,
+    "bulk_cache": false,
+    "promotion": false,
+    "training": false
+  }
+}

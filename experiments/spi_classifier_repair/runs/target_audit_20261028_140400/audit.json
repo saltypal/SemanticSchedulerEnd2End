@@ -1,0 +1,584 @@
+{
+  "class_source": {
+    "train": {
+      "ladi": {
+        "Low": 73,
+        "Medium": 18,
+        "High": 63,
+        "Critical": 4
+      },
+      "medic": {
+        "Low": 15,
+        "Medium": 6,
+        "High": 15,
+        "Critical": 10
+      }
+    },
+    "validation": {
+      "ladi": {
+        "Low": 31,
+        "Medium": 7,
+        "High": 22,
+        "Critical": 2
+      },
+      "medic": {
+        "Low": 12,
+        "Medium": 1,
+        "High": 16,
+        "Critical": 5
+      }
+    }
+  },
+  "saved_head_fit_metrics": {
+    "train": {
+      "n": 204,
+      "levels": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "ordinal_scale": "configured output order",
+      "accuracy": 0.7058823529411765,
+      "balanced_accuracy": 0.7271582584082584,
+      "macro_f1": 0.6636545064055952,
+      "brier_multiclass": 0.540148533435762,
+      "critical_to_low_medium": 0,
+      "critical_to_low_medium_rate": 0.0,
+      "log_loss": 0.9832504433867251,
+      "rps": 0.13418327786850542,
+      "ordinal_mae": 0.4264705882352941,
+      "confusion_true_rows_predicted_columns": [
+        [
+          69,
+          9,
+          8,
+          2
+        ],
+        [
+          3,
+          20,
+          1,
+          0
+        ],
+        [
+          15,
+          6,
+          45,
+          12
+        ],
+        [
+          0,
+          0,
+          4,
+          10
+        ]
+      ],
+      "high_critical_underpredictions": 25,
+      "per_class": {
+        "Low": {
+          "support": 88,
+          "precision": 0.7931034482758621,
+          "recall": 0.7840909090909091,
+          "f1": 0.7885714285714286
+        },
+        "Medium": {
+          "support": 24,
+          "precision": 0.5714285714285714,
+          "recall": 0.8333333333333334,
+          "f1": 0.6779661016949152
+        },
+        "High": {
+          "support": 78,
+          "precision": 0.7758620689655172,
+          "recall": 0.5769230769230769,
+          "f1": 0.6617647058823529
+        },
+        "Critical": {
+          "support": 14,
+          "precision": 0.4166666666666667,
+          "recall": 0.7142857142857143,
+          "f1": 0.5263157894736842
+        }
+      }
+    },
+    "validation": {
+      "n": 96,
+      "levels": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "ordinal_scale": "configured output order",
+      "accuracy": 0.5104166666666666,
+      "balanced_accuracy": 0.5738055166987236,
+      "macro_f1": 0.46370801725683597,
+      "brier_multiclass": 0.6216157139611652,
+      "critical_to_low_medium": 0,
+      "critical_to_low_medium_rate": 0.0,
+      "log_loss": 1.114520218339276,
+      "rps": 0.15037073644151255,
+      "ordinal_mae": 0.6770833333333334,
+      "confusion_true_rows_predicted_columns": [
+        [
+          23,
+          14,
+          2,
+          4
+        ],
+        [
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          8,
+          4,
+          16,
+          10
+        ],
+        [
+          0,
+          0,
+          2,
+          5
+        ]
+      ],
+      "high_critical_underpredictions": 14,
+      "per_class": {
+        "Low": {
+          "support": 43,
+          "precision": 0.696969696969697,
+          "recall": 0.5348837209302325,
+          "f1": 0.6052631578947368
+        },
+        "Medium": {
+          "support": 8,
+          "precision": 0.21739130434782608,
+          "recall": 0.625,
+          "f1": 0.3225806451612903
+        },
+        "High": {
+          "support": 38,
+          "precision": 0.7619047619047619,
+          "recall": 0.42105263157894735,
+          "f1": 0.5423728813559322
+        },
+        "Critical": {
+          "support": 7,
+          "precision": 0.2631578947368421,
+          "recall": 0.7142857142857143,
+          "f1": 0.38461538461538464
+        }
+      }
+    }
+  },
+  "nearest_conflicting_labels": [
+    {
+      "first": "07e65103dd0d125d4a73518a0545c13a6bc29f4430fa6c6c3245fae46ff63f86",
+      "second": "2bec7e00c76a9c978edc5d05e17e2f64062dbbee11d6aa988bf43e002c5440e8",
+      "cosine": 0.9472330212593079,
+      "levels": [
+        "Medium",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "validation"
+      ]
+    },
+    {
+      "first": "f06c64714775cb4d6816940aa7d5929d9d9c7bdedcc0707e4d697b7172b8f301",
+      "second": "8c650a3453e455857566203c74d22c66a144502e2f7ce377f97bd019d3936291",
+      "cosine": 0.9436295032501221,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "efd29e4b74368839d602bbe65a01e669393559d5649885f09b8a6697eb6d02b9",
+      "second": "efdba29442999ac4af4bea299a90dc3ef5ca18ab84a23dbb2cc7802f8619226d",
+      "cosine": 0.9397114515304565,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "37c956f3e140d5ee50452b664a3556fbf1d979d024c27ac00a76af4d1fcff017",
+      "second": "50a6cd201c78613bec6fc0c6fc9551bb937399672318d852807e50137db68fda",
+      "cosine": 0.9392077326774597,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "44ad0d157fbef8b3acfe4910e8d10aa7d7f76bfb698d34a8ef293877976c335c",
+      "second": "96e2cbfe7d54d1dbbc9f20c3abc50a9fe962f0bb44ab596bc5542e54a4994ced",
+      "cosine": 0.938446044921875,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "97673081dc7cb7181cfc0f63f00c2a442a71313bcf92c704a385d12adb4ba720",
+      "second": "d10e5b02c3899ebe2c9d74b7e40a84d443335bae00b9f5fc9c8c686f8b0cb2f2",
+      "cosine": 0.9365076422691345,
+      "levels": [
+        "Low",
+        "High"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "3899b5a22c77a269b5ecaacdb444fec1a7ccfe58c6f8d973e5d8bce50371a9e4",
+      "second": "bcf3a7dfff3b05183248524dce0577507bb2c7c583a8b90b7af909d081d7509b",
+      "cosine": 0.9358886480331421,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "3899b5a22c77a269b5ecaacdb444fec1a7ccfe58c6f8d973e5d8bce50371a9e4",
+      "second": "4d74e6ea3df13d21ef6dfacbb269dc398a3b9238c01b25518cfa45070705ffb9",
+      "cosine": 0.935001790523529,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "d393721d69e101191b70889067bd0faa39a841c4501ba8313c1760dc21883375",
+      "second": "ddeff79759ac5a22f11ed0a3d9d732c9f741234a0fd9286523613482a46f116e",
+      "cosine": 0.9326395392417908,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "1fbf1064c865a679aa3e03fe6cef830b023cb35734424ff5c37b498c36f77468",
+      "second": "5f946082db26145e5a5c86683beef4fa8deda35a56ff2c4af1eb9ef832908307",
+      "cosine": 0.9325694441795349,
+      "levels": [
+        "Medium",
+        "Low"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "d393721d69e101191b70889067bd0faa39a841c4501ba8313c1760dc21883375",
+      "second": "d6ff1113d7969147242a37314c273a9d597bb04cf50f9263824dd54ae85c8de1",
+      "cosine": 0.9314103722572327,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "061bfec1480caa5b255a2dbf708b585f32aad9e03c3c11931b4995a6140f499b",
+      "second": "b5dddc8a750fa444a08bb67237b524c0091e82b27f855e6ff5da05d7dd099de9",
+      "cosine": 0.9308385848999023,
+      "levels": [
+        "Critical",
+        "High"
+      ],
+      "splits": [
+        "train",
+        "validation"
+      ]
+    },
+    {
+      "first": "cfa6970eb65fd0a8cf83b876e49d3e9ff00d14de4fa1f1d0b0d3b7a6fc86d1f6",
+      "second": "9fbcc64945e35b1fe9055a64f2229ce6f1bacbd07fa5de8e51de625f12960651",
+      "cosine": 0.9301886558532715,
+      "levels": [
+        "Low",
+        "Medium"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "28df79872e10ea08bbbbfd9e8035319d0f971a430b218ae8de4cd2c71d72518b",
+      "second": "5359c4da0202c3e9e59c11af3b55a5cdab3733fa35bff93a0f0f856f37997024",
+      "cosine": 0.9300963878631592,
+      "levels": [
+        "Medium",
+        "Low"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "136f6854e36dee1e5ee033f1c8bdf76f98d1397a122a3d42b5473add5f25e579",
+      "second": "f4cc0a84a4d7e6a6027e46ff02175daa0d7677fd7afeec78ade2f7c5c8a571d5",
+      "cosine": 0.9298818111419678,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "validation"
+      ]
+    },
+    {
+      "first": "9fbcc64945e35b1fe9055a64f2229ce6f1bacbd07fa5de8e51de625f12960651",
+      "second": "94f92493d2f5adba92726d30a964b1342f160a263d1f52d8f8fd130e0bb863f6",
+      "cosine": 0.9296145439147949,
+      "levels": [
+        "Medium",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "validation"
+      ]
+    },
+    {
+      "first": "061bfec1480caa5b255a2dbf708b585f32aad9e03c3c11931b4995a6140f499b",
+      "second": "dbce4f17d7869ac004f58ec022527285584dc78216baa01197586f1ac5999a93",
+      "cosine": 0.9294820427894592,
+      "levels": [
+        "Critical",
+        "High"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "6f590004ee963fe18905098110b88ddaa8e64bb54caee34215fb4b1700a4b899",
+      "second": "a8b696ad342108b5e960801c1c85e8c0370e3259f2c7389df8009ed9665ef118",
+      "cosine": 0.9287810921669006,
+      "levels": [
+        "Low",
+        "Medium"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "7f325c56a36b01ed7bd2ad2a13befbbaa3918c5169bc0f254292d9d30684f260",
+      "second": "f8a693a1dd38f2a98a2969c6db5f906592c0d1a7244a681068a1cdcb908c1faf",
+      "cosine": 0.9286125898361206,
+      "levels": [
+        "Low",
+        "Medium"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "185752a9424c85ee8dc3f561180762fbedff8d9c5cd968d131c98d0e201efa48",
+      "second": "d5051eeaa19c2c0c27e2fc57e4a77a38e422d4195a9eb8b1c3f05cc157b68d4c",
+      "cosine": 0.928396463394165,
+      "levels": [
+        "Low",
+        "High"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "9fbcc64945e35b1fe9055a64f2229ce6f1bacbd07fa5de8e51de625f12960651",
+      "second": "dd16fa5042abe703274c726d09db2c186df7ec778f84995b8a516e3df0a2d209",
+      "cosine": 0.9269020557403564,
+      "levels": [
+        "Medium",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "01cb3cc110ee595821ccb5be31c1a9bcb4fa5159ce8534e19ba9cefb8c3fe144",
+      "second": "8544783db9630acad92116e39261de6725235d52ccaa3509c6326c5870a3476f",
+      "cosine": 0.9266467094421387,
+      "levels": [
+        "Low",
+        "High"
+      ],
+      "splits": [
+        "validation",
+        "train"
+      ]
+    },
+    {
+      "first": "37c956f3e140d5ee50452b664a3556fbf1d979d024c27ac00a76af4d1fcff017",
+      "second": "5b64513879da6a42438a9d9d8d0cc1582aebe146e31a33b07ed88d890025436a",
+      "cosine": 0.9258131384849548,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "d10e5b02c3899ebe2c9d74b7e40a84d443335bae00b9f5fc9c8c686f8b0cb2f2",
+      "second": "f8a693a1dd38f2a98a2969c6db5f906592c0d1a7244a681068a1cdcb908c1faf",
+      "cosine": 0.924655556678772,
+      "levels": [
+        "High",
+        "Medium"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "f06c64714775cb4d6816940aa7d5929d9d9c7bdedcc0707e4d697b7172b8f301",
+      "second": "fc316945d83eb44d9273e61eae59266c196d25b92f41b3621f9279aef035617c",
+      "cosine": 0.9245510101318359,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "validation"
+      ]
+    },
+    {
+      "first": "d10e5b02c3899ebe2c9d74b7e40a84d443335bae00b9f5fc9c8c686f8b0cb2f2",
+      "second": "634ec889234ccf9d1fd196a89f09ae05cd16b3430bfd3872240494a34bf0f800",
+      "cosine": 0.9244463443756104,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "8e670a9d5a71ca16090c0061af276e84ff9c8fd6085ec8965f328257af8e567e",
+      "second": "f4cc0a84a4d7e6a6027e46ff02175daa0d7677fd7afeec78ade2f7c5c8a571d5",
+      "cosine": 0.9241851568222046,
+      "levels": [
+        "High",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "validation"
+      ]
+    },
+    {
+      "first": "1aeb196ec27a5a254bb0adf389f10df0572bcf549a4b3452b08a3b3826beb799",
+      "second": "6f590004ee963fe18905098110b88ddaa8e64bb54caee34215fb4b1700a4b899",
+      "cosine": 0.9241315126419067,
+      "levels": [
+        "Medium",
+        "Low"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "4d74e6ea3df13d21ef6dfacbb269dc398a3b9238c01b25518cfa45070705ffb9",
+      "second": "a8b696ad342108b5e960801c1c85e8c0370e3259f2c7389df8009ed9665ef118",
+      "cosine": 0.9234006404876709,
+      "levels": [
+        "Low",
+        "Medium"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "first": "6010fab848298c4121040256e3f317ee2ff66fc96f4fdde20f0a959c6ec6ce0c",
+      "second": "9fbcc64945e35b1fe9055a64f2229ce6f1bacbd07fa5de8e51de625f12960651",
+      "cosine": 0.9228373765945435,
+      "levels": [
+        "Low",
+        "Medium"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    }
+  ],
+  "near_pair_counts": {
+    "0.9": {
+      "all_pairs": 369,
+      "different_labels": 155
+    },
+    "0.95": {
+      "all_pairs": 2,
+      "different_labels": 0
+    },
+    "0.98": {
+      "all_pairs": 0,
+      "different_labels": 0
+    }
+  }
+}

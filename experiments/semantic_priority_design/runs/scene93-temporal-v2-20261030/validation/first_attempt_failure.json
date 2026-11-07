@@ -1,0 +1,199 @@
+{
+  "error": "AssertionError('teacher_call_allocation: The fixed teacher allocation contains six rows summing to216.')",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\scene93-temporal-v2-20261030\\validation\\validate_scene_contract.py\", line 112, in <module>\n    check('teacher_call_allocation',sum(calls)==216 and len(calls)==6, len(calls),\n  File \"D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\experiments\\semantic_priority_design\\runs\\scene93-temporal-v2-20261030\\validation\\validate_scene_contract.py\", line 20, in check\n    if not condition: raise AssertionError(name+': '+detail)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: teacher_call_allocation: The fixed teacher allocation contains six rows summing to216.\n",
+  "check_results": [
+    {
+      "name": "isolated_import",
+      "status": "PASS",
+      "cases": 2,
+      "detail": "Loaded actual scene modules under a synthetic namespace; regular parameters package initializer was not imported.",
+      "outputs": {
+        "scene_arrays": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_arrays.py",
+        "scene_vocabulary": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\parameters\\scene_vocabulary.py"
+      }
+    },
+    {
+      "name": "vocabulary_dimensions",
+      "status": "PASS",
+      "cases": 4,
+      "detail": "93 total slots = 80 COCO + 5 object extensions + 8 regions; 85 object-count slots.",
+      "outputs": {
+        "classes": 93,
+        "objects": 85,
+        "regions": 8,
+        "coco": 80
+      }
+    },
+    {
+      "name": "wire_and_feature_dimensions",
+      "status": "PASS",
+      "cases": 4,
+      "detail": "Wire block and feature dimensions, plus requested 6 values + 6 masks + cold-start arithmetic.",
+      "outputs": {
+        "wire_bytes": 369,
+        "wire_bits": 2952,
+        "features": 374,
+        "extended_width": 387
+      }
+    },
+    {
+      "name": "scene_summary_masks_status",
+      "status": "PASS",
+      "cases": 97,
+      "detail": "Produced box examples summarize via actual summarize(); object counts apply, region count masks clear, region area remains available, clipped largest rectangles are correct.",
+      "outputs": {
+        "audit_kept": 4,
+        "counts_person_building": [
+          2,
+          1
+        ],
+        "areas_person_road": [
+          0.36,
+          0.6
+        ],
+        "saturated": false
+      }
+    },
+    {
+      "name": "unavailable_all_masks_status",
+      "status": "PASS",
+      "cases": 373,
+      "detail": "Unavailable extraction has failed status, canonical zero values and every count/area mask false.",
+      "outputs": {}
+    },
+    {
+      "name": "area_quantization_error",
+      "status": "PASS",
+      "cases": 93,
+      "detail": "Serialize/deserialize area error bounded by half an 8-bit quantization step.",
+      "outputs": {
+        "max_abs_error": 0.0007843137254902044,
+        "bound": 0.00196078431372549
+      }
+    },
+    {
+      "name": "exact_byte_roundtrip",
+      "status": "PASS",
+      "cases": 2,
+      "detail": "Wire deserialize/serialize and JSON record roundtrip reproduce exact bytes.",
+      "outputs": {
+        "length": 369,
+        "sha256": "91f2fc11f7b0f66ea61ac2a21b1236e651bc7ff696c63d215a1716bc040ee2ee"
+      }
+    },
+    {
+      "name": "received_feature_order_values",
+      "status": "PASS",
+      "cases": 7,
+      "detail": "Feature vector uses received quantized area; count alone receives log1p once; masks/status order matches implementation.",
+      "outputs": {
+        "length": 374,
+        "person_log1p_count": 1.0986122886681098,
+        "person_area_received": 0.3607843137254902,
+        "tail": [
+          1.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "invalid_contract_rejections",
+      "status": "PASS",
+      "cases": 6,
+      "detail": "Rejects wrong byte length, registry hash, expected/embedded producer hashes, and padding bits in both masks.",
+      "outputs": {
+        "rejected_cases": [
+          "wrong_length",
+          "wrong_registry_hash",
+          "wrong_expected_producer",
+          "wrong_embedded_producer",
+          "count_mask_padding",
+          "area_mask_padding"
+        ],
+        "count_padding_byte_offset": 356,
+        "area_padding_byte_offset": 368
+      }
+    },
+    {
+      "name": "model_registry_preservation",
+      "status": "PASS",
+      "cases": 33,
+      "detail": "All sixteen baseline IDs remain; one temporal registry ID is added.",
+      "outputs": {
+        "baseline_ids": [
+          "linear_choice",
+          "mlp_choice",
+          "delay_huber",
+          "ranknet",
+          "lambdamart",
+          "priority_classifier",
+          "deepsets_ranknet",
+          "set_transformer_ranknet",
+          "listmle",
+          "masked_ppo",
+          "masked_double_dqn",
+          "td_per",
+          "ranknet_warmstart_ppo",
+          "rl_vlm_f",
+          "vlm_replay",
+          "visionprefer"
+        ],
+        "current_ids": [
+          "linear_choice",
+          "mlp_choice",
+          "delay_huber",
+          "ranknet",
+          "lambdamart",
+          "priority_classifier",
+          "deepsets_ranknet",
+          "set_transformer_ranknet",
+          "listmle",
+          "masked_ppo",
+          "masked_double_dqn",
+          "td_per",
+          "ranknet_warmstart_ppo",
+          "rl_vlm_f",
+          "vlm_replay",
+          "visionprefer",
+          "temporal_deepsets_ranknet"
+        ],
+        "added": [
+          "temporal_deepsets_ranknet"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "name": "objective_math_preserved",
+      "status": "PASS",
+      "cases": 10,
+      "detail": "Literal D loss/target/reward and E loss formula lines match preserved baseline.",
+      "outputs": {
+        "baseline": [
+          "ell(W,delta) = W/delta + max(0,W/delta-1)",
+          "L_D(t) = sum over a_i<=t of ell(W_i(t),delta_i)",
+          "y_i = ell(W_i+d0,delta_i)-ell(W_i,delta_i)",
+          "Reward scale100 is fixed and independent of offered future jobs. Gamma=1. Include mid-service arrivals, idle intervals and the terminal interval. Reward sum equals -L_D(T)/100. The actor never receives true delta or z.",
+          "L_E(T)=sum_f w_f*(min(t_f,T)-r_f)/d0."
+        ],
+        "current": [
+          "ell(W,delta) = W/delta + max(0,W/delta-1)",
+          "L_D(t) = sum over a_i<=t of ell(W_i(t),delta_i)",
+          "y_i = ell(W_i+d0,delta_i)-ell(W_i,delta_i)",
+          "Reward scale100 is fixed and independent of offered future jobs. Gamma=1. Include mid-service arrivals, idle intervals and the terminal interval. Reward sum equals -L_D(T)/100. The actor never receives true delta or z.",
+          "L_E(T)=sum_f w_f*(min(t_f,T)-r_f)/d0."
+        ]
+      }
+    },
+    {
+      "name": "teacher_call_allocation",
+      "status": "FAIL",
+      "cases": 0,
+      "detail": "The fixed teacher allocation contains six rows summing to216.",
+      "outputs": {
+        "calls": [],
+        "sum": 0
+      }
+    }
+  ]
+}

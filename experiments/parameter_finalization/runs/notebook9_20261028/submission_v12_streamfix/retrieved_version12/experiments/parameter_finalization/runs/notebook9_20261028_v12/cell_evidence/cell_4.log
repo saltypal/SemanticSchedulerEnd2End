@@ -1,0 +1,20 @@
+CELL START 4 log /kaggle/working/experiments/parameter_finalization/runs/notebook9_20261028_v12/cell_evidence/cell_4.log
+[1mCLIPModel LOAD REPORT[0m from: /kaggle/working/project/models/priority_classifiers/clip
+Key                                  | Status     |  | 
+-------------------------------------+------------+--+-
+vision_model.embeddings.position_ids | UNEXPECTED |  | 
+text_model.embeddings.position_ids   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Input layout {'layout': 'kaggle_expanded_zip', 'images_verified': 300, 'archive_hash_verified': False, 'reason': 'Kaggle expanded archive; exact member hashes verified'} CLIP signature 105485efb3f14d80514f39138c3310714dfdbee850291a8f4e76551df5e5f065 expected 3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de
+Traceback (most recent call last):
+  File "/kaggle/working/project/parameters/cloud_notebook.py", line 37, in cell
+    try:yield
+        ^^^^^
+  File "/tmp/ipykernel_22/4092911754.py", line 16, in <cell line: 0>
+    exec(compile(INPUT_PREFLIGHT, "input_detector_preflight", "exec"), globals())
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "input_detector_preflight", line 32, in <module>
+RuntimeError: fresh CLIP embedding signature differs from existing 300-image features; stop before teacher labeling
+CELL END 4 seconds 30.334875103

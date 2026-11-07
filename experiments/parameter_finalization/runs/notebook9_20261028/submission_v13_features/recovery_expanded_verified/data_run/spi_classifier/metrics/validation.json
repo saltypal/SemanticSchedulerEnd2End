@@ -1,0 +1,229 @@
+{
+  "student": {
+    "n": 96,
+    "levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "ordinal_scale": "configured output order",
+    "accuracy": 0.5104166666666666,
+    "balanced_accuracy": 0.5738055166987236,
+    "macro_f1": 0.46370801725683597,
+    "brier_multiclass": 0.6216157139611652,
+    "critical_to_low_medium": 0,
+    "critical_to_low_medium_rate": 0.0,
+    "log_loss": 1.114520218339276,
+    "rps": 0.15037073644151255,
+    "ordinal_mae": 0.6770833333333334,
+    "confusion_true_rows_predicted_columns": [
+      [
+        23,
+        14,
+        2,
+        4
+      ],
+      [
+        2,
+        5,
+        1,
+        0
+      ],
+      [
+        8,
+        4,
+        16,
+        10
+      ],
+      [
+        0,
+        0,
+        2,
+        5
+      ]
+    ],
+    "high_critical_underpredictions": 14,
+    "per_class": {
+      "Low": {
+        "support": 43,
+        "precision": 0.696969696969697,
+        "recall": 0.5348837209302325,
+        "f1": 0.6052631578947368
+      },
+      "Medium": {
+        "support": 8,
+        "precision": 0.21739130434782608,
+        "recall": 0.625,
+        "f1": 0.3225806451612903
+      },
+      "High": {
+        "support": 38,
+        "precision": 0.7619047619047619,
+        "recall": 0.42105263157894735,
+        "f1": 0.5423728813559322
+      },
+      "Critical": {
+        "support": 7,
+        "precision": 0.2631578947368421,
+        "recall": 0.7142857142857143,
+        "f1": 0.38461538461538464
+      }
+    }
+  },
+  "training_prior": {
+    "n": 96,
+    "levels": [
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "ordinal_scale": "configured output order",
+    "accuracy": 0.4479166666666667,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.15467625899280577,
+    "brier_multiclass": 0.6320766051518647,
+    "critical_to_low_medium": 7,
+    "critical_to_low_medium_rate": 1.0,
+    "log_loss": 1.1308465523144482,
+    "rps": 0.1881728181468666,
+    "ordinal_mae": 1.09375,
+    "confusion_true_rows_predicted_columns": [
+      [
+        43,
+        0,
+        0,
+        0
+      ],
+      [
+        8,
+        0,
+        0,
+        0
+      ],
+      [
+        38,
+        0,
+        0,
+        0
+      ],
+      [
+        7,
+        0,
+        0,
+        0
+      ]
+    ],
+    "high_critical_underpredictions": 45,
+    "per_class": {
+      "Low": {
+        "support": 43,
+        "precision": 0.4479166666666667,
+        "recall": 1.0,
+        "f1": 0.6187050359712231
+      },
+      "Medium": {
+        "support": 8,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "High": {
+        "support": 38,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "Critical": {
+        "support": 7,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  "selected": {
+    "config": {
+      "family": "linear",
+      "C": 1.0,
+      "balanced": true
+    },
+    "folds": [
+      {
+        "fold": 0,
+        "train": 136,
+        "validation": 68,
+        "group_count": 62,
+        "macro_f1": 0.4133928571428571,
+        "critical_recall": 0.5,
+        "validation_class_support": [
+          31,
+          5,
+          28,
+          4
+        ],
+        "best_epoch": null,
+        "early_stopping_scope": "fixed budget or linear model"
+      },
+      {
+        "fold": 1,
+        "train": 137,
+        "validation": 67,
+        "group_count": 63,
+        "macro_f1": 0.41984649122807016,
+        "critical_recall": 0.6666666666666666,
+        "validation_class_support": [
+          26,
+          9,
+          26,
+          6
+        ],
+        "best_epoch": null,
+        "early_stopping_scope": "fixed budget or linear model"
+      },
+      {
+        "fold": 2,
+        "train": 135,
+        "validation": 69,
+        "group_count": 63,
+        "macro_f1": 0.4773291748901505,
+        "critical_recall": 0.5,
+        "validation_class_support": [
+          31,
+          10,
+          24,
+          4
+        ],
+        "best_epoch": null,
+        "early_stopping_scope": "fixed budget or linear model"
+      }
+    ],
+    "mean_macro_f1": 0.43685617442035923,
+    "mean_critical_recall": 0.5555555555555555
+  },
+  "final_epochs": 0,
+  "support": {
+    "train": {
+      "Low": 88,
+      "Medium": 24,
+      "High": 78,
+      "Critical": 14
+    },
+    "validation": {
+      "Low": 43,
+      "Medium": 8,
+      "High": 38,
+      "Critical": 7
+    },
+    "test": {
+      "unopened_images": 0
+    }
+  },
+  "export_max_absolute_difference": 8.608620150063473e-08,
+  "test_evaluated": false,
+  "selection_rule": "one-SE macro-F1; <=.05 Critical-recall loss; prefer linear/stronger regularization",
+  "best_mean_macro_f1": 0.43685617442035923,
+  "selection_standard_error": 0.020322074807929486,
+  "claim": "development teacher agreement; no independent human urgency accuracy"
+}

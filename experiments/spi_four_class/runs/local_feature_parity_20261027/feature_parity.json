@@ -1,0 +1,98 @@
+{
+  "completed_utc": "2026-10-27T16:20:32.064649+00:00",
+  "project": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End",
+  "interpreter": "D:\\Bunker\\BaseCamp\\WirelessCommunication\\SemanticCommunication\\SemanticSchedulerEnd2End\\.venv\\Scripts\\python.exe",
+  "python": "3.12.14",
+  "device": "cpu",
+  "network_access": "disabled by local_files_only loader",
+  "input_archive": "parameters\\results\\spi_inputs_v2_20261027b\\images.zip",
+  "input_archive_sha256": "996615bd131c36b8b8eafbe17078dfaa5e956cc7a6097231f93bd611b1324112",
+  "features_file_sha256": "e6d3e9775fe70c868783d3435898268ff75c88d856c1c982bef1bcba7597007c",
+  "image_id": "05b4e78cfbcb82b6d8ce44fefb51c8aa475d77374117740640fd793d47f7b014",
+  "image_path": "images/a290a2ed28cfe84b33fbd0582d9032cb6189e30c05e6678d054c2f3c3fd42feb.png",
+  "image_sha256": "a290a2ed28cfe84b33fbd0582d9032cb6189e30c05e6678d054c2f3c3fd42feb",
+  "split": "train",
+  "development_exposed": true,
+  "original_image_size": [
+    512,
+    341
+  ],
+  "checkpoint": "models/priority_classifiers/clip",
+  "live_provenance": {
+    "backbone": "clip",
+    "model_id": "openai/clip-vit-base-patch32",
+    "model_path": "models/priority_classifiers/clip",
+    "config_sha256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+    "producer_scope": "frozen pretrained embeddings; prompt similarities are not probabilities",
+    "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "preprocessing": "RGB_longest512_bicubic_then_aspect_preserving_pad_v1",
+    "processor_sha256": "a69d3a60cc3d402f739e3748f6d239b538680fbbf43b67ce6d5087ec0011f304",
+    "device": "cpu",
+    "data_parallel_requested": false,
+    "model_load_seconds": 1.5007406999357045,
+    "image_processor": {
+      "_processor_class": null,
+      "do_resize": true,
+      "size": {
+        "shortest_edge": 224
+      },
+      "resample": 3,
+      "do_center_crop": true,
+      "crop_size": {
+        "height": 224,
+        "width": 224
+      },
+      "do_rescale": true,
+      "rescale_factor": 0.00392156862745098,
+      "do_normalize": true,
+      "image_mean": [
+        0.48145466,
+        0.4578275,
+        0.40821073
+      ],
+      "image_std": [
+        0.26862954,
+        0.26130258,
+        0.27577711
+      ],
+      "do_convert_rgb": true,
+      "image_processor_type": "CLIPImageProcessor"
+    },
+    "scene_prompts": {
+      "road": "a photograph of a road or street",
+      "residential": "a photograph of residential buildings",
+      "indoor": "a photograph of an indoor scene",
+      "forest": "a photograph of a forest",
+      "water": "a photograph of a river or flooded area",
+      "people": "a photograph containing people",
+      "vehicle": "a photograph containing vehicles",
+      "fire": "a photograph of a fire"
+    },
+    "model_dtype": "torch.float32",
+    "embedding_dimension": 512,
+    "image_size": 224,
+    "text_max_positions": 77,
+    "text_padding": "longest_in_batch",
+    "text_truncation": false,
+    "image_feature_normalization": "L2",
+    "text_feature_normalization": "L2",
+    "similarity": "normalized image/text dot product; no logit scale or softmax",
+    "inference_mode": true,
+    "batch_size": 8,
+    "context_method": "token_chunk_75_weighted_normalized_mean_v1",
+    "context_status": "ok"
+  },
+  "cached_feature_signature": "3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de",
+  "live_embedding_signature": "3f526c96ba934fdc42657a77be22908459060da741676c067575645822faf1de",
+  "signature_match": true,
+  "embedding_dimension": 512,
+  "cached_l2_norm": 1.0,
+  "live_l2_norm": 1.0,
+  "cosine_similarity": 1.0,
+  "max_absolute_difference": 1.4901161193847656e-08,
+  "parity_threshold_max_abs": 0.0001,
+  "embedding_match_within_threshold": true,
+  "elapsed_seconds": 12.587812399957329,
+  "model_weights_downloaded": false,
+  "cache_or_source_modified": false
+}

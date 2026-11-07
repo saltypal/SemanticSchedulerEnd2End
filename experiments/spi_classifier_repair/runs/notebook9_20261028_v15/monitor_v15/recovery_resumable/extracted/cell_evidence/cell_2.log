@@ -1,0 +1,25 @@
+CELL START 2 log /kaggle/working/experiments/spi_classifier_repair/runs/notebook9_20261028_v15/cell_evidence/cell_2.log
+START bounded EfficientNet-B1 transfer comparison; CPU orchestration; train on cuda:0
+Downloading: "https://download.pytorch.org/models/efficientnet_b1-c27df63c.pth" to /kaggle/working/project/models/torchhub/checkpoints/efficientnet_b1-c27df63c.pth
+  0%|          | 0.00/30.1M [00:00<?, ?B/s] 63%|██████▎   | 19.0M/30.1M [00:00<00:00, 198MB/s]100%|██████████| 30.1M/30.1M [00:00<00:00, 214MB/s]
+CNN epoch 1 trainF1 0.5695575901761469 innerF1 0.3538819875776397
+CNN epoch 2 trainF1 0.776329389364885 innerF1 0.4318524096385542
+CNN epoch 3 trainF1 0.7561587405171711 innerF1 0.4464935930780333
+CNN epoch 4 trainF1 0.7692098662207358 innerF1 0.45270557615758855
+CNN epoch 5 trainF1 0.7606329861015996 innerF1 0.47325824957403906
+CNN epoch 6 trainF1 0.7772586890233949 innerF1 0.4974581724581724
+CNN epoch 7 trainF1 0.7833562119748505 innerF1 0.48874605124605125
+CNN epoch 8 trainF1 0.7893871720821105 innerF1 0.4658598367576696
+CNN epoch 9 trainF1 0.7839199365383009 innerF1 0.4658598367576696
+CNN epoch 10 trainF1 0.7792042743023135 innerF1 0.4722943722943723
+CNN epoch 11 trainF1 0.7891447975811291 innerF1 0.4662201252562699
+CNN epoch 12 trainF1 0.791358024691358 innerF1 0.46509231313048915
+CNN epoch 1 trainF1 0.5202524038461538 innerF1 None
+CNN epoch 2 trainF1 0.6249052809420842 innerF1 None
+CNN epoch 3 trainF1 0.6799375148665214 innerF1 None
+CNN epoch 4 trainF1 0.6807678720317052 innerF1 None
+CNN epoch 5 trainF1 0.6768042084497781 innerF1 None
+CNN epoch 6 trainF1 0.6786859186230256 innerF1 None
+CNN validation summary {'student': {'n': 96, 'levels': ['Low', 'Medium', 'High', 'Critical'], 'ordinal_scale': 'configured output order', 'accuracy': 0.5416666666666666, 'balanced_accuracy': 0.4851645829690506, 'macro_f1': 0.44622352379306, 'brier_multiclass': 0.6358413456265118, 'critical_to_low_medium': 0, 'critical_to_low_medium_rate': 0.0, 'log_loss': 1.1661994217720568, 'rps': 0.1664021178694665, 'ordinal_mae': 0.6770833333333334, 'confusion_true_rows_predicted_columns': [[24, 9, 5, 5], [3, 3, 2, 0], [6, 2, 22, 8], [0, 0, 4, 3]], 'high_critical_underpredictions': 12, 'per_class': {'Low': {'support': 43, 'precision': 0.7272727272727273, 'recall': 0.5581395348837209, 'f1': 0.631578947368421}, 'Medium': {'support': 8, 'precision': 0.21428571428571427, 'recall': 0.375, 'f1': 0.2727272727272727}, 'High': {'support': 38, 'precision': 0.6666666666666666, 'recall': 0.5789473684210527, 'f1': 0.6197183098591549}, 'Critical': {'support': 7, 'precision': 0.1875, 'recall': 0.42857142857142855, 'f1': 0.2608695652173913}}, 'loss': 1.166199433306853}, 'selected_epochs': 6, 'runtime_promotion_allowed': False, 'claim': 'development teacher agreement only'}
+END EfficientNet-B1 comparison
+CELL END 2 seconds 95.11939167499986

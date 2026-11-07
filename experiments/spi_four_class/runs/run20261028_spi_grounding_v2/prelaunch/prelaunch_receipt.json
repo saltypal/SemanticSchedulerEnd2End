@@ -1,0 +1,26 @@
+{
+  "prelaunch": "2026-10-28",
+  "run_id": "run20261028_spi_grounding_v2",
+  "notebook": "satyapaladugu/betterscheduler-spi-20261027finalc",
+  "numeric_id": 141089219,
+  "base_version": 4,
+  "base_terminal_status": "ERROR",
+  "base_failure": "text_only_diagnostic flag omitted; failed before any model response",
+  "source_sha256": "11c88ee29e3389be4c36d75d48ae72d174239984c0eec3f7ee32d220e1a90210",
+  "resource_cap_seconds": 3600,
+  "aggregate_gpu_hour_cap": 2.0,
+  "quota": {
+    "GPU": "4.27h used",
+    "remaining": "25.73h",
+    "refresh": "2026-10-31T00:00:00"
+  },
+  "source_hashes": {
+    "experiments/spi_four_class/visual_reliability.py": "3fa8aa4eb9f64c97d8be941e7690dfffff963093dcab436aea66868c47e7eb2a",
+    "experiments/spi_four_class/test_visual_reliability.py": "5be2d9ce3e14b01a441f5cb73ede2562c7f6c48d89be2f62cab73ad47eccf285",
+    "parameters/build_annotation_notebook.py": "852e30c4e3110bd2baaec8d2b0a7829bb1108dbedb98952d80513ac07175e3f5",
+    "parameters/build_spi_pipeline_notebook.py": "2262c3fad78c3a4ecf1e74370deabcb4c7c4098db11ca8c582e22ca263c525e3"
+  },
+  "tests": "19 passed in 10.40s",
+  "package_validation": true,
+  "authorized_submission_command": "kaggle kernels push -p experiments/spi_four_class/runs/run20261028_spi_grounding_v2/submission -t 3600 --accelerator NvidiaTeslaT4"
+}

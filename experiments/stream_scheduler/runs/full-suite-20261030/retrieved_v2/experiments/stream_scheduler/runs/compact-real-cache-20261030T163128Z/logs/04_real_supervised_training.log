@@ -1,0 +1,580 @@
+START 04_real_supervised_training output /kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T163128Z
+Actual managed training packages {'torch': '2.11.0+cpu', 'numpy': '2.1.3', 'lightgbm': '4.6.0'}
+TRAIN COMMAND ['/usr/bin/python3', '-u', '/kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T163128Z/source/experiments/stream_scheduler/train_real_suite.py', '--archive', '/kaggle/input/notebooks/satyapaladuguplus/semantic-image-pool-scene-cache-20261030/experiments/image_pool/runs/Mini_dataset_6000.tar', '--output', '/kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T163128Z/results', '--epochs', '50', '--seeds', '1729,2718,31415', '--training-episodes', '64', '--samples', '512', '--model-seconds', '600']
+7044225265
+EPOCH delay_huber 31415 27 loss 0.007451989830094707 validation -0.3901263360630258
+EPOCH delay_huber 31415 28 loss 0.00755635183475345 validation -0.3910386478570323
+EPOCH delay_huber 31415 29 loss 0.007399420168896498 validation -0.3899125697728533
+EPOCH delay_huber 31415 30 loss 0.007150325436703575 validation -0.38395826323215265
+EPOCH delay_huber 31415 31 loss 0.00699652747067292 validation -0.3846817402746206
+EPOCH delay_huber 31415 32 loss 0.006952573242563244 validation -0.37313293918102924
+EPOCH delay_huber 31415 33 loss 0.00668640360727199 validation -0.3770656273789091
+EPOCH delay_huber 31415 34 loss 0.006585063715788153 validation -0.37376509945270764
+EPOCH delay_huber 31415 35 loss 0.006482328299024065 validation -0.3770047307370407
+EPOCH delay_huber 31415 36 loss 0.006388913458516998 validation -0.3752774888694091
+EPOCH delay_huber 31415 37 loss 0.006315144584750243 validation -0.3849360916718101
+EPOCH delay_huber 31415 38 loss 0.006426903069054468 validation -0.3626139490066995
+EPOCH delay_huber 31415 39 loss 0.006312231553353476 validation -0.3727900091994922
+EPOCH delay_huber 31415 40 loss 0.006043198860503196 validation -0.37565865164033924
+EPOCH delay_huber 31415 41 loss 0.005892909159449955 validation -0.38099732029661837
+EPOCH delay_huber 31415 42 loss 0.005800092070472829 validation -0.36352535042588985
+EPOCH delay_huber 31415 43 loss 0.005681843550440324 validation -0.371750273761163
+EPOCH delay_huber 31415 44 loss 0.005616819982030119 validation -0.3626572948703342
+EPOCH delay_huber 31415 45 loss 0.00560569033428493 validation -0.3620597123654536
+EPOCH delay_huber 31415 46 loss 0.005591142411807137 validation -0.3604543279112983
+EPOCH delay_huber 31415 47 loss 0.0055828706245284465 validation -0.3585873140329391
+EPOCH delay_huber 31415 48 loss 0.005498442158901662 validation -0.3644216658885354
+EPOCH delay_huber 31415 49 loss 0.005648991124631464 validation -0.36481998230116575
+TRAIN ranknet/31415
+EPOCH ranknet 31415 0 loss 0.6864693701500073 validation -0.47845165302491427
+EPOCH ranknet 31415 1 loss 0.6767308661947027 validation -0.4604728627079792
+EPOCH ranknet 31415 2 loss 0.6674241797882132 validation -0.4504740369276091
+EPOCH ranknet 31415 3 loss 0.6579417139291763 validation -0.4425793474904724
+EPOCH ranknet 31415 4 loss 0.6474115236196667 validation -0.4469828371684379
+EPOCH ranknet 31415 5 loss 0.6364178716903552 validation -0.4439183098158211
+EPOCH ranknet 31415 6 loss 0.6252195378765464 validation -0.43277897377763885
+EPOCH ranknet 31415 7 loss 0.6150492637534626 validation -0.4325431612489093
+EPOCH ranknet 31415 8 loss 0.6048458189761732 validation -0.4336871495775029
+EPOCH ranknet 31415 9 loss 0.5945944644627161 validation -0.4215365062102348
+EPOCH ranknet 31415 10 loss 0.5839557887229603 validation -0.4157042569101605
+EPOCH ranknet 31415 11 loss 0.5741417208773782 validation -0.4150640123044282
+EPOCH ranknet 31415 12 loss 0.5638209033495514 validation -0.40553599994097406
+EPOCH ranknet 31415 13 loss 0.5542786205842276 validation -0.4011129694524612
+EPOCH ranknet 31415 14 loss 0.5446978344625677 validation -0.40585728881869204
+EPOCH ranknet 31415 15 loss 0.5358818017411977 validation -0.40390128807820036
+EPOCH ranknet 31415 16 loss 0.5267863806438982 validation -0.3942441111131423
+EPOCH ranknet 31415 17 loss 0.5176683183235582 validation -0.3865582949252586
+EPOCH ranknet 31415 18 loss 0.511557773075765 validation -0.37222179199242306
+EPOCH ranknet 31415 19 loss 0.5017590054631 validation -0.37491073700327515
+EPOCH ranknet 31415 20 loss 0.49364887505180377 validation -0.36987601478105286
+EPOCH ranknet 31415 21 loss 0.485594116466018 validation -0.3634004733538074
+EPOCH ranknet 31415 22 loss 0.4781999781553168 validation -0.35820361244912774
+EPOCH ranknet 31415 23 loss 0.4722318320427803 validation -0.3591796071610595
+EPOCH ranknet 31415 24 loss 0.4675205503062898 validation -0.35567465227821565
+EPOCH ranknet 31415 25 loss 0.4597484017667739 validation -0.35486909136955413
+EPOCH ranknet 31415 26 loss 0.4557359935602108 validation -0.3523103692123696
+EPOCH ranknet 31415 27 loss 0.45305098498852203 validation -0.3461415813730366
+EPOCH ranknet 31415 28 loss 0.4451220338839903 validation -0.34437752138403643
+EPOCH ranknet 31415 29 loss 0.438699065788569 validation -0.34104027434713563
+EPOCH ranknet 31415 30 loss 0.4324882467446969 validation -0.34122838143530826
+EPOCH ranknet 31415 31 loss 0.4288773528201091 validation -0.34169310409387565
+EPOCH ranknet 31415 32 loss 0.42539620353204555 validation -0.3392612358976828
+EPOCH ranknet 31415 33 loss 0.42199101557002905 validation -0.34099877363331266
+EPOCH ranknet 31415 34 loss 0.417549372634312 validation -0.3371428409537155
+EPOCH ranknet 31415 35 loss 0.41496415544304455 validation -0.33587336333722545
+EPOCH ranknet 31415 36 loss 0.4135842284033515 validation -0.32964907241021685
+EPOCH ranknet 31415 37 loss 0.4111595511220685 validation -0.327688367485565
+EPOCH ranknet 31415 38 loss 0.41015024873877337 validation -0.3351696805782353
+EPOCH ranknet 31415 39 loss 0.4058237782800802 validation -0.3352025640136926
+EPOCH ranknet 31415 40 loss 0.4041930929456612 validation -0.32829963476801105
+EPOCH ranknet 31415 41 loss 0.40168669782735833 validation -0.33507315680154953
+EPOCH ranknet 31415 42 loss 0.39908324778048154 validation -0.33624308732396097
+EPOCH ranknet 31415 43 loss 0.39556165671206145 validation -0.3340314901348829
+EPOCH ranknet 31415 44 loss 0.3940802604597593 validation -0.32850877451393323
+EPOCH ranknet 31415 45 loss 0.3930170815609699 validation -0.3320508235923846
+TRAIN lambdamart/31415
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRanker was fitted with feature names
+  warnings.warn(
+FAILED lambdamart/31415 ValueError('tree export mismatch')
+TRAIN priority_classifier/31415
+EPOCH priority_classifier 31415 0 loss 1.3410670913290232 validation -0.5518831042714332
+EPOCH priority_classifier 31415 1 loss 1.290544530726038 validation -0.5504857548135331
+EPOCH priority_classifier 31415 2 loss 1.2712141072843224 validation -0.5399311058143409
+EPOCH priority_classifier 31415 3 loss 1.260699150385335 validation -0.5299755423844682
+EPOCH priority_classifier 31415 4 loss 1.2461639696266502 validation -0.522918757615631
+EPOCH priority_classifier 31415 5 loss 1.236256824573502 validation -0.524312100537167
+EPOCH priority_classifier 31415 6 loss 1.2160726800793782 validation -0.5073077629340494
+EPOCH priority_classifier 31415 7 loss 1.200821645266842 validation -0.5018730952998456
+EPOCH priority_classifier 31415 8 loss 1.1885109982686117 validation -0.5018298207959594
+EPOCH priority_classifier 31415 9 loss 1.1718198391608894 validation -0.4873986224558172
+EPOCH priority_classifier 31415 10 loss 1.1562605710350908 validation -0.48736285052529216
+EPOCH priority_classifier 31415 11 loss 1.1375525995681528 validation -0.47795825798165276
+EPOCH priority_classifier 31415 12 loss 1.116518868249841 validation -0.47176508500205117
+EPOCH priority_classifier 31415 13 loss 1.098704528005328 validation -0.46945200519489716
+EPOCH priority_classifier 31415 14 loss 1.0785032763378695 validation -0.47056897121575625
+EPOCH priority_classifier 31415 15 loss 1.0579053886031033 validation -0.46764483579895216
+EPOCH priority_classifier 31415 16 loss 1.0386880121877766 validation -0.46494497697269743
+EPOCH priority_classifier 31415 17 loss 1.0219060794770485 validation -0.4560319259779838
+EPOCH priority_classifier 31415 18 loss 1.0024062235206657 validation -0.45228588367929007
+EPOCH priority_classifier 31415 19 loss 0.9864459185228043 validation -0.4510566894930309
+EPOCH priority_classifier 31415 20 loss 0.9605495230061933 validation -0.4524004574415166
+EPOCH priority_classifier 31415 21 loss 0.9387931579349242 validation -0.44727324879619074
+EPOCH priority_classifier 31415 22 loss 0.9192604922818646 validation -0.44202440537286947
+EPOCH priority_classifier 31415 23 loss 0.9011164416242536 validation -0.44038299298295697
+EPOCH priority_classifier 31415 24 loss 0.8844638483151357 validation -0.4360946771202806
+EPOCH priority_classifier 31415 25 loss 0.8624793705744196 validation -0.4344607136491978
+EPOCH priority_classifier 31415 26 loss 0.8539834795524257 validation -0.4299467262340529
+EPOCH priority_classifier 31415 27 loss 0.8376794319347027 validation -0.43550935499259064
+EPOCH priority_classifier 31415 28 loss 0.8133534257474366 validation -0.4331783532425089
+EPOCH priority_classifier 31415 29 loss 0.7970820193258987 validation -0.44014837978731086
+EPOCH priority_classifier 31415 30 loss 0.7837683861040432 validation -0.4303703336226549
+EPOCH priority_classifier 31415 31 loss 0.767024344647325 validation -0.4312507733655007
+EPOCH priority_classifier 31415 32 loss 0.7539273324069882 validation -0.4249725091567299
+EPOCH priority_classifier 31415 33 loss 0.7446412284484722 validation -0.42720103562064704
+EPOCH priority_classifier 31415 34 loss 0.7359069586137821 validation -0.42068932475893983
+EPOCH priority_classifier 31415 35 loss 0.7141616537598452 validation -0.4235541468091365
+EPOCH priority_classifier 31415 36 loss 0.7008965357356942 validation -0.4268217276982987
+EPOCH priority_classifier 31415 37 loss 0.6846721906138669 validation -0.415336057945848
+EPOCH priority_classifier 31415 38 loss 0.6713352654016376 validation -0.41486442936153817
+EPOCH priority_classifier 31415 39 loss 0.6716796347411673 validation -0.41330192936153826
+EPOCH priority_classifier 31415 40 loss 0.6530299261220023 validation -0.41036195426009253
+EPOCH priority_classifier 31415 41 loss 0.6391697674958721 validation -0.4020968455835662
+EPOCH priority_classifier 31415 42 loss 0.629735943242963 validation -0.4029202808188243
+EPOCH priority_classifier 31415 43 loss 0.6257217192793689 validation -0.39721654035547377
+EPOCH priority_classifier 31415 44 loss 0.6279301241962116 validation -0.39675229337980017
+EPOCH priority_classifier 31415 45 loss 0.6059078797136124 validation -0.3879601682953858
+EPOCH priority_classifier 31415 46 loss 0.5921004436994224 validation -0.38319278280326696
+EPOCH priority_classifier 31415 47 loss 0.5879092579321963 validation -0.38144726214741825
+EPOCH priority_classifier 31415 48 loss 0.5750256994507623 validation -0.3885739431581802
+EPOCH priority_classifier 31415 49 loss 0.5668385189153753 validation -0.3823225165336615
+TRAIN deepsets_ranknet/31415
+EPOCH deepsets_ranknet 31415 0 loss 0.6903650040039793 validation -0.4708266899488843
+EPOCH deepsets_ranknet 31415 1 loss 0.6824930290458724 validation -0.4634361476084333
+EPOCH deepsets_ranknet 31415 2 loss 0.6760962486732751 validation -0.4559135372278357
+EPOCH deepsets_ranknet 31415 3 loss 0.6686281888978556 validation -0.46026551839813146
+EPOCH deepsets_ranknet 31415 4 loss 0.6587540981126949 validation -0.45263179009436894
+EPOCH deepsets_ranknet 31415 5 loss 0.6487883144873194 validation -0.4397447985091223
+EPOCH deepsets_ranknet 31415 6 loss 0.6383049369906075 validation -0.4277656318424556
+EPOCH deepsets_ranknet 31415 7 loss 0.627257308922708 validation -0.426064063017836
+EPOCH deepsets_ranknet 31415 8 loss 0.6155674237816129 validation -0.4150801331212834
+EPOCH deepsets_ranknet 31415 9 loss 0.6037742558401078 validation -0.4156898340999089
+EPOCH deepsets_ranknet 31415 10 loss 0.5913800364069175 validation -0.4248476550837242
+EPOCH deepsets_ranknet 31415 11 loss 0.5792278265580535 validation -0.4230995150066231
+EPOCH deepsets_ranknet 31415 12 loss 0.5664012144115986 validation -0.42424200532413653
+EPOCH deepsets_ranknet 31415 13 loss 0.5537774585609441 validation -0.4120343055520336
+EPOCH deepsets_ranknet 31415 14 loss 0.5410853060384397 validation -0.4066971285171958
+EPOCH deepsets_ranknet 31415 15 loss 0.5276024621889519 validation -0.395670255073892
+EPOCH deepsets_ranknet 31415 16 loss 0.5162769423550344 validation -0.3891490644074275
+EPOCH deepsets_ranknet 31415 17 loss 0.5045268699577719 validation -0.39036633608518034
+EPOCH deepsets_ranknet 31415 18 loss 0.49240493707111455 validation -0.3880328584927099
+EPOCH deepsets_ranknet 31415 19 loss 0.48187852710543666 validation -0.36526082990870823
+EPOCH deepsets_ranknet 31415 20 loss 0.47220995459611004 validation -0.3745763722530312
+EPOCH deepsets_ranknet 31415 21 loss 0.4650646013342339 validation -0.3530391856124257
+EPOCH deepsets_ranknet 31415 22 loss 0.461447813153427 validation -0.3537863534768249
+EPOCH deepsets_ranknet 31415 23 loss 0.45141525598774024 validation -0.34631927012487107
+EPOCH deepsets_ranknet 31415 24 loss 0.4457160329002363 validation -0.34077319452760574
+EPOCH deepsets_ranknet 31415 25 loss 0.4397549818877451 validation -0.34025449560478205
+EPOCH deepsets_ranknet 31415 26 loss 0.4345274189117845 validation -0.3398784091780163
+EPOCH deepsets_ranknet 31415 27 loss 0.4370503834752526 validation -0.3396878921073307
+EPOCH deepsets_ranknet 31415 28 loss 0.4334298162448249 validation -0.33947123926270434
+EPOCH deepsets_ranknet 31415 29 loss 0.4290105454147124 validation -0.3387803565761525
+EPOCH deepsets_ranknet 31415 30 loss 0.42754396270447614 validation -0.33660545151206517
+EPOCH deepsets_ranknet 31415 31 loss 0.4254206334671835 validation -0.33573005476515105
+EPOCH deepsets_ranknet 31415 32 loss 0.4219102080560333 validation -0.3364680729495909
+EPOCH deepsets_ranknet 31415 33 loss 0.42509693489046185 validation -0.33573739595650953
+EPOCH deepsets_ranknet 31415 34 loss 0.4201560520932617 validation -0.34081137285703317
+EPOCH deepsets_ranknet 31415 35 loss 0.418204347444771 validation -0.33459163934327957
+EPOCH deepsets_ranknet 31415 36 loss 0.41902847282563016 validation -0.3338971948988351
+EPOCH deepsets_ranknet 31415 37 loss 0.41853563561562623 validation -0.34022862746315513
+EPOCH deepsets_ranknet 31415 38 loss 0.41652280870948744 validation -0.34206709314249206
+EPOCH deepsets_ranknet 31415 39 loss 0.41569953570979123 validation -0.33714382659695796
+EPOCH deepsets_ranknet 31415 40 loss 0.4123893834789669 validation -0.3371240484656385
+EPOCH deepsets_ranknet 31415 41 loss 0.41107047607965796 validation -0.34034087262051654
+EPOCH deepsets_ranknet 31415 42 loss 0.41088025926546834 validation -0.34394863503740625
+EPOCH deepsets_ranknet 31415 43 loss 0.4090085626794462 validation -0.34148083139025404
+EPOCH deepsets_ranknet 31415 44 loss 0.41151316409286665 validation -0.34422512532186755
+TRAIN set_transformer_ranknet/31415
+EPOCH set_transformer_ranknet 31415 0 loss 0.6858273631660268 validation -0.4015180562005367
+EPOCH set_transformer_ranknet 31415 1 loss 0.6748257733415812 validation -0.4213507135498445
+EPOCH set_transformer_ranknet 31415 2 loss 0.6620715789031237 validation -0.422811581665275
+EPOCH set_transformer_ranknet 31415 3 loss 0.6431441073655151 validation -0.3955979147693726
+EPOCH set_transformer_ranknet 31415 4 loss 0.6068314195726998 validation -0.38456331231721297
+EPOCH set_transformer_ranknet 31415 5 loss 0.5644293301738799 validation -0.37056613949539746
+EPOCH set_transformer_ranknet 31415 6 loss 0.5279069227544824 validation -0.3778448333330386
+EPOCH set_transformer_ranknet 31415 7 loss 0.49841111157729756 validation -0.36681865343363396
+EPOCH set_transformer_ranknet 31415 8 loss 0.4774866168445442 validation -0.3590800324699324
+EPOCH set_transformer_ranknet 31415 9 loss 0.4610862272675149 validation -0.35363559405113953
+EPOCH set_transformer_ranknet 31415 10 loss 0.44775111813942203 validation -0.352039910260883
+EPOCH set_transformer_ranknet 31415 11 loss 0.43946176700046635 validation -0.343829682951428
+EPOCH set_transformer_ranknet 31415 12 loss 0.4329915331181837 validation -0.3385330485756146
+EPOCH set_transformer_ranknet 31415 13 loss 0.42310134412946354 validation -0.34531670016173815
+EPOCH set_transformer_ranknet 31415 14 loss 0.41710724764925544 validation -0.334268390318119
+EPOCH set_transformer_ranknet 31415 15 loss 0.4168150250652616 validation -0.33262541127669715
+EPOCH set_transformer_ranknet 31415 16 loss 0.4258983479012386 validation -0.3421489945566351
+EPOCH set_transformer_ranknet 31415 17 loss 0.4150325137279651 validation -0.33685817201193147
+EPOCH set_transformer_ranknet 31415 18 loss 0.413299783022012 validation -0.3311293318485144
+EPOCH set_transformer_ranknet 31415 19 loss 0.40268208745055745 validation -0.3377293024212065
+EPOCH set_transformer_ranknet 31415 20 loss 0.39686105656710424 validation -0.33768764831850645
+EPOCH set_transformer_ranknet 31415 21 loss 0.38886884686417034 validation -0.3448849944854435
+EPOCH set_transformer_ranknet 31415 22 loss 0.38758091731142486 validation -0.34740533571879867
+EPOCH set_transformer_ranknet 31415 23 loss 0.3807890846851478 validation -0.3499874375967126
+EPOCH set_transformer_ranknet 31415 24 loss 0.38593072816047425 validation -0.35125160700502417
+EPOCH set_transformer_ranknet 31415 25 loss 0.378376918747108 validation -0.34983402876733977
+EPOCH set_transformer_ranknet 31415 26 loss 0.3705587844415277 validation -0.35368654127054
+TRAIN listmle/31415
+EPOCH listmle 31415 0 loss 1.7802203536903771 validation -0.4565015996451351
+EPOCH listmle 31415 1 loss 1.7556368003796488 validation -0.46435355059880384
+EPOCH listmle 31415 2 loss 1.7366601589822421 validation -0.4665101640742215
+EPOCH listmle 31415 3 loss 1.7119584179272618 validation -0.46121235303915264
+EPOCH listmle 31415 4 loss 1.6826149608096936 validation -0.45281500820649456
+EPOCH listmle 31415 5 loss 1.6444685076275012 validation -0.45045579403371655
+EPOCH listmle 31415 6 loss 1.6020944942958164 validation -0.44767390251632777
+EPOCH listmle 31415 7 loss 1.5522970093862853 validation -0.4608650499305766
+EPOCH listmle 31415 8 loss 1.4987450028858045 validation -0.4429747622986614
+EPOCH listmle 31415 9 loss 1.4424523904810858 validation -0.4402501805172015
+EPOCH listmle 31415 10 loss 1.3833897548870449 validation -0.43360945351908664
+EPOCH listmle 31415 11 loss 1.3262952913115496 validation -0.42709178797119535
+EPOCH listmle 31415 12 loss 1.2726058944733474 validation -0.4280237637349079
+EPOCH listmle 31415 13 loss 1.2243498918348856 validation -0.42709717139185016
+EPOCH listmle 31415 14 loss 1.1709844936637113 validation -0.42414138649498573
+EPOCH listmle 31415 15 loss 1.1273022621978808 validation -0.41850061131989624
+EPOCH listmle 31415 16 loss 1.082686835070596 validation -0.4015383457589532
+EPOCH listmle 31415 17 loss 1.043131564709827 validation -0.39290166317557706
+EPOCH listmle 31415 18 loss 1.0109997627726437 validation -0.39012480350534695
+EPOCH listmle 31415 19 loss 0.968555771031954 validation -0.37665340542262177
+EPOCH listmle 31415 20 loss 0.9352271595738665 validation -0.3730638567556876
+EPOCH listmle 31415 21 loss 0.8980656197688875 validation -0.3716270006351488
+EPOCH listmle 31415 22 loss 0.8699142038822174 validation -0.364358945629454
+EPOCH listmle 31415 23 loss 0.8495839633537035 validation -0.36247961515715943
+EPOCH listmle 31415 24 loss 0.8247235385279585 validation -0.36075579174983
+EPOCH listmle 31415 25 loss 0.8037860270888701 validation -0.3575690301945597
+EPOCH listmle 31415 26 loss 0.7898858546068633 validation -0.354052544383304
+EPOCH listmle 31415 27 loss 0.778226056673231 validation -0.35233013829240595
+EPOCH listmle 31415 28 loss 0.7680989373339354 validation -0.353845161202872
+EPOCH listmle 31415 29 loss 0.7632821904101076 validation -0.35138712172474007
+EPOCH listmle 31415 30 loss 0.7560701380028342 validation -0.34976258397614457
+EPOCH listmle 31415 31 loss 0.7432559665809148 validation -0.35124689628093186
+EPOCH listmle 31415 32 loss 0.7329161243418055 validation -0.3502052296142653
+EPOCH listmle 31415 33 loss 0.7266344478231495 validation -0.34791824125152737
+EPOCH listmle 31415 34 loss 0.720909753433653 validation -0.3498279634737495
+EPOCH listmle 31415 35 loss 0.71258707673554 validation -0.3478571532742901
+EPOCH listmle 31415 36 loss 0.7113615586184454 validation -0.3486994912515274
+EPOCH listmle 31415 37 loss 0.7006023901303972 validation -0.3487568541805065
+EPOCH listmle 31415 38 loss 0.6969862436726145 validation -0.3496663911322532
+EPOCH listmle 31415 39 loss 0.6989571645339258 validation -0.3502111225670003
+EPOCH listmle 31415 40 loss 0.6873979630886856 validation -0.35240697903420765
+EPOCH listmle 31415 41 loss 0.6901960865913952 validation -0.35381163174096936
+EPOCH listmle 31415 42 loss 0.6860700850205047 validation -0.35276141565686286
+EPOCH listmle 31415 43 loss 0.6819625081440067 validation -0.3522262451301755
+TRAIN temporal_deepsets_ranknet/31415
+EPOCH temporal_deepsets_ranknet 31415 0 loss 0.6859961628215387 validation -0.49267574883581694
+EPOCH temporal_deepsets_ranknet 31415 1 loss 0.6764605483040214 validation -0.463146133341343
+EPOCH temporal_deepsets_ranknet 31415 2 loss 0.6673411700758152 validation -0.45450866230894094
+EPOCH temporal_deepsets_ranknet 31415 3 loss 0.6565345162525773 validation -0.4454763275191407
+EPOCH temporal_deepsets_ranknet 31415 4 loss 0.6443058169679716 validation -0.4386026886107111
+EPOCH temporal_deepsets_ranknet 31415 5 loss 0.6311425081803463 validation -0.43889220107009724
+EPOCH temporal_deepsets_ranknet 31415 6 loss 0.6180016460129991 validation -0.43211336512002974
+EPOCH temporal_deepsets_ranknet 31415 7 loss 0.6038830327161122 validation -0.42744157149103024
+EPOCH temporal_deepsets_ranknet 31415 8 loss 0.5888698667404242 validation -0.42550661058673606
+EPOCH temporal_deepsets_ranknet 31415 9 loss 0.574115243885899 validation -0.41682938618536564
+EPOCH temporal_deepsets_ranknet 31415 10 loss 0.5586715026438469 validation -0.4118601283092935
+EPOCH temporal_deepsets_ranknet 31415 11 loss 0.5433552620525006 validation -0.40785167020854424
+EPOCH temporal_deepsets_ranknet 31415 12 loss 0.527963856147835 validation -0.4038068480346212
+EPOCH temporal_deepsets_ranknet 31415 13 loss 0.5130914383444178 validation -0.40069464677820166
+EPOCH temporal_deepsets_ranknet 31415 14 loss 0.49872721123028896 validation -0.3947160991603926
+EPOCH temporal_deepsets_ranknet 31415 15 loss 0.4838751345159835 validation -0.3946259280362681
+EPOCH temporal_deepsets_ranknet 31415 16 loss 0.4715650787729828 validation -0.39609590014882057
+EPOCH temporal_deepsets_ranknet 31415 17 loss 0.4585494672446657 validation -0.38963981651127083
+EPOCH temporal_deepsets_ranknet 31415 18 loss 0.44931804426050803 validation -0.3879456663423123
+EPOCH temporal_deepsets_ranknet 31415 19 loss 0.43930612352778553 validation -0.3855968398650564
+EPOCH temporal_deepsets_ranknet 31415 20 loss 0.43335699678391393 validation -0.39382687434119495
+EPOCH temporal_deepsets_ranknet 31415 21 loss 0.4273228345437019 validation -0.3736432773176369
+EPOCH temporal_deepsets_ranknet 31415 22 loss 0.42473401239476516 validation -0.36361513016505237
+EPOCH temporal_deepsets_ranknet 31415 23 loss 0.4189561871598926 validation -0.3599586525116719
+EPOCH temporal_deepsets_ranknet 31415 24 loss 0.4154862339182728 validation -0.36778043773080143
+EPOCH temporal_deepsets_ranknet 31415 25 loss 0.4129433964785676 validation -0.36295082831259384
+EPOCH temporal_deepsets_ranknet 31415 26 loss 0.41279848882004444 validation -0.36719776171651236
+EPOCH temporal_deepsets_ranknet 31415 27 loss 0.4114102915573312 validation -0.35958087751013945
+EPOCH temporal_deepsets_ranknet 31415 28 loss 0.40790582380941487 validation -0.36922081355824105
+EPOCH temporal_deepsets_ranknet 31415 29 loss 0.4051215945764852 validation -0.36469060198301195
+EPOCH temporal_deepsets_ranknet 31415 30 loss 0.40239429772555013 validation -0.3679316426825904
+EPOCH temporal_deepsets_ranknet 31415 31 loss 0.4004124551424866 validation -0.36850260930499557
+EPOCH temporal_deepsets_ranknet 31415 32 loss 0.39766757303505074 validation -0.36867798676036473
+EPOCH temporal_deepsets_ranknet 31415 33 loss 0.39674594663870266 validation -0.36783229423920216
+EPOCH temporal_deepsets_ranknet 31415 34 loss 0.3951192974877813 validation -0.36639531024371597
+EPOCH temporal_deepsets_ranknet 31415 35 loss 0.39465256315133956 validation -0.3674823884091905
+COMPLETED supervised increment /kaggle/working/experiments/stream_scheduler/runs/compact-real-cache-20261030T163128Z/results
+
+{
+  "phase": "completed_supervised_increment",
+  "arms": {
+    "linear_choice/1729": {
+      "status": "trained_validation_only",
+      "seconds": 179.71424229699994,
+      "validation_score": -0.4648091672604352,
+      "model_sha256": "51c30c1cab48e1670922bd08ff7f5aef86ca7c3d511a5e6b044f3d5c915d81a6",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "mlp_choice/1729": {
+      "status": "trained_validation_only",
+      "seconds": 246.638969298,
+      "validation_score": -0.4428252890953364,
+      "model_sha256": "3188d33abc3090ab166664045e43800a61a7d375ec8e757659c37d6e301f8db3",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "delay_huber/1729": {
+      "status": "trained_validation_only",
+      "seconds": 357.1960109390002,
+      "validation_score": -0.3959941159369079,
+      "model_sha256": "0736cf1c00254d3775bf581b6227c1189dc1b62acd7ff66cf7974d7e22f3b0a5",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 366.89404921100004,
+      "validation_score": -0.3530460817686904,
+      "model_sha256": "2b3326d1f6fa5713ae6c780d593a74892480e74aa9f8670bb1360f162a4f1caa",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "lambdamart/1729": {
+      "status": "failed",
+      "error": "tree export mismatch",
+      "seconds": 19.30729333299996
+    },
+    "priority_classifier/1729": {
+      "status": "trained_validation_only",
+      "seconds": 357.67680481299976,
+      "validation_score": -0.4135202620752127,
+      "model_sha256": "21e67483bf50b2e7e9fca7943d44da16f854e372a5d41f9fb9dcb53e0132f7f7",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "deepsets_ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 363.1683825130003,
+      "validation_score": -0.3467505805328951,
+      "model_sha256": "1dfd380a0da42e52cb6cbfa44497ba3e50223a5bc6666b194f87f58dd00ac39c",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "set_transformer_ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 221.1104563150002,
+      "validation_score": -0.3927120056817796,
+      "model_sha256": "fed51608326909cd92e55536cbf892ae435f8d9417b07a68fd35f963b8955b19",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "listmle/1729": {
+      "status": "trained_validation_only",
+      "seconds": 245.46670968199987,
+      "validation_score": -0.397481493628705,
+      "model_sha256": "d8c91a1b3c64df52f7a22796ed1ff90f6f5104ce9a7d715a4d4c95b6efee4597",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "temporal_deepsets_ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 600.202894089,
+      "validation_score": -0.373855098421332,
+      "model_sha256": "f8382584390cbdaa2f0ec27bf9c25a0b3617bf06ebe989ede09379a8778a3374",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "linear_choice/2718": {
+      "status": "trained_validation_only",
+      "seconds": 308.95444283100005,
+      "validation_score": -0.45240981104526656,
+      "model_sha256": "6c7f580e5669eb868461c93152dbad5159a4021fcd93dd9ccc4dd4a11f1480f0",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "mlp_choice/2718": {
+      "status": "trained_validation_only",
+      "seconds": 354.2804145499995,
+      "validation_score": -0.3978523360903155,
+      "model_sha256": "39052599bf49edbb01885388dcbaab3cdde73560899b4102b4e80eb3e686fc47",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "delay_huber/2718": {
+      "status": "trained_validation_only",
+      "seconds": 363.0557418190001,
+      "validation_score": -0.3323500173031191,
+      "model_sha256": "f521511430f19570e4088fbd3d87a71d8bc6b8522d43be81deabdca52097ba97",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "ranknet/2718": {
+      "status": "trained_validation_only",
+      "seconds": 339.28995516099985,
+      "validation_score": -0.34050155325816994,
+      "model_sha256": "b60220daeb8925de2f6ebf74bc386faad192807061a10aa21b4a524a2b34988f",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "lambdamart/2718": {
+      "status": "failed",
+      "error": "tree export mismatch",
+      "seconds": 9.588942143000168
+    },
+    "priority_classifier/2718": {
+      "status": "trained_validation_only",
+      "seconds": 154.08641297400027,
+      "validation_score": -0.44494473917849675,
+      "model_sha256": "e860f02db0d5170fa8f3c34d17fee25c608df45d0c1a4a9d1afe041a8fc5b9ec",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "deepsets_ranknet/2718": {
+      "status": "trained_validation_only",
+      "seconds": 268.2221292309996,
+      "validation_score": -0.33527662667251035,
+      "model_sha256": "ffaade5264547c3ec23e14117b5b92b0fab6bfc5d473e9ed2bf7cfde7b3bfef9",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "set_transformer_ranknet/2718": {
+      "status": "trained_validation_only",
+      "seconds": 243.70351501700043,
+      "validation_score": -0.35982140127019213,
+      "model_sha256": "d1573440ce1b76aa8c2a2c0c385b18b4ab9913582de1e4c3f55d866d1230ec85",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "listmle/2718": {
+      "status": "trained_validation_only",
+      "seconds": 305.6023993889994,
+      "validation_score": -0.3623929561273273,
+      "model_sha256": "9d3153039da6245271fb7c3dcd1253aa1961c724d7a40fd299c544261f751529",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "temporal_deepsets_ranknet/2718": {
+      "status": "trained_validation_only",
+      "seconds": 388.64702686800047,
+      "validation_score": -0.3409852475378979,
+      "model_sha256": "7a2d73947368c821d7aa86fdf569dab8e17dbf59f3e4f6cf45b02511d40c964d",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "linear_choice/31415": {
+      "status": "trained_validation_only",
+      "seconds": 314.87580282,
+      "validation_score": -0.42911193347658827,
+      "model_sha256": "d9a92bceec7b43e1c2b42d0d31d19af68c0f7752e7753549940009a50ae09197",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "mlp_choice/31415": {
+      "status": "trained_validation_only",
+      "seconds": 261.64223248600047,
+      "validation_score": -0.4198085292575844,
+      "model_sha256": "86491617bfceb49095470fe6a1a44b43553d2104b8d07d7ffc01068aaa4e7b82",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "delay_huber/31415": {
+      "status": "trained_validation_only",
+      "seconds": 359.5675846179993,
+      "validation_score": -0.3585873140329391,
+      "model_sha256": "2c3257490d006db8821d840ef9239869c75710e3613d8d296582af6d3b6e177e",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "ranknet/31415": {
+      "status": "trained_validation_only",
+      "seconds": 321.81497894099994,
+      "validation_score": -0.327688367485565,
+      "model_sha256": "2ae4fb90f4c0f71201f6788b073d2fb15fc2aa3a8bb1494f2d408f7cb7ec0d08",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "lambdamart/31415": {
+      "status": "failed",
+      "error": "tree export mismatch",
+      "seconds": 9.192612845999975
+    },
+    "priority_classifier/31415": {
+      "status": "trained_validation_only",
+      "seconds": 336.8957193369997,
+      "validation_score": -0.38144726214741825,
+      "model_sha256": "5468094bbeef72edd34df111a977980677a5ee95b438f6cd156f994645abcf5f",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "deepsets_ranknet/31415": {
+      "status": "trained_validation_only",
+      "seconds": 310.64649274099975,
+      "validation_score": -0.3338971948988351,
+      "model_sha256": "5e817ff0ce2bfb47d673e7eaab55f50c41d9ae95ae26f1ddd0ed1d71489df1f9",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "set_transformer_ranknet/31415": {
+      "status": "trained_validation_only",
+      "seconds": 239.06429548800043,
+      "validation_score": -0.3311293318485144,
+      "model_sha256": "7fdfdec1ebe36dafd4bbeca05cf3956f94ae80ce8104fa7d5cfcd1a4750a9284",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "listmle/31415": {
+      "status": "trained_validation_only",
+      "seconds": 385.6453103779986,
+      "validation_score": -0.3478571532742901,
+      "model_sha256": "9cf40aa9b7d8bd518eabcb34e96dc7e577f8691b9764f3f1dc09c48eb98c88e2",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "temporal_deepsets_ranknet/31415": {
+      "status": "trained_validation_only",
+      "seconds": 445.05617165699914,
+      "validation_score": -0.35958087751013945,
+      "model_sha256": "cad9fc72cdeabd92c93f366b696f992228e00f40c462d4ca279c0298d5a34696",
+      "episodes": 64,
+      "samples": 512,
+      "final_test_opened": false
+    },
+    "masked_ppo": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "masked_double_dqn": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "td_per": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "ranknet_warmstart_ppo": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "rl_vlm_f": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "vlm_replay": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "visionprefer": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    }
+  }
+}
+
+END 04_real_supervised_training complete 8701.217228782

@@ -1,0 +1,153 @@
+{
+  "scope": "real-cache silver-D supervised increment; no independent urgency claim",
+  "statuses": {
+    "linear_choice/1729": {
+      "status": "trained_validation_only",
+      "seconds": 3.135390588000064,
+      "validation_score": -0.14503192746859536,
+      "model_sha256": "f532385c2e37394c8fe4dc5077a8fecb0488979694a3d1a6d83129f5eda2ca7c",
+      "episodes": 2,
+      "samples": 32,
+      "final_test_opened": false
+    },
+    "mlp_choice/1729": {
+      "status": "trained_validation_only",
+      "seconds": 1.6955539690000023,
+      "validation_score": -0.12810484413526202,
+      "model_sha256": "af777f05950e4f4fcb209fe68a5156b079357c9834512e2f5063c60d6f135c6b",
+      "episodes": 2,
+      "samples": 32,
+      "final_test_opened": false
+    },
+    "ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 1.715974087999939,
+      "validation_score": -0.14633401080192868,
+      "model_sha256": "f663186af33632a3fe78f47509ad1349343c1f84097e4bf34200df0f7b69ba51",
+      "episodes": 2,
+      "samples": 32,
+      "final_test_opened": false
+    },
+    "deepsets_ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 1.4037094739999247,
+      "validation_score": -0.14763609413526202,
+      "model_sha256": "d007b2019a165b25e360f9fb8e0ec4463bdc4e7f02c28fc2954fa89f47e43ea6",
+      "episodes": 2,
+      "samples": 32,
+      "final_test_opened": false
+    },
+    "set_transformer_ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 1.6133482519999234,
+      "validation_score": -0.13728113356275964,
+      "model_sha256": "704f47c0f2d3506a652b7d8ca3e1103784d2c965228afe03850eea6954095a20",
+      "episodes": 2,
+      "samples": 32,
+      "final_test_opened": false
+    },
+    "temporal_deepsets_ranknet/1729": {
+      "status": "trained_validation_only",
+      "seconds": 1.757188719999931,
+      "validation_score": -0.13852151080192868,
+      "model_sha256": "4c3957648c354da543ea11ec8b75241800c5c3b76b405337a36ba7a04893eb4b",
+      "episodes": 2,
+      "samples": 32,
+      "final_test_opened": false
+    },
+    "masked_ppo": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "masked_double_dqn": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "td_per": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "ranknet_warmstart_ppo": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "rl_vlm_f": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "vlm_replay": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    },
+    "visionprefer": {
+      "status": "not_run_in_D_supervised_increment",
+      "reason": "next full-suite stage; not counted as trained"
+    }
+  },
+  "input_profile": {
+    "schema": "scene93_received387_v1",
+    "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+    "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+    "feature_order": "scene374+SPI4+R+N+availability6+cold1",
+    "semantic_producer": {
+      "repo": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+      "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+      "weights_sha256": {
+        "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+      },
+      "download_checkpoint_bytes": 605247071,
+      "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+      "parameters": 87849216
+    },
+    "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+    "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+    "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+    "sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+  },
+  "data_audit": {
+    "images": 6000,
+    "raw_unique": 5952,
+    "cached_embeddings": 3887,
+    "reference_known": 3915,
+    "reference_conflicts": 8,
+    "reference_scope": "mixed-protocol VLM pseudo-labels; not independent urgency truth",
+    "source_counts": {
+      "crisismmd": 4000,
+      "open_images": 1000,
+      "places365": 1000
+    },
+    "group_split_counts": {
+      "train": 5376,
+      "validation": 417,
+      "test": 207
+    },
+    "input_profile": {
+      "schema": "scene93_received387_v1",
+      "vocabulary_sha256": "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0",
+      "producer_sha256": "5ec8add97b8bff04ac771792a4195c10948e74cc99464fb50358743371285747",
+      "feature_order": "scene374+SPI4+R+N+availability6+cold1",
+      "semantic_producer": {
+        "repo": "openai/clip-vit-base-patch32",
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+        "preprocessing": "EXIF upright RGB aspect-preserving pad224 grey127; native normalization",
+        "processor_sha256": "25c290cb958c162a9f146f891a277c9727f46e3ffe9bf615f230f86225228227",
+        "weights_sha256": {
+          "pytorch_model.bin": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f"
+        },
+        "download_checkpoint_bytes": 605247071,
+        "checkpoint_inventory_scope": "all downloaded bin/safetensors weights and indexes; may include unused alternate formats",
+        "parameters": 87849216
+      },
+      "missions_sha256": "963db903fc8dfb70537506126c4c8b0d3a4bbb547b19b36654313368021ee387",
+      "scalar_quantization": "R unsigned8[-1,1];N unsigned8[0,1];cold convention hidden",
+      "sender_kb": "FIFO128; appearance cosine query then commit all observations",
+      "sha256": "c33e8189f7de60e79732458d0a7b0a6f256a57caef25372b7969945091a84db2"
+    }
+  },
+  "final_test_opened": false,
+  "P_teacher": "not run in this CPU increment",
+  "RL": "next increment",
+  "UE_mode": "fixed populations/dynamic arrivals; full churn extension not yet tested"
+}

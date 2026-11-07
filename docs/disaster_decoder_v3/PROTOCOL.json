@@ -1,0 +1,107 @@
+{
+  "study": "disaster_decoder_v3",
+  "status": "prototype_complete_verified_controlled_benchmark",
+  "scope": "rank fully arrived digital latent jobs at the receiver; no legacy scheduler changes",
+  "header": {
+    "version": 3,
+    "bytes": 32,
+    "format": ">BBHIIQ8BI",
+    "prefix_format": ">BBHIIQ8B",
+    "fields": ["R", "S", "Q", "I", "F", "P", "C", "N"],
+    "crc": "CRC32 over first 28 bytes"
+  },
+  "profiles": [
+    {"id": 1001, "task": "building_damage", "weights": {"buildings_any": 0, "buildings_affected_or_greater": 0.3333333333, "buildings_minor_or_greater": 0.6666666667}},
+    {"id": 1002, "task": "road_damage", "weights": {"roads_any": 0, "roads_damage": 1}},
+    {"id": 1003, "task": "structural_flooding", "weights": {"flooding_any": 0.3333333333, "flooding_structures": 0.6666666667}}
+  ],
+  "models": ["CLIP ViT-B/32 frozen", "LADI-small reference only", "DINO-tiny frozen", "Qwen3-VL-4B offline silver annotations"],
+  "dataset": {
+    "revision": "5f2dbfe8c466d32edafd1bab847ec5252309acdb",
+    "download_splits": ["validation", "test"],
+    "validation_roles_percent": {"A": 50, "B": 20, "C": 30},
+    "grouping": "source-grouped to prevent image leakage",
+    "test": "locked until choices are frozen"
+  },
+  "ranker_plan": {
+    "mlp": [16, 32, 16, 1],
+    "objective": "exact-coverage swaps with weighted pairwise logistic loss",
+    "comparisons": ["classic", "linear", "tree"],
+    "method_count": 13,
+    "main_method": "CAHR",
+    "fixed_queries": "128 shared A-role queries per task for all methods; do not resample a fresh set each epoch",
+    "epochs": 60,
+    "early_stopping_patience": 10,
+    "l2_grid": [1e-5, 1e-4, 1e-3],
+    "tree_grid": {"leaves": [7, 15, 31], "max_iterations": 200, "learning_rate": 0.05},
+    "seed_plan": "complete all 13 methods on core seed 0 before seed 1/2 for main and strongest baseline, subject to documented deterministic/tree exemptions",
+    "ablation_plan": "nine retrained ablations as defined by the training protocol, including eight-field removals and S/N removals",
+    "status": "completed_version_1_elapsed_seconds_470.9174869"
+  },
+  "evidence_limits": ["controlled observation coverage is not verified real-world fact coverage", "different image files do not prove different physical incidents", "Qwen annotations are silver and separate from source labels"],
+  "verified_checkpoint": {
+    "module": "SemParam/decoder_parameters.py",
+    "historical_test_result": "11 passed in 1.25s",
+    "scope": "synthetic math and contract checks only",
+    "stage_a": {
+      "run_id": "20261022_stageA_v3",
+      "audit": "passed",
+      "manifest_rows": 1939,
+      "manifest_unique_ids_before_conflict_exclusion": 1936,
+      "excluded_conflicting_label_rows": 4,
+      "retained_unique_images": 1934,
+      "unique_role_counts": {"A": 445, "B": 178, "C": 267, "test": 1044},
+      "note": "Extraction summary test count 1045 is pre-deduplication; use the audit unique count 1044.",
+      "image_model_success": {"CLIP": 1934, "LADI_reference": 1934, "DINO": 1934},
+      "embedding_dimensions": 512,
+      "cost_profiles": {"total": 8, "cuda:0": 4, "cuda:1": 4},
+      "qwen_valid_silver_proposals": 32,
+      "artifact_audit_path": "results/disaster_decoder_v3/20261022_stageA_v3/artifact_audit.json"
+    },
+    "inference_costs_registered_ops_gflops": {
+      "CLIP": 8.81762304,
+      "LADI_reference": 32.6971392,
+      "DINO_shape_dependent_range": [665.607, 746.230],
+      "Qwen": "full model FLOPs not measured; partial analytic text estimates not comparable"
+    }
+  },
+  "training_status": {
+    "kernel": "hmmmkk/disaster-eight-field-scheduler",
+    "version": 1,
+    "status": "COMPLETED",
+    "elapsed_seconds": 470.9174869,
+    "comparison_path": "results/disaster_decoder_v3/20261023_stageB_v1/full/study/comparison.csv",
+    "full_artifacts_path": "results/disaster_decoder_v3/20261023_stageB_v1/full/study/",
+    "method_rows": 39,
+    "methods_per_task": 13,
+    "tasks": ["building_damage", "road_damage", "structural_flooding"],
+    "test_used_for_selection": false
+  },
+  "measured_A10": {
+    "metric": "mean unique-observation coverage over positions 1 through 10",
+    "comparison_csv_rounding": 4,
+    "methods": ["fifo", "round_robin", "random", "importance", "fixed_formula", "classifier", "regressor", "linear_ranknet", "neural_ranknet", "linear_coverage", "neural_coverage", "lambdamart", "coverage_tree"],
+    "task_method_scores": "See docs/disaster_decoder_v3/RESEARCH_REPORT.md#measured-comparison; all 39 source values are in the comparison CSV.",
+    "C_selected_methods": {"building_damage": "coverage_tree", "road_damage": "regressor", "structural_flooding": "coverage_tree"},
+    "cahr_minus_C_selected_ci95": {
+      "building_damage": {"mean_difference": -0.0143961971, "ci95": [-0.0364455820, 0.0066140319], "pools": 24},
+      "road_damage": {"mean_difference": 0.0575666667, "ci95": [0.0, 0.1596333333], "pools": 10},
+      "structural_flooding": {"mean_difference": 0.0266286458, "ci95": [-0.0180083420, 0.0737000738], "pools": 32}
+    },
+    "claim_limit": "Mixed task-specific outcomes; no universal or general CAHR superiority claim."
+  },
+  "validation_status": {
+    "combined_tests_passed": 53,
+    "receiver_queue_wrapper_tests_passed": 3,
+    "new_analysis_tests_pending_full_run": 0,
+    "full_test_run": "53 passed in 48.45 seconds",
+    "full_artifact_prediction_audit": "passed; 37440 exported-model episode orders reproduced; 480 primary files verified",
+    "final_executed_notebook_output_capture_and_metric_parity": "passed; final kernel version 2; 39 quality rows unchanged; 3 executed cells, full table and 2 embedded PNGs, no errors",
+    "study_source_hash_matches_published_source": true,
+    "graphify_ast_only_refresh": "not run; graphify module unavailable; no installation attempted"
+  },
+  "final_notebook": {"kernel": "hmmmkk/disaster-eight-field-final-notebook", "version": 2, "elapsed_seconds": 297.4164031, "path": "Scheduler/notebooks/05_disaster_decoder_v3.ipynb", "mode": "verified extraction and completed training resumed without test-based retuning"},
+  "figure_weighting": "repetitions within strata, then strata within source pools; corrected report-only in final version 2, no model/metric changes",
+  "unverified": ["real codec reconstruction and service-time integration", "independent semantic fact/urgency labels", "external dataset/event-level validation", "complete Qwen VLM inference FLOPs"],
+  "artifacts_expected": "results/disaster_decoder_v3/<runid>/"
+}

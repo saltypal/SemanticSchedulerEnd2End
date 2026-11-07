@@ -1,0 +1,9 @@
+{
+  "missing_or_conflicting_fields": [
+    "building.present",
+    "building.affected_or_greater"
+  ],
+  "parameters_consistent": false,
+  "representation_sufficient": false,
+  "reason": "The candidate representation explicitly sets building.present to false, which contradicts the visible evidence of a damaged building in the image and the native reference fact that building.present is true, violating the decoding rule that absent implies unaffected and failing to recover the required fact."
+}

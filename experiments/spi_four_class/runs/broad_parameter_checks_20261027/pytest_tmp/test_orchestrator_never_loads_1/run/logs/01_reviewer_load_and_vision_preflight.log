@@ -1,0 +1,14 @@
+START 01_reviewer_load_and_vision_preflight output D:\Bunker\BaseCamp\WirelessCommunication\SemanticCommunication\SemanticSchedulerEnd2End\experiments\spi_four_class\runs\broad_parameter_checks_20261027\pytest_tmp\test_orchestrator_never_loads_1\run
+Reviewer preflight: model_failed seconds 0.0
+Reviewer preflight error: None None
+Reviewer preflight: model_failed seconds 0.0
+Reviewer preflight error: None None
+Traceback (most recent call last):
+  File "D:\Bunker\BaseCamp\WirelessCommunication\SemanticCommunication\SemanticSchedulerEnd2End\parameters\artifacts.py", line 72, in stage
+    try:yield
+        ^^^^^
+  File "D:\Bunker\BaseCamp\WirelessCommunication\SemanticCommunication\SemanticSchedulerEnd2End\parameters\annotation_pilot.py", line 134, in run_annotation_pilot
+    if any(r['status']!='complete' for r in preflight):raise RuntimeError('reviewer technical/JSON preflight failed')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: reviewer technical/JSON preflight failed
+END 01_reviewer_load_and_vision_preflight {'stage': '01_reviewer_load_and_vision_preflight', 'status': 'failed', 'seconds': 0.03200000000651926}

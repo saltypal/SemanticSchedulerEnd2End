@@ -1,0 +1,10 @@
+# Version6 scheduler development handoff
+1000image records joined by imageID and SHA, not arrayposition. image_records.jsonl contains detector measurements. offline_references.jsonl contains separate teacherSPI and nativeannotations. Teacherlabels are not studentpredictions and must not be passed as runtime SPI while evaluating against those same labels.
+
+Missing mission relevance, causal UE novelty and capturemetadata must be computed by the scheduler experiment from its declared mission/history/arrival simulation. They were intentionally skipped here. There are no actual timestamps in this cohort. Detector vocabulary was default80categories, not mission-specific. Largestboxarea is not physicaldistance or urgency. Collectiveunioncoverage absent from oldrecords.
+
+The actual v6 split/group fields have now been joined into image_records.jsonl by the pair (image_id, image_sha256), never by row order. 983/1000 records matched v6 comparison/records.json; the other 17 remain with null v6_split/v6_group and status not_in_v6_records. The exact pre-join file is preserved as image_records_pre_v6_split_join.jsonl; v6_split_join_receipt.json records source hash, counts and split distribution. Original native split is NOT the actual trained split. Exactduplicates/tweetparents grouped; near-duplicate/eventindependence unverified. Do not randomlysplitgeneratedqueues as substitute for independentimagegroups. Previouslyevaluated1000images are developmentexposed, not freshfinaltest.
+
+Model selected on validation: SigLIP2+weighted RBF-SVM. Test Medium recall 0; no 4classreadinessclaim. Labels arereferences/pseudo-labels, not validatedurgencytruth. Train schedulerpolicy development only. A fresh independenttest is required for finalclaims. Classifiertrainingcollection and schedulertraining/evaluation must share explicit groupboundaries.
+
+Remoteorigin: satyapaladugu/crisismmd1000-spi-labeling version6. Retrievedclassifierpaths originally contain /kaggle/working paths; resolve by relativepath under v6_results, not external absoluteexecution. Downloadmanifestwill record actualfilehashes. No images/rawencoderweights requested locally.

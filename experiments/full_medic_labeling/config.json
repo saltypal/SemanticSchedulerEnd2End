@@ -1,0 +1,52 @@
+{
+  "dataset": "QCRI/MEDIC",
+  "revision": "bc2e6f3c99f511ce89055cad5a661c69e43ec6de",
+  "rows": 71198,
+  "gpu_ownership": {
+    "1": "Qwen3.5-9B thinkingOFF",
+    "0": "sequential frozen encoders and YOLO"
+  },
+  "encoders": [
+    "clip_b32",
+    "siglip2_b16",
+    "dino",
+    "convnextv2_tiny"
+  ],
+  "ml_heads": [
+    "logistic",
+    "ridge",
+    "linear_svm",
+    "rbf_svm",
+    "knn",
+    "random_forest",
+    "extra_trees",
+    "hist_boost"
+  ],
+  "neural_heads": [
+    "mlp",
+    "mean_mlp",
+    "gated_abmil",
+    "single_query_cross_attention"
+  ],
+  "unique_pairs": 48,
+  "balancing": [
+    "original",
+    "class_weighted",
+    "random_oversampling",
+    "moderate_undersampling"
+  ],
+  "balance_scope": "fit fold only; natural validation/test; no weighted-loss plus balanced-sampling combination by default",
+  "runtime_fields_skipped": [
+    "KB",
+    "context_relevance",
+    "capture_metadata"
+  ],
+  "metrics": [
+    "macro_f1",
+    "per_class_precision_recall_f1",
+    "balanced_accuracy",
+    "confusion",
+    "CPU_GPU_cost_separately"
+  ],
+  "status": "building_not_submitted"
+}

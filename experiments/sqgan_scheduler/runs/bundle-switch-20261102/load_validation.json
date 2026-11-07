@@ -1,0 +1,66 @@
+{
+  "algorithm": "sqgan",
+  "checkpoint_sha256": "706396402d86e84276393ce3fe39f0b0b1b545ff024c0ecae3b8ab72d22f3d6d",
+  "components": [
+    {
+      "component": "encoder",
+      "strict": true,
+      "tensor_count": 150
+    },
+    {
+      "component": "decoder",
+      "strict": true,
+      "tensor_count": 288
+    },
+    {
+      "component": "masker",
+      "strict": true,
+      "tensor_count": 21
+    },
+    {
+      "component": "demasker",
+      "strict": true,
+      "tensor_count": 175
+    },
+    {
+      "component": "quantize",
+      "strict": true,
+      "tensor_count": 3
+    },
+    {
+      "component": "encoder_semantic",
+      "strict": true,
+      "tensor_count": 146
+    },
+    {
+      "component": "decoder_semantic",
+      "strict": true,
+      "tensor_count": 194
+    },
+    {
+      "component": "masker_semantic",
+      "strict": true,
+      "tensor_count": 21
+    },
+    {
+      "component": "demasker_semantic",
+      "strict": true,
+      "tensor_count": 175
+    },
+    {
+      "component": "quantize_semantic",
+      "strict": true,
+      "tensor_count": 3
+    }
+  ],
+  "source_packet": "SQ01",
+  "representation": "digital_bytes",
+  "source_lossless": false,
+  "radio_channel": "none; ideal received payload",
+  "input_shape": [
+    1,
+    3,
+    256,
+    512
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "run_status": "COMPLETE",
+  "notebook_slug": "satyapaladuguplus/semantic-decoder-scheduler-20261030/1",
+  "recovery_zip_sha256": "d82a13ae813751bec52b1aaf9899671f841a542c73d9c89c6ee3afc650a4b26b",
+  "recovery_zip_matches_remote_kernel_log_sha256": true,
+  "zip_member_count": 50,
+  "artifact_manifest_entries": 28,
+  "artifact_manifest_matches": 27,
+  "artifact_manifest_total": 28,
+  "artifact_manifest_mismatch": {
+    "cell_status.json": {
+      "expected": "bb4982300cfd36f36638309ee8e017457cd8981202a3dcdb1dd73486a438fbd3",
+      "actual": "3f495a6415165c8e6c2d3398136b8c1bc3696fb2813c7473ec836fab29ae0e76"
+    }
+  },
+  "checks": {
+    "zip_crc_ok": true,
+    "scene_roundtrips": true,
+    "twelve_rows": true,
+    "offered_accounting": true,
+    "selected_identity": true,
+    "readiness_wait_service_horizon": true,
+    "per_class_accounting": true,
+    "J_D_and_nDCG_null": true,
+    "sizes_match": true,
+    "no_input_archive": true
+  },
+  "all_component_checks_pass": true,
+  "scene_bytes": [
+    34.45133333333333,
+    45,
+    73
+  ],
+  "censored_final_dispatches": 4,
+  "per_trace_policy_counts": {
+    "0": {
+      "fifo": {
+        "offered": 48,
+        "selected": 48,
+        "unselected": 0,
+        "censored": 0
+      },
+      "round_robin": {
+        "offered": 48,
+        "selected": 48,
+        "unselected": 0,
+        "censored": 0
+      },
+      "random": {
+        "offered": 48,
+        "selected": 48,
+        "unselected": 0,
+        "censored": 0
+      },
+      "predicted_spi_fifo": {
+        "offered": 48,
+        "selected": 48,
+        "unselected": 0,
+        "censored": 0
+      }
+    },
+    "1": {
+      "fifo": {
+        "offered": 256,
+        "selected": 256,
+        "unselected": 0,
+        "censored": 0
+      },
+      "round_robin": {
+        "offered": 256,
+        "selected": 256,
+        "unselected": 0,
+        "censored": 0
+      },
+      "random": {
+        "offered": 256,
+        "selected": 256,
+        "unselected": 0,
+        "censored": 0
+      },
+      "predicted_spi_fifo": {
+        "offered": 256,
+        "selected": 256,
+        "unselected": 0,
+        "censored": 0
+      }
+    },
+    "2": {
+      "fifo": {
+        "offered": 512,
+        "selected": 459,
+        "unselected": 53,
+        "censored": 1
+      },
+      "round_robin": {
+        "offered": 512,
+        "selected": 459,
+        "unselected": 53,
+        "censored": 1
+      },
+      "random": {
+        "offered": 512,
+        "selected": 459,
+        "unselected": 53,
+        "censored": 1
+      },
+      "predicted_spi_fifo": {
+        "offered": 512,
+        "selected": 459,
+        "unselected": 53,
+        "censored": 1
+      }
+    }
+  },
+  "executed_notebook_exposed": false,
+  "limitation": "cell_status.json is changed to final complete after artifact_manifest.json was calculated in stage05; sole internal manifest mismatch. Kaggle file listing exposed no executed .ipynb.",
+  "retrieved_logs": {
+    "01_environment.log": {
+      "matches_recovery_zip": true,
+      "sha256": "565e2f1de77b59341a830a708a90e4fa69c269fc336d0f754ff034806b699b11",
+      "bytes": 605
+    },
+    "02_source_snapshot.log": {
+      "matches_recovery_zip": true,
+      "sha256": "5ff1b682c25d2f10e00ed24448ea484990c4413ce3732aebea3cd59b352973fc",
+      "bytes": 875
+    },
+    "03_input_and_regression.log": {
+      "matches_recovery_zip": true,
+      "sha256": "5428a60c1c9a42adda59bef588af8df48da8f9efe274d99f1a25cce371e03d9a",
+      "bytes": 341
+    },
+    "04_transport_and_dynamic_replay.log": {
+      "matches_recovery_zip": true,
+      "sha256": "ac09ab51a9a2c0bb4e9c4d79c1104d0536b3e1a2cd379d91338ebf4f42ae29d9",
+      "bytes": 1710
+    },
+    "05_report_and_recovery.log": {
+      "matches_recovery_zip": true,
+      "sha256": "b87241522d72c64f4884d1fb0eb4f7da04a36f67c9b557e98ce9eb49a711883e",
+      "bytes": 325
+    },
+    "driver.log": {
+      "matches_recovery_zip": true,
+      "sha256": "3c133b8dddff37b8cc3009b5a0e9adff41902e3880afebfd0f1347ba137e18a4",
+      "bytes": 444
+    }
+  },
+  "all_retrieved_logs_match_recovery_zip": true
+}

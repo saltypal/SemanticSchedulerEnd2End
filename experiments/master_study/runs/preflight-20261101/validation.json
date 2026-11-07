@@ -1,0 +1,29 @@
+{
+  "pytest": {
+    "exit": 0,
+    "seconds": 212.21741403000124,
+    "command": [
+      "/home/Satya/.venvs/semantic-scheduler/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "parameters/tests",
+      "Scheduler/tests",
+      "Test/tests",
+      "experiments/stream_scheduler/tests",
+      "--junitxml=experiments/master_study/runs/preflight-20261101/junit.xml"
+    ],
+    "log": "experiments/master_study/runs/preflight-20261101/pytest.log"
+  },
+  "waiting_reference": {
+    "exit": 0,
+    "seconds": 0.2765471270013222,
+    "command": [
+      "/home/Satya/.venvs/semantic-scheduler/bin/python",
+      "experiments/stream_scheduler/check_waiting_spec.py",
+      "--output",
+      "experiments/master_study/runs/preflight-20261101/waiting_reference"
+    ],
+    "log": "experiments/master_study/runs/preflight-20261101/waiting_reference.log"
+  }
+}

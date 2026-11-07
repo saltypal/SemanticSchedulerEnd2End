@@ -1,0 +1,80 @@
+..............................................................F......... [ 67%]
+.......................F...........                                      [100%]
+=================================== FAILURES ===================================
+_ test_teacher_student_resume_preserves_complete_models_and_rejects_changed_labels _
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_teacher_student_resume_pr0')
+
+    def test_teacher_student_resume_preserves_complete_models_and_rejects_changed_labels(tmp_path):
+>       from Scheduler.training.stream_suite.tests.test_teacher_and_supervisor import test_complete_teacher_label_to_all_student_pipeline
+E       ModuleNotFoundError: No module named 'Scheduler.training.stream_suite.tests'
+
+experiments/master_study/tests/test_paired_notebooks.py:75: ModuleNotFoundError
+_____ test_complete_teacher_cache_does_not_reload_weights_or_require_cuda ______
+
+tmp_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_complete_teacher_cache_do0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7e2e01393ce0>
+
+    def test_complete_teacher_cache_does_not_reload_weights_or_require_cuda(tmp_path,monkeypatch):
+        import hashlib
+        import torch
+        from transformers import AutoProcessor
+        from Scheduler.training.stream_suite.qwen_teacher import run,MODEL_ID,INFERENCE_PROTOCOL
+        from Scheduler.training.stream_suite.teacher_output import OUTPUT_VERSION
+        image=tmp_path/"image.bin";image.write_bytes(b"cache identity fixture")
+        request={"id":"cached","task":"candidate","context_id":"cached","images":[str(image)],"roles":["A"],"prompt":"fixture"}
+        requests=tmp_path/"requests.jsonl";requests.write_text(json.dumps(request)+"\n")
+        output=tmp_path/"out";output.mkdir()
+        revision="cc594898137f460bfe9f0759e9844b3ce807cfb5"
+        (output/"provenance.json").write_text(json.dumps({"model_id":MODEL_ID,"revision":revision,
+            "output_version":OUTPUT_VERSION,"quantization":"NF4_double_FP16", "inference_protocol":INFERENCE_PROTOCOL,
+            "renderer_sha256":hashlib.sha256((Path(__file__).parents[1]/"teacher_panels.py").read_bytes()).hexdigest()}))
+        (output/"responses.jsonl").write_text(json.dumps({"id":"cached","status":"parsed",
+            "request_sha256":hashlib.sha256(json.dumps(request,sort_keys=True).encode()).hexdigest(),
+            "image_sha256":[hashlib.sha256(image.read_bytes()).hexdigest()]})+"\n")
+        monkeypatch.setattr(torch.cuda,"is_available",lambda:False)
+        def forbidden(*args,**kwargs):
+            raise AssertionError("complete cache must not reload processor/model")
+        monkeypatch.setattr(AutoProcessor,"from_pretrained",forbidden)
+>       assert run(requests,output,revision)==None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+experiments/stream_scheduler/tests/test_teacher_and_supervisor.py:221: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+request_path = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_complete_teacher_cache_do0/requests.jsonl')
+output = PosixPath('/tmp/pytest-of-Satya/pytest-0/test_complete_teacher_cache_do0/out')
+revision = 'cc594898137f460bfe9f0759e9844b3ce807cfb5', device = 'cuda:0'
+max_calls = 216, deadline_seconds = None, precision = 'nf4'
+
+    def run(request_path,output,revision,device="cuda:0",max_calls=216,deadline_seconds=None,precision="nf4"):
+        import torch
+        from transformers import AutoProcessor,Qwen2_5_VLForConditionalGeneration,BitsAndBytesConfig
+        from PIL import Image,ImageOps
+        if precision not in ("nf4","fp16-balanced"):raise ValueError("unsupported teacher precision")
+        protocol=dict(INFERENCE_PROTOCOL)
+        if precision!="nf4":protocol["decoding"]="greedy_max512_fp16_balanced"
+        quantization="NF4_double_FP16" if precision=="nf4" else "FP16_balanced"
+        output=Path(output);output.mkdir(parents=True,exist_ok=True)
+        if not re.fullmatch("[0-9a-f]{40}",revision):raise ValueError("pin an immutable official model revision")
+        if deadline_seconds is not None and not 0 < deadline_seconds < float("inf"):raise ValueError("positive finite teacher time budget required")
+        if max_calls>216 or max_calls<1:raise ValueError("invalid total-call ceiling")
+        requests=[json.loads(l) for l in Path(request_path).read_text().splitlines() if l.strip()]
+        if len({r["id"] for r in requests})!=len(requests):raise ValueError("duplicate query IDs")
+        renderer_hash=hashlib.sha256(Path(__file__).with_name("teacher_panels.py").read_bytes()).hexdigest()
+        raw=output/"responses.jsonl";done={}
+        if raw.exists():
+            for line in raw.read_text().splitlines():
+                r=json.loads(line);done[r["id"]]=r
+        if done:
+            prior=json.loads((output/"provenance.json").read_text())
+            if prior.get("inference_protocol")!=protocol:raise ValueError("teacher visual protocol changed; use a fresh output directory")
+>           if prior.get("renderer_sha256")!=renderer_hash:raise ValueError("teacher renderer changed; use a fresh output directory")
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           ValueError: teacher renderer changed; use a fresh output directory
+
+Scheduler/training/stream_suite/qwen_teacher.py:39: ValueError
+=========================== short test summary info ============================
+FAILED experiments/master_study/tests/test_paired_notebooks.py::test_teacher_student_resume_preserves_complete_models_and_rejects_changed_labels
+FAILED experiments/stream_scheduler/tests/test_teacher_and_supervisor.py::test_complete_teacher_cache_does_not_reload_weights_or_require_cuda
+2 failed, 105 passed in 88.62s (0:01:28)

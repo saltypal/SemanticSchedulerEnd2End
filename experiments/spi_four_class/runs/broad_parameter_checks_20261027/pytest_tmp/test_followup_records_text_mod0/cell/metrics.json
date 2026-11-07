@@ -1,0 +1,50 @@
+{
+  "settings": {
+    "max_new_tokens": 384,
+    "max_pixels": 262144,
+    "image_max_side": 512,
+    "prompt_variant": "candidate_provenance_v2",
+    "claim_scope": "all",
+    "enable_thinking": false
+  },
+  "text_only_diagnostic": true,
+  "metrics": {
+    "cases": 6,
+    "valid": 6,
+    "valid_fraction": 1.0,
+    "endpoints": {
+      "parameters_consistent": {
+        "confusion": {
+          "tp": 4,
+          "tn": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "class_correct_fraction_including_invalid": {
+          "False": 1.0,
+          "True": 1.0
+        },
+        "balanced_accuracy": 1.0
+      },
+      "representation_sufficient": {
+        "confusion": {
+          "tp": 2,
+          "tn": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "class_correct_fraction_including_invalid": {
+          "False": 1.0,
+          "True": 1.0
+        },
+        "balanced_accuracy": 1.0
+      }
+    },
+    "omission_rejection_fraction": 1.0,
+    "engineering_gate_passed": true,
+    "scope": "annotation-assisted audit controls; not independent visual recognition accuracy",
+    "images_are_paired_units": true
+  },
+  "joint_correct": 6,
+  "wall_seconds": 0.002458699978888035
+}

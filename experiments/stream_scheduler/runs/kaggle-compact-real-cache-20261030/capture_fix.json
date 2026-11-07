@@ -1,0 +1,9 @@
+{
+  "remote_v1_preserved": true,
+  "issue": "only cell_status.json internal manifest hash precedes final status update",
+  "cause": "manifest written before final stage context closed",
+  "fix": "canonical notebook now seals manifest after all stage contexts close",
+  "local_source_compiles": true,
+  "remote_resubmission": false,
+  "scientific_outputs_affected": false
+}

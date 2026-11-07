@@ -1,0 +1,52 @@
+{
+  "observed_utc": "2026-10-31T00:27:50Z",
+  "kernel": "satyapaladuguplus/semantic-decoder-scheduler-20261030/3",
+  "status": "RUNNING",
+  "remote_run_dir": "/kaggle/working/experiments/stream_scheduler/runs/full-v22-20261031T002530Z",
+  "completed_stages": [
+    "01_environment",
+    "02_source_snapshot",
+    "03_input_and_regression"
+  ],
+  "remote_source_snapshot": {
+    "files": 113,
+    "mini_archive_sha256": "0f8c6186b09dcf6ab87911df642612919377157bb1585082bed1c93b1506fe2c",
+    "compact_transport_tests": "6 passed"
+  },
+  "runtime": {
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu_count": 2,
+    "gpu_names": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "measured_neural_device": "cuda:0",
+    "measured_preflight_median_update_ms": 3.898551000020234
+  },
+  "compute_bound": {
+    "driver_seconds": 8400,
+    "aggregate_gpu_hours_at_observed_count": 4.6666666667,
+    "program_ceiling_gpu_hours": 6.0
+  },
+  "dependency_stage": {
+    "transformers": "4.57.6",
+    "bitsandbytes": "0.49.2",
+    "accelerate": "1.14.0",
+    "Pillow": "12.3.0",
+    "status": "installed; resolver reported unrelated existing dopamine/gradio/diffusers conflicts"
+  },
+  "material_partial": {
+    "component": "optional complete_vectors subprocess",
+    "status": "FAILED",
+    "error": "ModuleNotFoundError: No module named project_compat while importing parameters.vision",
+    "runner_continued": true,
+    "cache_coverage": "3887/5952 unique image hashes cached; exactly 2065/6000 rows lack embeddings (1441 train, 417 validation, 207 test). For those rows, relevance, novelty and cold-start availability masks are false; no extension was passed downstream."
+  },
+  "teacher": {
+    "requests_prepared": true,
+    "qwen_model_loading_or_startup_messages_seen": true,
+    "qualified_responses_seen": false
+  },
+  "source": "monitor/follow_worker_logs.txt via Kaggle kernels logs --follow; first limited read also returned the same lines"
+}
