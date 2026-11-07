@@ -11,6 +11,7 @@ class NoCocoSceneTransport:
     """
 
     VERSION = 4
+    VOCABULARY_SHA256 = "37181cef81ba6f9c777ab05fefe182a50dedaeda8454c7ad9216ff17e1eb91c0"
     PREFIX = struct.Struct("<BBH")
     DENSE = struct.Struct("<5H13sBH")
     ENTRY = struct.Struct("<BHB")
@@ -21,7 +22,7 @@ class NoCocoSceneTransport:
 
     def __init__(self, legacy):
         expected = (True,) * 85 + (False,) * 8
-        if legacy.applicable != expected:
+        if legacy.registry.hex() != self.VOCABULARY_SHA256 or legacy.applicable != expected:
             raise ValueError("expected the ordered COCO80 + project5 + region8 profile")
         self.legacy = legacy
 

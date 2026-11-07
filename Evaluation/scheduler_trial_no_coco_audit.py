@@ -57,9 +57,8 @@ def main():
     args = parser.parse_args()
     raw = cached_file(args.revision, "received_features.npz")
     summary = json.loads(cached_file(args.revision, "summary.json"))
-    # Cache export contains quantized measurements. The original registry hash
-    # is immaterial to their size and is replaced by an audit-only binding.
-    legacy = CompactSceneTransport(1, "00" * 32, summary["producer_ids"][0], [True] * 85 + [False] * 8)
+    legacy = CompactSceneTransport(1, NoCocoSceneTransport.VOCABULARY_SHA256,
+                                   summary["producer_ids"][0], [True] * 85 + [False] * 8)
     reduced = NoCocoSceneTransport(legacy)
     old, new = [], []
     with np.load(io.BytesIO(raw), allow_pickle=False) as cache:

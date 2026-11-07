@@ -7,7 +7,7 @@ from Evaluation.no_coco_scene_transport import NoCocoSceneTransport
 
 
 def setup_codecs():
-    legacy = CompactSceneTransport(37, "12" * 32, "34" * 32, [True] * 85 + [False] * 8)
+    legacy = CompactSceneTransport(37, NoCocoSceneTransport.VOCABULARY_SHA256, "34" * 32, [True] * 85 + [False] * 8)
     return legacy, NoCocoSceneTransport(legacy)
 
 
@@ -59,3 +59,9 @@ def test_rejects_malformed_scene():
                 packet[:5] + b"\x80" + packet[6:], packet[:8] + b"\x0c" + packet[9:]):
         with pytest.raises(ValueError):
             trial.decode(bad)
+
+
+def test_rejects_other_registries_with_same_count_mask():
+    other = CompactSceneTransport(37, '00' * 32, '34' * 32, [True] * 85 + [False] * 8)
+    with pytest.raises(ValueError):
+        NoCocoSceneTransport(other)
