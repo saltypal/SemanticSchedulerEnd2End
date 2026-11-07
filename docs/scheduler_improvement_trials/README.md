@@ -77,6 +77,14 @@ The controlled development replay is frozen in the saved command and run receipt
 
 Before opening a task holdout, require reviewed same-segment linkage across distinct views, road-condition labels and event roles with source and near-duplicate checks. The scheduling feature must be available from the message bytes at admission. Keep evaluation road IDs, condition labels and future service outcomes out of the policy. Freeze the actual source profile, reader, codec, deadline definition, effect threshold, false-report limit, tail-wait limit and analysis code. A physical arrival trace and a chronological capture replay must remain separate scopes. Without a field arrival log, report controlled replay with explicit synthetic transport and queue assumptions.
 
+### Decision criteria for a qualified follow-up
+
+These are engineering thresholds chosen before any task holdout is opened. The primary contrast is receiver conditioning minus the stronger development-selected duplicate-aware control at nominal load 0.9, using the same headers, age guard, and service estimate. Report 0.5 and 1.2 as prespecified stress regimes. Use six median receiver service times as the primary capture-relative budget and four and ten as sensitivity budgets. Obtain the service reference from a separate development profile on the named hardware. This protocol assumes synthetic traffic unless an actual receiver log becomes available.
+
+The unit is a verified blocked road-segment condition at a declared observation time. Exclude unknown conditions from binary performance denominators and report their counts. Count one correct timely result per offered condition. Count a false report per completed job that reports obstruction against a verified negative. Preserve the full job lifecycle to compute capped wait for all offers, including jobs left unstarted. A practically worthwhile improvement is at least five percentage points in event-average timely evidence. Guardrails allow at most one additional false report per 100 verified negative jobs and at most one quarter of a median service time in additional all-offer p95 capped wait. Report the absolute event effects and whether leave-one-event-out estimates change their sign. A gain driven by one event is insufficient for a multi-event claim.
+
+These criteria do not create an eligible holdout. Before evaluating, commit a manifest that identifies the development and holdout event groups, independently adjudicated condition and linkage, near-duplicate checks, and the exact cue, reader, codec, and evaluator versions. Any later revision requires a new untouched cohort or an explicit exploratory label.
+
 ## Day 3 — Matched development replay and correctness checks
 
 The scheduler prototype receives a token, arrival, completion deadline, task score, appearance signature and expected service duration. Its static and conditional variants both discount exact signatures for completed positive reports. The conditional variant also reduces priority for near signatures. Both share the age guard, deadline check and service estimate. The guard prioritizes an old ready job once the wait threshold is reached. It does not guarantee a maximum wait under overload or nonpreemptive service.
@@ -101,6 +109,10 @@ A separate replay replaces the second copy with a 10 percent darker, slightly bl
 
 With the same 7,139 ms capture-relative budget and measured sender preparation, a header-only control delivers 3 of the 12 positive image IDs and issues zero observed false reports. This control assumes the same zero transport delay as the development queue and bypasses JPEG encoding and all receiver decode work. It matches both scheduling variants at overload while delivering one fewer positive at the two lower loads.
 
+### Selector overhead
+
+A separate CPU microbenchmark used 32 prior signatures, synthetic ready queues, 10 warmups and 100 calls per configuration. At queue size 128, p95 selection cost was 0.20 ms for the static rule, 1.19 ms for the conditional rule and 1.18 ms for the hard near gate. At queue size 512, the corresponding figures were 0.80, 4.44 and 4.35 ms. The near rules compare each candidate with the history, so their cost grows with both sizes. This is a local selector measurement with fixed input, separate from the replay clock and the end-to-end image timings. The controlled replay already shows no conditional advantage before charging this extra overhead.
+
 ## Day 4 — Holdout remains closed
 
 The qualification gates have not been met for a multi-event road-segment experiment. The 24-image sample has no independently verified cross-view road linkage, and the public training annotation audit yielded candidate links only. No holdout result, event-level confidence interval or leave-one-event-out statistic is reported.
@@ -121,6 +133,7 @@ python -m Evaluation.scheduler_trial_crasar_crops <candidate-linkage-audit.json>
 python -m Evaluation.scheduler_trial_repeat_cue_probe <crop-dir> <cached-CLIP-checkpoint> <cue-result.json>
 python -m Evaluation.scheduler_trial_variants <development-sample-manifest.json> <new-variant-dir>
 python -m Evaluation.scheduler_trial_replay <probe.json> <replay.json>
+python -m Evaluation.scheduler_trial_timing <new-timing-receipt.json>
 python -m Evaluation.scheduler_trial_report docs/scheduler_improvement_trials/dev_balanced_replay.json docs/scheduler_improvement_trials
 python -m pytest Scheduler/tests/test_trial_evidence_policy.py Scheduler/tests/test_scheduler_trial_replay.py -q
 ```

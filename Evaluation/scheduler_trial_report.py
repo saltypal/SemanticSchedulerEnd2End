@@ -51,6 +51,10 @@ def main():
     names = ("day1_probe.json", "day1_balanced_probe.json", "crasar_training_linkage.json",
              "dev_exact_repeat_replay.json", "dev_balanced_replay.json",
              "dev_replay_coverage.png", "dev_replay_table.csv")
+    extra_names = ("day1_variant_probe.json", "dev_variant_replay.json", "dev_selector_timing.json",
+                   "crasar_training_condition_candidates.json", "crasar_training_crop_manifest.json",
+                   "crasar_crop_hash_check.json", "crasar_repeat_cue_probe.json")
+    names += tuple(name for name in extra_names if (out / name).is_file())
     probe = json.loads((out / "day1_balanced_probe.json").read_text(encoding="utf-8"))
     scores = probe["records"]
     calibration = {}
