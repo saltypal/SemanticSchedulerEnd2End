@@ -1,0 +1,41 @@
+{
+  "scope": "Image-disjoint development extension. Event and near-duplicate separation unestablished.",
+  "frozen_threshold": 0.5,
+  "frozen": {
+    "source_reader_score": {
+      "positive": 9,
+      "negative": 9,
+      "true_positive": 2,
+      "false_positive": 0,
+      "average_precision": 0.8675324675324676
+    },
+    "resized_reader_score": {
+      "positive": 9,
+      "negative": 9,
+      "true_positive": 1,
+      "false_positive": 0,
+      "average_precision": 0.8336912542794896
+    },
+    "reader_score": {
+      "positive": 9,
+      "negative": 9,
+      "true_positive": 0,
+      "false_positive": 0,
+      "average_precision": 0.5740638990638991
+    }
+  },
+  "candidate_threshold": 0.013761813752353193,
+  "candidate_rule": "Strictly above all scored calibration negatives",
+  "candidate": {
+    "positive": 9,
+    "negative": 9,
+    "true_positive": 0,
+    "false_positive": 0,
+    "average_precision": 0.5740638990638991
+  },
+  "candidate_gate": "At least 2/3 recall and at most one false positive, with nine or more images per class",
+  "candidate_passes_pilot_gate": false,
+  "protected_holdout_opened": false,
+  "calibration_receipt_sha256": "0f640cdc9a75fbbb8ecfed1cbb772be5157ca472bbce501a99b63068685789b9",
+  "extension_receipt_sha256": "a0aeddbfabf018190034c297122f20a31b033290ffcf8ba908d78733712e71e1"
+}

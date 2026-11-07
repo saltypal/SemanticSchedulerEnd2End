@@ -24,6 +24,8 @@ def assess(calibration, extension):
     for field in ("codec", "sqgan_checkpoint_sha256", "reader_checkpoint_sha256", "preprocessing", "threshold"):
         if calibration[field] != extension[field]:
             raise ValueError(f"pilot configurations differ: {field}")
+    if calibration.get("image_fraction", 0.25) != extension.get("image_fraction", 0.25):
+        raise ValueError("pilot configurations differ: image_fraction")
     if calibration["codec"] != "sqgan":
         raise ValueError("requires native SQ-GAN measurements")
     a, b = calibration["rows"], extension["rows"]

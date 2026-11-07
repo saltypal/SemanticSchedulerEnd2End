@@ -53,6 +53,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--source-audit", type=Path, help="Publisher provenance for named events")
+    parser.add_argument("--extension", type=Path, help="Additional image-disjoint pilot receipt")
     parser.add_argument("--cycles", type=int, default=1, help="Exact workload repetitions, not independent samples")
     args = parser.parse_args()
     if args.cycles < 1:
@@ -60,6 +62,36 @@ def main():
     raw = args.receipt.read_bytes()
     receipt = json.loads(raw)
     records = receipt["rows"]
+    extension_hash = None
+    if args.extension:
+        extension_raw = args.extension.read_bytes()
+        extension = json.loads(extension_raw)
+        for field in ("codec", "sqgan_checkpoint_sha256", "reader_checkpoint_sha256",
+                      "preprocessing", "threshold", "cue_bytes"):
+            if receipt.get(field) != extension.get(field):
+                raise ValueError(f"pilot receipts use different {field}")
+        if receipt.get("image_fraction", 0.25) != extension.get("image_fraction", 0.25):
+            raise ValueError("pilot receipts use different image retention fractions")
+        spi_keys = ("checkpoint_sha256", "head_sha256", "processor_sha256")
+        if any(receipt.get("spi", {}).get(key) != extension.get("spi", {}).get(key)
+               for key in spi_keys):
+            raise ValueError("pilot receipts use different SPI identities")
+        records = [*records, *extension["rows"]]
+        if len({row["source_sha256"] for row in records}) != len(records):
+            raise ValueError("pilot receipts contain duplicate images")
+        if len({row["observation"]["identity"] for row in records}) != len(records):
+            raise ValueError("pilot receipts contain duplicate identities")
+        extension_hash = hashlib.sha256(extension_raw).hexdigest()
+    source_audit_hash = None
+    if args.source_audit:
+        audit_raw = args.source_audit.read_bytes()
+        matches = {row["identity"]: row for row in json.loads(audit_raw)["rows"]}
+        for record in records:
+            match = matches[record["observation"]["identity"]]
+            if match["source_sha256"] != record["source_sha256"]:
+                raise ValueError("source audit does not match the measured bytes")
+            record["event_group"] = match["candidate_event"] if match["image_match"] else None
+        source_audit_hash = hashlib.sha256(audit_raw).hexdigest()
     rows = [Observation(**row["observation"]) for row in records]
     if receipt["codec"] == "jpeg" and any(row.cue is not None for row in rows):
         raise ValueError("JPEG control cannot carry the SQ01 mask cue")
@@ -77,6 +109,7 @@ def main():
     output = dict(scope="Development replay. Synthetic captures, four serial sender queues, ideal delivery, "
                         "one nonpreemptive receiver. Deadline six median service times from capture.",
                   codec=receipt["codec"], source_sha256=hashlib.sha256(raw).hexdigest(),
+                  extension_sha256=extension_hash, source_audit_sha256=source_audit_hash,
                   cycles=args.cycles, unique_measured_images=len(rows),
                   cue_bytes=receipt["cue_bytes"], cue_diagnostic=cue_check(records, rows),
                   holdout_opened=False, results=results)

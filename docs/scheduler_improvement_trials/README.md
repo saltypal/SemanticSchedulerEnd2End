@@ -1,5 +1,7 @@
 # Scheduler improvement trials
 
+See the [24-image SQ-GAN extension and holdout decision](native_sqgan_extension.md) for the latest reader gate and matched replay.
+
 See [native SQ-GAN pilot and matched replay](native_sqgan_pilot.md) for the completed six-image codec pilot and its reader and holdout decision.
 
 See [SQ-GAN integration and staged replay](sqgan_staged_replay.md) for the next experiment, measured JPEG control, and native asset gate.
