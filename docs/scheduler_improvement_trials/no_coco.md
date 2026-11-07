@@ -1,5 +1,7 @@
 # No-COCO scene header trial
 
+See [complete application-header verification](no_coco_full_header.md) for the 15-trace packet and refit results. The nine-trace table below is the earlier scene-only replay.
+
 The old scene block included slots for 80 standard COCO classes. The new opt-in block transmits the five project objects (building, bridge, utility pole, traffic sign and animal) and eight regions (road, water, debris, smoke, flame, snow, ground and grass). It also transmits the detector status and availability information. The receiver expands omitted slots as unavailable, which preserves the historical feature layout for a controlled inference comparison.
 
 ## Measured size
