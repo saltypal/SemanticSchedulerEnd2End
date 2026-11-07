@@ -45,6 +45,7 @@ def replay(offers, horizon_ms, policy, max_wait_ms):
             candidate = select_trial_candidate(
                 [job.candidate for job in ready.values()], tuple(recognized), now,
                 max_wait_ms=max_wait_ms, near_bits=4, receiver_conditioning=policy == "conditional",
+                hard_near_gate=policy == "near_hard",
             )
         job = ready.pop(candidate.token)
         wait.append(now - candidate.arrival_ms)
@@ -73,26 +74,39 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("probe", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--variants", type=Path)
     args = parser.parse_args()
     probe = json.loads(args.probe.read_text(encoding="utf-8"))
     rows = probe["records"]
+    variants = rows
+    policies = ("fifo", "static", "conditional")
+    if args.variants:
+        alternate = json.loads(args.variants.read_text(encoding="utf-8"))
+        if alternate["threshold"] != probe["threshold"] or alternate["model_sha256"] != probe["model_sha256"]:
+            parser.error("probe and variants must use the same model and threshold")
+        by_id = {row["id"]: row for row in alternate["records"]}
+        variants = [by_id[row["id"] + "-variant"] for row in rows]
+        if any(a["native_road_damage"] != b["native_road_damage"] for a, b in zip(rows, variants)):
+            parser.error("a variant has a different reference label")
+        policies += ("near_hard",)
     service = median(row["decode_ms"] + row["reader_ms"] for row in rows)
     results = []
     for load in (0.5, 0.9, 1.2):
         offers = []
-        for index, row in enumerate(rows + rows):
+        for index, row in enumerate(rows + variants):
             capture = index * service / load
             arrival = capture + row["sender_ms"] + row["encode_ms"]
             candidate = TrialCandidate(str(index), arrival, capture + 6 * service,
                                        row["header"], int(row["appearance_hash"], 16), service)
-            offers.append(MeasuredJob(candidate, row["id"] if row["native_road_damage"] else None,
+            offers.append(MeasuredJob(candidate, rows[index % len(rows)]["id"] if row["native_road_damage"] else None,
                                       row["decoded"] >= probe["threshold"],
                                       row["decode_ms"] + row["reader_ms"]))
         horizon = max(job.candidate.deadline_ms for job in offers)
-        for policy in ("fifo", "static", "conditional"):
+        for policy in policies:
             results.append(dict(load=load, policy=policy, **replay(offers, horizon, policy, 5 * service)))
+    repeat_type = 'mild photometric variants' if args.variants else 'exact image repeats'
     with args.output.open("x", encoding="utf-8") as stream:
-        json.dump({"scope": "Development stress only. Injected exact repeats, synthetic arrivals, "
+        json.dump({"scope": f"Development stress only. Injected {repeat_type}, synthetic arrivals, "
                              "measured JPEG and frozen-reader service. No independent event estimate.",
                    "service_estimate_ms": service, "results": results}, stream, indent=2, allow_nan=False)
         stream.write("\n")

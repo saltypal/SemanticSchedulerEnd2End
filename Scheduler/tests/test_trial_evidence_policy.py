@@ -37,3 +37,11 @@ def test_completion_window_and_empty_queue():
     timely = candidate("timely", 0.1, 0b1111111)
     assert choose([late, timely]) == timely
     assert choose([]) is None
+
+def test_hard_gate_is_a_distinct_comparator():
+    repeat = candidate("near", 0.95, 0b1)
+    fresh = candidate("fresh", 0.10, 0b1111111)
+    ready = [repeat, fresh]
+    assert choose(ready, [0]) == repeat
+    assert select_trial_candidate(ready, [0], 1.0, max_wait_ms=20.0, near_bits=4,
+                                  receiver_conditioning=False, hard_near_gate=True) == fresh

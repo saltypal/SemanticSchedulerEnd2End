@@ -1,6 +1,13 @@
 {
   "scope": "Development and data qualification only. No holdout opened.",
   "replay_source": "dev_balanced_replay.json",
+  "header_only_control": {
+    "scope": "Synthetic no-transport control. Sender compute counted; decoder and JPEG encoding bypassed.",
+    "budget_ms": 7139.4105,
+    "timely_true_positive_images": 3,
+    "timely_false_positive_images": 0,
+    "offered_positive_images": 12
+  },
   "leave_one_image_out_development_threshold_diagnostic": {
     "source": {
       "true_positives": 8,

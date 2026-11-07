@@ -22,6 +22,7 @@ def select_trial_candidate(
     max_wait_ms: float,
     near_bits: int,
     receiver_conditioning: bool,
+    hard_near_gate: bool = False,
 ) -> TrialCandidate | None:
     """Choose from ready headers using signatures from completed positive reports.
 
@@ -41,9 +42,9 @@ def select_trial_candidate(
         if job.signature in positive_signatures:
             return 0.0
         novelty = 1.0
-        if receiver_conditioning and positive_signatures:
+        if (receiver_conditioning or hard_near_gate) and positive_signatures:
             nearest = min((job.signature ^ known).bit_count() for known in positive_signatures)
-            novelty = min(1.0, nearest / (near_bits + 1))
+            novelty = float(nearest > near_bits) if hard_near_gate else min(1.0, nearest / (near_bits + 1))
         return job.task_score * novelty / job.expected_service_ms
 
     return min(ready, key=lambda job: (-priority(job), job.arrival_ms, job.token))

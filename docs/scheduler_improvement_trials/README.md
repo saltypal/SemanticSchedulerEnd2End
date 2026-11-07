@@ -45,7 +45,7 @@ The reconstruction path recovered one more positive in aggregate at the fixed th
 
 All 24 downloaded images have distinct raw hashes, and none exactly matches the initial 12. No event or near-duplicate isolation is asserted. A leave-one-image-out development diagnostic placed each path's threshold just above its highest remaining negative score. Source and JPEG reconstruction each recovered 8 positives, while the 8-bit header recovered 7. Each path produced 1 false positive. This exploratory threshold check used the same small development set and is not a held-out estimate. It suggests the default threshold explains more of the measured loss than JPEG on this batch, and that score quantization can remove separation at low values.
 
-The team confirmed there is no receiver-arrival log or independently reviewed same-road linkage available internally. The CRASAR training-only audit found 18,590 road-line IDs in 36 annotation files and zero IDs reused across files. Rounding the two geographic endpoints to five decimals produced 548 candidate endpoint pairs appearing in multiple files. These are leads for a geographically matched cohort. They do not establish stable road identity, condition agreement, temporal availability or dispatch-time linkability. The source GeoTIFFs are large. A 64 KiB byte-range probe on one training raster succeeded. The smallest model configuration inspected in this pass still lists a roughly 977 MB checkpoint. A full model bundle has not been selected or qualified.
+The team confirmed there is no receiver-arrival log or independently reviewed same-road linkage available internally. The CRASAR training-only audit found 18,590 road-line IDs in 36 annotation files and zero IDs reused across files. Rounding the two geographic endpoints to five decimals produced 548 candidate endpoint pairs appearing in multiple files. These are leads for a geographically matched cohort. They do not establish stable road identity, condition agreement, temporal availability or dispatch-time linkability. The source GeoTIFFs are large. A 64 KiB byte-range probe on one training raster succeeded. The baseline model configuration inspected in this pass lists a roughly 977 MB checkpoint. A full model bundle has not been selected or qualified.
 
 
 ### Input qualification
@@ -55,6 +55,21 @@ The team confirmed there is no receiver-arrival log or independently reviewed sa
 - The CRASAR-U-DROIDs road benchmark supplies aligned road annotations over ten disasters. Its orthomosaics and aligned labels are a candidate source for matched road views. Orthomosaic order is not a receiver arrival trace. Repeated views need independent linkage and must remain separate from runtime observations. Access to file listings establishes availability of the listing only. It does not qualify the dataset or any model for this trial.
 
 Sources: [LADI dataset](https://huggingface.co/datasets/MITLL/LADI-v2-dataset), [frozen reference reader](https://huggingface.co/MITLL/LADI-v2-classifier-small-reference), [RescueNet](https://doi.org/10.1038/s41597-023-02799-4), [CRASAR road benchmark](https://ojs.aaai.org/index.php/AAAI/article/view/41248), [CRASAR dataset](https://huggingface.co/datasets/CRASAR/CRASAR-U-DROIDs/tree/4c2732a7ab9658517ca8caa69bfee9e1f87ca532).
+
+### Cross-view qualification
+
+The condition screen checked whether the midpoint of each candidate road line fell inside native condition polygons in multiple training orthomosaics. Of the 548 geometric candidates, 12 shared a known condition label across views. Three shared an obstruction label. All three are from Hurricane Ian, and two use the same source-raster pair. These are three candidate pairs within one event. The midpoint test does not replace annotation alignment or independent same-segment adjudication.
+
+I retrieved only the TIFF blocks required for six 512 by 512 windows. The crop manifest records bounds, alpha coverage and hashes. All six windows had full valid-pixel coverage. Visual inspection found corresponding local scene content within each pair. I used these as development candidates, with no claim that the crop process represents real receiver traffic.
+
+| Pre-dispatch repeat cue | Geographic candidate pair distances | Distinct-location distances | Median local CPU cost |
+| --- | --- | --- | ---: |
+| 64-bit difference hash | 18, 20, 32 | 16–34 | 0.85 ms |
+| 128-bit CLIP sketch | 13, 22, 15 | 19–33 | 127.62 ms |
+
+The four-bit appearance gate misses all three candidate pairs. Increasing its cutoff to cover all three also accepts distinct-location examples in this small set. The compact CLIP sketch improves separation for two candidates but still overlaps distinct-location distances and adds roughly 127 ms of sender computation. Neither cue qualifies for a held-out geographic-repeat claim. The CLIP numbers are a separate exploratory measurement on six selected crops. They were not used to tune or replay a new threshold.
+
+For a future qualified run, use sender-available camera footprint and capture metadata to propose overlap. Keep annotated road identity and condition on the evaluator side. Test footprint matching against weak headers, simple duplicate gates and high-confidence scene matches, with natural positives and hard negatives drawn from multiple event groups. The fact that a coordinate can be calculated for an annotation-selected crop does not show that a deployed sender can supply the same feature causally.
 
 ## Day 2 — Protocol and holdout gate
 
@@ -68,7 +83,7 @@ The scheduler prototype receives a token, arrival, completion deadline, task sco
 
 The replay uses recorded sender and JPEG encoding costs before admission and recorded decode and reader times during receiver service. It assumes independent preparation for each offer and no measured network delay or shared sender contention. It uses common offered jobs, three nominal load levels, and a capture-relative deadline of six median service times. The same image list appears twice to inject exact repeats. Failed and unfinished jobs cannot credit evidence. Receiver state uses completed positive reports, including false positives. In this development variant, late successful reports may inform subsequent scheduling but earn zero timely evidence.
 
-Seven focused tests pass. They cover empty queues, exact-repeat equivalence, an actionable near-repeat fixture, age and deadline behavior, failed and unfinished jobs, false state and unique credit. The fixture confirms the mechanism can change a decision when its conditions hold. Its labels and results are constructed. The historical SPI-first and marginal urgency baselines need an SPI input aligned to the new cohort and were not run in this road-damage replay.
+Eight focused tests pass. They cover empty queues, exact-repeat equivalence, an actionable near-repeat fixture, age and deadline behavior, failed and unfinished jobs, false state and unique credit. The fixture confirms the mechanism can change a decision when its conditions hold. Its labels and results are constructed. The historical SPI-first and marginal urgency baselines need an SPI input aligned to the new cohort and were not run in this road-damage replay.
 
 | Nominal load | FIFO timely / offered | Static duplicate-aware | Receiver-conditioned | Max started wait, FIFO / static / conditioned |
 | --- | ---: | ---: | ---: | ---: |
@@ -79,6 +94,12 @@ Seven focused tests pass. They cover empty queues, exact-repeat equivalence, an 
 All cells had zero observed false reports on this small selected sample. At load 1.2, all policies left five jobs unstarted. There were 21 late completions under FIFO and 27 under each score-based policy. The two score-based policies had identical dispatch orders on these traces. Their extra timely positive at load 1.2 comes with more late completions. Maximum started wait excludes unstarted jobs and must be read with the latter count.
 
 [Development figure](dev_replay_coverage.png) · [Detailed CSV](dev_replay_table.csv) · [Reproduction hashes](development_manifest.json)
+
+### Mild image-variant control
+
+A separate replay replaces the second copy with a 10 percent darker, slightly blurred version of the same source image. This preserves the nominal scene and uses actual JPEG decode and reader timings for each variant. Source identity is joined only by the evaluator. The four-bit cue matched 23 of 24 injected pairs and zero of the 276 distinct-original image-ID pairs in this small sample. The conditional policy, the exact-only control, and a hard four-bit gate each scored 4/12, 4/12 and 3/12 at loads 0.5, 0.9 and 1.2. FIFO scored 4/12, 4/12 and 2/12. These are constructed same-source repeats. Their easy matchability is inconsistent with the distinct-view CRASAR diagnostic above.
+
+With the same 7,139 ms capture-relative budget and measured sender preparation, a header-only control delivers 3 of the 12 positive image IDs and issues zero observed false reports. This control assumes the same zero transport delay as the development queue and bypasses JPEG encoding and all receiver decode work. It matches both scheduling variants at overload while delivering one fewer positive at the two lower loads.
 
 ## Day 4 — Holdout remains closed
 
@@ -96,6 +117,9 @@ Run from the trial checkout. Use new paths for raw probe and replay receipts.
 python -m Evaluation.scheduler_trial_dev_samples <new-development-image-dir>
 python -m Evaluation.scheduler_trial_probe --sample-manifest <manifest> --model-dir <local-reference-model> --output <probe.json>
 python -m Evaluation.scheduler_trial_crasar_audit <linkage-audit.json>
+python -m Evaluation.scheduler_trial_crasar_crops <candidate-linkage-audit.json> <new-crop-dir>
+python -m Evaluation.scheduler_trial_repeat_cue_probe <crop-dir> <cached-CLIP-checkpoint> <cue-result.json>
+python -m Evaluation.scheduler_trial_variants <development-sample-manifest.json> <new-variant-dir>
 python -m Evaluation.scheduler_trial_replay <probe.json> <replay.json>
 python -m Evaluation.scheduler_trial_report docs/scheduler_improvement_trials/dev_balanced_replay.json docs/scheduler_improvement_trials
 python -m pytest Scheduler/tests/test_trial_evidence_policy.py Scheduler/tests/test_scheduler_trial_replay.py -q
