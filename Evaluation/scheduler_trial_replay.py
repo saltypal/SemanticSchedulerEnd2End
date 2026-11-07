@@ -104,7 +104,7 @@ def main():
         horizon = max(job.candidate.deadline_ms for job in offers)
         for policy in policies:
             results.append(dict(load=load, policy=policy, **replay(offers, horizon, policy, 5 * service)))
-    repeat_type = 'mild photometric variants' if args.variants else 'exact image repeats'
+    repeat_type = 'mild photometric variants' if args.variants else 'exact repeats'
     with args.output.open("x", encoding="utf-8") as stream:
         json.dump({"scope": f"Development stress only. Injected {repeat_type}, synthetic arrivals, "
                              "measured JPEG and frozen-reader service. No independent event estimate.",
