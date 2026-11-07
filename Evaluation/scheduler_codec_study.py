@@ -72,6 +72,8 @@ def main():
                 raise ValueError(f"pilot receipts use different {field}")
         if receipt.get("image_fraction", 0.25) != extension.get("image_fraction", 0.25):
             raise ValueError("pilot receipts use different image retention fractions")
+        if receipt.get("exif_transpose", False) != extension.get("exif_transpose", False):
+            raise ValueError("pilot receipts use different EXIF orientation handling")
         spi_keys = ("checkpoint_sha256", "head_sha256", "processor_sha256")
         if any(receipt.get("spi", {}).get(key) != extension.get("spi", {}).get(key)
                for key in spi_keys):

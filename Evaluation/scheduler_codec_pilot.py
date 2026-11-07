@@ -30,6 +30,16 @@ def run(args):
         raise ValueError("duplicate development identity")
     if args.output.exists():
         raise ValueError("output already exists")
+    reader_hash = sha256(args.reader / "model.safetensors")
+    threshold = 0.5
+    source_screen_hash = None
+    if args.source_screen:
+        screen = json.loads(args.source_screen.read_bytes())
+        if (not args.exif_transpose or screen["manifest_sha256"] != sha256(args.manifest)
+                or screen["reader_sha256"] != reader_hash):
+            raise ValueError("source screen does not match the codec inputs")
+        threshold = screen["threshold"]
+        source_screen_hash = sha256(args.source_screen)
     if args.codec == "sqgan":
         if not args.bundle or not args.source_root or not (args.bundle / "bundle.json").is_file():
             raise FileNotFoundError("verified SQ-GAN bundle and source root required")
@@ -54,7 +64,7 @@ def run(args):
     def stages(path):
         start = perf_counter_ns()
         with Image.open(path) as raw:
-            source = raw.convert("RGB")
+            source = (ImageOps.exif_transpose(raw) if args.exif_transpose else raw).convert("RGB")
             content = ImageOps.contain(source, (512, 256), Image.Resampling.BILINEAR)
         image = Image.new("RGB", (512, 256), (127, 127, 127))
         left, top = (512 - content.width) // 2, (256 - content.height) // 2
@@ -99,20 +109,25 @@ def run(args):
     observations = []
     for row in rows:
         path = args.manifest.parent / row["image_path"]
+        source_hash = sha256(path)
+        if "source_sha256" in row and row["source_sha256"] != source_hash:
+            raise ValueError(f"source hash mismatch for {row['item_id']}")
         payload, sender, decode, read, prediction, cue, cue_ms, teacher, encode, error, source, content = stages(path)
         observation = Observation(row["item_id"], hashlib.sha256(payload).hexdigest(), sender, len(payload),
-                                  decode, read, None if prediction is None else prediction >= 0.5,
+                                  decode, read, None if prediction is None else prediction >= threshold,
                                   "roads_damage" in row["positive_labels"], row.get("spi"),
                                   row.get("reference_critical"), cue)
         observations.append(dict(observation=asdict(observation), reader_score=prediction,
                                  teacher_ms=teacher, encode_ms=encode, cue_ms=cue_ms, error=error,
-                                 source_sha256=sha256(path), event_group=row.get("event_group"),
+                                 source_sha256=source_hash, event_group=row.get("event_group"),
                                  source_reader_score=score(source), resized_reader_score=score(content)))
     receipt = dict(codec=args.codec, scope="Native visible road damage, development only. CPU, two torch threads.",
-                   reader_checkpoint_sha256=sha256(args.reader / "model.safetensors"), threshold=0.5,
+                   reader_checkpoint_sha256=reader_hash, threshold=threshold,
+                   source_screen_sha256=source_screen_hash,
                    preprocessing="Aspect-preserving fit in 512x256 gray canvas; crop padding before reading.",
                    manifest_sha256=sha256(args.manifest), sqgan_checkpoint_sha256=PINNED_SHA if args.codec == "sqgan" else None,
                    image_fraction=args.image_fraction if args.codec == "sqgan" else None,
+                   exif_transpose=args.exif_transpose,
                    cue_bytes=1 if args.codec == "sqgan" else 0, rows=observations)
     with args.output.open("x", encoding="utf-8") as stream:
         json.dump(receipt, stream, indent=2, allow_nan=False)
@@ -125,6 +140,8 @@ def main():
     parser.add_argument("--reader", required=True, type=Path)
     parser.add_argument("--codec", choices=("sqgan", "jpeg"), default="sqgan")
     parser.add_argument("--image-fraction", type=float, default=0.25)
+    parser.add_argument("--exif-transpose", action="store_true")
+    parser.add_argument("--source-screen", type=Path)
     parser.add_argument("--bundle", type=Path)
     parser.add_argument("--source-root", type=Path)
     parser.add_argument("--output", required=True, type=Path)

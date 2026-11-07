@@ -1,6 +1,8 @@
 # Scheduler improvement trials
 
-See the [24-image SQ-GAN extension and holdout decision](native_sqgan_extension.md) for the latest reader gate and matched replay.
+See the [frozen large-reference reader follow-up](strong_reader_trial.md) for the latest reader gate and matched replay.
+
+See the [24-image SQ-GAN extension and holdout decision](native_sqgan_extension.md) for the preceding native pilot.
 
 See [native SQ-GAN pilot and matched replay](native_sqgan_pilot.md) for the completed six-image codec pilot and its reader and holdout decision.
 

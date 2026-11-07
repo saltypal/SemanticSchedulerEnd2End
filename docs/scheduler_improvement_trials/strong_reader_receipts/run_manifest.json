@@ -1,0 +1,344 @@
+{
+  "decision": "no_go",
+  "study_branch": "scheduler_improvement_trials",
+  "original_scheduler_commit": "43aa658b7e91f5ab574f3aba920454add918c085",
+  "protected_holdout_opened": false,
+  "scheduler_retrained": false,
+  "field_receiver_trace_available": false,
+  "critical_labels_available": false,
+  "reader_revision": "e7971f2700074d2cfe587c685a73de400b4f809f",
+  "source_separation_check": "No shared validation row, source SHA-256 or source folder between calibration and retry",
+  "artifacts_sha256": {
+    "manifest.json": "b166f89af3ec12d52e60198239bc2dd8544a1d38bb3c7c405cb434388988dc8f",
+    "paired.json": "1481a1b22804fcf564475d76f6da45fae2a70bdc2e89eec07bcf42268a4a9805",
+    "paired_spi.json": "f858122fe2659c4ffb52203cb0fe55886ba2bcdea17e83bc532355e7bead4f9f",
+    "replay.json": "2d6fdd7beeb13b3bc0de1a959af99fcf17e9b89e60a9c62789e2b1494967cdce",
+    "retry_manifest.json": "6b26c5347b99d834b9fa852846339cbb6b22637f51686678d598713d5a3122c7",
+    "retry_selection.json": "0950b4cbe8f14da42cd7db97f687daddf386d08fb45a734a34bcef5206f897ed",
+    "retry_source_screen.json": "fb4bb2fa1560ca08c8f9a76602d991cbbf6654929810967d9c99a54a58507596",
+    "selection.json": "b3bdcf4a03d1f4db42a97b42a4d9fa24794ebb556b681d21bf9119c9bf8bfda7",
+    "source_screen.json": "7061427b5bf7950fcfd3b2f33437720d6ca3ba7ba92265e370eb992d7faff88f"
+  },
+  "figure_sha256": "8d8c9e4357802cb0116c100c2c8cf978f71741339a4f5907ced42eab4a009190",
+  "historical_replay_sha256": "bde7969588a47bc0c91e31b3f90aa676a63668c20379119ed76632712d3bf23b",
+  "stress_replay": {
+    "cycles": 4,
+    "unique_images": 24,
+    "sha256": "93eefbea0154d13b55dac0f50eeaddc9d55013b68e8f1ec2bc841789763e316c",
+    "conditions": [
+      {
+        "nominal_load": 0.5,
+        "burst": false,
+        "policies": {
+          "fifo": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 0.0,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 0.0,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi_cue": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 0.0,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          }
+        }
+      },
+      {
+        "nominal_load": 0.5,
+        "burst": true,
+        "policies": {
+          "fifo": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 91619.54999999935,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 114633.0087749993,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi_cue": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 115181.03747499897,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          }
+        }
+      },
+      {
+        "nominal_load": 0.9,
+        "burst": false,
+        "policies": {
+          "fifo": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 0.0,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 0.0,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi_cue": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 0.0,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          }
+        }
+      },
+      {
+        "nominal_load": 0.9,
+        "burst": true,
+        "policies": {
+          "fifo": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 133702.1216,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 176559.4533312503,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          },
+          "spi_cue": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 194205.61902500002,
+            "completed": 96,
+            "failed": 0,
+            "unfinished": 0,
+            "unstarted": 0,
+            "not_arrived": 0
+          }
+        }
+      },
+      {
+        "nominal_load": 1.2,
+        "burst": false,
+        "policies": {
+          "fifo": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 3,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 590611.5688812457,
+            "completed": 86,
+            "failed": 0,
+            "unfinished": 1,
+            "unstarted": 9,
+            "not_arrived": 0
+          },
+          "spi": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 2,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 1698125.8617937486,
+            "completed": 86,
+            "failed": 0,
+            "unfinished": 1,
+            "unstarted": 9,
+            "not_arrived": 0
+          },
+          "spi_cue": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 2135432.55993125,
+            "completed": 87,
+            "failed": 0,
+            "unfinished": 1,
+            "unstarted": 8,
+            "not_arrived": 0
+          }
+        }
+      },
+      {
+        "nominal_load": 1.2,
+        "burst": true,
+        "policies": {
+          "fifo": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 3,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 655560.3601296869,
+            "completed": 86,
+            "failed": 0,
+            "unfinished": 1,
+            "unstarted": 9,
+            "not_arrived": 0
+          },
+          "spi": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 2,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 1978970.695446874,
+            "completed": 86,
+            "failed": 0,
+            "unfinished": 1,
+            "unstarted": 9,
+            "not_arrived": 0
+          },
+          "spi_cue": {
+            "offered_positive_ids": 12,
+            "timely_correct_positive_ids": 0,
+            "false_reports": 4,
+            "critical_offered": null,
+            "critical_missed": null,
+            "critical_reference_available": 0,
+            "spi_available": 96,
+            "p95_observed_wait_ms": 2324458.218735939,
+            "completed": 87,
+            "failed": 0,
+            "unfinished": 1,
+            "unstarted": 8,
+            "not_arrived": 0
+          }
+        }
+      }
+    ]
+  },
+  "verification": {
+    "focused_tests_passed": 21,
+    "native_paired_rows_verified": 24,
+    "native_replay_byte_identical": true,
+    "historical_replay_byte_identical": true,
+    "identical_workload_across_policies": true
+  }
+}
