@@ -1,5 +1,7 @@
 # Scheduler improvement trials
 
+See the [consolidated work record](work_record.md) for the byte accounting, no-COCO implementation, complete packet replay and reduced-feature refit.
+
 ## What we are testing
 
 The receiver has one decoder. When several images are ready, the next image should ideally tell the receiver something it still needs to know. A second picture of a road the receiver already understands might be less useful than a picture of a different road. That depends on whether the scheduler can recognize the repeat before decoding and whether the reconstruction actually supports a correct decision.
