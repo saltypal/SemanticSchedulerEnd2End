@@ -1,5 +1,7 @@
 # Scheduler improvement trials
 
+Start with the [consolidated work record](work_record.md) for the complete published trial sequence, the key results, and the current evidence gates.
+
 See the [road-region reader trial](road_region_reader.md) for the latest source gate.
 
 See the [frozen large-reference reader follow-up](strong_reader_trial.md) for the preceding reader gate and matched replay.
@@ -9,8 +11,6 @@ See the [24-image SQ-GAN extension and holdout decision](native_sqgan_extension.
 See [native SQ-GAN pilot and matched replay](native_sqgan_pilot.md) for the completed six-image codec pilot and its reader and holdout decision.
 
 See [SQ-GAN integration and staged replay](sqgan_staged_replay.md) for the next experiment, measured JPEG control, and native asset gate.
-
-See the [consolidated work record](work_record.md) for the byte accounting, no-COCO implementation, complete packet replay and reduced-feature refit.
 
 ## What we are testing
 
