@@ -41,17 +41,22 @@ def main():
     parser.add_argument("prior_manifest", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--exclude-prefixes-from", type=Path)
+    parser.add_argument("--exclude-images-from", type=Path, action="append", default=[])
     parser.add_argument("--positive-count", type=int, choices=(9, 12), default=12)
     args = parser.parse_args()
     prior = json.loads(args.prior_manifest.read_text(encoding="utf-8-sig"))
     used = {row["row_idx"] for row in prior}
     prefixes = set()
     prior_paths = [args.prior_manifest.parent / row["image_path"] for row in prior]
+    extra_manifests = list(args.exclude_images_from)
     if args.exclude_prefixes_from:
-        calibration = json.loads(args.exclude_prefixes_from.read_text(encoding="utf-8"))
-        prefixes = {row["source_prefix"] for row in calibration}
-        used.update(row["row_idx"] for row in calibration)
-        prior_paths.extend(args.exclude_prefixes_from.parent / row["image_path"] for row in calibration)
+        extra_manifests.append(args.exclude_prefixes_from)
+    for manifest in extra_manifests:
+        prior_rows = json.loads(manifest.read_text(encoding="utf-8-sig"))
+        if manifest == args.exclude_prefixes_from:
+            prefixes = {row["source_prefix"] for row in prior_rows}
+        used.update(row["row_idx"] for row in prior_rows)
+        prior_paths.extend(manifest.parent / row["image_path"] for row in prior_rows)
     thumbs, hashes = [], set()
     for path in prior_paths:
         data = path.read_bytes()

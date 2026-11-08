@@ -1,6 +1,8 @@
 # Scheduler improvement trials
 
-See the [frozen large-reference reader follow-up](strong_reader_trial.md) for the latest reader gate and matched replay.
+See the [road-region reader trial](road_region_reader.md) for the latest source gate.
+
+See the [frozen large-reference reader follow-up](strong_reader_trial.md) for the preceding reader gate and matched replay.
 
 See the [24-image SQ-GAN extension and holdout decision](native_sqgan_extension.md) for the preceding native pilot.
 
