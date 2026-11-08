@@ -2,7 +2,9 @@
 
 Start with the [consolidated work record](work_record.md) for the complete published trial sequence, the key results, and the current evidence gates.
 
-See the [road-region reader trial](road_region_reader.md) for the latest source gate.
+See the [event-separated obstruction reader trial](event_obstruction_reader.md) for the latest source gate and comparison with the original scheduler.
+
+See the [road-region reader trial](road_region_reader.md) for the earlier LADI source gate.
 
 See the [frozen large-reference reader follow-up](strong_reader_trial.md) for the preceding reader gate and matched replay.
 

@@ -1,6 +1,6 @@
 # Scheduler improvement trials — consolidated work record
 
-This is the index for the published trial sequence through the road-region reader study. Each stage links to its detailed method, results and available receipts. The original scheduler branch starts at `43aa658`.
+This is the index for the published trial sequence through the event-separated obstruction study. Each stage links to its detailed method, results and available receipts. The trials branched from original scheduler commit `43aa658`.
 
 ## Why 76.3% became 23.8%
 
@@ -50,6 +50,7 @@ The 75 proxy-Critical offers are pooled across the 15 original validation episod
 | 11. Native extension and rate control | All 18 additional 464 B jobs decoded. The reader found 2/9 positives on originals, 1/9 after resizing and 0/9 after SQ-GAN. A locked lower threshold still found 0/9. On the first six images, raising the image-latent fraction from 25% to 50% increased payload from 464 to 624 B and still yielded 0/3 post-decode positives. | The combined 24-image replay and original six scenarios reproduced. The cue and policy did not qualify. The 624 B control did not justify changing the default rate. [Extension, qualification and rate control](native_sqgan_extension.md) |
 | 12. Larger frozen reader and matched replay | Fresh originals gave 4/12 true positives and 1/12 false reports. The same 24 messages decoded at 464 B and gave 0/12 true positives and 1/12 false reports. A separate source-folder-disjoint retry with a locked threshold yielded 3/9 true positives and 3/12 false reports. | All three policies delivered zero timely correct positives across six scenarios. Bursty overload p95 observed waits were 238 s for FIFO, 364 s for SPI-first and 570 s with the cue. A four-cycle stress run exercised unfinished work with 24 unique images and 96 offers. [Reader, figure and run manifest](strong_reader_trial.md) |
 | 13. Frozen road-region reader | On 21 fresh originals, the crop reader found 9/9 positives and made 3/12 false reports. The full-frame comparator found 8/9 with 1/12 false reports. The frozen gate required 6/9 and at most 2/12 false reports. All scores and decisions reproduced. | The crop reader failed the source gate, and the paired CLI rejected that receipt. The full-frame comparator passed on this batch after failing on the earlier fresh batch. The paired run and conditional rate curve remain unopened for this reader. [Road-region protocol, results and hashes](road_region_reader.md) |
+| 14. Event-separated obstruction reader | Acquired 86 verified CRASAR training-partition crops across four events. The centered reader passed Ida at 5/6 true positives and 0/12 false reports. It failed Harvey at 2/6 and 2/12 and calibration at 3/6 and 2/12. | Both variants failed qualification. The event-separated endpoint is visible obstruction. Paired codec and scheduling gates remain closed. [Event-separated methods and receipts](event_obstruction_reader.md) |
 
 ## Original five-step plan and team handoff
 
