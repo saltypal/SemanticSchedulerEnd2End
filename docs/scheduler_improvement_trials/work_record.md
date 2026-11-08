@@ -51,6 +51,20 @@ The 75 proxy-Critical offers are pooled across the 15 original validation episod
 | 12. Larger frozen reader and matched replay | Fresh originals gave 4/12 true positives and 1/12 false reports. The same 24 messages decoded at 464 B and gave 0/12 true positives and 1/12 false reports. A separate source-folder-disjoint retry with a locked threshold yielded 3/9 true positives and 3/12 false reports. | All three policies delivered zero timely correct positives across six scenarios. Bursty overload p95 observed waits were 238 s for FIFO, 364 s for SPI-first and 570 s with the cue. A four-cycle stress run exercised unfinished work with 24 unique images and 96 offers. [Reader, figure and run manifest](strong_reader_trial.md) |
 | 13. Frozen road-region reader | On 21 fresh originals, the crop reader found 9/9 positives and made 3/12 false reports. The full-frame comparator found 8/9 with 1/12 false reports. The frozen gate required 6/9 and at most 2/12 false reports. All scores and decisions reproduced. | The crop reader failed the source gate, and the paired CLI rejected that receipt. The full-frame comparator passed on this batch after failing on the earlier fresh batch. The paired run and conditional rate curve remain unopened for this reader. [Road-region protocol, results and hashes](road_region_reader.md) |
 
+## Original five-step plan and team handoff
+
+Four of the five planned development stages ran and have reproducible results. That is **80% by stage execution**, with each stage weighted equally. The fifth stage has a recorded no-go decision. Its qualified holdout evaluation is pending. The execution count includes experiments that failed their success criteria.
+
+| Original step | Verified status | Result |
+| --- | --- | --- |
+| 1. Run a real SQ-GAN pilot | Complete | Measured per-image sender, payload, decoder and reader outcomes. The native decoder worked, while the road-damage reader failed at the tested rate. |
+| 2. Improve the simulator | Engineering complete | Replaced fixed service with measured per-image service in matched controlled replays. Verified bursts, overload, backlog and failure handling. Field timing and Critical misses need suitable data. |
+| 3. Test the encoder-derived cue | Development test complete. Cue unqualified. | Measured one header byte and median 3.01 ms of extra sender work in the larger-reader pilot. The predictive comparison could not qualify because it had no successful positive outcomes. |
+| 4. Compare FIFO, SPI-first and SPI-first plus cue | Development replay complete. Benefit unverified. | All three returned zero timely correct positives. FIFO had the shortest p95 observed wait in scenarios with queueing. Critical preservation remains unmeasured. |
+| 5. Make the holdout decision | No-go recorded. Holdout run pending. | A passing reader and an independently labeled multi-event cohort are needed before freezing and opening the holdout. |
+
+The verified improvement in this branch is the **23.8% mean reduction in complete trial application header overhead**, with SPI-first decisions preserved on the archived replay. The measured-service simulator is an engineering improvement. A gain in timely correct evidence from the new cue or policy has yet to be demonstrated.
+
 ## Current decision and open work
 
 - **Header.** The no-COCO application packet is verified with SPI-first and JPEG controls under the archived replay. Learned-policy decisions are sensitive to COCO removal. Sender savings from reducing detector prompts and link-layer timing remain unmeasured.
