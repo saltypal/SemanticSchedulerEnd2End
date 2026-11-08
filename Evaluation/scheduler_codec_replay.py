@@ -76,7 +76,8 @@ class Job:
     deadline: float
 
 
-def trace(rows, load, *, burst=False, sources=4, header_bytes=0, link_bytes_per_ms=None):
+def trace(rows, load, *, burst=False, sources=4, header_bytes=0, link_bytes_per_ms=None,
+          fixed_deadline_ms=None):
     if not rows or not math.isfinite(load) or load <= 0 or sources < 1 or header_bytes < 0:
         raise ValueError("invalid trace parameters")
     if link_bytes_per_ms is not None and (not math.isfinite(link_bytes_per_ms) or link_bytes_per_ms <= 0):
@@ -84,6 +85,11 @@ def trace(rows, load, *, burst=False, sources=4, header_bytes=0, link_bytes_per_
     base = median(row.decode_ms + row.reader_ms for row in rows)
     intervals = [0.25 if burst and i % 8 < 4 else 1.75 if burst else 1.0
                  for i in range(len(rows))]
+    if fixed_deadline_ms is not None:
+        if not math.isfinite(fixed_deadline_ms) or fixed_deadline_ms <= 0:
+            raise ValueError("fixed deadline must be positive")
+        base = sum(row.decode_ms + row.reader_ms for row in rows) / sum(intervals)
+    deadline = 6 * base if fixed_deadline_ms is None else fixed_deadline_ms
     clocks = [0.] * sources
     capture = 0.
     jobs = []
@@ -92,9 +98,9 @@ def trace(rows, load, *, burst=False, sources=4, header_bytes=0, link_bytes_per_
         start = max(capture, clocks[sender])
         clocks[sender] = start + row.sender_ms
         delivery = 0. if link_bytes_per_ms is None else (row.payload_bytes + header_bytes) / link_bytes_per_ms
-        jobs.append(Job(i, row, capture, start, clocks[sender] + delivery, capture + 6 * base))
+        jobs.append(Job(i, row, capture, start, clocks[sender] + delivery, capture + deadline))
         capture += base * step / load
-    return tuple(jobs), capture + 6 * base
+    return tuple(jobs), capture + deadline
 
 
 @dataclass(frozen=True)
@@ -115,7 +121,7 @@ def choose(ready, policy):
     return min(eligible, key=oldest)
 
 
-def replay(jobs, horizon, policy):
+def replay(jobs, horizon, policy, *, detailed=False):
     if policy not in POLICIES or not jobs or not math.isfinite(horizon) or horizon <= 0:
         raise ValueError("invalid replay")
     if len({job.token for job in jobs}) != len(jobs):
@@ -145,7 +151,7 @@ def replay(jobs, horizon, policy):
         now = finish
     positives, delivered = set(), set()
     waits, timeline = [], []
-    critical = critical_missed = false_reports = 0
+    critical = critical_missed = critical_correct = false_reports = late = 0
     counts = dict(completed=0, failed=0, unfinished=0, unstarted=0, not_arrived=0)
     for job in jobs:
         obs = job.observation
@@ -156,12 +162,14 @@ def replay(jobs, horizon, policy):
         counts[result["state"]] += 1
         done = result["decision_ms"]
         timely = done is not None and done <= job.deadline
+        late += done is not None and not timely
         if timely and obs.predicted_positive and obs.reference_positive:
             delivered.add(obs.identity)
         false_reports += done is not None and obs.predicted_positive and not obs.reference_positive
         if obs.reference_critical is True:
             critical += 1
             critical_missed += not timely
+            critical_correct += timely and obs.predicted_positive == obs.reference_positive
         if job.arrival < horizon:
             wait = (result["dispatch_ms"] if result["dispatch_ms"] is not None else horizon) - job.arrival
             waits.append(wait)
@@ -171,10 +179,15 @@ def replay(jobs, horizon, policy):
                              payload_bytes=obs.payload_bytes,
                              deadline_ms=job.deadline, **result))
     known_critical = sum(job.observation.reference_critical is not None for job in jobs)
-    return dict(offered_positive_ids=len(positives), timely_correct_positive_ids=len(delivered),
+    report = dict(offered_positive_ids=len(positives), timely_correct_positive_ids=len(delivered),
                 false_reports=int(false_reports), critical_offered=critical if known_critical else None,
                 critical_missed=critical_missed if known_critical else None,
                 critical_reference_available=known_critical,
                 spi_available=sum(job.observation.spi is not None for job in jobs),
                 p95_observed_wait_ms=float(np.quantile(waits, .95)) if waits else None,
                 **counts, timeline=timeline)
+    if detailed:
+        report.update(late_decisions=late,
+                      critical_completed_on_time=critical-critical_missed if known_critical else None,
+                      critical_correct_on_time=critical_correct if known_critical else None)
+    return report

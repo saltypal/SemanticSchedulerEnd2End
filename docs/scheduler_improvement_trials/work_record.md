@@ -1,6 +1,6 @@
 # Scheduler improvement trials — consolidated work record
 
-This is the index for the published trial sequence through the multi-event obstruction reader retry. Each stage links to its detailed method, results and available receipts. The trials branched from original scheduler commit `43aa658`.
+This is the index for the published trial sequence through the fixed-deadline replay and road-corridor ablation. Each stage links to its detailed method, results and available receipts. The trials branched from original scheduler commit `43aa658`.
 
 ## Why 76.3% became 23.8%
 
@@ -52,6 +52,7 @@ The 75 proxy-Critical offers are pooled across the 15 original validation episod
 | 13. Frozen road-region reader | On 21 fresh originals, the crop reader found 9/9 positives and made 3/12 false reports. The full-frame comparator found 8/9 with 1/12 false reports. The frozen gate required 6/9 and at most 2/12 false reports. All scores and decisions reproduced. | The crop reader failed the source gate, and the paired CLI rejected that receipt. The full-frame comparator passed on this batch after failing on the earlier fresh batch. The paired run and conditional rate curve remain unopened for this reader. [Road-region protocol, results and hashes](road_region_reader.md) |
 | 14. Event-separated obstruction reader | Acquired 86 verified CRASAR training-partition crops across four events. The centered reader passed Ida at 5/6 true positives and 0/12 false reports. It failed Harvey at 2/6 and 2/12 and calibration at 3/6 and 2/12. | Both variants failed qualification. The event-separated endpoint is visible obstruction. Paired codec and scheduling gates remain closed. [Event-separated methods and receipts](event_obstruction_reader.md) |
 | 15. Multi-event reader and reviewed controls | Trained on Ian, Harvey and Ida. On fresh Mayfield and Michael crops, centered average precision rose from 0.634 to 0.757 and from 0.743 to 0.822 versus the frozen Ian-only reader. At the calibrated threshold, the centered reader found 4/6 and 3/6 positives and made 5/12 and 0/12 false reports, respectively. | The source gate failed. The paired 464 B run, cue replay and holdout remain closed. [Blind review, results and receipts](multievent_obstruction_reader.md) |
+| 16. Fixed-deadline replay and road-corridor ablation | Verified 60 matched scenarios with fixed deadlines, measured demand and queue backlog. The corridor mask changed Mayfield from 4/6 detections and 5/12 false reports to 4/6 and 4/12. Michael stayed at 3/6 and 0/12. | Simulator upgrade verified. Reader remains unqualified. The cue changed 34 dispatch orders and yielded no timely correct positives. [Replay, lane diagnosis and receipts](fixed_replay_lane_ablation.md) |
 
 ## Original five-step plan and team handoff
 

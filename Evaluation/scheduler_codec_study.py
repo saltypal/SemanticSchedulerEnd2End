@@ -5,6 +5,7 @@ import hashlib
 import json
 import random
 from pathlib import Path
+from statistics import median
 
 import numpy as np
 
@@ -56,6 +57,7 @@ def main():
     parser.add_argument("--source-audit", type=Path, help="Publisher provenance for named events")
     parser.add_argument("--extension", type=Path, help="Additional image-disjoint pilot receipt")
     parser.add_argument("--cycles", type=int, default=1, help="Exact workload repetitions, not independent samples")
+    parser.add_argument("--deadline-profile", type=Path, help="Separate measured pilot for fixed deadlines")
     args = parser.parse_args()
     if args.cycles < 1:
         parser.error("--cycles must be positive")
@@ -97,17 +99,53 @@ def main():
     rows = [Observation(**row["observation"]) for row in records]
     if receipt["codec"] == "jpeg" and any(row.cue is not None for row in rows):
         raise ValueError("JPEG control cannot carry the SQ01 mask cue")
-    workload = list(rows)
-    rng = random.Random(1729)
-    for _ in range(1, args.cycles):
-        workload.extend(rng.sample(rows, len(rows)))
+    profile_hash = deadline = None
+    seeds = (1729,)
+    if args.deadline_profile:
+        profile_raw = args.deadline_profile.read_bytes()
+        profile = json.loads(profile_raw)
+        reference = [Observation(**r["observation"]) for r in profile["rows"]]
+        reference_sources = {r["source_sha256"] for r in profile["rows"] if r.get("source_sha256")}
+        evaluation_sources = {r["source_sha256"] for r in records if r.get("source_sha256")}
+        if (reference_sources & evaluation_sources
+                or {r.payload_sha256 for r in reference} & {r.payload_sha256 for r in rows}):
+            raise ValueError("deadline profile overlaps evaluation images or payloads")
+        profile_hash = hashlib.sha256(profile_raw).hexdigest()
+        deadline = 6 * median(r.decode_ms + r.reader_ms for r in reference)
+        seeds = tuple(range(10))
     results = []
-    for load in (0.5, 0.9, 1.2):
-        for burst in (False, True):
-            jobs, horizon = trace(workload, load, burst=burst)
-            results.append(dict(nominal_load=load, burst=burst, horizon_ms=horizon,
-                                offered_service_to_horizon=sum(o.decode_ms + o.reader_ms for o in workload) / horizon,
-                                policies={name: replay(jobs, horizon, name) for name in POLICIES}))
+    for seed in seeds:
+        rng = random.Random(seed)
+        workload = rng.sample(rows, len(rows)) if deadline else list(rows)
+        for _ in range(1, args.cycles):
+            workload.extend(rng.sample(rows, len(rows)))
+        for load in (0.5, 0.9, 1.2):
+            for burst in (False, True):
+                jobs, horizon = trace(workload, load, burst=burst, fixed_deadline_ms=deadline)
+                service = sum(o.decode_ms + o.reader_ms for o in workload)
+                condition = dict(nominal_load=load, burst=burst, horizon_ms=horizon,
+                                 offered_service_to_horizon=service / horizon,
+                                 policies={name: replay(jobs, horizon, name, detailed=bool(deadline))
+                                           for name in POLICIES})
+                if deadline:
+                    window = horizon - deadline
+                    admitted = sum(j.observation.decode_ms + j.observation.reader_ms
+                                   for j in jobs if j.arrival < window)
+                    condition.update(seed=seed, capture_window_ms=window,
+                                     offered_service_to_capture_window=service / window,
+                                     admitted_service_to_capture_window=admitted / window)
+                    for report in condition["policies"].values():
+                        report["queued_at_capture_window_end"] = sum(
+                            j["arrival_ms"] < window
+                            and (j["dispatch_ms"] is None or j["dispatch_ms"] >= window)
+                            for j in report["timeline"])
+                    orders = [
+                        [j["token"] for j in sorted(
+                            (j for j in condition["policies"][name]["timeline"] if j["dispatch_ms"] is not None),
+                            key=lambda j: j["dispatch_ms"])]
+                        for name in ("spi", "spi_cue")]
+                    condition["cue_changed_dispatch_order"] = orders[0] != orders[1]
+                results.append(condition)
     output = dict(scope="Development replay. Synthetic captures, four serial sender queues, ideal delivery, "
                         "one nonpreemptive receiver. Deadline six median service times from capture.",
                   codec=receipt["codec"], source_sha256=hashlib.sha256(raw).hexdigest(),
@@ -115,6 +153,9 @@ def main():
                   cycles=args.cycles, unique_measured_images=len(rows),
                   cue_bytes=receipt["cue_bytes"], cue_diagnostic=cue_check(records, rows),
                   holdout_opened=False, results=results)
+    if deadline:
+        output.update(scope="Controlled replay. Synthetic captures, ideal delivery, measured service, fixed deadline.",
+                      deadline_profile_sha256=profile_hash, fixed_deadline_ms=deadline, seeds=list(seeds))
     with args.output.open("x", encoding="utf-8") as stream:
         json.dump(output, stream, indent=2, allow_nan=False)
         stream.write("\n")

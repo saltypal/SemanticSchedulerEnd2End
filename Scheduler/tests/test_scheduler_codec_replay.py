@@ -73,3 +73,24 @@ def test_native_pilot_checkpoint_pin_is_full_sha256():
     from Evaluation.scheduler_codec_pilot import PINNED_SHA
 
     assert len(bytes.fromhex(PINNED_SHA)) == 32
+
+
+@pytest.mark.parametrize("burst", [False, True])
+def test_fixed_deadlines_and_load_use_separate_time_bases(burst):
+    rows = [observed("a"), observed("b", decode_ms=13.)]
+    jobs, horizon = trace(rows, 1.2, burst=burst, fixed_deadline_ms=100.)
+    work = sum(row.decode_ms + row.reader_ms for row in rows)
+    assert work / (horizon - 100.) == pytest.approx(1.2)
+    assert all(job.deadline - job.capture == pytest.approx(100.) for job in jobs)
+
+
+def test_detailed_replay_counts_correct_critical_separately_from_completion():
+    jobs = (
+        Job(0, observed("wrong", reference_critical=True, predicted_positive=False), 0, 0, 1, 5),
+        Job(1, observed("late", reference_critical=True), 0, 0, 2, 7),
+        Job(2, observed("failed", predicted_positive=None, reader_ms=0), 0, 0, 3, 10),
+    )
+    report = replay(jobs, 20, "fifo", detailed=True)
+    assert report["critical_completed_on_time"] == 1
+    assert report["critical_correct_on_time"] == 0
+    assert report["late_decisions"] == report["failed"] == 1
