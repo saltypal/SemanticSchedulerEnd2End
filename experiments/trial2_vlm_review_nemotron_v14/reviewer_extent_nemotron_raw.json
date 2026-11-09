@@ -1,0 +1,554 @@
+{
+  "model": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+  "revision": "437f4e28b989cc2d9a16b6767cc930cdf48797ff",
+  "gpu": "Tesla T4",
+  "prompt": "Assess only definite visible disaster impact in this single photo. Return one JSON object with grade, extent, affected, and evidence. Grade is an integer: 0 no definite visible impact, 1 limited definite impact, 2 consequential definite impact. Extent is an integer: 0 unknown or none, 1 one localized location, 2 multiple distinct affected locations, 3 widespread definite impact across the visible area. Affected is a list of short labels for what is visibly affected, e.g. homes, vehicles, or fields, and is empty if nothing is definitely affected. Evidence is a short string describing the visual signs and their extent. Inspect the full image, including small or partially visible signs. Do not infer damage from construction, population, nearby water, or blur. If grade is zero, use extent zero and an empty affected list. If damage is definite but its extent is unclear, use extent zero.",
+  "pairs": [
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "b": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    }
+  ],
+  "image_token_budget": "Nemotron AutoImageProcessor default",
+  "answers": [
+    {
+      "sweep": 1,
+      "image_id": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact in the provided image.\"\n}",
+      "valid": false,
+      "seconds": 9.576494203000038
+    },
+    {
+      "sweep": 1,
+      "image_id": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 7.799092364999979
+    },
+    {
+      "sweep": 1,
+      "image_id": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 8.01778162200003
+    },
+    {
+      "sweep": 1,
+      "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 1,\n  \"extent\": 1,\n  \"affected\": [\"homes\"],\n  \"evidence\": \"The white structure appears to be a house with a damaged roof, indicating a localized impact.\"\n}",
+      "valid": false,
+      "seconds": 9.245706944999938
+    },
+    {
+      "sweep": 1,
+      "image_id": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact in the image.\"\n}",
+      "valid": false,
+      "seconds": 8.547639906000086
+    },
+    {
+      "sweep": 1,
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"trees\", \"land\"],\n  \"evidence\": \"Trees are partially submerged in the river, and the land is visibly flooded.\"\n}",
+      "valid": false,
+      "seconds": 9.451183795999896
+    },
+    {
+      "sweep": 1,
+      "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"homes\", \"roads\"],\n  \"evidence\": \"Muddy water in the river and along the banks, indicating possible flooding. Some homes are partially submerged, and roads are visibly affected by the water.\"\n}",
+      "valid": false,
+      "seconds": 10.893817364000142
+    },
+    {
+      "sweep": 1,
+      "image_id": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 8.751648724000006
+    },
+    {
+      "sweep": 1,
+      "image_id": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 9.11000389700007
+    },
+    {
+      "sweep": 1,
+      "image_id": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of damage or impact.\"\n}",
+      "valid": false,
+      "seconds": 9.336065660000031
+    },
+    {
+      "sweep": 1,
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 1,\n  \"extent\": 0,\n  \"affected\": [\"buildings\"],\n  \"evidence\": \"The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity.\"\n}",
+      "valid": false,
+      "seconds": 13.035946945999967
+    },
+    {
+      "sweep": 1,
+      "image_id": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 9.193175081999925
+    },
+    {
+      "sweep": 1,
+      "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"homes\", \"roads\", \"fields\"],\n  \"evidence\": \"Muddy water in fields and roads, indicating flooding. Some homes are surrounded by water, and the roads are partially submerged.\"\n}",
+      "valid": false,
+      "seconds": 11.228208443000085
+    },
+    {
+      "sweep": 1,
+      "image_id": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"The image does not show any visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 9.303437218999989
+    },
+    {
+      "sweep": 1,
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"homes\", \"vehicles\", \"roads\"],\n  \"evidence\": \"Floodwaters have inundated multiple homes, vehicles, and roads, with water levels reaching up to the rooftops of some structures.\"\n}",
+      "valid": false,
+      "seconds": 11.217586641000025
+    },
+    {
+      "sweep": 2,
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"homes\", \"vehicles\", \"roads\"],\n  \"evidence\": \"Floodwaters have inundated multiple homes, vehicles, and roads, with water levels reaching up to the rooftops of some structures.\"\n}",
+      "valid": false,
+      "seconds": 11.20327327599989
+    },
+    {
+      "sweep": 2,
+      "image_id": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"The image does not show any visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 9.407651699000098
+    },
+    {
+      "sweep": 2,
+      "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"homes\", \"roads\", \"fields\"],\n  \"evidence\": \"Muddy water in fields and roads, indicating flooding. Some homes are surrounded by water, and the roads are partially submerged.\"\n}",
+      "valid": false,
+      "seconds": 11.242256520999945
+    },
+    {
+      "sweep": 2,
+      "image_id": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 9.052773820000084
+    },
+    {
+      "sweep": 2,
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 1,\n  \"extent\": 0,\n  \"affected\": [\"buildings\"],\n  \"evidence\": \"The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity.\"\n}",
+      "valid": false,
+      "seconds": 12.657876243999908
+    },
+    {
+      "sweep": 2,
+      "image_id": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of damage or impact.\"\n}",
+      "valid": false,
+      "seconds": 9.075179853000009
+    },
+    {
+      "sweep": 2,
+      "image_id": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 8.976298091999979
+    },
+    {
+      "sweep": 2,
+      "image_id": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 8.942505213999993
+    },
+    {
+      "sweep": 2,
+      "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"homes\", \"roads\"],\n  \"evidence\": \"Muddy water in the river and along the banks, indicating possible flooding. Some homes are partially submerged, and roads are visibly affected by the water.\"\n}",
+      "valid": false,
+      "seconds": 11.271135858999969
+    },
+    {
+      "sweep": 2,
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\"trees\", \"land\"],\n  \"evidence\": \"Trees are partially submerged in the river, and the land is visibly flooded.\"\n}",
+      "valid": false,
+      "seconds": 10.043594410999958
+    },
+    {
+      "sweep": 2,
+      "image_id": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact in the image.\"\n}",
+      "valid": false,
+      "seconds": 9.214732553999966
+    },
+    {
+      "sweep": 2,
+      "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 1,\n  \"extent\": 1,\n  \"affected\": [\"homes\"],\n  \"evidence\": \"The white structure appears to be a house with a damaged roof, indicating a localized impact.\"\n}",
+      "valid": false,
+      "seconds": 10.105763386000035
+    },
+    {
+      "sweep": 2,
+      "image_id": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 8.94235337200007
+    },
+    {
+      "sweep": 2,
+      "image_id": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact.\"\n}",
+      "valid": false,
+      "seconds": 8.957444685999917
+    },
+    {
+      "sweep": 2,
+      "image_id": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"No visible signs of disaster impact in the provided image.\"\n}",
+      "valid": false,
+      "seconds": 9.310797296999908
+    }
+  ],
+  "nf4_layers": 225,
+  "status": "completed",
+  "peak_gpu_bytes": 9150445568
+}

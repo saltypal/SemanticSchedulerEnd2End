@@ -1344,3 +1344,15 @@ Version14 outcome verified: COMPLETE platform, partial_or_blocked research. Visu
 ## Mainstream source promotion 5 November 2026
 
 Canonical notebook sources now live under `Notebooks/SchedulerSuite/paired/wsl`, `Notebooks/SchedulerSuite/paired/windows` and `Notebooks/SchedulerSuite/recovery`. Existing owner slugs, published versions, run IDs and retrieved outputs are unchanged. Builders are in `Scheduler/training/study`. These rebuilt sources have not been submitted. Historical notebooks remain at their recorded paths.
+
+## Trial 2 Nemotron single-photo follow-up — 10 Nov 2026
+- Existing private notebook: `hmmkk20/semantic-scheduler-trial2-vlm-smoke`, version 14 submitted; status was `QUEUED` at last check.
+- Purpose: same 15 LADI calibration photos and same single-photo grade/extent/affected/evidence rubric as Qwen v13; two sweeps; pinned Nemotron revision `437f4e28b989cc2d9a16b6767cc930cdf48797ff`; one Tesla T4, NF4/FP16.
+- Source: `%TEMP%/trial2-vlm-nemotron-single-v14/pilot.py`; local Python compilation passed. Expected output: `/kaggle/working/reviewer_extent_nemotron.json`. Results pending; no completion or inference claim until downloaded and hash-verified.
+
+### Trial 2 Nemotron v14 completion — 10 Nov 2026
+- Version14 status: COMPLETE. Downloaded the exact output to `%TEMP%/trial2-vlm-nemotron-single-output-v14/` and archived the submitted source, raw response JSON, log, and offline analysis under `experiments/trial2_vlm_review_nemotron_v14/`.
+- Raw receipt SHA-256: `3bd6f90d3c5f1e0b8f7ba87bcb822c36653eeffcb514b2068ba5cb9ea5a4d159`. Model: `nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1`, revision `437f4e28b989cc2d9a16b6767cc930cdf48797ff`; Tesla T4; 225 NF4 layers; peak allocated memory 9,150,445,568 bytes.
+- Two reversed sweeps produced 30 valid structured raw responses; all 15 photos repeated exact grade, extent, affected list, and evidence. The submitted online parser rejected the outputs due to an over-escaped regex; corrected offline parsing validated the preserved raw JSON. Median call latency 9.31s.
+- Of Qwen's 16 calibration ties, Nemotron has 5 strict grade differences: 4 unsupported preferences for `c05293ad` (based on buildings/parking/roads, not visible disaster evidence), 1 unadjudicated possible damaged-roof preference for `446d99e4`; 11 ties. Count zero new strict training labels. No RankNet training.
+- Archived source SHA-256: 3e0b172246228643864a5cbb3c25ee99a8f95824e7aac94e336d6550cf54d082; offline analysis SHA-256: 6813b455ac4a5a9e42ad6cadbd6308b8a1877542aec42f1a3afc78feb9bfaa5.
