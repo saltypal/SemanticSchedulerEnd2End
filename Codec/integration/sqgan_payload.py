@@ -75,6 +75,12 @@ class SQGANDigitalCodec:
         if not isinstance(payload,bytes):raise TypeError("SQ-GAN encoder must produce bytes")
         self.packet.decode_packet(payload)
         return payload
+    def encode_with_features(self, image, semantic=None):
+        """Encode once and return the payload with its pre-mask image grid."""
+        from Codec.integration.sqgan_prefeatures import encode_with_features
+
+        return encode_with_features(self, image, semantic)
+
     def semantic_map(self,image):
         """Transmitter-only frozen teacher restored from the SAME trained bundle."""
         import torch
