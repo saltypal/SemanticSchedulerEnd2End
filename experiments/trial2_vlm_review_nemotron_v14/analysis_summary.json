@@ -57,7 +57,7 @@
       "winner_evidence": "The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity."
     }
   ],
-  "review_decision": "Do not use any new Nemotron preference as a strict training label from this calibration run. Four strict differences favor c05293ad based on building-complex/parking/road text that does not establish disaster impact in the photograph; the fifth favors 446d99e4 based on roof-damage wording, which lacks a matching selected impact tag and needs independent adjudication. Eleven pairs remain unresolved.",
+  "review_decision": "Do not use any new Nemotron preference as a strict training label from this calibration run. Four strict differences favor c05293ad based on building-complex/parking/road text that does not establish disaster impact in the photograph; the fifth favors 446d99e4 based on roof-damage wording, which lacks a matching selected impact tag and needs independent adjudication. Eleven pairs remain unresolved. Exact grade agreement was 9/15 (60.0%) with Qwen v12 and 10/14 (71.4%) with Qwen v13, excluding its one invalid photo; these are small calibration-set descriptive rates, not qualification scores.",
   "c052_visual_spot_check": "The image shows a large building complex and roads; no obvious inundated structures are visible at displayed resolution. Nemotron cites human-built setting, not disaster impact. Treat its grade 1 as unsupported for this preference review; the native flooding_structures label is a weak proxy, not confirmation of visible impact.",
   "446_visual_spot_check": "Nemotron cites a damaged roof. The source image has a prominent white-roofed structure; damage is plausible but not independently adjudicated. Leave this preference unresolved.",
   "label_csv_sha256": {
@@ -85,5 +85,71 @@
     "file": "kaggle_v15_parser_fix_unsubmitted.py",
     "sha256": "06630712f123ebb7550c0b1a5a59430c5b19dbdb52a1f0ea9a5443c266ae3162",
     "purpose": "Correct the response regex and use a real newline in the image marker prompt. Not submitted; v14 raw outputs were sufficient for offline validation."
+  },
+  "qwen_nemotron_grade_comparison": {
+    "qwen_v12": {
+      "compared_photos": 15,
+      "same_grade": 9,
+      "agreement_fraction": 0.6,
+      "disagreements": [
+        {
+          "image_id": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+          "qwen_grade": 1,
+          "nemotron_grade": 0
+        },
+        {
+          "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+          "qwen_grade": 1,
+          "nemotron_grade": 2
+        },
+        {
+          "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+          "qwen_grade": 1,
+          "nemotron_grade": 2
+        },
+        {
+          "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+          "qwen_grade": 1,
+          "nemotron_grade": 2
+        }
+      ]
+    },
+    "qwen_v13": {
+      "compared_photos": 14,
+      "same_grade": 10,
+      "agreement_fraction": 0.7142857142857143,
+      "disagreements": [
+        {
+          "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+          "qwen_grade": 0,
+          "nemotron_grade": 2
+        },
+        {
+          "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+          "qwen_grade": 0,
+          "nemotron_grade": 2
+        }
+      ]
+    }
   }
 }
