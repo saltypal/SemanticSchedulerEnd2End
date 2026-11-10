@@ -69,3 +69,90 @@ def test_wait_polls_until_complete():
     sleeps = []
     assert ops.wait("s1", timeout=100, poll=5, sleep=sleeps.append) == 0
     assert sleeps == [5, 5]
+
+
+WSL_BIN = "/home/Satya/.venvs/semantic-kaggle/bin/kaggle"
+CFG2 = {"default_account": "wsl", "slug_prefix": "edge-", "repo_url": "u",
+        "accounts": {"win": {"username": "w", "runner": "native", "bin": "kaggle"},
+                     "wsl": {"username": "z", "runner": "wsl", "bin": WSL_BIN}}}
+
+
+def _run(argv, tmp_path, cfg=CFG2):
+    calls, lines = [], []
+    rc = kaggle_ops.main(argv, runner=lambda c, e=None: calls.append(c) or (0, "sha\n" if c[0] == "git" else "ok"),
+                         cfg=cfg, log_path=tmp_path / "log.md", out=lines.append, stage_root=tmp_path / "nb")
+    return rc, calls, lines
+
+
+def test_to_wsl_path():
+    assert kaggle_ops.to_wsl_path(r"D:\Bunker\x y\f") == "/mnt/d/Bunker/x y/f"
+    assert kaggle_ops.to_wsl_path("C:/a/b") == "/mnt/c/a/b"
+    assert kaggle_ops.to_wsl_path("/already/linux") == "/already/linux"
+    assert kaggle_ops.to_wsl_path("owner/slug") == "owner/slug"
+
+
+def test_wsl_prefix_bin_and_path_translation():
+    ops = kaggle_ops.Ops(CFG2, "wsl", out=lambda *_: None)
+    cmd = ops._cmd(["kernels", "push", "-p", r"D:\a\b", "--path", "E:/c"])
+    assert cmd == ["wsl", WSL_BIN, "kernels", "push", "-p", "/mnt/d/a/b", "--path", "/mnt/e/c"]
+    assert kaggle_ops.Ops(CFG2, "win", out=lambda *_: None)._cmd(["x", "-p", r"D:\a"]) == ["kaggle", "x", "-p", r"D:\a"]
+
+
+def test_default_account_is_wsl_from_real_config(tmp_path):
+    from scripts.edge.build_notebook import load_kaggle_config
+    cfg = load_kaggle_config()
+    assert cfg["default_account"] == "wsl" and cfg["accounts"]["win"]["username"] == "satyapaladugu"
+    assert cfg["accounts"]["wsl"]["username"] == "satyapaladuguplus" and cfg["accounts"]["win"]["bin"] == "kaggle"
+    rc, calls, lines = _run(["--dry-run", "dataset-list", "--mine"], tmp_path)
+    assert rc == 0 and calls == [] and lines[0] == f"$ wsl {WSL_BIN} datasets list --mine"
+
+
+def test_dataset_create_stages_metadata_and_logs(tmp_path):
+    src = tmp_path / "My Data"
+    src.mkdir()
+    (src / "a.txt").write_text("x")
+    rc, calls, _ = _run(["dataset-create", "--dir", str(src), "--title", "T", "--public", "--dir-mode", "tar"], tmp_path)
+    stage = tmp_path / "nb/_stage/wsl/datasets/my-data"
+    meta = json.loads((stage / "dataset-metadata.json").read_text())
+    assert meta == {"id": "z/my-data", "title": "T", "licenses": [{"name": "other"}]}
+    dcall = calls[0]
+    assert (stage / "a.txt").exists() and dcall[:4] == ["wsl", WSL_BIN, "datasets", "create"]
+    assert "--public" in dcall and dcall[-2:] == ["--dir-mode", "tar"]
+    assert "| dataset-create | wsl | z/my-data |" in (tmp_path / "log.md").read_text()
+
+
+def test_dataset_metadata_kept_if_present(tmp_path):
+    src = tmp_path / "d"
+    src.mkdir()
+    (src / "dataset-metadata.json").write_text('{"id": "keep/me"}')
+    _run(["dataset-version", "--dir", str(src), "--message", "m1", "--account", "win"], tmp_path)
+    stage = tmp_path / "nb/_stage/win/datasets/d"
+    assert json.loads((stage / "dataset-metadata.json").read_text()) == {"id": "keep/me"}
+
+
+def test_dataset_version_status_and_dry_run(tmp_path):
+    src = tmp_path / "d"
+    src.mkdir()
+    rc, calls, _ = _run(["dataset-version", "--dir", str(src), "--message", "hi"], tmp_path)
+    assert calls[0][3] == "version" and calls[0][-2:] == ["-m", "hi"]
+    rc, calls, _ = _run(["dataset-status", "--slug", "foo"], tmp_path)
+    assert calls[0][-3:] == ["datasets", "status", "z/foo"] or calls[0][-1] == "z/foo"
+    before = len(list(tmp_path.rglob("*")))
+    for argv in (["--dry-run", "dataset-create", "--dir", str(src)],
+                 ["--dry-run", "dataset-version", "--dir", str(src), "--message", "m"],
+                 ["--dry-run", "dataset-status", "--slug", "foo"], ["--dry-run", "dataset-list", "--mine"]):
+        rc, calls, lines = _run(argv, tmp_path)
+        assert rc == 0 and calls == [] and lines[0].startswith("$ wsl ")
+    assert len(list(tmp_path.rglob("*"))) == before
+
+
+def test_metadata_sources_and_cli(tmp_path):
+    meta = build_metadata(CFG, "win", "s1", "T", dataset_sources=["a/b"], kernel_sources=["c/d"])
+    assert meta["dataset_sources"] == ["a/b"] and meta["kernel_sources"] == ["c/d"]
+    assert build_metadata(CFG, "win", "s1", "T")["kernel_sources"] == []
+    from scripts.edge import build_notebook as bn
+    bn.main(["--step", "s9", "--entrypoint", "m", "--title", "T", "--out-dir", str(tmp_path),
+             "--dataset-source", "a/b", "--dataset-source", "a/c", "--kernel-source", "k/l"])
+    m = json.loads((tmp_path / "s9.kernel-metadata.json").read_text())
+    assert m["dataset_sources"] == ["a/b", "a/c"] and m["kernel_sources"] == ["k/l"]
+    assert m["id"].startswith("satyapaladuguplus/")

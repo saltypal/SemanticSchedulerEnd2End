@@ -1,6 +1,9 @@
-# Kaggle for edge notebooks: Windows CLI only (decision 2026-11-10). Never commit tokens.
+# Kaggle for edge notebooks. Never commit tokens.
 # New edge-<step> slugs are approved for this study; later runs are new VERSIONS of the same slug.
+# `bin` is the kaggle executable (default 'kaggle'); runner wsl prefixes commands with `wsl`.
+default_account: wsl   # the Windows account is busy for now
 accounts:
-  win: {username: "satyapaladugu", config_dir: "", runner: native}
+  win: {username: "satyapaladugu", config_dir: "", runner: native, bin: 'kaggle'}
+  wsl: {username: "satyapaladuguplus", config_dir: "", runner: wsl, bin: '/home/Satya/.venvs/semantic-kaggle/bin/kaggle'}
 slug_prefix: 'edge-'
 repo_url: 'https://github.com/saltypal/SemanticSchedulerEnd2End.git'

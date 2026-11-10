@@ -1,0 +1,23 @@
+# Embedding + classifier grid for the SPI (plan v3 S3; docs/CHECKLIST.md step 5).
+# ue_cost = image-encoder parameters in millions (lower is lighter on the UE); ue_note says what it means.
+encoders:
+  - {name: clip_b32,        hf_id: openai/clip-vit-base-patch32,     family: clip,     dim: 512, ue_cost: 88, ue_note: "ViT-B/32 vision tower, ~4.4 GFLOPs"}
+  - {name: siglip2_base,    hf_id: google/siglip2-base-patch16-224,  family: siglip,   dim: 768, ue_cost: 93, ue_note: "ViT-B/16 vision tower, ~17 GFLOPs"}
+  - {name: dinov2_small,    hf_id: facebook/dinov2-small,            family: dino,     dim: 384, ue_cost: 22, ue_note: "ViT-S/14, lightest candidate"}
+  - {name: dinov2_base,     hf_id: facebook/dinov2-base,             family: dino,     dim: 768, ue_cost: 86, ue_note: "ViT-B/14"}
+  - {name: convnextv2_tiny, hf_id: facebook/convnextv2-tiny-1k-224,  family: convnext, dim: 768, ue_cost: 28, ue_note: "ConvNeXtV2-T, ~4.5 GFLOPs; hit disk-full in the old grid"}
+classifiers:
+  logistic:   {C: [0.01, 0.1, 1.0, 10.0]}
+  linear_svm: {C: [0.01, 0.1, 1.0]}          # LinearSVC decision_function + temperature scaling
+  knn:        {k: [5, 15, 31]}
+  mlp:        {hidden: [[128], [256, 64]], alpha: [0.0001, 0.01]}
+  hist_gb:    {max_leaf_nodes: [15, 31], learning_rate: [0.05, 0.1]}
+selection:
+  primary: val_macro_f1
+  min_critical_recall: 0.6      # gate on validation Critical recall
+  f1_tie_tol: 0.005             # macro-F1 within this counts as a tie
+  tie_break: [lower_ue_cost, lower_ece]
+limits:
+  max_images_per_encoder: 6000
+  shard_size: 500
+  min_free_gb: 3.0

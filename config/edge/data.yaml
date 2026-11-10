@@ -30,6 +30,15 @@ normals:
   # Places365 categories that look like damage; excluded so rubble-like scenes are never labelled Low.
   places365_blacklist: [ruin, junkyard, landfill, construction_site, excavation, volcano, dam]
   source_tier: Low
+  places365_count: 6000            # stratified over categories, after the blacklist
+  people_count: 3000               # Open Images validation: Selfie first, then Person
+  seed: 29
+  people_mids: {selfie: /m/0sgh53y, person: /m/01g317}
+  sources:
+    places365_filelist: https://data.csail.mit.edu/places/places365/filelist_places365-standard.tar
+    places365_categories: https://raw.githubusercontent.com/csailvision/places365/master/categories_places365.txt
+    openimages_labels: https://storage.googleapis.com/openimages/v7/oidv7-val-annotations-human-imagelabels.csv
+    openimages_images: https://storage.googleapis.com/openimages/2018_04/validation/validation-images-with-rotation.csv
 
 splits:
   # Event-disjoint. Final choice is made by report_counts() gates, see sec. 10 S0.

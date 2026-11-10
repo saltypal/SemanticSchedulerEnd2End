@@ -93,13 +93,14 @@ def kernel_slug(cfg, step_id):
     return f"{cfg.get('slug_prefix', 'edge-')}{step_id}"
 
 
-def build_metadata(cfg, account, step_id, title, needs_gpu=True):
+def build_metadata(cfg, account, step_id, title, needs_gpu=True, dataset_sources=(), kernel_sources=()):
     """kernel-metadata.json dict; owner comes from the account's username in config."""
     owner = cfg["accounts"][account].get("username", "")
     return {"id": f"{owner}/{kernel_slug(cfg, step_id)}", "title": title,
             "code_file": f"{step_id}.ipynb", "language": "python", "kernel_type": "notebook",
             "is_private": True, "enable_gpu": bool(needs_gpu), "enable_internet": True,
-            "dataset_sources": [], "competition_sources": []}
+            "dataset_sources": list(dataset_sources), "kernel_sources": list(kernel_sources),
+            "competition_sources": []}
 
 
 def write_outputs(nb, meta, step_id, out_dir=OUT_DIR):
@@ -117,9 +118,11 @@ def main(argv=None):
     p.add_argument("--step", required=True)
     p.add_argument("--entrypoint", required=True)
     p.add_argument("--title", required=True)
-    p.add_argument("--account", default="win", choices=("win", "wsl"))
+    p.add_argument("--account", default=None, choices=("win", "wsl"), help="default: default_account")
     p.add_argument("--branch", default="main")
     p.add_argument("--requirement", action="append", default=[])
+    p.add_argument("--dataset-source", action="append", default=[])
+    p.add_argument("--kernel-source", action="append", default=[])
     p.add_argument("--no-gpu", action="store_true")
     p.add_argument("--out-dir", default=str(OUT_DIR))
     p.add_argument("args", nargs=argparse.REMAINDER, help="after --: entrypoint args")
@@ -128,7 +131,8 @@ def main(argv=None):
     ep_args = [x for x in a.args if x != "--"]
     nb = build_notebook(a.step, a.entrypoint, ep_args, a.title, cfg["repo_url"], a.branch,
                         tuple(a.requirement), not a.no_gpu)
-    meta = build_metadata(cfg, a.account, a.step, a.title, not a.no_gpu)
+    account = a.account or cfg.get("default_account", "wsl")
+    meta = build_metadata(cfg, account, a.step, a.title, not a.no_gpu, a.dataset_source, a.kernel_source)
     for path in write_outputs(nb, meta, a.step, a.out_dir):
         print(path)
 
