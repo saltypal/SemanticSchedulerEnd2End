@@ -37,6 +37,7 @@ splits:
   train_events: [hurricane_harvey, hurricane_irma, iraq_iran_earthquake, srilanka_floods]
   val_events: [california_wildfires]
   test_events: [hurricane_maria, mexico_earthquake]
+  normals_split: [0.6, 0.1, 0.3]   # train / val / test fractions for event-less everyday images
   gates:
     min_test_critical: 150
     min_val_critical: 100

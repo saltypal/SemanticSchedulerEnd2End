@@ -190,3 +190,19 @@ previous one.
 - If a GPU is needed, the Kaggle run is recorded with its SHA.
 - `FINAL_PLAN_V3.md` / `DRAFT_PAPER.md` are updated if a decision changed.
 - A dated, factual entry is added to `parameters/JOURNAL.md`.
+
+## 8. Status (2026-11-10)
+**Decisions since the first draft:** Kaggle uses the **Windows CLI only** (account `satyapaladugu`), with new
+`edge-<step>` slugs approved for this study and later runs published as new versions of the same slug.
+Labels are written as JSONL (`labels_raw.jsonl`), not parquet. Validation event is **California wildfires**
+(Sri Lanka had 71 Critical, below the 100 gate); Sri Lanka joins training.
+
+**Built and unit-tested on CPU (no Kaggle run yet):** C00–C03, C12–C15, C20–C25 (code), C30–C34,
+C40–C43 (code), plus `Evaluation/edge/{tables,run_sweep}.py`. Not built: C35 val tuning run, C50–C53 runs.
+**Not yet measured:** SQ-GAN decode latency, real masker output format and real STS (needs a T4).
+
+**Known pre-existing failures (not from this work):** `test_handoff_tools`, `test_paired_notebook_capsules`:
+preserved notebooks embed CRLF copies of sources, so they cannot match LF files. Left as is (rule: do not
+modify preserved notebooks).
+**Core vs extras:** core = labels, simulator, header, STS, SV-DPP + 6-8 baselines, CTR@D. Optional extras:
+equivalence-set policies, MPC, MILP bound, DQN/LTR, SCOPE variants, RLAIF, JPEG ladder.

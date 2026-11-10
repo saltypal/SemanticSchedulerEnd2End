@@ -1,0 +1,9 @@
+# UE-side header settings (plan v3.1 sec. 4). The SimHash seed is a per-deployment secret;
+# this repository value is a development placeholder only.
+simhash_seed: 20240611
+phash_bits: 64
+bit_depths:            # bits per quantised field; flip_rate_study chooses the smallest safe value
+  spi: 8
+  relevance: 8
+  sts: 8
+mission_registry_path: config/edge/missions.yaml   # placeholder, not created yet

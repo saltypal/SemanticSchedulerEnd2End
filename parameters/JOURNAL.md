@@ -2418,3 +2418,13 @@ they conflict.
 **Literature read in full:** 2605.05527, 2609.19792, 2608.05537, 2609.03590.
 
 No training or Kaggle jobs were run.
+
+### 2026-11-10 Edge scheduler implementation wave (code only)
+Merged `sem_schedluerAI_trial2` into `main` (one whitespace conflict). Restored the missing archived
+`SemParam` modules from history so legacy tests import again. Added `.gitattributes` LF rules.
+Implemented, with unit tests and a clean-context review, the packages `parameters/edge`, `Codec/edge`,
+`Evaluation/edge`, `Scheduler/edge`, `Scheduler/training/edge`, `scripts/edge` and `config/edge`.
+Label gate on real CrisisMMD metadata: per-event Critical counts California 500, Harvey 578, Irma 350,
+Maria 544, Iraq-Iran 219, Mexico 221, Sri Lanka 71, so validation moved to California wildfires.
+No GPU, Kaggle or model run happened; no result is claimed. Full suite: 470 passed, 3 failed (CRLF in
+preserved artifacts), 5 skipped.

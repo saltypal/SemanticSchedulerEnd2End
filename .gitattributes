@@ -5,3 +5,13 @@
 experiments/**/*.pt -filter -diff -merge -text
 experiments/**/*.pkl -filter -diff -merge -text
 models/yolov8s-worldv2.pt -filter -diff -merge -text
+
+# Keep text sources LF on every platform (tests compare exact bytes and hashes).
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.ipynb text eol=lf
+*.sh text eol=lf
+*.toml text eol=lf
