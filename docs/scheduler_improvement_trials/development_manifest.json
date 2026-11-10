@@ -1,0 +1,36 @@
+{
+  "scope": "Development and data qualification only. No holdout opened.",
+  "replay_source": "dev_balanced_replay.json",
+  "header_only_control": {
+    "scope": "Synthetic no-transport control. Sender compute counted; decoder and JPEG encoding bypassed.",
+    "budget_ms": 7139.4105,
+    "timely_true_positive_images": 3,
+    "timely_false_positive_images": 0,
+    "offered_positive_images": 12
+  },
+  "leave_one_image_out_development_threshold_diagnostic": {
+    "source": {
+      "true_positives": 8,
+      "false_positives": 1
+    },
+    "header": {
+      "true_positives": 7,
+      "false_positives": 1
+    },
+    "decoded": {
+      "true_positives": 8,
+      "false_positives": 1
+    }
+  },
+  "artifact_sha256": {
+    "day1_probe.json": "e2f03dd1527779459fef54888d365a4e22582babd4c64fe53c52b39546ac86f6",
+    "day1_balanced_probe.json": "7cf5278d1ba1705bb0a300fdbf35f4ec4c035c767e994e01c0f54b0c17229df5",
+    "dev_exact_repeat_replay.json": "884ba448acdbcf1720d07670b92032d5562485dbd1785c0ebcf8c44876a7fda6",
+    "dev_balanced_replay.json": "db614ba3070ae3347734fcc20e8b81f0a90ddc2e3dad5546f916eb975b702993",
+    "dev_replay_coverage.png": "15308a067ad1290acb5c27082bf39a5167377ec3f5ea435109d0059862d0092f",
+    "dev_replay_table.csv": "a4caf2d59b2a1cbeb415c59bcd9f15ea878ccda3cfdfaf0bebfc8f0adfccb2f5",
+    "day1_variant_probe.json": "db62f436a170d613ba386fa4ebe50ba33894fe078c35eeaa522eceadeafbb5ca",
+    "dev_variant_replay.json": "98fd2e1625a6529d5936eebefbe19f36185d54fa05412e39dd13ec7b457fb384",
+    "dev_selector_timing.json": "624751ace7c3958ce1041d9e5ea656f0ffd35cdc4a6d543e64dd8b57255b32db"
+  }
+}

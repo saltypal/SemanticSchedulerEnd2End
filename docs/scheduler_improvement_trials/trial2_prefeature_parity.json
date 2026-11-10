@@ -1,0 +1,86 @@
+{
+  "check": "trial2_test1_prefeature_parity",
+  "scope": "Pinned SQ-GAN single-pass pre-mask export, local CPU, real images.",
+  "device": "cpu",
+  "torch_version": "2.12.1+cpu",
+  "torch_threads": 2,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.4",
+  "source_commit": "0e5cdd7c0240b89749dad684645c53f783ac24cc",
+  "checkpoint_sha256": "706396402d86e84276393ce3fe39f0b0b1b545ff024c0ecae3b8ab72d22f3d6d",
+  "bundle_run_id": "20261028T130100Z-eea4f3aa",
+  "codec_inputs": {
+    "bundle": "20261028T130100Z-eea4f3aa",
+    "source_root": "source_root"
+  },
+  "expected_feature_shape": [
+    1,
+    256,
+    16,
+    32
+  ],
+  "codec_load_ms": 32697.684,
+  "images": [
+    {
+      "image": "test_row_0259_flooding_structures.jpg",
+      "image_sha256": "5ee33683b21e22898a03010c2d62b91dfaa554f88d62af34380a48f31d0f2431",
+      "payload_bytes": 464,
+      "payload_sha256": "74b4b33e80247fe66d9f22eba61a222dc752f983b09a60d37e109c95745a135d",
+      "deterministic_baseline_encode": true,
+      "payload_identical_encode_with_features": true,
+      "encoder_calls_during_export": 1,
+      "pixel_identical_reconstruction": true,
+      "reconstruction_sha256": "abe2e6b8535799a4c76f81894ef8ca2532e4944da8f9a8ebb9e4cd46947001eb",
+      "reconstruction_finite": true,
+      "feature_shape": [
+        1,
+        256,
+        16,
+        32
+      ],
+      "feature_dtype": "torch.float32",
+      "feature_shape_matches_handoff_expectation": true,
+      "features_finite": true,
+      "teacher_ms": 37536.318,
+      "encode_baseline_ms": 13545.452,
+      "encode_determinism_check_ms": 12793.616,
+      "encode_with_features_ms": 12392.696,
+      "decode_baseline_ms": 36769.674,
+      "decode_features_ms": 36040.307,
+      "passed": true
+    },
+    {
+      "image": "test_row_0015_buildings_minor_or_greater.jpg",
+      "image_sha256": "c5f085b617f1973b678d072cce933aa1b4fbbc9e11c617d7d2932f484c504270",
+      "payload_bytes": 464,
+      "payload_sha256": "904171d60740befbeca1045b5f4a03398857aa108b2337f798500b2ae16a3cda",
+      "deterministic_baseline_encode": true,
+      "payload_identical_encode_with_features": true,
+      "encoder_calls_during_export": 1,
+      "pixel_identical_reconstruction": true,
+      "reconstruction_sha256": "7088164d37f1fe2c1b5d943d01bdbd7de42b8a569327178b4747e9f909691c8f",
+      "reconstruction_finite": true,
+      "feature_shape": [
+        1,
+        256,
+        16,
+        32
+      ],
+      "feature_dtype": "torch.float32",
+      "feature_shape_matches_handoff_expectation": true,
+      "features_finite": true,
+      "teacher_ms": 636.726,
+      "encode_baseline_ms": 12241.702,
+      "encode_determinism_check_ms": 12073.709,
+      "encode_with_features_ms": 12813.512,
+      "decode_baseline_ms": 40849.924,
+      "decode_features_ms": 39432.866,
+      "passed": true
+    }
+  ],
+  "summary": {
+    "images": 2,
+    "passed": 2,
+    "all_passed": true
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "run": {
+    "notebook": "hmmkk20/semantic-scheduler-trial2-vlm-smoke",
+    "version": 17,
+    "status": "COMPLETE",
+    "elapsed_seconds": 815.8,
+    "platform_accelerator": "GPU T4 x2",
+    "source_sha256": "fdd9d69704705cea6fbafda78d4208ad9617be01af0b95dfcea641329d8907a7",
+    "debug_images": 15,
+    "sweeps_per_model": 2
+  },
+  "models": {
+    "qwen": {
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+      "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+      "gpu": "Tesla T4",
+      "nf4_layers": 358,
+      "peak_gpu_bytes": 7119831040,
+      "answers": 30,
+      "unique_images": 15,
+      "schema_valid": 30,
+      "repeatable_images": 15,
+      "grade_counts_by_unique_image": {
+        "0": 15,
+        "1": 0,
+        "2": 0
+      },
+      "positive_answers": 0,
+      "positive_locations_in_allowed_regions": 0,
+      "receipt_sha256": "e9b936bca8b207683c9c8302cf787de2003bacc04743acec23d6d28fc6d57d19",
+      "controls": {
+        "c05293ad": [
+          {
+            "sweep": 1,
+            "grade": 0,
+            "extent": 0,
+            "evidence": null,
+            "affected": []
+          },
+          {
+            "sweep": 2,
+            "grade": 0,
+            "extent": 0,
+            "evidence": null,
+            "affected": []
+          }
+        ],
+        "f0c4bdee": [
+          {
+            "sweep": 1,
+            "grade": 0,
+            "extent": 0,
+            "evidence": null,
+            "affected": []
+          },
+          {
+            "sweep": 2,
+            "grade": 0,
+            "extent": 0,
+            "evidence": null,
+            "affected": []
+          }
+        ]
+      }
+    },
+    "nemotron": {
+      "model": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+      "revision": "437f4e28b989cc2d9a16b6767cc930cdf48797ff",
+      "gpu": "Tesla T4",
+      "nf4_layers": 225,
+      "peak_gpu_bytes": 9343994880,
+      "answers": 30,
+      "unique_images": 15,
+      "schema_valid": 30,
+      "repeatable_images": 15,
+      "grade_counts_by_unique_image": {
+        "0": 8,
+        "1": 6,
+        "2": 1
+      },
+      "positive_answers": 14,
+      "positive_locations_in_allowed_regions": 12,
+      "receipt_sha256": "fa9ac3de3fb8c0056b0b1120afe8900df355a43852e8250f0636b2c403247d70",
+      "controls": {
+        "c05293ad": [
+          {
+            "sweep": 1,
+            "grade": 0,
+            "extent": 0,
+            "evidence": null,
+            "affected": []
+          },
+          {
+            "sweep": 2,
+            "grade": 0,
+            "extent": 0,
+            "evidence": null,
+            "affected": []
+          }
+        ],
+        "f0c4bdee": [
+          {
+            "sweep": 1,
+            "grade": 2,
+            "extent": 2,
+            "evidence": {
+              "what": "water covering roads and entering houses",
+              "where": "center region",
+              "sign": "brown color of water and submerged structures"
+            },
+            "affected": [
+              "houses",
+              "roads"
+            ]
+          },
+          {
+            "sweep": 2,
+            "grade": 2,
+            "extent": 2,
+            "evidence": {
+              "what": "water covering roads and entering houses",
+              "where": "center region",
+              "sign": "brown color of water and submerged structures"
+            },
+            "affected": [
+              "houses",
+              "roads"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "gate": {
+    "parking_buildings_grade0": true,
+    "clear_flood_grade2_with_locatable_evidence": false,
+    "identical_image_repeat_readings_tie": true,
+    "pass": false,
+    "fresh_qualification_opened": false,
+    "ranknet_trained": false
+  },
+  "decision": "FAIL_DEBUG_CONTROL_KEEP_FRESH_COHORT_CLOSED",
+  "diagnosis": [
+    "Qwen emitted grade 0 for all 15 photos in both sweeps, including the pixel-verified severe flood control. The stricter evidence rule suppressed all positive judgments.",
+    "Nemotron repeated labels, but its severe-flood response used where=\"center region\", outside the nine allowed region labels, and cited brown color alongside submerged structures; the location contract was not followed."
+  ]
+}

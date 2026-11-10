@@ -1,0 +1,3391 @@
+{
+  "scope": "Saved development arrivals, silver reference tiers, synthetic service. Cached SPI and scene features; historical dynamic relevance and novelty absent in both arms.",
+  "revision": "7a1e4b164360007642615b0705fd391b137b8da7",
+  "model_sha256": "34a93cd95f7a66c0cfb902065350f5decc6b376bf79ee19e387a90a200d52268",
+  "summary": {
+    "fifo": {
+      "penalty": 5.822023047802359,
+      "unfinished": 14.4,
+      "p95_capped_wait": 14.24515711060701
+    },
+    "spi": {
+      "penalty": 3.3740825153982468,
+      "unfinished": 14.4,
+      "p95_capped_wait": 15.302136981997803
+    },
+    "lambdamart_full": {
+      "penalty": 3.6087320055720533,
+      "unfinished": 14.4,
+      "p95_capped_wait": 15.310322330563405
+    },
+    "lambdamart_no_coco": {
+      "penalty": 3.4155874419442784,
+      "unfinished": 14.4,
+      "p95_capped_wait": 15.302136981997803
+    }
+  },
+  "skipped_missing_reference_or_features": [],
+  "changed_lambdamart_orders": 15,
+  "episodes": [
+    {
+      "episode": 0,
+      "load": 0.5,
+      "fifo": {
+        "penalty": 0.6121368859920612,
+        "unfinished": 0,
+        "p95_capped_wait": 10.9184812978722,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 5.521257979299708,
+            "median_selected_wait": 5.419944297624461,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 5.521257979299708,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 31,
+            "selected": 31,
+            "unselected": 0,
+            "mean_selected_wait": 1.9433339132310388,
+            "median_selected_wait": 0.6290242038185294,
+            "p95_selected_wait": 10.194768984699145,
+            "restricted_mean_wait": 1.9433339132310388,
+            "followup_count": 31,
+            "eligible": 31,
+            "within_budget": 0.8387096774193549
+          },
+          "Medium": {
+            "offered": 22,
+            "selected": 22,
+            "unselected": 0,
+            "mean_selected_wait": 2.2294870431663725,
+            "median_selected_wait": 0.8778798286323877,
+            "p95_selected_wait": 7.094725377923074,
+            "restricted_mean_wait": 2.2294870431663725,
+            "followup_count": 22,
+            "eligible": 22,
+            "within_budget": 0.9545454545454546
+          },
+          "Low": {
+            "offered": 27,
+            "selected": 27,
+            "unselected": 0,
+            "mean_selected_wait": 3.8222920266465366,
+            "median_selected_wait": 2.098673817305567,
+            "p95_selected_wait": 12.253037992238855,
+            "restricted_mean_wait": 3.8222920266465366,
+            "followup_count": 27,
+            "eligible": 27,
+            "within_budget": 1.0
+          }
+        }
+      },
+      "spi": {
+        "penalty": 0.27548179643862253,
+        "unfinished": 0,
+        "p95_capped_wait": 15.979611361958389,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.7712579792997083,
+            "median_selected_wait": 0.7390941934914963,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.7712579792997083,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 31,
+            "selected": 31,
+            "unselected": 0,
+            "mean_selected_wait": 0.6207532680697485,
+            "median_selected_wait": 0.0582227894394407,
+            "p95_selected_wait": 2.251326985532536,
+            "restricted_mean_wait": 0.6207532680697485,
+            "followup_count": 31,
+            "eligible": 31,
+            "within_budget": 0.967741935483871
+          },
+          "Medium": {
+            "offered": 22,
+            "selected": 22,
+            "unselected": 0,
+            "mean_selected_wait": 1.2294870431663725,
+            "median_selected_wait": 0.4542754933625659,
+            "p95_selected_wait": 4.564941719753163,
+            "restricted_mean_wait": 1.2294870431663725,
+            "followup_count": 22,
+            "eligible": 22,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 27,
+            "selected": 27,
+            "unselected": 0,
+            "mean_selected_wait": 6.859329063683573,
+            "median_selected_wait": 2.3549083612614936,
+            "p95_selected_wait": 19.445380646351662,
+            "restricted_mean_wait": 6.123656261032478,
+            "followup_count": 27,
+            "eligible": 27,
+            "within_budget": 0.8148148148148148
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 0.29883231518447895,
+        "unfinished": 0,
+        "p95_capped_wait": 15.663482031253325,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.7712579792997083,
+            "median_selected_wait": 0.7390941934914963,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.7712579792997083,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 31,
+            "selected": 31,
+            "unselected": 0,
+            "mean_selected_wait": 0.8465597196826518,
+            "median_selected_wait": 0.2819920486047067,
+            "p95_selected_wait": 3.998331478308259,
+            "restricted_mean_wait": 0.8465597196826518,
+            "followup_count": 31,
+            "eligible": 31,
+            "within_budget": 0.9354838709677419
+          },
+          "Medium": {
+            "offered": 22,
+            "selected": 22,
+            "unselected": 0,
+            "mean_selected_wait": 1.5022143158936452,
+            "median_selected_wait": 0.7193828463757654,
+            "p95_selected_wait": 4.182274804680104,
+            "restricted_mean_wait": 1.5022143158936452,
+            "followup_count": 22,
+            "eligible": 22,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 27,
+            "selected": 27,
+            "unselected": 0,
+            "mean_selected_wait": 6.377847582202092,
+            "median_selected_wait": 2.149203265336922,
+            "p95_selected_wait": 20.013184093448405,
+            "restricted_mean_wait": 5.632680747634309,
+            "followup_count": 27,
+            "eligible": 27,
+            "within_budget": 0.8148148148148148
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 0.28758154844358996,
+        "unfinished": 0,
+        "p95_capped_wait": 15.979611361958389,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.7712579792997083,
+            "median_selected_wait": 0.7390941934914963,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.7712579792997083,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 31,
+            "selected": 31,
+            "unselected": 0,
+            "mean_selected_wait": 0.8143016551665228,
+            "median_selected_wait": 0.0582227894394407,
+            "p95_selected_wait": 4.407758336834533,
+            "restricted_mean_wait": 0.8143016551665228,
+            "followup_count": 31,
+            "eligible": 31,
+            "within_budget": 0.9032258064516129
+          },
+          "Medium": {
+            "offered": 22,
+            "selected": 22,
+            "unselected": 0,
+            "mean_selected_wait": 1.3203961340754633,
+            "median_selected_wait": 0.6526109270540701,
+            "p95_selected_wait": 4.182274804680104,
+            "restricted_mean_wait": 1.3203961340754633,
+            "followup_count": 22,
+            "eligible": 22,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 27,
+            "selected": 27,
+            "unselected": 0,
+            "mean_selected_wait": 6.563032767387277,
+            "median_selected_wait": 2.3549083612614936,
+            "p95_selected_wait": 19.445380646351662,
+            "restricted_mean_wait": 5.938471075847293,
+            "followup_count": 27,
+            "eligible": 27,
+            "within_budget": 0.8148148148148148
+          }
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "load": 0.9,
+      "fifo": {
+        "penalty": 4.375630723814289,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 34.74606153570483,
+            "median_selected_wait": 34.74606153570483,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 16.0,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 71,
+            "selected": 71,
+            "unselected": 0,
+            "mean_selected_wait": 14.717969286196789,
+            "median_selected_wait": 16.49078587598703,
+            "p95_selected_wait": 37.31067707920713,
+            "restricted_mean_wait": 9.62021493450236,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.38028169014084506
+          },
+          "Medium": {
+            "offered": 29,
+            "selected": 29,
+            "unselected": 0,
+            "mean_selected_wait": 14.195419507568102,
+            "median_selected_wait": 11.563684995890796,
+            "p95_selected_wait": 36.999269730222245,
+            "restricted_mean_wait": 9.57958820636412,
+            "followup_count": 29,
+            "eligible": 29,
+            "within_budget": 0.41379310344827586
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 58,
+            "unselected": 0,
+            "mean_selected_wait": 15.799177780646604,
+            "median_selected_wait": 10.433790683405313,
+            "p95_selected_wait": 39.28073830379543,
+            "restricted_mean_wait": 9.839993249289138,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.5517241379310345
+          }
+        }
+      },
+      "spi": {
+        "penalty": 2.223035077235818,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 0.24606153570481837,
+            "median_selected_wait": 0.24606153570481837,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.24606153570481837,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 71,
+            "selected": 71,
+            "unselected": 0,
+            "mean_selected_wait": 3.591208722816511,
+            "median_selected_wait": 0.7920310574550911,
+            "p95_selected_wait": 28.357039119757744,
+            "restricted_mean_wait": 2.476254233455549,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.8732394366197183
+          },
+          "Medium": {
+            "offered": 29,
+            "selected": 29,
+            "unselected": 0,
+            "mean_selected_wait": 8.264385024809481,
+            "median_selected_wait": 1.4990392682912699,
+            "p95_selected_wait": 33.23353333073972,
+            "restricted_mean_wait": 5.029879422526983,
+            "followup_count": 29,
+            "eligible": 29,
+            "within_budget": 0.7241379310344828
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 58,
+            "unselected": 0,
+            "mean_selected_wait": 33.575039849612125,
+            "median_selected_wait": 49.577025361474085,
+            "p95_selected_wait": 60.082272149542284,
+            "restricted_mean_wait": 11.03956483893899,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.3793103448275862
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 2.5615728419602037,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 6.246061535704818,
+            "median_selected_wait": 6.246061535704818,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 6.246061535704818,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 71,
+            "selected": 71,
+            "unselected": 0,
+            "mean_selected_wait": 5.943321398872848,
+            "median_selected_wait": 2.1097224435278576,
+            "p95_selected_wait": 30.985761000578663,
+            "restricted_mean_wait": 3.8484033024075655,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.676056338028169
+          },
+          "Medium": {
+            "offered": 29,
+            "selected": 29,
+            "unselected": 0,
+            "mean_selected_wait": 7.0574884730853435,
+            "median_selected_wait": 2.6997532779980986,
+            "p95_selected_wait": 39.67095745005321,
+            "restricted_mean_wait": 4.301606715111532,
+            "followup_count": 29,
+            "eligible": 29,
+            "within_budget": 0.8275862068965517
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 58,
+            "unselected": 0,
+            "mean_selected_wait": 31.092281228922467,
+            "median_selected_wait": 36.63573888111149,
+            "p95_selected_wait": 89.0633724820228,
+            "restricted_mean_wait": 10.557469380248449,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.4482758620689655
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 2.2205480547596887,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 2,
+            "selected": 2,
+            "unselected": 0,
+            "mean_selected_wait": 4.246061535704818,
+            "median_selected_wait": 4.246061535704818,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 4.246061535704818,
+            "followup_count": 2,
+            "eligible": 2,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 71,
+            "selected": 71,
+            "unselected": 0,
+            "mean_selected_wait": 4.126419990422144,
+            "median_selected_wait": 2.4498352996834853,
+            "p95_selected_wait": 15.441877218279416,
+            "restricted_mean_wait": 3.4509383498628163,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.647887323943662
+          },
+          "Medium": {
+            "offered": 29,
+            "selected": 29,
+            "unselected": 0,
+            "mean_selected_wait": 7.505764335154309,
+            "median_selected_wait": 4.27259133229947,
+            "p95_selected_wait": 34.103509885969906,
+            "restricted_mean_wait": 5.042121487430517,
+            "followup_count": 29,
+            "eligible": 29,
+            "within_budget": 0.7931034482758621
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 58,
+            "unselected": 0,
+            "mean_selected_wait": 33.16124674616385,
+            "median_selected_wait": 49.26817014270905,
+            "p95_selected_wait": 60.082272149542284,
+            "restricted_mean_wait": 10.935210349775309,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.39655172413793105
+          }
+        }
+      }
+    },
+    {
+      "episode": 2,
+      "load": 1.2,
+      "fifo": {
+        "penalty": 8.164935609096037,
+        "unfinished": 21,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 6.9922645760167415,
+            "median_selected_wait": 1.079713849657411,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 3.6882880398074516,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.6666666666666666
+          },
+          "High": {
+            "offered": 102,
+            "selected": 92,
+            "unselected": 10,
+            "mean_selected_wait": 28.398766660042522,
+            "median_selected_wait": 27.988397661672188,
+            "p95_selected_wait": 58.10705455817155,
+            "restricted_mean_wait": 11.961416120747842,
+            "followup_count": 102,
+            "eligible": 102,
+            "within_budget": 0.23529411764705882
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 30,
+            "unselected": 3,
+            "mean_selected_wait": 20.81217476981383,
+            "median_selected_wait": 13.623126724482894,
+            "p95_selected_wait": 57.32602547072434,
+            "restricted_mean_wait": 9.572446928184295,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.42424242424242425
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 68,
+            "unselected": 7,
+            "mean_selected_wait": 24.60995646946523,
+            "median_selected_wait": 20.706128505158162,
+            "p95_selected_wait": 57.02574451755483,
+            "restricted_mean_wait": 10.781613441690592,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.4266666666666667
+          }
+        }
+      },
+      "spi": {
+        "penalty": 4.076492984455631,
+        "unfinished": 21,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 0.658931242683409,
+            "median_selected_wait": 0.4851502697649437,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.658931242683409,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 102,
+            "selected": 101,
+            "unselected": 1,
+            "mean_selected_wait": 6.493989334023763,
+            "median_selected_wait": 1.290087220757556,
+            "p95_selected_wait": 49.413169894181706,
+            "restricted_mean_wait": 3.884345597652695,
+            "followup_count": 102,
+            "eligible": 102,
+            "within_budget": 0.6862745098039216
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 32,
+            "unselected": 1,
+            "mean_selected_wait": 10.62367282302149,
+            "median_selected_wait": 1.5000785256793332,
+            "p95_selected_wait": 51.34488762343491,
+            "restricted_mean_wait": 5.302930617525781,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.7272727272727273
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 57,
+            "unselected": 18,
+            "mean_selected_wait": 55.54913613931409,
+            "median_selected_wait": 97.88895444790023,
+            "p95_selected_wait": 108.23275792947742,
+            "restricted_mean_wait": 11.4437640490217,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.3333333333333333
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 5.021854323521047,
+        "unfinished": 21,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 1.158931242683409,
+            "median_selected_wait": 0.8818348623626644,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.158931242683409,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.8333333333333334
+          },
+          "High": {
+            "offered": 102,
+            "selected": 97,
+            "unselected": 5,
+            "mean_selected_wait": 6.164130413485974,
+            "median_selected_wait": 3.792237529252361,
+            "p95_selected_wait": 20.422226513112925,
+            "restricted_mean_wait": 5.005026680712447,
+            "followup_count": 102,
+            "eligible": 102,
+            "within_budget": 0.5490196078431373
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 32,
+            "unselected": 1,
+            "mean_selected_wait": 10.079465296730945,
+            "median_selected_wait": 2.19415672864152,
+            "p95_selected_wait": 51.78098295124391,
+            "restricted_mean_wait": 5.125287699739767,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.7575757575757576
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 61,
+            "unselected": 14,
+            "mean_selected_wait": 42.29171578120479,
+            "median_selected_wait": 18.790438333609657,
+            "p95_selected_wait": 102.11163888141519,
+            "restricted_mean_wait": 11.106766514770692,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.4
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 4.081823722370116,
+        "unfinished": 21,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 0.9922645760167423,
+            "median_selected_wait": 0.4851502697649437,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.9922645760167423,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.8333333333333334
+          },
+          "High": {
+            "offered": 102,
+            "selected": 101,
+            "unselected": 1,
+            "mean_selected_wait": 7.236563591449507,
+            "median_selected_wait": 3.9223540594693986,
+            "p95_selected_wait": 43.117992413536456,
+            "restricted_mean_wait": 5.06103568735691,
+            "followup_count": 102,
+            "eligible": 102,
+            "within_budget": 0.5098039215686274
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 32,
+            "unselected": 1,
+            "mean_selected_wait": 9.18617282302149,
+            "median_selected_wait": 3.652836747053655,
+            "p95_selected_wait": 44.79488762343491,
+            "restricted_mean_wait": 5.787779102374266,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.7272727272727273
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 57,
+            "unselected": 18,
+            "mean_selected_wait": 55.005276490191285,
+            "median_selected_wait": 84.88895444790023,
+            "p95_selected_wait": 107.53991243206116,
+            "restricted_mean_wait": 11.5637640490217,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.3333333333333333
+          }
+        }
+      }
+    },
+    {
+      "episode": 3,
+      "load": 0.5,
+      "fifo": {
+        "penalty": 0.2469338170399445,
+        "unfinished": 0,
+        "p95_capped_wait": 4.13758487505924,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 1.4738848309179993,
+            "median_selected_wait": 1.0970330800394237,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.4738848309179993,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.5
+          },
+          "High": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 1.6455530070688256,
+            "median_selected_wait": 1.5045186249129827,
+            "p95_selected_wait": 4.103690951137317,
+            "restricted_mean_wait": 1.6455530070688256,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.90625
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 0.8248044584307932,
+            "median_selected_wait": 0.3625449848796052,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.8248044584307932,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 1.1062863222372628,
+            "median_selected_wait": 0.27377414183303017,
+            "p95_selected_wait": 5.25560527355927,
+            "restricted_mean_wait": 1.1062863222372628,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 1.0
+          }
+        }
+      },
+      "spi": {
+        "penalty": 0.17966312897610823,
+        "unfinished": 0,
+        "p95_capped_wait": 5.552443368008653,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.22388483091799927,
+            "median_selected_wait": 0.09703308003942368,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.22388483091799927,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 0.9268030070688255,
+            "median_selected_wait": 0.5377990030124948,
+            "p95_selected_wait": 3.1960163494320093,
+            "restricted_mean_wait": 0.9268030070688255,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.96875
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 1.5895103407837343,
+            "median_selected_wait": 0.3625449848796052,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.5895103407837343,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.8823529411764706
+          },
+          "Low": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 1.5608317767827171,
+            "median_selected_wait": 0.27377414183303017,
+            "p95_selected_wait": 5.803005172081995,
+            "restricted_mean_wait": 1.5608317767827171,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 1.0
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 0.20306328993129502,
+        "unfinished": 0,
+        "p95_capped_wait": 5.999482898663693,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.9738848309179993,
+            "median_selected_wait": 0.09703308003942368,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.9738848309179993,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.75
+          },
+          "High": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 0.9893030070688255,
+            "median_selected_wait": 0.38422652099169596,
+            "p95_selected_wait": 4.483198865457269,
+            "restricted_mean_wait": 0.9893030070688255,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.9375
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 1.295392693724911,
+            "median_selected_wait": 0.3625449848796052,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.295392693724911,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.9411764705882353
+          },
+          "Low": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 1.5608317767827171,
+            "median_selected_wait": 0.27377414183303017,
+            "p95_selected_wait": 6.6854983065821,
+            "restricted_mean_wait": 1.5608317767827171,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 1.0
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 0.18127993885943758,
+        "unfinished": 0,
+        "p95_capped_wait": 5.552443368008653,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.22388483091799927,
+            "median_selected_wait": 0.09703308003942368,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.22388483091799927,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 1.1143030070688256,
+            "median_selected_wait": 0.7590005855557465,
+            "p95_selected_wait": 3.208220419070382,
+            "restricted_mean_wait": 1.1143030070688256,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.96875
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 1.2365691643131462,
+            "median_selected_wait": 0.3625449848796052,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.2365691643131462,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.9411764705882353
+          },
+          "Low": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 1.5608317767827171,
+            "median_selected_wait": 0.27377414183303017,
+            "p95_selected_wait": 5.803005172081995,
+            "restricted_mean_wait": 1.5608317767827171,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 1.0
+          }
+        }
+      }
+    },
+    {
+      "episode": 4,
+      "load": 0.9,
+      "fifo": {
+        "penalty": 4.396784798105131,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 18.55312332222344,
+            "median_selected_wait": 24.747562955208366,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 10.746459812170576,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.2
+          },
+          "High": {
+            "offered": 67,
+            "selected": 67,
+            "unselected": 0,
+            "mean_selected_wait": 14.208853777695689,
+            "median_selected_wait": 12.19899683921939,
+            "p95_selected_wait": 32.82379473325252,
+            "restricted_mean_wait": 9.095064799758825,
+            "followup_count": 67,
+            "eligible": 67,
+            "within_budget": 0.3880597014925373
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 16.239454517607314,
+            "median_selected_wait": 17.127965913889156,
+            "p95_selected_wait": 35.9626776283945,
+            "restricted_mean_wait": 9.787015260628364,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.3939393939393939
+          },
+          "Low": {
+            "offered": 57,
+            "selected": 57,
+            "unselected": 0,
+            "mean_selected_wait": 16.583612555820704,
+            "median_selected_wait": 16.779576741466002,
+            "p95_selected_wait": 35.275019155135325,
+            "restricted_mean_wait": 10.533311456604686,
+            "followup_count": 57,
+            "eligible": 57,
+            "within_budget": 0.47368421052631576
+          }
+        }
+      },
+      "spi": {
+        "penalty": 2.230964525887672,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.5531233222234391,
+            "median_selected_wait": 0.7322990608528812,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.5531233222234391,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 67,
+            "selected": 67,
+            "unselected": 0,
+            "mean_selected_wait": 3.8058687030688247,
+            "median_selected_wait": 0.6181297413757605,
+            "p95_selected_wait": 20.875845829673498,
+            "restricted_mean_wait": 2.6794756729661646,
+            "followup_count": 67,
+            "eligible": 67,
+            "within_budget": 0.8208955223880597
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 7.118242396395192,
+            "median_selected_wait": 1.8493999282448783,
+            "p95_selected_wait": 27.047996156230997,
+            "restricted_mean_wait": 4.863115353459357,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.7575757575757576
+          },
+          "Low": {
+            "offered": 57,
+            "selected": 57,
+            "unselected": 0,
+            "mean_selected_wait": 35.67133185406632,
+            "median_selected_wait": 53.431210934649854,
+            "p95_selected_wait": 60.96964785033836,
+            "restricted_mean_wait": 11.751371163018414,
+            "followup_count": 57,
+            "eligible": 57,
+            "within_budget": 0.3333333333333333
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 2.4578302061090955,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 1.753123322223439,
+            "median_selected_wait": 0.747562955208366,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.753123322223439,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.6
+          },
+          "High": {
+            "offered": 67,
+            "selected": 67,
+            "unselected": 0,
+            "mean_selected_wait": 4.984973180680765,
+            "median_selected_wait": 2.4402927247757304,
+            "p95_selected_wait": 26.02467739344244,
+            "restricted_mean_wait": 3.5250438425461526,
+            "followup_count": 67,
+            "eligible": 67,
+            "within_budget": 0.6865671641791045
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 9.845515123667921,
+            "median_selected_wait": 3.832354220669046,
+            "p95_selected_wait": 47.13906743473968,
+            "restricted_mean_wait": 4.900182068650366,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.7878787878787878
+          },
+          "Low": {
+            "offered": 57,
+            "selected": 57,
+            "unselected": 0,
+            "mean_selected_wait": 32.60115641546982,
+            "median_selected_wait": 28.134201638973195,
+            "p95_selected_wait": 90.80113794938042,
+            "restricted_mean_wait": 10.770359329833804,
+            "followup_count": 57,
+            "eligible": 57,
+            "within_budget": 0.43859649122807015
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 2.2189682593683036,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 1.9531233222234392,
+            "median_selected_wait": 0.747562955208366,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.9531233222234392,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.6
+          },
+          "High": {
+            "offered": 67,
+            "selected": 67,
+            "unselected": 0,
+            "mean_selected_wait": 3.984973180680765,
+            "median_selected_wait": 1.463935407656436,
+            "p95_selected_wait": 19.58108223360699,
+            "restricted_mean_wait": 3.143840460998706,
+            "followup_count": 67,
+            "eligible": 67,
+            "within_budget": 0.6716417910447762
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 33,
+            "unselected": 0,
+            "mean_selected_wait": 6.8758181539709495,
+            "median_selected_wait": 3.8493999282448783,
+            "p95_selected_wait": 20.109806471791103,
+            "restricted_mean_wait": 5.148813581330381,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.7575757575757576
+          },
+          "Low": {
+            "offered": 57,
+            "selected": 57,
+            "unselected": 0,
+            "mean_selected_wait": 35.47834939792596,
+            "median_selected_wait": 42.56010585687051,
+            "p95_selected_wait": 63.493193396891414,
+            "restricted_mean_wait": 11.821546601614905,
+            "followup_count": 57,
+            "eligible": 57,
+            "within_budget": 0.3333333333333333
+          }
+        }
+      }
+    },
+    {
+      "episode": 5,
+      "load": 1.2,
+      "fifo": {
+        "penalty": 9.74882001331839,
+        "unfinished": 27,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 7,
+            "selected": 7,
+            "unselected": 0,
+            "mean_selected_wait": 27.91723626441946,
+            "median_selected_wait": 5.942746143294428,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 8.541110458544418,
+            "followup_count": 7,
+            "eligible": 7,
+            "within_budget": 0.14285714285714285
+          },
+          "High": {
+            "offered": 111,
+            "selected": 100,
+            "unselected": 11,
+            "mean_selected_wait": 29.501317236183922,
+            "median_selected_wait": 22.84854435327415,
+            "p95_selected_wait": 68.26919430388904,
+            "restricted_mean_wait": 11.507334222284978,
+            "followup_count": 111,
+            "eligible": 111,
+            "within_budget": 0.2072072072072072
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 25,
+            "unselected": 9,
+            "mean_selected_wait": 36.28342788880199,
+            "median_selected_wait": 33.48398385271386,
+            "p95_selected_wait": 69.41571284223242,
+            "restricted_mean_wait": 13.00988910644166,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.20588235294117646
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 69,
+            "unselected": 6,
+            "mean_selected_wait": 25.00520545102,
+            "median_selected_wait": 19.571293934371496,
+            "p95_selected_wait": 67.96231675741438,
+            "restricted_mean_wait": 10.556596953555264,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.4266666666666667
+          }
+        }
+      },
+      "spi": {
+        "penalty": 5.875083113964318,
+        "unfinished": 27,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 7,
+            "selected": 7,
+            "unselected": 0,
+            "mean_selected_wait": 0.4886648358480282,
+            "median_selected_wait": 0.6048327855627633,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.4886648358480282,
+            "followup_count": 7,
+            "eligible": 7,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 111,
+            "selected": 109,
+            "unselected": 2,
+            "mean_selected_wait": 11.745536516045105,
+            "median_selected_wait": 7.652224770121009,
+            "p95_selected_wait": 50.46839758108497,
+            "restricted_mean_wait": 7.170523571175335,
+            "followup_count": 111,
+            "eligible": 111,
+            "within_budget": 0.45045045045045046
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 33,
+            "unselected": 1,
+            "mean_selected_wait": 18.803414369266843,
+            "median_selected_wait": 10.123979853627048,
+            "p95_selected_wait": 55.21436762033916,
+            "restricted_mean_wait": 8.488244265544,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.47058823529411764
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 52,
+            "unselected": 23,
+            "mean_selected_wait": 49.83811589571488,
+            "median_selected_wait": 14.185993658314754,
+            "p95_selected_wait": 114.3189793956598,
+            "restricted_mean_wait": 11.94969591764579,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.37333333333333335
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 6.030317885013253,
+        "unfinished": 27,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 7,
+            "selected": 7,
+            "unselected": 0,
+            "mean_selected_wait": 2.0600934072766015,
+            "median_selected_wait": 1.9427461432944284,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.0600934072766015,
+            "followup_count": 7,
+            "eligible": 7,
+            "within_budget": 0.5714285714285714
+          },
+          "High": {
+            "offered": 111,
+            "selected": 108,
+            "unselected": 3,
+            "mean_selected_wait": 10.150852244645874,
+            "median_selected_wait": 3.838423350915477,
+            "p95_selected_wait": 43.30780522658037,
+            "restricted_mean_wait": 5.719959311773672,
+            "followup_count": 111,
+            "eligible": 111,
+            "within_budget": 0.5135135135135135
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 29,
+            "unselected": 5,
+            "mean_selected_wait": 26.91212387405922,
+            "median_selected_wait": 5.199833180177947,
+            "p95_selected_wait": 81.69931664735726,
+            "restricted_mean_wait": 9.79714983927469,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.4411764705882353
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 57,
+            "unselected": 18,
+            "mean_selected_wait": 39.62734533141352,
+            "median_selected_wait": 21.595239376952037,
+            "p95_selected_wait": 108.26733564312833,
+            "restricted_mean_wait": 11.452927089545703,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.36
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 5.854123070958035,
+        "unfinished": 27,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 7,
+            "selected": 7,
+            "unselected": 0,
+            "mean_selected_wait": 2.0600934072766015,
+            "median_selected_wait": 1.9427461432944284,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.0600934072766015,
+            "followup_count": 7,
+            "eligible": 7,
+            "within_budget": 0.5714285714285714
+          },
+          "High": {
+            "offered": 111,
+            "selected": 109,
+            "unselected": 2,
+            "mean_selected_wait": 11.708839268338684,
+            "median_selected_wait": 6.237995568656586,
+            "p95_selected_wait": 49.90652323296208,
+            "restricted_mean_wait": 7.262062755469013,
+            "followup_count": 111,
+            "eligible": 111,
+            "within_budget": 0.42342342342342343
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 33,
+            "unselected": 1,
+            "mean_selected_wait": 19.43977800563048,
+            "median_selected_wait": 9.123979853627048,
+            "p95_selected_wait": 56.21436762033916,
+            "restricted_mean_wait": 9.345458228872056,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.47058823529411764
+          },
+          "Low": {
+            "offered": 75,
+            "selected": 52,
+            "unselected": 23,
+            "mean_selected_wait": 49.29965435725334,
+            "median_selected_wait": 13.391710988759634,
+            "p95_selected_wait": 114.3189793956598,
+            "restricted_mean_wait": 11.94969591764579,
+            "followup_count": 75,
+            "eligible": 75,
+            "within_budget": 0.37333333333333335
+          }
+        }
+      }
+    },
+    {
+      "episode": 6,
+      "load": 0.5,
+      "fifo": {
+        "penalty": 1.237934900073507,
+        "unfinished": 0,
+        "p95_capped_wait": 14.042319019836349,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 4.026391699811677,
+            "median_selected_wait": 4.737423682736818,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 4.026391699811677,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.25
+          },
+          "High": {
+            "offered": 44,
+            "selected": 44,
+            "unselected": 0,
+            "mean_selected_wait": 4.982790213261494,
+            "median_selected_wait": 0.9076684567187954,
+            "p95_selected_wait": 14.00711385338203,
+            "restricted_mean_wait": 4.982790213261494,
+            "followup_count": 44,
+            "eligible": 44,
+            "within_budget": 0.5681818181818182
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 6.071376520665044,
+            "median_selected_wait": 4.7584009640022344,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 6.071376520665044,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.6470588235294118
+          },
+          "Low": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 5.63200573421421,
+            "median_selected_wait": 2.314363733309989,
+            "p95_selected_wait": 15.662950183185702,
+            "restricted_mean_wait": 5.585278781597029,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.9523809523809523
+          }
+        }
+      },
+      "spi": {
+        "penalty": 0.5329221465565008,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.2763916998116773,
+            "median_selected_wait": 0.31438879009141374,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.2763916998116773,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 44,
+            "selected": 44,
+            "unselected": 0,
+            "mean_selected_wait": 0.3918811223524025,
+            "median_selected_wait": 0.07602891505009524,
+            "p95_selected_wait": 1.2007180781540168,
+            "restricted_mean_wait": 0.3918811223524025,
+            "followup_count": 44,
+            "eligible": 44,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 3.306670638312103,
+            "median_selected_wait": 1.7584009640022344,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.8363402050918736,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.9411764705882353
+          },
+          "Low": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 11.917720019928497,
+            "median_selected_wait": 2.232155068380088,
+            "p95_selected_wait": 31.31614765658175,
+            "restricted_mean_wait": 7.403795598318094,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.5714285714285714
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 0.6120424098447823,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.2763916998116773,
+            "median_selected_wait": 0.31438879009141374,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.2763916998116773,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 44,
+            "selected": 44,
+            "unselected": 0,
+            "mean_selected_wait": 1.1646083950796753,
+            "median_selected_wait": 0.20632097045861997,
+            "p95_selected_wait": 4.034193891541767,
+            "restricted_mean_wait": 1.1646083950796753,
+            "followup_count": 44,
+            "eligible": 44,
+            "within_budget": 0.9090909090909091
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 4.7184353441944555,
+            "median_selected_wait": 3.5292108456345233,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 4.42457549920952,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.7647058823529411
+          },
+          "Low": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 10.536767638976114,
+            "median_selected_wait": 4.474789418219402,
+            "p95_selected_wait": 38.01614765658172,
+            "restricted_mean_wait": 7.0307216457837445,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.7380952380952381
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 0.567873810222182,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.5263916998116773,
+            "median_selected_wait": 0.4755225302754873,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.5263916998116773,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 44,
+            "selected": 44,
+            "unselected": 0,
+            "mean_selected_wait": 0.937335667806948,
+            "median_selected_wait": 0.40102905874896777,
+            "p95_selected_wait": 3.944205575558511,
+            "restricted_mean_wait": 0.937335667806948,
+            "followup_count": 44,
+            "eligible": 44,
+            "within_budget": 0.9318181818181818
+          },
+          "Medium": {
+            "offered": 17,
+            "selected": 17,
+            "unselected": 0,
+            "mean_selected_wait": 3.306670638312103,
+            "median_selected_wait": 1.8779737424352447,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.8363402050918736,
+            "followup_count": 17,
+            "eligible": 17,
+            "within_budget": 0.9411764705882353
+          },
+          "Low": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 11.322481924690402,
+            "median_selected_wait": 3.7780477460667257,
+            "p95_selected_wait": 30.604752318899305,
+            "restricted_mean_wait": 7.362605552252059,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.5952380952380952
+          }
+        }
+      }
+    },
+    {
+      "episode": 7,
+      "load": 0.9,
+      "fifo": {
+        "penalty": 9.411990757337703,
+        "unfinished": 15,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 5,
+            "unselected": 1,
+            "mean_selected_wait": 38.54869963636656,
+            "median_selected_wait": 35.23573752205854,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 16.0,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 77,
+            "selected": 73,
+            "unselected": 4,
+            "mean_selected_wait": 28.013889368526293,
+            "median_selected_wait": 29.239925005034706,
+            "p95_selected_wait": 59.44518794800517,
+            "restricted_mean_wait": 11.490660520376858,
+            "followup_count": 77,
+            "eligible": 77,
+            "within_budget": 0.24675324675324675
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 31,
+            "unselected": 2,
+            "mean_selected_wait": 34.959696047816585,
+            "median_selected_wait": 37.959543248232706,
+            "p95_selected_wait": 60.71376478924919,
+            "restricted_mean_wait": 12.737919902327322,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.21212121212121213
+          },
+          "Low": {
+            "offered": 64,
+            "selected": 57,
+            "unselected": 7,
+            "mean_selected_wait": 29.55099531452703,
+            "median_selected_wait": 27.523463167630553,
+            "p95_selected_wait": 60.13470616467475,
+            "restricted_mean_wait": 12.372803684101306,
+            "followup_count": 64,
+            "eligible": 64,
+            "within_budget": 0.296875
+          }
+        }
+      },
+      "spi": {
+        "penalty": 5.2640767918374305,
+        "unfinished": 15,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 1.205050550290996,
+            "median_selected_wait": 0.5494985898931475,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.205050550290996,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.8333333333333334
+          },
+          "High": {
+            "offered": 77,
+            "selected": 76,
+            "unselected": 1,
+            "mean_selected_wait": 9.957987888438705,
+            "median_selected_wait": 3.928956965390597,
+            "p95_selected_wait": 45.58248752615583,
+            "restricted_mean_wait": 5.204617668666657,
+            "followup_count": 77,
+            "eligible": 77,
+            "within_budget": 0.5064935064935064
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 31,
+            "unselected": 2,
+            "mean_selected_wait": 15.139970042487665,
+            "median_selected_wait": 3.9015057024995485,
+            "p95_selected_wait": 49.26489252778167,
+            "restricted_mean_wait": 6.82512199241124,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.6666666666666666
+          },
+          "Low": {
+            "offered": 64,
+            "selected": 53,
+            "unselected": 11,
+            "mean_selected_wait": 67.4793375391215,
+            "median_selected_wait": 86.2259009493454,
+            "p95_selected_wait": 90.848115246543,
+            "restricted_mean_wait": 13.564036533600213,
+            "followup_count": 64,
+            "eligible": 64,
+            "within_budget": 0.15625
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 5.371364409967084,
+        "unfinished": 15,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 4.371717216957663,
+            "median_selected_wait": 4.094046511131339,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 4.371717216957663,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.16666666666666666
+          },
+          "High": {
+            "offered": 77,
+            "selected": 76,
+            "unselected": 1,
+            "mean_selected_wait": 9.826408941070284,
+            "median_selected_wait": 3.9525970977575255,
+            "p95_selected_wait": 37.54826532830588,
+            "restricted_mean_wait": 5.488023258473073,
+            "followup_count": 77,
+            "eligible": 77,
+            "within_budget": 0.5454545454545454
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 31,
+            "unselected": 2,
+            "mean_selected_wait": 17.288976416988596,
+            "median_selected_wait": 4.460248273127803,
+            "p95_selected_wait": 58.30690505726635,
+            "restricted_mean_wait": 7.351835649498877,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.6363636363636364
+          },
+          "Low": {
+            "offered": 64,
+            "selected": 53,
+            "unselected": 11,
+            "mean_selected_wait": 52.63306561177533,
+            "median_selected_wait": 57.591196877896635,
+            "p95_selected_wait": 106.81277329737952,
+            "restricted_mean_wait": 13.090614014182357,
+            "followup_count": 64,
+            "eligible": 64,
+            "within_budget": 0.234375
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 5.327776189241309,
+        "unfinished": 15,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 3.7050505502909963,
+            "median_selected_wait": 4.021301823846436,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 3.7050505502909963,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.16666666666666666
+          },
+          "High": {
+            "offered": 77,
+            "selected": 76,
+            "unselected": 1,
+            "mean_selected_wait": 10.247461572649232,
+            "median_selected_wait": 4.253790442146908,
+            "p95_selected_wait": 44.09425719555252,
+            "restricted_mean_wait": 5.789033253082242,
+            "followup_count": 77,
+            "eligible": 77,
+            "within_budget": 0.42857142857142855
+          },
+          "Medium": {
+            "offered": 33,
+            "selected": 31,
+            "unselected": 2,
+            "mean_selected_wait": 15.6238410102296,
+            "median_selected_wait": 4.9015057024995485,
+            "p95_selected_wait": 46.26489252778167,
+            "restricted_mean_wait": 7.5826977499869965,
+            "followup_count": 33,
+            "eligible": 33,
+            "within_budget": 0.6363636363636364
+          },
+          "Low": {
+            "offered": 64,
+            "selected": 53,
+            "unselected": 11,
+            "mean_selected_wait": 65.504732972695,
+            "median_selected_wait": 87.64721725964716,
+            "p95_selected_wait": 92.2518993955185,
+            "restricted_mean_wait": 13.30471420132302,
+            "followup_count": 64,
+            "eligible": 64,
+            "within_budget": 0.1875
+          }
+        }
+      }
+    },
+    {
+      "episode": 8,
+      "load": 1.2,
+      "fifo": {
+        "penalty": 11.908002612839265,
+        "unfinished": 45,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 9,
+            "selected": 4,
+            "unselected": 5,
+            "mean_selected_wait": 34.26465827334623,
+            "median_selected_wait": 34.245000446112016,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 14.495442434682904,
+            "followup_count": 9,
+            "eligible": 9,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 109,
+            "selected": 86,
+            "unselected": 23,
+            "mean_selected_wait": 31.156862979980893,
+            "median_selected_wait": 30.812742706963697,
+            "p95_selected_wait": 71.45822361966376,
+            "restricted_mean_wait": 11.882690133651785,
+            "followup_count": 109,
+            "eligible": 109,
+            "within_budget": 0.22018348623853212
+          },
+          "Medium": {
+            "offered": 46,
+            "selected": 41,
+            "unselected": 5,
+            "mean_selected_wait": 37.75802581318048,
+            "median_selected_wait": 41.14268861521916,
+            "p95_selected_wait": 72.0249713162469,
+            "restricted_mean_wait": 12.658906944450715,
+            "followup_count": 46,
+            "eligible": 46,
+            "within_budget": 0.21739130434782608
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 47,
+            "unselected": 11,
+            "mean_selected_wait": 29.890223458526517,
+            "median_selected_wait": 22.99480930112088,
+            "p95_selected_wait": 73.05051220591722,
+            "restricted_mean_wait": 11.66581395581319,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.3275862068965517
+          }
+        }
+      },
+      "spi": {
+        "penalty": 7.865050510006286,
+        "unfinished": 45,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 9,
+            "selected": 9,
+            "unselected": 0,
+            "mean_selected_wait": 0.3692501954281416,
+            "median_selected_wait": 0.3456673705998412,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.3692501954281416,
+            "followup_count": 9,
+            "eligible": 9,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 109,
+            "selected": 106,
+            "unselected": 3,
+            "mean_selected_wait": 15.356303824018713,
+            "median_selected_wait": 5.9916754798647816,
+            "p95_selected_wait": 76.84231585635509,
+            "restricted_mean_wait": 7.9614628102304605,
+            "followup_count": 109,
+            "eligible": 109,
+            "within_budget": 0.44036697247706424
+          },
+          "Medium": {
+            "offered": 46,
+            "selected": 41,
+            "unselected": 5,
+            "mean_selected_wait": 41.64095611455318,
+            "median_selected_wait": 24.767051597777936,
+            "p95_selected_wait": 86.14268861521916,
+            "restricted_mean_wait": 12.055998401254453,
+            "followup_count": 46,
+            "eligible": 46,
+            "within_budget": 0.2391304347826087
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 22,
+            "unselected": 36,
+            "mean_selected_wait": 21.67238517814136,
+            "median_selected_wait": 1.1157827644264948,
+            "p95_selected_wait": 83.2712745169503,
+            "restricted_mean_wait": 11.909809223026631,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.27586206896551724
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 8.21205965126688,
+        "unfinished": 45,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 9,
+            "selected": 9,
+            "unselected": 0,
+            "mean_selected_wait": 16.9248057509837,
+            "median_selected_wait": 4.6170391257318215,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 7.092583429625473,
+            "followup_count": 9,
+            "eligible": 9,
+            "within_budget": 0.1111111111111111
+          },
+          "High": {
+            "offered": 109,
+            "selected": 104,
+            "unselected": 5,
+            "mean_selected_wait": 10.24222653912532,
+            "median_selected_wait": 4.164964324282344,
+            "p95_selected_wait": 46.54444414242918,
+            "restricted_mean_wait": 6.76498098896674,
+            "followup_count": 109,
+            "eligible": 109,
+            "within_budget": 0.42201834862385323
+          },
+          "Medium": {
+            "offered": 46,
+            "selected": 36,
+            "unselected": 10,
+            "mean_selected_wait": 38.4272094113735,
+            "median_selected_wait": 24.226416717268876,
+            "p95_selected_wait": 119.10121689909117,
+            "restricted_mean_wait": 11.280417851935509,
+            "followup_count": 46,
+            "eligible": 46,
+            "within_budget": 0.32608695652173914
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 29,
+            "unselected": 29,
+            "mean_selected_wait": 34.724512044255746,
+            "median_selected_wait": 5.242289506401534,
+            "p95_selected_wait": 108.83932853968068,
+            "restricted_mean_wait": 11.919437478090588,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.27586206896551724
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 8.020219079207466,
+        "unfinished": 45,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 9,
+            "selected": 9,
+            "unselected": 0,
+            "mean_selected_wait": 3.702583528761475,
+            "median_selected_wait": 4.193960979628542,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 3.702583528761475,
+            "followup_count": 9,
+            "eligible": 9,
+            "within_budget": 0.1111111111111111
+          },
+          "High": {
+            "offered": 109,
+            "selected": 104,
+            "unselected": 5,
+            "mean_selected_wait": 15.680102291246403,
+            "median_selected_wait": 5.709137222931112,
+            "p95_selected_wait": 70.64743077415221,
+            "restricted_mean_wait": 8.742573013713313,
+            "followup_count": 109,
+            "eligible": 109,
+            "within_budget": 0.3211009174311927
+          },
+          "Medium": {
+            "offered": 46,
+            "selected": 42,
+            "unselected": 4,
+            "mean_selected_wait": 38.9718229046648,
+            "median_selected_wait": 31.152206448509716,
+            "p95_selected_wait": 77.47821299758054,
+            "restricted_mean_wait": 12.164694053428365,
+            "followup_count": 46,
+            "eligible": 46,
+            "within_budget": 0.2608695652173913
+          },
+          "Low": {
+            "offered": 58,
+            "selected": 23,
+            "unselected": 35,
+            "mean_selected_wait": 20.777483381375138,
+            "median_selected_wait": 0.8268286485707677,
+            "p95_selected_wait": 77.55191173914515,
+            "restricted_mean_wait": 11.909809223026631,
+            "followup_count": 58,
+            "eligible": 58,
+            "within_budget": 0.27586206896551724
+          }
+        }
+      }
+    },
+    {
+      "episode": 9,
+      "load": 0.5,
+      "fifo": {
+        "penalty": 0.6782936133346475,
+        "unfinished": 0,
+        "p95_capped_wait": 8.578971466337377,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 2.096865502665757,
+            "median_selected_wait": 2.4385892938027425,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.096865502665757,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.5
+          },
+          "High": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 3.10706828771224,
+            "median_selected_wait": 1.9927585657699467,
+            "p95_selected_wait": 8.498716442522053,
+            "restricted_mean_wait": 3.10706828771224,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.5952380952380952
+          },
+          "Medium": {
+            "offered": 19,
+            "selected": 19,
+            "unselected": 0,
+            "mean_selected_wait": 3.706106355769727,
+            "median_selected_wait": 1.4478351915905705,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 3.706106355769727,
+            "followup_count": 19,
+            "eligible": 19,
+            "within_budget": 0.8421052631578947
+          },
+          "Low": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 3.4752511350440423,
+            "median_selected_wait": 2.954459888662363,
+            "p95_selected_wait": 7.924502385527243,
+            "restricted_mean_wait": 3.4752511350440423,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 1.0
+          }
+        }
+      },
+      "spi": {
+        "penalty": 0.29909834358486065,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.5968655026657572,
+            "median_selected_wait": 0.706310417628849,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.5968655026657572,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 0.5594492400931922,
+            "median_selected_wait": 0.5188429094669473,
+            "p95_selected_wait": 1.449365449151365,
+            "restricted_mean_wait": 0.5594492400931922,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 1.0
+          },
+          "Medium": {
+            "offered": 19,
+            "selected": 19,
+            "unselected": 0,
+            "mean_selected_wait": 1.7061063557697271,
+            "median_selected_wait": 0.8672080695518787,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.7061063557697271,
+            "followup_count": 19,
+            "eligible": 19,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 8.194001135044042,
+            "median_selected_wait": 5.236115393972618,
+            "p95_selected_wait": 20.294766562365876,
+            "restricted_mean_wait": 7.441707916853911,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.75
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 0.34679704561695934,
+        "unfinished": 0,
+        "p95_capped_wait": 15.991870028534072,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.8468655026657572,
+            "median_selected_wait": 0.9385892938027425,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.8468655026657572,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 0.7975444781884303,
+            "median_selected_wait": 0.5498441901564277,
+            "p95_selected_wait": 2.4442713123580075,
+            "restricted_mean_wait": 0.7975444781884303,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.9761904761904762
+          },
+          "Medium": {
+            "offered": 19,
+            "selected": 19,
+            "unselected": 0,
+            "mean_selected_wait": 2.074527408401306,
+            "median_selected_wait": 0.36664315610026676,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.074527408401306,
+            "followup_count": 19,
+            "eligible": 19,
+            "within_budget": 0.9473684210526315
+          },
+          "Low": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 7.631501135044042,
+            "median_selected_wait": 4.225297336099722,
+            "p95_selected_wait": 21.23794744762442,
+            "restricted_mean_wait": 6.2770351461843905,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.84375
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 0.3111575218153631,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.5968655026657572,
+            "median_selected_wait": 0.706310417628849,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.5968655026657572,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 42,
+            "selected": 42,
+            "unselected": 0,
+            "mean_selected_wait": 0.7499254305693827,
+            "median_selected_wait": 0.7058163644027751,
+            "p95_selected_wait": 2.0126998287427136,
+            "restricted_mean_wait": 0.7499254305693827,
+            "followup_count": 42,
+            "eligible": 42,
+            "within_budget": 0.9761904761904762
+          },
+          "Medium": {
+            "offered": 19,
+            "selected": 19,
+            "unselected": 0,
+            "mean_selected_wait": 1.7061063557697271,
+            "median_selected_wait": 1.2661417678630045,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.7061063557697271,
+            "followup_count": 19,
+            "eligible": 19,
+            "within_budget": 1.0
+          },
+          "Low": {
+            "offered": 32,
+            "selected": 32,
+            "unselected": 0,
+            "mean_selected_wait": 7.944001135044042,
+            "median_selected_wait": 5.236115393972618,
+            "p95_selected_wait": 19.745187955134988,
+            "restricted_mean_wait": 7.377205709947648,
+            "followup_count": 32,
+            "eligible": 32,
+            "within_budget": 0.78125
+          }
+        }
+      }
+    },
+    {
+      "episode": 10,
+      "load": 0.9,
+      "fifo": {
+        "penalty": 3.5576904558342997,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 9.399486809184063,
+            "median_selected_wait": 9.918072269659348,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 8.546525214144438,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.2
+          },
+          "High": {
+            "offered": 59,
+            "selected": 59,
+            "unselected": 0,
+            "mean_selected_wait": 14.159391722201812,
+            "median_selected_wait": 8.648002123774845,
+            "p95_selected_wait": 34.6622776741629,
+            "restricted_mean_wait": 9.132403478393822,
+            "followup_count": 59,
+            "eligible": 59,
+            "within_budget": 0.3559322033898305
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 9.627218661573533,
+            "median_selected_wait": 4.5757140351053,
+            "p95_selected_wait": 31.083568160338263,
+            "restricted_mean_wait": 6.617568856457555,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.7
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 60,
+            "unselected": 0,
+            "mean_selected_wait": 12.371827080802554,
+            "median_selected_wait": 10.276995553933006,
+            "p95_selected_wait": 31.632923218268175,
+            "restricted_mean_wait": 8.726237934578677,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.6166666666666667
+          }
+        }
+      },
+      "spi": {
+        "penalty": 1.7137377992985214,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 0.5994868091840629,
+            "median_selected_wait": 0.41101960383490166,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.5994868091840629,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 59,
+            "selected": 59,
+            "unselected": 0,
+            "mean_selected_wait": 3.0068493493204564,
+            "median_selected_wait": 0.9035518575341541,
+            "p95_selected_wait": 16.654502329732267,
+            "restricted_mean_wait": 2.1924680621898096,
+            "followup_count": 59,
+            "eligible": 59,
+            "within_budget": 0.864406779661017
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 5.527218661573533,
+            "median_selected_wait": 1.041935529004519,
+            "p95_selected_wait": 26.37772580695396,
+            "restricted_mean_wait": 3.7478165789615128,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.8
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 60,
+            "unselected": 0,
+            "mean_selected_wait": 25.43849374746922,
+            "median_selected_wait": 32.09286677114794,
+            "p95_selected_wait": 50.108768620174445,
+            "restricted_mean_wait": 9.574773015867983,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.45
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 2.024234381629057,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 1.599486809184063,
+            "median_selected_wait": 1.4110196038349017,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.599486809184063,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.6
+          },
+          "High": {
+            "offered": 59,
+            "selected": 59,
+            "unselected": 0,
+            "mean_selected_wait": 5.769561213727236,
+            "median_selected_wait": 2.2357166587216852,
+            "p95_selected_wait": 11.964192972605634,
+            "restricted_mean_wait": 3.1528811825188807,
+            "followup_count": 59,
+            "eligible": 59,
+            "within_budget": 0.6101694915254238
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 2.077218661573533,
+            "median_selected_wait": 0.8222375990131943,
+            "p95_selected_wait": 7.521138731583568,
+            "restricted_mean_wait": 2.077218661573533,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.95
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 60,
+            "unselected": 0,
+            "mean_selected_wait": 23.788493747469218,
+            "median_selected_wait": 17.749833132689716,
+            "p95_selected_wait": 64.1526066612367,
+            "restricted_mean_wait": 9.090637589804087,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.5
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 1.694870414175703,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 2.199486809184063,
+            "median_selected_wait": 1.4110196038349017,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.199486809184063,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.6
+          },
+          "High": {
+            "offered": 59,
+            "selected": 59,
+            "unselected": 0,
+            "mean_selected_wait": 3.583120535761134,
+            "median_selected_wait": 3.609478434974932,
+            "p95_selected_wait": 7.586001609264456,
+            "restricted_mean_wait": 3.32540794957009,
+            "followup_count": 59,
+            "eligible": 59,
+            "within_budget": 0.576271186440678
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 3.827218661573533,
+            "median_selected_wait": 3.320382805258518,
+            "p95_selected_wait": 12.754342332819487,
+            "restricted_mean_wait": 3.8029953053637846,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.85
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 60,
+            "unselected": 0,
+            "mean_selected_wait": 25.305160414135887,
+            "median_selected_wait": 25.625884071406148,
+            "p95_selected_wait": 52.247454644374,
+            "restricted_mean_wait": 9.37470592905448,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.4666666666666667
+          }
+        }
+      }
+    },
+    {
+      "episode": 11,
+      "load": 1.2,
+      "fifo": {
+        "penalty": 9.430317274121041,
+        "unfinished": 28,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 4,
+            "unselected": 1,
+            "mean_selected_wait": 40.08304459840026,
+            "median_selected_wait": 42.58121416557812,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 15.366230493110454,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 103,
+            "selected": 91,
+            "unselected": 12,
+            "mean_selected_wait": 27.366937257297494,
+            "median_selected_wait": 27.689079194328286,
+            "p95_selected_wait": 61.43002139113067,
+            "restricted_mean_wait": 11.18170408137784,
+            "followup_count": 103,
+            "eligible": 103,
+            "within_budget": 0.27184466019417475
+          },
+          "Medium": {
+            "offered": 35,
+            "selected": 28,
+            "unselected": 7,
+            "mean_selected_wait": 28.553365538580238,
+            "median_selected_wait": 27.618821644620432,
+            "p95_selected_wait": 62.240435715178855,
+            "restricted_mean_wait": 11.78689992930156,
+            "followup_count": 35,
+            "eligible": 35,
+            "within_budget": 0.2857142857142857
+          },
+          "Low": {
+            "offered": 71,
+            "selected": 64,
+            "unselected": 7,
+            "mean_selected_wait": 27.151149899110763,
+            "median_selected_wait": 23.372226984601888,
+            "p95_selected_wait": 60.1382939439894,
+            "restricted_mean_wait": 10.941596467124223,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.38028169014084506
+          }
+        }
+      },
+      "spi": {
+        "penalty": 5.399900016312941,
+        "unfinished": 28,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 2.666757855491744,
+            "median_selected_wait": 0.6937405713041898,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 2.666757855491744,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.8
+          },
+          "High": {
+            "offered": 103,
+            "selected": 102,
+            "unselected": 1,
+            "mean_selected_wait": 10.458066248478682,
+            "median_selected_wait": 4.464132581613981,
+            "p95_selected_wait": 54.08523373821529,
+            "restricted_mean_wait": 6.451682241772579,
+            "followup_count": 103,
+            "eligible": 103,
+            "within_budget": 0.47572815533980584
+          },
+          "Medium": {
+            "offered": 35,
+            "selected": 34,
+            "unselected": 1,
+            "mean_selected_wait": 17.730267626525485,
+            "median_selected_wait": 12.640717696949537,
+            "p95_selected_wait": 56.01511343705245,
+            "restricted_mean_wait": 9.227227670055234,
+            "followup_count": 35,
+            "eligible": 35,
+            "within_budget": 0.4
+          },
+          "Low": {
+            "offered": 71,
+            "selected": 46,
+            "unselected": 25,
+            "mean_selected_wait": 52.93833715898238,
+            "median_selected_wait": 47.39557535841351,
+            "p95_selected_wait": 116.46733850408424,
+            "restricted_mean_wait": 11.720333995202989,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.29577464788732394
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 5.603855537049402,
+        "unfinished": 28,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 4.866757855491744,
+            "median_selected_wait": 4.3385975968925266,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 4.866757855491744,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.2
+          },
+          "High": {
+            "offered": 103,
+            "selected": 99,
+            "unselected": 4,
+            "mean_selected_wait": 10.258789683406771,
+            "median_selected_wait": 4.067278238047294,
+            "p95_selected_wait": 43.81506569395596,
+            "restricted_mean_wait": 5.877865064440388,
+            "followup_count": 103,
+            "eligible": 103,
+            "within_budget": 0.44660194174757284
+          },
+          "Medium": {
+            "offered": 35,
+            "selected": 34,
+            "unselected": 1,
+            "mean_selected_wait": 20.17012980034555,
+            "median_selected_wait": 4.270988726455194,
+            "p95_selected_wait": 94.43806170516214,
+            "restricted_mean_wait": 7.45465524478242,
+            "followup_count": 35,
+            "eligible": 35,
+            "within_budget": 0.6285714285714286
+          },
+          "Low": {
+            "offered": 71,
+            "selected": 49,
+            "unselected": 22,
+            "mean_selected_wait": 43.56503706013963,
+            "median_selected_wait": 28.395817918039867,
+            "p95_selected_wait": 122.2414201661595,
+            "restricted_mean_wait": 11.523581637556592,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.30985915492957744
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 5.432012286575157,
+        "unfinished": 28,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 5,
+            "selected": 5,
+            "unselected": 0,
+            "mean_selected_wait": 4.866757855491744,
+            "median_selected_wait": 4.001610883857694,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 4.866757855491744,
+            "followup_count": 5,
+            "eligible": 5,
+            "within_budget": 0.2
+          },
+          "High": {
+            "offered": 103,
+            "selected": 102,
+            "unselected": 1,
+            "mean_selected_wait": 10.81100742494927,
+            "median_selected_wait": 4.3639098847777475,
+            "p95_selected_wait": 50.81079493398777,
+            "restricted_mean_wait": 6.186845260919649,
+            "followup_count": 103,
+            "eligible": 103,
+            "within_budget": 0.39805825242718446
+          },
+          "Medium": {
+            "offered": 35,
+            "selected": 34,
+            "unselected": 1,
+            "mean_selected_wait": 17.230267626525485,
+            "median_selected_wait": 10.530861123060319,
+            "p95_selected_wait": 54.04667838978797,
+            "restricted_mean_wait": 8.958730320842452,
+            "followup_count": 35,
+            "eligible": 35,
+            "within_budget": 0.45714285714285713
+          },
+          "Low": {
+            "offered": 71,
+            "selected": 46,
+            "unselected": 25,
+            "mean_selected_wait": 50.51447943750233,
+            "median_selected_wait": 29.084503969444228,
+            "p95_selected_wait": 118.46733850408424,
+            "restricted_mean_wait": 11.72223929052313,
+            "followup_count": 71,
+            "eligible": 71,
+            "within_budget": 0.30985915492957744
+          }
+        }
+      }
+    },
+    {
+      "episode": 12,
+      "load": 0.5,
+      "fifo": {
+        "penalty": 1.4711609352587294,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 8.530744958665789,
+            "median_selected_wait": 10.747767886183695,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 8.530744958665789,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.25
+          },
+          "High": {
+            "offered": 36,
+            "selected": 36,
+            "unselected": 0,
+            "mean_selected_wait": 5.226468992873445,
+            "median_selected_wait": 3.808627214116619,
+            "p95_selected_wait": 16.507324849264727,
+            "restricted_mean_wait": 5.1482732476806525,
+            "followup_count": 36,
+            "eligible": 36,
+            "within_budget": 0.5
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 6.401273842772059,
+            "median_selected_wait": 5.934407269425712,
+            "p95_selected_wait": 16.485109424587556,
+            "restricted_mean_wait": 6.262180754016943,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.6
+          },
+          "Low": {
+            "offered": 39,
+            "selected": 39,
+            "unselected": 0,
+            "mean_selected_wait": 7.522359131737393,
+            "median_selected_wait": 6.1537349636842436,
+            "p95_selected_wait": 17.231473581193278,
+            "restricted_mean_wait": 7.351157965903501,
+            "followup_count": 39,
+            "eligible": 39,
+            "within_budget": 0.8717948717948718
+          }
+        }
+      },
+      "spi": {
+        "penalty": 0.760890058266088,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 0.28074495866578886,
+            "median_selected_wait": 0.24776788618369494,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 0.28074495866578886,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 1.0
+          },
+          "High": {
+            "offered": 36,
+            "selected": 36,
+            "unselected": 0,
+            "mean_selected_wait": 1.7264689928734462,
+            "median_selected_wait": 0.29327220523973807,
+            "p95_selected_wait": 9.259871438453512,
+            "restricted_mean_wait": 1.3457056808025603,
+            "followup_count": 36,
+            "eligible": 36,
+            "within_budget": 0.9166666666666666
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 2.2512738427720613,
+            "median_selected_wait": 0.31177297380284585,
+            "p95_selected_wait": 7.537684922901281,
+            "restricted_mean_wait": 2.039182980735679,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.95
+          },
+          "Low": {
+            "offered": 39,
+            "selected": 39,
+            "unselected": 0,
+            "mean_selected_wait": 13.727487336865597,
+            "median_selected_wait": 19.52188124925091,
+            "p95_selected_wait": 24.685568802699386,
+            "restricted_mean_wait": 10.125347679979585,
+            "followup_count": 39,
+            "eligible": 39,
+            "within_budget": 0.4358974358974359
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 0.9275920618388338,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 1.2807449586657889,
+            "median_selected_wait": 0.4538740826810823,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.2807449586657889,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.75
+          },
+          "High": {
+            "offered": 36,
+            "selected": 36,
+            "unselected": 0,
+            "mean_selected_wait": 2.782024548429001,
+            "median_selected_wait": 0.3263736874219916,
+            "p95_selected_wait": 12.34021884892978,
+            "restricted_mean_wait": 1.6927474961610447,
+            "followup_count": 36,
+            "eligible": 36,
+            "within_budget": 0.8888888888888888
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 1.7012738427720613,
+            "median_selected_wait": 0.4298983849688014,
+            "p95_selected_wait": 5.209675277228612,
+            "restricted_mean_wait": 1.7012738427720613,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.95
+          },
+          "Low": {
+            "offered": 39,
+            "selected": 39,
+            "unselected": 0,
+            "mean_selected_wait": 12.9326155419938,
+            "median_selected_wait": 10.982495482784003,
+            "p95_selected_wait": 46.52211608217067,
+            "restricted_mean_wait": 8.839848004313081,
+            "followup_count": 39,
+            "eligible": 39,
+            "within_budget": 0.717948717948718
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 0.7882179197552698,
+        "unfinished": 0,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 1.2807449586657889,
+            "median_selected_wait": 0.4538740826810823,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 1.2807449586657889,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.75
+          },
+          "High": {
+            "offered": 36,
+            "selected": 36,
+            "unselected": 0,
+            "mean_selected_wait": 1.8375801039845574,
+            "median_selected_wait": 0.3263736874219916,
+            "p95_selected_wait": 7.843466172477061,
+            "restricted_mean_wait": 1.4568167919136714,
+            "followup_count": 36,
+            "eligible": 36,
+            "within_budget": 0.9444444444444444
+          },
+          "Medium": {
+            "offered": 20,
+            "selected": 20,
+            "unselected": 0,
+            "mean_selected_wait": 2.1012738427720614,
+            "median_selected_wait": 0.31177297380284585,
+            "p95_selected_wait": 5.180450105561148,
+            "restricted_mean_wait": 1.8891829807356793,
+            "followup_count": 20,
+            "eligible": 20,
+            "within_budget": 0.95
+          },
+          "Low": {
+            "offered": 39,
+            "selected": 39,
+            "unselected": 0,
+            "mean_selected_wait": 13.599282208660469,
+            "median_selected_wait": 19.52188124925091,
+            "p95_selected_wait": 24.685568802699386,
+            "restricted_mean_wait": 10.125347679979585,
+            "followup_count": 39,
+            "eligible": 39,
+            "within_budget": 0.4358974358974359
+          }
+        }
+      }
+    },
+    {
+      "episode": 13,
+      "load": 0.9,
+      "fifo": {
+        "penalty": 9.659588256117132,
+        "unfinished": 16,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 31.74582554778673,
+            "median_selected_wait": 26.71082962778319,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 14.672260521213971,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 89,
+            "selected": 85,
+            "unselected": 4,
+            "mean_selected_wait": 30.74145268947577,
+            "median_selected_wait": 33.497203273035296,
+            "p95_selected_wait": 62.729227063248416,
+            "restricted_mean_wait": 12.013070827682068,
+            "followup_count": 89,
+            "eligible": 89,
+            "within_budget": 0.24719101123595505
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 29,
+            "unselected": 5,
+            "mean_selected_wait": 31.169433513017875,
+            "median_selected_wait": 33.690500056909826,
+            "p95_selected_wait": 62.39751033661322,
+            "restricted_mean_wait": 12.759488927271565,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.20588235294117646
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 54,
+            "unselected": 6,
+            "mean_selected_wait": 28.48218166862622,
+            "median_selected_wait": 31.31660483743265,
+            "p95_selected_wait": 61.535375753615206,
+            "restricted_mean_wait": 11.752394847945661,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.35
+          }
+        }
+      },
+      "spi": {
+        "penalty": 6.110412379264427,
+        "unfinished": 16,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 27.24582554778673,
+            "median_selected_wait": 7.933476628405046,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 8.138998835416494,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.25
+          },
+          "High": {
+            "offered": 89,
+            "selected": 89,
+            "unselected": 0,
+            "mean_selected_wait": 10.91898864973646,
+            "median_selected_wait": 7.000932763681931,
+            "p95_selected_wait": 53.2249628741058,
+            "restricted_mean_wait": 6.342787528375381,
+            "followup_count": 89,
+            "eligible": 89,
+            "within_budget": 0.42696629213483145
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 32,
+            "unselected": 2,
+            "mean_selected_wait": 26.305357074925784,
+            "median_selected_wait": 10.992212202124492,
+            "p95_selected_wait": 73.1809772287465,
+            "restricted_mean_wait": 9.270743462987312,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.4411764705882353
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 47,
+            "unselected": 13,
+            "mean_selected_wait": 60.37419752894808,
+            "median_selected_wait": 93.59391001229825,
+            "p95_selected_wait": 101.22396199198916,
+            "restricted_mean_wait": 11.890139094601805,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.2833333333333333
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 6.409719962014661,
+        "unfinished": 16,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 30.99582554778673,
+            "median_selected_wait": 13.433476628405046,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 9.390410733895134,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.25
+          },
+          "High": {
+            "offered": 89,
+            "selected": 88,
+            "unselected": 1,
+            "mean_selected_wait": 10.506468338817157,
+            "median_selected_wait": 4.079646773410502,
+            "p95_selected_wait": 50.82911192651147,
+            "restricted_mean_wait": 5.995224121499498,
+            "followup_count": 89,
+            "eligible": 89,
+            "within_budget": 0.4606741573033708
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 27,
+            "unselected": 7,
+            "mean_selected_wait": 24.47705777765024,
+            "median_selected_wait": 4.7197123958179645,
+            "p95_selected_wait": 95.167001705339,
+            "restricted_mean_wait": 9.668380983729545,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.4411764705882353
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 53,
+            "unselected": 7,
+            "mean_selected_wait": 47.67872235808205,
+            "median_selected_wait": 49.12917870037455,
+            "p95_selected_wait": 125.94340765055568,
+            "restricted_mean_wait": 11.370157086558654,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.38333333333333336
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 6.112368509380718,
+        "unfinished": 16,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 4,
+            "selected": 4,
+            "unselected": 0,
+            "mean_selected_wait": 27.99582554778673,
+            "median_selected_wait": 7.933476628405046,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 8.388998835416494,
+            "followup_count": 4,
+            "eligible": 4,
+            "within_budget": 0.25
+          },
+          "High": {
+            "offered": 89,
+            "selected": 89,
+            "unselected": 0,
+            "mean_selected_wait": 11.087527975579157,
+            "median_selected_wait": 6.940011901157774,
+            "p95_selected_wait": 50.82273505938002,
+            "restricted_mean_wait": 6.589978539611336,
+            "followup_count": 89,
+            "eligible": 89,
+            "within_budget": 0.39325842696629215
+          },
+          "Medium": {
+            "offered": 34,
+            "selected": 32,
+            "unselected": 2,
+            "mean_selected_wait": 26.367857074925784,
+            "median_selected_wait": 10.992212202124492,
+            "p95_selected_wait": 74.08097722874649,
+            "restricted_mean_wait": 9.770743462987312,
+            "followup_count": 34,
+            "eligible": 34,
+            "within_budget": 0.4411764705882353
+          },
+          "Low": {
+            "offered": 60,
+            "selected": 47,
+            "unselected": 13,
+            "mean_selected_wait": 59.94866561405446,
+            "median_selected_wait": 93.62083527247376,
+            "p95_selected_wait": 101.13403716481572,
+            "restricted_mean_wait": 11.923472427935138,
+            "followup_count": 60,
+            "eligible": 60,
+            "within_budget": 0.2833333333333333
+          }
+        }
+      }
+    },
+    {
+      "episode": 14,
+      "load": 1.2,
+      "fifo": {
+        "penalty": 12.430125064753211,
+        "unfinished": 64,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 4,
+            "unselected": 2,
+            "mean_selected_wait": 66.19296156735352,
+            "median_selected_wait": 79.9437627864431,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 16.0,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 114,
+            "selected": 86,
+            "unselected": 28,
+            "mean_selected_wait": 36.216135096173,
+            "median_selected_wait": 29.42022646680111,
+            "p95_selected_wait": 89.06227087961932,
+            "restricted_mean_wait": 12.289123502473283,
+            "followup_count": 114,
+            "eligible": 114,
+            "within_budget": 0.21929824561403508
+          },
+          "Medium": {
+            "offered": 43,
+            "selected": 35,
+            "unselected": 8,
+            "mean_selected_wait": 25.66701341925003,
+            "median_selected_wait": 13.009485072958213,
+            "p95_selected_wait": 70.7342211955401,
+            "restricted_mean_wait": 10.84088666525363,
+            "followup_count": 43,
+            "eligible": 43,
+            "within_budget": 0.32558139534883723
+          },
+          "Low": {
+            "offered": 95,
+            "selected": 70,
+            "unselected": 25,
+            "mean_selected_wait": 26.194099635246534,
+            "median_selected_wait": 15.978479650955535,
+            "p95_selected_wait": 83.61884923246447,
+            "restricted_mean_wait": 11.21509469351869,
+            "followup_count": 95,
+            "eligible": 95,
+            "within_budget": 0.3684210526315789
+          }
+        }
+      },
+      "spi": {
+        "penalty": 7.804429058888484,
+        "unfinished": 64,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 10.758379515715434,
+            "median_selected_wait": 7.113251023435701,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 7.943791920234403,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.5
+          },
+          "High": {
+            "offered": 114,
+            "selected": 110,
+            "unselected": 4,
+            "mean_selected_wait": 15.815229216953698,
+            "median_selected_wait": 6.744051362071467,
+            "p95_selected_wait": 78.46573817626182,
+            "restricted_mean_wait": 8.227407798743094,
+            "followup_count": 114,
+            "eligible": 114,
+            "within_budget": 0.4298245614035088
+          },
+          "Medium": {
+            "offered": 43,
+            "selected": 39,
+            "unselected": 4,
+            "mean_selected_wait": 23.912172114451387,
+            "median_selected_wait": 6.833585160038922,
+            "p95_selected_wait": 83.51972373776492,
+            "restricted_mean_wait": 8.917516198697086,
+            "followup_count": 43,
+            "eligible": 43,
+            "within_budget": 0.4883720930232558
+          },
+          "Low": {
+            "offered": 95,
+            "selected": 40,
+            "unselected": 55,
+            "mean_selected_wait": 21.789316200236275,
+            "median_selected_wait": 2.341227115790133,
+            "p95_selected_wait": 80.21393695690008,
+            "restricted_mean_wait": 11.897158440001915,
+            "followup_count": 95,
+            "eligible": 95,
+            "within_budget": 0.29473684210526313
+          }
+        }
+      },
+      "lambdamart_full": {
+        "penalty": 8.049843762633763,
+        "unfinished": 64,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 6.591712849048764,
+            "median_selected_wait": 5.44216034826394,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 6.591712849048764,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 114,
+            "selected": 104,
+            "unselected": 10,
+            "mean_selected_wait": 14.261155583872117,
+            "median_selected_wait": 4.297621337873387,
+            "p95_selected_wait": 72.0665959058043,
+            "restricted_mean_wait": 7.276301827040429,
+            "followup_count": 114,
+            "eligible": 114,
+            "within_budget": 0.37719298245614036
+          },
+          "Medium": {
+            "offered": 43,
+            "selected": 36,
+            "unselected": 7,
+            "mean_selected_wait": 14.096536505770265,
+            "median_selected_wait": 4.260217629298204,
+            "p95_selected_wait": 69.3886387442133,
+            "restricted_mean_wait": 7.600049915156784,
+            "followup_count": 43,
+            "eligible": 43,
+            "within_budget": 0.627906976744186
+          },
+          "Low": {
+            "offered": 95,
+            "selected": 49,
+            "unselected": 46,
+            "mean_selected_wait": 36.39790927468923,
+            "median_selected_wait": 5.540524396665774,
+            "p95_selected_wait": 118.57865720004332,
+            "restricted_mean_wait": 11.705715331203912,
+            "followup_count": 95,
+            "eligible": 95,
+            "within_budget": 0.30526315789473685
+          }
+        }
+      },
+      "lambdamart_no_coco": {
+        "penalty": 8.134991304031852,
+        "unfinished": 64,
+        "p95_capped_wait": 16.0,
+        "by_class": {
+          "Critical": {
+            "offered": 6,
+            "selected": 6,
+            "unselected": 0,
+            "mean_selected_wait": 13.091712849048768,
+            "median_selected_wait": 8.613251023435701,
+            "p95_selected_wait": null,
+            "restricted_mean_wait": 9.443791920234403,
+            "followup_count": 6,
+            "eligible": 6,
+            "within_budget": 0.0
+          },
+          "High": {
+            "offered": 114,
+            "selected": 110,
+            "unselected": 4,
+            "mean_selected_wait": 18.73341103513551,
+            "median_selected_wait": 9.077293898318018,
+            "p95_selected_wait": 76.61408457442462,
+            "restricted_mean_wait": 9.127915752683677,
+            "followup_count": 114,
+            "eligible": 114,
+            "within_budget": 0.3157894736842105
+          },
+          "Medium": {
+            "offered": 43,
+            "selected": 39,
+            "unselected": 4,
+            "mean_selected_wait": 17.34806955034882,
+            "median_selected_wait": 5.363053835190826,
+            "p95_selected_wait": 76.70907100941095,
+            "restricted_mean_wait": 8.453361136725015,
+            "followup_count": 43,
+            "eligible": 43,
+            "within_budget": 0.5348837209302325
+          },
+          "Low": {
+            "offered": 95,
+            "selected": 40,
+            "unselected": 55,
+            "mean_selected_wait": 19.814316200236274,
+            "median_selected_wait": 3.115790736259248,
+            "p95_selected_wait": 75.16393695690009,
+            "restricted_mean_wait": 11.87109772960338,
+            "followup_count": 95,
+            "eligible": 95,
+            "within_budget": 0.30526315789473685
+          }
+        }
+      }
+    }
+  ]
+}

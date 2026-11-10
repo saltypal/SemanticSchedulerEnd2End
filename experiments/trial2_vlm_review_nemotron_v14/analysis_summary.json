@@ -1,0 +1,155 @@
+{
+  "scope": "Calibration-only reviewer comparison; no ranker training or held-out evaluation.",
+  "kaggle_kernel": "hmmkk20/semantic-scheduler-trial2-vlm-smoke",
+  "kaggle_version": 14,
+  "model": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+  "revision": "437f4e28b989cc2d9a16b6767cc930cdf48797ff",
+  "gpu": "Tesla T4",
+  "nf4_layers": 225,
+  "peak_gpu_bytes": 9150445568,
+  "calls": 30,
+  "offline_valid_raw_json_calls": 30,
+  "unique_photos": 15,
+  "repeatable_photos": 15,
+  "repeatability_definition": "same grade, extent, affected list and evidence string across the two reversed iteration sweeps",
+  "median_inference_seconds": 9.307117257999948,
+  "qwen_calibration_pair_count": 30,
+  "qwen_same_grade_ties": 16,
+  "nemotron_tie_outcomes": {
+    "unadjudicated_possible_evidence": 1,
+    "unresolved": 11,
+    "unsupported_rationale": 4
+  },
+  "strict_differences": [
+    {
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "winner": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "reason": "grade",
+      "winner_evidence": "The white structure appears to be a house with a damaged roof, indicating a localized impact."
+    },
+    {
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "winner": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "reason": "grade",
+      "winner_evidence": "The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity."
+    },
+    {
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "winner": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "reason": "grade",
+      "winner_evidence": "The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity."
+    },
+    {
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "winner": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "reason": "grade",
+      "winner_evidence": "The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity."
+    },
+    {
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "winner": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "reason": "grade",
+      "winner_evidence": "The presence of a large, organized building complex with a parking lot and roads indicates human activity and development. The surrounding dense forest suggests that the area is not heavily developed, and the buildings are likely the only significant structures in the vicinity."
+    }
+  ],
+  "review_decision": "Do not use any new Nemotron preference as a strict training label from this calibration run. Four strict differences favor c05293ad based on building-complex/parking/road text that does not establish disaster impact in the photograph; the fifth favors 446d99e4 based on roof-damage wording, which lacks a matching selected impact tag and needs independent adjudication. Eleven pairs remain unresolved. Exact grade agreement was 9/15 (60.0%) with Qwen v12 and 10/14 (71.4%) with Qwen v13, excluding its one invalid photo; these are small calibration-set descriptive rates, not qualification scores.",
+  "c052_visual_spot_check": "The image shows a large building complex and roads; no obvious inundated structures are visible at displayed resolution. Nemotron cites human-built setting, not disaster impact. Treat its grade 1 as unsupported for this preference review; the native flooding_structures label is a weak proxy, not confirmation of visible impact.",
+  "446_visual_spot_check": "Nemotron cites a damaged roof. The source image has a prominent white-roofed structure; damage is plausible but not independently adjudicated. Leave this preference unresolved.",
+  "label_csv_sha256": {
+    "train": "7f0497e22b79cbe8f731df7eb60a4fe87917815be7f69731e68376f87d726e41",
+    "val": "d4d8af93b8d5a7c67c292423f9b5be62ffa4ae930b795ecd9d2b3a8fdf577ca2",
+    "test": "a4b2e8dba12f3154fcf9d30e932daf14c2712cacc1222da15d0e5f2e32f3be20"
+  },
+  "qwen_v12_sha256": "aa3460910848f9aaff9a3d17ee5856d7ff7f02b2ec6e9c1e8f76a049a746517e",
+  "qwen_v13_sha256": "bb8879c85c62304ccd9fca0355122de980299af44d9a1f6571e0b312edd1a4de",
+  "files": {
+    "kaggle_v14_pilot.py": {
+      "sha256": "3e0b172246228643864a5cbb3c25ee99a8f95824e7aac94e336d6550cf54d082",
+      "bytes": 20664
+    },
+    "reviewer_extent_nemotron_raw.json": {
+      "sha256": "3bd6f90d3c5f1e0b8f7ba87bcb822c36653eeffcb514b2068ba5cb9ea5a4d159",
+      "bytes": 22614
+    },
+    "kaggle_log.jsonl": {
+      "sha256": "2386156ff0f8aad271e342a705efa992a8e9180e0c32bc237448bee675b177fc",
+      "bytes": 19929
+    }
+  },
+  "prepared_unsubmitted_parser_fix": {
+    "file": "kaggle_v15_parser_fix_unsubmitted.py",
+    "sha256": "06630712f123ebb7550c0b1a5a59430c5b19dbdb52a1f0ea9a5443c266ae3162",
+    "purpose": "Correct the response regex and use a real newline in the image marker prompt. Not submitted; v14 raw outputs were sufficient for offline validation."
+  },
+  "qwen_nemotron_grade_comparison": {
+    "qwen_v12": {
+      "compared_photos": 15,
+      "same_grade": 9,
+      "agreement_fraction": 0.6,
+      "disagreements": [
+        {
+          "image_id": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+          "qwen_grade": 1,
+          "nemotron_grade": 0
+        },
+        {
+          "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+          "qwen_grade": 1,
+          "nemotron_grade": 2
+        },
+        {
+          "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+          "qwen_grade": 1,
+          "nemotron_grade": 2
+        },
+        {
+          "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+          "qwen_grade": 1,
+          "nemotron_grade": 2
+        }
+      ]
+    },
+    "qwen_v13": {
+      "compared_photos": 14,
+      "same_grade": 10,
+      "agreement_fraction": 0.7142857142857143,
+      "disagreements": [
+        {
+          "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+          "qwen_grade": 0,
+          "nemotron_grade": 2
+        },
+        {
+          "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+          "qwen_grade": 0,
+          "nemotron_grade": 1
+        },
+        {
+          "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+          "qwen_grade": 0,
+          "nemotron_grade": 2
+        }
+      ]
+    }
+  }
+}

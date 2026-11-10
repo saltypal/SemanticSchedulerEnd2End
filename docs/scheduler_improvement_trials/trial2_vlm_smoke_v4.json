@@ -1,0 +1,19 @@
+{
+  "scope": "Two-image hardware smoke only. No qualification or training labels.",
+  "gpu": "Tesla T4",
+  "images": [
+    "https://fema-cap-imagery.s3.amazonaws.com/Images/9213/618232/1_000_1234fe6f10-01e8-40e7-83e9-68f83dbe79a6.jpg",
+    "https://fema-cap-imagery.s3.amazonaws.com/Images/CAP_-_Hur_Ian_Sept_2022/Source/23-1-3141/A0026b/1_000_06_072.jpg"
+  ],
+  "models": [
+    {
+      "model": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+      "revision": "437f4e28b989cc2d9a16b6767cc930cdf48797ff",
+      "status": "failed",
+      "nf4_layers": 225,
+      "answers": [],
+      "error": "Traceback (most recent call last):\n  File \"/kaggle/src/script.py\", line 72, in <module>\n    answer = model.chat(tokenizer=tokenizer, question=question, generation_config={\"max_new_tokens\":128,\"do_sample\":False,\"eos_token_id\":tokenizer.eos_token_id}, **inputs)\n  File \"/root/.cache/huggingface/modules/transformers_modules/nvidia/Llama_hyphen_3_dot_1_hyphen_Nemotron_hyphen_Nano_hyphen_VL_hyphen_8B_hyphen_V1/437f4e28b989cc2d9a16b6767cc930cdf48797ff/modeling.py\", line 260, in chat\n    generation_output = self.generate(\n        pixel_values=pixel_values,\n    ...<3 lines>...\n        **generation_config\n    )\n  File \"/usr/local/lib/python3.13/dist-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"/root/.cache/huggingface/modules/transformers_modules/nvidia/Llama_hyphen_3_dot_1_hyphen_Nemotron_hyphen_Nano_hyphen_VL_hyphen_8B_hyphen_V1/437f4e28b989cc2d9a16b6767cc930cdf48797ff/modeling.py\", line 308, in generate\n    input_embeds[selected] = vit_embeds.reshape(-1, C).to(input_embeds.device)\n    ~~~~~~~~~~~~^^^^^^^^^^\nRuntimeError: Index put requires the source and destination dtypes match, got Half for the destination and Float for the source.\n",
+      "peak_gpu_bytes": 8686587392
+    }
+  ]
+}
