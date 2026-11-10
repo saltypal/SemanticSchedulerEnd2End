@@ -1,0 +1,17 @@
+# Simulator, value function and constraint settings (plan v3.1 sec. 5, 6, 9). Times in seconds.
+tiers: [Critical, High, Medium, Low]
+soft_deadline_s:   [5, 15, 60, 300]     # D_k; hard deadline H_k = 2 * D_k
+hard_deadline_factor: 2.0
+weights:           [8, 4, 2, 1]         # w_k, swept x0.5 / x2 in sensitivity runs
+eta_timely:        [0.95, 0.85, 0.60, 0.20]   # per-tier timeliness targets
+zeta_critical_copy: 0.25                # value of a later copy of a Critical image
+workers: [1, 2, 4, 6, 8]
+batch_sizes: [1, 2, 4, 8]
+loads_rho: [0.6, 0.8, 1.0, 1.2, 1.5]
+realisations: 10
+warmup_fraction: 0.10
+dup:
+  hard_purge_prob: 0.95                 # purge only if delivered copy exists and P(dup) above this
+sv_dpp:
+  V: 1.0
+  debt_init: 0.0

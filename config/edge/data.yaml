@@ -1,0 +1,42 @@
+# Dataset, label mapping and split policy for the edge decoder scheduler (plan v3.1 sec. 3).
+# Every rule here is a documented design choice; change it here, never in code.
+crisismmd:
+  metadata_revision: "10a5626ba112ab9c50369c473a2062bcf205d708"   # QCRI/CrisisMMD on HuggingFace
+  tasks: [informative, humanitarian, damage]
+  native_splits: [train, dev, test]
+
+# First matching tier wins, top to bottom. Values are the native CrisisMMD label strings.
+tier_rules:
+  Critical:
+    damage: [severe_damage]
+    humanitarian: [injured_or_dead_people, missing_or_found_people]   # life-safety override
+  High:
+    damage: [mild_damage]
+    humanitarian: [affected_individuals, infrastructure_and_utility_damage, vehicle_damage]
+  Medium:
+    damage: [little_or_no_damage]
+    humanitarian: [rescue_volunteering_or_donation_effort, other_relevant_information]
+    requires_informative: true     # Medium via humanitarian needs informative == informative
+  Low:
+    default: true                  # not informative / not_humanitarian / unmatched
+
+# Sensitivity mapping (reported in an appendix): affected_individuals promoted to Critical.
+alternative_mappings:
+  affected_critical:
+    Critical:
+      humanitarian_add: [affected_individuals]
+
+normals:
+  # Places365 categories that look like damage; excluded so rubble-like scenes are never labelled Low.
+  places365_blacklist: [ruin, junkyard, landfill, construction_site, excavation, volcano, dam]
+  source_tier: Low
+
+splits:
+  # Event-disjoint. Final choice is made by report_counts() gates, see sec. 10 S0.
+  # Sri Lanka has only 71 Critical (gate 100), so validation is California wildfires (S0 fallback).
+  train_events: [hurricane_harvey, hurricane_irma, iraq_iran_earthquake, srilanka_floods]
+  val_events: [california_wildfires]
+  test_events: [hurricane_maria, mexico_earthquake]
+  gates:
+    min_test_critical: 150
+    min_val_critical: 100

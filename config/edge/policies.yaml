@@ -1,0 +1,6 @@
+# Which policies run in which table. Names are registry keys in Scheduler/edge/registry.py.
+main_table: [fifo, random, rr_mission, edf, tuf_dasa, spi_first_edf, priority_aging, mlwdf,
+             gen_cmu_h, whittle_abandon, edgeserving, completion_dpp, tier_dpp_no_gain, mpc_rollout,
+             sv_dpp]
+equivalence_appendix: [llf, lelf, exp_rule, dapf, pf_mission, gen_cmu]
+references: [genie_sv_dpp]
