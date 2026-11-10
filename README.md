@@ -1,5 +1,35 @@
 # Semantic image decoder scheduler
 
+## Current work: semantic decoder scheduling at the O-RAN edge
+
+UEs send one `[64-byte semantic header][SQ-GAN payload]` per image, with no retransmission and no
+per-UE state. At the edge, a scheduler decides which payload each GPU decoder worker decodes next, and
+which to purge, using only the header. Design and status:
+
+| Read this | For |
+|---|---|
+| [docs/CHECKLIST.md](docs/CHECKLIST.md) | Step-by-step run order, who does what, what is ready |
+| [docs/reviews/FINAL_PLAN_V3.md](docs/reviews/FINAL_PLAN_V3.md) | Locked design (objective, SV-DPP, SCOPE, simulator, build order S0-S12) |
+| [docs/IMPLEMENTATION_GUIDE.md](docs/IMPLEMENTATION_GUIDE.md) | House rules, package layout, task cards, Kaggle protocol |
+| [docs/paper/DRAFT_PAPER.md](docs/paper/DRAFT_PAPER.md) | Living IEEE-style draft (results are placeholders) |
+| [parameters/JOURNAL.md](parameters/JOURNAL.md) | Dated record of what was done and measured |
+
+New code lives under an `edge/` sub-package of each owner: `parameters/edge` (labels, features, header,
+SPI), `Codec/edge` (SQ-GAN profile, codec table), `Evaluation/edge` (simulator, metrics, tables, sweeps),
+`Scheduler/edge` (policies) and `Scheduler/training/edge` (learners). Settings are in `config/edge/*.yaml`.
+Kaggle notebooks are thin: they clone the latest `main`, install, and call a package entry point
+(`scripts/edge/build_notebook.py`, `scripts/edge/kaggle_ops.py`; Windows Kaggle CLI only).
+
+Quick check (CPU, no downloads): `python -m pytest -q Scheduler/tests/test_edge_*.py parameters/tests/test_edge_*.py Evaluation/tests/test_edge_*.py`
+
+Status: code and unit tests only. No Kaggle or GPU run has happened yet, so there are no results.
+Two old tests (`test_handoff_tools`, `test_paired_notebook_capsules_include_live_implementation`) fail
+because preserved notebooks embed CRLF copies of sources; they are left untouched by design.
+
+---
+
+# Earlier work (historical context, kept unchanged)
+
 ## Main scheduler suite
 
 The current parameter-based scheduler is the main implementation. Its training,

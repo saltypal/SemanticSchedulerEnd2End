@@ -2,7 +2,7 @@
 
 *Living draft. IEEE journal structure in single-column Markdown. Target: IEEE TCCN / TWC / IoT-J.*
 *Methods synced to FINAL_PLAN_V3 v3.1 (2026-11-10). Status: **pseudo-results**. Every number in [brackets] is a placeholder until the experiment exists.
-Cross-references: `docs/reviews/FINAL_PLAN_V2.md`, `docs/reviews/PLAN_V2_EXPLAINED.md`.*
+Cross-references: `docs/reviews/history/FINAL_PLAN_V2.md`, `docs/reviews/history/PLAN_V2_EXPLAINED.md`.*
 
 Authors: [names], [affiliations]
 
