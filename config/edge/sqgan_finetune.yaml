@@ -1,0 +1,39 @@
+# SQ-GAN codec v1 fine-tune (entry point: python -m Codec.edge.sqgan_finetune). The teammate edits ONLY this file.
+# Trainer = Semantic_Lossless src/sqgan_train.py (read-only upstream). Keys under `train` map 1:1 to its options.
+source:
+  repo_url: https://github.com/nanddiniiiii/Semantic_Lossless.git
+  pinned_commit: a370de1ae20b70445df4a90709e555f586f7b29b   # git rev-parse HEAD of the local copy when this was written
+  local_dir: /kaggle/working/Semantic_Lossless
+  # Used only if the clone fails. NOTE: the listed Kaggle source dataset may hold only .upstream/sqgan, not src/.
+  fallback_search_root: /kaggle/input
+  upstream_sqgan_zip: sqgan-pinned-source.zip      # inside semantic-lossless-private-sqgan-source
+inputs:
+  labels_file: labels_raw.jsonl
+  splits_file: splits_v1.json                      # produced later by the dedup step
+  checkpoint_search_root: /kaggle/input            # folder holding the ten author *.ckpt (assets dataset)
+data:
+  sources: [crisismmd, places365, openimages]      # DECISION: which image sources are used for fine-tuning
+  small_image_policy: skip                         # skip | upscale. DECISION: trainer needs >=256x512 parents (dataset.py:120-123)
+  min_height: 256                                  # fixed by the trainer crop [256,512] (sqgan_train.py:126)
+  min_width: 512
+  max_train_images: null                           # smoke tests only
+teacher:
+  model: nvidia/segformer-b0-finetuned-ade-512-512
+  revision: main                                   # DECISION: pin a commit hash; the resolved hash is written to the bundle
+  seg_classes: config/edge/seg_classes.yaml
+train:
+  seed: 22                                         # sqgan_train.py:32
+  batch_size: 2                                    # :127 (DataParallel needs >=2, :130)
+  data_parallel: auto                              # auto = true when 2+ CUDA devices
+  learning_rate: 1.25e-5                           # :134
+  epochs: 10                                       # :138. DECISION: sets the LR schedule length
+  max_seconds: 36000                               # :190 hard stop; Kaggle session is 12 h
+  image_fraction: 0.25                             # :71 evaluation retention; recorded as codec rates
+  semantic_fraction: 0.25
+output:
+  out_dir: /kaggle/working/runs/edge-sqgan-v1
+  bundle_dir: /kaggle/working/runs/edge-sqgan-v1/bundle
+  run_id: edge-sqgan-v1
+codec:
+  kaggle_dataset: satyapaladuguplus/scheduler-sqgan-v1
+  sts_profile: 2

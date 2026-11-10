@@ -1,0 +1,181 @@
+# Project segmentation class map for SQ-GAN pseudo-labels (see Codec/edge/seg_map.py).
+# 20 channels = 19 classes + null, the shape SQ-GAN expects (Semantic_Lossless src/sqgan_train.py:83 one_hot 20).
+# Indices 6 and 7 MUST stay traffic_light / traffic_sign: the trainer builds its small-object mask from ids 6,7 (sqgan_train.py:84).
+# Channel 19 MUST stay null (loss slices semantic[:, :-1], sqgan_train.py:19).
+
+teacher_label_count: 150   # ADE20K SceneParsing; verified against the teacher's id2label at run time
+
+classes:
+  - {id: 0, name: road}
+  - {id: 1, name: sidewalk}
+  - {id: 2, name: building}
+  - {id: 3, name: wall}
+  - {id: 4, name: fence}
+  - {id: 5, name: pole}
+  - {id: 6, name: traffic_light}
+  - {id: 7, name: traffic_sign}
+  - {id: 8, name: vegetation}
+  - {id: 9, name: terrain}
+  - {id: 10, name: sky}
+  - {id: 11, name: person}
+  - {id: 12, name: water}   # DECISION: replaces Cityscapes 'rider' (12) so flood water is representable; merge rider into person.
+  - {id: 13, name: car}
+  - {id: 14, name: truck}
+  - {id: 15, name: bus}
+  - {id: 16, name: boat}   # DECISION: replaces Cityscapes 'train' (16); boats matter in floods. Alternative: 'debris'.
+  - {id: 17, name: motorcycle}
+  - {id: 18, name: bicycle}
+  - {id: 19, name: "null"}   # DECISION: unmapped/indoor ADE classes go here (alternative: map to building).
+
+# One row per ADE20K id. 'to' must be a name from classes. '# DECISION:' rows need the teammate's call.
+ade_to_project:
+  - {id: 0, ade: wall, to: wall}
+  - {id: 1, ade: building, to: building}
+  - {id: 2, ade: sky, to: sky}
+  - {id: 3, ade: floor, to: "null"}
+  - {id: 4, ade: tree, to: vegetation}
+  - {id: 5, ade: ceiling, to: "null"}
+  - {id: 6, ade: road, to: road}
+  - {id: 7, ade: bed, to: "null"}
+  - {id: 8, ade: windowpane, to: building}   # DECISION: windows of damaged buildings: building or null?
+  - {id: 9, ade: grass, to: vegetation}
+  - {id: 10, ade: cabinet, to: "null"}
+  - {id: 11, ade: sidewalk, to: sidewalk}
+  - {id: 12, ade: person, to: person}
+  - {id: 13, ade: earth, to: terrain}
+  - {id: 14, ade: door, to: building}
+  - {id: 15, ade: table, to: "null"}
+  - {id: 16, ade: mountain, to: terrain}
+  - {id: 17, ade: plant, to: vegetation}
+  - {id: 18, ade: curtain, to: "null"}
+  - {id: 19, ade: chair, to: "null"}
+  - {id: 20, ade: car, to: car}
+  - {id: 21, ade: water, to: water}
+  - {id: 22, ade: painting, to: "null"}
+  - {id: 23, ade: sofa, to: "null"}
+  - {id: 24, ade: shelf, to: "null"}
+  - {id: 25, ade: house, to: building}
+  - {id: 26, ade: sea, to: water}
+  - {id: 27, ade: mirror, to: "null"}
+  - {id: 28, ade: rug, to: "null"}
+  - {id: 29, ade: field, to: terrain}
+  - {id: 30, ade: armchair, to: "null"}
+  - {id: 31, ade: seat, to: "null"}
+  - {id: 32, ade: fence, to: fence}
+  - {id: 33, ade: desk, to: "null"}
+  - {id: 34, ade: rock, to: terrain}   # DECISION: rubble/boulders: terrain or a future debris class?
+  - {id: 35, ade: wardrobe, to: "null"}
+  - {id: 36, ade: lamp, to: "null"}
+  - {id: 37, ade: bathtub, to: "null"}
+  - {id: 38, ade: railing, to: fence}
+  - {id: 39, ade: cushion, to: "null"}
+  - {id: 40, ade: base, to: "null"}
+  - {id: 41, ade: box, to: "null"}
+  - {id: 42, ade: column, to: building}
+  - {id: 43, ade: signboard, to: traffic_sign}   # DECISION: shop signs vs traffic signs
+  - {id: 44, ade: chest of drawers, to: "null"}
+  - {id: 45, ade: counter, to: "null"}
+  - {id: 46, ade: sand, to: terrain}
+  - {id: 47, ade: sink, to: "null"}
+  - {id: 48, ade: skyscraper, to: building}
+  - {id: 49, ade: fireplace, to: "null"}
+  - {id: 50, ade: refrigerator, to: "null"}
+  - {id: 51, ade: grandstand, to: building}
+  - {id: 52, ade: path, to: sidewalk}   # DECISION: sidewalk or terrain?
+  - {id: 53, ade: stairs, to: building}
+  - {id: 54, ade: runway, to: road}
+  - {id: 55, ade: case, to: "null"}
+  - {id: 56, ade: pool table, to: "null"}
+  - {id: 57, ade: pillow, to: "null"}
+  - {id: 58, ade: screen door, to: building}
+  - {id: 59, ade: stairway, to: building}
+  - {id: 60, ade: river, to: water}
+  - {id: 61, ade: bridge, to: building}
+  - {id: 62, ade: bookcase, to: "null"}
+  - {id: 63, ade: blind, to: "null"}
+  - {id: 64, ade: coffee table, to: "null"}
+  - {id: 65, ade: toilet, to: "null"}
+  - {id: 66, ade: flower, to: vegetation}
+  - {id: 67, ade: book, to: "null"}
+  - {id: 68, ade: hill, to: terrain}
+  - {id: 69, ade: bench, to: "null"}
+  - {id: 70, ade: countertop, to: "null"}
+  - {id: 71, ade: stove, to: "null"}
+  - {id: 72, ade: palm, to: vegetation}
+  - {id: 73, ade: kitchen island, to: "null"}
+  - {id: 74, ade: computer, to: "null"}
+  - {id: 75, ade: swivel chair, to: "null"}
+  - {id: 76, ade: boat, to: boat}
+  - {id: 77, ade: bar, to: "null"}
+  - {id: 78, ade: arcade machine, to: "null"}
+  - {id: 79, ade: hovel, to: building}
+  - {id: 80, ade: bus, to: bus}
+  - {id: 81, ade: towel, to: "null"}
+  - {id: 82, ade: light, to: "null"}
+  - {id: 83, ade: truck, to: truck}
+  - {id: 84, ade: tower, to: building}
+  - {id: 85, ade: chandelier, to: "null"}
+  - {id: 86, ade: awning, to: building}
+  - {id: 87, ade: streetlight, to: pole}
+  - {id: 88, ade: booth, to: building}
+  - {id: 89, ade: television receiver, to: "null"}
+  - {id: 90, ade: airplane, to: "null"}   # DECISION: no class; null
+  - {id: 91, ade: dirt track, to: road}   # DECISION: road or terrain?
+  - {id: 92, ade: apparel, to: "null"}
+  - {id: 93, ade: pole, to: pole}
+  - {id: 94, ade: land, to: terrain}
+  - {id: 95, ade: bannister, to: fence}
+  - {id: 96, ade: escalator, to: "null"}
+  - {id: 97, ade: ottoman, to: "null"}
+  - {id: 98, ade: bottle, to: "null"}
+  - {id: 99, ade: buffet, to: "null"}
+  - {id: 100, ade: poster, to: "null"}
+  - {id: 101, ade: stage, to: "null"}
+  - {id: 102, ade: van, to: car}
+  - {id: 103, ade: ship, to: boat}
+  - {id: 104, ade: fountain, to: water}   # DECISION: water, or building?
+  - {id: 105, ade: conveyer belt, to: "null"}
+  - {id: 106, ade: canopy, to: building}
+  - {id: 107, ade: washer, to: "null"}
+  - {id: 108, ade: plaything, to: "null"}
+  - {id: 109, ade: swimming pool, to: water}
+  - {id: 110, ade: stool, to: "null"}
+  - {id: 111, ade: barrel, to: "null"}
+  - {id: 112, ade: basket, to: "null"}
+  - {id: 113, ade: waterfall, to: water}
+  - {id: 114, ade: tent, to: building}   # DECISION: relief tents: building or own class?
+  - {id: 115, ade: bag, to: "null"}
+  - {id: 116, ade: minibike, to: motorcycle}
+  - {id: 117, ade: cradle, to: "null"}
+  - {id: 118, ade: oven, to: "null"}
+  - {id: 119, ade: ball, to: "null"}
+  - {id: 120, ade: food, to: "null"}
+  - {id: 121, ade: step, to: sidewalk}   # DECISION: sidewalk or building?
+  - {id: 122, ade: tank, to: "null"}
+  - {id: 123, ade: trade name, to: traffic_sign}   # DECISION: shop signs vs traffic signs
+  - {id: 124, ade: microwave, to: "null"}
+  - {id: 125, ade: pot, to: "null"}
+  - {id: 126, ade: animal, to: "null"}
+  - {id: 127, ade: bicycle, to: bicycle}
+  - {id: 128, ade: lake, to: water}
+  - {id: 129, ade: dishwasher, to: "null"}
+  - {id: 130, ade: screen, to: "null"}
+  - {id: 131, ade: blanket, to: "null"}
+  - {id: 132, ade: sculpture, to: "null"}
+  - {id: 133, ade: hood, to: "null"}
+  - {id: 134, ade: sconce, to: "null"}
+  - {id: 135, ade: vase, to: "null"}
+  - {id: 136, ade: traffic light, to: traffic_light}
+  - {id: 137, ade: tray, to: "null"}
+  - {id: 138, ade: ashcan, to: "null"}
+  - {id: 139, ade: fan, to: "null"}
+  - {id: 140, ade: pier, to: building}   # DECISION: building or water?
+  - {id: 141, ade: crt screen, to: "null"}
+  - {id: 142, ade: plate, to: "null"}
+  - {id: 143, ade: monitor, to: "null"}
+  - {id: 144, ade: bulletin board, to: "null"}
+  - {id: 145, ade: shower, to: "null"}
+  - {id: 146, ade: radiator, to: "null"}
+  - {id: 147, ade: glass, to: "null"}
+  - {id: 148, ade: clock, to: "null"}
+  - {id: 149, ade: flag, to: pole}   # DECISION: pole or null?

@@ -1,0 +1,37 @@
+# One per-image feature pass (Codec/edge/feature_pass.py). Everything cached so training needs no GPU.
+paths:                       # Kaggle defaults; the CLI can override --images-root / --labels-root / --out
+  input_base: /kaggle/input    # images/labels roots auto-discovered here (folder holding index.jsonl / labels_raw.jsonl)
+  images_marker: index.jsonl
+  labels_file: labels_raw.jsonl
+  discover_depth: 3
+  cache_slug: scheduler-dataset-v1-cache
+  bundle_flat: /kaggle/input/semantic-scheduler-sqgan-bundle-20261102
+  sqgan_source: /kaggle/input/semantic-lossless-private-sqgan-source
+  sqgan_assets: /kaggle/input/semantic-lossless-private-sqgan-assets
+  restore_dir: /kaggle/working/sqgan_bundle
+  out: /kaggle/working/runs/edge-s2
+shard:
+  size: 500                  # images per shard (bucket = sha256(uid) % n_shards, stable across runs)
+  batch_size: 32             # images decoded + embedded per batch
+  min_free_gb: 3.0
+  warmup_images: 3           # first N images of every stage are flagged warm-up in timings.jsonl
+embeddings:
+  enabled: true
+  encoders: all              # "all" = every encoder in grid.yaml, or a list of names; a missing model only skips that encoder
+hashes:
+  simhash_encoder: clip_b32  # SimHash64 of this encoder's float16 embedding
+  phash_thumb: 128           # pHash runs on a 128x128 LANCZOS grayscale thumbnail (speed)
+sqgan:
+  enabled: true
+  m_levels: [0.25, 0.55]     # SQ-GAN image/semantic token keep fractions
+  input_hw: [256, 512]       # letterbox target (H, W): scale = min(W/w, H/h), centred, zero pad
+  token_grid: [16, 32]       # 512 tokens -> 64-byte kept bitmap, 16x32 class grid
+  pad_value: 0
+decode:
+  enabled: true
+  jpeg_quality: 95
+profile:
+  batch_sizes: [1, 2, 4, 8]
+  repeats: 10
+  warmup: 2
+  phash_samples: 50

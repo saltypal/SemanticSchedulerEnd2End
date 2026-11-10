@@ -1,85 +1,93 @@
 # Run checklist (check each box before the next step)
 
-Rule for every step: the notebook clones the latest `main`, prints the commit SHA, runs a package entry
-point, writes outputs under `/kaggle/working/runs/<step>/`, and the outputs that later steps need are
-saved as a **Kaggle dataset** (new version each time). Windows Kaggle CLI only, account `satyapaladugu`.
-Design: `docs/reviews/FINAL_PLAN_V3.md`. Status words: READY = code + unit tests exist; MISSING = must be
-built first; UNVERIFIED = needs a real run to confirm.
+Rules for every step:
+- Nothing is downloaded or stored on the laptop. All data work runs on Kaggle (internet on).
+- Each notebook clones the latest `main` (the repo is public), prints the commit SHA, runs a package entry
+  point, and writes a `run_manifest.json`. Outputs later steps need are published as **Kaggle datasets**.
+- Kaggle CLI: **WSL**, account `satyapaladuguplus` (the Windows account is busy). New slugs are approved for
+  this study; later runs are new versions of the same slug.
+- Publishing from inside a notebook needs a Kaggle Secret that only you can add (notebook Add-ons ->
+  Secrets: `KAGGLE_API_TOKEN`, or `KAGGLE_USERNAME` + `KAGGLE_KEY`). Without it a notebook still finishes and
+  tells you to use "Save Version" -> "New dataset from output" in the web UI.
+- Design: `docs/reviews/FINAL_PLAN_V3.md`. Status: DONE / READY (code + unit tests, not yet run on Kaggle) /
+  MISSING / UNVERIFIED (needs a real Kaggle run).
 
-## 0. Housekeeping before the repo goes public
-- [x] Secret scan of tracked text: no keys or tokens found (the 3 hits are code that *excludes* `kaggle.json`).
-- [x] Large-file scan: no tracked file over 20 MB; full history pack is about 600 MB (fine for GitHub).
-- [ ] Delete merged branches (needs your OK; all three are fully contained in `main`, so nothing is lost):
-  `git push origin --delete nandini-integration scheduler_improvement_trials sem_schedluerAI_trial2`
-  and locally `git branch -d NewSetup claude/scheduler-params-policy-3a647b codex/archive-image-scheduling-20260927 semantic-awareAIscheduler merge-trial2`.
-  Kept on purpose: `checkpoint-20261105-before-lfs-repair` (1 commit not in `main`) and any branch checked out
-  in a worktree.
-- [ ] Decide if personal paths in old docs (e.g. `C:\Users\...`) matter for a public repo.
+## The three datasets
+| Dataset | Slug (owner satyapaladuguplus) | Contents | Built by |
+|---|---|---|---|
+| A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `edge-a-download-images` |
+| B | `scheduler-dataset-v1-labels` | tier labels applied to A (rules in `config/edge/data.yaml`), counts, gates; no images | notebook `edge-b-labeling` |
+| C | `scheduler-dataset-v1-cache` | embeddings (5 encoders), SimHash + pHash, SQ-GAN kept-token map, class grid, 13-value mask summary, pooled encoder grid, payload bytes, decoded JPEGs, per-stage timings, FLOPs, grid + selection results | notebook `edge-s2-feature-pass` |
+Also existing on the account: `edge-labels-v1` (labels only, superseded by B; delete when you say so),
+`semantic-scheduler-sqgan-bundle-20261102` (v0 SQ-GAN bundle, flat layout), `semantic-lossless-private-sqgan-source`,
+`semantic-lossless-private-sqgan-assets`.
 
-## 1. Re-label the datasets and save them on Kaggle
-| What | Status |
-|---|---|
-| Tier mapping from CrisisMMD human labels (`parameters/edge/labels.py`, CLI, 20 tests) | READY. Real counts already computed locally |
-| Normal-image lists: Places365 (minus damage-lookalike classes) and people photos | MISSING: `parameters/edge/normals.py` (acquire + list + blacklist) |
-| Publish outputs as a Kaggle dataset (`kaggle datasets create/version`) | MISSING: `kaggle_ops.py` only handles kernels; add `dataset` subcommands |
-| Notebook `edge-s1-labels` | MISSING: build with `scripts/edge/build_notebook.py` |
+## 0. Housekeeping
+- [x] Secret scan: no keys or tokens in tracked text. Large-file scan: no tracked file over 20 MB.
+- [x] Repo is publicly readable (anonymous GitHub API returns 200).
+- [x] Merge teammate Trial 2 branch into `main`; restore archived `SemParam`; line-ending rules.
+- [ ] Delete merged branches (needs your OK; contained in `main`): remote `nandini-integration`,
+  `scheduler_improvement_trials`, `sem_schedluerAI_trial2`; local `NewSetup`,
+  `claude/scheduler-params-policy-3a647b`, `codex/archive-image-scheduling-20260927`,
+  `semantic-awareAIscheduler`, `merge-trial2`. Kept: `checkpoint-20261105-before-lfs-repair` (1 unique commit).
+- [ ] Decide whether personal paths in old docs matter for a public repo.
+- [ ] Add the Kaggle Secret to the notebooks that publish (A, B, C).
 
-Outputs to save (dataset `edge-labels-v1`): `labels_raw.jsonl`, `counts.json`, the 9 pinned CrisisMMD
-metadata JSON files, `normals_places365.jsonl`, `normals_people.jsonl`.
-Gate: test events >= 150 Critical (765 now), validation event >= 100 Critical (California 500).
-Frozen after step 2b (splits).
-- [ ] relabel run done, dataset uploaded, counts reviewed together
+## 1. PILOT FIRST (one GPU notebook, `edge-pilot`) -> read results -> fix -> only then the full runs
+The pilot runs every stage on about 20 images per source and writes `PILOT_REPORT.md` with pass/fail per stage
+and a table "unverified item -> check -> result". Stages: download sample (A) -> label it (B) -> feature pass
+smoke (embeddings, hashes, SQ-GAN encode/decode, masks, timings, FLOPs) -> grid export.
+Checks cover everything earlier reported as unverified:
+- GPU/disk/library versions; DataParallel on 2 GPUs; flat v0 bundle restore and strict weight load; deep key scan
+- real masker output (`sample_index`, kept-token count vs m x 512, whether scores are exposed), m mapping,
+  pre-mask grid shape, pooled-feature size
+- decode latency per batch size, VRAM, SQ-GAN FLOPs; compute-profile hooks on every real model
+- all 5 embedders load and match their expected dimensions; DINOv2 judge path
+- ADE20K teacher label names vs `seg_classes.yaml`; real-logit projection
+- fine-tune plumbing: pinned-commit fetch, `.upstream/sqgan` extraction, real trainer pilot launch, 256x256
+  image rejection; payload reader vs class-map gap
+- dataset size extrapolation vs the 20 GB limit; memory at 16 workers; download throughput
+- Kaggle publish round trip (small private test dataset), secrets, status parsing, zip mode with many files;
+  `/kaggle/input` auto-discovery (only verifiable when A/B are attached as datasets)
+- [ ] pilot code finished and reviewed (in progress)
+- [ ] push pilot notebook to Kaggle (WSL) and run it
+- [ ] read `PILOT_REPORT.md`; list every FAIL; fix in code; re-run the failing stages
+- [ ] only when the pilot is clean: continue below
 
-## 2. SQ-GAN on the T4 (profile + masker check)
-| What | Status |
-|---|---|
-| `Codec/edge/sqgan_profile.py` (latency per batch size, VRAM, GFLOPs, masker keys) | READY (fakes only) |
-| SQ-GAN source + v0 bundle available to Kaggle as datasets | MISSING: source zip exists in the SemanticLossless repo (`Kaggle/assets/sqgan_source`); the v0 bundle lives in the other Kaggle account's notebook output and must be republished under `satyapaladugu` |
-| Real masker output format (`sample_index`) | UNVERIFIED: first thing this run checks |
-- [ ] publish `edge-sqgan-source` and `edge-sqgan-v0` datasets (fill `config/edge/codec.yaml`)
-- [ ] run `edge-s0-profile`; review `sqgan_v0_profile.json`
-Note: decode is single-image, so "batch B" is B sequential decodes in one timed window (documented in the code).
+## 2. Full dataset builds (CPU, internet on)
+- [ ] A: run `edge-a-download-images`; review `failures.json` and size vs 20 GB; publish A
+- [ ] B: run `edge-b-labeling` on A; gates: test Critical >= 150 (765 in the local pass), validation >= 100
+  (California 500); publish B
+Labels recap: CrisisMMD v2.0 human labels -> Critical (severe damage, or injured/dead/missing people),
+High (mild damage; affected individuals, infrastructure/utility damage, vehicle damage),
+Medium (little/no damage; rescue/other relevant info when informative), Low (not informative; all everyday
+images). Validation event = California wildfires (Sri Lanka had only 71 Critical); test = Maria + Mexico.
 
-## 3. Semantic masks / STS for all images: does it wait for the teammate? **No.**
-The plan is two passes with the same code (S4 with codec v0, S11 with codec v1):
-1. Now, with the existing v0 checkpoint: produces the STS, payload bytes and fidelity table for the whole
-   pool. This is also how we find bugs early.
-2. After her fine-tune: re-run the same notebook with `codec=v1`; header `version=2`; learned policies are retrained.
-Cost of v0 first: one extra pass. Benefit: the whole pipeline and the first results do not block on her.
-- [ ] STS table v0 (needs steps 1, 2 and the splits)
+## 3. Cache + grid (C), GPU
+- [ ] run `edge-s2-feature-pass` (sharded, resumable) on A + B + v0 bundle; review the grid comparison
+  (5 encoders x 5 classifier families, gate: Critical recall >= 0.6 on validation); pick the UE encoder; publish C
+- [ ] cross-split near-duplicate removal and `splits_v1.json` (frozen); label about 400 duplicate pairs
 
-## 4. Teammate's SQ-GAN fine-tune: where is her notebook, and where does the model file go?
-- **There is no notebook for this in this repo.** The training code is in the separate SemanticLossless
-  project (`Semantic_Lossless/src/sqgan_train.py`, notebooks under `Notebooks/project_notebooks/Training/`).
-  The earlier fine-tune (bundle `20261028T130100Z-eea4f3aa`) came from a Kaggle notebook on the other account.
-- **Her inputs:** `splits_v1.json` + `labels` from step 1 (train images only; never val/test), and a segmentation
-  map source (ADE20K-trained SegFormer merged to 20 project classes so SQ-GAN's 20-channel input is unchanged).
-- **Her output (a bundle folder):** `bundle.json` (algorithm `sqgan`, `pipeline_completed: true`, per-file
-  `path`/`bytes`/`sha256`), `last.pt`, `assets/checkpoint`. `sqgan_payload.py` verifies every file against `bundle.json`.
-- **Placeholders:** `config/edge/codec.yaml` now has `v0` and `v1` entries (dataset slug, bundle subdir,
-  `last_pt_sha256`, rates). She uploads the bundle as Kaggle dataset `satyapaladugu/edge-sqgan-v1`, and we
-  fill the two TODO fields. Nothing else in the code changes.
-- [ ] hand her the train-image list after step 2b; she trains; she uploads the bundle; we fill `codec.yaml`
+## 4. Teammate SQ-GAN fine-tune (codec v1)
+READY as a scaffold, never run: `Notebooks/Edge/edge-sqgan-finetune-v1.ipynb`, hand-off in
+`docs/SQGAN_FINETUNE_HANDOFF.md`, class map in `config/edge/seg_classes.yaml` (rows marked `# DECISION:` need her call).
+Her output is a bundle dataset `satyapaladuguplus/scheduler-sqgan-v1`; we fill `config/edge/codec.yaml` (v1).
+Known risks: Places365 images are 256x256 and the trainer rejects parents under 256x512 (policy decision:
+drop or upscale); the fallback source dataset may lack SemanticLossless `src/`; `sqgan_payload.semantic_map` must
+call `seg_map.project_logits` for bundles that ship `seg_classes.yaml`.
+- [ ] pilot checks of the fine-tune plumbing pass
+- [ ] hand her the train-image list after splits are frozen; she trains and uploads; fill `codec.yaml`
+- [ ] re-run the feature pass with `codec=v1` (header version 2) and retrain learned policies
 
-## 5. Re-train all embeddings + classifiers, select the best, save everything
-| What | Status |
-|---|---|
-| CLIP-B/32 + logistic head, calibration, ablation without normals (`parameters/edge/spi.py`) | READY (one encoder only) |
-| Old comparison notebook (`experiments/spi_comparison_4000`: 4 encoders x 12 classifiers) | NOT reusable as is: trained on VLM pseudo-labels, and run v11 crashed out of disk space |
-| Multi-encoder grid on human tiers with resumable saves | MISSING: `parameters/edge/embedding_grid.py` + notebook |
+## 5. Everything after (core first; extras only if time)
+- [ ] DINOv2 fidelity judge + 300-image human audit; receiver models; header v1 freeze (bit-depth test)
+- [ ] simulator sweep on validation: FIFO, EDF, SPI-first+EDF, M-LWDF, Whittle, EdgeServing, completion-aware DPP,
+  SV-DPP, one learner, genie reference; tune on validation only
+- [ ] test-event sweeps (frozen policy set), live 2xT4 check, codec v1 re-run
+- [ ] optional extras: MPC, MILP bound, SCOPE variants, DQN/LTR, RLAIF, JPEG ladder
 
-What the new grid must do: extract embeddings per encoder (CLIP-B/32, SigLIP2, DINOv2, ConvNeXtV2), save each
-as it finishes (and free memory/disk before the next), train the classifier families on train events
-(+ everyday images), pick by validation macro-F1 with a Critical-recall gate (>= 0.6), calibrate, and save
-every embedding, head, per-model report and the chosen model as a Kaggle dataset (`edge-spi-v1`).
-Constraint from the header: the UE-side encoder must be light, so the report also lists cost per image.
-- [ ] build grid + notebook, run, review the comparison table, pick the UE encoder
-
-## 6. After steps 1-5 (in order)
-- [ ] 2b dedup across splits and freeze `splits_v1.json`; label ~400 duplicate pairs
-- [ ] DINOv2 fidelity judge (train events) and the 300-image human audit sheet
-- [ ] codec table v0 (STS, payload bytes, fidelity) and receiver models (duplicate model, predicted fidelity)
-- [ ] header v1 freeze (bit-depth flip-rate test), then tune policies on the validation event only
-- [ ] first simulator sweep on validation (core policies only): FIFO, EDF, SPI-first+EDF, M-LWDF, Whittle, EdgeServing, completion-aware DPP, SV-DPP, one learner, genie
-- [ ] test-event sweeps (only after everything is frozen), then live 2xT4 check, then codec v1 re-run
-- [ ] optional extras only if time: MPC, MILP bound, SCOPE variants, DQN/LTR, RLAIF, JPEG ladder
+## Status of code (all unit-tested on CPU, none run on Kaggle yet)
+Simulator, ~24 policies, SV-DPP, UE-side modules, SPI head, grid, learners, dataset A/B builders, feature pass,
+fine-tune scaffold, Kaggle tools (WSL + datasets), pilot orchestrator. Pilot checks are being added.
+Two old tests still fail on Windows (`test_handoff_tools`, `test_paired_notebook_capsules...`): preserved
+notebooks embed CRLF copies of sources; left untouched by design.
