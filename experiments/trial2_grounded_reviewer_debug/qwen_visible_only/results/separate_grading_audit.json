@@ -1,0 +1,59 @@
+{
+  "input_sha256": "29c82e523852fc64fedec8fee177466b9c26dce1003c658de130ebb1b6f723aa",
+  "method": "Manual pixel spot check followed by existing deterministic grader. Debug controls only.",
+  "controls": [
+    {
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sweeps": [
+        1,
+        2
+      ],
+      "raw": "The aerial photo shows a flooded area with water covering parts of a town and surrounding landscape. The floodwaters extend across the lower portion of the image, submerging buildings and roads.",
+      "pixel_review": "Qwen identifies inundated buildings and roads in the lower frame. The original photo confirms consequential impact across separated areas. The second region is from the pixel spot check.",
+      "observation": {
+        "assessment": "multiple_sites",
+        "evidence": [
+          {
+            "what": "properties",
+            "where": "lower left",
+            "sign": "floodwater covers areas around multiple buildings"
+          },
+          {
+            "what": "properties and road area",
+            "where": "center right",
+            "sign": "floodwater visibly inundates developed ground"
+          }
+        ]
+      },
+      "grade": 2
+    },
+    {
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sweeps": [
+        1,
+        2
+      ],
+      "raw": "The aerial photo shows a forested area with some buildings and structures. There is no visible sign of a disaster impact such as structural damage, debris, or changes in the landscape that would indicate an event like flooding or landslides. The image appears to be taken under normal conditions without any obvious signs of recent disaster activity.",
+      "pixel_review": "No clear disaster impact in the original full-frame view. Omit the model inference about normal conditions or event timing.",
+      "observation": {
+        "assessment": "no_visible_impact",
+        "evidence": []
+      },
+      "grade": 0
+    },
+    {
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "sweeps": [
+        1,
+        2
+      ],
+      "raw": "The aerial photo shows a flooded area with water covering what appears to be a forested region near a river. The water level has risen significantly, submerging parts of the trees and potentially affecting the surrounding landscape.",
+      "pixel_review": "Partly submerged vegetation is visible. Prior water level and consequential disaster impact remain uncertain.",
+      "observation": {
+        "assessment": "uncertain",
+        "evidence": []
+      },
+      "grade": null
+    }
+  ]
+}

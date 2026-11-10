@@ -1,0 +1,442 @@
+{
+  "model": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+  "revision": "437f4e28b989cc2d9a16b6767cc930cdf48797ff",
+  "gpu": "Tesla T4",
+  "prompt": "Look at this single aerial photo. Describe only directly visible physical impact. Water near an object and muddy color alone do not show damage. Do not infer earlier water levels, hidden damage, or submerged vehicles. Return JSON with keys evidence and assessment, in that order. Evidence is an array of objects with what (affected item), where (rough frame position), and sign (visible physical change). Assessment is one of multiple_sites, route_disrupted, localized, no_visible_impact, uncertain. Use multiple_sites only for definite impact at two separately located sites, route_disrupted only if a route is visibly blocked or covered, localized for one definite affected site, and uncertain if impact cannot be established. Record uncertain observations as such and do not guess.",
+  "pairs": [
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "b": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    }
+  ],
+  "image_token_budget": "Nemotron AutoImageProcessor default",
+  "answers": [
+    {
+      "sweep": 1,
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "observation": {
+        "evidence": [
+          {
+            "affected_item": "trees",
+            "where": "along the riverbank",
+            "sign": "muddy water line"
+          },
+          {
+            "affected_item": "land",
+            "where": "riverbank",
+            "sign": "erosion"
+          },
+          {
+            "affected_item": "water",
+            "where": "river",
+            "sign": "muddy color"
+          }
+        ],
+        "assessment": "localized"
+      },
+      "proposed_grade": null,
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": [
+        {
+          "affected_item": "trees",
+          "where": "along the riverbank",
+          "sign": "muddy water line"
+        },
+        {
+          "affected_item": "land",
+          "where": "riverbank",
+          "sign": "erosion"
+        },
+        {
+          "affected_item": "water",
+          "where": "river",
+          "sign": "muddy color"
+        }
+      ],
+      "raw": "{\n  \"evidence\": [\n    {\n      \"affected_item\": \"trees\",\n      \"where\": \"along the riverbank\",\n      \"sign\": \"muddy water line\"\n    },\n    {\n      \"affected_item\": \"land\",\n      \"where\": \"riverbank\",\n      \"sign\": \"erosion\"\n    },\n    {\n      \"affected_item\": \"water\",\n      \"where\": \"river\",\n      \"sign\": \"muddy color\"\n    }\n  ],\n  \"assessment\": \"localized\"\n}",
+      "valid": false,
+      "seconds": 14.918976308999959
+    },
+    {
+      "sweep": 1,
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "observation": {
+        "evidence": [
+          {
+            "affected_item": "road",
+            "where": "center",
+            "sign": "curved and narrow"
+          },
+          {
+            "affected_item": "buildings",
+            "where": "bottom left",
+            "sign": "isolated"
+          },
+          {
+            "affected_item": "buildings",
+            "where": "top center",
+            "sign": "isolated"
+          }
+        ],
+        "assessment": "multiple_sites"
+      },
+      "proposed_grade": null,
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": [
+        {
+          "affected_item": "road",
+          "where": "center",
+          "sign": "curved and narrow"
+        },
+        {
+          "affected_item": "buildings",
+          "where": "bottom left",
+          "sign": "isolated"
+        },
+        {
+          "affected_item": "buildings",
+          "where": "top center",
+          "sign": "isolated"
+        }
+      ],
+      "raw": "{\n  \"evidence\": [\n    {\n      \"affected_item\": \"road\",\n      \"where\": \"center\",\n      \"sign\": \"curved and narrow\"\n    },\n    {\n      \"affected_item\": \"buildings\",\n      \"where\": \"bottom left\",\n      \"sign\": \"isolated\"\n    },\n    {\n      \"affected_item\": \"buildings\",\n      \"where\": \"top center\",\n      \"sign\": \"isolated\"\n    }\n  ],\n  \"assessment\": \"multiple_sites\"\n}",
+      "valid": false,
+      "seconds": 13.574678769000002
+    },
+    {
+      "sweep": 1,
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "observation": {},
+      "proposed_grade": null,
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"evidence\": [\n    {\n      \"affected_item\": \"houses\",\n      \"where\": \"left side of the image\",\n      \"sign\": \"water surrounding the structures\"\n    },\n    {\n      \"affected_item\": \"houses\",\n      \"where\": \"center of the image\",\n      \"sign\": \"water surrounding the structures\"\n    },\n    {\n      \"affected_item\": \"houses\",\n      \"where\": \"right side of the image\",\n      \"sign\": \"water surrounding the structures\"\n    },\n    {\n      \"affected_item\": \"road\",\n      \"where\": \"center of the image\",\n      \"sign\": \"water covering the road\"\n    },\n    {\n      \"affected_item\": \"forest\",\n      \"where\": \"left side of the image\",\n      \"sign\": \"water surrounding the forested area\"\n    },\n    {\n      \"affected_item\": \"forest\",\n      \"where\": \"right side of the image",
+      "valid": false,
+      "seconds": 20.726506787999938
+    },
+    {
+      "sweep": 2,
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "observation": {},
+      "proposed_grade": null,
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": null,
+      "raw": "{\n  \"evidence\": [\n    {\n      \"affected_item\": \"houses\",\n      \"where\": \"left side of the image\",\n      \"sign\": \"water surrounding the structures\"\n    },\n    {\n      \"affected_item\": \"houses\",\n      \"where\": \"center of the image\",\n      \"sign\": \"water surrounding the structures\"\n    },\n    {\n      \"affected_item\": \"houses\",\n      \"where\": \"right side of the image\",\n      \"sign\": \"water surrounding the structures\"\n    },\n    {\n      \"affected_item\": \"road\",\n      \"where\": \"center of the image\",\n      \"sign\": \"water covering the road\"\n    },\n    {\n      \"affected_item\": \"forest\",\n      \"where\": \"left side of the image\",\n      \"sign\": \"water surrounding the forested area\"\n    },\n    {\n      \"affected_item\": \"forest\",\n      \"where\": \"right side of the image",
+      "valid": false,
+      "seconds": 21.21862179499999
+    },
+    {
+      "sweep": 2,
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "observation": {
+        "evidence": [
+          {
+            "affected_item": "road",
+            "where": "center",
+            "sign": "curved and narrow"
+          },
+          {
+            "affected_item": "buildings",
+            "where": "bottom left",
+            "sign": "isolated"
+          },
+          {
+            "affected_item": "buildings",
+            "where": "top center",
+            "sign": "isolated"
+          }
+        ],
+        "assessment": "multiple_sites"
+      },
+      "proposed_grade": null,
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": [
+        {
+          "affected_item": "road",
+          "where": "center",
+          "sign": "curved and narrow"
+        },
+        {
+          "affected_item": "buildings",
+          "where": "bottom left",
+          "sign": "isolated"
+        },
+        {
+          "affected_item": "buildings",
+          "where": "top center",
+          "sign": "isolated"
+        }
+      ],
+      "raw": "{\n  \"evidence\": [\n    {\n      \"affected_item\": \"road\",\n      \"where\": \"center\",\n      \"sign\": \"curved and narrow\"\n    },\n    {\n      \"affected_item\": \"buildings\",\n      \"where\": \"bottom left\",\n      \"sign\": \"isolated\"\n    },\n    {\n      \"affected_item\": \"buildings\",\n      \"where\": \"top center\",\n      \"sign\": \"isolated\"\n    }\n  ],\n  \"assessment\": \"multiple_sites\"\n}",
+      "valid": false,
+      "seconds": 14.079983158999994
+    },
+    {
+      "sweep": 2,
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "observation": {
+        "evidence": [
+          {
+            "affected_item": "trees",
+            "where": "along the riverbank",
+            "sign": "muddy water line"
+          },
+          {
+            "affected_item": "land",
+            "where": "riverbank",
+            "sign": "erosion"
+          },
+          {
+            "affected_item": "water",
+            "where": "river",
+            "sign": "muddy color"
+          }
+        ],
+        "assessment": "localized"
+      },
+      "proposed_grade": null,
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": [
+        {
+          "affected_item": "trees",
+          "where": "along the riverbank",
+          "sign": "muddy water line"
+        },
+        {
+          "affected_item": "land",
+          "where": "riverbank",
+          "sign": "erosion"
+        },
+        {
+          "affected_item": "water",
+          "where": "river",
+          "sign": "muddy color"
+        }
+      ],
+      "raw": "{\n  \"evidence\": [\n    {\n      \"affected_item\": \"trees\",\n      \"where\": \"along the riverbank\",\n      \"sign\": \"muddy water line\"\n    },\n    {\n      \"affected_item\": \"land\",\n      \"where\": \"riverbank\",\n      \"sign\": \"erosion\"\n    },\n    {\n      \"affected_item\": \"water\",\n      \"where\": \"river\",\n      \"sign\": \"muddy color\"\n    }\n  ],\n  \"assessment\": \"localized\"\n}",
+      "valid": false,
+      "seconds": 13.88358334999998
+    }
+  ],
+  "nf4_layers": 225,
+  "status": "completed",
+  "peak_gpu_bytes": 9103086080
+}

@@ -1,0 +1,560 @@
+{
+  "model": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+  "revision": "437f4e28b989cc2d9a16b6767cc930cdf48797ff",
+  "gpu": "Tesla T4",
+  "prompt": "Review this single aerial photo for directly visible disaster impact. Return only JSON with integer grade, integer extent, affected (a list of short names), and evidence (a string).\nUse grade 2 for definite consequential impact, grade 1 for definite limited impact, or grade 0 when definite impact is not established. Every positive grade requires evidence in this exact form: What: affected item; Where: specific image region; Sign: direct visible physical impact. The sign must describe a physical interaction or change you can see, such as water visibly covering entrances or road surfaces. Buildings, parking lots, development, nearby water, muddy color, apparent construction, and sharpness alone cannot support a positive grade. Do not guess. For grade 0 use an empty affected list and extent 0. Use extent 0 if the affected area is unclear, 1 for one clearly visible affected location, 2 for multiple clearly visible affected locations, or 3 for clearly visible widespread impact. Include only visibly affected areas when assigning extent.",
+  "pairs": [
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "b": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 1,
+      "a": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "b": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "b": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 2,
+      "a": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "b": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": true
+    },
+    {
+      "split": "calibration",
+      "spi_tier": 3,
+      "a": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "b": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "sampling_tags_differ": false
+    }
+  ],
+  "image_token_budget": "Nemotron AutoImageProcessor default",
+  "answers": [
+    {
+      "sweep": 1,
+      "image_id": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.58485288199995
+    },
+    {
+      "sweep": 1,
+      "image_id": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 7.46257079399993
+    },
+    {
+      "sweep": 1,
+      "image_id": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 7.650088941000149
+    },
+    {
+      "sweep": 1,
+      "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 7.9013710609999634
+    },
+    {
+      "sweep": 1,
+      "image_id": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 7.945233117000043
+    },
+    {
+      "sweep": 1,
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "Trees are partially submerged in water; land is visibly flooded.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"trees\",\n    \"land\"\n  ],\n  \"evidence\": \"Trees are partially submerged in water; land is visibly flooded.\"\n}",
+      "valid": false,
+      "seconds": 9.899222550000104
+    },
+    {
+      "sweep": 1,
+      "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "Muddy water visibly covering parts of the roads and the area around the houses.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"houses\",\n    \"roads\"\n  ],\n  \"evidence\": \"Muddy water visibly covering parts of the roads and the area around the houses.\"\n}",
+      "valid": false,
+      "seconds": 10.619620311000062
+    },
+    {
+      "sweep": 1,
+      "image_id": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.76998383199998
+    },
+    {
+      "sweep": 1,
+      "image_id": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.633803894000039
+    },
+    {
+      "sweep": 1,
+      "image_id": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.355784989000085
+    },
+    {
+      "sweep": 1,
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.209734019999814
+    },
+    {
+      "sweep": 1,
+      "image_id": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.15344522600003
+    },
+    {
+      "sweep": 1,
+      "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "grade": 2,
+      "extent": 2,
+      "affected": [
+        "road",
+        "houses"
+      ],
+      "evidence": "What: road and houses; Where: center of the image; Sign: water visibly covering the road and reaching the lower levels of the houses.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"road\",\n    \"houses\"\n  ],\n  \"evidence\": \"What: road and houses; Where: center of the image; Sign: water visibly covering the road and reaching the lower levels of the houses.\"\n}",
+      "valid": true,
+      "seconds": 11.204890580999972
+    },
+    {
+      "sweep": 1,
+      "image_id": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.063604954000084
+    },
+    {
+      "sweep": 1,
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "Water visibly covering roads and buildings; What: buildings and roads; Where: specific image region; Sign: direct visible physical impact.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"buildings\",\n    \"roads\",\n    \"waterways\"\n  ],\n  \"evidence\": \"Water visibly covering roads and buildings; What: buildings and roads; Where: specific image region; Sign: direct visible physical impact.\"\n}",
+      "valid": false,
+      "seconds": 11.472607858999936
+    },
+    {
+      "sweep": 2,
+      "image_id": "f0c4bdeef5e46fbe71558cdde2610ffd99ce99dbdd74a5c1965ab7f4c91a60e4",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "Water visibly covering roads and buildings; What: buildings and roads; Where: specific image region; Sign: direct visible physical impact.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"buildings\",\n    \"roads\",\n    \"waterways\"\n  ],\n  \"evidence\": \"Water visibly covering roads and buildings; What: buildings and roads; Where: specific image region; Sign: direct visible physical impact.\"\n}",
+      "valid": false,
+      "seconds": 11.625564096999824
+    },
+    {
+      "sweep": 2,
+      "image_id": "f04dcad8ecd635d8b07752beb7548c00140d7cf91562265ad91172a8e17adda6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.292384140999957
+    },
+    {
+      "sweep": 2,
+      "image_id": "edc6164e5a6c0263cdfaf86d305e15236f0a119ff5918c051a94e6ad35db3fe1",
+      "grade": 2,
+      "extent": 2,
+      "affected": [
+        "road",
+        "houses"
+      ],
+      "evidence": "What: road and houses; Where: center of the image; Sign: water visibly covering the road and reaching the lower levels of the houses.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"road\",\n    \"houses\"\n  ],\n  \"evidence\": \"What: road and houses; Where: center of the image; Sign: water visibly covering the road and reaching the lower levels of the houses.\"\n}",
+      "valid": true,
+      "seconds": 11.506303725999942
+    },
+    {
+      "sweep": 2,
+      "image_id": "c21712966b7608b8c87b4c4efdeb1e4a5551a6a5458ec44f48fc70701b87d3a9",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.285809272999813
+    },
+    {
+      "sweep": 2,
+      "image_id": "c05293ad4e6b39fda0b218843ee52918cb9e005d715ec968cbe3bdbb2e8b2c28",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.278815047999842
+    },
+    {
+      "sweep": 2,
+      "image_id": "b117edaa598114814647b06b411e5c1344e55f4822de2f257298a7fd54a7383b",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.174881725999967
+    },
+    {
+      "sweep": 2,
+      "image_id": "a442e3245e54b4cca896a47a2d5a37b5a374ef370edc3c0bb40d0714f090ab56",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.144791787000031
+    },
+    {
+      "sweep": 2,
+      "image_id": "850799bcf975e27b12eea80850689460f9ac48c73eb2c0e4c88335ab1d668cab",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.174286618999986
+    },
+    {
+      "sweep": 2,
+      "image_id": "6f66a840f6e56530c2bb82197c3a257424dd35e6add4858620002325e0495dc6",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "Muddy water visibly covering parts of the roads and the area around the houses.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"houses\",\n    \"roads\"\n  ],\n  \"evidence\": \"Muddy water visibly covering parts of the roads and the area around the houses.\"\n}",
+      "valid": false,
+      "seconds": 10.282588774999795
+    },
+    {
+      "sweep": 2,
+      "image_id": "6df24d7a0da49e9cf764c5aa0e3cc595f632163a986660b06334172563489a71",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "Trees are partially submerged in water; land is visibly flooded.",
+      "raw": "{\n  \"grade\": 2,\n  \"extent\": 2,\n  \"affected\": [\n    \"trees\",\n    \"land\"\n  ],\n  \"evidence\": \"Trees are partially submerged in water; land is visibly flooded.\"\n}",
+      "valid": false,
+      "seconds": 10.346128080000199
+    },
+    {
+      "sweep": 2,
+      "image_id": "46283d370824bcc089ce38f0f77de8714786ea63a0911867645471e799b5e4f3",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.17891481699985
+    },
+    {
+      "sweep": 2,
+      "image_id": "446d99e4361cb3224dd7832e0f9427aab0ba5d2bf7e8bb2ab3800f5063fe58bc",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.233321298999954
+    },
+    {
+      "sweep": 2,
+      "image_id": "42f99acd1c3529c3519264b5dd8cc857ee76000635eee85b55510f7316161643",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.26099598299993
+    },
+    {
+      "sweep": 2,
+      "image_id": "33ec5fab49609be6217b10f01e0a2d3b70f6efe49c38c616f7e905ee59e229f0",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.251477271000113
+    },
+    {
+      "sweep": 2,
+      "image_id": "1fd005af391bfe58c0858a207619c192b2751f92c461a2d9a4346c8773e6feae",
+      "grade": null,
+      "extent": null,
+      "affected": null,
+      "evidence": "",
+      "raw": "{\n  \"grade\": 0,\n  \"extent\": 0,\n  \"affected\": [],\n  \"evidence\": \"\"\n}",
+      "valid": false,
+      "seconds": 8.297598579000123
+    }
+  ],
+  "nf4_layers": 225,
+  "status": "completed",
+  "peak_gpu_bytes": 9172285952
+}
