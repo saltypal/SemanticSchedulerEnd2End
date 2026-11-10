@@ -2359,3 +2359,62 @@ Authorized comparison uses saved 4000 selected images /3933 valid pseudo-labels 
 
 ### Parameter extraction report, 2026-11-04
 Created experiments/parameter_extraction_report/REPORT.md and REPORT.html. Report contains6570 words, eight explanatory/measurement figures exported as PNG/SVG, all36 completed original-regime candidate scores in CSV, primary-paper links and evidence hashes. Distinguishes completed Mini CLIP-logistic pipeline from partial CLIP-cross-attention development leader. Detector choice is supported by measured cost, not unmeasured box accuracy. VLM hallucination and mixed teacher protocols remain limitations. Source inspection confirmed current default UE history64, condition-text relevance, 35-byte historical scalar header versus369-byte scene block, and distinct student/wire class index orders. No models trained or cloud jobs launched for this report.
+
+## 2026-11-10 Scheduler redesign review and plan v2.1 (Claude Code)
+
+**Scope:** read-only review of main (10283199), `sem_schedluerAI_trial2` (41f74017), the other
+branches and the Codex chat logs. No training, inference or Kaggle jobs were run.
+
+**Diagnosis:**
+- The old benchmark is circular: Qwen tiers define both the SPI target and the waiting-penalty
+  weights, with unit service and i.i.d. images.
+- Its optimum is a cμ-type sort, which explains SPI-first 3.374 beating PPO 4.594 and DDQN 4.710
+  (`experiments/results_analysis/runs/analysis-20261104/ANALYSIS.md`).
+
+**Decisions (user-approved direction):**
+- **System model:**
+  - The encoder sits on the UE; the decoder and scheduler at the O-RAN edge (O-Cloud). Policy is
+    managed through a near-RT RIC xApp.
+  - Every packet is [64 B header][payload]. There is no SR/BSR handshake, no UE identity and no UE
+    history.
+  - The scheduled resource is the decoder pool. Actions: decode / defer / purge.
+- **Ground truth:** CrisisMMD v2 human damage severity mapped to tiers, plus a life-safety
+  override and not-informative→Low. Places365 and people photos→Low. Qwen labels become an agreement
+  audit only.
+- **Parameters:** SPI (retrained on human tiers + normals, calibrated), CLIP mission relevance,
+  64-bit SimHash for receiver-side novelty, and the SQ-GAN Semantic Token Summary built from
+  `masker()['sample_index']` + the 20-class map (replaces YOLO), with predicted decode utility û.
+- **Objective:** timely semantic value w·u·g·(1−dup). Headline metric: Critical Timely Recall@D.
+- **Policies:** about 20 baselines including adapted 5G logic. Proposed: SV-DPP (Neely DPP adapted,
+  virtual queue on Critical misses), SC-PPO (PPO-Lagrangian) and SC-PPO-AIF (RLAIF).
+- **Simulation:** trace-driven on per-image lookup tables, built on the teammate's staged timing,
+  plus a live validation run.
+
+**Documents:**
+- `docs/reviews/Q1_REVIEW_AND_FINAL_PLAN.md`
+- `docs/reviews/FINAL_PLAN_V2.md`
+- `docs/reviews/PLAN_V2_EXPLAINED.md` (authoritative for v2.1)
+- `docs/reviews/MISSION_PROFILES_DRAFT.md` (26 draft profiles; some 3GPP references unverified)
+
+**Next:** P0 verification (CrisisMMD counts/tweet ids, Places365 blacklist, SQ-GAN T4 timings and
+masker keys).
+
+### 2026-11-10 Plan v3.1 locked after counter-review
+`docs/reviews/FINAL_PLAN_V3.md` is now authoritative and supersedes v2, v2.1 and the explainer where
+they conflict.
+
+**Changes:**
+- **Constraints and judge:** per-tier timeliness debt queues with a feasibility condition; a DINOv2
+  fidelity judge (u = judge(recon) = judge(orig)) with a human audit.
+- **SV-DPP v3.1:** renewal-frame ratio form with a differential completion-probability score.
+- **Deduplication:** soft dedup using pHash + SimHash, delivered-only memory and a secret seed.
+- **SCOPE:** one min-max training framework applied to PPO, DQN, LTR and two RLAIF arms.
+- **Baselines:** pruned to representatives with an equivalence appendix; a MILP bound and an MPC
+  rollout added.
+- **Simulator:** samples without replacement and draws latency from the empirical distribution.
+- **Build order:** S0–S12 with leakage fixes (S2b cross-split dedup, S3b judge, val-only gates, S11
+  codec swap with retraining).
+
+**Literature read in full:** 2605.05527, 2609.19792, 2608.05537, 2609.03590.
+
+No training or Kaggle jobs were run.
