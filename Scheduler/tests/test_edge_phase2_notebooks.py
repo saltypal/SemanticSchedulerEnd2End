@@ -33,8 +33,11 @@ def test_ids_titles_and_accounts(mod, step):
 def test_dataset_sources():
     assert tr.build("ppo")[1]["dataset_sources"] == ["satyapaladuguplus/scheduler-dataset-v1-simtable"]
     assert sw.build("tune")[1]["dataset_sources"] == ["satyapaladuguplus/scheduler-dataset-v1-simtable"]
+    from Evaluation.edge.edge_config import load_config
     ds = live.build()[1]
-    assert "satyapaladugu/scheduler-sqgan-v1" in ds["dataset_sources"]
+    v1 = load_config("codec")["codecs"]["v1"]["kaggle_dataset"]
+    assert v1 == "satyapaladuguplus/scheduler-sqgan-v1" and v1 in ds["dataset_sources"]
+    assert "satyapaladugu/scheduler-sqgan-v1" not in ds["dataset_sources"]
     assert ds["enable_gpu"] and ds["machine_shape"] == "NvidiaTeslaT4"
 
 
@@ -100,9 +103,36 @@ def test_tune_and_compare_stages_on_synthetic_table():
     assert [c["policy"] for c in cmp0["cells"]] + [c["policy"] for c in cmp1["cells"]] == ["fifo", "edf"]
 
 
-def test_ablations_fail_loudly_when_module_missing():
-    import importlib.util
-    if importlib.util.find_spec("Evaluation.edge.header_proofs") is not None:
-        pytest.skip("header_proofs present")
-    with pytest.raises(SystemExit, match="ABLATIONS NOT AVAILABLE"):
-        sweep_stages.stage_ablations(type("A", (), {"out_dir": "."})(), (0, 1))
+def test_ablations_call_header_proofs_cli(monkeypatch, tmp_path):
+    """The stage's argv must parse with header_proofs' real CLI (run in-process, core work stubbed)."""
+    from types import SimpleNamespace
+    from Evaluation.edge import header_proofs, tables
+    seen = {}
+
+    def fake_run(rows, latency, split, policies, workers, rhos, realisations, base_seed=0, tables_=None,
+                 scenario=None, arrival=None, subsample=None):
+        seen.update(split=split, policies=policies, workers=workers, rhos=rhos, realisations=realisations,
+                    arrival=arrival, scenario=scenario, subsample=subsample)
+        return {"ok": True}
+
+    monkeypatch.setattr(header_proofs, "run_header_proofs", fake_run)
+    monkeypatch.setattr(header_proofs, "save", lambda res, out_dir: seen.update(out_dir=out_dir))
+    monkeypatch.setattr(tables, "load_rows", lambda path: [])
+    monkeypatch.setattr(tables, "latency_from_profile_json", lambda path: None)
+
+    def in_process(cmd, **kwargs):
+        assert cmd[1:4] == ["-u", "-m", "Evaluation.edge.header_proofs"]
+        header_proofs.main(cmd[4:])
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(sweep_stages, "subprocess", SimpleNamespace(run=in_process))
+    a = SimpleNamespace(table="t.csv", profile="p.json", out_dir=str(tmp_path), policies=None,
+                        workers=[1, 2], rhos=[0.8, 1.0], realisations=3, arrival="trace")
+    res = sweep_stages.stage_ablations(a, (0, 1))
+    assert seen["split"] == "val" and seen["policies"] == ["sv_dpp"] and seen["arrival"] == "trace"
+    assert seen["workers"] == [1, 2] and seen["rhos"] == [0.8, 1.0] and seen["realisations"] == 3
+    assert seen["out_dir"] == str(tmp_path / "ablations")
+    assert res["proofs_file"] == str(tmp_path / "ablations" / "header_proofs.json")
+    # policies are sharded: a shard with no policies does nothing
+    empty = sweep_stages.stage_ablations(SimpleNamespace(**dict(vars(a), policies=["fifo"])), (1, 2))
+    assert empty["proofs_file"] is None

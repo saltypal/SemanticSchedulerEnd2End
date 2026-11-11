@@ -1,17 +1,21 @@
 """Emit Notebooks/Edge/edge-live-t4.ipynb: live 2xT4 validation (plan v3 sec. 9) via Evaluation.edge.live_check.
 
-Needs the codec v1 bundle (``satyapaladugu/scheduler-sqgan-v1``, later), the public images and the sim table.
-Never pushes anything.
+Needs the codec v1 bundle (slug read from config/edge/codec.yaml, codecs.v1.kaggle_dataset), the public
+images and the sim table. Never pushes anything.
 """
 import argparse
 
+from Evaluation.edge.edge_config import load_config
 from scripts.edge import _nb_common as nc
 from scripts.edge import build_notebook as bn
 
 STEP = "edge-live-t4"
 TITLE = "Edge Live T4"
 ENTRY = "Evaluation.edge.live_check"
-DATASET_SOURCES = (nc.SIMTABLE_DS, nc.IMAGES_DS, nc.SQGAN_V1_DS)
+CODEC_V1_DS = load_config("codec")["codecs"]["v1"]["kaggle_dataset"]
+if not CODEC_V1_DS:
+    raise ValueError("config/edge/codec.yaml: codecs.v1.kaggle_dataset is empty")
+DATASET_SOURCES = (nc.SIMTABLE_DS, nc.IMAGES_DS, CODEC_V1_DS)
 REQUIREMENTS = ("pytorch-lightning==1.9.5", "torchmetrics==0.11.4", "transformers==4.46.3", "scipy", "omegaconf",
                 "pytorch-msssim==1.0.0", "lpips==0.1.4", "PyYAML", "einops", "pillow")
 
@@ -36,7 +40,7 @@ def build(account=None, branch="main", n_images=1000, policies=("fifo", "edf", "
     nb = bn.build_notebook(STEP, ENTRY, extra, TITLE, cfg["repo_url"], branch, REQUIREMENTS, True)
     nb["cells"][0] = bn._md(f"# {TITLE}\n\nStep `{STEP}`: 2 x T4, c = 2, {n_images} test images, policies "
                             f"{', '.join(policies)}. Select the T4 x2 accelerator.\n\n{nc.PRIVATE_NOTE}"
-                            f"Codec v1 bundle: `{nc.SQGAN_V1_DS}` (attach once published).\n")
+                            f"Codec v1 bundle: `{CODEC_V1_DS}` (attach once published).\n")
     nb["cells"][4:5] = [nc.discover_cell(), bn._code(RUN.format(step=STEP, entry=ENTRY, extra=extra))]
     meta = bn.build_metadata(cfg, account or cfg.get("default_account", "wsl"), STEP, TITLE, True, DATASET_SOURCES)
     meta["machine_shape"] = "NvidiaTeslaT4"

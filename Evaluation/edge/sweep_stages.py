@@ -2,12 +2,12 @@
 
 Stages: ``tune`` (val: SV-DPP V x hard_purge_prob grid, optional learner training grid through
 train_cli), ``compare`` (val: main_table + extended, c in 1,2,4,6,8, 10 realisations),
-``ablations`` (header proofs, delegated to Evaluation.edge.header_proofs when it exists) and
-``test`` (frozen policy set, only with ``--final-test``). ``--shard i/n`` splits the work over
+``ablations`` (header proofs via Evaluation.edge.header_proofs, val split, trace arrivals) and
+``test`` (frozen policy set, only with ``--final-test``). Policy names may be ``learned:<algo>:<checkpoint>``
+(trained learners, see Scheduler.training.edge.learned_policy), resolved by run_sweep. ``--shard i/n`` splits the work over
 accounts/notebooks (policies, or grid points for ``tune``) and writes ``<stage>.shard<i>of<n>.json``.
 """
 import argparse
-import importlib.util
 import json
 import subprocess
 import sys
@@ -95,17 +95,20 @@ def stage_test(rows, latency, a, shard, tables):
 
 
 def stage_ablations(a, shard):
-    """Header proofs live in Evaluation/edge/header_proofs.py (W-SIM). Fail loudly if absent."""
-    if importlib.util.find_spec("Evaluation.edge.header_proofs") is None:
-        raise SystemExit("ABLATIONS NOT AVAILABLE: Evaluation/edge/header_proofs.py is not on this branch yet "
-                         "(owned by W-SIM). Re-run after it lands on main.")
-    dest = out_path(a.out_dir, "ablations", shard).with_suffix(".proofs.json")
-    # ASSUMED CLI: --table --profile --out (adjust here if header_proofs uses other flags).
+    """Header proofs (Evaluation/edge/header_proofs.py): val split, trace arrivals by default.
+
+    Policies are sharded like the other stages; each shard writes into its own folder."""
+    policies = take_shard(a.policies or ["sv_dpp"], shard)
+    if not policies:
+        return dict(stage="ablations", shard=list(shard), proofs_file=None)
+    folder = Path(a.out_dir) / ("ablations" if shard[1] == 1 else "ablations.shard%dof%d" % shard)
     cmd = [sys.executable, "-u", "-m", "Evaluation.edge.header_proofs", "--table", a.table,
-           "--profile", a.profile, "--out", str(dest)]
+           "--profile", a.profile, "--split", "val", "--policies", *policies,
+           "--workers", *[str(w) for w in a.workers], "--rhos", *[str(r) for r in a.rhos],
+           "--realisations", str(a.realisations), "--arrival", a.arrival, "--out-dir", str(folder)]
     if subprocess.run(cmd).returncode:
         raise SystemExit("header_proofs failed: " + " ".join(cmd))
-    return dict(stage="ablations", shard=list(shard), proofs_file=str(dest))
+    return dict(stage="ablations", shard=list(shard), proofs_file=str(folder / "header_proofs.json"))
 
 
 def main(argv=None):
@@ -125,6 +128,8 @@ def main(argv=None):
     ap.add_argument("--tuned", default=None, help="tune-stage JSON whose best_kwargs go to sv_dpp")
     ap.add_argument("--learner-grid", default=None, help="JSON list of {algo, args:[...]} for the tune stage")
     ap.add_argument("--final-test", action="store_true")
+    ap.add_argument("--arrival", choices=["poisson", "mmpp", "trace"], default="trace",
+                    help="arrival mode for the ablations stage (header_proofs --arrival)")
     a = ap.parse_args(argv)
     shard = parse_shard(a.shard)
     Path(a.out_dir).mkdir(parents=True, exist_ok=True)

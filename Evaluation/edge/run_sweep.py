@@ -23,6 +23,7 @@ from Evaluation.edge.edge_config import load_config, repo_root
 from Evaluation.edge.env import EdgeEnv
 from Evaluation.edge.receiver import Receiver
 from Scheduler.edge import registry
+from Scheduler.training.edge import learned_policy
 
 SCALARS = ("ctr_ungated", "value", "value_per_gpu_s", "low_starvation",
            "redundant_per_100")
@@ -30,12 +31,17 @@ NAN = float("nan")
 
 
 def resolve_policies(names):
-    """Expand group names (main_table, ...) to policy names; raise on unknown names."""
+    """Expand group names (main_table, ...) to policy names; raise on unknown names.
+
+    ``learned:<algo>:<checkpoint>`` names are trained learners (Scheduler.training.edge.learned_policy).
+    """
     groups, known = load_config("policies"), registry.all_policies()
     out = []
     for n in names:
         for m in (groups[n] if n in groups else [n]):
-            if m not in known:
+            if learned_policy.is_learned(m):
+                learned_policy.parse_spec(m)
+            elif m not in known:
                 raise ValueError("unknown policy %r; known: %s" % (m, sorted(known)))
             if m not in out:
                 out.append(m)
@@ -47,6 +53,10 @@ def _seed(base, *parts):
 
 
 def _build_policy(name, kwargs, truth_by_id):
+    if learned_policy.is_learned(name):   # header-only: truth_by_id is deliberately not passed on
+        if kwargs:
+            raise ValueError("learned policy %r takes no kwargs, got %r" % (name, kwargs))
+        return learned_policy.build_learned(name)
     factory = registry.all_policies()[name]
     if getattr(factory, "uses_truth", False):
         return factory(truth_by_id, **kwargs)
