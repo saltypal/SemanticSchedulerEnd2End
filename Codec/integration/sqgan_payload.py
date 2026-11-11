@@ -97,8 +97,25 @@ class SQGANDigitalCodec:
         mean=image.new_tensor([.485,.456,.406])[None,:,None,None];std=image.new_tensor([.229,.224,.225])[None,:,None,None]
         with torch.inference_mode():
             logits=self._teacher(pixel_values=(image-mean)/std).logits
-            ids=F.interpolate(logits,size=(256,512),mode="bilinear",align_corners=False).argmax(1)
-            return F.one_hot(ids,num_classes=20).permute(0,3,1,2).float()
+            return self._one_hot_from_logits(logits)
+    def _seg_index(self):
+        """ADE20K->20-class index for fine-tuned v1 bundles (those carry seg_classes.yaml); None for v0."""
+        if not hasattr(self,"_seg_index_cache"):
+            path=self.bundle/"seg_classes.yaml"
+            if path.is_file():
+                from Codec.edge import seg_map
+                self._seg_index_cache=seg_map.build_index(seg_map.load_class_map(path))
+            else:self._seg_index_cache=None
+        return self._seg_index_cache
+    def _one_hot_from_logits(self,logits):
+        import torch
+        from torch.nn import functional as F
+        index=self._seg_index()
+        if index is not None: # v1: the teacher emits 150 ADE20K channels; merge to the 20 codec classes
+            from Codec.edge.seg_map import project_logits
+            logits=project_logits(logits,index)
+        ids=F.interpolate(logits,size=(256,512),mode="bilinear",align_corners=False).argmax(1)
+        return F.one_hot(ids,num_classes=20).permute(0,3,1,2).float()
     def decode(self,payload):
         import torch
         if not isinstance(payload,bytes):raise TypeError("complete immutable payload bytes required")

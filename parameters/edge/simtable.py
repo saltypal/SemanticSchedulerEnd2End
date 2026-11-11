@@ -11,10 +11,16 @@ Codec-dependent fields (STS, payload bytes, latency) are placeholders until the 
 ``sts == []`` and ``payload_source == "placeholder"``; ``fill_codec`` merges C2 later.
 
     python -m parameters.edge.simtable --labels-root <B> --cache-root <C1> --out <dir>
+
+``fill-codec`` merges the SQ-GAN v1 pass (C2 = the feature-pass cache folder(s) of ``--codec v1``) into a built table:
+    python -m parameters.edge.simtable fill-codec --table <simtable_v1.jsonl> --c2 <C2 dir> [<C2 dir> ...] --out <dir>
+and writes ``simtable_v1.jsonl``, ``latency_v1.json`` (``{"samples": {"1": [s, ...], ...}}``, read by
+``Evaluation.edge.tables.latency_from_profile_json``) and ``codec_fill_report.json`` into ``--out``.
 """
 import argparse
 import json
 import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -176,6 +182,102 @@ def build(label_rows, splits, cache, mission_emb, missions_cfg, dedup_cfg):
     return out, head, report
 
 
+# ----------------------------------------------------------------------------- C2: SQ-GAN v1 pass merge
+def _fkey(m):
+    return "%g" % float(m)
+
+
+def load_c2(c2_dirs):
+    """Read feature-pass cache folder(s) -> ({image_id: fields}, latency samples {batch: [s]}).
+
+    Per image (only when the first, smallest m encoded): ``sts`` (13 floats of that m), ``payload_bytes_by_m`` (every
+    m that encoded), ``lpips`` and ``recon_miou`` (first m, when finite)."""
+    out, samples = {}, {}
+    for root in ([c2_dirs] if isinstance(c2_dirs, (str, Path)) else c2_dirs):
+        for shard in sorted((Path(root) / "shards").glob("shard_*")):
+            for lat in shard.glob("latency_samples.json"):
+                for b, vals in json.loads(lat.read_text(encoding="utf-8"))["samples"].items():
+                    samples.setdefault(str(b), []).extend(float(v) for v in vals)
+            if not (shard / "uids.json").exists() or not (shard / "sqgan_ok.npy").exists():
+                continue
+            uids = json.loads((shard / "uids.json").read_text(encoding="utf-8"))
+            tags = sorted((f.stem[len("offsets_"):] for f in shard.glob("offsets_m*.npy")), key=lambda t: float(t[1:]))
+            if not tags:
+                continue
+            ok = np.load(shard / "sqgan_ok.npy").reshape(len(uids), -1)
+            offs = {t: np.load(shard / ("offsets_%s.npy" % t)) for t in tags}
+            t0 = tags[0]
+            sts0 = np.load(shard / ("sts_%s.npy" % t0))
+            q = {k: np.load(shard / ("%s_%s.npy" % (k, t0))) if (shard / ("%s_%s.npy" % (k, t0))).exists() else None
+                 for k in ("lpips", "miou")}
+            for i, uid in enumerate(uids):
+                if not ok[i, 0]:
+                    continue
+                by_m = {_fkey(t[1:]): int(offs[t][i + 1] - offs[t][i]) for j, t in enumerate(tags)
+                        if j < ok.shape[1] and ok[i, j] and offs[t][i + 1] > offs[t][i]}
+                if _fkey(t0[1:]) not in by_m:
+                    continue
+                rec = {"sts": [float(v) for v in sts0[i]], "payload_bytes_by_m": by_m}
+                for src, name in (("lpips", "lpips"), ("miou", "recon_miou")):
+                    if q[src] is not None and np.isfinite(q[src][i]):
+                        rec[name] = float(q[src][i])
+                out[uid] = rec
+    return out, samples
+
+
+def fill_codec(rows, c2, samples=None):
+    """Merge C2 into table rows by image_id. Returns (rows, report, latency dict or None).
+
+    Filled rows get ``sts``, ``payload_bytes`` (first/smallest m, 0.25), ``payload_bytes_by_m``, ``payload_source
+    "sqgan_v1"`` and, when present, ``lpips`` / ``recon_miou``. Rows absent from C2 keep their placeholders."""
+    out, missing, filled = [], [], 0
+    for r in rows:
+        rec = c2.get(r["image_id"])
+        if rec is None:
+            missing.append(r["image_id"])
+            out.append(validate_row(dict(r)))
+            continue
+        row = dict(r)
+        by_m = rec["payload_bytes_by_m"]
+        row.update(sts=list(rec["sts"]), payload_bytes=by_m[min(by_m, key=float)], payload_bytes_by_m=dict(by_m),
+                   payload_source="sqgan_v1")
+        for k in ("lpips", "recon_miou"):
+            if k in rec:
+                row[k] = rec[k]
+        out.append(validate_row(row))
+        filled += 1
+    ids = {r["image_id"] for r in rows}
+    report = {"rows": len(rows), "filled": filled, "missing_from_c2": len(missing), "missing_sample": missing[:20],
+              "c2_not_in_table": len([u for u in c2 if u not in ids]),
+              "latency_batches": {b: len(v) for b, v in (samples or {}).items()}}
+    latency = {"samples": {b: list(v) for b, v in sorted(samples.items(), key=lambda kv: int(kv[0]))},
+               "emulated_batching": True, "source": "sqgan_v1 feature pass"} if samples else None
+    return out, report, latency
+
+
+def fill_main(argv):
+    ap = argparse.ArgumentParser(prog="python -m parameters.edge.simtable fill-codec", description=fill_codec.__doc__)
+    ap.add_argument("--table", required=True, help="simtable_v1.jsonl (or the folder holding it)")
+    ap.add_argument("--c2", required=True, nargs="+", help="feature-pass cache folder(s) of the SQ-GAN v1 pass")
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args(argv)
+    table = Path(a.table)
+    table = table / "simtable_v1.jsonl" if table.is_dir() else table
+    rows = [json.loads(x) for x in table.read_text(encoding="utf-8").splitlines() if x.strip()]
+    c2, samples = load_c2(a.c2)
+    out_rows, report, latency = fill_codec(rows, c2, samples)
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    with open(out / "simtable_v1.jsonl", "w", encoding="utf-8") as f:
+        for r in out_rows:
+            f.write(json.dumps(r) + "\n")
+    if latency:
+        (out / "latency_v1.json").write_text(json.dumps(latency, indent=1), encoding="utf-8")
+    (out / "codec_fill_report.json").write_text(json.dumps(report, indent=1), encoding="utf-8")
+    print(json.dumps(report, indent=1))
+    return report
+
+
 def git_sha():
     try:
         return subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
@@ -184,6 +286,9 @@ def git_sha():
 
 
 def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == "fill-codec":
+        return fill_main(argv[1:])
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--labels-root", required=True)
     ap.add_argument("--cache-root", required=True)

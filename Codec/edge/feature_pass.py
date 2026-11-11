@@ -303,7 +303,7 @@ def _sq_one(ctx, sq, uid, img, m_levels, hw, grid, sfail):
             bitmap = pack_bitmap(kept, grid[0] * grid[1])
             sts13 = np.asarray(sts_mod.compute_sts(cls, kept, tuple(grid)), dtype=np.float32)
             prefeat = pool_prefeatures(enc["features"]) if res["prefeat"] is None and enc.get("features") is not None else None
-            entry = {"payload": bytes(enc["payload"]), "bitmap": bitmap, "sts": sts13, "recon": None}
+            entry = {"payload": bytes(enc["payload"]), "bitmap": bitmap, "sts": sts13, "recon": None, "orig": arr}
         except Exception as exc:
             _stage_fail(sfail, "sqgan_encode_" + m_tag(m), uid, exc)
             continue
@@ -374,6 +374,10 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
         if cfg["decode"]["enabled"]:
             np.save(shard_dir / ("decode_ok_%s.npy" % tag), np.array(
                 [bool(z(u) and m in z(u)["m"] and z(u)["m"][m]["recon"]) for u in uids]))
+            if cfg["decode"].get("quality"):          # NaN where decode or the quality stage failed
+                for key, name in (("lpips", "lpips"), ("miou", "miou")):
+                    np.save(shard_dir / ("%s_%s.npy" % (name, tag)), np.array(
+                        [z(u)["m"][m].get(key, np.nan) if z(u) and m in z(u)["m"] else np.nan for u in uids], np.float32))
     return info
 
 
@@ -466,6 +470,11 @@ def process_shard(ctx, idx, rows):
         for u, _ in items:
             per_uid[u] = rec[u]
             order.append(u)
+    sq = ctx.sqgan()
+    if sq is not None and cfg["decode"]["enabled"] and cfg["decode"].get("latency"):
+        m0 = m_levels[0]
+        _latency_shard(ctx, sq, partial, [per_uid[u]["sq"]["m"][m0]["payload"] for u in order
+                                          if per_uid[u]["sq"] and m0 in per_uid[u]["sq"]["m"]][:8], m0, sfail)
     info = _flush_arrays(partial, order, per_uid, cfg, enc_names, bool(cfg["sqgan"]["enabled"]))
     (partial / "uids.json").write_text(json.dumps(order), encoding="utf-8")
     with open(partial / "timings.jsonl", "w", encoding="utf-8") as fh:
@@ -493,7 +502,15 @@ def _decode_one(ctx, sq, uid, m, entry, shard_dir, sfail):
         arr = ctx.timer.run("decode_" + m_tag(m), [uid], lambda: sq.decode(entry["payload"], m), gpu=True)
     except Exception as exc:
         _stage_fail(sfail, "decode_" + m_tag(m), uid, exc)
+        entry.pop("orig", None)
         return
+    orig = entry.pop("orig", None)
+    if ctx.cfg["decode"].get("quality") and orig is not None and hasattr(sq, "quality"):   # LPIPS + recon mIoU (D6)
+        try:
+            q = ctx.timer.run("quality_" + m_tag(m), [uid], lambda: sq.quality(orig, arr), gpu=True)
+            entry["lpips"], entry["miou"] = float(q["lpips"]), float(q["miou"])
+        except Exception as exc:
+            _stage_fail(sfail, "quality_" + m_tag(m), uid, exc)
     try:
         d = shard_dir / ("recon_%s" % m_tag(m))
         d.mkdir(exist_ok=True)
@@ -503,6 +520,36 @@ def _decode_one(ctx, sq, uid, m, entry, shard_dir, sfail):
         entry["recon"] = rel
     except Exception as exc:
         _stage_fail(sfail, "recon_save", uid, exc)
+
+
+def _latency_shard(ctx, sq, shard_dir, payloads, m, sfail):
+    """Decode latency samples (seconds) per batch size, written to ``latency_samples.json`` in the shard.
+
+    The SQ-GAN decoder takes one packet per call, so a batch of B is B sequential decodes in one timed window
+    (same emulation as Codec.edge.sqgan_profile). Payloads cycle when fewer than B are available."""
+    prof, clock, sync = ctx.cfg["profile"], ctx.backends.clock, ctx.backends.sync or (lambda: None)
+    try:
+        if not payloads:
+            return
+        samples = {}
+        for b in sorted(set(int(x) for x in prof["batch_sizes"])):
+            batch = [payloads[i % len(payloads)] for i in range(b)]
+            for _ in range(int(prof["warmup"])):
+                for p in batch:
+                    sq.decode(p, m)
+            out = []
+            for _ in range(int(prof["repeats"])):
+                sync()
+                t0 = clock()
+                for p in batch:
+                    sq.decode(p, m)
+                sync()
+                out.append(float(clock() - t0))
+            samples[str(b)] = out
+        (shard_dir / "latency_samples.json").write_text(
+            json.dumps({"samples": samples, "m": m, "emulated_batching": True}), encoding="utf-8")
+    except Exception as exc:
+        _stage_fail(sfail, "latency", "shard", exc)
 
 
 # ------------------------------------------------------------------ manifest / summary
@@ -685,6 +732,8 @@ def main(argv=None):
     r.add_argument("--require-sqgan", action=argparse.BooleanOptionalAction, default=None,
                    help="exit non-zero if the SQ-GAN stage was skipped as a whole (default: on when SQ-GAN is enabled and not --smoke)")
     r.add_argument("--no-decode", action="store_true")
+    r.add_argument("--codec", choices=("v0", "v1"), default=None,
+                   help="v1: fine-tuned bundle from config/edge/codec.yaml; also records LPIPS, recon mIoU, decode latency")
     r.add_argument("--encoders", nargs="*", default=None, help="subset of grid.yaml encoders")
     g = sub.add_parser("export-grid")
     g.add_argument("--labels-root", default=None)
@@ -722,6 +771,10 @@ def main(argv=None):
         cfg["sqgan"]["enabled"] = False
     if a.no_decode:
         cfg["decode"]["enabled"] = False
+    if a.codec:
+        cfg["sqgan"]["codec"] = a.codec
+    if cfg["sqgan"].get("codec") == "v1":
+        cfg["decode"].update(quality=True, latency=True)
     if a.encoders is not None:
         cfg["embeddings"]["encoders"] = a.encoders
     from Codec.edge import feature_pass_backends as real

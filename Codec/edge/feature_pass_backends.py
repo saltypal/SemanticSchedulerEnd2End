@@ -16,6 +16,8 @@ from pathlib import Path
 
 import numpy as np
 
+from Evaluation.edge.edge_config import load_config
+
 
 def cuda_sync():
     try:
@@ -211,6 +213,18 @@ def restore_flat_bundle(flat_dir, dest):
     return bundle
 
 
+def v1_bundle_dir(base=KAGGLE_INPUT, codec_cfg=None):
+    """Mounted fine-tuned v1 bundle folder from ``codecs.v1`` of config/edge/codec.yaml (dataset slug + bundle_subdir)."""
+    v1 = (codec_cfg or load_config("codec"))["codecs"]["v1"]
+    slug = str(v1["kaggle_dataset"]).split("/")[-1]
+    if not slug:
+        raise ValueError("codecs.v1.kaggle_dataset is empty in config/edge/codec.yaml")
+    folder = find_dataset(slug, base) / v1.get("bundle_subdir", "")
+    if not (folder / "bundle.json").is_file():
+        raise FileNotFoundError("no bundle.json in %s (codecs.v1.bundle_subdir=%r)" % (folder, v1.get("bundle_subdir")))
+    return folder
+
+
 class RealSQGAN:
     """Backend with segment / encode / decode (see feature_pass.Backends)."""
 
@@ -218,7 +232,10 @@ class RealSQGAN:
         p = cfg["paths"]
         self.device = device
         base = p.get("input_base", KAGGLE_INPUT)
-        self.bundle = restore_flat_bundle(resolve_dataset(p.get("bundle_flat"), "sqgan-bundle", base), p["restore_dir"])
+        if cfg["sqgan"].get("codec") == "v1":
+            self.bundle = v1_bundle_dir(base)
+        else:
+            self.bundle = restore_flat_bundle(resolve_dataset(p.get("bundle_flat"), "sqgan-bundle", base), p["restore_dir"])
         self.source, self.source_mode = resolve_source_root(cfg, base=base)
         self.m_levels = list(cfg["sqgan"]["m_levels"])
         self._codecs = {}
@@ -250,6 +267,19 @@ class RealSQGAN:
         if len(calls) != 1 or "kept" not in mk:
             raise RuntimeError("expected one encoder call and a masker sample_index")
         return {"payload": payload, "kept": mk["kept"], "features": feat["features"][0].float().cpu().numpy()}
+
+    def quality(self, orig_arr, recon_arr):
+        """LPIPS (alex) and SegFormer mIoU of the reconstruction against the original, both HxWx3 uint8."""
+        from Codec.edge.codec_table import codec_seg_fn, recon_miou
+        import torch
+        if not hasattr(self, "_lpips"):
+            import lpips
+            self._lpips = lpips.LPIPS(net="alex").to(self.device).eval()
+        x, y = self._tensor(orig_arr), self._tensor(recon_arr)
+        with torch.no_grad():
+            lp = float(self._lpips(x * 2 - 1, y * 2 - 1).mean())
+        seg = codec_seg_fn(self._codec(self.m_levels[0]))
+        return {"lpips": lp, "miou": recon_miou(seg, x, y)}
 
     def decode(self, payload, m):
         t = self._codec(m).decode(payload)

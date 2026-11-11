@@ -23,12 +23,15 @@ hashes:
   phash_thumb: 128           # pHash runs on a 128x128 LANCZOS grayscale thumbnail (speed)
 sqgan:
   enabled: true
+  codec: v0                  # v1 = fine-tuned bundle of config/edge/codec.yaml (CLI --codec v1; the v1 notebook run)
   m_levels: [0.25, 0.55]     # SQ-GAN image/semantic token keep fractions
   input_hw: [256, 512]       # letterbox target (H, W): scale = min(W/w, H/h), centred, zero pad
   token_grid: [16, 32]       # 512 tokens -> 64-byte kept bitmap, 16x32 class grid
   pad_value: 0
 decode:
   enabled: true
+  quality: false             # LPIPS + SegFormer recon mIoU per decoded image (forced on by --codec v1)
+  latency: false             # decode latency samples per batch size in each shard (forced on by --codec v1)
   jpeg_quality: 95
 profile:
   batch_sizes: [1, 2, 4, 8]

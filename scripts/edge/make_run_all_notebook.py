@@ -2,6 +2,8 @@
 
 ``--which ab-embed`` (default): ``dataset-semschedule`` = datasets A, B, embeddings cache C and the grid.
 ``--which sqgan``: ``dataset-semschedule-sqgan`` = the SQ-GAN pass; reads A and B from the public datasets (no kernel source).
+Full mode also attaches the fine-tuned v1 bundle dataset (config/edge/codec.yaml) and runs ``--codec v1``; build it for the
+second account with ``--account win``.
 
 Thin notebooks: clone, quiet install, ``python -m parameters.edge.run_all --which W --mode <MODE>``, then copy
 the report, summary and logs to /kaggle/working top level. Regenerate the full run with ``--mode full``.
@@ -71,6 +73,9 @@ def build(mode=None, branch="main", account=None, which="ab-embed"):
                     bn._code(COLLECT.format(work=WORK))]
     account = account or cfg.get("default_account", "wsl")
     sources = DATASET_SOURCES if which == "ab-embed" else SQGAN_NB_SOURCES
+    if which == "sqgan" and mode == "full":            # fine-tuned v1 bundle (config/edge/codec.yaml), read by --codec v1
+        v1 = load_config("codec")["codecs"]["v1"]["kaggle_dataset"]
+        sources = sources + ((v1,) if v1 and v1 not in sources else ())
     meta = bn.build_metadata(cfg, account, step, title, True, sources)
     meta["machine_shape"] = "NvidiaTeslaT4"        # T4 x2, same key as the fine-tune notebook
     return nb, meta

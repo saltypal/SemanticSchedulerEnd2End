@@ -2,7 +2,10 @@
 
 Everything model-specific is injected as callables so tests use fakes:
   encode_fn(image)->(payload_bytes, kept_idx, seg_map); decode_fn(payload)->recon;
-  judge_fn(original, recon)->0/1; sts_fn(seg_map, kept_idx)->13 floats; lpips_fn optional.
+  judge_fn(original, recon)->0/1; sts_fn(seg_map, kept_idx)->13 floats; lpips_fn and miou_fn optional.
+Reconstruction mIoU (decision D6): ``miou_fn(original, recon)`` = ``recon_miou(seg_fn, original, recon)`` where
+``seg_fn(image)`` returns the 20-class map of the SegFormer teacher (``codec_seg_fn`` uses the codec's own teacher,
+which projects to 20 classes for v1 bundles); injectable so tests use a fake.
 ``encode_with_kept_tokens`` is the real-codec encode_fn (masker hook, same pattern as
 Codec.integration.sqgan_prefeatures). ``run_table`` is resumable, flushes each row, and shards by hash parity.
 """
@@ -54,7 +57,41 @@ def encode_with_kept_tokens(codec, image, semantic=None):
     return payload, holder["kept"], seg
 
 
-def build_rows(items, encode_fn, decode_fn, judge_fn, sts_fn, codec_tag="v0", lpips_fn=None):
+def miou(map_a, map_b, n_classes=20):
+    """Mean IoU between two integer class maps over classes present in either map (1.0 if both are empty)."""
+    import numpy as np
+    a, b = np.asarray(map_a), np.asarray(map_b)
+    if a.shape != b.shape:
+        raise ValueError("class maps differ in shape: %r vs %r" % (a.shape, b.shape))
+    ious = []
+    for c in range(n_classes):
+        ia, ib = a == c, b == c
+        union = int(np.logical_or(ia, ib).sum())
+        if union:
+            ious.append(int(np.logical_and(ia, ib).sum()) / union)
+    return float(np.mean(ious)) if ious else 1.0
+
+
+def recon_miou(seg_fn, original, recon, n_classes=20):
+    """SegFormer mIoU of the reconstruction against the original: the same teacher on both images."""
+    return miou(seg_fn(original), seg_fn(recon), n_classes)
+
+
+def codec_seg_fn(codec):
+    """seg_fn from a loaded codec: its frozen teacher, projected to the 20 codec classes (v1) -> (H, W) int map."""
+    return lambda image: codec.semantic_map(image).argmax(1)[0].cpu().numpy()
+
+
+def mean_quality(rows):
+    """Mean of the per-image ``lpips`` and ``recon_miou`` values that are present."""
+    out = {}
+    for key in ("lpips", "recon_miou"):
+        vals = [r[key] for r in rows if key in r]
+        out[key] = sum(vals) / len(vals) if vals else None
+    return out
+
+
+def build_rows(items, encode_fn, decode_fn, judge_fn, sts_fn, codec_tag="v0", lpips_fn=None, miou_fn=None):
     """Yield one row per (image_id, image)."""
     for image_id, image in items:
         payload, kept, seg = encode_fn(image)
@@ -64,6 +101,8 @@ def build_rows(items, encode_fn, decode_fn, judge_fn, sts_fn, codec_tag="v0", lp
                "fidelity": int(judge_fn(image, recon)), "codec": codec_tag}
         if lpips_fn is not None:
             row["lpips"] = float(lpips_fn(image, recon))
+        if miou_fn is not None:
+            row["recon_miou"] = float(miou_fn(image, recon))
         yield row
 
 
@@ -122,8 +161,9 @@ def main(argv=None):
         e = extract_dino_embeddings([to_np(orig), to_np(rec)], "facebook/dinov2-base", 2, a.device)
         return int(judge.predict(e[:1])[0] == judge.predict(e[1:])[0])
     items = ((p.stem, load(p)) for p in paths)
+    seg_fn = codec_seg_fn(codec)
     run_table(items, a.out, shard, encode_fn=lambda im: encode_with_kept_tokens(codec, im), decode_fn=codec.decode,
-              judge_fn=judge_fn, sts_fn=compute_sts)
+              judge_fn=judge_fn, sts_fn=compute_sts, miou_fn=lambda o, r: recon_miou(seg_fn, o, r))
 
 
 if __name__ == "__main__":

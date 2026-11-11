@@ -4,8 +4,9 @@
 
 ``ab-embed`` (notebook ``dataset-semschedule``): env, A (images), B (labels), C_features (embeddings of all 5
 encoders + SimHash + pHash, ``--no-sqgan``, 2-way GPU sharded), C_grid, publish. No SQ-GAN anywhere.
-``sqgan`` (notebook ``dataset-semschedule-sqgan``): env, S_locate (finds A and B in the output of notebook 1
-under /kaggle/input), S_sqgan (``--only-sqgan --require-sqgan``, 2-way GPU sharded), checks (pilot only, the
+``sqgan`` (notebook ``dataset-semschedule-sqgan``): env, S_locate (finds A and B under /kaggle/input: the public
+datasets scheduler-dataset-v1-images / -labels), S_sqgan (``--only-sqgan --require-sqgan``; full mode adds ``--codec v1``,
+the fine-tuned bundle of config/edge/codec.yaml, with LPIPS, recon mIoU, decode latency; 2-way GPU sharded), checks (pilot only, the
 SQ-GAN related ones), publish (``scheduler-dataset-v1-sqgan``, needs a Kaggle Secret).
 
 Every stage is a SEPARATE SUBPROCESS. A failed stage is recorded, stages that depend on it are marked
@@ -80,8 +81,8 @@ def locate_inputs(root="/kaggle/input", depth=LOCATE_DEPTH):
                 what, len(hits), fname, root, "".join("\n    " + str(h) for h in hits)))
     if problems:
         raise LocateError(
-            "cannot locate the notebook-1 output. Run notebook '%s' (pilot or full) first and keep it attached as a "
-            "kernel source of this notebook.\n  %s" % (NOTEBOOK1, "\n  ".join(problems)))
+            "cannot locate dataset A / B. Attach the public datasets scheduler-dataset-v1-images and "
+            "scheduler-dataset-v1-labels (or the output of notebook '%s') as sources.\n  %s" % (NOTEBOOK1, "\n  ".join(problems)))
     return found
 
 
@@ -247,7 +248,7 @@ def _sqgan_stages(pil, work, py, input_root, env_stage):
                "argvs": [[py, "-c", LOCATE_CODE, str(work), str(input_root)]]},
               {"name": "S_sqgan", "timeout": 8 * 3600, "expect": [cache / "summary.json"], "cache_dir": cache,
                "parallel": lambda n_gpu: _feature_parts(py, *located(), cache, pil, n_gpu,
-                                                        ["--only-sqgan", "--require-sqgan"]),
+                                                        ["--only-sqgan", "--require-sqgan"] + ([] if pil else ["--codec", "v1"])),
                "argvs": [[py, "-c", MERGE_CODE, str(cache)]]}]
     if pil:
         parts = pilot.check_stages(work, py, SQGAN_CHECKS)

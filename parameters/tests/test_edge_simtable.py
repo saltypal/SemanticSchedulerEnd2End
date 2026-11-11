@@ -1,3 +1,5 @@
+import json
+
 import numpy as np
 
 from parameters.edge import simtable as st
@@ -54,3 +56,53 @@ def test_build_rows_validate_and_follow_v3_mapping():
     assert all(r["fidelity"] == 1 and r["sts"] == [] and r["mission"] == 1 for r in out)
     assert all(len(r["relevance_by_mission"]) == 2 and r["relevance"] == r["relevance_by_mission"][1] for r in out)
     assert rep["spi"]["test_scored"] is False and rep["spi"]["val"]["n"] == 48
+
+
+def _c2(tmp_path, ids, bad=()):
+    """A feature-pass cache folder (one shard, m 0.25 and 0.55) for ``ids``."""
+    sh = tmp_path / "c2" / "shards" / "shard_0000"
+    sh.mkdir(parents=True)
+    n = len(ids)
+    (sh / "uids.json").write_text(json.dumps(ids))
+    np.save(sh / "sqgan_ok.npy", np.array([[i not in bad, i not in bad] for i in range(n)]))
+    for tag, size in (("m0.25", 100), ("m0.55", 220)):
+        np.save(sh / ("offsets_%s.npy" % tag), np.arange(n + 1, dtype=np.int64) * size)
+    np.save(sh / "sts_m0.25.npy", np.tile(np.linspace(0, 1, 13, dtype=np.float32), (n, 1)))
+    np.save(sh / "lpips_m0.25.npy", np.full(n, 0.12, np.float32))
+    np.save(sh / "miou_m0.25.npy", np.full(n, 0.8, np.float32))
+    (sh / "latency_samples.json").write_text(json.dumps({"samples": {"1": [0.01, 0.02], "2": [0.03]}}))
+    return tmp_path / "c2"
+
+
+def _table():
+    rows, splits, cache = _fake()
+    return st.build(rows, splits, cache, np.eye(2, 8), MISSIONS, {"simhash_max": 1, "phash_max": 8})[0]
+
+
+def test_fill_codec_merges_by_image_id_and_reports_missing(tmp_path):
+    from Evaluation.edge.tables import latency_from_profile_json, validate_row
+    table = _table()
+    ids = [r["image_id"] for r in table]
+    c2, samples = st.load_c2(_c2(tmp_path, ids[:-2] + ["not-in-table"], bad=(0,)))
+    out, rep, lat = st.fill_codec(table, c2, samples)
+    by = {r["image_id"]: r for r in out}
+    f = by[ids[1]]
+    assert f["payload_source"] == "sqgan_v1" and f["payload_bytes"] == 100 and f["payload_bytes_by_m"] == {"0.25": 100, "0.55": 220}
+    assert len(f["sts"]) == 13 and abs(f["lpips"] - 0.12) < 1e-6 and abs(f["recon_miou"] - 0.8) < 1e-6
+    assert by[ids[0]]["payload_source"] == "placeholder" and by[ids[0]]["sts"] == []     # C2 flagged image 0 as failed
+    assert rep["filled"] == len(ids) - 3 and rep["missing_from_c2"] == 3 and rep["c2_not_in_table"] == 1
+    assert all(validate_row(dict(r)) for r in out)
+    p = tmp_path / "latency_v1.json"
+    p.write_text(json.dumps(lat))
+    assert latency_from_profile_json(p) is not None and lat["samples"]["1"] == [0.01, 0.02]
+
+
+def test_fill_codec_cli_writes_outputs(tmp_path):
+    table = _table()
+    tpath = tmp_path / "simtable_v1.jsonl"
+    tpath.write_text("\n".join(json.dumps(r) for r in table) + "\n")
+    rep = st.main(["fill-codec", "--table", str(tpath), "--c2", str(_c2(tmp_path, [r["image_id"] for r in table])),
+                   "--out", str(tmp_path / "o")])
+    assert rep["filled"] == len(table)
+    assert json.loads((tmp_path / "o" / "latency_v1.json").read_text())["samples"]["2"] == [0.03]
+    assert (tmp_path / "o" / "simtable_v1.jsonl").exists() and (tmp_path / "o" / "codec_fill_report.json").exists()

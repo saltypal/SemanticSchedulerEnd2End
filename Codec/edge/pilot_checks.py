@@ -700,6 +700,8 @@ def check_payload_semantic_map(ctx):
     d["bundle_has_seg_classes"] = has_seg
     try:
         src = inspect.getsource(codec.semantic_map)
+        if hasattr(codec, "_one_hot_from_logits"):
+            src += inspect.getsource(codec._one_hot_from_logits)
     except (OSError, TypeError):
         src = ""
     d["reader_calls_project_logits"] = "project_logits" in src

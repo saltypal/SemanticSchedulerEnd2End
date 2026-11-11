@@ -58,3 +58,31 @@ def test_jpeg_ladder_monotone():
     sizes = [r["payload_bytes"] for r in sorted(rows, key=lambda r: r["quality"])]
     assert sizes == sorted(sizes) and sizes[0] < sizes[-1]
     assert rows[0]["sts"] == [] and rows[0]["sts_available"] is False
+
+
+def test_miou_classes_present_in_either_map():
+    a = np.array([[0, 0, 1, 1], [0, 0, 1, 1]])
+    assert ct.miou(a, a) == 1.0
+    b = np.array([[0, 0, 0, 0], [0, 0, 1, 1]])         # class 0: 4/6 ; class 1: 2/4
+    assert abs(ct.miou(a, b) - (4 / 6 + 2 / 4) / 2) < 1e-9
+    c = np.array([[2, 2, 2, 2], [2, 2, 2, 2]])         # disjoint: class 2 appears only in c
+    assert ct.miou(a, c) == 0.0
+
+
+def test_recon_miou_uses_injected_segformer_on_both_images():
+    calls = []
+
+    def seg_fn(img):
+        calls.append(img)
+        return np.full((4, 4), int(img))
+    assert ct.recon_miou(seg_fn, 3, 3) == 1.0 and ct.recon_miou(seg_fn, 3, 4) == 0.0
+    assert calls[:2] == [3, 3]
+
+
+def test_build_rows_adds_recon_miou_and_mean_quality():
+    rows = list(ct.build_rows([("a", 1), ("b", 2)], lambda im: (b"x" * 5, [0], np.zeros((256, 512), int)),
+                              lambda p: 0, lambda o, r: 1, lambda s, k: [0.0] * 13,
+                              lpips_fn=lambda o, r: 0.2, miou_fn=lambda o, r: 0.5 * o))
+    assert [r["recon_miou"] for r in rows] == [0.5, 1.0]
+    q = ct.mean_quality(rows)
+    assert abs(q["lpips"] - 0.2) < 1e-9 and abs(q["recon_miou"] - 0.75) < 1e-9

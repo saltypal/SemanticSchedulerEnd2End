@@ -451,3 +451,31 @@ def test_notebook_install_cell_has_lpips():
     nb, _ = mk.build()
     install = ["".join(c["source"]) for c in nb["cells"] if "pip install" in "".join(c["source"])]
     assert install and "lpips" in install[0]
+
+
+class QualitySQ(FakeSQ):
+    def quality(self, orig, recon):
+        return {"lpips": 0.1, "miou": 0.9}
+
+
+def test_v1_quality_and_latency_outputs(tmp_path):
+    root, rows = _dataset(tmp_path, n=6)
+    cfg = _make_cfg()
+    cfg["decode"].update(quality=True, latency=True)
+    cfg["profile"].update(batch_sizes=[1, 2], repeats=3, warmup=1)
+    ctx, _ = _ctx(root, tmp_path / "o", cfg)
+    ctx.backends.sqgan_factory = QualitySQ
+    fp.run(ctx, rows)
+    for s in _shards(tmp_path / "o"):
+        n = len(json.loads((s / "uids.json").read_text()))
+        for tag in ("m0.25", "m0.55"):
+            assert np.allclose(np.load(s / ("lpips_%s.npy" % tag)), 0.1) and len(np.load(s / ("miou_%s.npy" % tag))) == n
+        lat = json.loads((s / "latency_samples.json").read_text())["samples"]
+        assert sorted(lat) == ["1", "2"] and all(len(v) == 3 for v in lat.values())
+
+
+def test_quality_files_absent_by_default(tmp_path):
+    root, rows = _dataset(tmp_path, n=4)
+    ctx, _ = _ctx(root, tmp_path / "o", _make_cfg())
+    fp.run(ctx, rows)
+    assert not list((tmp_path / "o").rglob("lpips_*.npy")) and not list((tmp_path / "o").rglob("latency_samples.json"))

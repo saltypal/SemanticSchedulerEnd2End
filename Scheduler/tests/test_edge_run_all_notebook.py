@@ -64,3 +64,10 @@ def test_cells_are_quiet_and_collect_outputs():
                        "PILOT_REPORT.md", "RUN_SUMMARY.md", "logs"):
             assert needle in text, (which, needle)
         assert "tqdm" not in text.replace("TQDM_DISABLE", "").lower()
+
+
+def test_sqgan_full_mode_attaches_v1_bundle():
+    meta = mk.build(mode="full", which="sqgan", account="win")[1]
+    assert "satyapaladugu/scheduler-sqgan-v1" in meta["dataset_sources"]
+    assert "satyapaladuguplus/scheduler-dataset-v1-images" in meta["dataset_sources"]
+    assert "satyapaladugu/scheduler-sqgan-v1" not in mk.build(mode="pilot", which="sqgan")[1]["dataset_sources"]
