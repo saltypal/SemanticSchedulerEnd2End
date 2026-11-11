@@ -96,7 +96,7 @@ class EdgeEnv:
                     grp = job.truth.dup_group
                     dup = grp is not None and grp in delivered_groups
                     zeta = (spec.zeta_critical_copy if k == 0 else 0.0) if dup else 1.0
-                    v = spec.weights[k] * job.truth.fidelity * spec.g(k, d) * zeta
+                    v = spec.weights[k] * spec.g(k, d) * zeta      # D5: fidelity dropped, v = w*g*zeta
                     rows[job.id] = self._row(job, "decoded", now, start, len(batch), v, dup)
                     if grp is not None:
                         delivered_groups.add(grp)

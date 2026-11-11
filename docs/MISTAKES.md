@@ -5,6 +5,8 @@ Newest first. Keep rows short; link the commit or file where useful.
 
 | # | Date | What went wrong | Root cause | Fix | Status |
 |---|---|---|---|---|---|
+| 38 | 2026-11-11 | Simulator value and genie still used true fidelity after D5 | W-ALG changed the metric only; `env.py` value and `GenieSVDPP._view` kept `truth.fidelity` | v = w·g·ζ in env; genie uses u = 1 | FIXED |
+| 37 | 2026-11-11 | D: filled up (1.2 GB free); 8 dataset tests failed writing fake images | Git Bash rewrote `!/experiments/` to `C:/Program Files/Git/experiments/`, so "sparse" worker worktrees held the full 2 GB `experiments/` | `MSYS_NO_PATHCONV=1` for `git sparse-checkout set`; finished worktree removed | FIXED |
 | 36 | 2026-11-11 | Random S2c pair sampling gave only 3 real copies and 0 same-tweet pairs out of 353 | uniform random pairs almost never land on near-duplicates | mined candidates: pHash/SimHash nearest neighbours + same-tweet + random (`dup_pairs.mined_candidates`): 116 copies, 54 same-tweet | FIXED |
 | 35 | 2026-11-11 | `obtain_source` would crash right after a successful GitHub clone on Kaggle | `fetch_pinned` returns the folder; caller used it as the commit string (`str + Path`) | banner uses the verified pin; test passes | FIXED |
 | 34 | 2026-11-11 | Edge test run took 9 min and one test failed | `source_root` check now falls back to a real git clone when nothing is mounted; the unit test hit the network | test injects a fake clone; asserts the real requirement (source zip must be mounted) | FIXED |

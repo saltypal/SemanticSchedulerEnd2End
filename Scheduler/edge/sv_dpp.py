@@ -150,7 +150,7 @@ class SVDPP(Policy):
 
 
 class GenieSVDPP(SVDPP):
-    """Reference only: reads ground truth (true tier one-hot, true fidelity, delivered-dup flag).
+    """Reference only: reads ground truth (true tier one-hot, delivered-dup flag). Fidelity is dropped (D5).
 
     This is the ONLY policy in this module that touches ``Truth``; ``SVDPP`` never does.
     """
@@ -179,7 +179,7 @@ class GenieSVDPP(SVDPP):
     def _view(self, job):
         t = self.truth[job.id]
         dup = 1.0 if (t.dup_group is not None and t.dup_group in self._delivered) else 0.0
-        return self._probs(job.id, None), float(t.fidelity), dup
+        return self._probs(job.id, None), 1.0, dup     # D5: fidelity dropped (u = 1)
 
 
 POLICIES = {"sv_dpp": SVDPP, "genie_sv_dpp": GenieSVDPP}
