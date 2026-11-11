@@ -101,6 +101,36 @@ def write_csv(pairs, path):
             w.writerow(list(p) + [""])
 
 
+def label_by_rule(pairs, sem_max, perc_max):
+    """Decision D14: duplicate iff SimHash distance <= sem_max or pHash distance <= perc_max (rows of the CSV)."""
+    return [dict(p, label="duplicate" if int(p["d_sem"]) <= sem_max or int(p["d_perc"]) <= perc_max else "distinct")
+            for p in pairs]
+
+
+def fit_receiver(candidates_csv, table_jsonl, out_json, sem_max, perc_max):
+    """S5: rule-label the candidates, fit the receiver P(dup) logistic, report overall + per-event ROC-AUC."""
+    import json
+    from Evaluation.edge import receiver_models as rm
+    with open(candidates_csv, newline="", encoding="utf-8") as f:
+        pairs = label_by_rule(list(csv.DictReader(f)), sem_max, perc_max)
+    rows = {}
+    with open(table_jsonl, encoding="utf-8") as f:
+        for line in f:
+            r = json.loads(line)
+            rows[r["image_id"]] = r
+    pairs = [p for p in pairs if p["id_a"] in rows and p["id_b"] in rows]
+    sem = {k: v["sem_key"] for k, v in rows.items()}
+    per = {k: v["perc_key"] for k, v in rows.items()}
+    model, auc = rm.fit_dup_model(pairs, sem, per)
+    scores = rm.dup_scores(model, [int(p["d_sem"]) for p in pairs], [int(p["d_perc"]) for p in pairs])
+    labels = [1 if p["label"] == "duplicate" else 0 for p in pairs]
+    events = [rows[p["id_a"]]["event"] or "everyday" for p in pairs]
+    rm.save_models(out_json, dup=model)
+    return {"n_pairs": len(pairs), "n_duplicate": sum(labels), "auc": auc,
+            "per_event_auc": rm.per_event_auc(scores, labels, events),
+            "model": {"a": model.a, "b1": model.b1, "b2": model.b2}, "labels": "rule-based (D14)"}
+
+
 def load_labelled(path):
     """Read a labelled CSV; every label must be ``duplicate`` or ``distinct``."""
     with open(path, newline="", encoding="utf-8") as f:

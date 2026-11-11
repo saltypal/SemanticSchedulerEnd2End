@@ -23,3 +23,9 @@ def test_rows_without_keys_are_kept_and_reported():
     labels = [_row("a", "e_tr"), _row("z", "e_te")]
     splits, report, _ = freeze(labels, {"a": (0, 0)}, CFG)
     assert splits["z"] == "test" and report["no_keys"] == ["z"]
+
+
+def test_label_by_rule_d14():
+    from parameters.edge.dup_pairs import label_by_rule
+    out = label_by_rule([{"d_sem": "1", "d_perc": "30"}, {"d_sem": "9", "d_perc": "8"}, {"d_sem": "2", "d_perc": "9"}], 1, 8)
+    assert [p["label"] for p in out] == ["duplicate", "duplicate", "distinct"]
