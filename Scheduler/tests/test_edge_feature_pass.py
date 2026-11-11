@@ -265,6 +265,47 @@ def test_find_data_root(tmp_path):
         fp.find_data_root("labels_raw.jsonl", tmp_path, 3)
 
 
+# ---------------------------------------------------------------- full segmentation map
+
+def test_segmap_roundtrip_and_grid_recompute(tmp_path):
+    from parameters.edge import sts as sts_mod
+    root, rows = _dataset(tmp_path, n=6)
+    out = tmp_path / "o"
+    summ = fp.run(_ctx(root, out, _make_cfg(shard_size=10))[0], rows)
+    s = _shards(out)[0]
+    seg = np.load(s / "segmap_u8.npz")["seg"]
+    grid = np.load(s / "class_grid.npy")
+    assert seg.shape == (6, 256, 512) and seg.dtype == np.uint8 and seg.max() <= 19
+    for i in range(6):
+        assert np.array_equal(sts_mod.majority_vote_grid(seg[i], 16), grid[i])
+    done = json.loads((s / "done.json").read_text())
+    assert done["segmap_saved"] is True and done["segmap_shape"] == [6, 256, 512] and done["segmap_mb"] > 0
+    assert summ["segmap_saved"] is True and summ["segmap_shape"] == ["N", 256, 512] and summ["segmap_mb"] > 0
+    # exact round trip against the teacher output the fake produces for image 0
+    uid0 = json.loads((s / "uids.json").read_text())[0]
+    img = fp._load_image(root, next(r for r in rows if r["uid"] == uid0))
+    arr, _ = fp.letterbox(img, (256, 512), 0)
+    assert np.array_equal(seg[0], ((arr[..., 0].astype(np.int64) // 13) % 20).astype(np.uint8))
+
+
+def test_segmap_zero_rows_when_sqgan_failed(tmp_path):
+    root, rows = _dataset(tmp_path, n=4)
+    out = tmp_path / "o"
+    fp.run(_ctx_sq(root, out, _make_cfg(shard_size=10), RaisingSegSQ()), rows)
+    s = _shards(out)[0]
+    seg = np.load(s / "segmap_u8.npz")["seg"]
+    assert seg.shape == (4, 256, 512) and not seg.any() and not np.load(s / "sqgan_ok.npy").any()
+
+
+def test_segmap_compresses_smooth_map(tmp_path):
+    seg = np.zeros((20, 256, 512), np.uint8)
+    seg[:, :, 200:] = 5
+    p = tmp_path / "s.npz"
+    np.savez_compressed(p, seg=seg)
+    assert p.stat().st_size < seg.nbytes / 50
+    assert np.array_equal(np.load(p)["seg"], seg)
+
+
 # ---------------------------------------------------------------- stage isolation
 
 class RaisingSegSQ(FakeSQ):

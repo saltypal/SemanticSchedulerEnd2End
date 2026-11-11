@@ -181,7 +181,7 @@ def test_judge_dino_with_fake_extractor(tmp_path):
     assert r["status"] == "pass", r["error"] or r["items"]
 
 
-def make_smoke(root, good=True):
+def make_smoke(root, good=True, with_segmap=True):
     from Codec.edge.feature_pass import m_tag
     cache = root / "cache"
     s = cache / "shards" / "shard_0000"
@@ -189,8 +189,16 @@ def make_smoke(root, good=True):
     tags = [m_tag(m) for m in pc._cfg("feature_pass")["sqgan"]["m_levels"]]
     (s / "done.json").write_text("{}")
     (s / "failures.json").write_text("[]")
-    for f in ("phash64", "simhash64", "sqgan_ok", "class_grid", "prefeat_meanmax"):
+    for f in ("phash64", "simhash64", "prefeat_meanmax"):
         np.save(s / (f + ".npy"), np.zeros(2))
+    from parameters.edge.sts import majority_vote_grid
+    seg = np.zeros((2, 256, 512), np.uint8)
+    seg[:, :, 256:] = 7
+    seg[1, :64] = 3
+    np.save(s / "sqgan_ok.npy", np.array([[True, True], [True, True]]))
+    np.save(s / "class_grid.npy", np.stack([majority_vote_grid(x, 16) for x in seg]).astype(np.uint8))
+    if with_segmap:
+        np.savez_compressed(s / "segmap_u8.npz", seg=seg)
     for t in tags:
         for a in ("offsets", "kept_bitmap", "sts"):
             np.save(s / ("%s_%s.npy" % (a, t)), np.zeros(2))
@@ -210,9 +218,29 @@ def test_smoke_verify_pass_and_fail(tmp_path):
     make_smoke(good)
     r = pc.run_check("feature_pass_smoke_verify", ctx(good))
     assert r["status"] == "pass", r["items"]
+    assert r["items"]["feature_pass_segmap_saved"]["status"] == "pass"
+    assert r["items"]["feature_pass_segmap_matches_grid"]["status"] == "pass"
     make_smoke(bad, good=False)
     r = pc.run_check("feature_pass_smoke_verify", ctx(bad))
     assert r["status"] == "fail" and r["items"]["feature_pass_timings_stages"]["status"] == "fail"
+
+
+def test_smoke_verify_segmap_missing_and_mismatch(tmp_path):
+    miss, bad = tmp_path / "m", tmp_path / "x"
+    miss.mkdir()
+    bad.mkdir()
+    make_smoke(miss, with_segmap=False)
+    r = pc.run_check("feature_pass_smoke_verify", ctx(miss))
+    assert r["status"] == "fail" and r["items"]["feature_pass_segmap_saved"]["status"] == "fail"
+    make_smoke(bad)
+    g = bad / "cache/shards/shard_0000/class_grid.npy"
+    arr = np.load(g)
+    arr[0, 0, 0] = 19
+    np.save(g, arr)
+    r = pc.run_check("feature_pass_smoke_verify", ctx(bad))
+    assert r["items"]["feature_pass_segmap_saved"]["status"] == "pass"
+    assert r["items"]["feature_pass_segmap_matches_grid"]["status"] == "fail"
+    assert r["details"]["segmap_grid_mismatches"] == 1
 
 
 def test_report_table_has_correct_statuses(tmp_path):

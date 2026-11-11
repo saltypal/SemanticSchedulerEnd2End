@@ -41,6 +41,7 @@ from parameters.edge import features, sts as sts_mod
 from parameters.edge.embedding_grid import disk_guard
 
 N_TOKENS = 512
+SEGMAP_FILE = "segmap_u8.npz"     # key "seg": (N,256,512) uint8 teacher class map, 0..19, zeros where sqgan failed
 
 
 # ------------------------------------------------------------------ small pure helpers
@@ -293,7 +294,8 @@ def _sq_one(ctx, sq, uid, img, m_levels, hw, grid, sfail):
     except Exception as exc:
         _stage_fail(sfail, "sqgan_segment", uid, exc)
         return None
-    res = {"letterbox": lb, "class_grid": cls.astype(np.uint8), "m": {}, "prefeat": None}
+    res = {"letterbox": lb, "class_grid": cls.astype(np.uint8), "segmap": np.asarray(cmap).astype(np.uint8),
+           "m": {}, "prefeat": None}
     for m in m_levels:
         try:
             enc = ctx.timer.run("sqgan_encode_" + m_tag(m), [uid], lambda m=m: sq.encode(arr, handle, m), gpu=True)
@@ -314,8 +316,9 @@ def _sq_one(ctx, sq, uid, img, m_levels, hw, grid, sfail):
 def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
     """Write all aligned arrays for the readable images (uids order). Failed stages get a False flag + zero rows."""
     n = len(uids)
+    info = {}
     if n == 0:
-        return
+        return info
     for name in enc_names:
         ok = np.array([name in per_uid[u]["emb"] for u in uids])
         np.save(shard_dir / ("emb_%s_ok.npy" % name), ok)
@@ -333,7 +336,7 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
         np.save(shard_dir / "simhash64.npy", u64([0 if p is None else p for p in sh]))
         np.save(shard_dir / "simhash_ok.npy", np.array([p is not None for p in sh]))
     if not sq_enabled:
-        return
+        return info
     m_levels = cfg["sqgan"]["m_levels"]
     ok = np.array([[bool(per_uid[u]["sq"] and m in per_uid[u]["sq"]["m"]) for m in m_levels] for u in uids])
     np.save(shard_dir / "sqgan_ok.npy", ok.reshape(n, len(m_levels)))
@@ -342,6 +345,13 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
     np.save(shard_dir / "letterbox.npy", np.stack([z(u)["letterbox"] if z(u) else np.zeros(7, np.float32) for u in uids]))
     np.save(shard_dir / "class_grid.npy", np.stack(
         [z(u)["class_grid"] if z(u) else np.zeros(tuple(grid), np.uint8) for u in uids]))
+    seg = np.zeros((n,) + tuple(cfg["sqgan"]["input_hw"]), np.uint8)       # rows of failed segmentation stay zero
+    for i, u in enumerate(uids):
+        if z(u):
+            seg[i] = z(u)["segmap"]
+    np.savez_compressed(shard_dir / SEGMAP_FILE, seg=seg)
+    info["segmap_shape"] = list(seg.shape)
+    info["segmap_mb"] = round((shard_dir / SEGMAP_FILE).stat().st_size / 1e6, 4)
     dim = next((z(u)["prefeat"].size for u in uids if z(u) and z(u)["prefeat"] is not None), 0)
     np.save(shard_dir / "prefeat_meanmax.npy", np.stack(
         [z(u)["prefeat"] if z(u) and z(u)["prefeat"] is not None else np.zeros(dim, np.float16) for u in uids])
@@ -362,6 +372,7 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
         if cfg["decode"]["enabled"]:
             np.save(shard_dir / ("decode_ok_%s.npy" % tag), np.array(
                 [bool(z(u) and m in z(u)["m"] and z(u)["m"][m]["recon"]) for u in uids]))
+    return info
 
 
 def process_shard(ctx, idx, rows):
@@ -426,7 +437,7 @@ def process_shard(ctx, idx, rows):
         for u, _ in items:
             per_uid[u] = rec[u]
             order.append(u)
-    _flush_arrays(partial, order, per_uid, cfg, enc_names, bool(cfg["sqgan"]["enabled"]))
+    info = _flush_arrays(partial, order, per_uid, cfg, enc_names, bool(cfg["sqgan"]["enabled"]))
     (partial / "uids.json").write_text(json.dumps(order), encoding="utf-8")
     with open(partial / "timings.jsonl", "w", encoding="utf-8") as fh:
         for row in ctx.timer.drain():
@@ -438,6 +449,8 @@ def process_shard(ctx, idx, rows):
             "n_stage_failures": sum(r["count"] for r in stage_rows), "encoders": enc_ok,
             "skipped": dict(ctx.skipped), "m_levels": m_levels if ctx.sqgan() is not None else [],
             "seconds": time.time() - t_shard}
+    if "segmap_shape" in info:
+        done.update(segmap_saved=True, segmap_shape=info["segmap_shape"], segmap_mb=info["segmap_mb"])
     (partial / "done.json").write_text(json.dumps(done, indent=1), encoding="utf-8")
     os.replace(partial, final)
     return done
@@ -497,6 +510,7 @@ def summarize(out_dir):
     """Aggregate every finished shard: counts, failures (bad images listed), mean non-warm-up ms per stage."""
     shards = sorted(Path(out_dir, "shards").glob("shard_????"))
     tot, fails, stage_rows, stage_ms, skipped = Counter(), [], [], {}, {}
+    seg_flags, seg_shapes, seg_mb = [], set(), 0.0
     for s in shards:
         if not (s / "done.json").exists():
             continue
@@ -505,6 +519,11 @@ def summarize(out_dir):
         tot["requested"] += d["n_requested"]
         tot["ok"] += d["n_ok"]
         skipped.update(d.get("skipped", {}))
+        if d.get("m_levels"):
+            seg_flags.append(bool(d.get("segmap_saved")))
+            seg_mb += float(d.get("segmap_mb", 0.0))
+            if d.get("segmap_shape"):
+                seg_shapes.add(tuple(d["segmap_shape"][1:]))
         for r in json.loads((s / "failures.json").read_text(encoding="utf-8")):
             (stage_rows if "count" in r else fails).append(r)      # stage-level rows carry a count; image rows do not
         for line in (s / "timings.jsonl").read_text(encoding="utf-8").splitlines():
@@ -515,6 +534,9 @@ def summarize(out_dir):
     summary = {"counts": dict(tot), "n_failures": len(fails), "failures": fails, "skipped": skipped,
                "n_stage_failures": sum(r["count"] for r in stage_failures), "stage_failures": stage_failures,
                "stage_mean_ms": {k: float(np.mean(v)) for k, v in sorted(stage_ms.items())}}
+    if seg_flags:
+        summary.update(segmap_saved=all(seg_flags), segmap_shape=["N"] + list(next(iter(seg_shapes), ())),
+                       segmap_mb=round(seg_mb, 3))
     Path(out_dir, "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     return summary
 

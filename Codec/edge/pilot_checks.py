@@ -908,8 +908,36 @@ def check_feature_pass_smoke_verify(ctx):
         items["feature_pass_compute_profile_flops"] = item("pass" if not zero and p else "fail", "flops<=0 for %s" % zero)
     else:
         items["feature_pass_compute_profile_flops"] = item("fail", "compute_profile.json missing")
+    seg_missing, seg_bad, seg_mismatch, seg_checked, seg_mb = [], [], 0, 0, 0.0
+    for s in shards:
+        if not (s / "sqgan_ok.npy").exists():
+            continue                                    # SQ-GAN stage did not run in this shard
+        sf = s / "segmap_u8.npz"
+        if not sf.exists():
+            seg_missing.append(s.name)
+            continue
+        seg_mb += sf.stat().st_size / 1e6
+        try:
+            from parameters.edge.sts import majority_vote_grid
+            seg = np.load(sf)["seg"]
+            grid = np.load(s / "class_grid.npy")
+            ok = np.load(s / "sqgan_ok.npy").reshape(len(seg), -1).any(axis=1)
+            if seg.shape != (len(grid), 256, 512) or seg.dtype != np.uint8 or (seg.size and int(seg.max()) > 19):
+                seg_bad.append("%s shape %s dtype %s" % (s.name, seg.shape, seg.dtype))
+                continue
+            for i in np.flatnonzero(ok):
+                seg_checked += 1
+                if not np.array_equal(majority_vote_grid(seg[i], 256 // grid.shape[1]), grid[i]):
+                    seg_mismatch += 1
+        except Exception as exc:
+            seg_bad.append("%s: %r" % (s.name, exc))
+    d.update(segmap_mb=round(seg_mb, 3), segmap_images_checked=seg_checked, segmap_grid_mismatches=seg_mismatch)
+    items["feature_pass_segmap_saved"] = item("pass" if not seg_missing and not seg_bad else "fail",
+                                              "segmap_u8.npz missing in %s; bad (shape/dtype/values) %s; %.2f MB" % (seg_missing, seg_bad[:3], seg_mb))
+    items["feature_pass_segmap_matches_grid"] = item("pass" if not seg_missing and not seg_bad and not seg_mismatch else "fail",
+                                                     "%d of %d sqgan_ok images mismatch the saved 16x32 grid" % (seg_mismatch, seg_checked))
     total = sum(f.stat().st_size for f in cache.rglob("*") if f.is_file())
-    n_ok = json.loads((cache / "summary.json").read_text())["counts"].get("ok", 0) if (cache / "summary.json").exists() else 0
+    n_ok =json.loads((cache / "summary.json").read_text())["counts"].get("ok", 0) if (cache / "summary.json").exists() else 0
     labels = ctx.work / "dataset-b" / "labels_raw.jsonl"
     full_n = sum(1 for _ in open(labels, encoding="utf-8")) if labels.exists() else 27082
     proj = total / max(n_ok, 1) * full_n / 1e9
@@ -988,6 +1016,8 @@ UNVERIFIED_ITEMS = {
     "feature_pass_recon_jpegs": ("recon JPEGs decode", "feature-pass WB", "feature_pass_smoke_verify"),
     "feature_pass_compute_profile_flops": ("compute_profile.json flops > 0 per model", "feature-pass WB", "feature_pass_smoke_verify"),
     "feature_pass_disk_projection": ("full-dataset cache fits /kaggle/working", "feature-pass WB", "feature_pass_smoke_verify"),
+    "feature_pass_segmap_saved": ("full 256x512 uint8 teacher class map saved per shard (shape, dtype, <=19)", "feature-pass WB", "feature_pass_smoke_verify"),
+    "feature_pass_segmap_matches_grid": ("majority-vote grid recomputed from the saved map equals class_grid.npy", "feature-pass WB", "feature_pass_smoke_verify"),
 }
 
 # order matters: checks that read pilot outputs run after the stages that make them
