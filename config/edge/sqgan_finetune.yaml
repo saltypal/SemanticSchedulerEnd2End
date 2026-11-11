@@ -12,7 +12,7 @@ inputs:
   splits_file: splits_v1.json                      # produced later by the dedup step
   checkpoint_search_root: /kaggle/input            # folder holding the ten author *.ckpt (assets dataset)
 data:
-  sources: [crisismmd, places365, openimages]      # DECISION: which image sources are used for fine-tuning
+  sources: [crisismmd, places365, coco_people]      # DECISION: which image sources are used for fine-tuning
   small_image_policy: skip                         # skip | upscale. DECISION: trainer needs >=256x512 parents (dataset.py:120-123)
   min_height: 256                                  # fixed by the trainer crop [256,512] (sqgan_train.py:126)
   min_width: 512

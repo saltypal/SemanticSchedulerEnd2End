@@ -6,7 +6,7 @@ exponential backoff on 429/5xx/network errors and return failures instead of rai
 
 * CrisisMMD: HuggingFace pinned-commit URL per ``image_path``.
 * Places365: ``val_256.tar`` downloaded once (Range-resume), only selected members extracted.
-* Open Images: OriginalURL then Thumbnail300KURL; re-encoded to JPEG q95, longest side <= 1600.
+* Kaggle-mounted Places365 / COCO images: ``copy_verified`` (read-only inputs, no network).
 """
 import io
 import json
@@ -21,8 +21,6 @@ from pathlib import Path
 CRISISMMD_URL = ("https://huggingface.co/datasets/QCRI/CrisisMMD/resolve/"
                  "10a5626ba112ab9c50369c473a2062bcf205d708/%s")
 PLACES_TAR_URL = "https://data.csail.mit.edu/places/places365/val_256.tar"
-MAX_SIDE = 1600
-JPEG_QUALITY = 95
 _UA = {"User-Agent": "scheduler-dataset-builder/1.0"}
 
 
@@ -118,6 +116,74 @@ def fetch_crisismmd(rows, out_dir, opener=default_opener, workers=8, retries=4, 
     return _map_threads(one, list(rows), workers, progress_path)
 
 
+def find_crisismmd_root(search_root="/kaggle/input", max_depth=4):
+    """Directory holding ``data_image/<event>/...`` below ``search_root`` (depth-limited), else None.
+
+    Raises RuntimeError when several different candidate roots exist."""
+    base = Path(search_root)
+    found = []
+
+    def is_root(d):
+        di = d / "data_image"
+        try:
+            return di.is_dir() and any(c.is_dir() for c in di.iterdir())
+        except OSError:
+            return False
+
+    def walk(d, depth):
+        if is_root(d):
+            found.append(d)
+            return
+        if depth >= max_depth:
+            return
+        try:
+            children = sorted(c for c in d.iterdir() if c.is_dir())
+        except OSError:
+            return
+        for c in children:
+            walk(c, depth + 1)
+
+    if base.is_dir():
+        walk(base, 0)
+    if len(found) > 1:
+        raise RuntimeError("several CrisisMMD roots found under %s: %s; pass --crisismmd-root"
+                           % (search_root, ", ".join(str(f) for f in found)))
+    return found[0] if found else None
+
+
+def copy_crisismmd_from_root(rows, root, out_dir, workers=8):
+    """Copy ``<root>/<image_path>`` to ``<out_dir>/images/crisismmd/<image_path>`` (no network).
+
+    Skips existing same-size files, verifies each copy decodes. Returns (failures, bytes_copied);
+    failure reasons are ``missing_in_source`` or ``corrupt``."""
+    import shutil
+    src_root = Path(root)
+    dst_root = Path(out_dir) / "images" / "crisismmd"
+    copied = []
+
+    def one(row):
+        rel = row["image_path"]
+        src, dst = src_root / rel, dst_root / rel
+        if not src.is_file():
+            return {"source": "crisismmd", "key": rel, "reason": "missing_in_source"}
+        size = src.stat().st_size
+        if dst.is_file() and dst.stat().st_size == size:
+            return None
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        tmp = dst.with_name(dst.name + ".part")
+        try:
+            shutil.copyfile(src, tmp)
+            check_image(tmp.read_bytes())
+            os.replace(tmp, dst)
+            copied.append(size)
+            return None
+        except Exception:
+            tmp.unlink(missing_ok=True)
+            return {"source": "crisismmd", "key": rel, "reason": "corrupt"}
+    failures = _map_threads(one, list(rows), workers)
+    return failures, sum(copied)
+
+
 def download_with_resume(dest, url=PLACES_TAR_URL, retries=8, base_delay=2.0, sleep=time.sleep,
                          chunk=1 << 20, urlopen=None):
     """Stream ``url`` to ``dest``; resume a partial file with an HTTP Range request."""
@@ -194,60 +260,29 @@ def fetch_places365(items, out_dir, tar_source, keep=False):
     return failures
 
 
-def normalize_jpeg(data):
-    """-> (jpeg_bytes, original_size). Re-encodes unless already JPEG, RGB and within MAX_SIDE."""
-    from PIL import Image
-    fmt, size = check_image(data)
-    if fmt == "JPEG" and max(size) <= MAX_SIDE:
-        with Image.open(io.BytesIO(data)) as im:
-            if im.mode == "RGB":
-                return data, size
-    with Image.open(io.BytesIO(data)) as im:
-        im = im.convert("RGB")
-        if max(im.size) > MAX_SIDE:
-            scale = MAX_SIDE / max(im.size)
-            im = im.resize((max(1, round(im.size[0] * scale)), max(1, round(im.size[1] * scale))),
-                           Image.LANCZOS)
-        buf = io.BytesIO()
-        im.save(buf, "JPEG", quality=JPEG_QUALITY)
-    return buf.getvalue(), size
+def copy_verified(pairs, workers=8, source="copy"):
+    """Copy ``(src_path, dst_path, key)`` triples (no network); skip same-size existing files and
+    verify every copy decodes. Returns failure dicts (``missing_in_source`` / ``corrupt``)."""
+    import shutil
 
-
-def fetch_openimages_one(item, out_dir, opener=default_opener, thumb_urls=None, retries=4,
-                         base_delay=1.0, sleep=time.sleep):
-    """Fetch one Open Images item. Returns ``{"id", "orig_size", "url_used"}`` or ``None``;
-    on failure ``item["_failure"]`` is set (thread-safe: per-item dict)."""
-    target = Path(out_dir) / "images" / "openimages" / ("%s.jpg" % item["id"])
-    if _ok_existing(target):
-        return {"id": item["id"], "orig_size": item.get("orig_size"), "url_used": "cached"}
-    urls = [u for u in (item.get("url"), (thumb_urls or {}).get(item["id"])) if u]
-    errors = []
-    for url in urls:
-        try:
-            data = get_with_retry(opener, url, retries, base_delay, sleep=sleep)
-            jpeg, orig = normalize_jpeg(data)
-            _write_atomic(target, jpeg)
-            return {"id": item["id"], "orig_size": list(orig), "url_used": url}
-        except Exception as exc:
-            errors.append("%s: %s" % (url, str(exc)[:120]))
-    item["_failure"] = {"source": "openimages_people", "key": item["id"],
-                        "reason": "; ".join(errors) or "no url"}
-    return None
-
-
-def fetch_openimages(items, out_dir, opener=default_opener, thumb_urls=None, workers=8, retries=4,
-                     base_delay=1.0, sleep=time.sleep, progress_path=None):
-    """Fetch all items. Returns (results_by_id, failures)."""
-    results = {}
-
-    def one(item):
-        res = fetch_openimages_one(item, out_dir, opener, thumb_urls, retries, base_delay, sleep)
-        if res:
-            results[item["id"]] = res
+    def one(triple):
+        src, dst, key = Path(triple[0]), Path(triple[1]), triple[2]
+        if not src.is_file():
+            return {"source": source, "key": key, "reason": "missing_in_source"}
+        if dst.is_file() and dst.stat().st_size == src.stat().st_size:
             return None
-        return item.pop("_failure")
-    failures = _map_threads(one, list(items), workers, progress_path)
-    return results, failures
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        tmp = dst.with_name(dst.name + ".part")
+        try:
+            shutil.copyfile(src, tmp)
+            check_image(tmp.read_bytes())
+            os.replace(tmp, dst)
+            return None
+        except Exception:
+            tmp.unlink(missing_ok=True)
+            return {"source": source, "key": key, "reason": "corrupt"}
+    return _map_threads(one, list(pairs), workers)
+
 
 
 def fill_to_count(candidates, n, fetch_fn, workers=8):

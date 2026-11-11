@@ -1,7 +1,7 @@
 """Stage B: labels for the images of dataset A (``scheduler-dataset-v1-labels``); no images are copied.
 
 Reads A's ``index.jsonl``; labels CrisisMMD rows from the 9 pinned metadata JSONs (only images present
-in A); takes the first ``places365_count`` / ``people_count`` normals by ``rank`` that exist in A.
+in A); takes every Places365 / COCO-people row of A (A already holds the configured counts) that exists on disk.
 Outputs labels_raw.jsonl (rows carry ``uid``/``file``), counts.json (gate verdicts), normals_*.jsonl,
 crisismmd_metadata/, failures.json, manifest.json, README.md, dataset-metadata.json; then publishes.
 
@@ -23,10 +23,9 @@ OWNER = "satyapaladuguplus"
 README = ("# Scheduler dataset v1: labels (B)\n\nLabels for the images in scheduler-dataset-v1-images (A); no images here. "
           "`file` is relative to A's root. Tiers (Critical/High/Medium/Low) derive from CrisisMMD human "
           "annotations (damage severity, humanitarian category, informativeness) with a life-safety override; "
-          "everyday images (Places365 scenes, Open Images selfies/people) are Low. Rules: config/edge/data.yaml. "
-          "Sources keep their own licences (CrisisMMD research use QCRI, Places365 MIT CSAIL, Open Images per-image).\n")
-NORMAL_PATH = {"places365": lambda r: "val_256/" + r["image_id"],
-               "openimages_people": lambda r: "openimages/validation/%s.jpg" % r["image_id"]}
+          "everyday images (Places365 scenes, COCO people) are Low. Rules: config/edge/data.yaml. "
+          "Sources keep their own licences (CrisisMMD research use QCRI, Places365 CC0, COCO 2017 CC BY 4.0).\n")
+NORMAL_SOURCES = ("places365", "coco_people")
 
 
 def discover_images_root(base="/kaggle/input", max_depth=4):
@@ -44,17 +43,19 @@ def read_index(root):
     return [json.loads(x) for x in (Path(root) / "index.jsonl").read_text(encoding="utf-8").splitlines() if x]
 
 
-def _normal_rows(index, source, count, cfg, root):
-    """First ``count`` ranked A rows of ``source`` whose file exists -> label rows."""
-    ranked = sorted((r for r in index if r["source"] == source and (Path(root) / r["file"]).is_file()),
-                    key=lambda r: r["rank"])[:count]
-    items = [{"id": r["image_id"], "path": NORMAL_PATH[source](r), "category": r.get("category")} for r in ranked]
-    rows, _ = labels.normal_rows(items, source, cfg["normals"])
-    for row, a in zip(rows, ranked):
-        row["image_id"] = a["image_id"]
-        if "url" in a:
-            row.update(url=a["url"], license=a["license"], author=a["author"])
-        row["uid"], row["file"] = a["uid"], a["file"]
+def _normal_rows(index, source, cfg, root, failures):
+    """Every A row of ``source`` whose file exists -> Low label rows (blacklist applies to places365)."""
+    rows = []
+    for a in sorted((r for r in index if r["source"] == source), key=lambda r: r["rank"]):
+        if not (Path(root) / a["file"]).is_file():
+            failures.append({"source": source, "key": a["file"], "uid": a["uid"],
+                             "reason": "listed in A index but file missing"})
+            continue
+        item = {"id": a.get("image_id"), "path": a["file"], "category": a.get("category")}
+        got, _ = labels.normal_rows([item], source, cfg["normals"])
+        for row in got:
+            row["uid"], row["file"] = a["uid"], a["file"]
+            rows.append(row)
     return rows
 
 
@@ -72,20 +73,15 @@ def build_b(meta_dir, out_dir, images_root, cfg=None):
             crisis.append(row)
         else:
             failures.append({"source": "crisismmd", "key": row["image_path"], "uid": uid, "reason": "missing in A"})
-    ncfg = cfg["normals"]
-    places = _normal_rows(index, "places365", ncfg["places365_count"], cfg, images_root)
-    people = _normal_rows(index, "openimages_people", ncfg["people_count"], cfg, images_root)
-    for source, got, want in (("places365", places, ncfg["places365_count"]),
-                              ("openimages_people", people, ncfg["people_count"])):
-        if len(got) < want:
-            failures.append({"source": source, "key": "*", "reason": "shortfall: %d of %d available in A" % (len(got), want)})
+    places = _normal_rows(index, "places365", cfg, images_root, failures)
+    people = _normal_rows(index, "coco_people", cfg, images_root, failures)
     everything = crisis + places + people
     uids = [r["uid"] for r in everything]
     if len(set(uids)) != len(uids):
         raise ValueError("uid collision in labels_raw")
     write_jsonl(out / "labels_raw.jsonl", everything)
     write_jsonl(out / "normals_places365.jsonl", places)
-    write_jsonl(out / "normals_people.jsonl", people)
+    write_jsonl(out / "normals_coco_people.jsonl", people)
     (out / "failures.json").write_text(json.dumps(failures, indent=2), encoding="utf-8")
     counts = labels.report_counts(everything, cfg)
     by_source = {}
@@ -93,7 +89,7 @@ def build_b(meta_dir, out_dir, images_root, cfg=None):
         tiers = by_source.setdefault(r["source"], {})
         tiers[r["tier"]] = tiers.get(r["tier"], 0) + 1
     counts["totals_by_source_tier"] = by_source
-    counts["normals"] = {"places365_final": len(places), "people_final": len(people),
+    counts["normals"] = {"places365_final": len(places), "coco_people_final": len(people),
                          "missing_in_a": len(failures), "a_index_rows": len(index)}
     (out / "counts.json").write_text(json.dumps(counts, indent=2), encoding="utf-8")
     meta_out = out / "crisismmd_metadata"

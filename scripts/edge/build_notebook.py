@@ -4,6 +4,7 @@ Cells only clone/install/call a package entrypoint and write a run manifest; all
 logic stays in the package. Never pushes anything (see kaggle_ops.py).
 """
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -14,40 +15,86 @@ CONFIG = ROOT / "config/edge/kaggle.yaml"
 OUT_DIR = ROOT / "Notebooks/Edge"
 
 
+_CELL_COUNTER = [0]
+
+
+def _cell_id(kind, text):
+    """Deterministic 12-hex-char id (nbformat 5), unique per cell via a running counter."""
+    _CELL_COUNTER[0] += 1
+    return hashlib.sha1(f"{_CELL_COUNTER[0]}:{kind}:{text}".encode()).hexdigest()[:12]
+
+
 def _code(text):
-    return {"cell_type": "code", "execution_count": None, "metadata": {},
-            "outputs": [], "source": text.strip("\n").splitlines(keepends=True)}
+    text = text.strip("\n")
+    return {"cell_type": "code", "execution_count": None, "id": _cell_id("code", text), "metadata": {},
+            "outputs": [], "source": text.splitlines(keepends=True)}
 
 
 def _md(text):
-    return {"cell_type": "markdown", "metadata": {}, "source": text.splitlines(keepends=True)}
+    return {"cell_type": "markdown", "id": _cell_id("md", text), "metadata": {},
+            "source": text.splitlines(keepends=True)}
+
+
+def title_for_slug(slug):
+    """edge-a-download-images -> 'Edge A Download Images' (single-letter words upper-case)."""
+    return " ".join(w.upper() if len(w) == 1 else w.capitalize() for w in slug.split("-") if w)
+
+
+def _env_cell():
+    return _code('''
+import os, time, warnings
+os.environ.update(PYTHONWARNINGS='ignore', PYDEVD_DISABLE_FILE_VALIDATION='1', TOKENIZERS_PARALLELISM='false',
+                  HF_HUB_DISABLE_PROGRESS_BARS='1', TQDM_DISABLE='1')
+warnings.filterwarnings('ignore')
+T0 = time.time()
+''')
 
 
 def _clone_cell(repo_url, branch):
     return _code(f'''
 import os, subprocess
 REPO, URL, BRANCH = "/kaggle/working/repo", "{repo_url}", "{branch}"
+def _git(*a, cwd=None):
+    return subprocess.run(["git", *a], cwd=cwd, check=True, capture_output=True, text=True).stdout.strip()
 if os.path.isdir(REPO + "/.git"):
-    subprocess.run(["git", "-C", REPO, "fetch", "origin", BRANCH], check=True)
-    subprocess.run(["git", "-C", REPO, "reset", "--hard", "origin/" + BRANCH], check=True)
+    _git("fetch", "-q", "--depth", "1", "origin", BRANCH, cwd=REPO)
+    _git("reset", "-q", "--hard", "FETCH_HEAD", cwd=REPO)
 else:
-    subprocess.run(f"git clone --depth 1 --branch {{BRANCH}} {{URL}} {{REPO}}", shell=True, check=True)
-GIT_SHA = subprocess.check_output(f"git -C {{REPO}} rev-parse HEAD", shell=True, text=True).strip()
-print("commit", GIT_SHA)
+    _git("clone", "--depth", "1", "-q", "--no-progress", "--branch", BRANCH, URL, REPO)
+GIT_SHA = _git("rev-parse", "HEAD", cwd=REPO)
+print("repo @", GIT_SHA[:8], "(" + _git("log", "-1", "--format=%s", cwd=REPO) + ")")
 ''')
 
 
 def _install_cell(requirements):
-    extra = "".join(f" {r}" for r in requirements)
+    reqs = list(map(str, requirements))
     return _code(f'''
-%cd /kaggle/working/repo
-!pip install -q -e .{extra}
+import subprocess, time
+_t = time.time()
+LOG = "/kaggle/working/pip_install.log"
+with open(LOG, "w") as _f:
+    _rc = subprocess.run(["pip", "install", "-q", "--no-input", "--disable-pip-version-check",
+                          "--ignore-requires-python", "-e", ".", *{reqs!r}],
+                         cwd=REPO, stdout=_f, stderr=subprocess.STDOUT).returncode
+if _rc:
+    print("".join(open(LOG).readlines()[-25:]))
+    raise RuntimeError("pip install failed (rc=%s)" % _rc)
+print("installed in %.0fs" % (time.time() - _t))
 ''')
 
 
 def _run_cell(entrypoint_module, args):
-    cmd = " ".join(["python", "-u", "-m", entrypoint_module, *map(str, args)])
-    return _code(f"!{cmd}")
+    argv = ["python", "-u", "-m", entrypoint_module, *map(str, args)]
+    return _code(f'''
+import os, subprocess
+ARGV = {argv!r}
+print("$ python -m {entrypoint_module} " + " ".join(ARGV[4:]))
+_p = subprocess.Popen(ARGV, cwd=REPO, env=dict(os.environ), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+for _line in _p.stdout:
+    print(_line, end="", flush=True)
+if _p.wait():
+    raise RuntimeError("{entrypoint_module} exited with %s" % _p.returncode)
+''')
 
 
 def _manifest_cell(step_id, entrypoint_module, args):
@@ -76,9 +123,9 @@ print(manifest)
 def build_notebook(step_id, entrypoint_module, args, title, repo_url, branch="main",
                    requirements=(), needs_gpu=True):
     """Return an nbformat v4 notebook dict: clone, install, run, manifest cells."""
+    _CELL_COUNTER[0] = 0
     cells = [_md(f"# {title}\n\nStep `{step_id}`. Thin wrapper; logic lives in `{entrypoint_module}`.\n"),
-             _clone_cell(repo_url, branch), _install_cell(requirements),
-             _code("import time; T0 = time.time()"),
+             _env_cell(), _clone_cell(repo_url, branch), _install_cell(requirements),
              _run_cell(entrypoint_module, args), _manifest_cell(step_id, entrypoint_module, args)]
     meta = {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
             "language_info": {"name": "python"}, "kaggle": {"accelerator": "gpu" if needs_gpu else "none"}}

@@ -16,7 +16,7 @@ pad_top, scale] so original coordinates can be recovered.
 Shards: bucket = sha256(uid) % n_shards, n_shards = ceil(N / shard_size); a shard is written to
 ``shard_XXXX.partial`` then renamed, ``done.json`` is the last file, finished shards are skipped, and
 ``--part i/n`` lets several runs split the shards. One unreadable image never stops the run: it is listed in
-``failures``. Models are injected through ``Backends`` (tests use fakes); the real ones are in
+``failures``; any other stage error is a stage-level failure (``*_ok.npy`` flags + zero rows). Models are injected through ``Backends`` (tests use fakes); the real ones are in
 ``feature_pass_backends``. Reuses features.simhash64/phash64, sts.compute_sts, embedding_grid.disk_guard and
 splits.assign_event_splits.
 """
@@ -238,20 +238,43 @@ def _load_image(root, row):
         return im.convert("RGB")
 
 
+def _stage_fail(sfail, stage, uid, exc):
+    """Record a stage-level failure (image stays ok): aggregated by (stage, error type, message)."""
+    key = (stage, type(exc).__name__, str(exc)[:300])
+    e = sfail.setdefault(key, {"stage": stage, "error_type": key[1], "message": key[2], "count": 0, "example_uids": []})
+    e["count"] += 1
+    if len(e["example_uids"]) < 5:
+        e["example_uids"].append(uid)
+
+
+def merge_stage_failures(*lists):
+    """Merge stage-failure rows (as written to failures.json) by (stage, error_type, message), summing counts."""
+    out = {}
+    for rows in lists:
+        for r in rows:
+            k = (r["stage"], r["error_type"], r["message"])
+            e = out.setdefault(k, dict(r, count=0, example_uids=[]))
+            e["count"] += r["count"]
+            e["example_uids"] = (e["example_uids"] + list(r.get("example_uids", [])))[:5]
+    return list(out.values())
+
+
 def _embed_batch(ctx, name, fn, items):
-    """Embeddings for ``items`` [(uid, img)]; on a batch error retry per image. Returns {uid: vec|None}."""
+    """Embeddings for ``items`` [(uid, img)]; on a batch error retry per image.
+
+    Returns ({uid: vec|None}, {uid: exception}) - a failed image only misses this encoder's embedding."""
     uids = [u for u, _ in items]
     try:
         arr = ctx.timer.run("embed_" + name, uids, lambda: np.asarray(fn([im for _, im in items])), gpu=True)
-        return {u: arr[i] for i, u in enumerate(uids)}
+        return {u: arr[i] for i, u in enumerate(uids)}, {}
     except Exception:
-        out = {}
+        out, errs = {}, {}
         for u, im in items:
             try:
                 out[u] = ctx.timer.run("embed_" + name, [u], lambda im=im: np.asarray(fn([im]))[0], gpu=True)
-            except Exception:
-                out[u] = None
-        return out
+            except Exception as exc:
+                out[u], errs[u] = None, exc
+        return out, errs
 
 
 def _gray_thumb(img, size):
@@ -259,36 +282,57 @@ def _gray_thumb(img, size):
     return np.asarray(img.convert("L").resize((size, size), Image.LANCZOS), dtype=np.float64)
 
 
-def _sq_one(ctx, sq, uid, img, m_levels, hw, grid):
-    """SQ-GAN encode (all m) + decode for one image. Returns dict, raises on failure."""
-    arr, lb = letterbox(img, hw, ctx.cfg["sqgan"]["pad_value"])
-    cmap, handle = ctx.timer.run("sqgan_segment", [uid], lambda: sq.segment(arr), gpu=True)
-    cmap = np.asarray(cmap)
-    cls = sts_mod.majority_vote_grid(cmap, hw[0] // grid[0])
+def _sq_one(ctx, sq, uid, img, m_levels, hw, grid, sfail):
+    """SQ-GAN segment + encode (per m) for one image. Never raises: each stage failure is recorded in ``sfail``.
+
+    Returns None when segmentation failed, else a dict whose ``m`` holds only the levels that encoded."""
+    try:
+        arr, lb = letterbox(img, hw, ctx.cfg["sqgan"]["pad_value"])
+        cmap, handle = ctx.timer.run("sqgan_segment", [uid], lambda: sq.segment(arr), gpu=True)
+        cls = sts_mod.majority_vote_grid(np.asarray(cmap), hw[0] // grid[0])
+    except Exception as exc:
+        _stage_fail(sfail, "sqgan_segment", uid, exc)
+        return None
     res = {"letterbox": lb, "class_grid": cls.astype(np.uint8), "m": {}, "prefeat": None}
     for m in m_levels:
-        enc = ctx.timer.run("sqgan_encode_" + m_tag(m), [uid], lambda m=m: sq.encode(arr, handle, m), gpu=True)
-        kept = np.unique(np.asarray(enc["kept"], dtype=np.int64))
-        bitmap = pack_bitmap(kept, grid[0] * grid[1])
-        sts13 = np.asarray(sts_mod.compute_sts(cls, kept, tuple(grid)), dtype=np.float32)
-        if res["prefeat"] is None and enc.get("features") is not None:
-            res["prefeat"] = pool_prefeatures(enc["features"])      # encoder is m-independent: first m's grid
-        res["m"][m] = {"payload": bytes(enc["payload"]), "bitmap": bitmap, "sts": sts13, "recon": None}
+        try:
+            enc = ctx.timer.run("sqgan_encode_" + m_tag(m), [uid], lambda m=m: sq.encode(arr, handle, m), gpu=True)
+            kept = np.unique(np.asarray(enc["kept"], dtype=np.int64))
+            bitmap = pack_bitmap(kept, grid[0] * grid[1])
+            sts13 = np.asarray(sts_mod.compute_sts(cls, kept, tuple(grid)), dtype=np.float32)
+            prefeat = pool_prefeatures(enc["features"]) if res["prefeat"] is None and enc.get("features") is not None else None
+            entry = {"payload": bytes(enc["payload"]), "bitmap": bitmap, "sts": sts13, "recon": None}
+        except Exception as exc:
+            _stage_fail(sfail, "sqgan_encode_" + m_tag(m), uid, exc)
+            continue
+        if prefeat is not None:                       # encoder is m-independent: first m's grid
+            res["prefeat"] = prefeat
+        res["m"][m] = entry
     return res
 
 
-def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, emb_ok, sq_state):
-    """Write all aligned arrays for the finished images (uids order)."""
+def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
+    """Write all aligned arrays for the readable images (uids order). Failed stages get a False flag + zero rows."""
     n = len(uids)
+    if n == 0:
+        return
     for name in enc_names:
-        if emb_ok.get(name):
-            np.save(shard_dir / ("emb_%s.npy" % name), np.stack([per_uid[u]["emb"][name] for u in uids]).astype(np.float16))
-    if per_uid and all("phash" in per_uid[u] for u in uids):
-        np.save(shard_dir / "phash64.npy", u64([per_uid[u]["phash"] for u in uids]))
+        ok = np.array([name in per_uid[u]["emb"] for u in uids])
+        np.save(shard_dir / ("emb_%s_ok.npy" % name), ok)
+        if ok.any():
+            first = next(per_uid[u]["emb"][name] for u in uids if name in per_uid[u]["emb"])
+            zero = np.zeros(first.shape, np.float16)
+            np.save(shard_dir / ("emb_%s.npy" % name),
+                    np.stack([per_uid[u]["emb"][name] if name in per_uid[u]["emb"] else zero for u in uids]).astype(np.float16))
+    ph = [per_uid[u]["phash"] for u in uids]
+    np.save(shard_dir / "phash64.npy", u64([0 if p is None else p for p in ph]))
+    np.save(shard_dir / "phash_ok.npy", np.array([p is not None for p in ph]))
     sim = cfg["hashes"]["simhash_encoder"]
-    if emb_ok.get(sim):
-        np.save(shard_dir / "simhash64.npy", u64([per_uid[u]["simhash"] for u in uids]))
-    if sq_state is None:
+    if sim in enc_names:
+        sh = [per_uid[u]["simhash"] for u in uids]
+        np.save(shard_dir / "simhash64.npy", u64([0 if p is None else p for p in sh]))
+        np.save(shard_dir / "simhash_ok.npy", np.array([p is not None for p in sh]))
+    if not sq_enabled:
         return
     m_levels = cfg["sqgan"]["m_levels"]
     ok = np.array([[bool(per_uid[u]["sq"] and m in per_uid[u]["sq"]["m"]) for m in m_levels] for u in uids])
@@ -321,7 +365,10 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, emb_ok, sq_state):
 
 
 def process_shard(ctx, idx, rows):
-    """Run every enabled stage over one shard and write it atomically. Returns the done.json dict."""
+    """Run every enabled stage over one shard and write it atomically. Returns the done.json dict.
+
+    An image fails only if it cannot be decoded. Every other stage runs in its own try/except: an error becomes a
+    stage-level failure (failures.json / summary.json) and a False flag with zero placeholder rows."""
     cfg = ctx.cfg
     final = ctx.out_dir / "shards" / ("shard_%04d" % idx)
     partial = final.with_name(final.name + ".partial")
@@ -334,7 +381,7 @@ def process_shard(ctx, idx, rows):
     sim_name = cfg["hashes"]["simhash_encoder"]
     m_levels, hw, grid = cfg["sqgan"]["m_levels"], cfg["sqgan"]["input_hw"], cfg["sqgan"]["token_grid"]
     t_shard = time.time()
-    per_uid, order, failures = {}, [], []
+    per_uid, order, failures, sfail = {}, [], [], {}
     bs = int(cfg["shard"]["batch_size"])
     for b0 in range(0, len(rows), bs):
         items = []
@@ -345,67 +392,66 @@ def process_shard(ctx, idx, rows):
                 failures.append({"uid": r["uid"], "file": r.get("file"), "stage": "load", "error": repr(exc)})
         if not items:
             continue
-        rec = {u: {"emb": {}, "sq": None} for u, _ in items}
-        dropped = set()
+        rec = {u: {"emb": {}, "phash": None, "simhash": None, "sq": None} for u, _ in items}
         for name in enc_names:
             fn = ctx.embedder(name)
             if fn is None:
                 continue
-            for u, vec in _embed_batch(ctx, name, fn, items).items():
-                if vec is None:
-                    dropped.add(u)
-                    failures.append({"uid": u, "stage": "embed_" + name, "error": "embedding failed"})
-                else:
+            vecs, errs = _embed_batch(ctx, name, fn, items)
+            for u, vec in vecs.items():
+                if vec is not None:
                     rec[u]["emb"][name] = np.asarray(vec, dtype=np.float32).astype(np.float16)
-        items = [(u, im) for u, im in items if u not in dropped]
-        uids = [u for u, _ in items]
+            for u, exc in errs.items():
+                _stage_fail(sfail, "embed_" + name, u, exc)
         for u, im in items:
             try:
                 thumb = _gray_thumb(im, cfg["hashes"]["phash_thumb"])
                 rec[u]["phash"] = ctx.timer.run("phash", [u], lambda t=thumb: features.phash64(t))
-                if sim_name in rec[u]["emb"]:
-                    rec[u]["simhash"] = features.simhash64(rec[u]["emb"][sim_name].astype(np.float64))
             except Exception as exc:
-                failures.append({"uid": u, "stage": "hash", "error": repr(exc)})
-                dropped.add(u)
+                _stage_fail(sfail, "phash", u, exc)
+            if sim_name in rec[u]["emb"]:
+                try:
+                    rec[u]["simhash"] = ctx.timer.run(
+                        "simhash", [u], lambda u=u: features.simhash64(rec[u]["emb"][sim_name].astype(np.float64)))
+                except Exception as exc:
+                    _stage_fail(sfail, "simhash", u, exc)
         sq = ctx.sqgan()
         if sq is not None:
             for u, im in items:
-                if u in dropped:
-                    continue
-                try:
-                    rec[u]["sq"] = _sq_one(ctx, sq, u, im, m_levels, hw, grid)
-                except Exception as exc:
-                    failures.append({"uid": u, "stage": "sqgan", "error": repr(exc)})
-                    continue
-                if cfg["decode"]["enabled"]:
+                rec[u]["sq"] = _sq_one(ctx, sq, u, im, m_levels, hw, grid, sfail)
+                if rec[u]["sq"] is not None and cfg["decode"]["enabled"]:
                     for m in m_levels:
-                        _decode_one(ctx, sq, u, m, rec[u]["sq"]["m"][m], partial, failures)
-        for u in uids:
-            if u not in dropped:
-                per_uid[u] = rec[u]
-                order.append(u)
-    emb_ok = {n: all(n in per_uid[u]["emb"] for u in order) and bool(order) and ctx.embedder(n) is not None
-              for n in enc_names}
-    _flush_arrays(partial, order, per_uid, cfg, enc_names, emb_ok, ctx.sqgan())
+                        if m in rec[u]["sq"]["m"]:
+                            _decode_one(ctx, sq, u, m, rec[u]["sq"]["m"][m], partial, sfail)
+        for u, _ in items:
+            per_uid[u] = rec[u]
+            order.append(u)
+    _flush_arrays(partial, order, per_uid, cfg, enc_names, bool(cfg["sqgan"]["enabled"]))
     (partial / "uids.json").write_text(json.dumps(order), encoding="utf-8")
     with open(partial / "timings.jsonl", "w", encoding="utf-8") as fh:
         for row in ctx.timer.drain():
             fh.write(json.dumps(row) + "\n")
-    (partial / "failures.json").write_text(json.dumps(failures, indent=1), encoding="utf-8")
+    stage_rows = list(sfail.values())
+    (partial / "failures.json").write_text(json.dumps(failures + stage_rows, indent=1), encoding="utf-8")
+    enc_ok = [n for n in enc_names if any(n in per_uid[u]["emb"] for u in order)]
     done = {"shard": idx, "n_requested": len(rows), "n_ok": len(order), "n_failed": len(failures),
-            "encoders": [n for n in enc_names if emb_ok.get(n)], "skipped": dict(ctx.skipped),
-            "m_levels": m_levels if ctx.sqgan() is not None else [], "seconds": time.time() - t_shard}
+            "n_stage_failures": sum(r["count"] for r in stage_rows), "encoders": enc_ok,
+            "skipped": dict(ctx.skipped), "m_levels": m_levels if ctx.sqgan() is not None else [],
+            "seconds": time.time() - t_shard}
     (partial / "done.json").write_text(json.dumps(done, indent=1), encoding="utf-8")
     os.replace(partial, final)
     return done
 
 
-def _decode_one(ctx, sq, uid, m, entry, shard_dir, failures):
-    """Decode a payload, save the recon JPEG q95, mark entry['recon'] with the relative path."""
+def _decode_one(ctx, sq, uid, m, entry, shard_dir, sfail):
+    """Decode a payload, save the recon JPEG q95, mark entry['recon'] with the relative path (stages isolated)."""
     from PIL import Image
     try:
         arr = ctx.timer.run("decode_" + m_tag(m), [uid], lambda: sq.decode(entry["payload"], m), gpu=True)
+    except Exception as exc:
+        _stage_fail(sfail, "decode_" + m_tag(m), uid, exc)
+        return
+    try:
         d = shard_dir / ("recon_%s" % m_tag(m))
         d.mkdir(exist_ok=True)
         rel = "recon_%s/%s.jpg" % (m_tag(m), uid_file_stem(uid))
@@ -413,7 +459,7 @@ def _decode_one(ctx, sq, uid, m, entry, shard_dir, failures):
             shard_dir / rel, format="JPEG", quality=int(ctx.cfg["decode"]["jpeg_quality"])))
         entry["recon"] = rel
     except Exception as exc:
-        failures.append({"uid": uid, "stage": "decode_" + m_tag(m), "error": repr(exc)})
+        _stage_fail(sfail, "recon_save", uid, exc)
 
 
 # ------------------------------------------------------------------ manifest / summary
@@ -450,7 +496,7 @@ def write_manifest(ctx, args):
 def summarize(out_dir):
     """Aggregate every finished shard: counts, failures (bad images listed), mean non-warm-up ms per stage."""
     shards = sorted(Path(out_dir, "shards").glob("shard_????"))
-    tot, fails, stage_ms, skipped = Counter(), [], {}, {}
+    tot, fails, stage_rows, stage_ms, skipped = Counter(), [], [], {}, {}
     for s in shards:
         if not (s / "done.json").exists():
             continue
@@ -459,12 +505,15 @@ def summarize(out_dir):
         tot["requested"] += d["n_requested"]
         tot["ok"] += d["n_ok"]
         skipped.update(d.get("skipped", {}))
-        fails += json.loads((s / "failures.json").read_text(encoding="utf-8"))
+        for r in json.loads((s / "failures.json").read_text(encoding="utf-8")):
+            (stage_rows if "count" in r else fails).append(r)      # stage-level rows carry a count; image rows do not
         for line in (s / "timings.jsonl").read_text(encoding="utf-8").splitlines():
             r = json.loads(line)
             if not r["warmup"]:
                 stage_ms.setdefault(r["stage"], []).append(r["ms"])
+    stage_failures = merge_stage_failures(stage_rows)
     summary = {"counts": dict(tot), "n_failures": len(fails), "failures": fails, "skipped": skipped,
+               "n_stage_failures": sum(r["count"] for r in stage_failures), "stage_failures": stage_failures,
                "stage_mean_ms": {k: float(np.mean(v)) for k, v in sorted(stage_ms.items())}}
     Path(out_dir, "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     return summary
@@ -501,9 +550,13 @@ def export_grid_inputs(out_dir, labels_rows, grid_dir, splits_path=None, log=pri
             continue
         uids = json.loads((s / "uids.json").read_text(encoding="utf-8"))
         for f in s.glob("emb_*.npy"):
+            if f.stem.endswith("_ok"):
+                continue
+            ok_f = s / (f.stem + "_ok.npy")
+            ok = np.load(ok_f) if ok_f.exists() else np.ones(len(uids), bool)   # drop zero-placeholder rows
             e = per_enc.setdefault(f.stem[4:], ([], []))
-            e[0].extend(uids)
-            e[1].append(np.load(f))
+            e[0].extend(u for u, k in zip(uids, ok) if k)
+            e[1].append(np.load(f)[ok])
     for name, (uids, arrs) in per_enc.items():
         np.savez(grid_dir / ("emb_%s.npz" % name), image_path=np.array(uids), emb=np.concatenate(arrs))
         (grid_dir / ("emb_%s.done" % name)).write_text(json.dumps({"n": len(uids)}), encoding="utf-8")

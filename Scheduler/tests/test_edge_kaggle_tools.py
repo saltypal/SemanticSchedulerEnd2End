@@ -17,9 +17,10 @@ def test_cell_order_and_content():
     assert nb["nbformat"] == 4
     cells = nb["cells"]
     assert cells[0]["cell_type"] == "markdown"
-    assert "git clone --depth 1" in _src(cells[1]) and "rev-parse HEAD" in _src(cells[1])
-    assert "pip install -q -e . foo" in _src(cells[2])
-    assert "python -u -m pkg.dummy --a 1" in _src(cells[4])
+    assert "TQDM_DISABLE" in _src(cells[1])
+    assert "--depth" in _src(cells[2]) and "rev-parse" in _src(cells[2])
+    assert "--ignore-requires-python" in _src(cells[3]) and "'foo'" in _src(cells[3])
+    assert "pkg.dummy" in _src(cells[4]) and "'-u'" in _src(cells[4])
     assert "run_manifest.json" in _src(cells[5])
 
 
@@ -156,3 +157,43 @@ def test_metadata_sources_and_cli(tmp_path):
     m = json.loads((tmp_path / "s9.kernel-metadata.json").read_text())
     assert m["dataset_sources"] == ["a/b", "a/c"] and m["kernel_sources"] == ["k/l"]
     assert m["id"].startswith("satyapaladuguplus/")
+
+
+def _dataset_nbs():
+    from scripts.edge import make_dataset_notebooks as m
+    return {n: m.build(n) for n in m.SPECS}
+
+
+def test_generated_notebook_hygiene():
+    for name, (nb, meta) in _dataset_nbs().items():
+        cells = nb["cells"]
+        ids = [c["id"] for c in cells]
+        assert len(set(ids)) == len(ids) and all(len(i) >= 8 and set(i) <= set("0123456789abcdef") for i in ids)
+        assert nb["nbformat"] == 4 and nb["nbformat_minor"] >= 5
+        code = [c for c in cells if c["cell_type"] == "code"]
+        first = _src(code[0])
+        for var in ("PYTHONWARNINGS", "PYDEVD_DISABLE_FILE_VALIDATION", "TOKENIZERS_PARALLELISM",
+                    "HF_HUB_DISABLE_PROGRESS_BARS", "TQDM_DISABLE"):
+            assert var in first
+        assert "warnings.filterwarnings('ignore')" in first
+        clone, install, run = _src(code[1]), _src(code[2]), _src(code[3])
+        assert "--ignore-requires-python" in install and '"-q"' in install and "pip_install.log" in install
+        assert "installed in" in install and "[-25:]" in install
+        assert '"-q"' in clone and "--no-progress" in clone and "FETCH_HEAD" in clone
+        assert "'-u', '-m'" in run and "cwd=REPO" in run
+
+
+def test_titles_roundtrip_and_sources():
+    import re
+    from scripts.edge.build_notebook import title_for_slug
+    assert title_for_slug("edge-a-download-images") == "Edge A Download Images"
+    assert title_for_slug("edge-b-labeling") == "Edge B Labeling"
+    nbs = _dataset_nbs()
+    for name, (_, meta) in nbs.items():
+        assert re.sub(r"[^a-z0-9]+", "-", meta["title"].lower()).strip("-") == name
+    a, b = nbs["edge-a-download-images"][1], nbs["edge-b-labeling"][1]
+    assert a["kernel_sources"] == [] and a["enable_gpu"] is False
+    assert a["dataset_sources"] == ["seaninggg/crisismmd-multimodal-crisis-dataset", "benjaminkz/places365",
+                                    "awsaf49/coco-2017-dataset"]   # CrisisMMD + Places365 + COCO inputs
+    assert a["enable_internet"] is True
+    assert b["kernel_sources"] == ["satyapaladuguplus/edge-a-download-images"] and b["dataset_sources"] == []

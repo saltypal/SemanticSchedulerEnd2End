@@ -1,18 +1,15 @@
 """Stage A: download ALL images into the Kaggle dataset ``scheduler-dataset-v1-images`` (no labels, no tiers).
 
-Sources: every CrisisMMD v2.0 image named in the 9 pinned metadata JSONs (pinned HF revision),
-oversampled Places365 val_256 and Open Images candidates (ranked in deterministic order; stage B
-takes the first N by ``rank``). Resumable, flushes a progress file, has a free-disk guard and a
-``--max-images`` dry run. Reuses parameters.edge.{fetch_images,normals,labels}.
+Sources: every CrisisMMD v2.0 image named in the 9 pinned metadata JSONs (copied from the attached Kaggle
+dataset, HF fallback), a small stratified Places365 sample (Kaggle ``benjaminkz/places365``, val_256 tar
+only as fallback) and COCO people (Kaggle ``awsaf49/coco-2017-dataset``). Kaggle inputs are mounted read-only
+and only the chosen files are copied. Resumable, free-disk guard, ``--max-images`` dry run.
 
     python -m parameters.edge.dataset_a --meta-dir <dir> --out /kaggle/working/dataset-a --workers 16
 """
 import argparse
-import csv
 import hashlib
-import io
 import json
-import math
 import shutil
 import subprocess
 import urllib.request
@@ -25,9 +22,12 @@ SLUG = "scheduler-dataset-v1-images"
 TITLE = "Scheduler dataset v1: images (A)"
 OWNER = "satyapaladuguplus"
 README = ("# Scheduler dataset v1: images (A)\n\nRaw images only, no labels. `index.jsonl` maps `uid` to `file` "
-          "(`images/crisismmd|places365|openimages/...`) with bytes, size and sha256; normals carry `rank` "
-          "(deterministic candidate order, oversampled). Labels are in scheduler-dataset-v1-labels (B). "
-          "Licences: CrisisMMD (research use, QCRI), Places365 (MIT CSAIL), Open Images (per-image licence in index).\n")
+          "(`images/crisismmd|places365|coco_people/...`) with bytes, size and sha256; normals carry `category` and `rank` "
+          "(deterministic order). Labels are in scheduler-dataset-v1-labels (B). "
+          "Licences: CrisisMMD (research use, QCRI), Places365 (CC0, Kaggle benjaminkz/places365), COCO 2017 (CC BY 4.0, Kaggle awsaf49/coco-2017-dataset).\n")
+
+
+MAX_COPY_FAIL_FRACTION = 0.02   # above this, missing/corrupt CrisisMMD copies are fetched from HF
 
 
 class DiskFull(RuntimeError):
@@ -97,21 +97,9 @@ def check_disk(path, min_free_gb, usage=shutil.disk_usage):
                        % (free, min_free_gb))
 
 
-def _thumb_urls(images_csv_text, ids):
-    wanted = set(ids)
-    return {r["ImageID"]: r["Thumbnail300KURL"] for r in csv.DictReader(io.StringIO(images_csv_text))
-            if r["ImageID"] in wanted and r.get("Thumbnail300KURL")}
-
-
-def candidates(fetch, cfg, max_images=None):
-    """Oversampled, ranked normals candidates: (places items, people items, report)."""
-    ncfg = dict(cfg["normals"])
-    factor = float(ncfg.get("oversample", 1.0))
-    pn, on = ncfg["places365_count"], ncfg["people_count"]
-    if max_images:
-        pn, on = min(pn, max_images), min(on, max_images)
-    ncfg["places365_count"], ncfg["people_count"] = math.ceil(pn * factor), math.ceil(on * factor)
-    return normals.build_normals(fetch, ncfg)
+def candidates(fetch, cfg, max_images=None, input_root="/kaggle/input"):
+    """Ranked normals: (places items, people items, report). See parameters.edge.normals.build_normals."""
+    return normals.build_normals(fetch, cfg["normals"], input_root, max_images)
 
 
 def _info(root, rel, prior):
@@ -148,7 +136,8 @@ def _index_rows(out, items, prior):
 
 
 def build_a(meta_dir, out_dir, fetch, cfg=None, opener=None, tar_source=None, workers=8, max_images=None,
-            min_free_gb=2.0, progress_dir=None, disk_usage=shutil.disk_usage, chunk=1000):
+            min_free_gb=2.0, progress_dir=None, disk_usage=shutil.disk_usage, chunk=1000,
+            crisismmd_root=None, input_root="/kaggle/input"):
     """Download everything, write index.jsonl/failures.json/manifest.json/README/metadata. Returns manifest."""
     cfg = cfg or load_config("data")
     out = Path(out_dir)
@@ -161,22 +150,38 @@ def build_a(meta_dir, out_dir, fetch, cfg=None, opener=None, tar_source=None, wo
               for k in sorted(records)]
     if max_images:
         crisis = crisis[:max_images]
-    places, people, nrep = candidates(fetch, cfg, max_images)
-    thumbs = _thumb_urls(fetch(cfg["normals"]["sources"]["openimages_images"]).decode("utf-8"),
-                         [p["id"] for p in people])
+    places, people, nrep = candidates(fetch, cfg, max_images, input_root)
+    kaggle_places = str(nrep["places365_mode"]).startswith("kaggle:")
     failures, stopped = [], None
+    crisismmd_source = "huggingface"
     try:
-        for i in range(0, len(crisis), chunk):
+        if crisismmd_root:
             check_disk(out, min_free_gb, disk_usage)
-            failures += fetch_images.fetch_crisismmd(crisis[i:i + chunk], out, opener, workers,
-                                                     progress_path=prog / "_progress_a_crisismmd.json")
+            copy_fails, _ = fetch_images.copy_crisismmd_from_root(crisis, crisismmd_root, out, workers)
+            crisismmd_source = "kaggle_input:%s" % crisismmd_root
+            if crisis and len(copy_fails) / len(crisis) > MAX_COPY_FAIL_FRACTION:
+                bad = {f["key"] for f in copy_fails}
+                for key in bad:    # drop partial/corrupt leftovers so the downloader refetches
+                    (out / "images" / "crisismmd" / key).unlink(missing_ok=True)
+                copy_fails = fetch_images.fetch_crisismmd([c for c in crisis if c["image_path"] in bad], out,
+                                                          opener, workers,
+                                                          progress_path=prog / "_progress_a_crisismmd.json")
+                crisismmd_source += "+huggingface_fallback"
+            failures += copy_fails
+        else:
+            for i in range(0, len(crisis), chunk):
+                check_disk(out, min_free_gb, disk_usage)
+                failures += fetch_images.fetch_crisismmd(crisis[i:i + chunk], out, opener, workers,
+                                                         progress_path=prog / "_progress_a_crisismmd.json")
         check_disk(out, min_free_gb, disk_usage)
-        failures += fetch_images.fetch_places365([{"id": p["id"]} for p in places], out, tar_source)
-        for i in range(0, len(people), chunk):
-            check_disk(out, min_free_gb, disk_usage)
-            _, fails = fetch_images.fetch_openimages([dict(p) for p in people[i:i + chunk]], out, opener,
-                                                     thumbs, workers, progress_path=prog / "_progress_a_openimages.json")
-            failures += fails
+        if kaggle_places:
+            failures += fetch_images.copy_verified(
+                [(p["src"], out / "images" / "places365" / p["id"], p["id"]) for p in places], workers, "places365")
+        else:
+            failures += fetch_images.fetch_places365([{"id": p["id"]} for p in places], out, tar_source)
+        check_disk(out, min_free_gb, disk_usage)
+        failures += fetch_images.copy_verified(
+            [(p["src"], out / "images" / "coco_people" / p["id"], p["id"]) for p in people], workers, "coco_people")
     except DiskFull as exc:
         stopped = str(exc)
     prior = _load_prior(out)
@@ -185,11 +190,10 @@ def build_a(meta_dir, out_dir, fetch, cfg=None, opener=None, tar_source=None, wo
           for c in crisis]
     pl = [{"uid": "places365:" + p["id"], "file": "images/places365/" + p["id"], "source": "places365",
            "image_id": p["id"], "category": p["category"], "rank": r} for r, p in enumerate(places)]
-    oi = [{"uid": "openimages_people:" + p["id"], "file": "images/openimages/%s.jpg" % p["id"],
-           "source": "openimages_people", "image_id": p["id"], "category": p["category"], "url": p["url"],
-           "license": p["license"], "author": p["author"], "rank": r} for r, p in enumerate(people)]
+    co = [{"uid": "coco_people:" + p["id"], "file": "images/coco_people/" + p["id"], "source": "coco_people",
+           "image_id": p["id"], "category": p["category"], "rank": r} for r, p in enumerate(people)]
     rows, missing = [], []
-    for group in (cm, pl, oi):
+    for group in (cm, pl, co):
         r, m = _index_rows(out, group, prior)
         rows += r
         missing += m
@@ -200,14 +204,23 @@ def build_a(meta_dir, out_dir, fetch, cfg=None, opener=None, tar_source=None, wo
             failures.append({"source": m["source"], "key": key, "reason": stopped or "not downloaded"})
     write_jsonl(out / "index.jsonl", rows)
     (out / "failures.json").write_text(json.dumps(failures, indent=2), encoding="utf-8")
-    nrep.update(index_rows=len(rows), failures=len(failures), stopped=stopped,
-                by_source={s: sum(1 for r in rows if r["source"] == s) for s in ("crisismmd", "places365", "openimages_people")})
+    nrep.update(crisismmd_source=crisismmd_source, index_rows=len(rows),failures=len(failures), stopped=stopped,
+                by_source={s: sum(1 for r in rows if r["source"] == s) for s in ("crisismmd", "places365", "coco_people")})
     (out / "README.md").write_text(README, encoding="utf-8")
     write_metadata(out, SLUG, TITLE)
     manifest = write_manifest(out, {r["file"]: {"bytes": r["bytes"], "sha256": r["sha256"]} for r in rows})
     manifest["report"] = nrep
     (out / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest
+
+
+def resolve_crisismmd_root(arg):
+    """None/'' -> auto-discover; 'none' -> force HF download (returns None); else the given path."""
+    if arg is None or arg == "":
+        return fetch_images.find_crisismmd_root()
+    if str(arg).lower() == "none":
+        return None
+    return str(arg)
 
 
 def main(argv=None):
@@ -219,10 +232,14 @@ def main(argv=None):
     ap.add_argument("--min-free-gb", type=float, default=2.0)
     ap.add_argument("--cache", default=None, help="metadata download cache (default: next to --out)")
     ap.add_argument("--publish", action=argparse.BooleanOptionalAction, default=True)
+    ap.add_argument("--crisismmd-root", default=None,
+                    help="folder holding data_image/ (default: auto-discover under /kaggle/input; "
+                         "'none' forces the Hugging Face download)")
     a = ap.parse_args(argv)
     cache = a.cache or str(Path(a.out).resolve().parent / "_edge_a_cache")
+    root = resolve_crisismmd_root(a.crisismmd_root)
     manifest = build_a(a.meta_dir, a.out, make_fetcher(cache), workers=a.workers, max_images=a.max_images,
-                       min_free_gb=a.min_free_gb)
+                       min_free_gb=a.min_free_gb, crisismmd_root=root)
     print(json.dumps(manifest["report"]))
     if a.publish:
         print(json.dumps(kaggle_publish.publish_dataset(a.out, SLUG, TITLE, "stage A images")))

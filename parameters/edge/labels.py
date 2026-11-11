@@ -113,10 +113,10 @@ def normal_rows(items, source, cfg=None):
     """Everyday images are Low by rule. ``items``: iterable of dicts with ``path`` and optional
     ``category``. Places365 categories on the blacklist are dropped (damage look-alikes)."""
     cfg = cfg or load_config("data")["normals"]
-    banned = set(cfg["places365_blacklist"]) if source == "places365" else set()
+    banned = {str(b).replace("/", "_") for b in cfg["places365_blacklist"]} if source == "places365" else set()
     rows, dropped = [], 0
     for item in items:
-        if item.get("category") in banned:
+        if str(item.get("category") or "").replace("/", "_") in banned:
             dropped += 1
             continue
         rows.append({"image_path": item["path"], "image_id": item.get("id"), "tweet_id": None,

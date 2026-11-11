@@ -59,6 +59,41 @@ def _encoder_cfg(name, grid_cfg=None):
     raise ValueError("unknown encoder " + name)
 
 
+def _first_attr(obj, names):
+    for n in names:
+        v = getattr(obj, n, None)
+        if v is not None:
+            return v
+    return None
+
+
+def _image_embedding(model, family, pixel_values):
+    """Raw (n, d) image embedding tensor, robust to transformers 4 (tensor) and 5 (ModelOutput) APIs."""
+    if family == "clip":
+        # vision tower + projection: the 512-d projected embedding, independent of get_image_features' return type
+        pooled = model.vision_model(pixel_values=pixel_values).pooler_output
+        return model.visual_projection(pooled)
+    if family == "siglip":
+        out = model.get_image_features(pixel_values=pixel_values)
+        if hasattr(out, "reshape"):                       # a plain tensor
+            return out
+        f = _first_attr(out, ("pooler_output", "image_embeds"))
+        if f is None:
+            raise ValueError("siglip get_image_features returned %s without pooler_output/image_embeds"
+                             % type(out).__name__)
+        return f
+    out = model(pixel_values=pixel_values)
+    f = getattr(out, "pooler_output", None)
+    return f if f is not None else out.last_hidden_state[:, 0]
+
+
+def _check_dim(f, enc):
+    got = int(f.shape[-1])
+    if got != int(enc["dim"]):
+        raise ValueError("encoder %s: embedding dim got %d, expected %d (grid.yaml); output type %s"
+                         % (enc["name"], got, int(enc["dim"]), type(f).__name__))
+
+
 def load_embedder(name, device="cpu", grid_cfg=None):
     """Return ``fn(list[PIL.Image]) -> (n, dim) float32`` L2-normalised. Lazy transformers/torch import."""
     import torch
@@ -70,13 +105,10 @@ def load_embedder(name, device="cpu", grid_cfg=None):
     def embed(images):
         inputs = proc(images=[im.convert("RGB") for im in images], return_tensors="pt").to(device)
         with torch.no_grad():
-            if enc["family"] in ("clip", "siglip"):
-                f = model.get_image_features(**inputs)
-            else:
-                out = model(**inputs)
-                f = out.pooler_output if getattr(out, "pooler_output", None) is not None \
-                    else out.last_hidden_state[:, 0]
-            f = torch.nn.functional.normalize(f.reshape(f.shape[0], -1), dim=-1)
+            f = _image_embedding(model, enc["family"], inputs["pixel_values"])
+            f = f.reshape(f.shape[0], -1)
+            _check_dim(f, enc)
+            f = torch.nn.functional.normalize(f, dim=-1)
         return f.cpu().numpy().astype(np.float32)
     embed.model = model
     return embed

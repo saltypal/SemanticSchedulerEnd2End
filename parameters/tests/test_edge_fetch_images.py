@@ -109,28 +109,16 @@ def test_places365_downloaded_tar_deleted_unless_keep(tmp_path):
     assert made["dest"].exists()
 
 
-def test_openimages_thumbnail_fallback_and_reencode(tmp_path):
-    big_png = img("PNG", (2000, 1000))
-
-    def opener(url, headers):
-        if "orig_dead" in url:
-            raise http_error(404)
-        return big_png if "thumb" in url else img("PNG")
-    items = [{"id": "a", "url": "http://orig_dead/a"}, {"id": "b", "url": "http://ok/b"}]
-    res, fails = fi.fetch_openimages(items, tmp_path, opener, {"a": "http://thumb/a"}, workers=1)
-    assert fails == [] and res["a"]["url_used"].startswith("http://thumb")
-    with Image.open(tmp_path / "images" / "openimages" / "a.jpg") as im:
-        assert im.format == "JPEG" and max(im.size) == 1600
-    assert res["a"]["orig_size"] == [2000, 1000]
-    with Image.open(tmp_path / "images" / "openimages" / "b.jpg") as im:
-        assert im.format == "JPEG"
-
-
-def test_openimages_failure_recorded(tmp_path):
-    def opener(url, headers):
-        raise http_error(404)
-    res, fails = fi.fetch_openimages([{"id": "z", "url": "http://dead/z"}], tmp_path, opener, workers=1)
-    assert res == {} and fails[0]["key"] == "z"
+def test_copy_verified_copies_skips_and_reports(tmp_path):
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "ok.jpg").write_bytes(img())
+    (src / "bad.jpg").write_bytes(b"not an image")
+    pairs = [(src / n, tmp_path / "dst" / n, n) for n in ("ok.jpg", "bad.jpg", "gone.jpg")]
+    fails = fi.copy_verified(pairs, workers=2, source="x")
+    assert {f["key"]: f["reason"] for f in fails} == {"bad.jpg": "corrupt", "gone.jpg": "missing_in_source"}
+    assert (tmp_path / "dst" / "ok.jpg").is_file() and not list((tmp_path / "dst").glob("*.part"))
+    assert fi.copy_verified(pairs[:1], workers=1) == []
 
 
 def test_fill_to_count_reaches_n():
@@ -150,3 +138,44 @@ def test_verify_images(tmp_path):
     (tmp_path / "images/bad.jpg").write_bytes(b"garbage")
     rows = [{"file": "images/ok.jpg"}, {"file": "images/bad.jpg"}, {"file": "images/none.jpg"}]
     assert fi.verify_images(rows, tmp_path) == (["images/none.jpg"], ["images/bad.jpg"])
+
+
+def _mk_root(base, names=("data_image/ev/0.jpg", "data_image/ev/1.jpg")):
+    for n in names:
+        p = base / n
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(img())
+    return base
+
+
+def test_find_crisismmd_root_both_layouts_and_none(tmp_path):
+    assert fi.find_crisismmd_root(tmp_path / "nope") is None
+    assert fi.find_crisismmd_root(tmp_path) is None
+    a = _mk_root(tmp_path / "a" / "slug" / "CrisisMMD_v2.0")
+    assert fi.find_crisismmd_root(tmp_path / "a") == a
+    b = _mk_root(tmp_path / "b" / "datasets" / "owner" / "slug" / "CrisisMMD_v2.0")
+    assert fi.find_crisismmd_root(tmp_path / "b") == b
+    (tmp_path / "c" / "x" / "data_image").mkdir(parents=True)   # no event subfolder
+    assert fi.find_crisismmd_root(tmp_path / "c") is None
+    assert fi.find_crisismmd_root(tmp_path / "b", max_depth=2) is None
+
+
+def test_find_crisismmd_root_ambiguous(tmp_path):
+    _mk_root(tmp_path / "x" / "CrisisMMD_v2.0")
+    _mk_root(tmp_path / "y" / "CrisisMMD_v2.0")
+    with pytest.raises(RuntimeError, match="several"):
+        fi.find_crisismmd_root(tmp_path)
+
+
+def test_copy_crisismmd_skips_missing_and_corrupt(tmp_path):
+    root = _mk_root(tmp_path / "src")
+    (root / "data_image/ev/2.jpg").write_bytes(b"not an image")
+    rows = [{"image_path": "data_image/ev/%d.jpg" % i} for i in range(4)]
+    out = tmp_path / "out"
+    fails, copied = fi.copy_crisismmd_from_root(rows, root, out, workers=2)
+    reasons = {f["key"]: f["reason"] for f in fails}
+    assert reasons == {"data_image/ev/2.jpg": "corrupt", "data_image/ev/3.jpg": "missing_in_source"}
+    assert copied == 2 * len(img())
+    assert not list(out.rglob("*.part")) and not (out / "images/crisismmd/data_image/ev/2.jpg").exists()
+    fails2, copied2 = fi.copy_crisismmd_from_root(rows[:2], root, out)
+    assert fails2 == [] and copied2 == 0      # same-size files skipped

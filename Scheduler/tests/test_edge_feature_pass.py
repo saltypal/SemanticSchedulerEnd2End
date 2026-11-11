@@ -76,7 +76,7 @@ def _ctx(root, out, cfg, fail=(), sq=True, counter=None):
             return np.stack([_vec(name, im) for im in images])
         return fn
     fake = FakeSQ()
-    backends = fp.Backends(emb_factory, (lambda: fake) if sq else None, clock=iter(np.arange(0, 1e6, 0.002)).__next__)
+    backends = fp.Backends(emb_factory, (lambda: fake) if sq else None, clock=(lambda it=iter(__import__("itertools").count(0, 0.002)): next(it)))
     return fp.Context(cfg, load_config("grid"), root, out, backends, log=lambda *a: None), fake
 
 
@@ -272,12 +272,160 @@ def test_notebook_builder(tmp_path):
     assert meta["enable_gpu"] is True and meta["code_file"] == "edge-s2-feature-pass.ipynb"
     src = ["".join(c["source"]) for c in nb["cells"]]
     joined = "\n".join(src)
-    for needle in ("Codec.edge.feature_pass run", "Codec.edge.compute_profile", "export-grid",
-                   "parameters.edge.embedding_grid grid", "parameters.edge.embedding_grid select", "/kaggle/working/runs/edge-s2"):
+    for needle in ("'Codec.edge.feature_pass', 'run'", "'Codec.edge.compute_profile'", "'export-grid'",
+                   "'parameters.edge.embedding_grid', 'grid'", "'parameters.edge.embedding_grid', 'select'", "/kaggle/working/runs/edge-s2"):
         assert needle in joined, needle
     assert "run_manifest.json" in "".join(src)
-    assert "feature_pass publish" in src[-1] and "scheduler-dataset-v1-cache" in src[-1]
+    assert "'Codec.edge.feature_pass', 'publish'" in src[-1] and "scheduler-dataset-v1-cache" in src[-1]
     assert not meta["kernel_sources"] and "--dataset-root" not in joined
     mk.main(["--out-dir", str(tmp_path)])
     assert (tmp_path / "edge-s2-feature-pass.ipynb").exists()
     assert (tmp_path / "edge-s2-feature-pass.kernel-metadata.json").exists()
+
+
+# ---------------------------------------------------------------- stage isolation
+
+class RaisingSegSQ(FakeSQ):
+    def segment(self, arr):
+        raise RuntimeError("segmenter exploded")
+
+
+class RaisingEncodeSQ(FakeSQ):
+    def encode(self, arr, handle, m):
+        if m == 0.55:
+            raise ValueError("encode m0.55 failed")
+        return super().encode(arr, handle, m)
+
+
+def _ctx_sq(root, out, cfg, sq, fail_enc=None):
+    def emb_factory(name):
+        def fn(images):
+            if name == fail_enc:
+                raise RuntimeError("encoder boom")
+            return np.stack([_vec(name, im) for im in images])
+        return fn
+    backends = fp.Backends(emb_factory, lambda: sq, clock=(lambda it=iter(__import__("itertools").count(0, 0.002)): next(it)))
+    return fp.Context(cfg, load_config("grid"), root, out, backends, log=lambda *a: None)
+
+
+def test_failing_encoder_keeps_image_ok_and_flags(tmp_path):
+    root, rows = _dataset(tmp_path, n=6)
+    out = tmp_path / "o"
+    summ = fp.run(_ctx_sq(root, out, _make_cfg(shard_size=10), FakeSQ(), fail_enc="dinov2_small"), rows)
+    assert summ["counts"]["ok"] == 6 and summ["n_failures"] == 0
+    s = _shards(out)[0]
+    assert not np.load(s / "emb_dinov2_small_ok.npy").any() and np.load(s / "emb_clip_b32_ok.npy").all()
+    assert not (s / "emb_dinov2_small.npy").exists() and (s / "emb_clip_b32.npy").exists()
+    assert (s / "phash64.npy").exists() and np.load(s / "phash_ok.npy").all()
+    assert np.load(s / "simhash_ok.npy").all() and (s / "class_grid.npy").exists() and np.load(s / "sqgan_ok.npy").all()
+    st = json.loads((s / "failures.json").read_text())
+    assert any(r["stage"] == "embed_dinov2_small" and r["error_type"] == "RuntimeError" and r["count"] == 6
+               and "encoder boom" in r["message"] for r in st)
+    assert any(r["stage"] == "embed_dinov2_small" and r["count"] == 6 for r in summ["stage_failures"])
+    assert summ["n_stage_failures"] == 6
+
+
+def test_failing_simhash_encoder_sets_simhash_flag_false(tmp_path):
+    root, rows = _dataset(tmp_path, n=4)
+    out = tmp_path / "o"
+    summ = fp.run(_ctx_sq(root, out, _make_cfg(shard_size=10), FakeSQ(), fail_enc="clip_b32"), rows)
+    s = _shards(out)[0]
+    n = len(json.loads((s / "uids.json").read_text()))
+    assert summ["counts"]["ok"] == 4 and (s / "phash64.npy").exists()
+    assert not np.load(s / "simhash_ok.npy").any() and len(np.load(s / "simhash64.npy")) == n
+    assert np.load(s / "emb_dinov2_small_ok.npy").all()
+
+
+def test_failing_sqgan_segment_keeps_other_stages(tmp_path):
+    root, rows = _dataset(tmp_path, n=6)
+    out = tmp_path / "o"
+    summ = fp.run(_ctx_sq(root, out, _make_cfg(shard_size=10), RaisingSegSQ()), rows)
+    assert summ["counts"]["ok"] == 6 and summ["n_failures"] == 0
+    s = _shards(out)[0]
+    assert (s / "done.json").exists() and (s / "emb_clip_b32.npy").exists() and (s / "phash64.npy").exists()
+    assert not np.load(s / "sqgan_ok.npy").any() and np.load(s / "sqgan_ok.npy").shape == (6, 2)
+    assert np.load(s / "class_grid.npy").shape == (6, 16, 32) and not np.load(s / "class_grid.npy").any()
+    assert any(r["stage"] == "sqgan_segment" and r["error_type"] == "RuntimeError" and r["count"] == 6
+               for r in summ["stage_failures"])
+    stages = {json.loads(l)["stage"] for l in (s / "timings.jsonl").read_text().splitlines()}
+    assert {"load", "phash", "embed_clip_b32"} <= stages
+
+
+def test_failing_single_m_encode_flags_only_that_m(tmp_path):
+    root, rows = _dataset(tmp_path, n=4)
+    out = tmp_path / "o"
+    summ = fp.run(_ctx_sq(root, out, _make_cfg(shard_size=10), RaisingEncodeSQ()), rows)
+    s = _shards(out)[0]
+    ok = np.load(s / "sqgan_ok.npy")
+    assert ok[:, 0].all() and not ok[:, 1].any()
+    assert any(r["stage"] == "sqgan_encode_m0.55" and r["error_type"] == "ValueError" for r in summ["stage_failures"])
+    assert np.load(s / "decode_ok_m0.25.npy").all() and not np.load(s / "decode_ok_m0.55.npy").any()
+    assert summ["counts"]["ok"] == 4
+
+
+def test_failing_decode_is_a_stage_failure(tmp_path):
+    class BadDecode(FakeSQ):
+        def decode(self, payload, m):
+            raise OSError("no decode")
+    root, rows = _dataset(tmp_path, n=3)
+    summ = fp.run(_ctx_sq(root, tmp_path / "o", _make_cfg(shard_size=10), BadDecode()), rows)
+    assert summ["counts"]["ok"] == 3
+    assert {r["stage"] for r in summ["stage_failures"]} == {"decode_m0.25", "decode_m0.55"}
+
+
+def test_export_grid_skips_failed_rows(tmp_path):
+    root, rows = _dataset(tmp_path, n=6)
+    out = tmp_path / "o"
+    fp.run(_ctx_sq(root, out, _make_cfg(shard_size=10), FakeSQ(), fail_enc="dinov2_small"), rows)
+    fp.export_grid_inputs(out, rows, out / "grid", None, log=lambda *a: None)
+    assert (out / "grid/emb_clip_b32.npz").exists() and not (out / "grid/emb_dinov2_small.npz").exists()
+    assert not (out / "grid/emb_clip_b32_ok.npz").exists()
+
+
+# ---------------------------------------------------------------- backends: clear errors
+
+def test_restore_flat_bundle_missing_manifest_message(tmp_path):
+    from Codec.edge import feature_pass_backends as be
+    flat = tmp_path / "flat"
+    flat.mkdir()
+    for i in range(20):
+        (flat / ("f%02d.bin" % i)).write_text("x")
+    (flat / "bundle_manifest.json").write_text("{}")
+    with pytest.raises(FileNotFoundError) as e:
+        be.restore_flat_bundle(flat, tmp_path / "dest")
+    msg = str(e.value)
+    assert str(flat) in msg and "*flat_manifest.json" in msg and "bundle_manifest.json" in msg
+    assert "f00.bin" in msg and "f19.bin" not in msg                 # at most 15 names listed
+    with pytest.raises(FileNotFoundError, match="does not exist"):
+        be.restore_flat_bundle(tmp_path / "nope", tmp_path / "dest")
+
+
+def test_restore_flat_bundle_ok(tmp_path):
+    from Codec.edge import feature_pass_backends as be
+    flat = tmp_path / "flat"
+    flat.mkdir()
+    (flat / "scheduler_sqgan_flat_manifest.json").write_text(json.dumps(
+        {"bundle_manifest": "bm.json", "files": {"a/b.pt": "w.pt"}}))
+    (flat / "bm.json").write_text("{}")
+    (flat / "w.pt").write_text("w")
+    b = be.restore_flat_bundle(flat, tmp_path / "dest")
+    assert (b / "bundle.json").exists() and (b / "a/b.pt").read_text() == "w"
+
+
+def test_find_source_root_message(tmp_path):
+    from Codec.edge import feature_pass_backends as be
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/__init__.py").write_text("")
+    (tmp_path / "readme.txt").write_text("")
+    with pytest.raises(FileNotFoundError) as e:
+        be.find_source_root(tmp_path)
+    msg = str(e.value)
+    assert str(tmp_path) in msg and "src/sqgan.py" in msg and "readme.txt" in msg
+
+
+def test_notebook_install_cell_has_lpips():
+    from scripts.edge import make_feature_pass_notebook as mk, make_pilot_notebook as mp
+    for mod in (mk, mp):
+        nb, _ = mod.build()
+        install = ["".join(c["source"]) for c in nb["cells"] if "pip install" in "".join(c["source"])]
+        assert install and "lpips" in install[0]

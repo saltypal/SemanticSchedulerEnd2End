@@ -37,6 +37,18 @@ def embedder_factory(device, grid_cfg):
     return lambda name: load_embedder(name, device, grid_cfg)
 
 
+def not_found(directory, pattern, what, limit=15):
+    """FileNotFoundError naming the directory searched, the pattern and up to ``limit`` names found there."""
+    d = Path(directory)
+    try:
+        names = sorted(p.name for p in d.iterdir())[:limit] if d.is_dir() else []
+    except OSError:
+        names = []
+    state = "" if d.is_dir() else " (directory does not exist)"
+    return FileNotFoundError("%s: nothing matching %r in %s%s; files found there (up to %d): %s"
+                             % (what, pattern, d, state, limit, names))
+
+
 def find_source_root(source_dir, max_depth=5):
     """Directory under ``source_dir`` holding src/__init__.py + src/sqgan.py + src/bitstream.py."""
     base = Path(source_dir)
@@ -45,13 +57,17 @@ def find_source_root(source_dir, max_depth=5):
         if len(root.relative_to(base).parts) <= max_depth and (root / "src/sqgan.py").exists() \
                 and (root / "src/bitstream.py").exists():
             return root
-    raise FileNotFoundError("no SQ-GAN source root (src/sqgan.py) under %s" % source_dir)
+    raise not_found(base, "src/__init__.py + src/sqgan.py + src/bitstream.py", "no SQ-GAN source root")
 
 
 def restore_flat_bundle(flat_dir, dest):
     """Copy the flat dataset members into ``dest/bundle`` with their original relative paths."""
     flat, dest = Path(flat_dir), Path(dest)
-    mapping = json.loads(next(flat.glob("*flat_manifest.json")).read_text())
+    manifests = sorted(flat.glob("*flat_manifest.json")) if flat.is_dir() else []
+    if not manifests:
+        extra = " (a bundle_manifest.json alone is not the flat mapping)" if (flat / "bundle_manifest.json").exists() else ""
+        raise not_found(flat, "*flat_manifest.json", "cannot restore flat SQ-GAN bundle" + extra)
+    mapping = json.loads(manifests[0].read_text())
     bundle = dest / "bundle"
     if (bundle / "bundle.json").exists():
         return bundle

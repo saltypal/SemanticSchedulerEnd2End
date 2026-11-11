@@ -19,6 +19,7 @@ DATASET_SOURCES = (
     "satyapaladuguplus/semantic-lossless-private-sqgan-source",
     "satyapaladuguplus/semantic-lossless-private-sqgan-assets",
 )
+REQUIREMENTS = ("lpips",)   # the SQ-GAN source imports lpips; not preinstalled on Kaggle images
 TITLE = "Edge S2 feature pass (embeddings, hashes, SQ-GAN, decode, timings) + SPI grid"
 
 _NOTE = ("Provisional splits are built by `parameters.edge.splits.assign_event_splits` when "
@@ -29,7 +30,7 @@ def build(branch="main", account=None):
     """Return (notebook dict, kernel-metadata dict)."""
     cfg = bn.load_kaggle_config()
     nb = bn.build_notebook(STEP, "Codec.edge.feature_pass", ["run", "--out", OUT],
-                           TITLE, cfg["repo_url"], branch, (), True)
+                           TITLE, cfg["repo_url"], branch, REQUIREMENTS, True)
     extra = [
         bn._md("## Compute profile (once per model)\n"),
         bn._run_cell("Codec.edge.compute_profile", ["--out", OUT]),

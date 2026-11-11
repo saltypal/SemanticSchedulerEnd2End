@@ -60,11 +60,75 @@ def item(status, detail):
     return {"status": status, "detail": str(detail)[:300]}
 
 
+DISCOVER_DEPTH = 4
+DATASET_KEYWORDS = ("sqgan-bundle", "sqgan-source", "sqgan-assets")
+DATASET_FILES = ("bundle_manifest.json", "*flat_manifest.json", "sqgan-pinned-source.zip")
+
+
+def _walk(base, depth):
+    """Yield (path, depth) for every entry under ``base`` down to ``depth`` levels (1 = direct children)."""
+    base = Path(base)
+    if depth < 1 or not base.is_dir():
+        return
+    try:
+        entries = sorted(base.iterdir())
+    except OSError:
+        return
+    for p in entries:
+        yield p, 1
+        if p.is_dir():
+            for q, d in _walk(p, depth - 1):
+                yield q, d + 1
+
+
+def input_tree(base, depth=3, limit=200):
+    """Names of /kaggle/input down to ``depth`` levels (relative paths, at most ``limit``) so the mount layout is visible."""
+    base = Path(base)
+    out = []
+    for p, _ in _walk(base, depth):
+        out.append(p.relative_to(base).as_posix() + ("/" if p.is_dir() else ""))
+        if len(out) >= limit:
+            break
+    return out
+
+
+def discover_datasets(input_base, depth=DISCOVER_DEPTH):
+    """{'dirs': {keyword: [dir, ...]}, 'files': {pattern: [file, ...]}} found under ``input_base`` (recursive, shallowest first)."""
+    import fnmatch
+    dirs = {k: [] for k in DATASET_KEYWORDS}
+    files = {k: [] for k in DATASET_FILES}
+    for p, _ in _walk(input_base, depth):
+        low = p.name.lower()
+        if p.is_dir():
+            for k in DATASET_KEYWORDS:
+                if k in low:
+                    dirs[k].append(str(p))
+        else:
+            for k in DATASET_FILES:
+                if fnmatch.fnmatch(low, k.lower()):
+                    files[k].append(str(p))
+    key = lambda x: (len(Path(x).parts), x)
+    return {"dirs": {k: sorted(v, key=key) for k, v in dirs.items()},
+            "files": {k: sorted(v, key=key) for k, v in files.items()}}
+
+
 def find_dataset(ctx, pattern):
-    hits = sorted(Path(ctx.input_base).glob(pattern)) if Path(ctx.input_base).is_dir() else []
+    """Attached dataset directory whose lowercase name contains the keyword in ``pattern`` (``*sqgan-bundle*``).
+
+    Searches recursively to depth 4 (layouts /kaggle/input/<slug> and /kaggle/input/datasets/<owner>/<slug>). Falls
+    back to the folder holding a flat/bundle manifest (bundle) or the pinned source zip (source/assets).
+    """
+    keyword = pattern.strip("*").lower()
+    found = discover_datasets(ctx.input_base)
+    hits = found["dirs"].get(keyword, [])
+    if not hits and keyword == "sqgan-bundle":
+        hits = [str(Path(f).parent) for k in ("*flat_manifest.json", "bundle_manifest.json") for f in found["files"][k]]
+    if not hits and keyword == "sqgan-source":
+        hits = [str(Path(f).parent) for f in found["files"]["sqgan-pinned-source.zip"]]
     if not hits:
-        raise Skip("no dataset matching %s mounted under %s" % (pattern, ctx.input_base))
-    return hits[0]
+        raise Skip("no dataset matching %s mounted under %s (searched depth %d; tree: %s)"
+                   % (pattern, ctx.input_base, DISCOVER_DEPTH, input_tree(ctx.input_base, 3, 20)))
+    return Path(hits[0])
 
 
 def ensure_bundle(ctx):
@@ -179,6 +243,8 @@ def check_env_gpu(ctx):
         except Exception as exc:
             libs[lib] = "missing: %r" % exc
     d["libraries"] = libs
+    d["input_tree"] = input_tree(ctx.input_base, 3, 200)
+    d["discovered_datasets"] = discover_datasets(ctx.input_base)
     items = {"gpu_count": item("pass" if count else "fail", "%d GPU(s)" % count),
              "gpu_names": item("pass" if d["gpu_names"] else "fail", ", ".join(d["gpu_names"]) or "none"),
              "torch_cuda": item("pass" if d["cuda_available"] else "fail", "cuda=%s torch %s" % (d["cuda_available"], torch.__version__)),
@@ -678,28 +744,28 @@ def check_dataset_scale(ctx):
         raise Skip("pilot dataset A index.jsonl missing at %s" % index)
     rows = [json.loads(x) for x in index.read_text().splitlines() if x]
     cfg = yaml.safe_load((Path(__file__).resolve().parents[2] / "config/edge/data.yaml").read_text())
-    nm = cfg["normals"]
-    full = {"crisismmd": 18082, "places365": nm["places365_count"], "openimages_people": nm["people_count"]}
-    over = float(nm["oversample"])
+    nm = (cfg or {}).get("normals") or {}
+    # defaults: 17 images/class (places365 has 365 classes, blacklist ignored), 3000 COCO people images
+    full = {"crisismmd": 18082, "places365": int(nm.get("places365_per_class", 17)) * 365,
+            "coco_people": int(nm.get("people_count", 3000))}
     acc = defaultdict(list)
     for r in rows:
         if r.get("bytes"):
             acc[r["source"]].append(r["bytes"])
     mean = {s: sum(v) / len(v) for s, v in acc.items()}
-    est, est_over = 0.0, 0.0
+    est = 0.0
     for s, n in full.items():
         m = mean.get(s)
         if m is None:
             continue
         est += n * m
-        est_over += n * m * (1.0 if s == "crisismmd" else over)
-    gb, gb_over = est / 1e9, est_over / 1e9
+    gb = est / 1e9
     d = {"mean_bytes_per_source": mean, "images_per_source": {s: len(v) for s, v in acc.items()}, "full_counts": full,
-         "estimate_gb": round(gb, 2), "estimate_gb_with_oversample": round(gb_over, 2), "limit_gb": FULL_DISK_GB,
-         "headroom_gb": round(FULL_DISK_GB - gb_over, 2)}
+         "estimate_gb": round(gb, 2), "limit_gb": FULL_DISK_GB,
+         "headroom_gb": round(FULL_DISK_GB - gb, 2)}
     missing = [s for s in full if s not in mean]
-    items = {"dataset_a_size_estimate": item("pass" if not missing and gb_over <= 0.9 * FULL_DISK_GB else "fail",
-                                             "%.1f GB (%.1f with oversample) of %.0f GB; no pilot images for %s" % (gb, gb_over, FULL_DISK_GB, missing))}
+    items = {"dataset_a_size_estimate": item("pass" if not missing and gb <= 0.9 * FULL_DISK_GB else "fail",
+                                             "%.1f GB of %.0f GB; no pilot images for %s" % (gb, FULL_DISK_GB, missing))}
     stages = {}
     sr = ctx.work / "stage_results.json"
     if sr.exists():

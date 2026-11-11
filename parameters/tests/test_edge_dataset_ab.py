@@ -30,18 +30,43 @@ def make_tar(path, names):
     return path
 
 
-DEAD = ("/data_image/ev/1.jpg", "http://orig/oi0", "http://orig/oi1", "http://thumb/oi1")
+DEAD = ("/data_image/ev/1.jpg",)
 
 
 def opener(url, headers):
-    if url.endswith(DEAD[0]) or url in DEAD[1:]:
+    if url.endswith(DEAD[0]):
         raise urllib.error.HTTPError(url, 404, "x", {}, None)
     return img()
 
 
+def _write_img(path, data=None):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data or img())
+
+
+def kaggle_inputs(tmp_path):
+    """Fake /kaggle/input: Places365 (3 classes x 4 files, 'ruin' blacklisted) and COCO (4 big-person images,
+    big1.jpg is corrupt, plus a tiny-person image)."""
+    inp = tmp_path / "kaggle_input"
+    for cls in ("airfield", "kitchen", "ruin"):
+        for i in range(4):
+            _write_img(inp / "places365" / "train" / cls / ("%08d.jpg" % (i + 1)))
+    coco = inp / "coco-2017-dataset" / "coco2017"
+    names = ["big%d.jpg" % i for i in range(4)] + ["tiny.jpg"]
+    for n in names:
+        _write_img(coco / "train2017" / n, b"garbage" if n == "big1.jpg" else None)
+    imgs = [{"id": i, "file_name": n, "width": 100, "height": 100} for i, n in enumerate(names)]
+    anns = [{"image_id": i, "category_id": 1, "bbox": [0, 0, 50, 50] if i < 4 else [0, 0, 5, 5], "iscrowd": 0}
+            for i in range(5)]
+    ann = coco / "annotations" / "person_keypoints_train2017.json"
+    ann.parent.mkdir(parents=True, exist_ok=True)
+    ann.write_text(json.dumps({"images": imgs, "annotations": anns}))
+    return inp
+
+
 def world(tmp_path, monkeypatch):
     cfg = copy.deepcopy(load_config("data"))
-    cfg["normals"].update(places365_count=3, people_count=3, oversample=2.0, places365_blacklist=["ruin"])
+    cfg["normals"].update(places365_per_class=2, people_count=4, places365_blacklist=["ruin"])
     src = cfg["normals"]["sources"]
     names = ["Places365_val_%08d.jpg" % i for i in range(1, 13)]
     val_txt = "\n".join("%s %d" % (n, i % 3) for i, n in enumerate(names))
@@ -50,13 +75,8 @@ def world(tmp_path, monkeypatch):
         info = tarfile.TarInfo("places365_val.txt")
         info.size = len(val_txt)
         tar.addfile(info, io.BytesIO(val_txt.encode()))
-    ids = ["oi%d" % i for i in range(8)]
-    lab = "ImageID,LabelName,Confidence\n" + "\n".join("%s,/m/0sgh53y,1" % i for i in ids) + "\n"
-    im = "ImageID,OriginalURL,License,Author,Thumbnail300KURL\n" + "\n".join(
-        "%s,http://orig/%s,lic,au,http://thumb/%s" % (i, i, i) for i in ids) + "\n"
     web = {src["places365_categories"]: b"/a/airfield 0\n/k/kitchen 1\n/r/ruin 2\n",
-           src["places365_filelist"]: filelist.read_bytes(),
-           src["openimages_labels"]: lab.encode(), src["openimages_images"]: im.encode()}
+           src["places365_filelist"]: filelist.read_bytes()}
     recs = {}
     for i in range(3):
         p = "data_image/ev/%d.jpg" % i
@@ -72,9 +92,10 @@ def world(tmp_path, monkeypatch):
     return cfg, meta, (lambda url: web[url]), tar
 
 
-def run_a(tmp_path, monkeypatch, out_name="a", **kw):
+def run_a(tmp_path, monkeypatch, out_name="a", kaggle=True, **kw):
     cfg, meta, fetch, tar = world(tmp_path, monkeypatch)
     kw.setdefault("opener", opener)
+    kw.setdefault("input_root", kaggle_inputs(tmp_path) if kaggle else tmp_path / "no_kaggle")
     manifest = da.build_a(meta, tmp_path / out_name, fetch, cfg=cfg, tar_source=tar, workers=2,
                           progress_dir=tmp_path, **kw)
     return cfg, meta, tmp_path / out_name, manifest, fetch, tar
@@ -92,10 +113,16 @@ def test_stage_a_index_and_no_labels(tmp_path, monkeypatch):
     by = {}
     for r in rows:
         by.setdefault(r["source"], []).append(r)
-    assert len(by["crisismmd"]) == 2 and len(by["places365"]) == 6 and len(by["openimages_people"]) == 5
-    assert sorted(r["rank"] for r in by["places365"]) == list(range(6))
+    assert set(by) == {"crisismmd", "places365", "coco_people"}
+    assert len(by["crisismmd"]) == 2 and len(by["places365"]) == 4 and len(by["coco_people"]) == 3
+    assert {r["category"] for r in by["places365"]} == {"airfield", "kitchen"}     # ruin blacklisted
+    assert all(r["file"].startswith("images/places365/%s/" % r["category"]) for r in by["places365"])
+    assert all(r["file"].startswith("images/coco_people/") for r in by["coco_people"])
+    assert sorted(r["rank"] for r in by["places365"]) == list(range(4))
     keys = {f["key"] for f in json.loads((out / "failures.json").read_text())}
-    assert {"data_image/ev/1.jpg", "oi1"} == keys  # oi0 recovered via thumbnail
+    assert {"data_image/ev/1.jpg", "big1.jpg"} == keys        # corrupt COCO copy is recorded, not indexed
+    assert manifest["report"]["places365_mode"].startswith("kaggle:")
+    assert "tiny.jpg" not in {r["image_id"] for r in by["coco_people"]}
     meta_json = json.loads((out / "dataset-metadata.json").read_text())
     assert meta_json["id"] == "satyapaladuguplus/scheduler-dataset-v1-images"
     files = json.loads((out / "manifest.json").read_text())["files"]
@@ -110,8 +137,9 @@ def test_stage_a_resumes_without_refetching(tmp_path, monkeypatch):
     def counting(url, headers):
         calls.append(url)
         return opener(url, headers)
-    da.build_a(meta, out, fetch, cfg=cfg, opener=counting, tar_source=tar, workers=2, progress_dir=tmp_path)
-    assert calls and all(u.endswith(DEAD[0]) or u in DEAD[1:] for u in calls)
+    da.build_a(meta, out, fetch, cfg=cfg, opener=counting, tar_source=tar, workers=2, progress_dir=tmp_path,
+               input_root=tmp_path / "kaggle_input")
+    assert calls and all(u.endswith(DEAD[0]) for u in calls)
 
 
 def test_stage_a_disk_guard(tmp_path, monkeypatch):
@@ -124,12 +152,18 @@ def test_stage_a_disk_guard(tmp_path, monkeypatch):
 def test_stage_a_max_images(tmp_path, monkeypatch):
     *_, manifest, _, _ = run_a(tmp_path, monkeypatch, max_images=1)
     by = manifest["report"]["by_source"]
-    assert by["crisismmd"] == 1 and by["places365"] <= 2 and by["openimages_people"] <= 2
+    assert by["crisismmd"] == 1 and by["places365"] <= 1 and by["coco_people"] <= 1
+
+
+def test_stage_a_fallback_tar_and_coco_unavailable(tmp_path, monkeypatch):
+    cfg, meta, out, manifest, *_ = run_a(tmp_path, monkeypatch, kaggle=False)
+    rep = manifest["report"]
+    assert rep["places365_mode"] == "fallback_val_256_tar" and rep["people_source"] == "unavailable"
+    assert rep["unavailable"] and rep["by_source"]["coco_people"] == 0 and rep["by_source"]["places365"] == 4
 
 
 def test_stage_b_labels_from_a(tmp_path, monkeypatch):
     cfg, meta, a_out, *_ = run_a(tmp_path, monkeypatch)
-    cfg["normals"].update(places365_count=2, people_count=2)
     out = tmp_path / "b"
     counts = bld.build_b(meta, out, a_out, cfg=cfg)
     rows = [json.loads(x) for x in (out / "labels_raw.jsonl").read_text().splitlines()]
@@ -137,17 +171,29 @@ def test_stage_b_labels_from_a(tmp_path, monkeypatch):
     for r in rows:
         by.setdefault(r["source"], []).append(r)
         assert (a_out / r["file"]).is_file() and r["uid"]
-    assert len(by["crisismmd"]) == 2 and len(by["places365"]) == 2 and len(by["openimages_people"]) == 2
+    assert len(by["crisismmd"]) == 2 and len(by["places365"]) == 4 and len(by["coco_people"]) == 3
+    assert all(r["tier"] == "Low" for r in by["places365"] + by["coco_people"])
     index = [json.loads(x) for x in (a_out / "index.jsonl").read_text().splitlines()]
-    top = sorted((r for r in index if r["source"] == "places365"), key=lambda r: r["rank"])[:2]
+    top = sorted((r for r in index if r["source"] == "places365"), key=lambda r: r["rank"])
     assert [r["uid"] for r in by["places365"]] == [r["uid"] for r in top]
     assert not (out / "images").exists()
+    assert (out / "normals_coco_people.jsonl").is_file() and (out / "normals_places365.jsonl").is_file()
+    assert counts["normals"]["places365_final"] == 4 and counts["normals"]["coco_people_final"] == 3
+    assert counts["totals_by_source_tier"]["coco_people"] == {"Low": 3}
     assert sorted(p.name for p in (out / "crisismmd_metadata").iterdir()) == [
         "damage_train.json", "humanitarian_train.json", "informative_train.json"]
     fails = json.loads((out / "failures.json").read_text())
     assert any(f["key"] == "data_image/ev/1.jpg" for f in fails)
     assert "gates" in counts
     assert json.loads((out / "dataset-metadata.json").read_text())["id"].endswith("scheduler-dataset-v1-labels")
+
+
+def test_stage_b_drops_blacklisted_places_row(tmp_path, monkeypatch):
+    cfg, meta, a_out, *_ = run_a(tmp_path, monkeypatch)
+    cfg["normals"]["places365_blacklist"] = ["kitchen"]     # stricter list than A used
+    bld.build_b(meta, tmp_path / "b", a_out, cfg=cfg)
+    rows = [json.loads(x) for x in (tmp_path / "b" / "normals_places365.jsonl").read_text().splitlines()]
+    assert rows and {r["category"] for r in rows} == {"airfield"}
 
 
 def test_discover_images_root(tmp_path):
@@ -162,3 +208,51 @@ def test_cli_flags_parse():
     for mod in (da, bld):
         with pytest.raises(SystemExit):
             mod.main(["--help"])
+
+
+def _fake_root(tmp_path, present):
+    root = tmp_path / "kaggle" / "CrisisMMD_v2.0"
+    for i in present:
+        p = root / ("data_image/ev/%d.jpg" % i)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(img())
+    return root
+
+
+def _crisis_opener(calls):
+    def op(url, headers):
+        calls.append(url)
+        return img()
+    return op
+
+
+def test_crisismmd_from_root_no_fallback_under_threshold(tmp_path, monkeypatch):
+    monkeypatch.setattr(da, "MAX_COPY_FAIL_FRACTION", 0.5)
+    root = _fake_root(tmp_path, [0, 1])          # row 2 missing but threshold raised to 50%... 1/3 < 0.5
+    calls = []
+    *_, out, manifest, _, _ = run_a(tmp_path, monkeypatch, crisismmd_root=root, opener=_crisis_opener(calls))
+    assert manifest["report"]["crisismmd_source"] == "kaggle_input:%s" % root
+    assert not [u for u in calls if "data_image" in u]
+    assert (out / "images/crisismmd/data_image/ev/0.jpg").is_file()
+
+
+def test_crisismmd_fallback_downloads_only_missing(tmp_path, monkeypatch):
+    root = _fake_root(tmp_path, [0])             # rows 0,1,2 expected; 1 and 2 missing -> over 2%
+    calls = []
+    *_, out, manifest, _, _ = run_a(tmp_path, monkeypatch, crisismmd_root=root, opener=_crisis_opener(calls))
+    crisis_calls = [u for u in calls if "data_image" in u]
+    assert sorted(u[-len("data_image/ev/1.jpg"):] for u in crisis_calls) == ["data_image/ev/1.jpg", "data_image/ev/2.jpg"]
+    assert manifest["report"]["crisismmd_source"].endswith("+huggingface_fallback")
+    assert (out / "images/crisismmd/data_image/ev/1.jpg").is_file()
+
+
+def test_crisismmd_default_is_huggingface(tmp_path, monkeypatch):
+    *_, manifest, _, _ = run_a(tmp_path, monkeypatch)
+    assert manifest["report"]["crisismmd_source"] == "huggingface"
+
+
+def test_resolve_root_none_forces_download(tmp_path, monkeypatch):
+    monkeypatch.setattr(da.fetch_images, "find_crisismmd_root", lambda: "/found")
+    assert da.resolve_crisismmd_root("none") is None
+    assert da.resolve_crisismmd_root(None) == "/found"
+    assert da.resolve_crisismmd_root(str(tmp_path)) == str(tmp_path)

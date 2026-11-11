@@ -49,10 +49,21 @@ Checks cover everything earlier reported as unverified:
 - dataset size extrapolation vs the 20 GB limit; memory at 16 workers; download throughput
 - Kaggle publish round trip (small private test dataset), secrets, status parsing, zip mode with many files;
   `/kaggle/input` auto-discovery (only verifiable when A/B are attached as datasets)
-- [ ] pilot code finished and reviewed (in progress)
-- [ ] push pilot notebook to Kaggle (WSL) and run it
-- [ ] read `PILOT_REPORT.md`; list every FAIL; fix in code; re-run the failing stages
-- [ ] only when the pilot is clean: continue below
+- [x] pilot code finished, pushed, and run on Kaggle (2 x Tesla T4): 14 items PASS, 18 FAIL, 22 SKIP
+- [x] results read (2026-11-11). Summary:
+  - PASS: dataset A download stage, dataset B labeling stage, grid export; DataParallel on 2 T4s; DINOv2-small,
+    DINOv2-base and ConvNeXtV2 embedders (dims 384/768/768 match the YAML); DINOv2 judge path; ADE20K label names
+    (0 mismatches) and class projection; pinned SemanticLossless commit fetch (src/ present).
+  - SKIP (cascade of one cause): all SQ-GAN items. The three SQ-GAN datasets were not found under /kaggle/input
+    (mount/attachment problem, being diagnosed). Also skipped: Kaggle publish checks (no Secret attached).
+  - FAIL, being fixed: CLIP + SigLIP2 embedders (transformers 5 returns a ModelOutput, not a tensor);
+    `lpips` missing; one failing stage failed whole images in the feature pass (0/20 ok, hashes not saved);
+    bare `StopIteration` errors instead of clear messages; `sqgan-pinned-source.zip` not found.
+  - Numbers: dataset A estimate 2.4 GB of 20 GB; pilot download speed 1.0 img/s (includes a 525 MB tar, so
+    pessimistic); peak memory 1.6 GB at 8 workers.
+- [ ] fixes in code (Sonnet low, in progress) and dataset-mount diagnosis (Haiku, in progress)
+- [ ] re-run the pilot after the fixes to confirm the SQ-GAN items (needs the mount issue solved)
+- [x] dataset A is allowed to start now (its pipeline passed); B follows A
 
 ## 2. Full dataset builds (CPU, internet on)
 - [ ] A: run `edge-a-download-images`; review `failures.json` and size vs 20 GB; publish A

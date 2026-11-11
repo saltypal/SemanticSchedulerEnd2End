@@ -133,3 +133,73 @@ def test_disk_guard(monkeypatch, tmp_path):
     with pytest.raises(RuntimeError):
         eg.extract_encoder("e", ["a"], lambda x: x, 1, "cpu", tmp_path, min_free_gb=2.0, embedder=FakeEmbedder(4))
     assert not (tmp_path / "emb_e.npz").exists()
+
+
+# ---------------------------------------------------------------- _image_embedding (transformers 4/5 robust)
+
+class _Out:
+    """ModelOutput-like object exposing only the given attributes."""
+
+    def __init__(self, **kw):
+        self.__dict__.update(kw)
+
+
+def _fake_clip(dim_pool=8, dim_proj=5):
+    torch = pytest.importorskip("torch")
+
+    class Vision:
+        def __call__(self, pixel_values):
+            return _Out(pooler_output=torch.ones(pixel_values.shape[0], dim_pool))
+
+    class M:
+        vision_model = Vision()
+        visual_projection = torch.nn.Linear(dim_pool, dim_proj, bias=False)
+
+        def get_image_features(self, **kw):
+            raise AssertionError("clip path must not call get_image_features")
+    return M(), torch.zeros(3, 3, 4, 4)
+
+
+def _fake_siglip(ret):
+    torch = pytest.importorskip("torch")
+
+    class M:
+        def get_image_features(self, pixel_values):
+            return ret(pixel_values.shape[0], torch)
+    return M(), torch.zeros(2, 3, 4, 4)
+
+
+def test_clip_uses_vision_model_and_projection():
+    m, px = _fake_clip()
+    out = eg._image_embedding(m, "clip", px)
+    assert tuple(out.shape) == (3, 5)
+
+
+def test_siglip_tensor_return():
+    m, px = _fake_siglip(lambda n, t: t.ones(n, 7))
+    assert tuple(eg._image_embedding(m, "siglip", px).shape) == (2, 7)
+
+
+def test_siglip_modeloutput_pooler_output():
+    m, px = _fake_siglip(lambda n, t: _Out(pooler_output=t.ones(n, 6), image_embeds=None))
+    assert tuple(eg._image_embedding(m, "siglip", px).shape) == (2, 6)
+
+
+def test_siglip_modeloutput_image_embeds():
+    m, px = _fake_siglip(lambda n, t: _Out(image_embeds=t.ones(n, 4)))
+    assert tuple(eg._image_embedding(m, "siglip", px).shape) == (2, 4)
+
+
+def test_dim_mismatch_names_encoder_dims_and_type():
+    torch = pytest.importorskip("torch")
+    with pytest.raises(ValueError) as e:
+        eg._check_dim(torch.ones(2, 10), {"name": "clip_b32", "dim": 512})
+    msg = str(e.value)
+    assert "clip_b32" in msg and "got 10" in msg and "expected 512" in msg and "Tensor" in msg
+    eg._check_dim(torch.ones(2, 512), {"name": "clip_b32", "dim": 512})
+
+
+def test_grid_yaml_dims_for_clip_and_siglip():
+    from Evaluation.edge.edge_config import load_config
+    dims = {e["name"]: e["dim"] for e in load_config("grid")["encoders"]}
+    assert dims["clip_b32"] == 512 and dims["siglip2_base"] == 768

@@ -130,7 +130,7 @@ def test_dataset_scale_estimate_and_rate(tmp_path):
     a = tmp_path / "dataset-a"
     a.mkdir()
     rows = [{"source": "crisismmd", "bytes": 100_000}, {"source": "places365", "bytes": 20_000},
-            {"source": "openimages_people", "bytes": 50_000}]
+            {"source": "coco_people", "bytes": 50_000}]
     (a / "index.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
     (tmp_path / "stage_results.json").write_text(json.dumps([{"name": "a_download_images", "seconds": 1.5, "peak_rss_mb": 321.0}]))
     r = pc.run_check("dataset_scale", ctx(tmp_path))
@@ -142,7 +142,7 @@ def test_dataset_scale_estimate_and_rate(tmp_path):
 def test_dataset_scale_fails_when_estimate_exceeds_limit(tmp_path):
     a = tmp_path / "dataset-a"
     a.mkdir()
-    rows = [{"source": s, "bytes": 5_000_000} for s in ("crisismmd", "places365", "openimages_people")]
+    rows = [{"source": s, "bytes": 5_000_000} for s in ("crisismmd", "places365", "coco_people")]
     (a / "index.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
     r = pc.run_check("dataset_scale", ctx(tmp_path))
     assert r["items"]["dataset_a_size_estimate"]["status"] == "fail" and r["details"]["estimate_gb"] > 90
@@ -242,3 +242,59 @@ def test_notebook_builder_emits_collect_cell_and_metadata():
     assert "parameters.edge.pilot" in text and "PILOT_REPORT.md" in text and "checks" in text and "--per-source" in text
     assert meta["enable_gpu"] and meta["enable_internet"] and meta["id"].endswith("/edge-pilot")
     assert meta["machine_shape"] == "NvidiaTeslaT4" and len(meta["dataset_sources"]) == 3
+
+
+# ---------------------------------------------------------------- dataset discovery / input tree
+
+def _touch(p, text=""):
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(text)
+
+
+@pytest.mark.parametrize("prefix", ["", "datasets/owner"])
+def test_find_dataset_layouts(tmp_path, prefix):
+    base = tmp_path / "input" / prefix
+    _touch(base / "Semantic-Scheduler-SQGAN-Bundle-2026" / "x_flat_manifest.json")
+    _touch(base / "private-sqgan-source" / "sqgan-pinned-source.zip")
+    c = pc.Ctx(out=tmp_path, input_base=str(tmp_path / "input"))
+    assert pc.find_dataset(c, "*sqgan-bundle*") == base / "Semantic-Scheduler-SQGAN-Bundle-2026"
+    assert pc.find_dataset(c, "*sqgan-source*") == base / "private-sqgan-source"
+    with pytest.raises(pc.Skip, match="sqgan-assets"):
+        pc.find_dataset(c, "*sqgan-assets*")
+
+
+def test_find_dataset_falls_back_to_manifest_folder(tmp_path):
+    _touch(tmp_path / "input" / "weird-name" / "bundle_manifest.json")
+    c = pc.Ctx(out=tmp_path, input_base=str(tmp_path / "input"))
+    assert pc.find_dataset(c, "*sqgan-bundle*") == tmp_path / "input" / "weird-name"
+
+
+def test_discover_datasets_lists_dirs_and_files(tmp_path):
+    base = tmp_path / "input"
+    _touch(base / "datasets" / "o" / "a-sqgan-assets" / "f.txt")
+    _touch(base / "datasets" / "o" / "b" / "k_flat_manifest.json")
+    _touch(base / "datasets" / "o" / "b" / "sqgan-pinned-source.zip")
+    _touch(base / "d1" / "d2" / "d3" / "d4" / "d5" / "bundle_manifest.json")      # deeper than depth 4
+    found = pc.discover_datasets(base)
+    assert found["dirs"]["sqgan-assets"] == [str(base / "datasets/o/a-sqgan-assets")]
+    assert found["files"]["*flat_manifest.json"] == [str(base / "datasets/o/b/k_flat_manifest.json")]
+    assert found["files"]["sqgan-pinned-source.zip"] and found["files"]["bundle_manifest.json"] == []
+
+
+def test_input_tree_depth_and_limit(tmp_path):
+    base = tmp_path / "input"
+    _touch(base / "a" / "b" / "c" / "deep.txt")
+    for i in range(10):
+        _touch(base / "many" / ("f%d.txt" % i))
+    tree = pc.input_tree(base, depth=3, limit=200)
+    assert "a/" in tree and "a/b/" in tree and "a/b/c/" in tree and "a/b/c/deep.txt" not in tree
+    assert len(pc.input_tree(base, 3, 5)) == 5
+    assert pc.input_tree(tmp_path / "missing") == []
+
+
+def test_env_gpu_records_input_tree(tmp_path):
+    pytest.importorskip("torch")
+    _touch(tmp_path / "input" / "datasets" / "o" / "x-sqgan-bundle" / "m_flat_manifest.json")
+    out = pc.check_env_gpu(pc.Ctx(out=tmp_path, input_base=str(tmp_path / "input")))
+    tree = out["details"]["input_tree"]
+    assert "datasets/o/x-sqgan-bundle/" in tree and len(tree) <= 200

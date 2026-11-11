@@ -4,6 +4,7 @@ crisismmd:
   metadata_revision: "10a5626ba112ab9c50369c473a2062bcf205d708"   # QCRI/CrisisMMD on HuggingFace
   tasks: [informative, humanitarian, damage]
   native_splits: [train, dev, test]
+  kaggle_dataset: "seaninggg/crisismmd-multimodal-crisis-dataset"   # attached to notebook A; images found by folder under /kaggle/input
 
 # First matching tier wins, top to bottom. Values are the native CrisisMMD label strings.
 tier_rules:
@@ -30,16 +31,17 @@ normals:
   # Places365 categories that look like damage; excluded so rubble-like scenes are never labelled Low.
   places365_blacklist: [ruin, junkyard, landfill, construction_site, excavation, volcano, dam]
   source_tier: Low
-  places365_count: 6000            # stratified over categories, after the blacklist
-  people_count: 3000               # Open Images validation: Selfie first, then Person
-  oversample: 1.3                  # candidate oversampling so image fetch failures still reach the counts
+  # Kaggle datasets, attached as notebook inputs (read-only mounts under /kaggle/input).
+  places365_kaggle_dataset: benjaminkz/places365   # CC0; train/<class>/<name>.jpg
+  places365_split: val             # Kaggle benjaminkz/places365 folder: val (~100 img/class, fast) or train; falls back to train if absent
+  places365_per_class: 17          # stratified: this many images from EVERY class (about 6,200 over 365 classes)
+  coco_kaggle_dataset: awsaf49/coco-2017-dataset   # people images from train2017 + person_keypoints_train2017.json
+  people_count: 3000
+  coco_min_person_area_frac: 0.05  # keep images with a person box >= this fraction of the image area
   seed: 29
-  people_mids: {selfie: /m/0sgh53y, person: /m/01g317}
-  sources:
+  sources:                         # fallback ONLY, used when the Places365 Kaggle dataset is not mounted
     places365_filelist: https://data.csail.mit.edu/places/places365/filelist_places365-standard.tar
     places365_categories: https://raw.githubusercontent.com/csailvision/places365/master/categories_places365.txt
-    openimages_labels: https://storage.googleapis.com/openimages/v7/oidv7-val-annotations-human-imagelabels.csv
-    openimages_images: https://storage.googleapis.com/openimages/2018_04/validation/validation-images-with-rotation.csv
 
 splits:
   # Event-disjoint. Final choice is made by report_counts() gates, see sec. 10 S0.

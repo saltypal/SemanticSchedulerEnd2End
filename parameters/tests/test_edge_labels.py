@@ -66,7 +66,7 @@ def test_normals_are_low_and_blacklist_is_dropped():
 
 
 def test_blacklist_applies_only_to_places365():
-    rows, dropped = labels.normal_rows([{"path": "p.jpg", "category": "ruin"}], "openimages_people")
+    rows, dropped = labels.normal_rows([{"path": "p.jpg", "category": "ruin"}], "coco_people")
     assert len(rows) == 1 and dropped == 0
 
 

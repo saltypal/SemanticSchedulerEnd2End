@@ -260,4 +260,4 @@ def test_notebook_spec():
     assert "satyapaladuguplus/scheduler-dataset-v1" not in meta["dataset_sources"] and meta["kernel_sources"] == []
     assert meta["enable_gpu"] and meta["machine_shape"] == "NvidiaTeslaT4"
     src = "\n".join("".join(c["source"]) for c in nb["cells"])
-    assert "Codec.edge.sqgan_finetune" in src and "--stage source" in src
+    assert "'Codec.edge.sqgan_finetune'" in src and "'--stage', 'source'" in src
