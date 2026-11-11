@@ -265,24 +265,6 @@ def test_find_data_root(tmp_path):
         fp.find_data_root("labels_raw.jsonl", tmp_path, 3)
 
 
-def test_notebook_builder(tmp_path):
-    from scripts.edge import make_feature_pass_notebook as mk
-    nb, meta = mk.build()
-    assert meta["dataset_sources"] == list(mk.DATASET_SOURCES) and len(meta["dataset_sources"]) == 5
-    assert meta["enable_gpu"] is True and meta["code_file"] == "edge-s2-feature-pass.ipynb"
-    src = ["".join(c["source"]) for c in nb["cells"]]
-    joined = "\n".join(src)
-    for needle in ("'Codec.edge.feature_pass', 'run'", "'Codec.edge.compute_profile'", "'export-grid'",
-                   "'parameters.edge.embedding_grid', 'grid'", "'parameters.edge.embedding_grid', 'select'", "/kaggle/working/runs/edge-s2"):
-        assert needle in joined, needle
-    assert "run_manifest.json" in "".join(src)
-    assert "'Codec.edge.feature_pass', 'publish'" in src[-1] and "scheduler-dataset-v1-cache" in src[-1]
-    assert not meta["kernel_sources"] and "--dataset-root" not in joined
-    mk.main(["--out-dir", str(tmp_path)])
-    assert (tmp_path / "edge-s2-feature-pass.ipynb").exists()
-    assert (tmp_path / "edge-s2-feature-pass.kernel-metadata.json").exists()
-
-
 # ---------------------------------------------------------------- stage isolation
 
 class RaisingSegSQ(FakeSQ):
@@ -424,8 +406,7 @@ def test_find_source_root_message(tmp_path):
 
 
 def test_notebook_install_cell_has_lpips():
-    from scripts.edge import make_feature_pass_notebook as mk, make_pilot_notebook as mp
-    for mod in (mk, mp):
-        nb, _ = mod.build()
-        install = ["".join(c["source"]) for c in nb["cells"] if "pip install" in "".join(c["source"])]
-        assert install and "lpips" in install[0]
+    from scripts.edge import make_run_all_notebook as mk
+    nb, _ = mk.build()
+    install = ["".join(c["source"]) for c in nb["cells"] if "pip install" in "".join(c["source"])]
+    assert install and "lpips" in install[0]

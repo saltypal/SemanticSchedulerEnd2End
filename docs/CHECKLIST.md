@@ -15,9 +15,9 @@ Rules for every step:
 ## The three datasets
 | Dataset | Slug (owner satyapaladuguplus) | Contents | Built by |
 |---|---|---|---|
-| A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `dataset-semschedule-a` |
-| B | `scheduler-dataset-v1-labels` | tier labels applied to A (rules in `config/edge/data.yaml`), counts, gates; no images | notebook `edge-b-labeling` |
-| C | `scheduler-dataset-v1-cache` | embeddings (5 encoders), SimHash + pHash, SQ-GAN kept-token map, class grid, 13-value mask summary, pooled encoder grid, payload bytes, decoded JPEGs, per-stage timings, FLOPs, grid + selection results | notebook `edge-s2-feature-pass` |
+| A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `dataset-semschedule` (stage A) |
+| B | `scheduler-dataset-v1-labels` | tier labels applied to A (rules in `config/edge/data.yaml`), counts, gates; no images | notebook `dataset-semschedule` (stage B) |
+| C | `scheduler-dataset-v1-cache` | embeddings (5 encoders), SimHash + pHash, SQ-GAN kept-token map, class grid, 13-value mask summary, pooled encoder grid, payload bytes, decoded JPEGs, per-stage timings, FLOPs, grid + selection results | notebook `dataset-semschedule` (stage C) |
 Also existing on the account: `edge-labels-v1` (labels only, superseded by B; delete when you say so),
 `semantic-scheduler-sqgan-bundle-20261102` (v0 SQ-GAN bundle, flat layout), `semantic-lossless-private-sqgan-source`,
 `semantic-lossless-private-sqgan-assets`.
@@ -33,7 +33,7 @@ Also existing on the account: `edge-labels-v1` (labels only, superseded by B; de
 - [ ] Decide whether personal paths in old docs matter for a public repo.
 - [ ] Add the Kaggle Secret to the notebooks that publish (A, B, C).
 
-## 1. PILOT FIRST (one GPU notebook, `edge-pilot`) -> read results -> fix -> only then the full runs
+## 1. PILOT FIRST (one GPU notebook, `dataset-semschedule`, mode `pilot`) -> read results -> fix -> only then the full runs
 The pilot runs every stage on about 20 images per source and writes `PILOT_REPORT.md` with pass/fail per stage
 and a table "unverified item -> check -> result". Stages: download sample (A) -> label it (B) -> feature pass
 smoke (embeddings, hashes, SQ-GAN encode/decode, masks, timings, FLOPs) -> grid export.
@@ -66,8 +66,8 @@ Checks cover everything earlier reported as unverified:
 - [x] dataset A is allowed to start now (its pipeline passed); B follows A
 
 ## 2. Full dataset builds (CPU, internet on)
-- [ ] A: run `dataset-semschedule-a`; review `failures.json` and size vs 20 GB; publish A
-- [ ] B: run `edge-b-labeling` on A; gates: test Critical >= 150 (765 in the local pass), validation >= 100
+- [ ] A: run `dataset-semschedule` (mode `full`, regenerate with `python -m scripts.edge.make_run_all_notebook --mode full`); review `failures.json` and size vs 20 GB; publish A
+- [ ] B: same run, stage B (reads A from the work folder); gates: test Critical >= 150 (765 in the local pass), validation >= 100
   (California 500); publish B
 Labels recap: CrisisMMD v2.0 human labels -> Critical (severe damage, or injured/dead/missing people),
 High (mild damage; affected individuals, infrastructure/utility damage, vehicle damage),
@@ -75,7 +75,7 @@ Medium (little/no damage; rescue/other relevant info when informative), Low (not
 images). Validation event = California wildfires (Sri Lanka had only 71 Critical); test = Maria + Mexico.
 
 ## 3. Cache + grid (C), GPU
-- [ ] run `edge-s2-feature-pass` (sharded, resumable) on A + B + v0 bundle; review the grid comparison
+- [ ] same run, stages C_features + C_grid (sharded, resumable; `--force <stage>` redoes one) on A + B + v0 bundle; review the grid comparison
   (5 encoders x 5 classifier families, gate: Critical recall >= 0.6 on validation); pick the UE encoder; publish C
 - [ ] cross-split near-duplicate removal and `splits_v1.json` (frozen); label about 400 duplicate pairs
 

@@ -160,8 +160,8 @@ def test_metadata_sources_and_cli(tmp_path):
 
 
 def _dataset_nbs():
-    from scripts.edge import make_dataset_notebooks as m
-    return {n: m.build(n) for n in m.SPECS}
+    from scripts.edge import make_run_all_notebook as m
+    return {m.STEP: m.build()}
 
 
 def test_generated_notebook_hygiene():
@@ -187,16 +187,9 @@ def test_titles_roundtrip_and_sources():
     import re
     from scripts.edge.build_notebook import title_for_slug
     assert title_for_slug("edge-a-download-images") == "Edge A Download Images"
-    assert title_for_slug("edge-b-labeling") == "Edge B Labeling"
     nbs = _dataset_nbs()
     for name, (_, meta) in nbs.items():
         assert re.sub(r"[^a-z0-9]+", "-", meta["title"].lower()).strip("-") == name
-    a, b = nbs["dataset-semschedule-a"][1], nbs["edge-b-labeling"][1]
-    assert a["kernel_sources"] == [] and a["enable_gpu"] is False
-    assert a["dataset_sources"] == ["seaninggg/crisismmd-multimodal-crisis-dataset", "benjaminkz/places365",
-                                    "awsaf49/coco-2017-dataset"]   # CrisisMMD + Places365 + COCO inputs
-    assert a["enable_internet"] is True
-    assert b["kernel_sources"] == ["satyapaladuguplus/dataset-semschedule-a"] and b["dataset_sources"] == []
 
 
 def test_kernel_slug_is_not_double_prefixed():
@@ -204,4 +197,4 @@ def test_kernel_slug_is_not_double_prefixed():
     cfg = {"slug_prefix": "edge-"}
     assert bn.kernel_slug(cfg, "edge-pilot") == "edge-pilot"
     assert bn.kernel_slug(cfg, "s1-dataset") == "edge-s1-dataset"
-    assert bn.kernel_slug(cfg, "dataset-semschedule-a") == "dataset-semschedule-a"
+    assert bn.kernel_slug(cfg, "dataset-semschedule") == "dataset-semschedule"

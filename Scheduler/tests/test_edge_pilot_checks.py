@@ -235,15 +235,6 @@ def test_report_table_has_correct_statuses(tmp_path):
     assert report["checks"]["env_gpu"]["status"] == "fail"
 
 
-def test_notebook_builder_emits_collect_cell_and_metadata():
-    from scripts.edge import make_pilot_notebook as mk
-    nb, meta = mk.build()
-    text = json.dumps(nb)
-    assert "parameters.edge.pilot" in text and "PILOT_REPORT.md" in text and "checks" in text and "--per-source" in text
-    assert meta["enable_gpu"] and meta["enable_internet"] and meta["id"].endswith("/edge-pilot")
-    assert meta["machine_shape"] == "NvidiaTeslaT4" and len(meta["dataset_sources"]) == 3
-
-
 # ---------------------------------------------------------------- dataset discovery / input tree
 
 def _touch(p, text=""):
