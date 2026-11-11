@@ -11,7 +11,7 @@ from scripts.edge import build_notebook as bn
 
 STEP = "edge-sqgan-finetune-v1"
 CONFIG = "config/edge/sqgan_finetune.yaml"
-TITLE = "Edge SQ-GAN fine-tune v1 (teammate hand-off)"
+TITLE = "Edge sqgan finetune v1"     # must slugify to STEP, or Kaggle creates a different kernel (MISTAKES 26)
 DATASET_SOURCES = (
     "satyapaladuguplus/scheduler-dataset-v1-images",
     "satyapaladuguplus/scheduler-dataset-v1-labels",
@@ -42,8 +42,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--branch", default="main")
     ap.add_argument("--out-dir", default=str(bn.OUT_DIR))
+    ap.add_argument("--account", default=None, help="key in config/edge/kaggle.yaml (win = second account)")
     a = ap.parse_args(argv)
-    nb, meta = build(a.branch)
+    nb, meta = build(a.branch, a.account)
     for p in bn.write_outputs(nb, meta, STEP, Path(a.out_dir)):
         print(p)
 

@@ -24,6 +24,8 @@ earns its bytes.
 | D10 | Algorithms | v3 line-up + 13 new algorithms (P0), implemented first |
 | D11 | Scheduler training | phase 2, all at once, parallel notebooks on both accounts |
 | D12 | Accounts | plus `satyapaladuguplus` (WSL CLI) = data + main line; second `satyapaladugu` (Windows CLI) = SQ-GAN line |
+| D14 | Duplicate-pair labels (S2c) | rule-based, not human: duplicate iff pHash <= 8 or SimHash <= 1. The P(dup) model therefore mirrors that rule; the paper says so |
+| D15 | Relevance | per mission profile: cosine(CLIP image, CLIP mission text) precomputed per (image, mission) as columns; the simulator picks the column of each UE's mission profile |
 | D13 | Class imbalance | handled in the SPI head (class-balanced loss, already used by the grid) + calibration + Critical-recall gate; val/test keep the natural mix; Critical-share is a sweep sensitivity row. No resampling |
 
 ## Rules
@@ -126,6 +128,5 @@ Local CPU (no notebook): S2b (done), S3 finalize, S5, S6, sim table, all P0 code
 - [ ] **Share with `satyapaladugu` (Viewer)**: dataset Settings -> Sharing for `scheduler-dataset-v1-images`, `-labels`, `-cache`,
       `semantic-scheduler-sqgan-bundle-20261102`, `semantic-lossless-private-sqgan-source`, `semantic-lossless-private-sqgan-assets`
       (today the second account gets 403 on all six). This unblocks the whole SQ-GAN line.
-- [ ] Label the 372 pairs in `dup_pairs_candidates.csv` (dataset B) as duplicate / distinct (~1 h) -> unblocks S5
 - [ ] Revoke the API token that was pasted in chat and in the old notebook cell (if not done yet)
 - [ ] Later: approve merged-branch deletions and deleting `edge-labels-v1`

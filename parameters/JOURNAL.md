@@ -2428,3 +2428,58 @@ Label gate on real CrisisMMD metadata: per-event Critical counts California 500,
 Maria 544, Iraq-Iran 219, Mexico 221, Sri Lanka 71, so validation moved to California wildfires.
 No GPU, Kaggle or model run happened; no result is claimed. Full suite: 470 passed, 3 failed (CRLF in
 preserved artifacts), 5 skipped.
+
+## 2026-11-11 Edge datasets, frozen splits and SPI classifier grid (plan v3, Claude Code)
+
+**Datasets (owner satyapaladuguplus, public).** A `scheduler-dataset-v1-images` 27,168 images (CrisisMMD v2 18,082 +
+Places365 val sample 6,086 + COCO people 3,000), 2.5 GB, 0 failures. B `scheduler-dataset-v1-labels` (tiers, counts,
+gates; v2 adds splits). C1 `scheduler-dataset-v1-cache` (5 encoders, SimHash, pHash, SPI grid), 27,168/27,168 ok.
+Mean UE-side cost per image (T4): CLIP-B/32 12.2 ms, SigLIP2 18.1 ms, DINOv2-base 24.5 ms, pHash 6.9 ms, SimHash 0.3 ms.
+
+**Tier counts (all images).** CrisisMMD: Critical 2,483, High 2,192, Medium 5,589, Low 7,818; Places365 and COCO all Low.
+Label noise: 1,032 humanitarian-vs-informative conflicts, 236 informative flags overridden.
+
+**Splits (S2b, `parameters/edge/freeze_splits.py`).** Event-disjoint: train Harvey, Irma, Iraq–Iran, Sri Lanka;
+val California wildfires (Sri Lanka had 71 Critical < 100); test Maria, Mexico; everyday images 60/10/30 by stable hash.
+Cross-split near-duplicates: min Hamming distance of every val/test image to train. pHash histogram (val+test):
+54 at 0, 7 at 2, 1 at 4, 8 at 6, 34 at 8, then 95 at 10, 539 at 12, 2,978 at 14, 6,419 at 16 -> a gap after 8.
+SimHash histogram is smooth (53 at 0, 19 at 1, 67 at 2, 214 at 3, ... peak ~1,650 at 8): crisis photos are
+semantically close, so only 0-1 bits are copies. Rule: drop val/test if pHash <= 8 OR SimHash <= 1 -> 124 dropped
+(52 pHash-only, 20 SimHash-only). Looser rules would drop hundreds of distinct Critical test images
+(SimHash <= 3 or pHash <= 8: 89 test Critical; SimHash <= 6 or pHash <= 10: 495).
+
+| Split | Critical | High | Medium | Low | Total |
+|---|---|---|---|---|---|
+| train | 1,218 | 1,354 | 3,383 | 10,019 | 15,974 |
+| val | 499 | 185 | 392 | 1,409 | 2,485 |
+| test | 760 | 646 | 1,762 | 5,417 | 8,585 |
+
+Gates pass (test Critical 760 >= 150, val 499 >= 100). Train is identical to the split the SPI grid used.
+
+**Duplicate pairs (S2c).** Random pair sampling gave 3 real copies in 353 pairs, so candidates are mined:
+372 pairs from train+val (116 pHash <= 8, 74 SimHash <= 1, 54 same tweet, 230 at SimHash 2-20, 68 far).
+Labels are rule-based (decision D14): duplicate iff pHash <= 8 or SimHash <= 1.
+
+**SPI classifier grid (S3, notebook dataset-semschedule stage C_grid; class-balanced losses; selection on val).**
+5 encoders x families {logistic, linear SVM, hist-GB, MLP, kNN}; n_train 15,974, n_val 2,501 (pre-dedup val).
+
+| Candidate | macro-F1 | Critical recall | ECE | Temperature | UE cost |
+|---|---|---|---|---|---|
+| SigLIP2 logistic C=1 | 0.589 | 0.750 | 0.023 | 0.93 | 93 |
+| SigLIP2 logistic C=0.1 (grid pick) | 0.587 | 0.754 | 0.023 | 0.67 | 93 |
+| **CLIP-B/32 logistic C=1 (kept)** | 0.577 | **0.830** | 0.021 | 0.97 | 88 |
+| SigLIP2 logistic C=10 | 0.577 | 0.724 | 0.018 | 1.29 | 93 |
+| SigLIP2 hist-GB lr 0.05 / 15 leaves | 0.572 | 0.652 | 0.023 | 0.89 | 93 |
+| CLIP-B/32 logistic C=10 | 0.570 | 0.774 | 0.025 | 1.22 | 88 |
+| SigLIP2 linear SVM C=1 | 0.569 | 0.756 | 0.028 | 0.58 | 93 |
+| CLIP-B/32 logistic C=0.1 | 0.566 | 0.824 | 0.018 | 0.73 | 88 |
+| DINOv2-base linear SVM C=1 | 0.565 | 0.700 | 0.026 | 0.60 | 86 |
+| DINOv2-base logistic C=1 | 0.564 | 0.730 | 0.021 | 1.01 | 86 |
+| CLIP-B/32 MLP 128 | 0.560 | 0.680 | 0.025 | 4.97 | 88 |
+| DINOv2-small linear SVM C=0.1 | 0.548 | 0.502 (fails gate) | 0.029 | 0.52 | 22 |
+
+Decision: CLIP-B/32 logistic C=1 stays (plan v3 locks CLIP-B/32 on the UE). Versus the best SigLIP2 it loses
+0.010 macro-F1 but gains 0.076 Critical recall, is better calibrated, cheaper (12 ms vs 18 ms), and the same embedding
+already produces the SimHash semantic key and relevance. All candidates above pass the 0.6 Critical-recall gate except
+DINOv2-small. Remaining S3 work: calibration on the frozen val, out-of-fold train posteriors, no-normals ablation,
+per-source report.
