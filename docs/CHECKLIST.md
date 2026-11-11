@@ -15,7 +15,7 @@ Rules for every step:
 ## The three datasets
 | Dataset | Slug (owner satyapaladuguplus) | Contents | Built by |
 |---|---|---|---|
-| A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `edge-a-download-images` |
+| A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `dataset-semschedule-a` |
 | B | `scheduler-dataset-v1-labels` | tier labels applied to A (rules in `config/edge/data.yaml`), counts, gates; no images | notebook `edge-b-labeling` |
 | C | `scheduler-dataset-v1-cache` | embeddings (5 encoders), SimHash + pHash, SQ-GAN kept-token map, class grid, 13-value mask summary, pooled encoder grid, payload bytes, decoded JPEGs, per-stage timings, FLOPs, grid + selection results | notebook `edge-s2-feature-pass` |
 Also existing on the account: `edge-labels-v1` (labels only, superseded by B; delete when you say so),
@@ -66,7 +66,7 @@ Checks cover everything earlier reported as unverified:
 - [x] dataset A is allowed to start now (its pipeline passed); B follows A
 
 ## 2. Full dataset builds (CPU, internet on)
-- [ ] A: run `edge-a-download-images`; review `failures.json` and size vs 20 GB; publish A
+- [ ] A: run `dataset-semschedule-a`; review `failures.json` and size vs 20 GB; publish A
 - [ ] B: run `edge-b-labeling` on A; gates: test Critical >= 150 (765 in the local pass), validation >= 100
   (California 500); publish B
 Labels recap: CrisisMMD v2.0 human labels -> Critical (severe damage, or injured/dead/missing people),
