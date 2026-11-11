@@ -80,12 +80,15 @@ def wrap_teacher(teacher, cfg):
     """
     check_teacher_labels(cfg, teacher.config.id2label)
     index = build_index(cfg)
-    inner = teacher.forward
+    base = type(teacher)
 
-    def forward(*args, **kwargs):
-        out = inner(*args, **kwargs)
+    # A class-level forward that uses ``self``: DataParallel replicas copy __class__, so each GPU replica runs its
+    # own weights. (An instance-level closure over the original bound forward made replica 1 call the cuda:0
+    # module: "weight is on cuda:0, different from other tensors on cuda:1".) state_dict keys are unchanged.
+    def forward(self, *args, **kwargs):
+        out = base.forward(self, *args, **kwargs)
         out.logits = project_logits(out.logits, index)
         return out
 
-    teacher.forward = forward
+    teacher.__class__ = type(base.__name__ + "Projected20", (base,), {"forward": forward})
     return teacher
