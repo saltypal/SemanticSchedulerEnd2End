@@ -10,3 +10,4 @@
 | dataset-semschedule | wsl | satyapaladuguplus/dataset-semschedule | 2 | b03d7a45ec6803fb0c0ec80eb963d4b3585e13cc | 2026-11-11T01:29:21Z |
 | edge-qwen-feedback | wsl | satyapaladuguplus/edge-qwen-feedback-s9-data-s3-kappa-labels (title-slug mistake, pilot) | 1 | 08816e8c9cb676e9dd264592fcb7b1e2778dfcb4 | 2026-11-11T14:35:13Z |
 | edge-sqgan-finetune-v1 | win | satyapaladugu/edge-sqgan-finetune-v1 | 1 | 8b10a426513250f15ffde399a6c0aa666699181f | 2026-11-11T15:01:34Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 1 | aac00ead57274515c08667420ec791a1a39c17fe | 2026-11-11T22:57:47Z |
