@@ -1,15 +1,20 @@
-"""One-notebook orchestrator: dataset A (images), B (labels), C (cache + classifier grid) in a single run.
+"""Two-notebook orchestrator (``--which``): the working parts are not blocked by SQ-GAN problems.
 
-    python -m parameters.edge.run_all --mode pilot|full --work /kaggle/working/run [--force STAGE ...]
+    python -m parameters.edge.run_all --which ab-embed|sqgan --mode pilot|full --work /kaggle/working/run [--force STAGE ...]
+
+``ab-embed`` (notebook ``dataset-semschedule``): env, A (images), B (labels), C_features (embeddings of all 5
+encoders + SimHash + pHash, ``--no-sqgan``, 2-way GPU sharded), C_grid, publish. No SQ-GAN anywhere.
+``sqgan`` (notebook ``dataset-semschedule-sqgan``): env, S_locate (finds A and B in the output of notebook 1
+under /kaggle/input), S_sqgan (``--only-sqgan --require-sqgan``, 2-way GPU sharded), checks (pilot only, the
+SQ-GAN related ones), publish (``scheduler-dataset-v1-sqgan``, needs a Kaggle Secret).
 
 Every stage is a SEPARATE SUBPROCESS. A failed stage is recorded, stages that depend on it are marked
 SKIP, independent stages still run. Stages write ``<work>/state/<stage>.done.json`` and are skipped on
 re-run unless ``--force <stage>``. Full child output goes to ``<work>/logs/<stage>.log``; the console
 (the Kaggle web log) gets a banner per stage, a few filtered lines and a RUN SUMMARY table.
 
-Order: env, A, B, C_features, C_grid, [checks (pilot only)], publish. ``pilot`` uses --max-images 20,
---smoke and the unverified-item checks of ``parameters.edge.pilot`` (PILOT_REPORT.md) and never publishes;
-``full`` runs full sizes and enforces the B gates (test/val Critical counts) before C.
+``pilot`` uses --max-images 20, --smoke and never publishes; ``full`` runs full sizes and enforces the B
+gates (test/val Critical counts) before C. The exit code is non-zero when any stage fails.
 """
 import argparse
 import json
@@ -30,9 +35,67 @@ KEYWORDS = ("done", "error", "warning", "shard", "images", "fail", "pass", "wrot
             "published", "created", "versioned", "traceback", "exception")
 _PROGRESS = re.compile(r"(\d+(\.\d+)?\s*%)|(\d+/\d+\s*\[)|(it/s)|(s/it)|(\bETA\b)|(\|[#█▏▎▍▌▋▊▉ ]{3,}\|)", re.I)
 
-# stage name -> (stages whose success it needs)
-DEPS = {"env": [], "A": [], "B": ["A"], "C_features": ["A", "B"], "C_grid": ["C_features"], "checks": [],
-        "publish": ["A", "B"]}
+WHICH = ("ab-embed", "sqgan")
+# stage name -> (stages whose success it needs), per notebook
+DEPS_BY = {"ab-embed": {"env": [], "A": [], "B": ["A"], "C_features": ["A", "B"], "C_grid": ["C_features"],
+                        "publish": ["A", "B"]},
+           "sqgan": {"env": [], "S_locate": [], "S_sqgan": ["S_locate"], "checks": [], "publish": ["S_sqgan"]}}
+DEPS = DEPS_BY["ab-embed"]
+# the pilot checks that belong to the SQ-GAN notebook (env_gpu = environment facts)
+SQGAN_CHECKS = ("env_gpu", "bundle_restore", "source_root", "bundle_deep_scan", "payload_semantic_map",
+                "masker_format", "feature_pass_codec_semantics", "sqgan_latency", "compute_profile_real",
+                "finetune_source", "finetune_pilot", "feature_pass_smoke_verify")
+SQGAN_SLUG = "scheduler-dataset-v1-sqgan"
+LOCATE_DEPTH = 6
+PRUNE_DIRS = ("images", "shards", "candidates", ".git", "__pycache__")
+NOTEBOOK1 = "dataset-semschedule"
+
+
+class LocateError(RuntimeError):
+    """Dataset A (index.jsonl) or B (labels_raw.jsonl) was not found exactly once under the input root."""
+
+
+def _find_files(root, name, depth=LOCATE_DEPTH):
+    root = Path(root)
+    hits = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        rel = Path(dirpath).relative_to(root)
+        if len(rel.parts) >= depth:
+            dirnames[:] = []
+        dirnames[:] = [d for d in dirnames if d not in PRUNE_DIRS]
+        if name in filenames:
+            hits.append(Path(dirpath))
+    return sorted(hits)
+
+
+def locate_inputs(root="/kaggle/input", depth=LOCATE_DEPTH):
+    """{'A': folder with index.jsonl, 'B': folder with labels_raw.jsonl}; LocateError unless exactly one each."""
+    found, problems = {}, []
+    for key, fname, what in (("A", "index.jsonl", "dataset A (images)"), ("B", "labels_raw.jsonl", "dataset B (labels)")):
+        hits = _find_files(root, fname, depth)
+        if len(hits) == 1:
+            found[key] = hits[0]
+        else:
+            problems.append("%s: found %d folders with %s under %s (need exactly 1)%s" % (
+                what, len(hits), fname, root, "".join("\n    " + str(h) for h in hits)))
+    if problems:
+        raise LocateError(
+            "cannot locate the notebook-1 output. Run notebook '%s' (pilot or full) first and keep it attached as a "
+            "kernel source of this notebook.\n  %s" % (NOTEBOOK1, "\n  ".join(problems)))
+    return found
+
+
+def locate_main(work, root="/kaggle/input"):
+    """Subprocess entry for stage S_locate: writes <work>/located.json; exit 1 with a clear message on failure."""
+    try:
+        found = locate_inputs(root)
+    except LocateError as error:
+        print("ERROR", error)
+        return 1
+    Path(work).mkdir(parents=True, exist_ok=True)
+    Path(work, "located.json").write_text(json.dumps({k: str(v) for k, v in found.items()}), encoding="utf-8")
+    print("located dataset A images at", found["A"], "and dataset B labels at", found["B"])
+    return 0
 
 
 class LineFilter:
@@ -108,15 +171,44 @@ PUBLISH_CODE = ("import json,sys;from parameters.edge import kaggle_publish as k
                 "print('publish',sys.argv[1],json.dumps(k.publish_dataset(sys.argv[2],m[0],m[1],m[2])))")
 
 
-def build_stages(mode, work, meta_dir=None, py=None):
+LOCATE_CODE = "import sys;from parameters.edge.run_all import locate_main;sys.exit(locate_main(sys.argv[1], sys.argv[2]))"
+
+
+def has_secret():
+    """True when Kaggle Secrets provide credentials (dataset publishing possible)."""
+    try:
+        from parameters.edge import kaggle_publish
+        return kaggle_publish.get_credentials() is not None
+    except Exception:
+        return False
+
+
+def _grid_note(grid):
+    """Pass note of C_grid: pilot data too thin for a classifier (GridDataError allowed) is plumbing only."""
+    f = Path(grid) / "grid_degenerate.json"
+    if f.exists():
+        try:
+            return "plumbing only: " + json.loads(f.read_text(encoding="utf-8"))["message"]
+        except (OSError, ValueError, KeyError):
+            return "plumbing only: degenerate grid data"
+    return ""
+
+
+def build_stages(mode, work, meta_dir=None, py=None, which="ab-embed", input_root="/kaggle/input"):
     """Ordered stage dicts: name, argvs (list of argv lists), timeout, expect, keep_all, keep_going, post."""
+    if which not in WHICH:
+        raise ValueError("which must be one of %s, got %r" % (WHICH, which))
     work, py = Path(work), py or sys.executable
-    meta_dir = str(meta_dir or (repo_root() / pilot.META_DIR))
     pil = mode == "pilot"
+    env_stage = {"name": "env", "argvs": [[py, "-c", ENV_CODE, str(work)]], "timeout": 300, "keep_all": True}
+    if which == "sqgan":
+        return _sqgan_stages(pil, work, py, input_root, env_stage)
+    meta_dir = str(meta_dir or (repo_root() / pilot.META_DIR))
     a, b, cache = work / "dataset-a", work / "dataset-b", work / "cache"
     grid = cache / "grid"
-    stages = [
-        {"name": "env", "argvs": [[py, "-c", ENV_CODE, str(work)]], "timeout": 300, "keep_all": True},
+    degenerate = ["--allow-degenerate"] if pil else []
+    return [
+        env_stage,
         {"name": "A", "timeout": 6 * 3600, "expect": [a / "index.jsonl", a / "manifest.json"],
          "argvs": [[py, "-m", "parameters.edge.dataset_a", "--meta-dir", meta_dir, "--out", str(a),
                     "--workers", "8" if pil else "16", "--no-publish"] + (["--max-images", "20"] if pil else [])]},
@@ -124,23 +216,47 @@ def build_stages(mode, work, meta_dir=None, py=None):
          "argvs": [[py, "-m", "parameters.edge.build_label_dataset", "--meta-dir", meta_dir, "--out", str(b),
                     "--images-root", str(a), "--no-publish"]],
          "post": lambda: _gate_error(b / "counts.json", enforce=not pil)},
-        {"name": "C_features", "timeout": 8 * 3600, "expect": [cache / "summary.json"],
-         "parallel": lambda n_gpu: _feature_parts(py, a, b, cache, pil, n_gpu),
+        {"name": "C_features", "timeout": 8 * 3600, "expect": [cache / "summary.json"], "cache_dir": cache,
+         "parallel": lambda n_gpu: _feature_parts(py, a, b, cache, pil, n_gpu, ["--no-sqgan"]),
          "argvs": [[py, "-c", MERGE_CODE, str(cache)]]},
-        {"name": "C_grid", "timeout": 4 * 3600, "argvs": [[py, "-m", "Codec.edge.feature_pass", "export-grid", "--labels-root", str(b), "--out", str(cache)],
+        {"name": "C_grid", "timeout": 4 * 3600, "pass_note": lambda: _grid_note(grid),
+         "argvs": [[py, "-m", "Codec.edge.feature_pass", "export-grid", "--labels-root", str(b), "--out", str(cache)],
                    [py, "-m", "parameters.edge.embedding_grid", "grid", "--embeddings-dir", str(grid),
                     "--labels", str(grid / "labels_by_uid.jsonl"), "--splits", str(grid / "splits_by_uid.json"),
-                    "--out", str(grid)],
-                   [py, "-m", "parameters.edge.embedding_grid", "select", "--grid-dir", str(grid)]]},
+                    "--out", str(grid)] + degenerate,
+                   [py, "-m", "parameters.edge.embedding_grid", "select", "--grid-dir", str(grid)] + degenerate]},
+        {"name": "publish", "timeout": 3600, "skip_reason": "pilot mode never publishes" if pil else None,
+         "argvs": lambda: _publish_argvs(py, a, b, cache)},
     ]
+
+
+def _sqgan_stages(pil, work, py, input_root, env_stage):
+    cache = work / "cache_sqgan"
+
+    def located():
+        info = json.loads((work / "located.json").read_text(encoding="utf-8"))
+        return Path(info["A"]), Path(info["B"])
+
+    def publish_skip():
+        if pil:
+            return "pilot mode never publishes"
+        return None if has_secret() else "no Kaggle Secret (add KAGGLE_API_TOKEN) so nothing can be published"
+
+    stages = [env_stage,
+              {"name": "S_locate", "timeout": 600, "keep_all": True, "expect": [work / "located.json"],
+               "argvs": [[py, "-c", LOCATE_CODE, str(work), str(input_root)]]},
+              {"name": "S_sqgan", "timeout": 8 * 3600, "expect": [cache / "summary.json"], "cache_dir": cache,
+               "parallel": lambda n_gpu: _feature_parts(py, *located(), cache, pil, n_gpu,
+                                                        ["--only-sqgan", "--require-sqgan"]),
+               "argvs": [[py, "-c", MERGE_CODE, str(cache)]]}]
     if pil:
-        from Codec.edge import pilot_checks
-        parts = [pilot.check_stage(n, work, py) for n in pilot_checks.CHECK_ORDER]
+        parts = pilot.check_stages(work, py, SQGAN_CHECKS)
         stages.append({"name": "checks", "argvs": [p["argv"] for p in parts], "keep_going": True,
                        "timeout": 3 * 3600, "expect": [p["expect"][0] for p in parts],
                        "post": lambda: _checks_error(work)})
-    stages.append({"name": "publish", "timeout": 3600, "skip_reason": "pilot mode never publishes" if pil else None,
-                   "argvs": lambda: _publish_argvs(py, a, b, cache)})
+    stages.append({"name": "publish", "timeout": 3600, "skip_reason": publish_skip,
+                   "argvs": [[py, "-m", "Codec.edge.feature_pass", "publish", "--out", str(cache),
+                              "--slug", SQGAN_SLUG]]})
     return stages
 
 
@@ -149,10 +265,10 @@ MERGE_CODE = ("import sys,json;from Codec.edge.feature_pass import summarize;s=s
               "'failures',s['n_failures'])")
 
 
-def _feature_parts(py, a, b, cache, pil, n_gpu):
+def _feature_parts(py, a, b, cache, pil, n_gpu, extra_flags=()):
     """[(label, argv, extra_env)]: one child per GPU (process-level sharding), or a single plain child."""
     base = [py, "-m", "Codec.edge.feature_pass", "run", "--images-root", str(a), "--labels-root", str(b),
-            "--out", str(cache)] + (["--smoke"] if pil else [])
+            "--out", str(cache)] + (["--smoke"] if pil else []) + list(extra_flags)
     if n_gpu < 2:
         return [("part0", base + ["--part", "0/1"], {})]
     return [("part%d" % i, base + ["--part", "%d/%d" % (i, n_gpu)], {"CUDA_VISIBLE_DEVICES": str(i)})
@@ -183,12 +299,13 @@ def _checks_error(work):
 
 class Orchestrator:
     def __init__(self, mode, work, force=(), runner=default_runner, out=None, meta_dir=None, py=None, cwd=None,
-                 gpus=gpu_count, progress_every=60.0):
-        self.gpus, self.progress_every = gpus, progress_every
+                 gpus=gpu_count, progress_every=60.0, which="ab-embed", input_root="/kaggle/input"):
+        self.gpus, self.progress_every, self.which = gpus, progress_every, which
+        self.deps = DEPS_BY[which]
         self.mode, self.work, self.force = mode, Path(work), set(force or ())
         self.runner, self.cwd = runner, str(cwd or repo_root())
         self.out = out or (lambda text: print(text, flush=True))
-        self.stages = build_stages(mode, self.work, meta_dir, py)
+        self.stages = build_stages(mode, self.work, meta_dir, py, which, input_root)
         self.results = {}
         for sub in ("state", "logs"):
             (self.work / sub).mkdir(parents=True, exist_ok=True)
@@ -210,7 +327,7 @@ class Orchestrator:
     def _run_parts(self, stage, parts, log):
         """Run the children concurrently (own log each); returns an error text or None."""
         name, rcs, lock = stage["name"], {}, threading.Lock()
-        shards = self.work / "cache" / "shards"
+        shards = Path(stage.get("cache_dir") or self.work / "cache") / "shards"
         stop = threading.Event()
 
         def child(label, argv, extra):
@@ -253,10 +370,12 @@ class Orchestrator:
     def run_stage(self, stage, index, total):
         name = stage["name"]
         self.out("==== STAGE %d/%d: %s ====" % (index, total, name))
-        if stage.get("skip_reason"):
-            self.out("%s: SKIP (%s)" % (name, stage["skip_reason"]))
-            return self._result(name, "SKIP", note=stage["skip_reason"])
-        blocked = [d for d in DEPS.get(name, []) if d in self.results and self.results[d]["status"] not in ("PASS",)]
+        reason = stage.get("skip_reason")
+        reason = reason() if callable(reason) else reason
+        if reason:
+            self.out("%s: SKIP (%s)" % (name, reason))
+            return self._result(name, "SKIP", note=reason)
+        blocked = [d for d in self.deps.get(name, []) if d in self.results and self.results[d]["status"] not in ("PASS",)]
         if blocked:
             first = self.results[blocked[0]]
             note = "needs %s (%s: %s)" % (", ".join(blocked), first["status"], first["note"])
@@ -306,10 +425,14 @@ class Orchestrator:
             return self._result(name, "FAIL", seconds, failed)
         self._done_file(name).write_text(json.dumps({"stage": name, "seconds": round(seconds, 1),
                                                      "finished_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}))
-        self.out("%s: done in %.0fs" % (name, seconds))
-        return self._result(name, "PASS", seconds)
+        note = stage["pass_note"]() if stage.get("pass_note") else ""
+        self.out("%s: done in %.0fs%s" % (name, seconds, (" (%s)" % note) if note else ""))
+        return self._result(name, "PASS", seconds, note)
 
     def run(self):
+        if self.which == "sqgan":
+            self.out("NOTE: this notebook has no dataset A/B of its own. It reads A (images) and B (labels) from the "
+                     "output of notebook '%s' (kernel source; run that notebook once, pilot or full, first)." % NOTEBOOK1)
         total = len(self.stages)
         for i, stage in enumerate(self.stages, 1):
             self.run_stage(stage, i, total)
@@ -324,8 +447,9 @@ class Orchestrator:
                 "-------------|--------|---------|-----"]
         for r in self.results.values():
             rows.append("%-12s | %-6s | %7.0f | %s" % (r["stage"], r["status"], r["seconds"], r["note"]))
-        sizes = ", ".join("%s=%s MB" % (k, dir_size_mb(self.work / d))
-                          for k, d in (("A", "dataset-a"), ("B", "dataset-b"), ("C", "cache")))
+        dirs = ((("A", "dataset-a"), ("B", "dataset-b"), ("C", "cache")) if self.which == "ab-embed"
+                else (("SQGAN", "cache_sqgan"),))
+        sizes = ", ".join("%s=%s MB" % (k, dir_size_mb(self.work / d)) for k, d in dirs)
         text = "\n".join(rows + ["sizes: " + sizes])
         (self.work / "RUN_SUMMARY.md").write_text(text + "\n", encoding="utf-8")
         return text
@@ -333,22 +457,32 @@ class Orchestrator:
     def _write_pilot_report(self):
         env_file = self.work / "environment.json"
         environment = json.loads(env_file.read_text()) if env_file.exists() else {}
-        stages = [{"name": n, "passed": r["status"] == "PASS", "seconds": r["seconds"], "missing_outputs": [],
-                   "stderr_tail": r["note"], "stdout_tail": ""} for n, r in self.results.items()]
-        report = {"mode": "pilot", "environment": environment, "stages": stages, "checks": pilot.read_checks(self.work)}
-        report["all_passed"] = all(s["passed"] or self.results[s["name"]]["status"] == "SKIP" for s in stages)
+        stages = [{"name": n, "status": r["status"], "passed": r["status"] == "PASS", "seconds": r["seconds"],
+                   "missing_outputs": [], "stderr_tail": r["note"], "stdout_tail": ""}
+                  for n, r in self.results.items()]
+        report = {"mode": "pilot", "which": self.which, "environment": environment, "stages": stages,
+                  "checks": pilot.read_checks(self.work),
+                  "only_checks": list(SQGAN_CHECKS) if self.which == "sqgan" else []}
+        report["all_passed"] = all(s["status"] in ("PASS", "SKIP") for s in stages)
+        # pilot-check compatible record (workers16_memory reads stage_results.json by the old pilot stage names)
+        alias = {"A": "a_download_images", "B": "b_label", "C_features": "c_feature_pass_smoke", "C_grid": "d_grid_export"}
+        legacy = [{"name": alias.get(s["name"], s["name"]), "passed": s["passed"], "seconds": s["seconds"],
+                   "status": s["status"], "peak_rss_mb": pilot.child_peak_rss_mb()} for s in stages]
+        (self.work / "stage_results.json").write_text(json.dumps(legacy, indent=2), encoding="utf-8")
         (self.work / "pilot_report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
         (self.work / "PILOT_REPORT.md").write_text(pilot.markdown(report), encoding="utf-8")
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--which", choices=WHICH, default="ab-embed")
+    ap.add_argument("--input-root", default="/kaggle/input")
     ap.add_argument("--mode", choices=("pilot", "full"), default="pilot")
     ap.add_argument("--work", default="/kaggle/working/run")
     ap.add_argument("--force", action="append", default=[], metavar="STAGE", help="re-run a finished stage (repeatable)")
     ap.add_argument("--meta-dir", default=None)
     a = ap.parse_args(argv)
-    return Orchestrator(a.mode, a.work, a.force, meta_dir=a.meta_dir).run()
+    return Orchestrator(a.mode, a.work, a.force, meta_dir=a.meta_dir, which=a.which, input_root=a.input_root).run()
 
 
 if __name__ == "__main__":

@@ -1,7 +1,10 @@
-"""Emit Notebooks/Edge/dataset-semschedule.ipynb (+ kernel metadata): datasets A, B and C in ONE notebook.
+"""Emit the two dataset notebooks (+ kernel metadata) into Notebooks/Edge/.
 
-Thin notebook: clone, quiet install, ``python -m parameters.edge.run_all --mode <MODE>``, then copy the
-report, summary and logs to /kaggle/working top level. Regenerate for the full run with ``--mode full``.
+``--which ab-embed`` (default): ``dataset-semschedule`` = datasets A, B, embeddings cache C and the grid.
+``--which sqgan``: ``dataset-semschedule-sqgan`` = the SQ-GAN pass; reads A and B from the output of the first.
+
+Thin notebooks: clone, quiet install, ``python -m parameters.edge.run_all --which W --mode <MODE>``, then copy
+the report, summary and logs to /kaggle/working top level. Regenerate the full run with ``--mode full``.
 Never pushes anything.
 """
 import argparse
@@ -14,12 +17,15 @@ from scripts.edge.make_sqgan_finetune_notebook import DATASET_SOURCES as _FT_SOU
 MODE = "pilot"                      # default mode; override with --mode full
 STEP = "dataset-semschedule"
 TITLE = "Dataset SemSchedule"
+SQGAN_STEP = "dataset-semschedule-sqgan"
+SQGAN_TITLE = "Dataset SemSchedule Sqgan"
+WHICH = {"ab-embed": (STEP, TITLE), "sqgan": (SQGAN_STEP, SQGAN_TITLE)}
 ENTRY = "parameters.edge.run_all"
 WORK = "/kaggle/working/run"
 _DATA = load_config("data")
 DATASET_SOURCES = (_DATA["crisismmd"]["kaggle_dataset"], _DATA["normals"]["places365_kaggle_dataset"],
-                   _DATA["normals"]["coco_kaggle_dataset"],
-                   *[s for s in _FT_SOURCES if "sqgan" in s])   # bundle, source, assets
+                   _DATA["normals"]["coco_kaggle_dataset"])             # notebook 1: no SQ-GAN datasets
+SQGAN_SOURCES = tuple(s for s in _FT_SOURCES if "sqgan" in s)            # notebook 2: source, assets, bundle
 REQUIREMENTS = ("pytorch-lightning==1.9.5", "torchmetrics==0.11.4", "transformers==4.46.3", "scipy", "omegaconf",
                 "pytorch-msssim==1.0.0", "lpips==0.1.4", "PyYAML", "einops", "pillow")
 
@@ -36,7 +42,7 @@ COLLECT = '''
 import shutil
 from pathlib import Path
 W, OUT = Path("{work}"), Path("/kaggle/working")
-for name in ("PILOT_REPORT.md", "pilot_report.json", "RUN_SUMMARY.md"):
+for name in ("PILOT_REPORT.md", "pilot_report.json", "RUN_SUMMARY.md", "located.json"):
     if (W / name).exists():
         shutil.copyfile(W / name, OUT / name)
 if (W / "state" / "summary.json").exists():
@@ -48,31 +54,37 @@ print((OUT / "RUN_SUMMARY.md").read_text() if (OUT / "RUN_SUMMARY.md").exists() 
 '''
 
 
-def build(mode=None, branch="main", account=None):
-    """Return (notebook dict, kernel-metadata dict)."""
+def build(mode=None, branch="main", account=None, which="ab-embed"):
+    """Return (notebook dict, kernel-metadata dict) for ``which`` in WHICH."""
     mode = mode or MODE
+    step, title = WHICH[which]
     cfg = bn.load_kaggle_config()
-    args = ["--mode", mode, "--work", WORK]
-    nb = bn.build_notebook(STEP, ENTRY, args, TITLE, cfg["repo_url"], branch, REQUIREMENTS, True)
-    nb["cells"][0] = bn._md("# %s\n\nDatasets A (images), B (labels) and C (cache + grid) in one run, mode `%s`. "
-                            "Logic lives in `%s`.\n" % (TITLE, mode, ENTRY))
+    args = ["--which", which, "--mode", mode, "--work", WORK]
+    nb = bn.build_notebook(step, ENTRY, args, title, cfg["repo_url"], branch, REQUIREMENTS, True)
+    what = ("Datasets A (images), B (labels) and C embeddings cache + grid" if which == "ab-embed" else
+            "SQ-GAN pass over dataset A and B read from the output of notebook `%s` (run that one first)" % STEP)
+    nb["cells"][0] = bn._md("# %s\n\n%s, mode `%s`. Logic lives in `%s`.\n" % (title, what, mode, ENTRY))
     nb["cells"][4] = bn._code(RUN.format(argv=["python", "-u", "-m", ENTRY, *args]))
     nb["cells"] += [bn._md("## Collect outputs\n\nReport, summary and logs are copied to the top level of /kaggle/working.\n"),
                     bn._code(COLLECT.format(work=WORK))]
     account = account or cfg.get("default_account", "wsl")
-    meta = bn.build_metadata(cfg, account, STEP, TITLE, True, DATASET_SOURCES)
+    sources = DATASET_SOURCES if which == "ab-embed" else SQGAN_SOURCES
+    meta = bn.build_metadata(cfg, account, step, title, True, sources)
+    if which == "sqgan":
+        meta["kernel_sources"] = ["%s/%s" % (meta["id"].split("/")[0], bn.kernel_slug(cfg, STEP))]
     meta["machine_shape"] = "NvidiaTeslaT4"        # T4 x2, same key as the fine-tune notebook
     return nb, meta
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--which", choices=tuple(WHICH), default="ab-embed")
     ap.add_argument("--mode", choices=("pilot", "full"), default=MODE)
     ap.add_argument("--branch", default="main")
     ap.add_argument("--out-dir", default=str(bn.OUT_DIR))
     a = ap.parse_args(argv)
-    nb, meta = build(a.mode, a.branch)
-    for p in bn.write_outputs(nb, meta, STEP, Path(a.out_dir)):
+    nb, meta = build(a.mode, a.branch, which=a.which)
+    for p in bn.write_outputs(nb, meta, WHICH[a.which][0], Path(a.out_dir)):
         print(p)
 
 

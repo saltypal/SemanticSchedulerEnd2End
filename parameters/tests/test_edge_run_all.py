@@ -8,8 +8,9 @@ from parameters.edge import run_all
 class FakeRunner:
     """Records argv; fails stages by substring; writes the files a real stage would produce."""
 
-    def __init__(self, work, fail=(), gates_ok=True, lines=("done",)):
+    def __init__(self, work, fail=(), gates_ok=True, lines=("done",), degenerate=False):
         self.work, self.fail, self.gates_ok, self.lines, self.calls = Path(work), list(fail), gates_ok, lines, []
+        self.degenerate = degenerate
         self.envs = []
 
     def __call__(self, argv, cwd, env, timeout, emit):
@@ -33,8 +34,17 @@ class FakeRunner:
                 {"gates": {"test_critical": 1, "test_critical_ok": self.gates_ok, "val_critical": 1,
                            "val_critical_ok": True}}))
         if "feature_pass run" in text:
-            (w / "cache").mkdir(parents=True, exist_ok=True)
-            (w / "cache" / "summary.json").write_text("{}")
+            out = Path(argv[argv.index("--out") + 1])
+            out.mkdir(parents=True, exist_ok=True)
+            (out / "summary.json").write_text("{}")
+        if "locate_main" in text:
+            (w / "located.json").write_text(json.dumps({"A": str(w / "fa"), "B": str(w / "fb")}))
+        if "embedding_grid grid" in text and self.degenerate and "--allow-degenerate" in text:
+            (w / "cache" / "grid").mkdir(parents=True, exist_ok=True)
+            (w / "cache" / "grid" / "grid_degenerate.json").write_text(json.dumps({"message": "train n=3 only Low"}))
+        if "embedding_grid grid" in text and self.degenerate and "--allow-degenerate" not in text:
+            emit("GridDataError: only class 3\n")
+            return 1
         if "pilot_checks" in text:
             name = argv[3]
             (w / "checks").mkdir(parents=True, exist_ok=True)
@@ -42,11 +52,11 @@ class FakeRunner:
         return 0
 
 
-def run(tmp_path, mode="full", fail=(), force=(), gates_ok=True, gpus=1, **kw):
+def run(tmp_path, mode="full", fail=(), force=(), gates_ok=True, gpus=1, which="ab-embed", **kw):
     out = []
     runner = FakeRunner(tmp_path, fail, gates_ok, **kw)
     orch = run_all.Orchestrator(mode, tmp_path, force, runner=runner, out=out.append, meta_dir="meta", py="py", cwd=".",
-                                  gpus=lambda: gpus, progress_every=3600)
+                                  gpus=lambda: gpus, progress_every=3600, which=which)
     rc = orch.run()
     return orch, runner, out, rc
 
@@ -63,20 +73,36 @@ def test_full_order_banners_and_no_checks(tmp_path):
     assert banners[0] == "==== STAGE 1/6: env ====" and banners[-1] == "==== STAGE 6/6: publish ===="
     assert not any("-m Codec.edge.pilot_checks" in c for c in runner.calls)
     assert not any("--max-images" in c or "--smoke" in c for c in runner.calls)
+    assert all("--no-sqgan" in c and "--only-sqgan" not in c for c in runner.calls if "feature_pass run" in c)
     cmds = [c for c in runner.calls]
     assert any("export-grid" in c for c in cmds) and any("embedding_grid grid" in c for c in cmds)
     assert any("embedding_grid select --grid-dir" in c for c in cmds)
     assert sum("kaggle_publish" in c for c in cmds) == 2 and any("feature_pass publish" in c for c in cmds)
-    assert "scheduler-dataset-v1-cache" in " ".join(cmds)
+    assert "scheduler-dataset-v1-cache" in " ".join(cmds) and "sqgan" not in " ".join(c for c in cmds if "publish" in c)
 
 
-def test_pilot_adds_checks_flags_and_report(tmp_path):
+def test_pilot_flags_report_and_skip_matches_state(tmp_path):
     orch, runner, out, rc = run(tmp_path, mode="pilot")
     joined = "\n".join(runner.calls)
-    assert "--max-images 20" in joined and "--smoke" in joined and "-m Codec.edge.pilot_checks" in joined
-    assert status(orch)["checks"] == "PASS" and status(orch)["publish"] == "SKIP"
-    assert (tmp_path / "PILOT_REPORT.md").exists()
-    assert "## Unverified items" in (tmp_path / "PILOT_REPORT.md").read_text()
+    assert "--max-images 20" in joined and "--smoke" in joined and "-m Codec.edge.pilot_checks" not in joined
+    assert list(orch.results) == ["env", "A", "B", "C_features", "C_grid", "publish"]
+    assert status(orch)["publish"] == "SKIP" and rc == 0
+    md = (tmp_path / "PILOT_REPORT.md").read_text()
+    assert "| publish | SKIP |" in md and "(failed)" not in md          # report == run_all state
+    rep = json.loads((tmp_path / "pilot_report.json").read_text())
+    assert rep["all_passed"] is True
+    legacy = {s["name"]: s for s in json.loads((tmp_path / "stage_results.json").read_text())}
+    assert "a_download_images" in legacy                                 # workers16_memory finds stage A
+
+
+def test_grid_data_error_pilot_passes_plumbing_only_full_fails(tmp_path):
+    orch, runner, out, rc = run(tmp_path / "p", mode="pilot", degenerate=True)
+    assert status(orch)["C_grid"] == "PASS" and rc == 0
+    assert orch.results["C_grid"]["note"].startswith("plumbing only: train n=3")
+    assert all("--allow-degenerate" in c for c in runner.calls if "embedding_grid" in c)
+    orch, runner, out, rc = run(tmp_path / "f", mode="full", degenerate=True)
+    assert status(orch)["C_grid"] == "FAIL" and rc == 1
+    assert not any("--allow-degenerate" in c for c in runner.calls)
 
 
 def test_failure_skips_dependents_but_not_independent(tmp_path):
@@ -181,3 +207,93 @@ def test_summary_merge_aggregates_shards(tmp_path):
     s = fp.summarize(tmp_path)
     assert s["counts"]["shards"] == 2 and s["counts"]["requested"] == 8 and s["counts"]["ok"] == 6
     assert json.loads((tmp_path / "summary.json").read_text())["counts"]["ok"] == 6
+
+
+# ------------------------------------------------------------------ notebook 2 (sqgan)
+
+def test_sqgan_full_stage_list_and_commands(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_all, "has_secret", lambda: True)
+    orch, runner, out, rc = run(tmp_path, which="sqgan", gpus=2)
+    assert rc == 0 and list(orch.results) == ["env", "S_locate", "S_sqgan", "publish"]
+    calls = _feature_calls(runner)
+    assert len(calls) == 2
+    for c, _ in calls:
+        assert "--only-sqgan" in c and "--require-sqgan" in c and "--no-sqgan" not in c and "--smoke" not in c
+        assert "--images-root %s" % (tmp_path / "fa") in c and "--labels-root %s" % (tmp_path / "fb") in c
+        assert "--out %s" % (tmp_path / "cache_sqgan") in c
+    assert sorted(e for _, e in calls) == ["0", "1"]
+    assert any("feature_pass publish" in c and "scheduler-dataset-v1-sqgan" in c for c in runner.calls)
+    assert not any("dataset_a" in c or "build_label_dataset" in c for c in runner.calls)
+    assert any(o.startswith("NOTE: this notebook has no dataset A/B") for o in out)
+    assert "SQGAN=" in out[-1]
+
+
+def test_sqgan_pilot_checks_subset_smoke_and_no_publish(tmp_path):
+    orch, runner, out, rc = run(tmp_path, mode="pilot", which="sqgan")
+    assert list(orch.results) == ["env", "S_locate", "S_sqgan", "checks", "publish"]
+    assert status(orch)["publish"] == "SKIP" and rc == 0
+    names = [c.split("-m Codec.edge.pilot_checks ")[1].split()[0] for c in runner.calls if "-m Codec.edge.pilot_checks" in c]
+    from Codec.edge import pilot_checks
+    assert names == [n for n in pilot_checks.CHECK_ORDER if n in run_all.SQGAN_CHECKS]
+    assert {"env_gpu", "bundle_restore", "feature_pass_smoke_verify"} <= set(names) and "embedders" not in names
+    assert all("--smoke" in c for c, _ in _feature_calls(runner))
+    md = (tmp_path / "PILOT_REPORT.md").read_text()
+    assert "embedders" not in md and "| publish | SKIP |" in md
+
+
+def test_sqgan_publish_skipped_without_secret(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_all, "has_secret", lambda: False)
+    orch, runner, out, rc = run(tmp_path, which="sqgan")
+    assert status(orch)["publish"] == "SKIP" and "Secret" in orch.results["publish"]["note"] and rc == 0
+    assert not any("feature_pass publish" in c for c in runner.calls)
+
+
+def test_sqgan_dependencies_and_failure_propagation(tmp_path):
+    assert run_all.DEPS_BY["sqgan"]["S_sqgan"] == ["S_locate"] and run_all.DEPS_BY["sqgan"]["publish"] == ["S_sqgan"]
+    assert run_all.DEPS_BY["ab-embed"]["C_features"] == ["A", "B"] and run_all.DEPS_BY["ab-embed"]["C_grid"] == ["C_features"]
+    orch, runner, out, rc = run(tmp_path, which="sqgan", fail=["locate_main"])
+    s = status(orch)
+    assert rc == 1 and s["S_locate"] == "FAIL" and s["S_sqgan"] == "SKIP" and s["publish"] == "SKIP"
+    assert not any("feature_pass run" in c for c in runner.calls)
+
+
+def test_sqgan_part_failure_fails_core_stage(tmp_path):
+    orch, runner, out, rc = run(tmp_path, which="sqgan", gpus=2, fail=["--part 0/2"])
+    assert rc == 1 and status(orch)["S_sqgan"] == "FAIL" and not any("summarize" in c for c in runner.calls)
+
+
+def _touch(path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("x")
+
+
+def test_locate_inputs_finds_exactly_one_each(tmp_path):
+    root = tmp_path / "input"
+    _touch(root / "dataset-semschedule" / "run" / "dataset-a" / "index.jsonl")
+    _touch(root / "dataset-semschedule" / "run" / "dataset-b" / "labels_raw.jsonl")
+    _touch(root / "dataset-semschedule" / "run" / "dataset-a" / "images" / "crisismmd" / "index.jsonl")  # pruned
+    found = run_all.locate_inputs(root)
+    assert found["A"].name == "dataset-a" and found["B"].name == "dataset-b"
+    assert run_all.locate_main(tmp_path / "w", root) == 0
+    assert json.loads((tmp_path / "w" / "located.json").read_text())["A"].endswith("dataset-a")
+
+
+def test_locate_errors_are_clear(tmp_path, capsys):
+    import pytest
+    root = tmp_path / "input"
+    root.mkdir()
+    with pytest.raises(run_all.LocateError) as e:                       # nothing there
+        run_all.locate_inputs(root)
+    msg = str(e.value)
+    assert "dataset-semschedule" in msg and "index.jsonl" in msg and "labels_raw.jsonl" in msg and "found 0" in msg
+    _touch(root / "k1" / "dataset-a" / "index.jsonl")
+    _touch(root / "k2" / "dataset-a" / "index.jsonl")
+    _touch(root / "k1" / "dataset-b" / "labels_raw.jsonl")
+    with pytest.raises(run_all.LocateError, match="found 2"):           # ambiguous A
+        run_all.locate_inputs(root)
+    assert run_all.locate_main(tmp_path / "w2", root) == 1
+    assert "ERROR" in capsys.readouterr().out and not (tmp_path / "w2" / "located.json").exists()
+    deep = tmp_path / "deep"                                            # beyond depth 6 is not searched
+    _touch(deep / "a" / "b" / "c" / "d" / "e" / "f" / "g" / "index.jsonl")
+    with pytest.raises(run_all.LocateError):
+        run_all.locate_inputs(deep)

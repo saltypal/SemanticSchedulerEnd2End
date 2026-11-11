@@ -199,6 +199,55 @@ def test_dim_mismatch_names_encoder_dims_and_type():
     eg._check_dim(torch.ones(2, 512), {"name": "clip_b32", "dim": 512})
 
 
+def _only_low_train():
+    embs, labels, splits = make_data()
+    for p in labels:
+        if splits[p] == "train":
+            labels[p]["tier"] = 3
+    return embs, labels, splits
+
+
+def test_grid_data_error_single_class_train_and_empty_val(tmp_path):
+    embs, labels, splits = _only_low_train()
+    with pytest.raises(eg.GridDataError) as e:
+        eg.run_grid(embs, labels, splits, CFG, tmp_path)
+    msg = str(e.value)
+    assert "train n=" in msg and "'Low': " in msg and "val n=" in msg and isinstance(e.value, ValueError)
+    embs, labels, splits = make_data()
+    no_val = {p: ("test" if s == "val" else s) for p, s in splits.items()}
+    with pytest.raises(eg.GridDataError, match="val n=0"):
+        eg.run_grid(embs, labels, no_val, CFG, tmp_path)
+
+
+def _write_grid_inputs(tmp_path, labels, splits, embs):
+    import json
+    names = {"good": "emb_good"}
+    d = tmp_path / "grid"
+    d.mkdir()
+    (d / "labels_by_uid.jsonl").write_text("\n".join(json.dumps(
+        {"image_path": p, "tier": int(v["tier"]), "source": v["source"]}) for p, v in labels.items()))
+    (d / "splits_by_uid.json").write_text(json.dumps(splits))
+    paths, emb = embs["good"]
+    np.savez(d / "emb_good.npz", image_path=paths, emb=emb)
+    (d / "emb_good.done").write_text("{}")
+    return d
+
+
+def test_cli_degenerate_flag(tmp_path, monkeypatch):
+    import json
+    cfg = dict(CFG, encoders=[{"name": "good", "ue_cost": 1}])
+    monkeypatch.setattr(eg, "load_config", lambda name: cfg)
+    embs, labels, splits = _only_low_train()
+    d = _write_grid_inputs(tmp_path, labels, splits, embs)
+    base = ["grid", "--embeddings-dir", str(d), "--labels", str(d / "labels_by_uid.jsonl"),
+            "--splits", str(d / "splits_by_uid.json"), "--out", str(d)]
+    with pytest.raises(eg.GridDataError):
+        eg.main(base)                                                   # full mode: hard failure
+    assert eg.main(base + ["--allow-degenerate"]) == 0                  # pilot: plumbing only
+    assert "train n=" in json.loads((d / eg.DEGENERATE_FILE).read_text())["message"]
+    assert eg.main(["select", "--grid-dir", str(d), "--allow-degenerate"]) == 0
+
+
 def test_grid_yaml_dims_for_clip_and_siglip():
     from Evaluation.edge.edge_config import load_config
     dims = {e["name"]: e["dim"] for e in load_config("grid")["encoders"]}

@@ -3,24 +3,39 @@ import re
 
 from scripts.edge import make_run_all_notebook as mk
 
+SQGAN_SOURCES = {"satyapaladuguplus/semantic-scheduler-sqgan-bundle-20261102",
+                 "satyapaladuguplus/semantic-lossless-private-sqgan-source",
+                 "satyapaladuguplus/semantic-lossless-private-sqgan-assets"}
+
 
 def _src(nb):
     return "\n".join("".join(c["source"]) for c in nb["cells"])
 
 
-def test_metadata():
+def _slug_ok(meta):
+    return re.sub(r"[^a-z0-9]+", "-", meta["title"].lower()).strip("-") == meta["id"].split("/")[1]
+
+
+def test_metadata_notebook1_has_no_sqgan_sources():
     nb, meta = mk.build()
     assert meta["id"] == "satyapaladuguplus/dataset-semschedule" and meta["title"] == "Dataset SemSchedule"
-    assert re.sub(r"[^a-z0-9]+", "-", meta["title"].lower()).strip("-") == meta["id"].split("/")[1]
-    assert meta["code_file"] == "dataset-semschedule.ipynb"
+    assert _slug_ok(meta) and meta["code_file"] == "dataset-semschedule.ipynb"
     assert meta["enable_gpu"] is True and meta["enable_internet"] is True and meta["machine_shape"] == "NvidiaTeslaT4"
     assert not meta["kernel_sources"]
     assert set(meta["dataset_sources"]) == {
-        "seaninggg/crisismmd-multimodal-crisis-dataset", "benjaminkz/places365", "awsaf49/coco-2017-dataset",
-        "satyapaladuguplus/semantic-scheduler-sqgan-bundle-20261102",
-        "satyapaladuguplus/semantic-lossless-private-sqgan-source",
-        "satyapaladuguplus/semantic-lossless-private-sqgan-assets"}
-    assert len(meta["dataset_sources"]) == 6
+        "seaninggg/crisismmd-multimodal-crisis-dataset", "benjaminkz/places365", "awsaf49/coco-2017-dataset"}
+    assert "'--which', 'ab-embed'" in _src(nb)
+
+
+def test_metadata_notebook2_sqgan():
+    nb, meta = mk.build(which="sqgan")
+    assert meta["id"] == "satyapaladuguplus/dataset-semschedule-sqgan" and meta["title"] == "Dataset SemSchedule Sqgan"
+    assert _slug_ok(meta) and meta["code_file"] == "dataset-semschedule-sqgan.ipynb"
+    assert meta["enable_gpu"] is True and meta["machine_shape"] == "NvidiaTeslaT4"
+    assert set(meta["dataset_sources"]) == SQGAN_SOURCES and len(meta["dataset_sources"]) == 3
+    assert meta["kernel_sources"] == ["satyapaladuguplus/dataset-semschedule"]
+    text = _src(nb)
+    assert "'--which', 'sqgan'" in text and "dataset-semschedule" in text
 
 
 def test_mode_default_and_full(tmp_path):
@@ -31,11 +46,17 @@ def test_mode_default_and_full(tmp_path):
     nb = json.loads((tmp_path / "dataset-semschedule.ipynb").read_text())
     assert "'--mode', 'full'" in _src(nb)
     assert (tmp_path / "dataset-semschedule.kernel-metadata.json").exists()
+    mk.main(["--which", "sqgan", "--mode", "full", "--out-dir", str(tmp_path)])
+    nb2 = json.loads((tmp_path / "dataset-semschedule-sqgan.ipynb").read_text())
+    assert "'--mode', 'full'" in _src(nb2) and "'--which', 'sqgan'" in _src(nb2)
+    meta2 = json.loads((tmp_path / "dataset-semschedule-sqgan.kernel-metadata.json").read_text())
+    assert meta2["kernel_sources"] == ["satyapaladuguplus/dataset-semschedule"]
 
 
 def test_cells_are_quiet_and_collect_outputs():
-    text = _src(mk.build()[0])
-    for needle in ("-q", "--ignore-requires-python", "TQDM_DISABLE", "--no-progress", "parameters.edge.run_all",
-                   "PILOT_REPORT.md", "RUN_SUMMARY.md", "logs"):
-        assert needle in text, needle
-    assert "tqdm" not in text.replace("TQDM_DISABLE", "").lower()
+    for which in ("ab-embed", "sqgan"):
+        text = _src(mk.build(which=which)[0])
+        for needle in ("-q", "--ignore-requires-python", "TQDM_DISABLE", "--no-progress", "parameters.edge.run_all",
+                       "PILOT_REPORT.md", "RUN_SUMMARY.md", "logs"):
+            assert needle in text, (which, needle)
+        assert "tqdm" not in text.replace("TQDM_DISABLE", "").lower()

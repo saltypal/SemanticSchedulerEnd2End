@@ -152,7 +152,36 @@ def test_stage_a_disk_guard(tmp_path, monkeypatch):
 def test_stage_a_max_images(tmp_path, monkeypatch):
     *_, manifest, _, _ = run_a(tmp_path, monkeypatch, max_images=1)
     by = manifest["report"]["by_source"]
-    assert by["crisismmd"] == 1 and by["places365"] <= 1 and by["coco_people"] <= 1
+    # CrisisMMD pilot takes max(8*N, 160) stratified rows (all 3 fixture rows, one is a dead URL); others keep N
+    assert by["crisismmd"] == 2 and by["places365"] <= 1 and by["coco_people"] <= 1
+
+
+def test_crisis_pilot_size():
+    assert da.crisis_pilot_size(20) == 160 and da.crisis_pilot_size(5) == 160 and da.crisis_pilot_size(30) == 240
+
+
+def _synthetic_rows():
+    events = ["e%d" % i for i in range(7)]
+    rows = []
+    for ei, ev in enumerate(events):
+        for ti, tier in enumerate(labels.TIERS):
+            # skewed: Low dominates and sorts first, rare tiers are few
+            n = 200 if tier == "Low" else 3 + ei
+            rows += [{"image_path": "%s/%s_%03d.jpg" % (ev, tier, k), "event": ev, "tier": tier} for k in range(n)]
+    return events, sorted(rows, key=lambda r: r["image_path"])
+
+
+def test_stratified_sample_covers_every_tier_and_event_deterministically():
+    events, rows = _synthetic_rows()
+    pick = da.stratified_sample(rows, 160)
+    assert len(pick) == len(set(pick)) == 160
+    by = {r["image_path"]: r for r in rows}
+    assert {by[p]["tier"] for p in pick} == set(labels.TIERS)
+    assert {by[p]["event"] for p in pick} == set(events)
+    for ev in events:
+        assert {by[p]["tier"] for p in pick if by[p]["event"] == ev} == set(labels.TIERS)
+    assert pick == da.stratified_sample(list(reversed(rows)), 160)
+    assert len(da.stratified_sample(rows[:5], 160)) == 5
 
 
 def test_stage_a_fallback_tar_and_coco_unavailable(tmp_path, monkeypatch):

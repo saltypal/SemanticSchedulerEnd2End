@@ -248,6 +248,27 @@ def _prepare(emb_pack, labels, splits):
     return data
 
 
+class GridDataError(ValueError):
+    """The labelled rows cannot support a classifier grid (train has < 2 classes, or val is empty)."""
+
+
+def _class_counts(y):
+    vals, counts = np.unique(np.asarray(y, int), return_counts=True)
+    return {TIERS[int(v)] if 0 <= int(v) < len(TIERS) else str(int(v)): int(c) for v, c in zip(vals, counts)}
+
+
+def check_split_data(ytr, yva, enc="?"):
+    """Raise GridDataError (with counts per split and class) when train has < 2 classes or val is empty."""
+    if len(set(np.asarray(ytr).tolist())) < 2 or len(yva) == 0:
+        raise GridDataError(
+            "cannot fit a grid for encoder %s: need >= 2 classes in train and a non-empty val; "
+            "train n=%d classes=%s, val n=%d classes=%s"
+            % (enc, len(ytr), _class_counts(ytr), len(yva), _class_counts(yva)))
+
+
+DEGENERATE_FILE = "grid_degenerate.json"
+
+
 def run_grid(embeddings_by_encoder, labels, splits, grid_cfg, out_dir, seed=0):
     """Train/evaluate every candidate on train/val, saving one JSON each; resumable. Returns candidates."""
     out_dir = Path(out_dir)
@@ -259,8 +280,7 @@ def run_grid(embeddings_by_encoder, labels, splits, grid_cfg, out_dir, seed=0):
         data = _prepare(pack, labels, splits)
         Xtr, ytr, _ = data["train"]
         Xva, yva, sva = data["val"]
-        if len(ytr) == 0 or len(yva) == 0:
-            raise ValueError("empty train or val split for encoder " + enc)
+        check_split_data(ytr, yva, enc)
         for family, hp in grid_cfg["classifiers"].items():
             for params in _expand(hp):
                 cid = candidate_id(enc, family, params)
@@ -401,8 +421,11 @@ def main(argv=None):
     g.add_argument("--splits", required=True)
     g.add_argument("--out", required=True)
     g.add_argument("--seed", type=int, default=0)
+    g.add_argument("--allow-degenerate", action="store_true",
+                   help="pilot: a GridDataError is recorded in grid_degenerate.json and exits 0 (plumbing only)")
     s = sub.add_parser("select")
     s.add_argument("--grid-dir", required=True)
+    s.add_argument("--allow-degenerate", action="store_true")
     a = ap.parse_args(argv)
     cfg = load_config("grid")
     if a.cmd == "extract":
@@ -424,9 +447,21 @@ def main(argv=None):
                 embs[enc["name"]] = (z["image_path"], z["emb"])
         if not embs:
             raise FileNotFoundError("no finished embeddings in " + a.embeddings_dir)
-        chosen, _ = grid_and_select(embs, labels, splits, cfg, a.out, a.seed)
+        (Path(a.out) / DEGENERATE_FILE).unlink(missing_ok=True)
+        try:
+            chosen, _ = grid_and_select(embs, labels, splits, cfg, a.out, a.seed)
+        except GridDataError as error:
+            if not a.allow_degenerate:
+                raise
+            Path(a.out).mkdir(parents=True, exist_ok=True)
+            (Path(a.out) / DEGENERATE_FILE).write_text(json.dumps({"message": str(error)}), encoding="utf-8")
+            print("GridDataError (allowed, plumbing only): %s" % error)
+            return 0
         print(json.dumps({k: v for k, v in chosen.items() if k != "val"}, indent=2))
     else:
+        if a.allow_degenerate and (Path(a.grid_dir) / DEGENERATE_FILE).exists():
+            print("select skipped: degenerate grid data (see %s)" % DEGENERATE_FILE)
+            return 0
         chosen = write_outputs(load_candidates(a.grid_dir), cfg["selection"], a.grid_dir)
         print(chosen["id"])
 

@@ -68,3 +68,26 @@ def test_report_files_written_and_default_stages_are_ordered(tmp_path):
     assert names[-1] == "check_feature_pass_smoke_verify"
     assert "--max-images" in pilot.make_stages(tmp_path, 3)[1]["argv"]
     assert "--no-publish" in pilot.make_stages(tmp_path, 3)[1]["argv"]
+
+
+def test_check_stages_subset_and_unknown(tmp_path):
+    subset = ["bundle_restore", "sqgan_latency", "env_gpu"]
+    got = [s["check"] for s in pilot.check_stages(tmp_path, "py", subset)]
+    assert got == [n for n in pilot_checks.CHECK_ORDER if n in subset]          # CHECK_ORDER order, not caller order
+    assert len(pilot.check_stages(tmp_path, "py")) == len(pilot_checks.CHECK_ORDER)
+    import pytest
+    with pytest.raises(ValueError, match="nope"):
+        pilot.check_stages(tmp_path, "py", ["nope"])
+
+
+def test_markdown_shows_state_status_and_skip_is_not_fail(tmp_path):
+    report = {"environment": {}, "checks": {}, "only_checks": ["sqgan_latency"], "stages": [
+        {"name": "publish", "passed": False, "status": "SKIP", "seconds": 0, "missing_outputs": [],
+         "stderr_tail": "pilot mode never publishes", "stdout_tail": ""},
+        {"name": "A", "passed": True, "status": "PASS", "seconds": 1, "missing_outputs": [],
+         "stderr_tail": "", "stdout_tail": ""}]}
+    text = pilot.markdown(report)
+    assert "| publish | SKIP |" in text and "| A | PASS |" in text and "(failed)" not in text
+    rows = [r for r in text.splitlines() if r.startswith("| ") and "| sqgan_latency |" in r]
+    assert rows and all("| sqgan_latency |" in r for r in rows)
+    assert "dataset_a_size_estimate" not in text                                 # items of other checks hidden

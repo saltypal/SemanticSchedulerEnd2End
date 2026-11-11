@@ -78,10 +78,25 @@ def check_stage(name, work, py):
             "expect": [work / "checks" / (name + ".json")], "timeout": CHECK_TIMEOUT.get(name, 900)}
 
 
+def check_stages(work, py, only_checks=None):
+    """``check_*`` stage dicts in CHECK_ORDER; ``only_checks`` (iterable of names) selects a subset.
+
+    Unknown names raise ValueError so a typo in a notebook never silently drops a check.
+    """
+    order = list(pilot_checks.CHECK_ORDER)
+    if only_checks is not None:
+        wanted = list(only_checks)
+        unknown = [n for n in wanted if n not in order]
+        if unknown:
+            raise ValueError("unknown check(s): %s" % ", ".join(unknown))
+        order = [n for n in order if n in wanted]
+    return [check_stage(n, work, py) for n in order]
+
+
 def _with_checks(stages, work, py):
     """env_gpu first (environment facts), the data stages, then every other check (they read stage outputs)."""
-    order = pilot_checks.CHECK_ORDER
-    return [check_stage(order[0], work, py)] + stages + [check_stage(n, work, py) for n in order[1:]]
+    first, *rest = check_stages(work, py)
+    return [first] + stages + rest
 
 
 def child_peak_rss_mb():
@@ -136,27 +151,34 @@ def item_row(item_id, checks):
     return status.upper(), " ".join(str(detail).replace("|", "/").split())[:160]
 
 
-def items_table(checks):
+def items_table(checks, only_checks=None):
+    """Unverified-item rows; with ``only_checks`` just the items covered by those checks."""
     rows = ["", "## Unverified items", "", "| item | check | result | detail |", "|---|---|---|---|"]
-    for item_id, (desc, source, name) in pilot_checks.UNVERIFIED_ITEMS.items():
+    items = {i: v for i, v in pilot_checks.UNVERIFIED_ITEMS.items() if only_checks is None or v[2] in only_checks}
+    for item_id, (desc, source, name) in items.items():
         status, detail = item_row(item_id, checks)
         rows.append("| %s | %s | %s | %s |" % (item_id, name, status, detail))
     counts = {}
-    for item_id in pilot_checks.UNVERIFIED_ITEMS:
+    for item_id in items:
         st = item_row(item_id, checks)[0]
         counts[st] = counts.get(st, 0) + 1
     return rows + ["", "Totals: " + ", ".join("%s=%d" % kv for kv in sorted(counts.items()))]
 
 
+def stage_status(stage):
+    """PASS/FAIL/SKIP of a report stage; an explicit ``status`` (set by run_all) wins over ``passed``."""
+    return stage.get("status") or ("PASS" if stage["passed"] else "FAIL")
+
+
 def markdown(report):
     rows = ["# Pilot report", "", "| stage | result | seconds | missing outputs |", "|---|---|---:|---|"]
     for s in report["stages"]:
-        rows.append("| %s | %s | %s | %s |" % (s["name"], "PASS" if s["passed"] else "FAIL", s["seconds"],
+        rows.append("| %s | %s | %s | %s |" % (s["name"], stage_status(s), s["seconds"],
                                               ", ".join(Path(m).name for m in s["missing_outputs"]) or "-"))
-    rows += items_table(report.get("checks", {}))
+    rows += items_table(report.get("checks", {}), report.get("only_checks"))
     rows += ["", "## Environment", "```", json.dumps(report["environment"], indent=2), "```"]
     for s in report["stages"]:
-        if not s["passed"]:
+        if stage_status(s) == "FAIL":
             rows += ["", "## %s (failed)" % s["name"], "```", s["stderr_tail"] or s["stdout_tail"], "```"]
     return "\n".join(rows) + "\n"
 

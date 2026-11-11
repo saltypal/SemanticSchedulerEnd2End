@@ -17,7 +17,8 @@ Rules for every step:
 |---|---|---|---|
 | A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `dataset-semschedule` (stage A) |
 | B | `scheduler-dataset-v1-labels` | tier labels applied to A (rules in `config/edge/data.yaml`), counts, gates; no images | notebook `dataset-semschedule` (stage B) |
-| C | `scheduler-dataset-v1-cache` | embeddings (5 encoders), SimHash + pHash, SQ-GAN kept-token map, class grid, 13-value mask summary, pooled encoder grid, payload bytes, decoded JPEGs, per-stage timings, FLOPs, grid + selection results | notebook `dataset-semschedule` (stage C) |
+| C1 | `scheduler-dataset-v1-cache` | embeddings cache: embeddings (5 encoders), SimHash + pHash, pooled encoder grid, grid + selection results | notebook `dataset-semschedule` (stages C_features with `--no-sqgan`, C_grid) |
+| C2 | `scheduler-dataset-v1-sqgan` | SQ-GAN cache: kept-token map, class grid, 13-value mask summary, payload bytes, decoded JPEGs, per-stage timings, FLOPs | notebook `dataset-semschedule-sqgan` (stage S_sqgan; reads A and B from notebook 1's output) |
 Also existing on the account: `edge-labels-v1` (labels only, superseded by B; delete when you say so),
 `semantic-scheduler-sqgan-bundle-20261102` (v0 SQ-GAN bundle, flat layout), `semantic-lossless-private-sqgan-source`,
 `semantic-lossless-private-sqgan-assets`.
@@ -33,7 +34,7 @@ Also existing on the account: `edge-labels-v1` (labels only, superseded by B; de
 - [ ] Decide whether personal paths in old docs matter for a public repo.
 - [ ] Add the Kaggle Secret to the notebooks that publish (A, B, C).
 
-## 1. PILOT FIRST (one GPU notebook, `dataset-semschedule`, mode `pilot`) -> read results -> fix -> only then the full runs
+## 1. PILOT FIRST (two GPU notebooks, mode `pilot`: `dataset-semschedule` = A + B + embeddings + grid; `dataset-semschedule-sqgan` = SQ-GAN pass + SQ-GAN checks, run it after notebook 1) -> read results -> fix -> only then the full runs
 The pilot runs every stage on about 20 images per source and writes `PILOT_REPORT.md` with pass/fail per stage
 and a table "unverified item -> check -> result". Stages: download sample (A) -> label it (B) -> feature pass
 smoke (embeddings, hashes, SQ-GAN encode/decode, masks, timings, FLOPs) -> grid export.
@@ -66,7 +67,7 @@ Checks cover everything earlier reported as unverified:
 - [x] dataset A is allowed to start now (its pipeline passed); B follows A
 
 ## 2. Full dataset builds (CPU, internet on)
-- [ ] A: run `dataset-semschedule` (mode `full`, regenerate with `python -m scripts.edge.make_run_all_notebook --mode full`); review `failures.json` and size vs 20 GB; publish A
+- [ ] A: run `dataset-semschedule` (mode `full`, regenerate with `python -m scripts.edge.make_run_all_notebook --which ab-embed --mode full`); review `failures.json` and size vs 20 GB; publish A
 - [ ] B: same run, stage B (reads A from the work folder); gates: test Critical >= 150 (765 in the local pass), validation >= 100
   (California 500); publish B
 Labels recap: CrisisMMD v2.0 human labels -> Critical (severe damage, or injured/dead/missing people),
@@ -74,9 +75,10 @@ High (mild damage; affected individuals, infrastructure/utility damage, vehicle 
 Medium (little/no damage; rescue/other relevant info when informative), Low (not informative; all everyday
 images). Validation event = California wildfires (Sri Lanka had only 71 Critical); test = Maria + Mexico.
 
-## 3. Cache + grid (C), GPU
-- [ ] same run, stages C_features + C_grid (sharded, resumable; `--force <stage>` redoes one) on A + B + v0 bundle; review the grid comparison
-  (5 encoders x 5 classifier families, gate: Critical recall >= 0.6 on validation); pick the UE encoder; publish C
+## 3. Caches (C1 embeddings + grid, C2 SQ-GAN), GPU
+- [ ] C1: same notebook `dataset-semschedule`, stages C_features (`--no-sqgan`, 2-way GPU sharded, resumable; `--force <stage>` redoes one) + C_grid; review the grid comparison
+  (5 encoders x 5 classifier families, gate: Critical recall >= 0.6 on validation); pick the UE encoder; publish C1
+- [ ] C2: notebook `dataset-semschedule-sqgan` (regenerate with `python -m scripts.edge.make_run_all_notebook --which sqgan --mode full`; kernel source = notebook 1, dataset sources = the three SQ-GAN datasets): stages S_locate, S_sqgan (`--only-sqgan --require-sqgan`), publish `scheduler-dataset-v1-sqgan`; an SQ-GAN problem never blocks A, B or C1
 - [ ] cross-split near-duplicate removal and `splits_v1.json` (frozen); label about 400 duplicate pairs
 
 ## 4. Teammate SQ-GAN fine-tune (codec v1)

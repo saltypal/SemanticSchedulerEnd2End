@@ -102,6 +102,29 @@ def candidates(fetch, cfg, max_images=None, input_root="/kaggle/input"):
     return normals.build_normals(fetch, cfg["normals"], input_root, max_images)
 
 
+def crisis_pilot_size(max_images):
+    """CrisisMMD rows in a pilot: enough that every split holds several tiers (places/COCO keep max_images)."""
+    return max(8 * int(max_images), 160)
+
+
+def stratified_sample(rows, n):
+    """Deterministic round-robin over (event, tier) groups; returns up to ``n`` image_path values.
+
+    ``rows`` are label_table rows (image_path, event, tier). Groups are visited in sorted order, one image
+    per group per round (images sorted by path), so every event and every tier present is represented.
+    """
+    groups = {}
+    for r in rows:
+        groups.setdefault((str(r["event"]), str(r["tier"])), []).append(r["image_path"])
+    queues = [sorted(groups[k]) for k in sorted(groups)]
+    out = []
+    while len(out) < n and any(queues):
+        for q in queues:
+            if q and len(out) < n:
+                out.append(q.pop(0))
+    return out
+
+
 def _info(root, rel, prior):
     path = Path(root) / rel
     if not path.is_file() or path.stat().st_size == 0:
@@ -149,7 +172,9 @@ def build_a(meta_dir, out_dir, fetch, cfg=None, opener=None, tar_source=None, wo
     crisis = [{"image_path": k, "event": records[k]["event"], "tweet_id": records[k]["tweet_id"]}
               for k in sorted(records)]
     if max_images:
-        crisis = crisis[:max_images]
+        rows = labels.label_table(records, cfg=cfg)
+        picked = set(stratified_sample(rows, crisis_pilot_size(max_images)))
+        crisis = [c for c in crisis if c["image_path"] in picked]
     places, people, nrep = candidates(fetch, cfg, max_images, input_root)
     kaggle_places = str(nrep["places365_mode"]).startswith("kaggle:")
     failures, stopped = [], None
