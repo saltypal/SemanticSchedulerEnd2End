@@ -1,106 +1,162 @@
-# Run checklist (check each box before the next step)
+# Master plan and checklist (final replan, 2026-11-11, deadline Friday 2026-11-13)
 
-Rules for every step:
-- Nothing is downloaded or stored on the laptop. All data work runs on Kaggle (internet on).
-- Each notebook clones the latest `main` (the repo is public), prints the commit SHA, runs a package entry
-  point, and writes a `run_manifest.json`. Outputs later steps need are published as **Kaggle datasets**.
-- Kaggle CLI: **WSL**, account `satyapaladuguplus` (the Windows account is busy). New slugs are approved for
-  this study; later runs are new versions of the same slug.
-- Publishing from inside a notebook needs a Kaggle Secret that only you can add (notebook Add-ons ->
-  Secrets: `KAGGLE_API_TOKEN`, or `KAGGLE_USERNAME` + `KAGGLE_KEY`). Without it a notebook still finishes and
-  tells you to use "Save Version" -> "New dataset from output" in the web UI.
-- Design: `docs/reviews/FINAL_PLAN_V3.md`. Status: DONE / READY (code + unit tests, not yet run on Kaggle) /
-  MISSING / UNVERIFIED (needs a real Kaggle run).
+**Source of truth:** `docs/reviews/FINAL_PLAN_V3.md` (system model §2, data §3, header §4, objective §5,
+SV-DPP §6, SCOPE §7, policies §8, simulator §9, build order §10) **plus the decisions in the table below**.
+Nothing else changes. If something is not in v3 or in this table, it is not done without asking the user.
 
-## The three datasets
-| Dataset | Slug (owner satyapaladuguplus) | Contents | Built by |
+Status: DONE / READY (code + unit tests, not run on real data) / TODO / BLOCKED.
+
+## Paper claim
+On real crisis images, an O-RAN edge decoder scheduler that sees only a 64-byte semantic header (SV-DPP)
+delivers more Critical images before their deadline (CTR@D) than every baseline, close to the genie, and each
+header field earns its bytes.
+
+## Decisions locked after v3 (by the user)
+| # | Topic | v3 said | Decided now |
 |---|---|---|---|
-| A | `scheduler-dataset-v1-images` | raw images only: CrisisMMD v2.0 (HF, pinned revision), Places365 val_256 scenes, Open Images people; `index.jsonl`, manifest, failures | notebook `dataset-semschedule` (stage A) |
-| B | `scheduler-dataset-v1-labels` | tier labels applied to A (rules in `config/edge/data.yaml`), counts, gates; no images | notebook `dataset-semschedule` (stage B) |
-| C1 | `scheduler-dataset-v1-cache` | embeddings cache: embeddings (5 encoders), SimHash + pHash, pooled encoder grid, grid + selection results | notebook `dataset-semschedule` (stages C_features with `--no-sqgan`, C_grid) |
-| C2 | `scheduler-dataset-v1-sqgan` | SQ-GAN cache: kept-token map, class grid, 13-value mask summary, payload bytes, decoded JPEGs, per-stage timings, FLOPs | notebook `dataset-semschedule-sqgan` (stage S_sqgan; reads A and B from notebook 1's output) |
-Also existing on the account: `edge-labels-v1` (labels only, superseded by B; delete when you say so),
-`semantic-scheduler-sqgan-bundle-20261102` (v0 SQ-GAN bundle, flat layout), `semantic-lossless-private-sqgan-source`,
-`semantic-lossless-private-sqgan-assets`.
+| D1 | People photos | Open Images | **COCO people, 3000** (Kaggle `awsaf49/coco-2017-dataset`) |
+| D2 | Everyday scenes | Places365 | Places365 **val, 17 per class**, minus 7 blacklisted classes (Kaggle `benjaminkz/places365`) |
+| D3 | Non-CrisisMMD images | Low | all Low (unchanged) |
+| D4 | Val event | Sri Lanka | **California wildfires** (Sri Lanka 71 Critical; v3 S0 rule). Train = Harvey, Irma, Iraq–Iran, Sri Lanka; test = Maria, Mexico |
+| D5 | Fidelity u, judge (S3b), û model (S5) | in value and gated CTR@D | **dropped.** v = w·g·ζ. Headline = **CTR@D ungated** |
+| D6 | Codec gates that used u | S4 "u not ≈ 0", S11 "mean u rises" | replaced by **LPIPS + SegFormer mIoU (recon vs original)** on val |
+| D7 | SQ-GAN fine-tune | teammate (S11, later) | **we do it ourselves, FIRST**, on the second Kaggle account `satyapaladugu` |
+| D8 | SQ-GAN passes | v0 pass (S4) then v1 re-run (S11) | v0 **pilot only** (plumbing + latency) -> fine-tune v1 -> **one full pass with v1** = the codec table. Header `version=2` (v1 STS profile). Small v0-vs-v1 quality table on a val subset |
+| D9 | Fine-tune data | train events | CrisisMMD train events + COCO train portion; images smaller than 256x512 are skipped (so Places365 is not used for fine-tuning). `# DECISION:` rows in `config/edge/seg_classes.yaml` keep their current defaults |
+| D10 | Scheduling algorithms | v3 §8 line-up | v3 line-up **plus 13 new algorithms** (list in P0). Implemented **first** |
+| D11 | Scheduler training | S8/S9 | kept separate: **phase 2, all at once**, parallel notebooks on both accounts |
+| D12 | Kaggle accounts | one | `satyapaladuguplus` (WSL CLI) = data + main line; `satyapaladugu` (Windows CLI) = SQ-GAN line; both for phase 2 |
 
-## 0. Housekeeping
-- [x] Secret scan: no keys or tokens in tracked text. Large-file scan: no tracked file over 20 MB.
-- [x] Repo is publicly readable (anonymous GitHub API returns 200).
-- [x] Merge teammate Trial 2 branch into `main`; restore archived `SemParam`; line-ending rules.
-- [ ] Delete merged branches (needs your OK; contained in `main`): remote `nandini-integration`,
-  `scheduler_improvement_trials`, `sem_schedluerAI_trial2`; local `NewSetup`,
-  `claude/scheduler-params-policy-3a647b`, `codex/archive-image-scheduling-20260927`,
-  `semantic-awareAIscheduler`, `merge-trial2`. Kept: `checkpoint-20261105-before-lfs-repair` (1 unique commit).
-- [ ] Decide whether personal paths in old docs matter for a public repo.
-- [ ] Add the Kaggle Secret to the notebooks that publish (A, B, C).
+## Rules
+- Laptop: no datasets or large outputs. Small report files only, to `D:\Bunker\BaseCamp\_claude_scratch` (never C:).
+  Pytest: `--basetemp D:\Bunker\BaseCamp\_claude_scratch\pyt`.
+- Kaggle CLI: plus account `wsl -e /home/Satya/.venvs/semantic-kaggle/bin/kaggle ...` (from PowerShell);
+  second account = native Windows `kaggle` (account `win` in `config/edge/kaggle.yaml`). On HTTP 429 wait ~30 s.
+- Notebooks clone latest `main`, print the SHA, write `run_manifest.json`, keep logs clean.
+- Commit to `main` only after the edge tests pass; no AI co-author lines; never edit `Archived/` or old notebooks.
+- Leakage (v3): test events touched only in S10; every gate uses val; fine-tuning uses train images only.
+- Every error -> a row in `docs/MISTAKES.md`. Every finished box -> ticked here with the number/result.
 
-## 1. PILOT FIRST (two GPU notebooks, mode `pilot`: `dataset-semschedule` = A + B + embeddings + grid; `dataset-semschedule-sqgan` = SQ-GAN pass + SQ-GAN checks, run it after notebook 1) -> read results -> fix -> only then the full runs
-The pilot runs every stage on about 20 images per source and writes `PILOT_REPORT.md` with pass/fail per stage
-and a table "unverified item -> check -> result". Stages: download sample (A) -> label it (B) -> feature pass
-smoke (embeddings, hashes, SQ-GAN encode/decode, masks, timings, FLOPs) -> grid export.
-Checks cover everything earlier reported as unverified:
-- GPU/disk/library versions; DataParallel on 2 GPUs; flat v0 bundle restore and strict weight load; deep key scan
-- real masker output (`sample_index`, kept-token count vs m x 512, whether scores are exposed), m mapping,
-  pre-mask grid shape, pooled-feature size
-- decode latency per batch size, VRAM, SQ-GAN FLOPs; compute-profile hooks on every real model
-- all 5 embedders load and match their expected dimensions; DINOv2 judge path
-- ADE20K teacher label names vs `seg_classes.yaml`; real-logit projection
-- fine-tune plumbing: pinned-commit fetch, `.upstream/sqgan` extraction, real trainer pilot launch, 256x256
-  image rejection; payload reader vs class-map gap
-- dataset size extrapolation vs the 20 GB limit; memory at 16 workers; download throughput
-- Kaggle publish round trip (small private test dataset), secrets, status parsing, zip mode with many files;
-  `/kaggle/input` auto-discovery (only verifiable when A/B are attached as datasets)
-- [x] pilot code finished, pushed, and run on Kaggle (2 x Tesla T4): 14 items PASS, 18 FAIL, 22 SKIP
-- [x] results read (2026-11-11). Summary:
-  - PASS: dataset A download stage, dataset B labeling stage, grid export; DataParallel on 2 T4s; DINOv2-small,
-    DINOv2-base and ConvNeXtV2 embedders (dims 384/768/768 match the YAML); DINOv2 judge path; ADE20K label names
-    (0 mismatches) and class projection; pinned SemanticLossless commit fetch (src/ present).
-  - SKIP (cascade of one cause): all SQ-GAN items. The three SQ-GAN datasets were not found under /kaggle/input
-    (mount/attachment problem, being diagnosed). Also skipped: Kaggle publish checks (no Secret attached).
-  - FAIL, being fixed: CLIP + SigLIP2 embedders (transformers 5 returns a ModelOutput, not a tensor);
-    `lpips` missing; one failing stage failed whole images in the feature pass (0/20 ok, hashes not saved);
-    bare `StopIteration` errors instead of clear messages; `sqgan-pinned-source.zip` not found.
-  - Numbers: dataset A estimate 2.4 GB of 20 GB; pilot download speed 1.0 img/s (includes a 525 MB tar, so
-    pessimistic); peak memory 1.6 GB at 8 workers.
-- [ ] fixes in code (Sonnet low, in progress) and dataset-mount diagnosis (Haiku, in progress)
-- [ ] re-run the pilot after the fixes to confirm the SQ-GAN items (needs the mount issue solved)
-- [x] dataset A is allowed to start now (its pipeline passed); B follows A
+---
 
-## 2. Full dataset builds (CPU, internet on)
-- [ ] A: run `dataset-semschedule` (mode `full`, regenerate with `python -m scripts.edge.make_run_all_notebook --which ab-embed --mode full`); review `failures.json` and size vs 20 GB; publish A
-- [ ] B: same run, stage B (reads A from the work folder); gates: test Critical >= 150 (765 in the local pass), validation >= 100
-  (California 500); publish B
-Labels recap: CrisisMMD v2.0 human labels -> Critical (severe damage, or injured/dead/missing people),
-High (mild damage; affected individuals, infrastructure/utility damage, vehicle damage),
-Medium (little/no damage; rescue/other relevant info when informative), Low (not informative; all everyday
-images). Validation event = California wildfires (Sri Lanka had only 71 Critical); test = Maria + Mexico.
+# PHASE 0 — code first (Wednesday)
 
-## 3. Caches (C1 embeddings + grid, C2 SQ-GAN), GPU
-- [ ] C1: same notebook `dataset-semschedule`, stages C_features (`--no-sqgan`, 2-way GPU sharded, resumable; `--force <stage>` redoes one) + C_grid; review the grid comparison
-  (5 encoders x 5 classifier families, gate: Critical recall >= 0.6 on validation); pick the UE encoder; publish C1
-- [ ] C2: notebook `dataset-semschedule-sqgan` (regenerate with `python -m scripts.edge.make_run_all_notebook --which sqgan --mode full`; kernel source = notebook 1, dataset sources = the three SQ-GAN datasets): stages S_locate, S_sqgan (`--only-sqgan --require-sqgan`), publish `scheduler-dataset-v1-sqgan`; an SQ-GAN problem never blocks A, B or C1
-- [ ] cross-split near-duplicate removal and `splits_v1.json` (frozen); label about 400 duplicate pairs
+## P0 New scheduling algorithms (code + unit tests, CPU; worker W-ALG)
+Already in code (22 + bound): FIFO, Random, RR-mission, EDF, TUF/DASA, SPI-first+EDF, priority+aging, M-LWDF, LLF,
+LELF, EXP, DAPF, PF-mission, gen-cμ, gen-cμ/h (abandonment), Whittle-abandon, EdgeServing, completion-aware DPP,
+per-tier DPP without ΔG, MPC rollout, SV-DPP, genie SV-DPP, MILP clairvoyant bound.
+Learners already in code: DQN, LTR, SCOPE (`Scheduler/training/edge/`). Missing: plain PPO / BC / DAgger / RankNet /
+LambdaMART entries and RLAIF — checked and filled in P0b.
+- [ ] D-over (Koren & Shasha 1995)
+- [ ] HVDF (highest value density first)
+- [ ] EDF with admission/triage (drop jobs that cannot meet H_k)
+- [ ] LCFS preemptive-priority
+- [ ] WFQ / Deficit Round Robin over tiers
+- [ ] Max-Weight / backpressure over tier queues
+- [ ] Max-age-first (AoI) and Whittle index for AoI
+- [ ] Clipper AIMD adaptive batching (adapted)
+- [ ] Clockwork-style deadline-aware batch planner (adapted)
+- [ ] Shepherd/Nexus-style SLO batch packing (adapted)
+- [ ] Risk-averse SPI priority (CVaR / lower confidence bound of expected weight)
+- [ ] Contextual bandit priority (LinUCB / Thompson on header features, online)
+- [ ] registered in `Scheduler/edge/registry.py` and a group in `config/edge/policies.yaml`; header-only (no truth leak)
+- [ ] main tables keep one representative per group (v3 §8); the rest go to the appendix equivalence plot
+## P0b Learner/RLAIF code audit (W-ALG, after P0)
+- [ ] confirm `train_cli` can train: PPO, BC, DAgger, DQN, RankNet, LambdaMART, SCOPE-PPO/DQN/LTR; add missing ones
+- [ ] RLAIF code for the edge simulator: Qwen pairwise/pointwise collector, Bradley–Terry reward model, SCOPE-AIF (i), (ii)
+- [ ] metric: `ctr_ungated` is the headline; u-gated columns removed from main tables (D5)
 
-## 4. Teammate SQ-GAN fine-tune (codec v1)
-READY as a scaffold, never run: `Notebooks/Edge/edge-sqgan-finetune-v1.ipynb`, hand-off in
-`docs/SQGAN_FINETUNE_HANDOFF.md`, class map in `config/edge/seg_classes.yaml` (rows marked `# DECISION:` need her call).
-Her output is a bundle dataset `satyapaladuguplus/scheduler-sqgan-v1`; we fill `config/edge/codec.yaml` (v1).
-Known risks: Places365 images are 256x256 and the trainer rejects parents under 256x512 (policy decision:
-drop or upscale); the fallback source dataset may lack SemanticLossless `src/`; `sqgan_payload.semantic_map` must
-call `seg_map.project_logits` for bundles that ship `seg_classes.yaml`.
-- [ ] pilot checks of the fine-tune plumbing pass
-- [ ] hand her the train-image list after splits are frozen; she trains and uploads; fill `codec.yaml`
-- [ ] re-run the feature pass with `codec=v1` (header version 2) and retrain learned policies
+## P0c SQ-GAN code fixes (worker W-SQ)
+- [ ] 3 failing tests: `test_skip_when_nothing_mounted` (pilot_checks), `test_discover_root`,
+      `test_obtain_source_pin_and_fallback` (sqgan_finetune: str + WindowsPath in pinned fetch)
+- [ ] commit the SQ-GAN source/mount edits (`--only-sqgan`, `--require-sqgan`, `find_dataset`, pinned-clone fallback) after edge tests pass
 
-## 5. Everything after (core first; extras only if time)
-- [ ] DINOv2 fidelity judge + 300-image human audit; receiver models; header v1 freeze (bit-depth test)
-- [ ] simulator sweep on validation: FIFO, EDF, SPI-first+EDF, M-LWDF, Whittle, EdgeServing, completion-aware DPP,
-  SV-DPP, one learner, genie reference; tune on validation only
-- [ ] test-event sweeps (frozen policy set), live 2xT4 check, codec v1 re-run
-- [ ] optional extras: MPC, MILP bound, SCOPE variants, DQN/LTR, RLAIF, JPEG ladder
+---
 
-## Status of code (all unit-tested on CPU, none run on Kaggle yet)
-Simulator, ~24 policies, SV-DPP, UE-side modules, SPI head, grid, learners, dataset A/B builders, feature pass,
-fine-tune scaffold, Kaggle tools (WSL + datasets), pilot orchestrator. Pilot checks are being added.
-Two old tests still fail on Windows (`test_handoff_tools`, `test_paired_notebook_capsules...`): preserved
-notebooks embed CRLF copies of sources; left untouched by design.
+# PHASE 1 — everything before scheduler training (Wednesday–Thursday)
+
+## S0 Verify & profile
+- [x] CrisisMMD v2, Places365, COCO built into dataset A (2.5 GB); notebook `dataset-semschedule` v2, all stages PASS
+- [x] val event: Sri Lanka 71 Critical -> California (D4)
+- [ ] read `counts.json`: test Critical >= 150, val Critical >= 100; record counts per split x tier here
+- [ ] SQ-GAN v0 pilot on T4 (second account): bundle restore, strict load, masker keys, latency **distribution** per B,
+      GFLOPs, VRAM -> `sqgan_v0_profile.json` (W-SQ)
+
+## S1 Raw labels
+- [x] tier mapping applied (dataset B, `config/edge/data.yaml`)
+
+## S2 UE features
+- [x] 5 encoders incl. CLIP-B/32, SimHash semantic key, relevance, pHash, SegFormer class maps (C1, 433 MB, 2 GPUs)
+
+## S2b Dedup & splits -> SPLITS FROZEN (worker W-DATA)
+- [ ] any val/test image with a near-duplicate (pHash + SimHash) in train is dropped from val/test (v3 rule)
+- [ ] event-disjoint splits; everyday images 60/10/30 after hash dedup
+- [ ] re-check gates after removal
+- [ ] publish `splits_v1.json` + removal report (plus account dataset)
+
+## S2c Duplicate pairs
+- [ ] ~400 candidate pairs (retweets + near matches) from train/val -> `dup_pairs_candidates.csv` (W-DATA)
+- [ ] TEAM labels duplicate/distinct (~1 h) -> `dup_pairs.csv`
+
+## S3 SPI
+- [x] grid 5 encoders x 5 classifier families ran (C_grid PASS)
+- [ ] read grid; choose the UE classifier (v3 locks CLIP-B/32 on the UE; switch only if the grid shows a clear gain at
+      UE cost); **gate: Critical recall on val >= 0.6**
+- [ ] calibration on val; "no normals" ablation; per-source report
+- [ ] κ agreement vs Qwen labels (uses the S9 collection)
+
+## S11→now: SQ-GAN fine-tune v1 (worker W-SQ, second account) — D7/D9
+- [ ] fine-tune pilot (tiny run): source fetch, data list, class map, trainer launch, checkpoint save
+- [ ] full fine-tune on train images only; bundle published as `satyapaladugu/scheduler-sqgan-v1`; fill `config/edge/codec.yaml` (v1)
+- [ ] adopt v1 only if LPIPS and recon mIoU improve over v0 on a val subset (D6)
+
+## S4 Codec table (v1) (W-SQ, second account)
+- [ ] full SQ-GAN pass with v1 over all images: STS (13), payload bytes at m 0.25/0.55, kept-token maps, decode latency
+      per B, LPIPS, recon mIoU -> `codec_v1_table`
+- [ ] v0-vs-v1 quality table on the val subset; masking-vs-YOLO evidence (kept tokens on crisis classes)
+- [ ] if reconstructions are unusable -> JPEG ladder becomes the primary codec (v3 S4 rule)
+
+## S5 Receiver models (W-DATA)
+- [ ] P(dup) logistic model on (semantic-key Hamming, perceptual-key Hamming) from `dup_pairs.csv`; cross-event key ROC
+
+## S6 Header -> HEADER FROZEN (W-DATA)
+- [x] pack/unpack/CRC (`parameters/edge/header64.py`)
+- [ ] bit-depth test on val: fewest bits with < 0.5% decision flips vs full precision; freeze `config/edge/header.yaml`
+
+## Simulator inputs (W-DATA; needs S2b, S3, S4, S5)
+- [ ] sim table per image: uid, split, event, true tier, calibrated SPI (out-of-fold for train), relevance, keys,
+      STS, payload bytes, capture time; latency CDF L(v1, B); publish as dataset
+- [ ] simulator smoke + sanity checks on a 200-row val slice (CPU)
+
+## S9 data: Qwen RLAIF collection (after S2b; train images only; either account)
+- [ ] Qwen pairwise + pointwise feedback; also gives the S3 κ labels; publish
+
+## BAR (all true before phase 2)
+- [ ] P0, P0b, P0c done; splits frozen; header frozen; codec_v1_table; sim table + latency CDF published;
+      Qwen feedback published; full edge test suite green on `main`
+
+---
+
+# PHASE 2 — scheduler phase, all at once (Friday)
+- [ ] S7 analytic policies (v3 line-up + P0) + SV-DPP tuned on val (V, w); genie; MILP bound on ~200-job traces
+- [ ] S8 learners: LambdaMART, RankNet, DQN, PPO, BC, DAgger, SCOPE-PPO/DQN/LTR; minimal proof experiment
+      (5 seeds, equal budgets, misspecified regimes: MMPP bursts, wrong σ_W, noisy SPI) — parallel notebooks, both accounts
+- [ ] S9 training: reward model, SCOPE-AIF (i) and (ii), evaluated on human labels
+- [ ] header proofs on val: field drop-out ablation; equal-bytes baseline (64 B thumbnail / embedding prefix);
+      dedup precision/recall; gap to genie; header overhead 64/(64+payload)
+- [ ] S10 freeze -> test sweeps (Maria + Mexico), c ∈ {1,2,4,6,8}, 10 realisations, bootstrap CIs; live 2×T4 check (c=2, KS test)
+- [ ] S12 paper: update `docs/paper/DRAFT_PAPER.md` from frozen results
+
+## Workers now
+| Worker | Model | Scope | Files it may touch |
+|---|---|---|---|
+| W-SQ | Sonnet low | P0c, S0 SQ-GAN pilot, fine-tune v1, S4 full pass, all SQ-GAN Kaggle ops (second account) | `Codec/`, `config/edge/{sqgan_finetune,codec,feature_pass,seg_classes}.yaml`, `scripts/edge/`, `Notebooks/Edge/*sqgan*`, SQ-GAN tests |
+| W-ALG | Sonnet low | P0, P0b | `Scheduler/`, `config/edge/policies.yaml`, `Evaluation/edge/{metrics,run_sweep}.py`, scheduler tests |
+| W-DATA | next, after W-ALG or in parallel when usage allows | S0 counts, S2b, S2c, S3, S5, S6, sim inputs | `parameters/edge/`, `Evaluation/edge/{tables,receiver_models}.py`, new data notebook |
+
+## User actions
+- [ ] make A, B, C1 Kaggle datasets (notebook -> Save Version -> "New dataset from output"), and make them readable
+      by the second account (public, or shared with `satyapaladugu`) — W-SQ needs them
+- [ ] TEAM: label ~400 duplicate pairs
+- [ ] approve merged-branch deletions and deleting `edge-labels-v1`
+- [ ] later: move Claude temp/config to D:
