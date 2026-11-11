@@ -48,3 +48,4 @@ Newest first. Keep rows short; link the commit or file where useful.
 - Check quoting and path rules for each shell (Git Bash rewrites `/home/...`; use PowerShell for `wsl`).
 - After editing a config that tracked files also contain, re-check it survived any bulk checkout.
 - Keep notebook logs short and readable; the user reads them on the Kaggle website.
+| Kaggle kernel title did not slugify to the id (Edge Qwen feedback (S9 ...)), so the first push created a second kernel edge-qwen-feedback-s9-data-s3-kappa-labels | Keep the title equal to the slug words (Edge Qwen Feedback); read the push warning about the title before polling |

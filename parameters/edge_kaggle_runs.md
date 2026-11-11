@@ -1,4 +1,4 @@
-# Edge Kaggle runs
+﻿# Edge Kaggle runs
 
 | step | account | slug | version | git SHA | utc |
 |---|---|---|---|---|---|
@@ -8,3 +8,4 @@
 | dataset-semschedule-a | wsl | satyapaladuguplus/dataset-semschedule-a | 1 | b876215cc46c654b3790922dc12bcc1371608476 | 2026-11-11T00:52:15Z |
 | dataset-semschedule | wsl | satyapaladuguplus/dataset-semschedule | 1 | 54a084cba7eefbcec93968eb7fe370fc34964f7b | 2026-11-11T01:05:13Z |
 | dataset-semschedule | wsl | satyapaladuguplus/dataset-semschedule | 2 | b03d7a45ec6803fb0c0ec80eb963d4b3585e13cc | 2026-11-11T01:29:21Z |
+| edge-qwen-feedback | wsl | satyapaladuguplus/edge-qwen-feedback-s9-data-s3-kappa-labels (title-slug mistake, pilot) | 1 | 08816e8c9cb676e9dd264592fcb7b1e2778dfcb4 | 2026-11-11T14:35:13Z |

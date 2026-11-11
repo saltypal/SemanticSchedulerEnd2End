@@ -1,4 +1,4 @@
-"""Emit Notebooks/Edge/edge-qwen-feedback.ipynb (+ kernel metadata): Qwen2.5-VL AI feedback on train images.
+﻿"""Emit Notebooks/Edge/edge-qwen-feedback.ipynb (+ kernel metadata): Qwen2.5-VL AI feedback on train images.
 
 Thin notebook: clone main, install what is missing, run ``python -m Scheduler.training.edge.qwen_feedback``.
 Account `wsl` (satyapaladuguplus), T4 x2, internet on (model download from Hugging Face). Never pushes anything.
@@ -9,7 +9,7 @@ from pathlib import Path
 from scripts.edge import build_notebook as bn
 
 STEP = "edge-qwen-feedback"
-TITLE = "Edge Qwen feedback (S9 data + S3 kappa labels)"
+TITLE = "Edge Qwen Feedback"  # must slugify to the kernel id, else Kaggle creates a new kernel
 DATASET_SOURCES = ("satyapaladuguplus/scheduler-dataset-v1-images", "satyapaladuguplus/scheduler-dataset-v1-labels")
 REQUIREMENTS = ("transformers>=4.49.0", "accelerate", "bitsandbytes>=0.43.0", "PyYAML")
 ENTRY = "Scheduler.training.edge.qwen_feedback"
