@@ -8,6 +8,9 @@ SQGAN_SOURCES = {"satyapaladuguplus/semantic-scheduler-sqgan-bundle-20261102",
                  "satyapaladuguplus/semantic-lossless-private-sqgan-assets"}
 
 
+AB_PUBLIC = {"satyapaladuguplus/scheduler-dataset-v1-images", "satyapaladuguplus/scheduler-dataset-v1-labels"}
+
+
 def _src(nb):
     return "\n".join("".join(c["source"]) for c in nb["cells"])
 
@@ -32,8 +35,9 @@ def test_metadata_notebook2_sqgan():
     assert meta["id"] == "satyapaladuguplus/dataset-semschedule-sqgan" and meta["title"] == "Dataset SemSchedule Sqgan"
     assert _slug_ok(meta) and meta["code_file"] == "dataset-semschedule-sqgan.ipynb"
     assert meta["enable_gpu"] is True and meta["machine_shape"] == "NvidiaTeslaT4"
-    assert set(meta["dataset_sources"]) == SQGAN_SOURCES and len(meta["dataset_sources"]) == 3
-    assert meta["kernel_sources"] == ["satyapaladuguplus/dataset-semschedule"]
+    assert set(meta["dataset_sources"]) == SQGAN_SOURCES | AB_PUBLIC and len(meta["dataset_sources"]) == 5
+    assert meta["kernel_sources"] == []
+    assert mk.build(which="sqgan", account="win")[1]["id"] == "satyapaladugu/dataset-semschedule-sqgan"
     text = _src(nb)
     assert "'--which', 'sqgan'" in text and "dataset-semschedule" in text
 
@@ -50,7 +54,7 @@ def test_mode_default_and_full(tmp_path):
     nb2 = json.loads((tmp_path / "dataset-semschedule-sqgan.ipynb").read_text())
     assert "'--mode', 'full'" in _src(nb2) and "'--which', 'sqgan'" in _src(nb2)
     meta2 = json.loads((tmp_path / "dataset-semschedule-sqgan.kernel-metadata.json").read_text())
-    assert meta2["kernel_sources"] == ["satyapaladuguplus/dataset-semschedule"]
+    assert meta2["kernel_sources"] == []
 
 
 def test_cells_are_quiet_and_collect_outputs():

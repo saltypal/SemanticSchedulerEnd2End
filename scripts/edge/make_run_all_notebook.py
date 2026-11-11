@@ -1,7 +1,7 @@
 """Emit the two dataset notebooks (+ kernel metadata) into Notebooks/Edge/.
 
 ``--which ab-embed`` (default): ``dataset-semschedule`` = datasets A, B, embeddings cache C and the grid.
-``--which sqgan``: ``dataset-semschedule-sqgan`` = the SQ-GAN pass; reads A and B from the output of the first.
+``--which sqgan``: ``dataset-semschedule-sqgan`` = the SQ-GAN pass; reads A and B from the public datasets (no kernel source).
 
 Thin notebooks: clone, quiet install, ``python -m parameters.edge.run_all --which W --mode <MODE>``, then copy
 the report, summary and logs to /kaggle/working top level. Regenerate the full run with ``--mode full``.
@@ -25,7 +25,9 @@ WORK = "/kaggle/working/run"
 _DATA = load_config("data")
 DATASET_SOURCES = (_DATA["crisismmd"]["kaggle_dataset"], _DATA["normals"]["places365_kaggle_dataset"],
                    _DATA["normals"]["coco_kaggle_dataset"])             # notebook 1: no SQ-GAN datasets
-SQGAN_SOURCES = tuple(s for s in _FT_SOURCES if "sqgan" in s)            # notebook 2: source, assets, bundle
+SQGAN_SOURCES = tuple(s for s in _FT_SOURCES if "sqgan" in s)            # source, assets, bundle
+# notebook 2 reads A and B from the PUBLIC datasets (the second account cannot read notebook 1 private output)
+SQGAN_NB_SOURCES = tuple(s for s in _FT_SOURCES if "dataset-v1" in s) + SQGAN_SOURCES
 REQUIREMENTS = ("pytorch-lightning==1.9.5", "torchmetrics==0.11.4", "transformers==4.46.3", "scipy", "omegaconf",
                 "pytorch-msssim==1.0.0", "lpips==0.1.4", "PyYAML", "einops", "pillow")
 
@@ -62,16 +64,14 @@ def build(mode=None, branch="main", account=None, which="ab-embed"):
     args = ["--which", which, "--mode", mode, "--work", WORK]
     nb = bn.build_notebook(step, ENTRY, args, title, cfg["repo_url"], branch, REQUIREMENTS, True)
     what = ("Datasets A (images), B (labels) and C embeddings cache + grid" if which == "ab-embed" else
-            "SQ-GAN pass over dataset A and B read from the output of notebook `%s` (run that one first)" % STEP)
+            "SQ-GAN pass over dataset A and B read from the public datasets scheduler-dataset-v1-images / -labels")
     nb["cells"][0] = bn._md("# %s\n\n%s, mode `%s`. Logic lives in `%s`.\n" % (title, what, mode, ENTRY))
     nb["cells"][4] = bn._code(RUN.format(argv=["python", "-u", "-m", ENTRY, *args]))
     nb["cells"] += [bn._md("## Collect outputs\n\nReport, summary and logs are copied to the top level of /kaggle/working.\n"),
                     bn._code(COLLECT.format(work=WORK))]
     account = account or cfg.get("default_account", "wsl")
-    sources = DATASET_SOURCES if which == "ab-embed" else SQGAN_SOURCES
+    sources = DATASET_SOURCES if which == "ab-embed" else SQGAN_NB_SOURCES
     meta = bn.build_metadata(cfg, account, step, title, True, sources)
-    if which == "sqgan":
-        meta["kernel_sources"] = ["%s/%s" % (meta["id"].split("/")[0], bn.kernel_slug(cfg, STEP))]
     meta["machine_shape"] = "NvidiaTeslaT4"        # T4 x2, same key as the fine-tune notebook
     return nb, meta
 
@@ -81,9 +81,10 @@ def main(argv=None):
     ap.add_argument("--which", choices=tuple(WHICH), default="ab-embed")
     ap.add_argument("--mode", choices=("pilot", "full"), default=MODE)
     ap.add_argument("--branch", default="main")
+    ap.add_argument("--account", default=None, help="key of config/edge/kaggle.yaml accounts (default: default_account)")
     ap.add_argument("--out-dir", default=str(bn.OUT_DIR))
     a = ap.parse_args(argv)
-    nb, meta = build(a.mode, a.branch, which=a.which)
+    nb, meta = build(a.mode, a.branch, account=a.account, which=a.which)
     for p in bn.write_outputs(nb, meta, WHICH[a.which][0], Path(a.out_dir)):
         print(p)
 
