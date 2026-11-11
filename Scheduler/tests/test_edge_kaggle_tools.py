@@ -197,3 +197,10 @@ def test_titles_roundtrip_and_sources():
                                     "awsaf49/coco-2017-dataset"]   # CrisisMMD + Places365 + COCO inputs
     assert a["enable_internet"] is True
     assert b["kernel_sources"] == ["satyapaladuguplus/edge-a-download-images"] and b["dataset_sources"] == []
+
+
+def test_kernel_slug_is_not_double_prefixed():
+    from scripts.edge import build_notebook as bn
+    cfg = {"slug_prefix": "edge-"}
+    assert bn.kernel_slug(cfg, "edge-pilot") == "edge-pilot"
+    assert bn.kernel_slug(cfg, "s1-dataset") == "edge-s1-dataset"

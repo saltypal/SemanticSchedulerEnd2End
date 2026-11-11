@@ -137,7 +137,9 @@ def load_kaggle_config(path=CONFIG):
 
 
 def kernel_slug(cfg, step_id):
-    return f"{cfg.get('slug_prefix', 'edge-')}{step_id}"
+    """Step ids that already start with the prefix (e.g. edge-pilot) are not prefixed twice."""
+    prefix = cfg.get("slug_prefix", "edge-")
+    return step_id if step_id.startswith(prefix) else f"{prefix}{step_id}"
 
 
 def build_metadata(cfg, account, step_id, title, needs_gpu=True, dataset_sources=(), kernel_sources=()):

@@ -5,6 +5,7 @@ Newest first. Keep rows short; link the commit or file where useful.
 
 | # | Date | What went wrong | Root cause | Fix | Status |
 |---|---|---|---|---|---|
+| 26 | 2026-11-11 | Pushing notebook A failed with `409 Conflict` and the title warning; pilot staged as `edge-edge-pilot` | `kernel_slug` added the `edge-` prefix to step names that already start with `edge-`, so the id (edge-edge-...) never matched the title-derived slug | step ids that already carry the prefix are not prefixed again; test added; stale staging folder cleared | FIXED |
 | 25 | 2026-11-11 | Back-and-forth on COCO people photos in dataset A | scope changed twice mid-task (added, asked to remove, then asked to keep) | final decision: keep COCO people (Kaggle) + Places365 (Kaggle, all Low) + CrisisMMD; Open Images dropped | FIXED (decision) |
 | 24 | 2026-11-11 | Kaggle notebook A stopped at `pip install -e .`: "requires a different Python: 3.13.18 not in '<3.13,>=3.12'" | `pyproject.toml` pins `requires-python >=3.12,<3.13`; Kaggle runs 3.13 | install cell adds `--ignore-requires-python` (no change to repo metadata) | FIXING |
 | 23 | 2026-11-11 | Notebook log unreadable: ~18,000 `git clone` "Updating files" lines, pip spinner codes, debugger and nbformat warnings | clone/pip not run quiet; no env flags | quiet clone (`-q`), pip `-q` with output to a file, `PYDEVD_DISABLE_FILE_VALIDATION=1`, `PYTHONWARNINGS=ignore`; shared log helper planned | FIXING |
