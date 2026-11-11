@@ -19,7 +19,7 @@ def tier(**kw):
     (dict(humanitarian="missing_or_found_people", informative="informative"), "Critical"),
     (dict(damage="mild_damage"), "High"),
     (dict(humanitarian="vehicle_damage"), "High"),
-    (dict(humanitarian="affected_individuals"), "High"),
+    (dict(humanitarian="affected_individuals", informative="informative"), "Medium"),   # plan v3 sec. 3
     (dict(damage="little_or_no_damage"), "Medium"),
     (dict(humanitarian="other_relevant_information", informative="informative"), "Medium"),
     (dict(humanitarian="rescue_volunteering_or_donation_effort", informative="informative"), "Medium"),
@@ -51,10 +51,20 @@ def test_conflicting_labels_are_flagged_and_take_the_most_severe():
 
 
 def test_alternative_mapping_promotes_affected_individuals():
+    """Plan v3 sec. 3: affected_individuals is Medium in the main mapping and High in the sensitivity mapping."""
     cfg = labels.load_config("data")
-    alt = labels._rules(cfg["tier_rules"], "affected_critical", cfg["alternative_mappings"])
-    assert labels.assign_tier({"humanitarian": {"affected_individuals"}}, alt)[0] == "Critical"
-    assert labels.assign_tier({"humanitarian": {"affected_individuals"}}, RULES)[0] == "High"
+    alt = labels._rules(cfg["tier_rules"], "affected_high", cfg["alternative_mappings"])
+    lab = {"humanitarian": {"affected_individuals"}, "informative": {"informative"}}
+    assert labels.assign_tier(lab, alt)[0] == "High"
+    assert labels.assign_tier(lab, RULES)[0] == "Medium"
+
+
+def test_retier_rows_only_changes_crisismmd():
+    rows = [{"source": "crisismmd", "tier": "High", "damage": [], "humanitarian": ["affected_individuals"],
+             "informative": ["informative"], "flags": []},
+            {"source": "places365", "tier": "Low", "damage": [], "humanitarian": [], "informative": [], "flags": []}]
+    out, changed = labels.retier_rows(rows)
+    assert [r["tier"] for r in out] == ["Medium", "Low"] and changed == {("High", "Medium"): 1}
 
 
 def test_normals_are_low_and_blacklist_is_dropped():

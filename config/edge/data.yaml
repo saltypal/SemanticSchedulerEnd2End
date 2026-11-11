@@ -11,20 +11,23 @@ tier_rules:
   Critical:
     damage: [severe_damage]
     humanitarian: [injured_or_dead_people, missing_or_found_people]   # life-safety override
+  # Only 3,526 of 18,082 CrisisMMD images carry a damage label, so humanitarian labels fill in (plan v3 sec. 3 is
+  # stated on damage labels): infrastructure/vehicle damage count as High (damage seen, severity unknown).
   High:
     damage: [mild_damage]
-    humanitarian: [affected_individuals, infrastructure_and_utility_damage, vehicle_damage]
+    humanitarian: [infrastructure_and_utility_damage, vehicle_damage]
   Medium:
     damage: [little_or_no_damage]
-    humanitarian: [rescue_volunteering_or_donation_effort, other_relevant_information]
+    # affected_individuals is Medium here and High only in the v3 sensitivity mapping below (aligned 2026-11-11)
+    humanitarian: [affected_individuals, rescue_volunteering_or_donation_effort, other_relevant_information]
     requires_informative: true     # Medium via humanitarian needs informative == informative
   Low:
     default: true                  # not informative / not_humanitarian / unmatched
 
-# Sensitivity mapping (reported in an appendix): affected_individuals promoted to Critical.
+# Sensitivity mapping (plan v3 sec. 3, reported in an appendix): affected_individuals -> High.
 alternative_mappings:
-  affected_critical:
-    Critical:
+  affected_high:
+    High:
       humanitarian_add: [affected_individuals]
 
 normals:

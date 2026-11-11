@@ -1,0 +1,42 @@
+# Mission registry (plan v3 sec. 2: set by the near-RT RIC xApp; header field "mission profile id", 2 bytes).
+# Relevance (header byte 19) = (cos(CLIP image, mission text) + 1) / 2, with the mission text embedding = the
+# L2-normalised mean of the prompts below, encoded by the SAME model as the cached image embeddings
+# (openai/clip-vit-base-patch32, text tower + text projection). Decision D15: relevance is precomputed for every
+# (image, mission) pair and stored as `relevance_by_mission`; the simulator picks the column of each UE's mission.
+model: openai/clip-vit-base-patch32
+missions:
+  - id: 0
+    name: general
+    prompts:
+      - "a photo of an emergency or disaster scene"
+      - "a photo showing people who need help after a disaster"
+      - "a photo of damage caused by a natural disaster"
+  - id: 1
+    name: flood_storm
+    prompts:
+      - "a photo of a flooded street after a hurricane"
+      - "a photo of storm damage to houses and power lines"
+      - "a photo of people being rescued from flood water"
+  - id: 2
+    name: wildfire
+    prompts:
+      - "a photo of a wildfire burning near homes"
+      - "a photo of houses destroyed by fire"
+      - "a photo of smoke and flames from a forest fire"
+  - id: 3
+    name: earthquake
+    prompts:
+      - "a photo of buildings collapsed by an earthquake"
+      - "a photo of rubble and cracked roads after an earthquake"
+      - "a photo of rescuers searching collapsed buildings"
+# Default mission of each image = the mission of the UEs reporting its event. Everyday images (no event) default to
+# `general`; a sweep realisation may reassign them to the mission of the UE stream they are mixed into.
+event_mission:
+  hurricane_harvey: flood_storm
+  hurricane_irma: flood_storm
+  hurricane_maria: flood_storm
+  srilanka_floods: flood_storm
+  california_wildfires: wildfire
+  iraq_iran_earthquake: earthquake
+  mexico_earthquake: earthquake
+everyday_mission: general

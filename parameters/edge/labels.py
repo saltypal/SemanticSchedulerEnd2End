@@ -109,6 +109,27 @@ def label_table(records, alternative=None, cfg=None):
     return rows
 
 
+def retier_rows(rows, alternative=None, cfg=None):
+    """Recompute ``tier``/``flags`` of CrisisMMD rows from their stored label lists (B rows), after a rule change.
+
+    Non-CrisisMMD rows keep their source tier. Returns (new rows, Counter of (old, new) tier changes).
+    """
+    from collections import Counter
+    cfg = cfg or load_config("data")
+    rules = _rules(cfg["tier_rules"], alternative, cfg.get("alternative_mappings"))
+    out, changed = [], Counter()
+    for r in rows:
+        r = dict(r)
+        if r.get("source") == "crisismmd":
+            lab = {k: set(r.get(k) or ()) for k in ("damage", "humanitarian", "informative")}
+            tier, flags = assign_tier(lab, rules)
+            if tier != r["tier"]:
+                changed[(r["tier"], tier)] += 1
+            r["tier"], r["flags"] = tier, flags
+        out.append(r)
+    return out, changed
+
+
 def normal_rows(items, source, cfg=None):
     """Everyday images are Low by rule. ``items``: iterable of dicts with ``path`` and optional
     ``category``. Places365 categories on the blacklist are dropped (damage look-alikes)."""

@@ -2483,3 +2483,39 @@ Decision: CLIP-B/32 logistic C=1 stays (plan v3 locks CLIP-B/32 on the UE). Vers
 already produces the SimHash semantic key and relevance. All candidates above pass the 0.6 Critical-recall gate except
 DINOv2-small. Remaining S3 work: calibration on the frozen val, out-of-fold train posteriors, no-normals ablation,
 per-source report.
+
+## 2026-11-11 (night) Tier mapping aligned with v3, final SPI head, relevance, simulator table
+
+**Tier mapping (D16).** Audit against plan v3 sec. 3: affected_individuals was High in the main mapping; v3 makes it
+High only as a sensitivity mapping. Aligned: affected_individuals -> Medium (needs informative), `affected_high`
+sensitivity mapping -> High. 509 images moved (437 High -> Medium, 72 High -> Low: not informative). Critical unchanged.
+Only 3,526 of 18,082 CrisisMMD images carry a damage label; humanitarian labels fill in for the rest (infrastructure /
+vehicle damage -> High). Dataset B republished with the v3 tiers.
+
+**Final SPI head (S3).** CLIP-B/32 logistic C=1, class-balanced, trained on train (15,974), temperature 0.95 on val,
+5-fold out-of-fold scores for train rows (so the simulator never sees over-confident train posteriors). Test not scored.
+
+| Metric (val, 2,485 images) | Value |
+|---|---|
+| macro-F1 | 0.567 |
+| Critical recall / precision | 0.818 / 0.683 |
+| High recall / precision | 0.079 / 0.141 |
+| Medium recall / precision | 0.534 / 0.545 |
+| Low recall / precision | 0.875 / 0.893 |
+| ECE (calibrated) | 0.024 |
+| CrisisMMD-only macro-F1 / Critical recall | 0.519 / 0.818 |
+| Everyday images predicted Low (COCO / Places365) | 98.6 % / 98.7 % |
+| No-normals ablation: false Critical on everyday val | 1.1 % without normals, 0.5 % with |
+| Train out-of-fold macro-F1 / Critical recall | 0.678 / 0.745 |
+
+Reading: Critical detection does not rely on the everyday-image shortcut (same 0.818 on CrisisMMD only). High is the
+confused middle tier on the California event (139 High images) — reported as a limitation; schedulers use the posterior.
+
+**Relevance (D15).** `config/edge/missions.yaml`: general, flood_storm, wildfire, earthquake; 3 prompts each, mean
+CLIP-B/32 text embedding (same model as the image embeddings). relevance = (cos + 1)/2, range 0.52–0.68 (CLIP cosines are
+compressed): the u8 header field uses ~40 of 256 levels; scaling is decided in the S6 bit-depth test.
+
+**Simulator table (`parameters/edge/simtable.py`, dataset `scheduler-dataset-v1-simtable`).** 27,044 rows (frozen
+splits), one per image: true tier (v3) and sensitivity tier, calibrated SPI, mission and relevance per mission, SimHash,
+pHash, duplicate group (D14 rule, 760 groups over 1,965 images), tweet-time capture for CrisisMMD (null for 9,080 everyday
+images), fidelity = 1 (D5). STS and payload bytes are placeholders (empty / 464 B) until the SQ-GAN v1 pass.
