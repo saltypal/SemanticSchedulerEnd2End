@@ -4,3 +4,11 @@ main_table: [fifo, random, rr_mission, edf, tuf_dasa, spi_first_edf, priority_ag
              sv_dpp]
 equivalence_appendix: [llf, lelf, exp_rule, dapf, pf_mission, gen_cmu]
 references: [genie_sv_dpp]
+# P0 extended line-up (header-only); not part of main_table. One representative per family goes to main tables.
+extended: [d_over, hvdf, edf_triage, lcfs_priority, drr_tiers, max_weight, max_age, whittle_aoi,
+           clipper_aimd, clockwork, shepherd_nexus, cvar_spi, linucb]
+ext_value_deadline: [d_over, hvdf, edf_triage]
+ext_fair_queueing: [lcfs_priority, drr_tiers, max_weight]
+ext_age: [max_age, whittle_aoi]
+ext_batching: [clipper_aimd, clockwork, shepherd_nexus]
+ext_risk_learning: [cvar_spi, linucb]

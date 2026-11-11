@@ -26,8 +26,12 @@ def timely_by_tier(result):
     return out
 
 
+HEADLINE = "ctr_ungated"   # decision D5: fidelity is dropped, so the headline metric is not u-gated
+
+
 def ctr(result, gated):
-    """Critical timely rate: true-Critical decoded within D_C; ``gated`` also requires u == 1."""
+    """Critical timely rate: true-Critical decoded within D_C; ``gated`` (legacy, not reported in the
+    main summary) also requires u == 1."""
     d0 = result.spec.soft_deadline[0]
     crit = [r for r in result.measured() if r["tier"] == 0]
     ok = [r["status"] == "decoded" and r["delay"] <= d0 and (r["u"] == 1 or not gated)
@@ -95,12 +99,11 @@ def decision_time_summary(result):
 
 
 def summarize(result, reference=None):
-    return dict(timely=timely_by_tier(result), ctr_gated=ctr(result, True),
-                ctr_ungated=ctr(result, False), value=normalised_value(result, reference),
+    return dict(timely=timely_by_tier(result), ctr_ungated=ctr(result, False), value=normalised_value(result, reference),
                 value_per_gpu_s=value_per_gpu_second(result), p95_sojourn=p95_sojourn(result),
                 low_starvation=low_starvation(result), redundant_per_100=redundant_per_100(result),
                 false_purges=false_purges(result), by_source=breakdown(result, "source"),
-                by_event=breakdown(result, "event"), by_u=breakdown(result, "u"),
+                by_event=breakdown(result, "event"),
                 decision_time=decision_time_summary(result))
 
 

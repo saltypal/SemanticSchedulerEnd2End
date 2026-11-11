@@ -45,8 +45,8 @@ def test_one_entry_per_cell_with_finite_metrics():
     keys = {(c["policy"], c["workers"], c["rho"]) for c in res["cells"]}
     assert len(keys) == 8
     for c in res["cells"]:
-        assert math.isfinite(c["ctr_gated"]) and math.isfinite(c["value"])
-        lo, hi = c["ci95"]["ctr_gated"]
+        assert math.isfinite(c["ctr_ungated"]) and math.isfinite(c["value"])
+        lo, hi = c["ci95"]["ctr_ungated"]
         assert math.isfinite(lo) and lo <= hi
     assert res["config"]["n_images"] == 50
 
@@ -77,3 +77,10 @@ def test_val_tuning_records_grid(tmp_path):
     assert out["best_V"] in (0.5, 2.0)
     run_sweep.save_results(sweep(), tmp_path / "r.json")
     assert (tmp_path / "r.json").stat().st_size > 0
+
+
+def test_headline_is_ungated_and_gated_columns_dropped():
+    from Evaluation.edge import metrics
+    cell = sweep(policies=["fifo"], workers=[1], rhos=[1.0], realisations=1)["cells"][0]
+    assert metrics.HEADLINE == "ctr_ungated" and "ctr_ungated" in cell
+    assert "ctr_gated" not in cell and "ctr_gated" not in cell["ci95"]

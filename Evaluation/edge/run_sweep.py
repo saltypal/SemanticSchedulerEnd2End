@@ -21,7 +21,7 @@ from Evaluation.edge.env import EdgeEnv
 from Evaluation.edge.receiver import Receiver
 from Scheduler.edge import registry
 
-SCALARS = ("ctr_gated", "ctr_ungated", "value", "value_per_gpu_s", "low_starvation",
+SCALARS = ("ctr_ungated", "value", "value_per_gpu_s", "low_starvation",
            "redundant_per_100")
 NAN = float("nan")
 
@@ -50,12 +50,12 @@ def _build_policy(name, kwargs, truth_by_id):
     return factory(**kwargs)
 
 
-def _ctr_rows(rows, d0, gated):
+def _ctr_rows(rows, d0):
     crit = [r for r in rows if r["tier"] == 0]
     if not crit:
         return NAN
     return float(np.mean([r["status"] == "decoded" and r["delay"] <= d0
-                          and (r["u"] == 1 or not gated) for r in crit]))
+                          for r in crit]))
 
 
 def _mean(vals):
@@ -104,9 +104,8 @@ def run_cell(rows, latency, spec, policy, kwargs, workers, rho, realisations, ba
     ci = {}
     if pooled:
         has_crit = any(r["tier"] == 0 for r in pooled)
-        for name, gated in (("ctr_gated", True), ("ctr_ungated", False)):
-            ci[name] = (metrics.bootstrap_ci(pooled, lambda s, g=gated: _ctr_rows(s, d0, g),
-                                             n_boot, rng) if has_crit else (NAN, NAN))
+        ci["ctr_ungated"] = (metrics.bootstrap_ci(pooled, lambda s: _ctr_rows(s, d0), n_boot, rng)
+                             if has_crit else (NAN, NAN))
         ci["value_per_image"] = metrics.bootstrap_ci(
             pooled, lambda s: float(np.mean([r["value"] for r in s])), n_boot, rng)
     cell["ci95"] = {k: list(v) for k, v in ci.items()}
@@ -142,11 +141,11 @@ def run_sweep(rows, latency, split, policies, workers, rhos, realisations, base_
 
 def val_tuning(rows, latency, v_grid, workers=2, rho=1.0, realisations=3, base_seed=0,
                max_batch=None, spec=None, n_boot=200, split="val", tables=None):
-    """Grid-search the V of SV-DPP on ``split``; best = highest gated CTR@D. Records every point."""
+    """Grid-search the V of SV-DPP on ``split``; best = highest CTR@D (ctr_ungated, the headline metric). Records every point."""
     rows, spec, max_batch = _setup(rows, latency, split, spec, max_batch)
     points = [run_cell(rows, latency, spec, "sv_dpp", dict(V=float(v)), workers, rho, realisations,
                        base_seed, max_batch, None, 0.0, n_boot, tables) for v in v_grid]
-    best = max(points, key=lambda c: -math.inf if math.isnan(c["ctr_gated"]) else c["ctr_gated"])
+    best = max(points, key=lambda c: -math.inf if math.isnan(c["ctr_ungated"]) else c["ctr_ungated"])
     return dict(best_V=best["kwargs"]["V"], best=best, grid=points, workers=workers, rho=rho,
                 split=split)
 

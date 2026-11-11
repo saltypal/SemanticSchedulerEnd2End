@@ -101,3 +101,90 @@ def train_dagger(env_factory, teacher, iters=3, episodes=2, epochs=30, lr=1e-2, 
         losses = bc_fit(model, data, epochs, lr)
         history.append(dict(iter=it, mean_reward=float(np.mean(rew)), n_samples=len(data), bc_loss=losses[-1]))
     return model, history
+
+
+# ---- v3 learners wired into train_cli: DQN, SCOPE-DQN, LTR (LambdaMART / RankNet), SCOPE-LTR ----
+
+def train_dqn_plain(env_factory, episodes=6, seed=0, hidden=32, **kw):
+    """Plain double-DQN, no teacher (margin loss off). Returns (model, history)."""
+    from Scheduler.training.edge import dqn
+    return dqn.train_dqn(env_factory, episodes, teacher=None, hidden=hidden, seed=seed, **kw)
+
+
+def train_scope_dqn(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32, lambda_lr=0.05, **kw):
+    """SCOPE-DQN: DQfD margin loss against ``teacher`` (annealed beta) + dual-updated tier penalties.
+
+    Each outer iteration trains ``episodes`` episodes with the current lambdas, then measures per-tier
+    timely success of the greedy policy on one fresh episode and applies the dual update."""
+    from Scheduler.training.edge import dqn
+    from Scheduler.training.edge.rollout import tier_success_rates
+    lam, model, history = np.zeros(4), None, []
+    etas = tuple(env_factory(seed).spec.eta)
+    for it in range(iters):
+        model, h = dqn.train_dqn(lambda e, it=it: env_factory(seed + it * episodes + e), episodes,
+                                 teacher=teacher, model=model, hidden=hidden, margin_weight=1.0,
+                                 beta_k=500.0, lambdas=tuple(lam), eps_start=0.5, seed=seed + it, **kw)
+        env = env_factory(seed + 1000 + it)
+        res = env.run(dqn.DQNPolicy(model))
+        j = tier_success_rates(res.measured() or res.outcomes, env.spec)
+        lam = dual_update(lam, j, etas, lambda_lr)
+        history.append(dict(iter=it, lambdas=lam.tolist(), tier_success=j.tolist(), loss=h[-1]["loss"]))
+    return model, history
+
+
+def _teacher_episodes(env_factory, teacher, episodes, seed):
+    from Scheduler.training.edge.reward_attribution import LoggingPolicy
+    out = []
+    for e in range(episodes):
+        pol = LoggingPolicy(teacher)
+        out.append((pol, env_factory(seed + e).run(pol)))
+    return [(p.records, r.outcomes) for p, r in out]
+
+
+def train_ltr(env_factory, teacher, ranker="lambdamart", episodes=4, seed=0, **kw):
+    """Learning to rank on the realised values of the teacher's decisions.
+
+    ``ranker`` is 'lambdamart' (lightgbm, else sklearn pointwise fallback) or 'ranknet'."""
+    from Scheduler.training.edge import ltr
+    data = ltr.build_ranking_dataset(_teacher_episodes(env_factory, teacher, episodes, seed))
+    if ranker == "ranknet":
+        model = ltr.train_ranknet(data, seed=seed, **kw)
+    elif ranker == "lambdamart":
+        model = ltr.train_lambdamart(data, seed=seed, **kw)
+    else:
+        raise ValueError("ranker must be lambdamart or ranknet")
+    return model, [dict(iter=0, ranker=ranker, n_rows=int(len(data["y"])), n_groups=int(len(data["group"])))]
+
+
+def train_scope_ltr(env_factory, teacher, iters=3, episodes=3, epochs=30, lr=1e-2, lambda_lr=0.05, hidden=32,
+                    seed=0):
+    """SCOPE-LTR: RankNet scorer fitted with the Lagrangian-reweighted ListNet distillation loss towards
+    the teacher's batch choices; lambdas follow a dual update from the scorer's own greedy rollout."""
+    from Scheduler.training.edge import ltr
+    from Scheduler.training.edge.rollout import tier_success_rates
+    torch.manual_seed(seed)
+    recs = [r for rs, _ in _teacher_episodes(env_factory, teacher, episodes, seed) for r in rs]
+    if not recs:
+        raise ValueError("teacher produced no decisions")
+    model = ltr.RankNet(recs[0].job_x.shape[1] + recs[0].glob.shape[0], hidden)
+    opt = torch.optim.Adam(model.net.parameters(), lr=lr)
+    etas = tuple(env_factory(seed).spec.eta)
+    lam, history = np.zeros(4), []
+    for it in range(iters):
+        for _ in range(epochs):
+            loss = 0.0
+            for r in recs:
+                x = torch.as_tensor(ltr._x(r.job_x, r.glob), dtype=torch.float32)
+                t = torch.zeros(len(r.ids))
+                t[list(r.idx)] = 3.0
+                loss = loss + ltr.listwise_distill_loss(model.net(x).squeeze(-1), t, lam, r.job_x[:, :4])
+            loss = loss / len(recs)
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
+        env = env_factory(seed + 1000 + it)
+        res = env.run(ltr.LTRPolicy(model))
+        j = tier_success_rates(res.measured() or res.outcomes, env.spec)
+        lam = dual_update(lam, j, etas, lambda_lr)
+        history.append(dict(iter=it, loss=float(loss.detach()), lambdas=lam.tolist(), tier_success=j.tolist()))
+    return model, history
