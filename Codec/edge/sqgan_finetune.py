@@ -13,7 +13,6 @@ import json
 import shutil
 import subprocess
 import sys
-import zipfile
 from pathlib import Path
 
 import yaml
@@ -46,7 +45,7 @@ def load_config(path, overrides=()):
     return cfg
 
 
-def discover_root(search_root, marker, depth=3):
+def discover_root(search_root, marker, depth=5):
     """Folder under ``search_root`` (<= ``depth`` levels deep) that directly contains ``marker``."""
     base = Path(search_root)
     hits = []
@@ -203,21 +202,27 @@ def _git(args, cwd=None):
     return subprocess.run(["git", *args], cwd=cwd, check=True, capture_output=True, text=True).stdout.strip()
 
 
+def fetch_pinned(source_cfg, dest, git=_git):
+    """Quiet shallow clone of ``repo_url`` into ``dest`` at ``pinned_commit``; returns dest (HEAD verified)."""
+    dest, pin = Path(dest), source_cfg["pinned_commit"]
+    if not (dest / ".git").is_dir():
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        git(["clone", "-q", "--no-progress", "--no-checkout", source_cfg["repo_url"], str(dest)])
+    git(["fetch", "-q", "--depth", "1", "origin", pin], str(dest))
+    git(["checkout", "-q", pin], str(dest))
+    head = git(["rev-parse", "HEAD"], str(dest))
+    if head != pin:
+        raise RuntimeError("checked out %s, wanted %s" % (head, pin))
+    return dest
+
+
 def obtain_source(cfg, git=_git):
     """Clone Semantic_Lossless at the pinned commit; fall back to a Kaggle copy. Returns (path, banner)."""
     s, dest = cfg["source"], Path(cfg["source"]["local_dir"])
     pin = s["pinned_commit"]
     try:
-        if not (dest / ".git").is_dir():
-            dest.mkdir(parents=True, exist_ok=True)
-            git(["init", "-q"], dest)
-            git(["remote", "add", "origin", s["repo_url"]], dest)
-        git(["fetch", "-q", "--depth", "1", "origin", pin], dest)
-        git(["checkout", "-q", pin], dest)
-        head = git(["rev-parse", "HEAD"], dest)
-        if head != pin:
-            raise RuntimeError("checked out %s, wanted %s" % (head, pin))
-        return dest, "SOURCE: GitHub clone of Semantic_Lossless at pinned commit " + head
+        fetch_pinned(s, dest, git)             # raises unless HEAD == pin
+        return dest, "SOURCE: GitHub clone of Semantic_Lossless at pinned commit " + pin
     except Exception as exc:     # private repo, no network, bad pin -> dataset copy
         hits = sorted(Path(s["fallback_search_root"]).glob("*/**/src/sqgan_train.py")) if Path(s["fallback_search_root"]).is_dir() else []
         if len(hits) != 1:
@@ -231,7 +236,7 @@ def obtain_source(cfg, git=_git):
 def find_checkpoint_dir(search_root):
     """Folder (<=3 levels) that holds all ten author component *.ckpt files."""
     base = Path(search_root)
-    for d in range(4):
+    for d in range(6):
         for p in sorted(base.glob("/".join(["*"] * d + ["encoder.ckpt"]))):
             if all((p.parent / (c + ".ckpt")).is_file() for c in COMPONENTS):
                 return p.parent
@@ -239,18 +244,12 @@ def find_checkpoint_dir(search_root):
 
 
 def ensure_upstream_sqgan(sl_root, cfg):
-    """Make <sl_root>/.upstream/sqgan exist (sqgan_train.py:34 reads it) from the Kaggle source dataset zip."""
-    target = Path(sl_root) / ".upstream" / "sqgan"
-    if (target / "config" / "sqgan_cityscapes.yml").is_file():
-        return target
-    zips = sorted(Path(cfg["source"]["fallback_search_root"]).glob("*/**/" + cfg["source"]["upstream_sqgan_zip"]))
-    if len(zips) != 1:
-        raise FileNotFoundError("need exactly one %s under /kaggle/input, found %d" % (cfg["source"]["upstream_sqgan_zip"], len(zips)))
-    with zipfile.ZipFile(zips[0]) as z:
-        for name in z.namelist():
-            if not (Path(sl_root) / name).resolve().is_relative_to(Path(sl_root).resolve()):
-                raise ValueError("zip path escapes target: " + name)
-        z.extractall(sl_root)
+    """Make <sl_root>/.upstream/sqgan exist (sqgan_train.py:34 reads it): from an extracted .upstream/sqgan folder in a
+    mounted dataset, or (still accepted) from sqgan-pinned-source.zip."""
+    from Codec.edge.feature_pass_backends import provide_upstream_sqgan
+    target = provide_upstream_sqgan(sl_root, cfg["source"]["fallback_search_root"])
+    if not (target / "config" / "sqgan_cityscapes.yml").is_file():
+        raise FileNotFoundError("%s has no config/sqgan_cityscapes.yml after provisioning" % target)
     return target
 
 

@@ -327,11 +327,13 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
             zero = np.zeros(first.shape, np.float16)
             np.save(shard_dir / ("emb_%s.npy" % name),
                     np.stack([per_uid[u]["emb"][name] if name in per_uid[u]["emb"] else zero for u in uids]).astype(np.float16))
-    ph = [per_uid[u]["phash"] for u in uids]
-    np.save(shard_dir / "phash64.npy", u64([0 if p is None else p for p in ph]))
-    np.save(shard_dir / "phash_ok.npy", np.array([p is not None for p in ph]))
+    hashes_on = cfg["hashes"].get("enabled", True)
+    if hashes_on:
+        ph = [per_uid[u]["phash"] for u in uids]
+        np.save(shard_dir / "phash64.npy", u64([0 if p is None else p for p in ph]))
+        np.save(shard_dir / "phash_ok.npy", np.array([p is not None for p in ph]))
     sim = cfg["hashes"]["simhash_encoder"]
-    if sim in enc_names:
+    if hashes_on and sim in enc_names:
         sh = [per_uid[u]["simhash"] for u in uids]
         np.save(shard_dir / "simhash64.npy", u64([0 if p is None else p for p in sh]))
         np.save(shard_dir / "simhash_ok.npy", np.array([p is not None for p in sh]))
@@ -375,6 +377,32 @@ def _flush_arrays(shard_dir, uids, per_uid, cfg, enc_names, sq_enabled):
     return info
 
 
+def stages_enabled(cfg):
+    """Stage names this run is configured to execute (embeddings, hashes, sqgan, decode)."""
+    out = []
+    if cfg["embeddings"]["enabled"]:
+        out.append("embeddings")
+    if cfg["hashes"].get("enabled", True):
+        out.append("hashes")
+    if cfg["sqgan"]["enabled"]:
+        out.append("sqgan")
+        if cfg["decode"]["enabled"]:
+            out.append("decode")
+    return out
+
+
+def stages_skipped(ctx, enc_names, enc_ok):
+    """Stages that could not run at all: SQ-GAN whose backend failed to build, embeddings with no encoder loaded."""
+    out = []
+    if enc_names and not enc_ok and all(("emb_" + n) in ctx.skipped for n in enc_names):
+        out.append("embeddings")
+    if "sqgan" in ctx.skipped:
+        out.append("sqgan")
+        if ctx.cfg["decode"]["enabled"]:
+            out.append("decode")
+    return out
+
+
 def process_shard(ctx, idx, rows):
     """Run every enabled stage over one shard and write it atomically. Returns the done.json dict.
 
@@ -390,6 +418,7 @@ def process_shard(ctx, idx, rows):
     partial.mkdir(parents=True)
     enc_names = ctx.encoder_names()
     sim_name = cfg["hashes"]["simhash_encoder"]
+    hashes_on = cfg["hashes"].get("enabled", True)
     m_levels, hw, grid = cfg["sqgan"]["m_levels"], cfg["sqgan"]["input_hw"], cfg["sqgan"]["token_grid"]
     t_shard = time.time()
     per_uid, order, failures, sfail = {}, [], [], {}
@@ -414,7 +443,7 @@ def process_shard(ctx, idx, rows):
                     rec[u]["emb"][name] = np.asarray(vec, dtype=np.float32).astype(np.float16)
             for u, exc in errs.items():
                 _stage_fail(sfail, "embed_" + name, u, exc)
-        for u, im in items:
+        for u, im in items if hashes_on else ():
             try:
                 thumb = _gray_thumb(im, cfg["hashes"]["phash_thumb"])
                 rec[u]["phash"] = ctx.timer.run("phash", [u], lambda t=thumb: features.phash64(t))
@@ -448,6 +477,7 @@ def process_shard(ctx, idx, rows):
     done = {"shard": idx, "n_requested": len(rows), "n_ok": len(order), "n_failed": len(failures),
             "n_stage_failures": sum(r["count"] for r in stage_rows), "encoders": enc_ok,
             "skipped": dict(ctx.skipped), "m_levels": m_levels if ctx.sqgan() is not None else [],
+            "stages_enabled": stages_enabled(cfg), "stages_skipped": stages_skipped(ctx, enc_names, enc_ok),
             "seconds": time.time() - t_shard}
     if "segmap_shape" in info:
         done.update(segmap_saved=True, segmap_shape=info["segmap_shape"], segmap_mb=info["segmap_mb"])
@@ -511,6 +541,7 @@ def summarize(out_dir):
     shards = sorted(Path(out_dir, "shards").glob("shard_????"))
     tot, fails, stage_rows, stage_ms, skipped = Counter(), [], [], {}, {}
     seg_flags, seg_shapes, seg_mb = [], set(), 0.0
+    enabled, skipped_stages = [], []
     for s in shards:
         if not (s / "done.json").exists():
             continue
@@ -519,6 +550,8 @@ def summarize(out_dir):
         tot["requested"] += d["n_requested"]
         tot["ok"] += d["n_ok"]
         skipped.update(d.get("skipped", {}))
+        enabled += [x for x in d.get("stages_enabled", []) if x not in enabled]
+        skipped_stages += [x for x in d.get("stages_skipped", []) if x not in skipped_stages]
         if d.get("m_levels"):
             seg_flags.append(bool(d.get("segmap_saved")))
             seg_mb += float(d.get("segmap_mb", 0.0))
@@ -532,6 +565,7 @@ def summarize(out_dir):
                 stage_ms.setdefault(r["stage"], []).append(r["ms"])
     stage_failures = merge_stage_failures(stage_rows)
     summary = {"counts": dict(tot), "n_failures": len(fails), "failures": fails, "skipped": skipped,
+               "stages_enabled": enabled, "stages_skipped": skipped_stages,
                "n_stage_failures": sum(r["count"] for r in stage_failures), "stage_failures": stage_failures,
                "stage_mean_ms": {k: float(np.mean(v)) for k, v in sorted(stage_ms.items())}}
     if seg_flags:
@@ -539,6 +573,30 @@ def summarize(out_dir):
                        segmap_mb=round(seg_mb, 3))
     Path(out_dir, "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     return summary
+
+
+def cache_index(out_dir):
+    """{uid: (shard_name, row)} over finished shards: the join key of an embeddings-only and an SQ-GAN-only cache."""
+    idx = {}
+    for s in sorted(Path(out_dir, "shards").glob("shard_????")):
+        if (s / "done.json").exists():
+            for i, u in enumerate(json.loads((s / "uids.json").read_text(encoding="utf-8"))):
+                idx[u] = (s.name, i)
+    return idx
+
+
+def join_caches(dir_a, dir_b):
+    """{uid: ((shard, row) in A, (shard, row) in B)} for the uids present in both caches."""
+    a, b = cache_index(dir_a), cache_index(dir_b)
+    return {u: (a[u], b[u]) for u in sorted(set(a) & set(b))}
+
+
+def sqgan_required_failure(summary, require):
+    """Message when ``require`` and SQ-GAN was skipped as a whole (it ran for no image), else None."""
+    if require and "sqgan" in summary.get("stages_skipped", []):
+        return ("--require-sqgan: the SQ-GAN stage was skipped as a whole and ran for no image (%s)"
+                % summary.get("skipped", {}).get("sqgan", "no reason recorded"))
+    return None
 
 
 def run(ctx, rows, limit=None, part=(0, 1)):
@@ -621,7 +679,11 @@ def main(argv=None):
     r.add_argument("--smoke", action="store_true", help="20-image smoke test (limit 20)")
     r.add_argument("--part", default="0/1", help="i/n: process shards with idx %% n == i")
     r.add_argument("--device", default="cuda")
-    r.add_argument("--no-sqgan", action="store_true")
+    r.add_argument("--no-sqgan", action="store_true", help="skip the SQ-GAN stages")
+    r.add_argument("--only-sqgan", action="store_true",
+                   help="run only the SQ-GAN stages (no embeddings/hashes); same shard layout, joinable by uid")
+    r.add_argument("--require-sqgan", action=argparse.BooleanOptionalAction, default=None,
+                   help="exit non-zero if the SQ-GAN stage was skipped as a whole (default: on when SQ-GAN is enabled and not --smoke)")
     r.add_argument("--no-decode", action="store_true")
     r.add_argument("--encoders", nargs="*", default=None, help="subset of grid.yaml encoders")
     g = sub.add_parser("export-grid")
@@ -651,6 +713,11 @@ def main(argv=None):
         print(lp, sp)
         return
     cfg = json.loads(json.dumps(cfg))
+    if a.no_sqgan and a.only_sqgan:
+        raise SystemExit("--no-sqgan and --only-sqgan are mutually exclusive")
+    if a.only_sqgan:
+        cfg["embeddings"]["enabled"] = False
+        cfg["hashes"]["enabled"] = False
     if a.no_sqgan:
         cfg["sqgan"]["enabled"] = False
     if a.no_decode:
@@ -665,7 +732,11 @@ def main(argv=None):
     ctx = Context(cfg, grid_cfg, root, out, backends)
     limit = 20 if a.smoke else a.limit
     summ = run(ctx, labels, limit, _parse_part(a.part))
-    print(json.dumps({k: summ[k] for k in ("counts", "n_failures", "skipped")}, indent=2))
+    print(json.dumps({k: summ[k] for k in ("counts", "n_failures", "skipped", "stages_enabled", "stages_skipped")}, indent=2))
+    require = (cfg["sqgan"]["enabled"] and not a.smoke) if a.require_sqgan is None else (a.require_sqgan and cfg["sqgan"]["enabled"])
+    msg = sqgan_required_failure(summ, require)
+    if msg:
+        raise SystemExit(msg)
 
 
 if __name__ == "__main__":

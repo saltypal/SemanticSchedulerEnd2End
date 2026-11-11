@@ -45,10 +45,28 @@ def test_run_check_writes_json_and_converts_exceptions(tmp_path):
 
 
 def test_skip_when_nothing_mounted(tmp_path):
-    for name in ("bundle_restore", "discovery_note", "dataset_scale", "feature_pass_smoke_verify", "source_root"):
+    for name in ("bundle_restore", "discovery_note", "dataset_scale", "feature_pass_smoke_verify"):
         r = pc.run_check(name, ctx(tmp_path))
         assert r["status"] == "skip", name
         assert all(v["status"] == "skip" for v in r["items"].values())
+
+
+def test_source_root_falls_back_to_pinned_clone(tmp_path):
+    """Nothing mounted: the check must try the pinned clone (never silently skip). Clone injected: no network."""
+    def broken(cfg, dest):
+        raise RuntimeError("network down")
+    r = pc.run_check("source_root", ctx(tmp_path, clone=broken))
+    assert r["status"] == "fail" and "pinned git clone" in r["error"]
+
+    def fake_clone(cfg, dest):
+        src = tmp_path / "clone" / "src"
+        src.mkdir(parents=True)
+        for f in ("__init__.py", "sqgan.py", "bitstream.py"):
+            (src / f).write_text("")
+        return src.parent
+    r = pc.run_check("source_root", ctx(tmp_path, clone=fake_clone))
+    # the clone alone is not enough: the upstream SQ-GAN code comes from the mounted source dataset's zip
+    assert r["status"] == "fail" and "upstream SQ-GAN code not found" in r["error"], r
 
 
 class FakeMasker:

@@ -60,10 +60,10 @@ def test_discover_root(tmp_path):
     (tmp_path / "c" / "labels_raw.jsonl").write_text("")
     with pytest.raises(ValueError):
         ft.discover_root(tmp_path, "labels_raw.jsonl")
-    deep = tmp_path / "x" / "1" / "2" / "3" / "4"
+    deep = tmp_path / "x" / "1" / "2" / "3" / "4" / "5" / "6"
     deep.mkdir(parents=True)
     (deep / "index.jsonl").write_text("")
-    with pytest.raises(FileNotFoundError):       # 4 levels is beyond the search depth
+    with pytest.raises(FileNotFoundError):       # 6 levels is beyond the search depth (5: Kaggle datasets/<owner>/<slug>/...)
         ft.discover_root(tmp_path / "x", "index.jsonl")
 
 

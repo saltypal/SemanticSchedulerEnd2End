@@ -50,6 +50,14 @@ splits:
   val_events: [california_wildfires]
   test_events: [hurricane_maria, mexico_earthquake]
   normals_split: [0.6, 0.1, 0.3]   # train / val / test fractions for event-less everyday images
+  # S2b: a val/test image is dropped if it is within these Hamming distances of ANY train image.
+  # Chosen from the measured min-distance histogram (2026-11-11): pHash has a gap after 8 bits (copies) before
+  # the bulk at 12-16; SimHash has no gap (crisis photos are semantically close), so only 0-1 bits = copies.
+  dedup:
+    phash_max: 8
+    simhash_max: 1
+  dup_pair_candidates: 400        # S2c: pairs from train+val for human duplicate/distinct labels
+  dup_pair_seed: 22
   gates:
     min_test_critical: 150
     min_val_critical: 100

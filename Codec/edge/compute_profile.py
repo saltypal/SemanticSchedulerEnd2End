@@ -150,12 +150,10 @@ def _capture_inputs(module):
     return box, h
 
 
-def collect_real_models(cfg, device, grid_cfg):
-    """Build the real model dict. Heavy: loads SQ-GAN, SegFormer and every encoder that loads."""
+def _sqgan_models(cfg, device):
+    """SQ-GAN encoder / masker / decoder and SegFormer teacher with inputs captured from one real encode/decode."""
     import torch
-    import torch.nn as nn
     from Codec.edge.feature_pass_backends import RealSQGAN
-    from parameters.edge.embedding_grid import load_embedder
     models = {}
     sq = RealSQGAN(cfg, device)
     codec = sq._codec(sq.m_levels[0])
@@ -171,6 +169,23 @@ def collect_real_models(cfg, device, grid_cfg):
             models["sqgan_" + n] = (getattr(codec.model, n), box["v"][0], box["v"][1])
     models["segformer_teacher"] = (codec._teacher, (), {"pixel_values": (img - 0.45) / 0.225})
 
+    return models
+
+
+def collect_real_models(cfg, device, grid_cfg, sqgan=True, embeddings=True):
+    """Build the real model dict. Heavy: loads SQ-GAN, SegFormer and every encoder that loads.
+
+    ``sqgan=False`` skips the SQ-GAN models and the SegFormer teacher (it is owned by the SQ-GAN codec) without error;
+    ``embeddings=False`` skips the embedding encoders."""
+    import torch
+    import torch.nn as nn
+    models = {}
+    if sqgan:
+        models.update(_sqgan_models(cfg, device))
+    if not embeddings:
+        return models
+
+    from parameters.edge.embedding_grid import load_embedder
     class Vision(nn.Module):
         def __init__(self, model, family):
             super().__init__()
@@ -191,19 +206,29 @@ def collect_real_models(cfg, device, grid_cfg):
     return {k: v for k, v in models.items() if v is not None}
 
 
+def profile_out_dir(base, no_sqgan=False, only_sqgan=False):
+    """Default output folder: each scope gets its own, so an embeddings-only and an SQ-GAN-only profile can be merged later."""
+    base = str(base).rstrip("/\\")
+    return base + "_embed" if no_sqgan else base + "_sqgan" if only_sqgan else base
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default=None, help="folder; compute_profile.json is written inside")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--no-sqgan", action="store_true", help="skip the SQ-GAN models (and SegFormer); profile embedders only")
+    ap.add_argument("--only-sqgan", action="store_true", help="profile only the SQ-GAN models + SegFormer")
     a = ap.parse_args(argv)
+    if a.no_sqgan and a.only_sqgan:
+        raise SystemExit("--no-sqgan and --only-sqgan are mutually exclusive")
     cfg, grid_cfg = load_config("feature_pass"), load_config("grid")
-    out = Path(a.out or cfg["paths"]["out"])
+    out = Path(a.out or profile_out_dir(cfg["paths"]["out"], a.no_sqgan, a.only_sqgan))
     out.mkdir(parents=True, exist_ok=True)
     pc = dict(cfg["profile"], device=a.device)
     rng = np.random.default_rng(0)
     gray = [rng.random((128, 128)) * 255 for _ in range(pc["phash_samples"])]
-    models = collect_real_models(cfg, a.device, grid_cfg)
+    models = collect_real_models(cfg, a.device, grid_cfg, sqgan=not a.no_sqgan, embeddings=not a.only_sqgan)
     prof = profile_all(pc, models, out / "compute_profile.json", a.force, gray)
     print(json.dumps({k: {"params": v.get("params"), "flops": v.get("flops")} for k, v in prof.items()}, indent=1))
 

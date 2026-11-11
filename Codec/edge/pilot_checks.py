@@ -60,7 +60,7 @@ def item(status, detail):
     return {"status": status, "detail": str(detail)[:300]}
 
 
-DISCOVER_DEPTH = 4
+DISCOVER_DEPTH = 5
 DATASET_KEYWORDS = ("sqgan-bundle", "sqgan-source", "sqgan-assets")
 DATASET_FILES = ("bundle_manifest.json", "*flat_manifest.json", "sqgan-pinned-source.zip")
 
@@ -115,16 +115,19 @@ def discover_datasets(input_base, depth=DISCOVER_DEPTH):
 def find_dataset(ctx, pattern):
     """Attached dataset directory whose lowercase name contains the keyword in ``pattern`` (``*sqgan-bundle*``).
 
-    Searches recursively to depth 4 (layouts /kaggle/input/<slug> and /kaggle/input/datasets/<owner>/<slug>). Falls
+    Searches recursively to depth 5 (layouts /kaggle/input/<slug> and /kaggle/input/datasets/<owner>/<slug>). Falls
     back to the folder holding a flat/bundle manifest (bundle) or the pinned source zip (source/assets).
     """
+    from Codec.edge.feature_pass_backends import find_datasets, find_upstream_sqgan
     keyword = pattern.strip("*").lower()
     found = discover_datasets(ctx.input_base)
-    hits = found["dirs"].get(keyword, [])
+    hits = [str(p) for p in find_datasets(keyword, ctx.input_base, DISCOVER_DEPTH)] or found["dirs"].get(keyword, [])
     if not hits and keyword == "sqgan-bundle":
         hits = [str(Path(f).parent) for k in ("*flat_manifest.json", "bundle_manifest.json") for f in found["files"][k]]
     if not hits and keyword == "sqgan-source":
-        hits = [str(Path(f).parent) for f in found["files"]["sqgan-pinned-source.zip"]]
+        kind, up = find_upstream_sqgan(ctx.input_base, DISCOVER_DEPTH)
+        hits = [str(up.parent.parent)] if kind == "dir" else []
+        hits = hits or [str(Path(f).parent) for f in found["files"]["sqgan-pinned-source.zip"]]
     if not hits:
         raise Skip("no dataset matching %s mounted under %s (searched depth %d; tree: %s)"
                    % (pattern, ctx.input_base, DISCOVER_DEPTH, input_tree(ctx.input_base, 3, 20)))
@@ -138,9 +141,17 @@ def ensure_bundle(ctx):
     return restore_flat_bundle(flat, ctx.bundle_root), flat
 
 
+def resolve_source(ctx):
+    """(root, mode): mounted dataset with src/, else a clone of the pinned commit (``clone`` hook for tests)."""
+    from Codec.edge.feature_pass_backends import resolve_source_root
+    from Evaluation.edge.edge_config import load_config
+    cfg = load_config("feature_pass")
+    cfg["paths"].update(input_base=ctx.input_base, restore_dir=str(ctx.work / "restore" / "bundle_dir"))
+    return resolve_source_root(cfg, log=print, clone=ctx.inject.get("clone"), base=ctx.input_base)
+
+
 def source_root(ctx):
-    from Codec.edge.feature_pass_backends import find_source_root
-    return find_source_root(find_dataset(ctx, "*sqgan-source*"))
+    return resolve_source(ctx)[0]
 
 
 def make_codec(ctx, m=0.25):
@@ -305,13 +316,12 @@ def check_bundle_deep_scan(ctx):
 
 
 def check_source_root(ctx):
-    """feature_pass find_source_root heuristic against the real mounted source dataset."""
-    from Codec.edge.feature_pass_backends import find_source_root
-    src = find_dataset(ctx, "*sqgan-source*")
-    root = find_source_root(src)
-    return {"details": {"dataset": str(src), "source_root": str(root), "has_sqgan_py": (root / "src/sqgan.py").exists(),
-                        "has_bitstream_py": (root / "src/bitstream.py").exists()},
-            "items": {"feature_pass_find_source_root": item("pass", "source root %s" % root)}}
+    """feature_pass source-root resolution: mounted dataset with src/, else the pinned git clone (plus .upstream/sqgan)."""
+    root, mode = resolve_source(ctx)
+    return {"details": {"mode": mode, "source_root": str(root), "has_sqgan_py": (root / "src/sqgan.py").exists(),
+                        "has_bitstream_py": (root / "src/bitstream.py").exists(),
+                        "has_upstream_sqgan": (root / ".upstream" / "sqgan").is_dir()},
+            "items": {"feature_pass_find_source_root": item("pass", "source root %s (%s)" % (root, mode))}}
 
 
 # ------------------------------------------------------------------ 3 masker_format
@@ -586,12 +596,13 @@ def check_finetune_source(ctx):
         d["git_error"] = _tail(str(exc))
         items["pinned_sha_fetch"] = item("fail", "%s: %s" % (type(exc).__name__, str(exc)[:200]))
     target_root = ctx.work / "ft_source" / "zip_only"
-    try:                                           # path 2: extract .upstream/sqgan from the dataset zip into an empty dir
+    cfg["source"]["fallback_search_root"] = ctx.input_base
+    try:                                           # path 2: provide .upstream/sqgan (extracted folder or zip) into an empty dir
         target_root.mkdir(parents=True, exist_ok=True)
         target = ft.ensure_upstream_sqgan(target_root, cfg)
         d["zip_target"], d["zip_src_present"] = str(target), (target_root / "src").is_dir()
         items["upstream_zip_extract"] = item("pass" if (target / "config" / "sqgan_cityscapes.yml").is_file() else "fail",
-                                             "extracted %s; SemanticLossless src/ present=%s" % (target, d["zip_src_present"]))
+                                             "provided %s; SemanticLossless src/ present=%s" % (target, d["zip_src_present"]))
     except Exception as exc:
         d["zip_error"] = _tail(str(exc))
         items["upstream_zip_extract"] = item("fail", "%s: %s" % (type(exc).__name__, str(exc)[:200]))
@@ -613,6 +624,8 @@ def check_finetune_pilot(ctx):
     from Codec.edge import sqgan_finetune as ft
     import numpy as np
     cfg = _ft_cfg(ctx)
+    cfg["source"]["fallback_search_root"] = ctx.input_base
+    cfg["inputs"]["checkpoint_search_root"] = ctx.input_base
     runner = ctx.hook("runner", subprocess.run)
     index = ctx.work / "dataset-a" / "index.jsonl"
     rows = [json.loads(x) for x in index.read_text().splitlines() if x] if index.exists() else []
@@ -771,16 +784,23 @@ def check_dataset_scale(ctx):
     if sr.exists():
         stages = {s["name"]: s for s in json.loads(sr.read_text())}
     a = stages.get("a_download_images")
+    state = ctx.work / "state" / "A.done.json"           # parameters/edge/run_all.py writes <work>/state/<stage>.done.json
+    if not (a and a.get("seconds")) and state.exists():
+        try:
+            rec = json.loads(state.read_text(encoding="utf-8"))
+            a = {"seconds": rec.get("seconds"), "peak_rss_mb": rec.get("peak_rss_mb")}
+        except (OSError, ValueError):
+            a = None
     if a and a.get("seconds"):
         rate = len(rows) / max(a["seconds"], 1e-6)
         total = sum(full.values())
         d.update(pilot_images=len(rows), pilot_seconds=a["seconds"], images_per_second=round(rate, 3), peak_rss_mb=a.get("peak_rss_mb"),
                  projected_full_hours=round(total / rate / 3600, 2) if rate else None)
         rss = a.get("peak_rss_mb")
-        items["workers16_memory"] = item("pass" if rss is not None else "fail",
+        items["workers16_memory"] = item("pass" if rss is not None else "skip",
                                          "peak child RSS %s MB with 8 workers; %.2f img/s; full download ~%.1f h" % (rss, rate, d["projected_full_hours"] or 0))
     else:
-        items["workers16_memory"] = item("fail", "no stage_results.json entry for a_download_images (pilot stage did not run first)")
+        items["workers16_memory"] = item("fail", "no a_download_images entry in stage_results.json and no state/A.done.json under %s (pilot stage did not run first)" % ctx.work)
     return {"details": d, "items": items}
 
 
@@ -1057,6 +1077,22 @@ def run_check(name, ctx):
     return res
 
 
+def reason_line(res):
+    """Why a check is not a plain pass: full first line of its error, else the first failing/skipped item detail."""
+    if res["status"] == "pass":
+        return ""
+    err = (res.get("error") or "").strip()
+    if err and res["status"] == "skip":
+        return err.splitlines()[0]
+    if err:                                      # a failure carries a traceback: its last line names the exception
+        lines = [x for x in err.splitlines() if x.strip()]
+        return lines[-1] if lines else ""
+    for name, it in res.get("items", {}).items():
+        if it["status"] == res["status"]:
+            return "%s: %s" % (name, str(it["detail"]).splitlines()[0] if it["detail"] else "")
+    return ""
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("check", help="check name, 'all' or 'list'")
@@ -1072,7 +1108,7 @@ def main(argv=None):
             print("unknown check", n, file=sys.stderr)
             return 2
         r = run_check(n, ctx)
-        print("[check] %-30s %s (%.1fs) %s" % (n, r["status"].upper(), r["seconds"], r["error"][-120:].replace("\n", " ")), flush=True)
+        print("[check] %-30s %s (%.1fs) %s" % (n, r["status"].upper(), r["seconds"], reason_line(r)), flush=True)
     return 0
 
 

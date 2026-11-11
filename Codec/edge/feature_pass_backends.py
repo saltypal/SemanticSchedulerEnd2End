@@ -9,7 +9,9 @@
   constructor option); the encoder grid does not depend on m so the first m's grid is the one cached.
 """
 import json
+import os
 import shutil
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -47,6 +49,134 @@ def not_found(directory, pattern, what, limit=15):
     state = "" if d.is_dir() else " (directory does not exist)"
     return FileNotFoundError("%s: nothing matching %r in %s%s; files found there (up to %d): %s"
                              % (what, pattern, d, state, limit, names))
+
+
+KAGGLE_INPUT = "/kaggle/input"
+DATASET_DEPTH = 5
+
+
+def _dirs_to_depth(base, depth):
+    """Yield (dir_path, depth) for every directory under ``base`` down to ``depth`` levels (1 = direct children)."""
+    base = Path(base)
+    if depth < 1 or not base.is_dir():
+        return
+    try:
+        children = sorted(p for p in base.iterdir() if p.is_dir())
+    except OSError:
+        return
+    for p in children:
+        yield p, 1
+        for q, d in _dirs_to_depth(p, depth - 1):
+            yield q, d + 1
+
+
+def find_datasets(slug_fragment, base=KAGGLE_INPUT, depth=DATASET_DEPTH):
+    """Mounted dataset directories whose lowercase name contains ``slug_fragment``, shallowest first.
+
+    Works for both Kaggle mount layouts (/kaggle/input/<slug> and /kaggle/input/datasets/<owner>/<slug>)."""
+    frag = str(slug_fragment).strip("*").lower()
+    hits = [p for p, _ in _dirs_to_depth(base, depth) if frag in p.name.lower()]
+    return sorted(hits, key=lambda p: (len(p.parts), str(p)))
+
+
+def find_dataset(slug_fragment, base=KAGGLE_INPUT, depth=DATASET_DEPTH):
+    """The shallowest mounted dataset directory whose lowercase name contains ``slug_fragment`` (FileNotFoundError if none)."""
+    hits = find_datasets(slug_fragment, base, depth)
+    if hits:
+        return hits[0]
+    seen = [p.relative_to(base).as_posix() for p, _ in _dirs_to_depth(base, 3)][:20] if Path(base).is_dir() else []
+    raise FileNotFoundError("no dataset directory matching %r under %s (searched depth %d%s; top of tree: %s)"
+                            % (slug_fragment, base, depth, "" if Path(base).is_dir() else ", base does not exist", seen))
+
+
+def resolve_dataset(configured, slug_fragment, base=KAGGLE_INPUT):
+    """``configured`` when that folder exists, else the mounted dataset found by ``slug_fragment``."""
+    if configured and Path(configured).is_dir():
+        return Path(configured)
+    return find_dataset(slug_fragment, base)
+
+
+def is_source_root(root):
+    root = Path(root)
+    return all((root / f).exists() for f in ("src/__init__.py", "src/sqgan.py", "src/bitstream.py"))
+
+
+def find_mounted_source_root(base=KAGGLE_INPUT, depth=DATASET_DEPTH):
+    """First directory under ``base`` (depth ``depth``, either layout) that is an SQ-GAN source root, else None."""
+    if is_source_root(base):
+        return Path(base)
+    for p, _ in _dirs_to_depth(base, depth):
+        if (p / "src").is_dir() and is_source_root(p):
+            return p
+    return None
+
+
+def find_upstream_sqgan(base=KAGGLE_INPUT, depth=DATASET_DEPTH):
+    """(kind, path): ('dir', <.upstream/sqgan>) for an extracted folder, ('zip', <sqgan-pinned-source.zip>), or (None, None)."""
+    for p, _ in _dirs_to_depth(base, depth):
+        if p.name == "sqgan" and p.parent.name == ".upstream":
+            return "dir", p
+    if Path(base).is_dir():
+        for dirpath, dirs, files in os.walk(base):
+            if len(Path(dirpath).relative_to(base).parts) > depth:
+                dirs[:] = []
+                continue
+            if "sqgan-pinned-source.zip" in files:
+                return "zip", Path(dirpath) / "sqgan-pinned-source.zip"
+    return None, None
+
+
+def provide_upstream_sqgan(root, base=KAGGLE_INPUT, log=print):
+    """Make ``<root>/.upstream/sqgan`` exist: from an extracted ``.upstream/sqgan`` folder (copied) or the pinned zip."""
+    root = Path(root)
+    target = root / ".upstream" / "sqgan"
+    if target.is_dir() and any(target.iterdir()):
+        return target
+    kind, found = find_upstream_sqgan(base)
+    if kind == "dir":
+        if found.resolve() != target.resolve():
+            shutil.copytree(found, target, dirs_exist_ok=True)
+        log("upstream SQ-GAN: copied extracted folder %s -> %s" % (found, target))
+    elif kind == "zip":
+        with zipfile.ZipFile(found) as z:
+            for name in z.namelist():
+                if not (root / name).resolve().is_relative_to(root.resolve()):
+                    raise ValueError("zip path escapes target: " + name)
+            z.extractall(root)
+        log("upstream SQ-GAN: extracted %s -> %s" % (found, root))
+    else:
+        raise FileNotFoundError("upstream SQ-GAN code not found: no .upstream/sqgan folder and no sqgan-pinned-source.zip "
+                                "under %s (depth %d)" % (base, DATASET_DEPTH))
+    return target
+
+
+def resolve_source_root(cfg, log=print, clone=None, base=None):
+    """(root, mode). (i) a mounted dataset holding the SemanticLossless src/; (ii) otherwise a clone of the pinned commit.
+
+    Either way ``<root>/.upstream/sqgan`` is provided from the mounted source dataset when possible."""
+    p = cfg["paths"]
+    base = base or p.get("input_base", KAGGLE_INPUT)
+    root = find_mounted_source_root(base)
+    if root is not None:
+        mode = "mounted dataset"
+        try:
+            provide_upstream_sqgan(root, base, log)
+        except (OSError, ValueError) as exc:      # read-only mount without .upstream: the root may still work
+            log("[warn] upstream SQ-GAN not provided for %s: %r" % (root, exc))
+    else:
+        from Codec.edge import sqgan_finetune as ft
+        dest = Path(p["restore_dir"]).parent / "semlossless"
+        ft_cfg = ft.load_config(Path(__file__).resolve().parents[2] / "config/edge/sqgan_finetune.yaml")
+        try:
+            root = Path((clone or ft.fetch_pinned)(ft_cfg["source"], dest))
+        except Exception as exc:
+            raise FileNotFoundError(
+                "no SQ-GAN source root: no mounted dataset under %s has src/__init__.py + src/sqgan.py + src/bitstream.py, "
+                "and the pinned git clone into %s failed: %s: %s" % (base, dest, type(exc).__name__, str(exc)[:300])) from exc
+        mode = "git clone of pinned commit"
+        provide_upstream_sqgan(root, base, log)
+    log("SQ-GAN source root: %s (%s)" % (root, mode))
+    return root, mode
 
 
 def find_source_root(source_dir, max_depth=5):
@@ -87,10 +217,12 @@ class RealSQGAN:
     def __init__(self, cfg, device):
         p = cfg["paths"]
         self.device = device
-        self.bundle = restore_flat_bundle(p["bundle_flat"], p["restore_dir"])
-        self.source = find_source_root(p["sqgan_source"])
+        base = p.get("input_base", KAGGLE_INPUT)
+        self.bundle = restore_flat_bundle(resolve_dataset(p.get("bundle_flat"), "sqgan-bundle", base), p["restore_dir"])
+        self.source, self.source_mode = resolve_source_root(cfg, base=base)
         self.m_levels = list(cfg["sqgan"]["m_levels"])
         self._codecs = {}
+        self._codec(self.m_levels[0])          # load codec + teacher now: a missing teacher skips the whole stage
 
     def _codec(self, m):
         if m not in self._codecs:
