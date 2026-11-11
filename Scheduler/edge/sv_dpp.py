@@ -11,6 +11,9 @@ Simplifications (documented estimates, the plan leaves the exact form open):
 * sigma_W^2 = (n_ahead * var(S_1) + lam * slack_i * share_higher_i * E[S_1^2]) / c^2.
 * G_defer uses a normal approximation of age + W_hat + S_B with variance sigma_W^2 + var(S_B).
 * The policy keeps its own debt queues Z (updated through observe), not State.debts.
+* D18: E[v_i] (now and defer terms) is multiplied by factor_i = 1 + relevance_beta * (r_tilde_i - 0.5),
+  r_tilde_i = clip((header relevance - lo[mission]) / (hi[mission] - lo[mission]), 0, 1). Header only.
+  relevance_beta = 0 gives factor 1 exactly, i.e. the plan v3 policy.
 """
 import math
 
@@ -30,7 +33,8 @@ class SVDPP(Policy):
     name = "sv_dpp"
     uses_truth = False
 
-    def __init__(self, V=None, eta=None, debt_init=None, hard_purge_prob=None):
+    def __init__(self, V=None, eta=None, debt_init=None, hard_purge_prob=None,
+                 relevance_beta=None, relevance_range=None):
         cfg = load_config("sim")
         self.V = float(cfg["sv_dpp"]["V"] if V is None else V)
         self._eta_arg = None if eta is None else tuple(float(e) for e in eta)
@@ -39,6 +43,12 @@ class SVDPP(Policy):
         self.hard_purge_prob = float(cfg["dup"]["hard_purge_prob"] if hard_purge_prob is None
                                      else hard_purge_prob)
         self.eta = self._eta_arg or tuple(float(e) for e in cfg["eta_timely"])
+        self.relevance_beta = float(cfg["sv_dpp"]["relevance_beta"] if relevance_beta is None
+                                    else relevance_beta)
+        rr = cfg["sv_dpp"]["relevance_range"] if relevance_range is None else relevance_range
+        self._relevance_range = {int(m): (float(lo), float(hi)) for m, (lo, hi) in dict(rr).items()}
+        if 0 not in self._relevance_range or any(hi <= lo for lo, hi in self._relevance_range.values()):
+            raise ValueError("sv_dpp relevance_range needs mission 0 and lo < hi for every mission")
         self.Z = list(self._debt_init)
         self._A, self._T = [0.0] * 4, [0.0] * 4
 
@@ -82,10 +92,18 @@ class SVDPP(Policy):
     def _zeta(self, k, dup):
         return (1.0 - dup * (1.0 - self.spec.zeta_critical_copy)) if k == 0 else (1.0 - dup)
 
-    def _ev(self, view, delay):
+    def _relevance_factor(self, job):
+        """D18: multiplier on E[v] from the header relevance only. Exactly 1.0 when beta is 0."""
+        if self.relevance_beta == 0.0:
+            return 1.0
+        lo, hi = self._relevance_range.get(int(job.header.mission), self._relevance_range[0])
+        r_tilde = min(1.0, max(0.0, (job.header.relevance - lo) / (hi - lo)))
+        return 1.0 + self.relevance_beta * (r_tilde - 0.5)
+
+    def _ev(self, view, delay, factor=1.0):
         p, u, dup = view
         s = self.spec
-        return u * sum(p[k] * s.weights[k] * s.g(k, delay) * self._zeta(k, dup) for k in range(4))
+        return factor * (u * sum(p[k] * s.weights[k] * s.g(k, delay) * self._zeta(k, dup) for k in range(4)))
 
     # ---------------- selection (sec. 6.2-6.5) ----------------
     def select(self, state: State) -> Decision:
@@ -107,7 +125,8 @@ class SVDPP(Policy):
         s1 = lat.samples[b1]
         amort = min(lat.mean(b) / b for b in lat.batch_sizes)
         var1, m2 = float(s1.var()), float(np.mean(s1 ** 2))
-        e1 = {j.id: self._ev(views[j.id], j.age + lat.mean(b1)) for j in jobs}
+        fac = {j.id: self._relevance_factor(j) for j in jobs}
+        e1 = {j.id: self._ev(views[j.id], j.age + lat.mean(b1), fac[j.id]) for j in jobs}
         order = sorted(jobs, key=lambda j: (-e1[j.id], j.header.arrival_time))
         q_mass = np.mean([views[j.id][0] for j in jobs], axis=0)
         lam = state.arrival_rate
@@ -126,8 +145,8 @@ class SVDPP(Policy):
             for j in jobs:
                 view = views[j.id]
                 w, var = what[j.id]
-                en = self._ev(view, j.age + mB)
-                ed = self._ev(view, j.age + w + mB)
+                en = self._ev(view, j.age + mB, fac[j.id])
+                ed = self._ev(view, j.age + w + mB, fac[j.id])
                 sd = math.sqrt(var + vB)
                 dg = 0.0
                 for k in range(4):

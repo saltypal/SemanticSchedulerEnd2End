@@ -15,6 +15,11 @@ dup:
 sv_dpp:
   V: 1.0
   debt_init: 0.0
+  relevance_beta: 0.5          # D18; 0 = plan v3 exactly (no relevance); tuned on val in S7
+  # per mission id [lo, hi] for r_tilde = clip((relevance - lo) / (hi - lo), 0, 1).
+  # [0.52, 0.68] = observed min/max of relevance in the sim table; replace with per-mission
+  # 5th/95th percentiles from the train split.
+  relevance_range: {0: [0.52, 0.68], 1: [0.52, 0.68], 2: [0.52, 0.68], 3: [0.52, 0.68]}
 
 # Arrival model and named scenarios (selectable with --scenario NAME ...; later names override earlier).
 # Knobs are documented in Evaluation/edge/regimes.py. Default (no scenario) = synthetic Poisson.
