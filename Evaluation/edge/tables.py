@@ -7,7 +7,7 @@ import math
 from pathlib import Path
 
 from Evaluation.edge.arrivals import build_jobs
-from Evaluation.edge.contracts import Header, LatencyProfile, Truth
+from Evaluation.edge.contracts import Header, Job, LatencyProfile, Truth
 
 CODECS = ("v0", "v1", "jpeg")
 SPLITS = ("train", "val", "test")
@@ -107,6 +107,14 @@ def default_truth_fn(row):
 def rows_to_jobs(rows, times, rng, network_delay=0.0, header_fn=default_header_fn, truth_fn=default_truth_fn):
     """Jobs sorted by arrival, rows drawn without replacement."""
     return build_jobs(rows, times, header_fn, truth_fn, rng, network_delay)
+
+
+def rows_to_jobs_ordered(rows, times, network_delay=0.0, header_fn=default_header_fn, truth_fn=default_truth_fn):
+    """Jobs for rows already in arrival order (row i arrives at times[i]); ids are positions."""
+    if len(rows) != len(times):
+        raise ValueError("rows and times must have the same length")
+    return [Job(i, header_fn(r, float(t), float(t) - network_delay), truth_fn(r))
+            for i, (r, t) in enumerate(zip(rows, times))]
 
 
 def latency_from_profile_json(path):

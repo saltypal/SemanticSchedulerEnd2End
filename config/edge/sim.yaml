@@ -15,3 +15,26 @@ dup:
 sv_dpp:
   V: 1.0
   debt_init: 0.0
+
+# Arrival model and named scenarios (selectable with --scenario NAME ...; later names override earlier).
+# Knobs are documented in Evaluation/edge/regimes.py. Default (no scenario) = synthetic Poisson.
+arrival: poisson                       # poisson | mmpp | trace (v3 sec. 9; trace = tweet-time order, kappa-compressed)
+mmpp: {low: 0.3, high: 1.7, switch_rate: 0.05}
+scenarios:
+  # I10 / v3 sec. 7 teacher-misspecified regimes (apply on val)
+  mmpp_bursts: {arrival: mmpp}
+  wrong_sigma_w_low: {sigma_w_scale: 0.25}     # policy believes latency is much less variable
+  wrong_sigma_w_high: {sigma_w_scale: 4.0}     # policy believes latency is much more variable
+  noisy_spi_10: {spi_noise: 0.10}              # 10 % of SPI posteriors confidently wrong
+  noisy_spi_20: {spi_noise: 0.20}
+  # I13 sensitivity rows
+  tier_alt: {tier_key: tier_alt}               # truth = affected->High mapping
+  critical_share_x2: {critical_share: 2.0}
+  critical_share_x0_5: {critical_share: 0.5}
+  weights_x0_5: {weights_scale: 0.5}
+  weights_x2: {weights_scale: 2.0}
+  loss_1pct: {loss: 0.01}
+  loss_3pct: {loss: 0.03}
+  loss_5pct: {loss: 0.05}
+  capture_jitter_30s: {capture_jitter_s: 30.0}
+  capture_jitter_120s: {capture_jitter_s: 120.0}

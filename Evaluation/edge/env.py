@@ -31,9 +31,10 @@ class RunResult:
 
 class EdgeEnv:
     def __init__(self, jobs, latency, spec, workers, max_batch, receiver, seed,
-                 warmup_fraction=0.10, ttl_hard=True):
+                 warmup_fraction=0.10, ttl_hard=True, policy_latency=None):
         self.jobs = sorted(jobs, key=lambda j: (j.header.arrival_time, j.id))
         self.latency, self.spec = latency, spec
+        self.policy_latency = policy_latency or latency   # what the policy believes (sigma_W regime)
         self.workers, self.max_batch = int(workers), int(max_batch)
         self.receiver, self.seed = receiver, seed
         self.warmup_fraction, self.ttl_hard = warmup_fraction, ttl_hard
@@ -129,7 +130,7 @@ class EdgeEnv:
             while free > 0 and queue:
                 cur = rate * exp(-(now - last_arr) / RATE_TAU) if last_arr is not None else 0.0
                 state = State(now, tuple(self._queued(j, now) for j in queue.values()), free,
-                              self.workers, self.latency, spec, self.max_batch,
+                              self.workers, self.policy_latency, spec, self.max_batch,
                               arrival_rate=cur, mission_served=tuple(sorted(mission_val.items())))
                 t0 = time.perf_counter()
                 dec = policy.select(state)

@@ -4,9 +4,12 @@ Library + CLI. Reuses ``tables`` (rows -> jobs, latency profile), ``arrivals`` (
 poisson/mmpp times), ``env.EdgeEnv``, ``metrics`` (summaries, bootstrap CI) and
 ``Scheduler.edge.registry``. Traces are paired: a (workers, rho, realisation) cell uses the same
 seed for every policy, derived from ``base_seed`` through ``SeedSequence``. Policy groups from
-config/edge/policies.yaml may be given by name. ``val_tuning`` grid-searches the V of SV-DPP.
+config/edge/policies.yaml may be given by name. Arrival modes: poisson (default), mmpp, trace (v3 sec. 9,
+see ``trace.py``; kappa is recorded per cell). Named scenarios from config/edge/sim.yaml (``regimes.py``:
+misspecified regimes and sensitivity rows) are selectable with ``--scenario``. ``val_tuning`` grid-searches the V of SV-DPP.
 """
 import argparse
+import dataclasses
 import json
 import math
 import subprocess
@@ -14,7 +17,7 @@ import time
 
 import numpy as np
 
-from Evaluation.edge import arrivals, metrics
+from Evaluation.edge import arrivals, metrics, regimes, trace
 from Evaluation.edge.contracts import ValueSpec
 from Evaluation.edge.edge_config import load_config, repo_root
 from Evaluation.edge.env import EdgeEnv
@@ -63,38 +66,71 @@ def _mean(vals):
     return float(np.mean(vals)) if vals else NAN
 
 
-def _make_jobs(rows, latency, tables, workers, rho, rep, base_seed, max_batch, mmpp, network_delay):
+def _make_jobs(rows, latency, tables, workers, rho, rep, base_seed, max_batch, mmpp, network_delay,
+               scen=None, header_mask=None):
+    """Return ``(jobs, info)`` for one realisation; identical for every policy of the cell (paired)."""
+    scen = scen or {}
     b = max([x for x in latency.batch_sizes if x <= max_batch] or [latency.batch_sizes[0]])
     rate = arrivals.rate_for_rho(rho, latency, b, workers)
-    rng = np.random.default_rng(_seed(base_seed, workers, round(rho * 1000), rep, 1))
-    n = len(rows)
-    if mmpp:
-        times = arrivals.mmpp_times(n, (rate * mmpp["low"], rate * mmpp["high"]),
-                                    mmpp["switch_rate"], rng)
+    cell_seed = (workers, round(rho * 1000), rep)
+    rng = np.random.default_rng(_seed(base_seed, *cell_seed, 1))
+    rrng = np.random.default_rng(_seed(base_seed, *cell_seed, 3))    # regime / sensitivity randomness
+    mode = scen.get("arrival") or ("mmpp" if mmpp else "poisson")
+    if mode not in ("poisson", "mmpp", "trace"):
+        raise ValueError("unknown arrival mode %r" % (mode,))
+    mmpp = scen.get("mmpp") or mmpp or (load_config("sim")["mmpp"] if mode == "mmpp" else None)
+    rows = regimes.use_tier_key(rows, scen.get("tier_key"))
+    rows = regimes.resample_critical(rows, scen.get("critical_share", 1.0), rrng)
+    rows = regimes.inject_spi_noise(rows, scen.get("spi_noise", 0.0), rrng)
+    info = dict(kappa=None, arrival=mode)
+    if mode == "trace":
+        rows, times, tinfo = trace.trace_arrivals(rows, rate, rng)
+        info.update(tinfo)
+        jobs = tables.rows_to_jobs_ordered(rows, times, network_delay=network_delay)
     else:
-        times = arrivals.poisson_times(n, rate, rng)
-    return tables.rows_to_jobs(rows, times, rng, network_delay=network_delay)
+        n = len(rows)
+        if mode == "mmpp":
+            times = arrivals.mmpp_times(n, (rate * mmpp["low"], rate * mmpp["high"]),
+                                        mmpp["switch_rate"], rng)
+        else:
+            times = arrivals.poisson_times(n, rate, rng)
+        jobs = tables.rows_to_jobs(rows, times, rng, network_delay=network_delay)
+    n0 = len(jobs)
+    jobs = regimes.drop_arrivals(jobs, scen.get("loss", 0.0), rrng)
+    info["n_lost"] = n0 - len(jobs)
+    jobs = regimes.jitter_capture(jobs, scen.get("capture_jitter_s", 0.0), rrng)
+    if header_mask is not None:   # I9 field drop-out: header_mask(header, job_id) -> header
+        jobs = [dataclasses.replace(j, header=header_mask(j.header, j.id)) for j in jobs]
+    return jobs, info
 
 
 def run_cell(rows, latency, spec, policy, kwargs, workers, rho, realisations, base_seed,
-             max_batch, mmpp=None, network_delay=0.0, n_boot=200, tables=None):
+             max_batch, mmpp=None, network_delay=0.0, n_boot=200, tables=None, scenario=None,
+             header_mask=None):
     """Run one (policy, workers, rho) cell over all realisations; return the aggregate dict."""
     if tables is None:
         from Evaluation.edge import tables
     t0 = time.perf_counter()
-    summaries, pooled = [], []
+    scen = scenario or {}
+    spec = regimes.scale_weights(spec, scen.get("weights_scale", 1.0))
+    seen = regimes.scale_latency_variance(latency, scen.get("sigma_w_scale", 1.0))
+    summaries, pooled, infos = [], [], []
     for rep in range(realisations):
-        jobs = _make_jobs(rows, latency, tables, workers, rho, rep, base_seed, max_batch,
-                          mmpp, network_delay)
+        jobs, info = _make_jobs(rows, latency, tables, workers, rho, rep, base_seed, max_batch,
+                                mmpp, network_delay, scen, header_mask)
+        infos.append(info)
         truth = {j.id: j.truth for j in jobs}
         env = EdgeEnv(jobs, latency, spec, workers, max_batch, Receiver(),
-                      _seed(base_seed, workers, round(rho * 1000), rep, 2))
+                      _seed(base_seed, workers, round(rho * 1000), rep, 2), policy_latency=seen)
         res = env.run(_build_policy(policy, kwargs, truth))
         summaries.append(metrics.summarize(res))
         pooled.extend(res.measured())
     d0, rng = spec.soft_deadline[0], np.random.default_rng(_seed(base_seed, 99))
     cell = dict(policy=policy, kwargs=kwargs, workers=workers, rho=rho, realisations=realisations,
-                n_measured=len(pooled))
+                n_measured=len(pooled), scenario=scen)
+    ks = [i["kappa"] for i in infos if i["kappa"] is not None]
+    cell["kappa"] = float(np.mean(ks)) if ks else None
+    cell["kappas"] = ks
     for key in SCALARS:
         cell[key] = _mean([s[key] for s in summaries])
     cell["false_purge_rate"] = _mean([s["false_purges"]["rate"] for s in summaries])
@@ -123,19 +159,32 @@ def _setup(rows, latency, split, spec, max_batch):
 
 def run_sweep(rows, latency, split, policies, workers, rhos, realisations, base_seed=0,
               max_batch=None, spec=None, mmpp=None, network_delay=0.0, n_boot=200,
-              policy_kwargs=None, tables=None):
-    """Sweep policies x workers x rho x realisations; returns a JSON-ready dict."""
+              policy_kwargs=None, tables=None, scenario=None, scenario_names=None, arrival=None,
+              subsample=None, header_mask=None):
+    """Sweep policies x workers x rho x realisations; returns a JSON-ready dict.
+
+    ``scenario`` is a knob dict, ``scenario_names`` names from config sim.yaml merged under it;
+    ``arrival`` ('poisson'|'mmpp'|'trace') overrides the scenario's arrival mode; ``subsample`` keeps a
+    seeded random subset (without replacement) of the split's rows.
+    """
     names = resolve_policies(policies)
     rows, spec, max_batch = _setup(rows, latency, split, spec, max_batch)
+    scen = dict(regimes.resolve_scenarios(scenario_names), **(scenario or {}))
+    if arrival:
+        scen["arrival"] = arrival
+    if subsample and subsample < len(rows):
+        keep = np.sort(np.random.default_rng(_seed(base_seed, 777)).choice(len(rows), int(subsample), replace=False))
+        rows = [rows[i] for i in keep]
     kw = policy_kwargs or {}
     t0 = time.perf_counter()
     cells = [run_cell(rows, latency, spec, p, kw.get(p, {}), w, r, realisations, base_seed,
-                      max_batch, mmpp, network_delay, n_boot, tables)
+                      max_batch, mmpp, network_delay, n_boot, tables, scen, header_mask)
              for w in workers for r in rhos for p in names]
     return dict(config=dict(split=split, policies=names, workers=list(workers), rhos=list(rhos),
                             realisations=realisations, base_seed=base_seed, max_batch=max_batch,
                             mmpp=mmpp, network_delay=network_delay, n_boot=n_boot,
-                            n_images=len(rows)),
+                            n_images=len(rows), scenario_names=list(scenario_names or []),
+                            scenario=scen),
                 git_sha=git_sha(), seconds=time.perf_counter() - t0, cells=cells)
 
 
@@ -188,12 +237,18 @@ def main(argv=None):
     ap.add_argument("--n-boot", type=int, default=200)
     ap.add_argument("--mmpp", nargs=3, type=float, metavar=("LOW", "HIGH", "SWITCH_RATE"),
                     help="rate multipliers and switching rate for an MMPP arrival process")
+    ap.add_argument("--arrival", choices=["poisson", "mmpp", "trace"],
+                    help="arrival mode (default poisson; --mmpp implies mmpp); trace = v3 sec. 9")
+    ap.add_argument("--scenario", nargs="+", default=[], metavar="NAME",
+                    help="named scenarios from config/edge/sim.yaml (regimes / sensitivity rows)")
+    ap.add_argument("--subsample", type=int, help="seeded random subset of the split's rows")
     ap.add_argument("--out", required=True)
     a = ap.parse_args(argv)
     mmpp = dict(low=a.mmpp[0], high=a.mmpp[1], switch_rate=a.mmpp[2]) if a.mmpp else None
     res = run_sweep(tables.load_rows(a.table), tables.latency_from_profile_json(a.profile),
                     a.split, a.policies, a.workers, a.rhos, a.realisations, a.seed,
-                    mmpp=mmpp, n_boot=a.n_boot, tables=tables)
+                    mmpp=mmpp, n_boot=a.n_boot, tables=tables, scenario_names=a.scenario,
+                    arrival=a.arrival, subsample=a.subsample)
     save_results(res, a.out)
     return res
 
