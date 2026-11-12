@@ -11,3 +11,14 @@
 | edge-qwen-feedback | wsl | satyapaladuguplus/edge-qwen-feedback-s9-data-s3-kappa-labels (title-slug mistake, pilot) | 1 | 08816e8c9cb676e9dd264592fcb7b1e2778dfcb4 | 2026-11-11T14:35:13Z |
 | edge-sqgan-finetune-v1 | win | satyapaladugu/edge-sqgan-finetune-v1 | 1 | 8b10a426513250f15ffde399a6c0aa666699181f | 2026-11-11T15:01:34Z |
 | edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 1 | aac00ead57274515c08667420ec791a1a39c17fe | 2026-11-11T22:57:47Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 2 | 3435e00954d851e7e39041433b6caf2f1ea027cf | 2026-11-11T23:31:06Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 3 | 2a618cdfe1863415e4c9a7c0f2d16fb6b78b77b5 | 2026-11-12T00:32:10Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 |  | 03197b265821d835c7ad5460b427c457a172f64b | 2026-11-12T00:32:46Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 |  | 03197b265821d835c7ad5460b427c457a172f64b | 2026-11-12T00:33:29Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 4 | 03197b265821d835c7ad5460b427c457a172f64b | 2026-11-12T00:35:09Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 5 | c469b1e6259a191070262455b60760a893064e7b | 2026-11-12T01:04:53Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 6 | 9cb2cfb18d104658acb09a95b12fcbea24eb28c6 | 2026-11-12T01:07:09Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 7 | 32697f676dfaf9c0975e484253f693145f6b65e0 | 2026-11-12T03:05:27Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 8 | 1a59345d5ebd36a8d2b96dcb3c85d572df4cdfcd | 2026-11-12T03:51:25Z |
+| edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 9 | c5b3bbfd60c1c0d1eb9e74c5678eb82cc82a4f50 | 2026-11-12T03:59:10Z |
+| dataset-semschedule-sqgan | wsl | satyapaladuguplus/dataset-semschedule-sqgan | 1 | b75651a9db29822a0ca82f87019d82bd0515c62f | 2026-11-12T12:54:07Z |
