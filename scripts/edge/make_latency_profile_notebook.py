@@ -16,44 +16,50 @@ DATASET_SOURCES = ("satyapaladuguplus/scheduler-dataset-v1-images",)
 OUT_NAME = "latency_v1_true.json"
 
 RUN = '''
-import json, sys, time
-sys.path.insert(0, REPO)
-import numpy as np, torch
+import json, sys, time, traceback
 from pathlib import Path
-from Codec.edge import feature_pass as fp
-from Codec.edge.feature_pass_backends import RealSQGAN
-from Evaluation.edge.edge_config import load_config
-M, N_IMAGES, WARMUP, SAMPLES = 0.25, 200, 5, 40
-cfg = json.loads(json.dumps(load_config("feature_pass")))
-cfg["sqgan"]["codec"] = "v1"; cfg["sqgan"]["m_levels"] = [M]
-root = fp.find_data_root(cfg["paths"]["images_marker"], cfg["paths"]["input_base"], cfg["paths"]["discover_depth"])
-rows = [json.loads(l) for l in (root / cfg["paths"]["images_marker"]).read_text().splitlines() if l.strip()]
-val = [r for r in rows if r.get("split") == "val"] or rows
-sq = RealSQGAN(cfg, "cuda")
-codec = sq._codec(M)
-payloads = []
-for r in val[:N_IMAGES]:
-    arr, _ = fp.letterbox(fp._load_image(root, r), tuple(cfg["sqgan"]["input_hw"]), cfg["sqgan"]["pad_value"])
-    _, handle = sq.segment(arr)
-    payloads.append(sq.encode(arr, handle, M)["payload"])
-print("encoded", len(payloads), "payloads")
-samples, vram = {}, {}
-for b in (1, 2, 4, 8):
-    batches = [[payloads[(k * b + i) % len(payloads)] for i in range(b)] for k in range(WARMUP + SAMPLES)]
-    torch.cuda.empty_cache(); torch.cuda.reset_peak_memory_stats()
-    out = []
-    for k, batch in enumerate(batches):
-        torch.cuda.synchronize(); t0 = time.perf_counter()
-        codec.decode_batch(batch)
-        torch.cuda.synchronize(); dt = time.perf_counter() - t0
-        if k >= WARMUP:
-            out.append(dt)
-    samples[str(b)] = out; vram[str(b)] = int(torch.cuda.max_memory_allocated())
-    print("B=%d mean %.1f ms" % (b, 1e3 * float(np.mean(out))))
-res = {"samples": samples, "emulated_batching": False, "m": M, "peak_vram_bytes": vram,
-       "n_payloads": len(payloads), "gpu": torch.cuda.get_device_name(0), "git_sha": GIT_SHA}
-Path("/kaggle/working/@OUT@").write_text(json.dumps(res))
-print("wrote @OUT@")
+try:
+    import json, sys, time
+    sys.path.insert(0, REPO)
+    import numpy as np, torch
+    from pathlib import Path
+    from Codec.edge import feature_pass as fp
+    from Codec.edge.feature_pass_backends import RealSQGAN
+    from Evaluation.edge.edge_config import load_config
+    M, N_IMAGES, WARMUP, SAMPLES = 0.25, 200, 5, 40
+    cfg = json.loads(json.dumps(load_config("feature_pass")))
+    cfg["sqgan"]["codec"] = "v1"; cfg["sqgan"]["m_levels"] = [M]
+    root = fp.find_data_root(cfg["paths"]["images_marker"], cfg["paths"]["input_base"], cfg["paths"]["discover_depth"])
+    rows = [json.loads(l) for l in (root / cfg["paths"]["images_marker"]).read_text().splitlines() if l.strip()]
+    val = [r for r in rows if r.get("split") == "val"] or rows
+    sq = RealSQGAN(cfg, "cuda")
+    codec = sq._codec(M)
+    payloads = []
+    for r in val[:N_IMAGES]:
+        arr, _ = fp.letterbox(fp._load_image(root, r), tuple(cfg["sqgan"]["input_hw"]), cfg["sqgan"]["pad_value"])
+        _, handle = sq.segment(arr)
+        payloads.append(sq.encode(arr, handle, M)["payload"])
+    print("encoded", len(payloads), "payloads")
+    samples, vram = {}, {}
+    for b in (1, 2, 4, 8):
+        batches = [[payloads[(k * b + i) % len(payloads)] for i in range(b)] for k in range(WARMUP + SAMPLES)]
+        torch.cuda.empty_cache(); torch.cuda.reset_peak_memory_stats()
+        out = []
+        for k, batch in enumerate(batches):
+            torch.cuda.synchronize(); t0 = time.perf_counter()
+            codec.decode_batch(batch)
+            torch.cuda.synchronize(); dt = time.perf_counter() - t0
+            if k >= WARMUP:
+                out.append(dt)
+        samples[str(b)] = out; vram[str(b)] = int(torch.cuda.max_memory_allocated())
+        print("B=%d mean %.1f ms" % (b, 1e3 * float(np.mean(out))))
+    res = {"samples": samples, "emulated_batching": False, "m": M, "peak_vram_bytes": vram,
+           "n_payloads": len(payloads), "gpu": torch.cuda.get_device_name(0), "git_sha": GIT_SHA}
+    Path("/kaggle/working/@OUT@").write_text(json.dumps(res))
+    print("wrote @OUT@")
+except Exception:
+    Path("/kaggle/working/@OUT@").write_text(json.dumps({"error": traceback.format_exc(), "emulated_batching": False}))
+    raise
 '''
 
 
@@ -63,6 +69,8 @@ def build(branch="main", account=None):
                            ("transformers>=4.49.0", "PyYAML", "lpips"), True)
     nb["cells"][0] = bn._md("# %s\n\nTrue batched decode latency of the v1 codec; writes `%s`.\n" % (TITLE, OUT_NAME))
     nb["cells"][4] = bn._code(RUN.replace("@OUT@", OUT_NAME))
+    for c in nb["cells"]:   # keep the clone out of /kaggle/working so the kernel output stays small
+        c["source"] = [x.replace("/kaggle/working/repo", "/tmp/repo") for x in c["source"]] if isinstance(c["source"], list) else c["source"].replace("/kaggle/working/repo", "/tmp/repo")
     kernel = load_config("codec")["codecs"]["v1"]["kaggle_kernel"]
     account = account or cfg.get("default_account", "wsl")
     meta = bn.build_metadata(cfg, account, STEP, TITLE, True, DATASET_SOURCES, (kernel,))
