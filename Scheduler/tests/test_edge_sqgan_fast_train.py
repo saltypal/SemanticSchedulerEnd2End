@@ -33,7 +33,8 @@ def _fake_src(monkeypatch, n_images=6):
     src = types.ModuleType("src")
     mods = {"src": src, "src.dataset": types.SimpleNamespace(ParentImages=Images),
             "src.ema": types.SimpleNamespace(ReplicaEMA=EMA),
-            "src.runtime": types.SimpleNamespace(write_json=lambda p, o: Path(p).write_text(json.dumps(o)))}
+            "src.runtime": types.SimpleNamespace(write_json=lambda p, o: Path(p).write_text(json.dumps(o))),
+            "src.evaluate": types.SimpleNamespace(evaluate=lambda *a, **k: None)}
     for k, v in mods.items():
         monkeypatch.setitem(sys.modules, k, v)
 
@@ -103,6 +104,7 @@ def test_pilot_two_updates_and_checkpoint(tmp_path, monkeypatch):
     assert (run / "pilot" / "checkpoints" / "last.pt").exists()
     s = json.loads((run / "pilot" / "training_summary.json").read_text())
     assert s["steps"] == 2 and s["fast_loop"] is True
+    assert (run / "pilot_passed.json").exists()          # the train stage requires this marker
     assert json.loads((run / "pilot" / "fast_loop.json").read_text())["amp_fp16"] is False   # cpu: amp off
 
 

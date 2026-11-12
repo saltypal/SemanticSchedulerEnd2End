@@ -163,3 +163,8 @@ def execute_fast(sqgan_train, stage, options, run):
                "elapsed_seconds": time.monotonic() - started, "strict_reload": True, "source_codec_only": True,
                "amp_skipped_updates": skipped, "teacher_cost_included_in_elapsed_time": True,
                "paper_convergence_reproduced": False, "fast_loop": True})
+    if pilot:                          # same as upstream sqgan_train.py:201-204
+        from src.evaluate import evaluate
+        evaluate(model, options["manifest"], target, {**options, "crop": 256, "evaluation_tile": [256, 512]}, pilot=True)
+        write_json(run / "pilot_passed.json", {"scope": "two adversarial steps, strict reload and development inference",
+                                               "source_codec_only": True, "AWGN_trained": False, "fast_loop": True})
