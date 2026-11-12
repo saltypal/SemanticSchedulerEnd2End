@@ -23,3 +23,4 @@
 | edge-sqgan-finetune-v1 | wsl | satyapaladuguplus/edge-sqgan-finetune-v1 | 9 | c5b3bbfd60c1c0d1eb9e74c5678eb82cc82a4f50 | 2026-11-12T03:59:10Z |
 | dataset-semschedule-sqgan | wsl | satyapaladuguplus/dataset-semschedule-sqgan | 1 | b75651a9db29822a0ca82f87019d82bd0515c62f | 2026-11-12T12:54:07Z |
 | edge-v1-latency | wsl | satyapaladuguplus/edge-v1-latency | 1 | e64e1b7834709c620cb1231dd9de7ebf8e43c7e6 | 2026-11-12T14:45:04Z |
+| edge-v1-latency | wsl | satyapaladuguplus/edge-v1-latency |  | 9a3a2a7e7768dff77ecd9531f586572b425e3d6b | 2026-11-12T15:18:40Z |
