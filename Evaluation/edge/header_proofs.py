@@ -110,7 +110,7 @@ def overhead(rows):
 
 def run_header_proofs(rows, latency, split, policies, workers, rhos, realisations, base_seed=0,
                       tables=None, scenario_names=None, arrival=None, subsample=None, n_boot=50,
-                      max_batch=None, policy_kwargs=None):
+                      max_batch=None, policy_kwargs=None, sts_fusion=None):
     """Run (a)-(d); returns ``{'config', 'ablation': [cell...], 'dedup': {...}, 'overhead': {...}}``."""
     if tables is None:
         from Evaluation.edge import tables
@@ -122,7 +122,8 @@ def run_header_proofs(rows, latency, split, policies, workers, rhos, realisation
     for name, mask in variants().items():
         res = run_sweep.run_sweep(rows, latency, split, policies, workers, rhos, realisations,
                                   base_seed, max_batch, n_boot=n_boot, tables=tables, scenario=scen,
-                                  subsample=subsample, header_mask=mask, policy_kwargs=policy_kwargs)
+                                  subsample=subsample, header_mask=mask, policy_kwargs=policy_kwargs,
+                                  sts_fusion=sts_fusion)
         for c in res["cells"]:
             ablation.append(dict(c, variant=name))
     # dedup P/R on the first cell's paired traces (receiver-only, policy independent)
@@ -184,11 +185,13 @@ def main(argv=None):
     ap.add_argument("--arrival", choices=["poisson", "mmpp", "trace"])
     ap.add_argument("--scenario", nargs="+", default=[])
     ap.add_argument("--subsample", type=int)
+    ap.add_argument("--sts-fusion", default=None, help="sts_fusion.json (D19)")
     ap.add_argument("--out-dir", required=True)
     a = ap.parse_args(argv)
     res = run_header_proofs(tables.load_rows(a.table), tables.latency_from_profile_json(a.profile),
                             a.split, a.policies, a.workers, a.rhos, a.realisations, a.seed, tables,
-                            a.scenario, a.arrival, a.subsample)
+                            a.scenario, a.arrival, a.subsample,
+                            **({"sts_fusion": run_sweep._load_fusion(a.sts_fusion)} if a.sts_fusion else {}))
     save(res, a.out_dir)
     return res
 

@@ -28,6 +28,7 @@ Critical images before their deadline (CTR@D) than every baseline, close to the 
 | D15 | Relevance | precomputed per (image, mission) from `config/edge/missions.yaml` (4 missions); simulator picks each UE's mission |
 | D16 | Tier mapping | **aligned with v3 §3**: affected_individuals -> Medium (High only in the `affected_high` sensitivity mapping). Humanitarian labels fill in where no damage label exists (14,556 of 18,082 images) |
 | D17 | SQ-GAN v0 | no v0 pilot / pass for results (user, 2026-11-11). The v0 pilot that already ran is ignored |
+| D19 | STS use | receiver fuses SPI + STS (logistic on train, temperature on val) into the tier belief all policies see; STS-masked header falls back to SPI (header ablation measures STS value) |
 | PARKED | Qwen feedback, S3 κ audit, SCOPE-AIF (S9) | set aside by the user; code/notebook exist (`edge-qwen-feedback`) |
 
 ## Rules

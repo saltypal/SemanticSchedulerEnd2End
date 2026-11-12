@@ -37,12 +37,20 @@ class EdgeEnv:
         self.policy_latency = policy_latency or latency   # what the policy believes (sigma_W regime)
         self.workers, self.max_batch = int(workers), int(max_batch)
         self.receiver, self.seed = receiver, seed
+        self._belief = {}
         self.warmup_fraction, self.ttl_hard = warmup_fraction, ttl_hard
         if self.workers < 1 or self.max_batch < 1:
             raise ValueError("workers and max_batch must be >= 1")
 
+    def _belief_header(self, job):
+        """Header as the policy sees it (D19 fused belief), cached per job; truth/metrics use job.header."""
+        b = self._belief.get(job.id)
+        if b is None:
+            b = self._belief[job.id] = self.receiver.belief(job.header)
+        return b
+
     def _queued(self, job, now):
-        h = job.header
+        h = self._belief_header(job)
         hit = self._est.get(job.id)
         if hit is None or hit[0] != self._version:   # receiver memory unchanged -> reuse estimates
             hit = (self._version, self.receiver.dup_prob(h), self.receiver.u_hat(h))
@@ -83,6 +91,7 @@ class EdgeEnv:
         rate, last_arr, now = 0.0, None, 0.0
         dtimes = []
         self._est, self._version = {}, 0
+        self._belief = {}
 
         while ai < len(jobs) or comps:
             t_arr = jobs[ai].header.arrival_time if ai < len(jobs) else np.inf
@@ -105,9 +114,9 @@ class EdgeEnv:
                     self._version += 1
                     m = job.header.mission
                     # header-only served value: expected tier weight from the SPI posterior (no truth)
-                    mission_val[m] = mission_val.get(m, 0.0) + sum(p * w for p, w in zip(job.header.tier_probs, spec.weights))
+                    mission_val[m] = mission_val.get(m, 0.0) + sum(p * w for p, w in zip(self._belief_header(job).tier_probs, spec.weights))
                     done["ids"].append(job.id)
-                    done["tier_probs"].append(job.header.tier_probs)
+                    done["tier_probs"].append(self._belief_header(job).tier_probs)
                     done["delays"].append(d)
                 policy.observe("complete", dict(done, time=now, batch_size=len(batch)))
             else:
@@ -119,7 +128,7 @@ class EdgeEnv:
                 last_arr = now
                 queue[job.id] = job
                 policy.observe("arrival", dict(id=job.id, time=now,
-                                               tier_probs=job.header.tier_probs))
+                                               tier_probs=self._belief_header(job).tier_probs))
 
             if self.ttl_hard:
                 for jid in [i for i, j in queue.items() if now - j.header.capture_time > h_max]:

@@ -116,7 +116,7 @@ def _make_jobs(rows, latency, tables, workers, rho, rep, base_seed, max_batch, m
 
 def run_cell(rows, latency, spec, policy, kwargs, workers, rho, realisations, base_seed,
              max_batch, mmpp=None, network_delay=0.0, n_boot=200, tables=None, scenario=None,
-             header_mask=None):
+             header_mask=None, sts_fusion=None):
     """Run one (policy, workers, rho) cell over all realisations; return the aggregate dict."""
     if tables is None:
         from Evaluation.edge import tables
@@ -130,7 +130,7 @@ def run_cell(rows, latency, spec, policy, kwargs, workers, rho, realisations, ba
                                 mmpp, network_delay, scen, header_mask)
         infos.append(info)
         truth = {j.id: j.truth for j in jobs}
-        env = EdgeEnv(jobs, latency, spec, workers, max_batch, Receiver(),
+        env = EdgeEnv(jobs, latency, spec, workers, max_batch, Receiver(fusion=sts_fusion),
                       _seed(base_seed, workers, round(rho * 1000), rep, 2), policy_latency=seen)
         res = env.run(_build_policy(policy, kwargs, truth))
         summaries.append(metrics.summarize(res))
@@ -170,7 +170,7 @@ def _setup(rows, latency, split, spec, max_batch):
 def run_sweep(rows, latency, split, policies, workers, rhos, realisations, base_seed=0,
               max_batch=None, spec=None, mmpp=None, network_delay=0.0, n_boot=200,
               policy_kwargs=None, tables=None, scenario=None, scenario_names=None, arrival=None,
-              subsample=None, header_mask=None):
+              subsample=None, header_mask=None, sts_fusion=None):
     """Sweep policies x workers x rho x realisations; returns a JSON-ready dict.
 
     ``scenario`` is a knob dict, ``scenario_names`` names from config sim.yaml merged under it;
@@ -188,7 +188,7 @@ def run_sweep(rows, latency, split, policies, workers, rhos, realisations, base_
     kw = policy_kwargs or {}
     t0 = time.perf_counter()
     cells = [run_cell(rows, latency, spec, p, kw.get(p, {}), w, r, realisations, base_seed,
-                      max_batch, mmpp, network_delay, n_boot, tables, scen, header_mask)
+                      max_batch, mmpp, network_delay, n_boot, tables, scen, header_mask, sts_fusion)
              for w in workers for r in rhos for p in names]
     return dict(config=dict(split=split, policies=names, workers=list(workers), rhos=list(rhos),
                             realisations=realisations, base_seed=base_seed, max_batch=max_batch,
@@ -233,6 +233,14 @@ def save_results(results, path):
         json.dump(_clean(results), handle, indent=1)
 
 
+def _load_fusion(path):
+    if not path:
+        return None
+    from parameters.edge.sts_fusion import StsFusion
+    with open(path, encoding="utf-8") as handle:
+        return StsFusion.from_dict(json.load(handle))
+
+
 def main(argv=None):
     from Evaluation.edge import tables
     ap = argparse.ArgumentParser(description="Policy sweep on a per-image table")
@@ -252,13 +260,14 @@ def main(argv=None):
     ap.add_argument("--scenario", nargs="+", default=[], metavar="NAME",
                     help="named scenarios from config/edge/sim.yaml (regimes / sensitivity rows)")
     ap.add_argument("--subsample", type=int, help="seeded random subset of the split's rows")
+    ap.add_argument("--sts-fusion", default=None, help="sts_fusion.json (D19 receiver fusion)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args(argv)
     mmpp = dict(low=a.mmpp[0], high=a.mmpp[1], switch_rate=a.mmpp[2]) if a.mmpp else None
     res = run_sweep(tables.load_rows(a.table), tables.latency_from_profile_json(a.profile),
                     a.split, a.policies, a.workers, a.rhos, a.realisations, a.seed,
                     mmpp=mmpp, n_boot=a.n_boot, tables=tables, scenario_names=a.scenario,
-                    arrival=a.arrival, subsample=a.subsample)
+                    arrival=a.arrival, subsample=a.subsample, sts_fusion=_load_fusion(a.sts_fusion))
     save_results(res, a.out)
     return res
 

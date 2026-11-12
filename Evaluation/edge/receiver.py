@@ -4,7 +4,7 @@ Only headers of images that were actually decoded and delivered enter the memory
 never learn from images it has not served. Reuses ``contracts.Header`` only.
 """
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from math import exp
 
 
@@ -26,11 +26,12 @@ def _sigmoid(x):
 class Receiver:
     """Ring memory of delivered (sem_key, perc_key) pairs plus duplicate/fidelity estimates."""
 
-    def __init__(self, size=512, model=None, u_fn=None):
+    def __init__(self, size=512, model=None, u_fn=None, fusion=None):
         if size < 1:
             raise ValueError("memory size must be >= 1")
         self.model = model or DupModel()
         self.u_fn = u_fn
+        self.fusion = fusion   # D19: StsFusion or None
         self.memory = deque(maxlen=int(size))
 
     def min_distances(self, header):
@@ -47,6 +48,12 @@ class Receiver:
             return 0.0
         m = self.model
         return _sigmoid(m.a + m.b1 * d[0] / 64.0 + m.b2 * d[1] / 64.0)
+
+    def belief(self, header):
+        """Header whose tier_probs is the SPI+STS fused belief (unchanged without fusion or a 13-value sts)."""
+        if self.fusion is None or len(header.sts) != 13:
+            return header
+        return replace(header, tier_probs=tuple(self.fusion(header.tier_probs, header.sts)))
 
     def u_hat(self, header):
         return 1.0 if self.u_fn is None else float(self.u_fn(header))
