@@ -246,7 +246,8 @@ def _sqgan_stages(pil, work, py, input_root, env_stage):
     stages = [env_stage,
               {"name": "S_locate", "timeout": 600, "keep_all": True, "expect": [work / "located.json"],
                "argvs": [[py, "-c", LOCATE_CODE, str(work), str(input_root)]]},
-              {"name": "S_sqgan", "timeout": 8 * 3600, "expect": [cache / "summary.json"], "cache_dir": cache,
+              {"name": "S_sqgan", "timeout": 11 * 3600,   # 55 shards x ~21 min / 2 GPUs ~ 10 h (8 h killed v1 at 43)
+               "expect": [cache / "summary.json"], "cache_dir": cache,
                "parallel": lambda n_gpu: _feature_parts(py, *located(), cache, pil, n_gpu,
                                                         ["--only-sqgan", "--require-sqgan"] + ([] if pil else ["--codec", "v1"])),
                "argvs": [[py, "-c", MERGE_CODE, str(cache)]]}]

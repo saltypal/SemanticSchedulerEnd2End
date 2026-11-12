@@ -21,7 +21,22 @@ STEP = "dataset-semschedule"
 TITLE = "Dataset SemSchedule"
 SQGAN_STEP = "dataset-semschedule-sqgan"
 SQGAN_TITLE = "Dataset SemSchedule Sqgan"
-WHICH = {"ab-embed": (STEP, TITLE), "sqgan": (SQGAN_STEP, SQGAN_TITLE)}
+WHICH = {"ab-embed": (STEP, TITLE), "sqgan": (SQGAN_STEP, SQGAN_TITLE),
+         # resume a killed v1 pass: copy the finished shards of the earlier run, process only the missing ones
+         "sqgan-resume": ("edge-sqgan-v1-resume", "Edge sqgan v1 resume")}
+RESUME_FROM = "satyapaladuguplus/dataset-semschedule-sqgan"
+RESUME_COPY = '''
+import glob, os, shutil
+src = [p for p in glob.glob("/kaggle/input/**/dataset-semschedule-sqgan/**/cache_sqgan/shards", recursive=True)]
+assert src, "earlier pass output (kernel source dataset-semschedule-sqgan) not mounted"
+dst = "{work}/cache_sqgan/shards"
+os.makedirs(dst, exist_ok=True)
+done = 0
+for d in sorted(glob.glob(src[0] + "/shard_*")):
+    if os.path.exists(d + "/done.json") and not os.path.exists(os.path.join(dst, os.path.basename(d))):
+        shutil.copytree(d, os.path.join(dst, os.path.basename(d))); done += 1
+print("copied", done, "finished shards from", src[0])
+'''
 ENTRY = "parameters.edge.run_all"
 WORK = "/kaggle/working/run"
 _DATA = load_config("data")
@@ -63,12 +78,19 @@ def build(mode=None, branch="main", account=None, which="ab-embed"):
     mode = mode or MODE
     step, title = WHICH[which]
     cfg = bn.load_kaggle_config()
+    resume = which == "sqgan-resume"
+    if resume:
+        which, mode = "sqgan", "full"
     args = ["--which", which, "--mode", mode, "--work", WORK]
     nb = bn.build_notebook(step, ENTRY, args, title, cfg["repo_url"], branch, REQUIREMENTS, True)
     what = ("Datasets A (images), B (labels) and C embeddings cache + grid" if which == "ab-embed" else
             "SQ-GAN pass over dataset A and B read from the public datasets scheduler-dataset-v1-images / -labels")
     nb["cells"][0] = bn._md("# %s\n\n%s, mode `%s`. Logic lives in `%s`.\n" % (title, what, mode, ENTRY))
     nb["cells"][4] = bn._code(RUN.format(argv=["python", "-u", "-m", ENTRY, *args]))
+    if resume:
+        nb["cells"][4:4] = [bn._md("## Resume" + chr(10) + chr(10) + "Copy finished shards of the killed run; the pass skips them." + chr(10)),
+                            bn._code(RESUME_COPY.replace("{work}", WORK))]
+        step, title = WHICH["sqgan-resume"]
     nb["cells"] += [bn._md("## Collect outputs\n\nReport, summary and logs are copied to the top level of /kaggle/working.\n"),
                     bn._code(COLLECT.format(work=WORK))]
     account = account or cfg.get("default_account", "wsl")
@@ -80,6 +102,10 @@ def build(mode=None, branch="main", account=None, which="ab-embed"):
     meta = bn.build_metadata(cfg, account, step, title, True, sources)
     if which == "sqgan" and mode == "full" and v1cfg.get("kaggle_kernel"):
         meta["kernel_sources"] = [v1cfg["kaggle_kernel"]]   # fine-tune output mounted read-only under /kaggle/input
+    if resume:
+        meta["kernel_sources"].append(RESUME_FROM)
+        meta["id"] = "%s/%s" % (meta["id"].split("/")[0], step)
+        meta["title"] = title
     meta["machine_shape"] = "NvidiaTeslaT4"        # T4 x2, same key as the fine-tune notebook
     return nb, meta
 
