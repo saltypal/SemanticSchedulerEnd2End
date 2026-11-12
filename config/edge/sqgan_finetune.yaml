@@ -27,10 +27,10 @@ train:
   data_parallel: auto                              # auto = true when 2+ CUDA devices
   learning_rate: 1.25e-5                           # :134
   epochs: 1                                        # :138. DECISION: sets the LR schedule length
-  max_seconds: 10800                               # :190 hard stop; Kaggle session is 12 h
+  max_seconds: 28800                               # :190 hard stop; Kaggle session is 12 h
   image_fraction: 0.25                             # :71 evaluation retention; recorded as codec rates
   semantic_fraction: 0.25
-  fast_loop: true          # Codec/edge/sqgan_fast_train.py (same model/losses; faster loop)
+  fast_loop: false         # Codec/edge/sqgan_fast_train.py (same model/losses; faster loop)
   amp: true                # fp16 autocast + GradScaler (T4 tensor cores)
   reuse_forward: true      # discriminator reuses the generator forward (losses detach)
   num_workers: 4           # DataLoader workers
