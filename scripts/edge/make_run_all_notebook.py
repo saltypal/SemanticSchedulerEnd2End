@@ -74,9 +74,12 @@ def build(mode=None, branch="main", account=None, which="ab-embed"):
     account = account or cfg.get("default_account", "wsl")
     sources = DATASET_SOURCES if which == "ab-embed" else SQGAN_NB_SOURCES
     if which == "sqgan" and mode == "full":            # fine-tuned v1 bundle (config/edge/codec.yaml), read by --codec v1
-        v1 = load_config("codec")["codecs"]["v1"]["kaggle_dataset"]
+        v1cfg = load_config("codec")["codecs"]["v1"]
+        v1 = None if v1cfg.get("kaggle_kernel") else v1cfg["kaggle_dataset"]
         sources = sources + ((v1,) if v1 and v1 not in sources else ())
     meta = bn.build_metadata(cfg, account, step, title, True, sources)
+    if which == "sqgan" and mode == "full" and v1cfg.get("kaggle_kernel"):
+        meta["kernel_sources"] = [v1cfg["kaggle_kernel"]]   # fine-tune output mounted read-only under /kaggle/input
     meta["machine_shape"] = "NvidiaTeslaT4"        # T4 x2, same key as the fine-tune notebook
     return nb, meta
 

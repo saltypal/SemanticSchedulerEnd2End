@@ -54,7 +54,7 @@ def test_mode_default_and_full(tmp_path):
     nb2 = json.loads((tmp_path / "dataset-semschedule-sqgan.ipynb").read_text())
     assert "'--mode', 'full'" in _src(nb2) and "'--which', 'sqgan'" in _src(nb2)
     meta2 = json.loads((tmp_path / "dataset-semschedule-sqgan.kernel-metadata.json").read_text())
-    assert meta2["kernel_sources"] == []
+    assert meta2["kernel_sources"] == ["satyapaladuguplus/edge-sqgan-finetune-v1"]   # full mode reads the v1 bundle
 
 
 def test_cells_are_quiet_and_collect_outputs():
@@ -68,6 +68,6 @@ def test_cells_are_quiet_and_collect_outputs():
 
 def test_sqgan_full_mode_attaches_v1_bundle():
     meta = mk.build(mode="full", which="sqgan", account="win")[1]
-    assert "satyapaladuguplus/scheduler-sqgan-v1" in meta["dataset_sources"]
+    assert meta["kernel_sources"] == ["satyapaladuguplus/edge-sqgan-finetune-v1"]   # v1 bundle from fine-tune output
     assert "satyapaladuguplus/scheduler-dataset-v1-images" in meta["dataset_sources"]
     assert "satyapaladuguplus/scheduler-sqgan-v1" not in mk.build(mode="pilot", which="sqgan")[1]["dataset_sources"]

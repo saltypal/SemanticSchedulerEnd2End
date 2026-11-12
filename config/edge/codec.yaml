@@ -13,7 +13,10 @@ codecs:
     sts_profile: 1                # header version 1: Cityscapes 7-class STS
   v1:
     description: "Fine-tuned on CrisisMMD-train + Places365-train with ADE20K-merged 20 classes"
-    kaggle_dataset: "satyapaladuguplus/scheduler-sqgan-v1"   # NOTE: docs/SQGAN_FINETUNE_HANDOFF.md says owner satyapaladuguplus; confirm
+    # Preferred: read the bundle straight from the fine-tune notebook output (kernel_sources; no dataset upload).
+    kaggle_kernel: "satyapaladuguplus/edge-sqgan-finetune-v1"   # version 9: 4,700 steps, 8 h cap, batch 2
+    kernel_bundle_subdir: "runs/edge-sqgan-v1/bundle"
+    kaggle_dataset: "satyapaladuguplus/scheduler-sqgan-v1"      # fallback if published as a dataset later
     bundle_subdir: "bundle"
     last_pt_sha256: ""            # TODO(after fine-tune): fill with `python -m Codec.edge.bundle_check <bundle> --deep --print-codec-yaml`
     image_fraction: 0.25

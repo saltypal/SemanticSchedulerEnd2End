@@ -216,6 +216,12 @@ def restore_flat_bundle(flat_dir, dest):
 def v1_bundle_dir(base=KAGGLE_INPUT, codec_cfg=None):
     """Mounted fine-tuned v1 bundle folder from ``codecs.v1`` of config/edge/codec.yaml (dataset slug + bundle_subdir)."""
     v1 = (codec_cfg or load_config("codec"))["codecs"]["v1"]
+    if v1.get("kaggle_kernel"):          # notebook output mounted via kernel_sources: <base>/**/<kernel slug>/<subdir>
+        kslug = str(v1["kaggle_kernel"]).split("/")[-1]
+        sub = v1.get("kernel_bundle_subdir", "")
+        hits = sorted(p.parent for p in Path(base).glob("**/%s/%s/bundle.json" % (kslug, sub)) if p.is_file())
+        if hits:
+            return hits[0]
     slug = str(v1["kaggle_dataset"]).split("/")[-1]
     if not slug:
         raise ValueError("codecs.v1.kaggle_dataset is empty in config/edge/codec.yaml")
