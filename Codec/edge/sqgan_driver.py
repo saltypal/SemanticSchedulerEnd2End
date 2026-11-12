@@ -56,7 +56,13 @@ def main(argv=None):
         return model
 
     sqgan_train.build = build
-    sqgan_train.execute(a.stage, options, run)
+    if options.get("fast_loop"):
+        spec = importlib.util.spec_from_file_location("sqgan_fast_train", Path(__file__).with_name("sqgan_fast_train.py"))
+        fast = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fast)
+        fast.execute_fast(sqgan_train, a.stage, options, run)
+    else:
+        sqgan_train.execute(a.stage, options, run)
 
 
 if __name__ == "__main__":

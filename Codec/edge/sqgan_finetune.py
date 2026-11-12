@@ -202,7 +202,10 @@ def trainer_options(cfg, manifest_path, checkpoint_dir, n_gpus):
             "device": "cuda:0" if n_gpus else "cpu", "batch_size": int(t["batch_size"]), "data_parallel": dp,
             "learning_rate": float(t["learning_rate"]), "epochs": int(t["epochs"]), "max_seconds": float(t["max_seconds"]),
             "image_fraction": float(t["image_fraction"]), "semantic_fraction": float(t["semantic_fraction"]),
-            "crop": 256, "evaluation_tile": [256, 512]}
+            "crop": 256, "evaluation_tile": [256, 512],
+            # speed (Codec/edge/sqgan_fast_train.py); fast_loop false = upstream sqgan_train.execute unchanged
+            "fast_loop": bool(t.get("fast_loop", False)), "amp": bool(t.get("amp", True)),
+            "reuse_forward": bool(t.get("reuse_forward", True)), "num_workers": int(t.get("num_workers", 4))}
 
 
 def _git(args, cwd=None):
