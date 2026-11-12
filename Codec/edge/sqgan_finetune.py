@@ -143,8 +143,10 @@ def build_manifest(train_rows, images_root, data_cfg, work_dir):
     """
     images_root, work_dir = Path(images_root), Path(work_dir)
     min_w, min_h = int(data_cfg["min_width"]), int(data_cfg["min_height"])
-    records, skipped = [], []
-    for r in train_rows:
+    from concurrent.futures import ThreadPoolExecutor
+
+    def one(r):
+        """(record | None, skipped uid | None) for one row; I/O bound, so rows run in threads (order kept)."""
         src, rel = r["source"], r["file"]
         prefix = "images/%s/" % src
         if not rel.startswith(prefix):
@@ -154,14 +156,19 @@ def build_manifest(train_rows, images_root, data_cfg, work_dir):
         source, relative = src, rel[len(prefix):]
         if w < min_w or h < min_h:
             if data_cfg["small_image_policy"] == "skip":
-                skipped.append(r["uid"])
-                continue
+                return None, r["uid"]
             dst = work_dir / "upscaled" / (hashlib.sha256(r["uid"].encode()).hexdigest()[:16] + ".png")
             _upscale(path, dst, min_w, min_h)
             path, source, relative = dst, "upscaled", dst.name
             w, h = image_size(path)
-        records.append({"source": source, "split": "train", "relative_path": relative, "sha256": sha256(path),
-                        "width": w, "height": h, "uid": r["uid"]})
+        return {"source": source, "split": "train", "relative_path": relative, "sha256": sha256(path),
+                "width": w, "height": h, "uid": r["uid"]}, None
+
+    # 32 threads: Kaggle /kaggle/input has high per-file latency (serial loop took ~26 min for ~16k files)
+    with ThreadPoolExecutor(max_workers=32) as pool:
+        results = list(pool.map(one, train_rows))
+    records = [rec for rec, _ in results if rec is not None]
+    skipped = [uid for _, uid in results if uid is not None]
     if not records:
         raise ValueError("no train images >= %dx%d left (skipped %d); see data.small_image_policy" % (min_w, min_h, len(skipped)))
     records.append(dict(records[0], split="val", pilot_smoke_only=True))
