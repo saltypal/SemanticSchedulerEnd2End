@@ -66,7 +66,7 @@ except Exception:
 def build(branch="main", account=None):
     cfg = bn.load_kaggle_config()
     nb = bn.build_notebook(STEP, "Codec.edge.sqgan_profile", [], TITLE, cfg["repo_url"], branch,
-                           ("transformers>=4.49.0", "PyYAML", "lpips"), True)
+                           ("pytorch-lightning==1.9.5", "torchmetrics==0.11.4", "transformers==4.46.3", "scipy", "omegaconf", "pytorch-msssim==1.0.0", "lpips==0.1.4", "PyYAML", "einops", "pillow"), True)
     nb["cells"][0] = bn._md("# %s\n\nTrue batched decode latency of the v1 codec; writes `%s`.\n" % (TITLE, OUT_NAME))
     nb["cells"][4] = bn._code(RUN.replace("@OUT@", OUT_NAME))
     for c in nb["cells"]:   # keep the clone out of /kaggle/working so the kernel output stays small
