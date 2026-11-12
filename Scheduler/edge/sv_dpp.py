@@ -34,7 +34,7 @@ class SVDPP(Policy):
     uses_truth = False
 
     def __init__(self, V=None, eta=None, debt_init=None, hard_purge_prob=None,
-                 relevance_beta=None, relevance_range=None):
+                 relevance_beta=None, relevance_range=None, tie_tol_frac=None):
         cfg = load_config("sim")
         self.V = float(cfg["sv_dpp"]["V"] if V is None else V)
         self._eta_arg = None if eta is None else tuple(float(e) for e in eta)
@@ -45,6 +45,8 @@ class SVDPP(Policy):
         self.eta = self._eta_arg or tuple(float(e) for e in cfg["eta_timely"])
         self.relevance_beta = float(cfg["sv_dpp"]["relevance_beta"] if relevance_beta is None
                                     else relevance_beta)
+        self.tie_tol_frac = float(cfg["sv_dpp"].get("tie_tol_frac", 0.1) if tie_tol_frac is None
+                                  else tie_tol_frac)
         rr = cfg["sv_dpp"]["relevance_range"] if relevance_range is None else relevance_range
         self._relevance_range = {int(m): (float(lo), float(hi)) for m, (lo, hi) in dict(rr).items()}
         if 0 not in self._relevance_range or any(hi <= lo for lo, hi in self._relevance_range.values()):
@@ -146,19 +148,21 @@ class SVDPP(Policy):
                 view = views[j.id]
                 w, var = what[j.id]
                 en = self._ev(view, j.age + mB, fac[j.id])
-                ed = self._ev(view, j.age + w + mB, fac[j.id])
+                wd = w + mB / c    # deferral costs at least one service round of the pool (sec. 6.2 / 6.3)
+                ed = self._ev(view, j.age + wd + mB, fac[j.id])
                 sd = math.sqrt(var + vB)
                 dg = 0.0
                 for k in range(4):
                     h = spec.hard_deadline(k) - j.age
                     gn = lat.cdf(B, h)
-                    gd = _phi((h - w - mB) / sd) if sd > 0 else float(h - w - mB >= 0)
+                    gd = _phi((h - wd - mB) / sd) if sd > 0 else float(h - wd - mB >= 0)
                     dg += self.Z[k] * view[0][k] * (gn - gd)
                 rows.append((self.V * (en - ed) + dg, en, j))
-            if max(r[0] for r in rows) - min(r[0] for r in rows) < _TIE:
-                rows.sort(key=lambda r: (-r[1], r[2].header.arrival_time))
-            else:
-                rows.sort(key=lambda r: (-r[0], -r[1], r[2].header.arrival_time))
+            # sec. 6.3 ties: a job whose score is negligible next to the value scale is "not at risk"
+            # and is ranked by E[v] (then arrival); per job, not only when the whole queue ties.
+            tol = max(_TIE, self.tie_tol_frac * max(r[1] for r in rows))
+            rows = [((r[0] if r[0] > tol else 0.0), r[1], r[2]) for r in rows]
+            rows.sort(key=lambda r: (-r[0], -r[1], r[2].header.arrival_time))
             top = rows[:B]
             ratio = sum(r[0] for r in top) / mB
             ev_ratio = sum(r[1] for r in top) / mB   # tie-break (plan 6.3): expected value rate

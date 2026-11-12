@@ -120,3 +120,21 @@ def test_at_risk_critical_beats_safe_critical_when_debt_high():
     pol.Z = [5.0, 0.0, 0.0, 0.0]
     d = pol.select(state([qj(0, ONE[0], age=0.0), qj(1, ONE[0], age=8.5)], lat=lat, rate=0.2))
     assert d.batch == (1,)
+
+
+def test_deferring_top_ranked_job_is_not_free():
+    """Deferral costs at least one service round (sec. 6.2): the critical about to cross D_C goes first."""
+    aged, fresh = qj(0, ONE[0], age=4.5), qj(1, ONE[0], age=0.0)
+    d = make().select(state([fresh, aged], lat=LatencyProfile({1: [1.0, 1.0], 2: [1.5, 1.5]})))
+    assert d.batch == (0,)
+
+
+def test_negligible_debt_credit_does_not_outrank_confident_critical():
+    """Sec. 6.3 ties are per job: tiny debt credit on a likely-Low job must not starve a confident Critical."""
+    lat = LatencyProfile({1: [0.4, 0.4], 2: [0.55, 0.55], 4: [0.85, 0.85], 8: [1.4, 1.4]})
+    low = [qj(i + 1, (0.02, 0.03, 0.05, 0.9), age=0.0) for i in range(20)]
+    crit = qj(0, (0.98, 0.01, 0.01, 0.0), age=2.0)
+    pol = make()
+    pol.Z = [15.0, 2.4, 2.0, 0.0]
+    d = pol.select(state(low + [crit], lat=lat, max_batch=8, workers=2, rate=1.8))
+    assert 0 in d.batch
