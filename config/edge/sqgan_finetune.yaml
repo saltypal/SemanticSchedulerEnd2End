@@ -23,7 +23,7 @@ teacher:
   seg_classes: config/edge/seg_classes.yaml
 train:
   seed: 22                                         # sqgan_train.py:32
-  batch_size: 8                                    # :127 (DataParallel needs >=2, :130)
+  batch_size: 4                                    # :127 (DataParallel needs >=2, :130)
   data_parallel: auto                              # auto = true when 2+ CUDA devices
   learning_rate: 1.25e-5                           # :134
   epochs: 1                                        # :138. DECISION: sets the LR schedule length
