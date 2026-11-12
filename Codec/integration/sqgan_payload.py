@@ -125,6 +125,40 @@ class SQGANDigitalCodec:
         if tensor.shape!=(1,3,256,512) or not torch.isfinite(tensor).all():
             raise ValueError("invalid SQ-GAN reconstruction")
         return tensor
+    def decode_batch(self,payloads):
+        """True batched decode: parse each packet on CPU, run the neural decoder once per equal-token-count group.
+
+        Mirrors SQGAN.decode (Semantic_Lossless src/sqgan.py) with a leading batch dim. Packets whose kept-token
+        counts differ cannot share a stacked tensor (no padding mask exists in demasker), so they form separate
+        groups; at a fixed retained fraction every packet has the same counts, i.e. one group. Returns a list of
+        (1,3,256,512) tensors in input order."""
+        import torch
+        payloads=list(payloads)
+        if not payloads:return []
+        parsed=[]
+        for payload in payloads:
+            if not isinstance(payload,bytes):raise TypeError("complete immutable payload bytes required")
+            parsed.append(self.packet.decode_packet(payload))
+        groups={}
+        for i,(img,sem) in enumerate(parsed):groups.setdefault((len(img[0]),len(sem[0])),[]).append(i)
+        out=[None]*len(payloads);m=self.model
+        parameter=next(m.parameters())
+        def restore(sections,quantizer,demasker):
+            codes=torch.tensor([c for _,c in sections],device=parameter.device,dtype=torch.long)
+            selected=torch.tensor([p for p,_ in sections],device=parameter.device,dtype=torch.long)
+            vectors=quantizer.get_codebook_entry(codes).permute(0,2,1).contiguous()
+            mask=parameter.new_zeros(len(sections),512);mask.scatter_(1,selected,1.)
+            return demasker(vectors,vectors[:,:,:0],selected,None,mask)
+        with torch.inference_mode():
+            for idx in groups.values():
+                logits=m.decoder_semantic(restore([parsed[i][1] for i in idx],m.quantize_semantic,m.demasker_semantic))
+                predicted=torch.zeros_like(logits).scatter_(1,logits.argmax(1,keepdim=True),1.)
+                rec=m.decoder(restore([parsed[i][0] for i in idx],m.quantize,m.demasker),[predicted[:,:-1] for _ in range(5)])
+                mean=rec.new_tensor([.485,.456,.406])[None,:,None,None];std=rec.new_tensor([.229,.224,.225])[None,:,None,None]
+                rec=rec*std+mean
+                if rec.shape!=(len(idx),3,256,512) or not torch.isfinite(rec).all():raise ValueError("invalid SQ-GAN reconstruction")
+                for j,i in enumerate(idx):out[i]=rec[j:j+1]
+        return out
     def execute(self,service,job,finish_time=None):
         """Decode exactly the service-owned job, then commit success or failure."""
         if service.in_flight is not job:raise ValueError("job must be the service's in-flight dispatch")

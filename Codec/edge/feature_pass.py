@@ -525,29 +525,33 @@ def _decode_one(ctx, sq, uid, m, entry, shard_dir, sfail):
 def _latency_shard(ctx, sq, shard_dir, payloads, m, sfail):
     """Decode latency samples (seconds) per batch size, written to ``latency_samples.json`` in the shard.
 
-    The SQ-GAN decoder takes one packet per call, so a batch of B is B sequential decodes in one timed window
-    (same emulation as Codec.edge.sqgan_profile). Payloads cycle when fewer than B are available."""
+    Uses backend.decode_batch (true batching) when present, else B sequential decodes in one timed window. Payloads cycle when fewer than B are available."""
     prof, clock, sync = ctx.cfg["profile"], ctx.backends.clock, ctx.backends.sync or (lambda: None)
     try:
         if not payloads:
             return
         samples = {}
+        true_batch = hasattr(sq, "decode_batch")
+        def run(batch):
+            if true_batch:
+                sq.decode_batch(batch, m)
+            else:
+                for p in batch:
+                    sq.decode(p, m)
         for b in sorted(set(int(x) for x in prof["batch_sizes"])):
             batch = [payloads[i % len(payloads)] for i in range(b)]
             for _ in range(int(prof["warmup"])):
-                for p in batch:
-                    sq.decode(p, m)
+                run(batch)
             out = []
             for _ in range(int(prof["repeats"])):
                 sync()
                 t0 = clock()
-                for p in batch:
-                    sq.decode(p, m)
+                run(batch)
                 sync()
                 out.append(float(clock() - t0))
             samples[str(b)] = out
         (shard_dir / "latency_samples.json").write_text(
-            json.dumps({"samples": samples, "m": m, "emulated_batching": True}), encoding="utf-8")
+            json.dumps({"samples": samples, "m": m, "emulated_batching": not true_batch}), encoding="utf-8")
     except Exception as exc:
         _stage_fail(sfail, "latency", "shard", exc)
 

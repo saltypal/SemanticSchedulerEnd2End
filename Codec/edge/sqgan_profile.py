@@ -2,7 +2,7 @@
 
 Output ``latency_samples`` {B: [seconds,...]} is exactly what
 ``Evaluation.edge.contracts.LatencyProfile`` takes. The real SQ-GAN decoder handles ONE packet per call,
-so batch size B is EMULATED by ``decode_batch_sequential`` (B sequential decodes inside one timed window).
+so, absent codec.decode_batch, batch size B is EMULATED by ``decode_batch_sequential`` (B sequential decodes inside one timed window).
 Replace that named function with a true batched decoder when one exists; nothing else changes.
 torch is imported lazily; with no CUDA the timing falls back to wall-clock.
 """
@@ -40,8 +40,12 @@ def profile_codec(codec, images, batch_sizes, repeats, device="cpu", flops_fn=No
         raise ValueError("images required")
     if repeats < 1 or not batch_sizes:
         raise ValueError("repeats>=1 and batch_sizes required")
-    emulated = decode_batch is None
-    decode_batch = decode_batch or decode_batch_sequential
+    if decode_batch is None and hasattr(codec, "decode_batch"):
+        decode_batch = lambda c, ps: c.decode_batch(ps)   # true batching
+        emulated = False
+    else:
+        emulated = decode_batch is None
+        decode_batch = decode_batch or decode_batch_sequential
     cuda = False
     try:
         import torch

@@ -290,3 +290,7 @@ class RealSQGAN:
     def decode(self, payload, m):
         t = self._codec(m).decode(payload)
         return (t[0].permute(1, 2, 0).clamp(0, 1).mul(255).round().byte().cpu().numpy())
+
+    def decode_batch(self, payloads, m):
+        arrs = self._codec(m).decode_batch(payloads)
+        return [t[0].permute(1, 2, 0).clamp(0, 1).mul(255).round().byte().cpu().numpy() for t in arrs]
