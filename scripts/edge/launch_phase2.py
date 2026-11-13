@@ -84,6 +84,9 @@ TRAIN_BUDGET = ("--iters", "30", "--episodes", "4", "--n-jobs", "500", "--worker
 BUDGETS = {"default": TRAIN_BUDGET,      # --budget big: retrain learners whose curves had not converged
            # fast (2026-11-13, user): 150 iters x 13 episodes = 1950 RL episodes, run with --seeds 1
            "fast": ("--iters", "150", "--episodes", "13", "--n-jobs", "500", "--workers", "2", "--rate", "3.0"),
+           # fix (2026-11-13, fix plan F5/F7): bursty training load, B up to 8 like evaluation, 150 x 13 episodes
+           "fix": ("--iters", "150", "--episodes", "13", "--n-jobs", "500", "--workers", "2", "--rate", "4.5",
+                   "--max-batch", "8", "--scenario", "mmpp_bursts"),
            "big": ("--iters", "120", "--episodes", "6", "--n-jobs", "800", "--workers", "2", "--rate", "3.0")}
 
 

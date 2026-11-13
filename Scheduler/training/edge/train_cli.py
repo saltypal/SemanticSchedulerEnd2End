@@ -26,6 +26,9 @@ def main(argv=None):
     ap.add_argument("--max-batch", type=int, default=4)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--sts-fusion", default=None, help="sts_fusion.json: receiver fuses SPI+STS (D19)")
+    ap.add_argument("--scenario", nargs="+", default=[],
+                    help="F5: train in named regimes of config/edge/sim.yaml (e.g. mmpp_bursts noisy_spi_20); "
+                         "uses the arrival and spi_noise knobs")
     a = ap.parse_args(argv)
     from Evaluation.edge.run_sweep import _load_fusion
     fusion = _load_fusion(a.sts_fusion)
@@ -44,10 +47,19 @@ def main(argv=None):
     latency = tables.latency_from_profile_json(a.profile)
     spec = ValueSpec.from_config(load_config("sim"))
 
+    from Evaluation.edge import arrivals, regimes
+    scen = regimes.resolve_scenarios(a.scenario)
+    mmpp = (scen.get("mmpp") or load_config("sim")["mmpp"]) if scen.get("arrival") == "mmpp" else None
+
     def env_factory(seed):
         rng = np.random.default_rng(seed)
         pick = [rows[i] for i in rng.integers(len(rows), size=a.n_jobs)]
-        times = np.cumsum(rng.exponential(1.0 / a.rate, size=a.n_jobs))
+        if scen.get("spi_noise"):
+            pick = regimes.inject_spi_noise(pick, float(scen["spi_noise"]), rng)
+        if mmpp:
+            times = arrivals.mmpp_times(a.n_jobs, (a.rate * mmpp["low"], a.rate * mmpp["high"]), mmpp["switch_rate"], rng)
+        else:
+            times = np.cumsum(rng.exponential(1.0 / a.rate, size=a.n_jobs))
         jobs = tables.rows_to_jobs(pick, times, rng)
         return EdgeEnv(jobs, latency, spec, a.workers, a.max_batch, Receiver(fusion=fusion), seed)
 
