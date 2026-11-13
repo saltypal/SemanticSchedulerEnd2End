@@ -111,6 +111,7 @@ class SVDPP(Policy):
     def select(self, state: State) -> Decision:
         spec, lat, c = self.spec, state.latency, max(1, state.workers)
         views = {j.id: self._view(j) for j in state.queue}
+        self.last_scores = {j.id: self._ev(views[j.id], j.age) for j in state.queue}   # trace only: E[v] now
         b1 = lat.batch_sizes[0]
         purge = set()
         for j in state.queue:

@@ -67,7 +67,9 @@ class SetGreedyPolicy(Policy):
         glob = torch.as_tensor(global_features(state), dtype=torch.float32)[None]
         with torch.no_grad():
             logits, _ = self.model(job, glob)
-        order = np.argsort(-logits[0].numpy().astype(float), kind="stable")[:batch_size_for(state)]
+        lg = logits[0].numpy().astype(float)
+        self.last_scores = {j.id: float(v) for j, v in zip(state.queue, lg)}   # trace only
+        order = np.argsort(-lg, kind="stable")[:batch_size_for(state)]
         return Decision(tuple(state.queue[int(i)].id for i in order))
 
 

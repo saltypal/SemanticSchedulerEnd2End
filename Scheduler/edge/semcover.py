@@ -231,6 +231,7 @@ class SemCover(Policy):
         if prep is None:
             return Decision()
         q, S = self.kernel_and_q(prep)
+        self.last_scores = {i: float(v) for i, v in zip(prep["ids"], q)}   # trace only: DPP quality
         k, avail, decay = prep["B"], prep["avail"], prep["decay"]
         Sc = condition(S, decay, self.eps)
         L = q[:, None] * Sc * q[None, :]
