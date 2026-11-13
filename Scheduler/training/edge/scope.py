@@ -46,9 +46,11 @@ def discounted_returns(rewards, gamma):
     return out
 
 
-def build_batch(decisions, returns):
+def build_batch(decisions, returns, ret_scale=1.0):
+    """``ret_scale`` divides the returns: the value head learns scaled returns, so its loss stays O(1) and does not
+    swamp the policy gradient under the global grad-norm clip (raw returns are O(100): vf ~ 4e4 vs pg ~ 1)."""
     b = pad_batch(decisions)
-    ret = torch.as_tensor(returns, dtype=torch.float32)
+    ret = torch.as_tensor(returns, dtype=torch.float32) / float(ret_scale)
     val = torch.as_tensor([d["value"] for d in decisions], dtype=torch.float32)
     adv = ret - val
     b.update(ret=ret, adv=(adv - adv.mean()) / (adv.std() + 1e-8) if len(adv) > 1 else adv)

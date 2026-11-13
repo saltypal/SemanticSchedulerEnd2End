@@ -102,7 +102,7 @@ def greedy_map(L, k, avail, rng=None):
         if rng is None:
             j = int(torch.argmax(torch.where(avail, d2.clamp(min=0) + tie, torch.full_like(d2, NEG))))
         else:
-            p = torch.where(avail, d2.clamp(min=0) + 1e-15, torch.zeros_like(d2)).numpy()
+            p = torch.where(avail, torch.nan_to_num(d2, nan=0.0).clamp(min=0) + 1e-15, torch.zeros_like(d2)).numpy()
             j = int(rng.choice(n, p=p / p.sum()))
         sel.append(j)
         avail[j] = False

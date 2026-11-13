@@ -95,7 +95,7 @@ def _nll(net, rec, zeta):
     return -sequential_logp(decision_L(net, rec, zeta), ch, rec["avail"]) if ch else torch.zeros((), dtype=DT)
 
 
-def train_semcover(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32, epochs=3, lr=1e-2, cfg=None):
+def train_semcover(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32, epochs=3, lr=3e-3, cfg=None):
     cfg = cfg or ScopeConfig(lr=lr)
     net = SemCoverNet(hidden)
     opt = torch.optim.Adam(net.parameters(), lr=cfg.lr)
@@ -103,7 +103,7 @@ def train_semcover(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32,
     # ---- stage 1: DPP likelihood of teacher batches (value-weighted) + tier CE ----
     recs = []
     for e in range(episodes):
-        ep, spec = _run(env_factory, net, "teacher", teacher, seed + e)
+        ep, spec = _run(env_factory, net, "teacher", teacher, seed * 1_000_003 + e)
         zeta = spec.zeta_critical_copy
         vmax = max(float(ep.rewards.max()), 1e-9) if len(ep.rewards) else 1.0
         for rec, r in zip(ep.decisions, ep.rewards):
@@ -123,7 +123,7 @@ def train_semcover(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32,
     # ---- stage 2: constrained policy gradient with annealed distillation ----
     lambdas, n_live = np.zeros(4), 0.0
     for it in range(iters):
-        eps_ = [_run(env_factory, net, "sample", teacher, seed + 100 + it * episodes + e, lambdas)
+        eps_ = [_run(env_factory, net, "sample", teacher, seed * 1_000_003 + 100 + it * episodes + e, lambdas)
                 for e in range(episodes)]
         succ = np.mean([ep.tier_success for ep, _ in eps_], axis=0)
         batch = []
@@ -142,6 +142,8 @@ def train_semcover(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32,
                 pg = -torch.min(ratio * a, torch.clamp(ratio, 1 - cfg.clip, 1 + cfg.clip) * a)
                 ce = F.cross_entropy(net.tier_logits(rec["jf"], rec["gf"]), rec["labels"])
                 loss = pg + beta * _nll(net, rec, zeta).float() + 0.2 * ce
+                if not torch.isfinite(loss):      # an exploding ratio once made the sampling p NaN (2026-11-13)
+                    continue
                 opt.zero_grad()
                 loss.backward()
                 nn.utils.clip_grad_norm_(net.parameters(), 1.0)

@@ -11,7 +11,7 @@ from Scheduler.training.edge.reward_attribution import attribute_rewards
 from Scheduler.training.edge.scope import discounted_returns
 
 
-def train_bcedge(env_factory, iters=5, episodes=2, hidden=32, lr=3e-3, gamma=0.95, alpha=0.05, seed=0):
+def train_bcedge(env_factory, iters=5, episodes=2, hidden=32, lr=3e-3, gamma=0.95, alpha=0.05, seed=0, epochs=4):
     """Returns (net, history list of dicts)."""
     torch.manual_seed(seed)
     net = make_net(hidden)
@@ -20,7 +20,7 @@ def train_bcedge(env_factory, iters=5, episodes=2, hidden=32, lr=3e-3, gamma=0.9
     for it in range(int(iters)):
         xs, masks, acts, rets, total = [], [], [], [], 0.0
         for e in range(int(episodes)):
-            s = seed + it * episodes + e
+            s = seed * 1_000_003 + it * episodes + e   # seeds no longer share episodes
             env = env_factory(s)
             pol = BCEdge(net, sample=True, record=True, seed=s)
             res = env.run(pol)
@@ -34,14 +34,18 @@ def train_bcedge(env_factory, iters=5, episodes=2, hidden=32, lr=3e-3, gamma=0.9
             continue
         x, m = torch.as_tensor(np.stack(xs)), torch.as_tensor(np.stack(masks))
         a, ret = torch.as_tensor(acts), torch.as_tensor(np.asarray(rets), dtype=torch.float32)
-        logits, v = net(x)
-        logp = torch.log_softmax(logits.masked_fill(~m, -1e9), dim=-1)
-        ent = -(logp.exp() * logp.masked_fill(~m, 0.0)).sum(-1).mean()
-        adv = (ret - v).detach()
-        loss = -(logp.gather(1, a[:, None]).squeeze(1) * adv).mean() + 0.5 * ((ret - v) ** 2).mean() - alpha * ent
-        opt.zero_grad()
-        loss.backward()
-        opt.step()
+        ret = ret / (ret.std() + 1e-8)           # scaled returns: value loss O(1), not O(1e4) (2026-11-13)
+        for _ in range(int(epochs)):            # was a single gradient step per iteration
+            logits, v = net(x)
+            logp = torch.log_softmax(logits.masked_fill(~m, -1e9), dim=-1)
+            ent = -(logp.exp() * logp.masked_fill(~m, 0.0)).sum(-1).mean()
+            adv = (ret - v).detach()
+            adv = (adv - adv.mean()) / (adv.std() + 1e-8) if len(adv) > 1 else adv
+            loss = -(logp.gather(1, a[:, None]).squeeze(1) * adv).mean() + 0.5 * ((ret - v) ** 2).mean() - alpha * ent
+            opt.zero_grad()
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0)
+            opt.step()
         hist.append(dict(iter=it, mean_return=total / episodes, loss=float(loss.detach()), entropy=float(ent.detach()),
                          decisions=len(xs)))
     return net, hist

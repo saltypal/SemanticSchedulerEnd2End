@@ -15,15 +15,20 @@ from Scheduler.training.edge.scope import (ScopeConfig, build_batch, discounted_
                                            scope_ppo_update)
 
 
+def ep_seed(seed, i):
+    """Episode i of training seed ``seed``. Seed 0 keeps its old stream (0 + i); other seeds no longer overlap."""
+    return seed * 1_000_003 + i
+
+
 def _ppo_loop(env_factory, model, cfg, iters, episodes, seed, teacher, use_dual):
     torch.manual_seed(seed)
     opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
-    lambdas, n_live, history = None, 0.0, []
+    lambdas, n_live, history, ret_scale = None, 0.0, [], None
     for it in range(iters):
         decisions, returns, rewards, succ = [], [], [], []
         for e in range(episodes):
             pol = LearnedPolicy(model, "sample", teacher, teacher_eps=cfg.teacher_eps)
-            ep = collect_episode(env_factory, pol, seed=seed + it * episodes + e, lambdas=lambdas)
+            ep = collect_episode(env_factory, pol, seed=ep_seed(seed, it * episodes + e), lambdas=lambdas)
             if lambdas is None:
                 lambdas = np.zeros(len(ep.tier_success))
             decisions += ep.decisions
@@ -33,7 +38,10 @@ def _ppo_loop(env_factory, model, cfg, iters, episodes, seed, teacher, use_dual)
         if not decisions:
             continue
         n_live += cfg.alpha_live * len(decisions)
-        batch = build_batch(decisions, np.asarray(returns))
+        r = np.asarray(returns)
+        sd = float(r.std()) or 1.0
+        ret_scale = sd if ret_scale is None else 0.9 * ret_scale + 0.1 * sd    # running return scale
+        batch = build_batch(decisions, r, ret_scale)
         stats = {}
         for _ in range(cfg.epochs):
             stats = scope_ppo_update(model, opt, batch, cfg, lambdas, n_live)
@@ -80,7 +88,7 @@ def train_bc(env_factory, teacher, episodes=4, epochs=50, lr=1e-2, model=None, s
     model = model or SetPolicy()
     data = []
     for e in range(episodes):
-        data += collect_episode(env_factory, LearnedPolicy(model, "teacher", teacher), seed=seed + e).decisions
+        data += collect_episode(env_factory, LearnedPolicy(model, "teacher", teacher), seed=ep_seed(seed, e)).decisions
     losses = bc_fit(model, data, epochs, lr)
     return model, [dict(iter=0, bc_loss_first=losses[0], bc_loss_last=losses[-1], n_samples=len(data))]
 
@@ -95,7 +103,7 @@ def train_dagger(env_factory, teacher, iters=3, episodes=2, epochs=30, lr=1e-2, 
         mode = "teacher" if it == 0 else "greedy"
         rew = []
         for e in range(episodes):
-            ep = collect_episode(env_factory, LearnedPolicy(model, mode, teacher), seed=seed + it * episodes + e)
+            ep = collect_episode(env_factory, LearnedPolicy(model, mode, teacher), seed=ep_seed(seed, it * episodes + e))
             data += ep.decisions
             rew.append(float(ep.rewards.sum()))
         losses = bc_fit(model, data, epochs, lr)
@@ -108,7 +116,8 @@ def train_dagger(env_factory, teacher, iters=3, episodes=2, epochs=30, lr=1e-2, 
 def train_dqn_plain(env_factory, episodes=6, seed=0, hidden=32, **kw):
     """Plain double-DQN, no teacher (margin loss off). Returns (model, history)."""
     from Scheduler.training.edge import dqn
-    return dqn.train_dqn(env_factory, episodes, teacher=None, hidden=hidden, seed=seed, **kw)
+    return dqn.train_dqn(lambda e: env_factory(ep_seed(seed, e)), episodes, teacher=None, hidden=hidden, seed=seed,
+                         **kw)   # was env_factory(e): every DQN seed saw the same episodes
 
 
 def train_scope_dqn(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32, lambda_lr=0.05, **kw):
@@ -121,10 +130,10 @@ def train_scope_dqn(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32
     lam, model, history = np.zeros(4), None, []
     etas = tuple(env_factory(seed).spec.eta)
     for it in range(iters):
-        model, h = dqn.train_dqn(lambda e, it=it: env_factory(seed + it * episodes + e), episodes,
+        model, h = dqn.train_dqn(lambda e, it=it: env_factory(ep_seed(seed, it * episodes + e)), episodes,
                                  teacher=teacher, model=model, hidden=hidden, margin_weight=1.0,
-                                 beta_k=500.0, lambdas=tuple(lam), eps_start=0.5, seed=seed + it, **kw)
-        env = env_factory(seed + 1000 + it)
+                                 beta_k=500.0, lambdas=tuple(lam), eps_start=0.5, seed=ep_seed(seed, it), **kw)
+        env = env_factory(ep_seed(seed, 1000 + it))
         res = env.run(dqn.DQNPolicy(model))
         j = tier_success_rates(res.measured() or res.outcomes, env.spec)
         lam = dual_update(lam, j, etas, lambda_lr)
@@ -137,7 +146,7 @@ def _teacher_episodes(env_factory, teacher, episodes, seed):
     out = []
     for e in range(episodes):
         pol = LoggingPolicy(teacher)
-        out.append((pol, env_factory(seed + e).run(pol)))
+        out.append((pol, env_factory(ep_seed(seed, e)).run(pol)))
     return [(p.records, r.outcomes) for p, r in out]
 
 
@@ -182,7 +191,7 @@ def train_scope_ltr(env_factory, teacher, iters=3, episodes=3, epochs=30, lr=1e-
             opt.zero_grad()
             loss.backward()
             opt.step()
-        env = env_factory(seed + 1000 + it)
+        env = env_factory(ep_seed(seed, 1000 + it))
         res = env.run(ltr.LTRPolicy(model))
         j = tier_success_rates(res.measured() or res.outcomes, env.spec)
         lam = dual_update(lam, j, etas, lambda_lr)
