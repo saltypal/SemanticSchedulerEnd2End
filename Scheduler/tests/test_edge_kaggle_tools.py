@@ -42,7 +42,7 @@ def test_dry_run_push_executes_nothing(tmp_path):
     assert calls == [] and not (tmp_path / "log.md").exists()
     cmds = [x for x in lines if x.startswith("$")]
     assert len(cmds) == 2 and all("kaggle kernels push" in c for c in cmds)
-    assert cmds[1].startswith("$ wsl kaggle")
+    assert cmds[1].startswith("$ wsl -e kaggle")
 
 
 def test_push_appends_log(tmp_path):
@@ -95,7 +95,7 @@ def test_to_wsl_path():
 def test_wsl_prefix_bin_and_path_translation():
     ops = kaggle_ops.Ops(CFG2, "wsl", out=lambda *_: None)
     cmd = ops._cmd(["kernels", "push", "-p", r"D:\a\b", "--path", "E:/c"])
-    assert cmd == ["wsl", WSL_BIN, "kernels", "push", "-p", "/mnt/d/a/b", "--path", "/mnt/e/c"]
+    assert cmd == ["wsl", "-e", WSL_BIN, "kernels", "push", "-p", "/mnt/d/a/b", "--path", "/mnt/e/c"]
     assert kaggle_ops.Ops(CFG2, "win", out=lambda *_: None)._cmd(["x", "-p", r"D:\a"]) == ["kaggle", "x", "-p", r"D:\a"]
 
 
@@ -105,7 +105,7 @@ def test_default_account_is_wsl_from_real_config(tmp_path):
     assert cfg["default_account"] == "wsl" and cfg["accounts"]["win"]["username"] == "satyapaladugu"
     assert cfg["accounts"]["wsl"]["username"] == "satyapaladuguplus" and cfg["accounts"]["win"]["bin"] == "kaggle"
     rc, calls, lines = _run(["--dry-run", "dataset-list", "--mine"], tmp_path)
-    assert rc == 0 and calls == [] and lines[0] == f"$ wsl {WSL_BIN} datasets list --mine"
+    assert rc == 0 and calls == [] and lines[0] == f"$ wsl -e {WSL_BIN} datasets list --mine"
 
 
 def test_dataset_create_stages_metadata_and_logs(tmp_path):
@@ -117,7 +117,7 @@ def test_dataset_create_stages_metadata_and_logs(tmp_path):
     meta = json.loads((stage / "dataset-metadata.json").read_text())
     assert meta == {"id": "z/my-data", "title": "T", "licenses": [{"name": "other"}]}
     dcall = calls[0]
-    assert (stage / "a.txt").exists() and dcall[:4] == ["wsl", WSL_BIN, "datasets", "create"]
+    assert (stage / "a.txt").exists() and dcall[:5] == ["wsl", "-e", WSL_BIN, "datasets", "create"]
     assert "--public" in dcall and dcall[-2:] == ["--dir-mode", "tar"]
     assert "| dataset-create | wsl | z/my-data |" in (tmp_path / "log.md").read_text()
 
@@ -135,7 +135,7 @@ def test_dataset_version_status_and_dry_run(tmp_path):
     src = tmp_path / "d"
     src.mkdir()
     rc, calls, _ = _run(["dataset-version", "--dir", str(src), "--message", "hi"], tmp_path)
-    assert calls[0][3] == "version" and calls[0][-2:] == ["-m", "hi"]
+    assert calls[0][4] == "version" and calls[0][-2:] == ["-m", "hi"]
     rc, calls, _ = _run(["dataset-status", "--slug", "foo"], tmp_path)
     assert calls[0][-3:] == ["datasets", "status", "z/foo"] or calls[0][-1] == "z/foo"
     before = len(list(tmp_path.rglob("*")))

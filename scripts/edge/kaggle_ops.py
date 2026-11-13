@@ -63,7 +63,7 @@ class Ops:
         for i in range(1, len(args)):
             if args[i - 1] in _PATH_FLAGS:
                 args[i] = to_wsl_path(args[i])
-        return ["wsl", binary, *args]
+        return ["wsl", "-e", binary, *args]      # -e: no shell, so patterns like (json|csv) reach kaggle intact
 
     def run(self, args):
         cmd = self._cmd(args)
