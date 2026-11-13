@@ -78,11 +78,16 @@ def check_limits(entries):
         raise ValueError("duplicate notebook slugs")
 
 
-def build_entry(e, out_dir, cfg, branch="main", seeds=5):
+# Training budget per seed (2026-11-13): the smoke defaults of train_cli (5 iters, 2 episodes, 200 jobs) are not results.
+# rate 3.0/s with 2 workers ~ rho 1.2 at the true v1 decode latency (0.74 s at B=1).
+TRAIN_BUDGET = ("--iters", "30", "--episodes", "4", "--n-jobs", "500", "--workers", "2", "--rate", "3.0")
+
+
+def build_entry(e, out_dir, cfg, branch="main", seeds=3):
     """Write the notebook + metadata for one entry (owner = its account); returns the metadata dict."""
     if e.kind == "train":
         nb, meta = tr.build(e.algo, e.account, branch, seeds, e.ranker or "lambdamart", step=e.step,
-                             sts_fusion=e.variant == "fusion")
+                             sts_fusion=e.variant == "fusion", extra=TRAIN_BUDGET)
     else:
         nb, meta = sw.build(e.algo, e.account, branch, e.shard, step=e.step, sts_fusion=e.variant == "fusion")
     meta["enable_gpu"] = e.gpu
@@ -107,7 +112,7 @@ class Launcher:
         kw = {"log_path": log_path} if log_path else {}
         self.ops = {a: Ops(cfg, a, runner, dry_run, out, stage_root=self.out_dir, **kw) for a in ACCOUNTS}
 
-    def build_all(self, entries, branch="main", seeds=5):
+    def build_all(self, entries, branch="main", seeds=3):
         check_limits(entries)
         return {e.step: build_entry(e, self.out_dir, self.cfg, branch, seeds) for e in entries}
 
@@ -152,7 +157,7 @@ def main(argv=None, runner=real_runner, cfg=None, out=print, sleep=time.sleep):
     g.add_argument("--collect", metavar="DIR")
     ap.add_argument("--dry-run", action="store_true", help="with --status/--collect: print commands only")
     ap.add_argument("--branch", default="main")
-    ap.add_argument("--seeds", type=int, default=5)
+    ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--variants", default=",".join(VARIANTS),
                     help="comma list of nofusion,fusion (default both; fusion passes --sts-fusion, slug suffix -fusion)")
     ap.add_argument("--only", nargs="+", default=None, help="restrict to these notebook slugs")
