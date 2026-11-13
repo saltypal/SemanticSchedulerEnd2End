@@ -30,6 +30,7 @@ Critical images before their deadline (CTR@D) than every baseline, close to the 
 | D17 | SQ-GAN v0 | no v0 pilot / pass for results (user, 2026-11-11). The v0 pilot that already ran is ignored |
 | D18 | Relevance in SV-DPP | E[v] x (1 + beta (r_tilde - 0.5)), r_tilde per-mission normalised; beta tuned on val (0 = plan v3) |
 | D19 | STS use | receiver fuses SPI + STS (logistic on train, temperature on val) into the tier belief all policies see; STS-masked header falls back to SPI (header ablation measures STS value) |
+| D20 | Header bit depths (S6) | SPI 4x16 bit, relevance 16 bit, STS 13x4 bit; still 64 B. 8-bit SPI/relevance flipped 8.2%/7.9% of SV-DPP decisions (> 0.5% bar) |
 | PARKED | Qwen feedback, S3 κ audit, SCOPE-AIF (S9) | set aside by the user; code/notebook exist (`edge-qwen-feedback`) |
 
 ## Rules

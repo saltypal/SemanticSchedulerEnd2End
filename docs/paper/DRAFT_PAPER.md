@@ -188,16 +188,17 @@ evaluation and for the training reward on training events only.
 | 9 | 3 | payload length |
 | 12 | 1 | codec id (4 b) + m index (4 b) |
 | 13 | 2 | mission profile id |
-| 15 | 4 | SPI posterior (4 x u8) |
-| 19 | 1 | mission relevance (u8) |
-| 20 | 8 | semantic key: 64-bit SimHash of the CLIP embedding (secret per-deployment seed) |
-| 28 | 13 | STS: 7-class kept-token histogram (7), retention ratios (4), centroid + spread (2) |
-| 41 | 8 | perceptual key: 64-bit pHash (DCT, no model) |
-| 49 | 2 | CRC-16 over the header |
-| 51 | 13 | reserved / extension |
+| 15 | 8 | SPI posterior (4 x u16) |
+| 23 | 2 | mission relevance (u16) |
+| 25 | 8 | semantic key: 64-bit SimHash of the CLIP embedding (secret per-deployment seed) |
+| 33 | 7 | STS: 13 x 4-bit nibbles: 7-class kept-token histogram (7), retention ratios (4), centroid + spread (2); 14th nibble zero pad |
+| 40 | 8 | perceptual key: 64-bit pHash (DCT, no model) |
+| 48 | 2 | CRC-16 over bytes 0-47 |
+| 50 | 14 | reserved / extension |
 
-Bit-depths of SPI, relevance and STS are set by a decision-flip-rate test on validation data (< 0.5% decision
-changes versus full precision). Codec v1 changes the STS class map, so it sets `version = 2` and the receiver uses
+Bit-depths were set by a decision-flip-rate test on validation data (S6, < 0.5% decision changes versus full
+precision): SPI and relevance need 16 bits to keep decision flips under 0.5% (8 bits: 8.2% / 7.9%); STS needs only
+4 bits (0 flips at 4 bits, with and without fusion). Version 1 (8-bit fields) is no longer produced. Codec v1 changes the STS class map, so it sets `version = 2` and the receiver uses
 the matching STS profile. The predicted decode utility u-hat of earlier drafts is not in the header and is not used.
 
 **B. Semantic Priority Indicator (SPI).** CLIP ViT-B/32 embedding -> class-balanced multinomial logistic regression
@@ -207,8 +208,8 @@ Selected from a grid of five encoders x five classifier families by validation m
 (Table V); CLIP-B/32 is kept because the same embedding already yields the semantic key and relevance.
 
 **C. Mission relevance.** r_i = (cos(CLIP(x_i), CLIP(text_pi)) + 1)/2, with each mission text the mean embedding of
-three prompts, pre-shared via the registry. CLIP cosines are compressed: values span 0.52-0.68 (about 40 of 256 u8
-levels); the scaling is fixed in the bit-depth test.
+three prompts, pre-shared via the registry. CLIP cosines are compressed: values span 0.52-0.68 (about 40 of 256 levels at 8 bits; about 10,500 of 65,536
+at the 16-bit field); the scaling is fixed in the bit-depth test.
 
 **D. Scene descriptors: from detectors to the codec's own mask.**
 1. A YOLO / COCO scene block averaged 34.45 B (dense maximum 307 B); removing COCO classes cut it to 8.16 B and the
@@ -601,7 +602,7 @@ CCTV/IoT, industrial, consumer/XR and NTN, mapped to 3GPP TS 22.125 / 22.186 / 2
 (`config/edge/missions.yaml`: general, flood_storm, wildfire, earthquake; D15).
 
 ## Appendix B: Header field justification and bit-depth study
-Field table and flip-rate methodology [RESULT PENDING: S6 bit-depth test; STS bits after the v1 pass].
+Field table and flip-rate methodology are in Sec. IV-A. SPI and relevance need 16 bits to keep decision flips under 0.5% (8 bits: 8.2% / 7.9%); STS needs only 4 bits (0 flips at 4 bits, with and without fusion).
 
 ## Appendix C: Tier mapping and sensitivity
 Full rule table (Sec. VII-A), the `affected_high` alternative mapping (509 images move between main and alternative

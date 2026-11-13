@@ -2,8 +2,12 @@
 # this repository value is a development placeholder only.
 simhash_seed: 20240611
 phash_bits: 64
-bit_depths:            # bits per quantised field; flip_rate_study chooses the smallest safe value
-  spi: 8
-  relevance: 8
-  sts: 8
+layout_version: 2      # 64-byte layout v2 (D20); version 1 (8-bit fields) is no longer produced
+bit_depths:            # bits per quantised field; fixed by parameters/edge/header64.py
+  # S6 bit-depth study (val 1,500 rows, c=2, rho 1.2, true latency): at 8 bits SPI and relevance
+  # flipped 8.2% / 7.9% of SV-DPP decisions; at 16 bits 0% (no fusion) / 0.11% (fusion).
+  # STS flipped 0% even at 4 bits.
+  spi: 16
+  relevance: 16
+  sts: 4
 mission_registry_path: config/edge/missions.yaml   # placeholder, not created yet

@@ -1,8 +1,10 @@
-"""64-byte semantic header pack/unpack (plan v3.1 sec. 4) and bit-depth flip-rate study (S6).
+"""64-byte semantic header pack/unpack (plan v3.1 sec. 4, layout v2 per D20) and bit-depth flip-rate study (S6).
 
 Big-endian layout (offset: bytes): 0:1 version<<4|flags, 1:4 message id, 5:4 capture ms mod 2^32,
-9:3 payload length, 12:1 codec<<4|m, 13:2 mission, 15:4 SPI u8 x4, 19:1 relevance u8, 20:8 sem key,
-28:13 STS u8, 41:8 perceptual key, 49:2 CRC-16/CCITT-FALSE over bytes 0..48, 51:13 reserved zero.
+9:3 payload length, 12:1 codec<<4|m, 13:2 mission, 15:8 SPI u16 x4, 23:2 relevance u16, 25:8 sem key,
+33:7 STS 13 x 4-bit nibbles (first value in the high nibble; the 14th nibble is zero padding),
+40:8 perceptual key, 48:2 CRC-16/CCITT-FALSE over bytes 0..47, 50:14 reserved zero.
+Version 2 is this layout. Version 1 (SPI 4 x u8, relevance u8, STS 13 x u8) is no longer produced.
 Flags (low nibble): bit0 SPI, bit1 STS, bit2 sem key, bit3 p-hash valid. Field values come from the
 ``Evaluation.edge.contracts.Header``; arrival_time is not transmitted (0.0 on unpack).
 """
@@ -13,18 +15,39 @@ import numpy as np
 from Evaluation.edge.contracts import Header
 
 SIZE = 64
-CRC_END = 49
+VERSION = 2
+CRC_END = 48
+SPI_BITS = 16
+REL_BITS = 16
+STS_BITS = 4
+STS_N = 13
 F_SPI, F_STS, F_SEM, F_PH = 1, 2, 4, 8
 
 
-def quantise(x, bits=8):
+def quantise(x, bits=16):
     """Map [0,1] to integer levels 0..2^bits-1 (clipped, rounded)."""
     top = (1 << bits) - 1
     return np.clip(np.rint(np.asarray(x, dtype=np.float64) * top), 0, top).astype(np.int64)
 
 
-def dequantise(q, bits=8):
+def dequantise(q, bits=16):
     return np.asarray(q, dtype=np.float64) / ((1 << bits) - 1)
+
+
+def pack_sts(q):
+    """13 nibble values (0..15) -> 7 bytes; the 14th nibble is zero."""
+    vals = [int(v) for v in q] + [0]
+    return bytes((vals[i] << 4) | vals[i + 1] for i in range(0, 14, 2))
+
+
+def unpack_sts(data):
+    """7 bytes -> 13 nibble values; raises ValueError if the padding nibble is not zero."""
+    if data[6] & 0x0F:
+        raise ValueError("STS padding nibble must be zero")
+    nibbles = []
+    for v in data:
+        nibbles += [v >> 4, v & 0x0F]
+    return nibbles[:STS_N]
 
 
 def crc16_ccitt(data, crc=0xFFFF):
@@ -41,12 +64,15 @@ def _check(name, value, lo, hi):
         raise ValueError("%s=%r outside [%d, %d]" % (name, value, lo, hi))
 
 
-def pack(header, message_id, version=1):
-    """Encode a contract Header into exactly 64 bytes."""
+def pack(header, message_id, version=VERSION):
+    """Encode a contract Header into exactly 64 bytes (layout v2).
+
+    ``version`` only sets the version nibble; version 1 (the old 8-bit layout) is no longer produced.
+    """
     h = header
     if len(h.tier_probs) != 4:
         raise ValueError("tier_probs must have 4 values")
-    if len(h.sts) not in (0, 13):
+    if len(h.sts) not in (0, STS_N):
         raise ValueError("sts must have 13 values (or be empty)")
     _check("version", version, 0, 15)
     _check("message_id", message_id, 0, 2 ** 32 - 1)
@@ -64,12 +90,12 @@ def pack(header, message_id, version=1):
     buf[9:12] = int(h.payload_bytes).to_bytes(3, "big")
     buf[12] = (h.codec_id << 4) | h.m_index
     struct.pack_into(">H", buf, 13, h.mission)
-    buf[15:19] = bytes(quantise(h.tier_probs).tolist())
-    buf[19] = int(quantise(h.relevance))
-    struct.pack_into(">Q", buf, 20, h.sem_key)
+    struct.pack_into(">4H", buf, 15, *quantise(h.tier_probs, SPI_BITS).tolist())
+    struct.pack_into(">H", buf, 23, int(quantise(h.relevance, REL_BITS)))
+    struct.pack_into(">Q", buf, 25, h.sem_key)
     if h.sts:
-        buf[28:41] = bytes(quantise(h.sts).tolist())
-    struct.pack_into(">Q", buf, 41, h.perc_key)
+        buf[33:40] = pack_sts(quantise(h.sts, STS_BITS))
+    struct.pack_into(">Q", buf, 40, h.perc_key)
     struct.pack_into(">H", buf, CRC_END, crc16_ccitt(bytes(buf[:CRC_END])))
     return bytes(buf)
 
@@ -80,19 +106,20 @@ def unpack(data):
         raise ValueError("header must be %d bytes, got %d" % (SIZE, len(data)))
     if struct.unpack_from(">H", data, CRC_END)[0] != crc16_ccitt(bytes(data[:CRC_END])):
         raise ValueError("header CRC mismatch")
-    if any(data[51:]):
+    if any(data[50:]):
         raise ValueError("reserved bytes must be zero")
     flags = data[0] & 0x0F
     need = F_SPI | F_SEM | F_PH
     if flags & need != need:
         raise ValueError("SPI, semantic-key and p-hash flags must be set")
-    sts = tuple(dequantise(list(data[28:41])).tolist()) if flags & F_STS else ()
+    sts = tuple(dequantise(unpack_sts(data[33:40]), STS_BITS).tolist()) if flags & F_STS else ()
     header = Header(
         capture_time=struct.unpack_from(">I", data, 5)[0] / 1000.0, arrival_time=0.0,
         payload_bytes=int.from_bytes(data[9:12], "big"), mission=struct.unpack_from(">H", data, 13)[0],
         codec_id=data[12] >> 4, m_index=data[12] & 15,
-        tier_probs=tuple(dequantise(list(data[15:19])).tolist()), relevance=float(data[19]) / 255.0,
-        sem_key=struct.unpack_from(">Q", data, 20)[0], perc_key=struct.unpack_from(">Q", data, 41)[0],
+        tier_probs=tuple(dequantise(struct.unpack_from(">4H", data, 15), SPI_BITS).tolist()),
+        relevance=float(dequantise(struct.unpack_from(">H", data, 23)[0], REL_BITS)),
+        sem_key=struct.unpack_from(">Q", data, 25)[0], perc_key=struct.unpack_from(">Q", data, 40)[0],
         sts=sts)
     return header, struct.unpack_from(">I", data, 1)[0]
 
