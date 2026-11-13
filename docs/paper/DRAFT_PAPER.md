@@ -294,8 +294,15 @@ with abandonment [31] for c = 1.
 
 **Algorithm 2 [PLACEHOLDER]: SV-DPP.**
 
-**C. SemCover: scheduling meaning, not jobs (proposed).** *Status: designed (`docs/design/SEMANTIC_SCHEDULER_DESIGN.md`);
-implementation and results [RESULT PENDING]. Fallback if it does not beat SCOPE-LTR / SV-DPP on validation: reported
+**C. SemCover: scheduling meaning, not jobs (proposed).** *Status: implemented (`Scheduler/edge/semcover.py`,
+`Scheduler/training/edge/semcover_train.py`); results [RESULT PENDING]. Implementation notes: (i) cos(pi d/64) and the
+p-hash indicator are not PSD in general, so the kernel is projected onto the PSD cone (eigenvalue clipping), normalised
+to a unit diagonal and given a 1e-3 ridge; (ii) a time-decayed memory is modelled as noisy observations of delivered
+scenes, S_QQ - S_QM A (A S_MM A + I - A^2)^-1 A S_MQ with A = diag(exp(-age/tau_k)), tau_k = 2 H_k (32 most recent
+deliveries), because decaying urgency alone cancels in DPP conditioning; (iii) the RL stage samples items
+sequentially in proportion to their marginal gains (greedy MAP is the mode), which has a tractable log-probability but
+is not an exact k-DPP sample; (iv) urgency is monotone in the Critical/High belief and deadline pressure with the
+context embedding fixed; the learned net is a residual on the analytic prior. Fallback if it does not beat SCOPE-LTR / SV-DPP on validation: reported
 as a semantic-diversity variant with its ablations; SV-DPP stays the main proposal.*
 
 *Philosophy.* The value of decoding an image is not a property of the image alone: it is how urgent its meaning is

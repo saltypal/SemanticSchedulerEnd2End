@@ -28,6 +28,7 @@ Critical images before their deadline (CTR@D) than every baseline, close to the 
 | D15 | Relevance | precomputed per (image, mission) from `config/edge/missions.yaml` (4 missions); simulator picks each UE's mission |
 | D16 | Tier mapping | **aligned with v3 §3**: affected_individuals -> Medium (High only in the `affected_high` sensitivity mapping). Humanitarian labels fill in where no damage label exists (14,556 of 18,082 images) |
 | D17 | SQ-GAN v0 | no v0 pilot / pass for results (user, 2026-11-11). The v0 pilot that already ran is ignored |
+| D18 | Relevance in SV-DPP | E[v] x (1 + beta (r_tilde - 0.5)), r_tilde per-mission normalised; beta tuned on val (0 = plan v3) |
 | D19 | STS use | receiver fuses SPI + STS (logistic on train, temperature on val) into the tier belief all policies see; STS-masked header falls back to SPI (header ablation measures STS value) |
 | PARKED | Qwen feedback, S3 κ audit, SCOPE-AIF (S9) | set aside by the user; code/notebook exist (`edge-qwen-feedback`) |
 
@@ -117,3 +118,26 @@ Critical images before their deadline (CTR@D) than every baseline, close to the 
 - [ ] Make `scheduler-dataset-v1-simtable` public if you want it like the others (I was not allowed to publish publicly)
 - [ ] Revoke the API token pasted earlier in chat / the old notebook cell (if not done)
 - [ ] Later: approve merged-branch deletions and deleting `edge-labels-v1`
+
+
+# Status update 2026-11-13 (Friday)
+## Done since the last update
+- [x] SQ-GAN v1 fine-tune (authors' Cityscapes checkpoints; 10,434 train images; batch 2 = 1/T4; ~4,700 steps, 8 h cap)
+- [x] True batched decode + latency (`latency_v1_true.json`): B 1/2/4/8 = 0.74/1.46/2.88/3.86 s; batching helps only at B=8
+- [x] SV-DPP fixes (defer-wait floor, per-job tie tolerance `tie_tol_frac`); smoke: ties EDF at rho 0.8, trails at 1.2
+- [x] D18 relevance factor; D19 receiver SPI+STS fusion (`parameters/edge/sts_fusion.py`, `--sts-fusion`)
+- [x] SemCover implemented (analytic `semcover` + learned `--algo semcover`); design `docs/design/SEMANTIC_SCHEDULER_DESIGN.md`
+- [x] Report scripts (`python -m Evaluation.edge.report codec-quality|results|header-proofs`); paper draft updated
+- [x] Trained learners evaluable in sweeps (`learned:<algo>:<ckpt>`); trace arrivals; header proofs; regimes; sensitivity rows
+## Running
+- [~] SQ-GAN v1 resume pass (`edge-sqgan-v1-resume`): 43/55 shards copied, last 12 processing (~2 h)
+- [~] W-LAUNCH: phase-2 launcher across both accounts (dry-run default), SemCover in notebooks, BCEdge-style baseline
+- [~] W-OVER: SV-DPP overload gap with true latency on val (1,000 rows)
+## Next (in order)
+1. Pass ends -> `report codec-quality` (D6 gate) -> `simtable fill-codec` (STS, payload) + true latency -> republish TAB
+2. `python -m parameters.edge.sts_fusion` (SPI vs SPI+STS on val) -> bit-depth test -> header frozen = BAR
+3. Phase 2 via `scripts/edge/launch_phase2.py --go`: tune -> train (11 learners x 5 seeds incl. SemCover, BCEdge)
+   -> compare (+ semcover, learned specs, `--sts-fusion`) -> header proofs -> test (once) -> live 2xT4
+4. `report results` / `report header-proofs` -> fill paper placeholders
+## Accounts
+- plus `satyapaladuguplus`: WSL CLI. second `satyapaladugu`: native Windows `kaggle` CLI (login works). Max 2 GPU batch sessions each.
