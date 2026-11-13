@@ -8,6 +8,7 @@ a learner the Truth table. The ``State`` seen in ``select`` holds ``QueuedJob`` 
 Checkpoint formats (written by train_cli):
   ppo, scope_ppo, bc, dagger   policy_net.save_model -> SetPolicy (dict cfg/state)
   dqn, scope_dqn               torch dict (hidden, state) -> dqn.make_qnet, DQNPolicy
+  semcover                     semcover_train.save_net -> SemCoverNet (cfg/state) -> semcover.SemCover(net=...)
   ltr, scope_ltr               LambdaMART pickle (TreeRanker) or RankNet torch file -> ltr.LTRPolicy
 """
 from pathlib import Path
@@ -25,7 +26,8 @@ PREFIX = "learned:"
 SET_ALGOS = ("ppo", "scope_ppo", "bc", "dagger")
 DQN_ALGOS = ("dqn", "scope_dqn")
 LTR_ALGOS = ("ltr", "scope_ltr")
-ALGOS = SET_ALGOS + DQN_ALGOS + LTR_ALGOS
+SEMCOVER_ALGOS = ("semcover",)
+ALGOS = SET_ALGOS + DQN_ALGOS + LTR_ALGOS + SEMCOVER_ALGOS
 
 
 def is_learned(name):
@@ -83,6 +85,10 @@ def build_learned(spec):
         model.load_state_dict(blob["state"])
         model.eval()
         return DQNPolicy(model, epsilon=0.0)
+    if algo in SEMCOVER_ALGOS:
+        from Scheduler.edge.semcover import SemCover
+        from Scheduler.training.edge.semcover_train import load_net
+        return SemCover(net=load_net(path))
     if algo in LTR_ALGOS:
         return LTRPolicy(_load_ranker(path))
     return SetGreedyPolicy(load_model(path), name=algo)

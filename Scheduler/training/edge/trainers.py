@@ -188,3 +188,9 @@ def train_scope_ltr(env_factory, teacher, iters=3, episodes=3, epochs=30, lr=1e-
         lam = dual_update(lam, j, etas, lambda_lr)
         history.append(dict(iter=it, loss=float(loss.detach()), lambdas=lam.tolist(), tier_success=j.tolist()))
     return model, history
+
+
+def train_semcover(env_factory, teacher, **kw):
+    """SemCover (semantic-coverage DPP scheduler): see semcover_train (imported lazily, keeps torch-only deps local)."""
+    from Scheduler.training.edge.semcover_train import train_semcover as _train
+    return _train(env_factory, teacher, **kw)

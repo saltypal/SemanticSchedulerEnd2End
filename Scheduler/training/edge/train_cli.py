@@ -1,4 +1,4 @@
-"""CLI: ``python -m Scheduler.training.edge.train_cli --algo ppo|scope_ppo|bc|dagger|dqn|scope_dqn|ltr|scope_ltr --table T --profile P --out O``.
+"""CLI: ``python -m Scheduler.training.edge.train_cli --algo ppo|scope_ppo|bc|dagger|dqn|scope_dqn|ltr|scope_ltr|semcover --table T --profile P --out O``.
 
 Builds a train-split env factory from a merged table (``Evaluation.edge.tables``, imported lazily),
 trains with ``trainers`` and saves weights plus a JSON history next to ``--out``.
@@ -9,7 +9,7 @@ import json
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--algo", required=True, choices=["ppo", "scope_ppo", "bc", "dagger", "dqn", "scope_dqn", "ltr", "scope_ltr"])
+    ap.add_argument("--algo", required=True, choices=["ppo", "scope_ppo", "bc", "dagger", "dqn", "scope_dqn", "ltr", "scope_ltr", "semcover"])
     ap.add_argument("--table", required=True)
     ap.add_argument("--profile", required=True)
     ap.add_argument("--out", required=True)
@@ -66,6 +66,8 @@ def main(argv=None):
     elif a.algo == "ltr":
         model, hist = trainers.train_ltr(env_factory, teacher, a.ranker, episodes=a.episodes, seed=a.seed,
                                          **({"prefer_lightgbm": False} if a.no_lightgbm and a.ranker == "lambdamart" else {}))
+    elif a.algo == "semcover":
+        model, hist = trainers.train_semcover(env_factory, teacher, hidden=a.hidden, **kw)
     else:
         model, hist = trainers.train_scope_ltr(env_factory, teacher, hidden=a.hidden, **kw)
     if a.algo in ("dqn", "scope_dqn"):
@@ -73,6 +75,9 @@ def main(argv=None):
         torch.save(dict(hidden=a.hidden, state=model.state_dict()), a.out)
     elif a.algo in ("ltr", "scope_ltr"):
         model.save(a.out)
+    elif a.algo == "semcover":
+        from Scheduler.training.edge.semcover_train import save_net
+        save_net(model, a.out)
     else:
         save_model(model, a.out)
     with open(a.out + ".history.json", "w") as f:
