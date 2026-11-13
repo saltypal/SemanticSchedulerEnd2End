@@ -57,7 +57,7 @@ def test_registered_and_grouped():
     assert len(NAMES) == 13 and set(NAMES) <= set(registry.all_policies())
     groups = load_config("policies")
     fam = [n for k, v in groups.items() if k.startswith("ext_") for n in v]
-    assert sorted(fam) == sorted(NAMES)
+    assert sorted(fam) == sorted(NAMES + ["bcedge"])   # bcedge: learned batching baseline (Scheduler.edge.bcedge)
 
 
 @pytest.mark.parametrize("name", NAMES)

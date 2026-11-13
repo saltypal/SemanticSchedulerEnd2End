@@ -9,7 +9,7 @@ from Evaluation.edge.edge_config import load_config
 
 _MODULES = ("Scheduler.edge.classic", "Scheduler.edge.theory", "Scheduler.edge.edgeserving",
             "Scheduler.edge.sv_dpp", "Scheduler.edge.mpc", "Scheduler.edge.extended",
-            "Scheduler.edge.batching", "Scheduler.edge.semcover")
+            "Scheduler.edge.batching", "Scheduler.edge.semcover", "Scheduler.edge.bcedge")
 
 
 def all_policies():

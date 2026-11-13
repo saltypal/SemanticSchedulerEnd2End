@@ -46,7 +46,11 @@ def out_path(out_dir, stage, shard):
 
 def compare_policies():
     cfg = load_config("policies")
-    return list(dict.fromkeys(cfg["main_table"] + cfg["extended"]))
+    return list(dict.fromkeys(cfg["main_table"] + cfg["extended"] + cfg.get("semantic", [])))
+
+
+def _fusion(a):
+    return rs._load_fusion(getattr(a, "sts_fusion", None))
 
 
 def stage_tune(rows, latency, a, shard, tables):
@@ -76,7 +80,7 @@ def stage_compare(rows, latency, a, shard, tables):
         if best:
             kw["sv_dpp"] = best
     return rs.run_sweep(rows, latency, "val", policies, a.workers, a.rhos, a.realisations, a.seed,
-                        n_boot=a.n_boot, policy_kwargs=kw, tables=tables)
+                        n_boot=a.n_boot, policy_kwargs=kw, tables=tables, sts_fusion=_fusion(a))
 
 
 def stage_test(rows, latency, a, shard, tables):
@@ -91,7 +95,7 @@ def stage_test(rows, latency, a, shard, tables):
         if best:
             kw["sv_dpp"] = best
     return rs.run_sweep(rows, latency, "test", policies, a.workers, a.rhos, a.realisations, a.seed,
-                        n_boot=a.n_boot, policy_kwargs=kw, tables=tables)
+                        n_boot=a.n_boot, policy_kwargs=kw, tables=tables, sts_fusion=_fusion(a))
 
 
 def stage_ablations(a, shard):
@@ -106,6 +110,8 @@ def stage_ablations(a, shard):
            "--profile", a.profile, "--split", "val", "--policies", *policies,
            "--workers", *[str(w) for w in a.workers], "--rhos", *[str(r) for r in a.rhos],
            "--realisations", str(a.realisations), "--arrival", a.arrival, "--out-dir", str(folder)]
+    if getattr(a, "sts_fusion", None):
+        cmd += ["--sts-fusion", a.sts_fusion]
     if subprocess.run(cmd).returncode:
         raise SystemExit("header_proofs failed: " + " ".join(cmd))
     return dict(stage="ablations", shard=list(shard), proofs_file=str(folder / "header_proofs.json"))
@@ -127,6 +133,7 @@ def main(argv=None):
     ap.add_argument("--max-batch", type=int, default=None)
     ap.add_argument("--tuned", default=None, help="tune-stage JSON whose best_kwargs go to sv_dpp")
     ap.add_argument("--learner-grid", default=None, help="JSON list of {algo, args:[...]} for the tune stage")
+    ap.add_argument("--sts-fusion", default=None, help="sts_fusion.json (D19 receiver fusion), all stages")
     ap.add_argument("--final-test", action="store_true")
     ap.add_argument("--arrival", choices=["poisson", "mmpp", "trace"], default="trace",
                     help="arrival mode for the ablations stage (header_proofs --arrival)")

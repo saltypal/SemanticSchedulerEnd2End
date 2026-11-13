@@ -1,4 +1,4 @@
-"""CLI: ``python -m Scheduler.training.edge.train_cli --algo ppo|scope_ppo|bc|dagger|dqn|scope_dqn|ltr|scope_ltr|semcover --table T --profile P --out O``.
+"""CLI: ``python -m Scheduler.training.edge.train_cli --algo ppo|scope_ppo|bc|dagger|dqn|scope_dqn|ltr|scope_ltr|semcover|bcedge --table T --profile P --out O``.
 
 Builds a train-split env factory from a merged table (``Evaluation.edge.tables``, imported lazily),
 trains with ``trainers`` and saves weights plus a JSON history next to ``--out``.
@@ -9,7 +9,7 @@ import json
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--algo", required=True, choices=["ppo", "scope_ppo", "bc", "dagger", "dqn", "scope_dqn", "ltr", "scope_ltr", "semcover"])
+    ap.add_argument("--algo", required=True, choices=["ppo", "scope_ppo", "bc", "dagger", "dqn", "scope_dqn", "ltr", "scope_ltr", "semcover", "bcedge"])
     ap.add_argument("--table", required=True)
     ap.add_argument("--profile", required=True)
     ap.add_argument("--out", required=True)
@@ -48,7 +48,7 @@ def main(argv=None):
         jobs = tables.rows_to_jobs(pick, times, rng)
         return EdgeEnv(jobs, latency, spec, a.workers, a.max_batch, Receiver(), seed)
 
-    teacher = registry.build(a.teacher) if a.algo not in ("ppo", "dqn") else None
+    teacher = registry.build(a.teacher) if a.algo not in ("ppo", "dqn", "bcedge") else None
     kw = dict(iters=a.iters, episodes=a.episodes, seed=a.seed)
     if a.algo == "ppo":
         model, hist = trainers.train_ppo(env_factory, **kw)
@@ -66,6 +66,9 @@ def main(argv=None):
     elif a.algo == "ltr":
         model, hist = trainers.train_ltr(env_factory, teacher, a.ranker, episodes=a.episodes, seed=a.seed,
                                          **({"prefer_lightgbm": False} if a.no_lightgbm and a.ranker == "lambdamart" else {}))
+    elif a.algo == "bcedge":
+        from Scheduler.training.edge.bcedge_train import train_bcedge
+        model, hist = train_bcedge(env_factory, hidden=a.hidden, **kw)
     elif a.algo == "semcover":
         model, hist = trainers.train_semcover(env_factory, teacher, hidden=a.hidden, **kw)
     else:
@@ -75,6 +78,9 @@ def main(argv=None):
         torch.save(dict(hidden=a.hidden, state=model.state_dict()), a.out)
     elif a.algo in ("ltr", "scope_ltr"):
         model.save(a.out)
+    elif a.algo == "bcedge":
+        from Scheduler.edge.bcedge import save_net
+        save_net(model, a.out)
     elif a.algo == "semcover":
         from Scheduler.training.edge.semcover_train import save_net
         save_net(model, a.out)

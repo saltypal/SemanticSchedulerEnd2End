@@ -1,6 +1,7 @@
 """Emit Notebooks/Edge/edge-scheduler-train.ipynb (+ kernel metadata): one learner per notebook version.
 
-``--algo`` picks the learner (ppo, scope_ppo, bc, dagger, dqn, scope_dqn, ltr, scope_ltr; ``--ranker`` for ltr).
+``--algo`` picks the learner (ppo, scope_ppo, bc, dagger, dqn, scope_dqn, ltr, scope_ltr, semcover, bcedge;
+``--ranker`` for ltr). ``step`` gives each learner its own slug (launch_phase2: edge-train-<algo>).
 The run cell calls ``python -m Scheduler.training.edge.train_cli`` once per seed on the train split of the sim
 table with the latency profile; checkpoints and learning curves go to /kaggle/working/runs/<step>/. Never pushes.
 """
@@ -12,7 +13,7 @@ from scripts.edge import build_notebook as bn
 STEP = "edge-scheduler-train"
 TITLE = "Edge Scheduler Train"      # slugifies to STEP (MISTAKES 26)
 ENTRY = "Scheduler.training.edge.train_cli"
-ALGOS = ("ppo", "scope_ppo", "bc", "dagger", "dqn", "scope_dqn", "ltr", "scope_ltr")
+ALGOS = ("ppo", "scope_ppo", "bc", "dagger", "dqn", "scope_dqn", "ltr", "scope_ltr", "semcover", "bcedge")
 DATASET_SOURCES = (nc.SIMTABLE_DS,)
 
 RUN = '''
@@ -34,18 +35,20 @@ print(sorted(os.listdir(OUT)))
 '''
 
 
-def build(algo="ppo", account=None, branch="main", seeds=5, ranker="lambdamart", extra=()):
+def build(algo="ppo", account=None, branch="main", seeds=5, ranker="lambdamart", extra=(), step=None):
     if algo not in ALGOS:
         raise ValueError("unknown algo %r; choose from %s" % (algo, ALGOS))
+    step = step or STEP
+    title = TITLE if step == STEP else bn.title_for_slug(step)
     cfg = bn.load_kaggle_config()
     seed_list = list(range(int(seeds)))
-    nb = bn.build_notebook(STEP, ENTRY, ["--algo", algo, "--seeds", seed_list], TITLE, cfg["repo_url"], branch,
+    nb = bn.build_notebook(step, ENTRY, ["--algo", algo, "--seeds", seed_list], title, cfg["repo_url"], branch,
                            ("scikit-learn", "lightgbm", "PyYAML"), False)
-    nb["cells"][0] = bn._md(f"# {TITLE}\n\nStep `{STEP}`, learner `{algo}`, seeds {seed_list}. "
+    nb["cells"][0] = bn._md(f"# {title}\n\nStep `{step}`, learner `{algo}`, seeds {seed_list}. "
                             f"Logic lives in `{ENTRY}`.\n\n{nc.PRIVATE_NOTE}")
-    run = bn._code(RUN.format(algo=algo, seeds=seed_list, ranker=ranker, extra=list(extra), step=STEP, entry=ENTRY))
+    run = bn._code(RUN.format(algo=algo, seeds=seed_list, ranker=ranker, extra=list(extra), step=step, entry=ENTRY))
     nb["cells"][4:5] = [nc.discover_cell(), run]                 # replace the generic run cell
-    meta = bn.build_metadata(cfg, account or cfg.get("default_account", "wsl"), STEP, TITLE, False, DATASET_SOURCES)
+    meta = bn.build_metadata(cfg, account or cfg.get("default_account", "wsl"), step, title, False, DATASET_SOURCES)
     return nc.finish(nb, meta)
 
 
