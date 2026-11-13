@@ -25,7 +25,10 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=1)
     ap.add_argument("--max-batch", type=int, default=4)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--sts-fusion", default=None, help="sts_fusion.json: receiver fuses SPI+STS (D19)")
     a = ap.parse_args(argv)
+    from Evaluation.edge.run_sweep import _load_fusion
+    fusion = _load_fusion(a.sts_fusion)
 
     import numpy as np
     from Evaluation.edge import tables
@@ -46,7 +49,7 @@ def main(argv=None):
         pick = [rows[i] for i in rng.integers(len(rows), size=a.n_jobs)]
         times = np.cumsum(rng.exponential(1.0 / a.rate, size=a.n_jobs))
         jobs = tables.rows_to_jobs(pick, times, rng)
-        return EdgeEnv(jobs, latency, spec, a.workers, a.max_batch, Receiver(), seed)
+        return EdgeEnv(jobs, latency, spec, a.workers, a.max_batch, Receiver(fusion=fusion), seed)
 
     teacher = registry.build(a.teacher) if a.algo not in ("ppo", "dqn", "bcedge") else None
     kw = dict(iters=a.iters, episodes=a.episodes, seed=a.seed)
