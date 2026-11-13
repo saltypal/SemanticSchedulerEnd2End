@@ -138,17 +138,47 @@ def train_scope_dqn(env_factory, teacher, iters=3, episodes=2, seed=0, hidden=32
     timely success of the greedy policy on one fresh episode and applies the dual update."""
     from Scheduler.training.edge import dqn
     from Scheduler.training.edge.rollout import tier_success_rates
+    import copy
     lam, model, history = np.zeros(4), None, []
-    etas = tuple(env_factory(seed).spec.eta)
+    spec0 = env_factory(seed).spec
+    etas, w = tuple(spec0.eta), np.asarray(spec0.weights, dtype=float)
+    state, margin_scale, best = {}, 1.0, (-np.inf, None, -1)
+    held = [ep_seed(seed, 50_000 + k) for k in range(2)]      # fixed held-out training episodes
+
+    def score(pol, seeds):
+        """Weighted timely success sum_k w_k J_k, averaged over the given episode seeds."""
+        out = []
+        for s in seeds:
+            env = env_factory(s)
+            res = env.run(pol)
+            out.append(float(w @ tier_success_rates(res.measured() or res.outcomes, env.spec)))
+        return float(np.mean(out))
+
     for it in range(iters):
+        # eps restarts low after the first iteration: the buffer and optimizer now persist across iterations
         model, h = dqn.train_dqn(lambda e, it=it: env_factory(ep_seed(seed, it * episodes + e)), episodes,
-                                 teacher=teacher, model=model, hidden=hidden, margin_weight=1.0,
-                                 beta_k=500.0, lambdas=tuple(lam), eps_start=0.5, seed=ep_seed(seed, it), **kw)
+                                 teacher=teacher, model=model, hidden=hidden, margin_weight=margin_scale,
+                                 beta_k=None, lambdas=tuple(lam), eps_start=0.5 if it == 0 else 0.1,
+                                 seed=ep_seed(seed, it), state=state, **kw)
         env = env_factory(ep_seed(seed, 1000 + it))
         res = env.run(dqn.DQNPolicy(model))
         j = tier_success_rates(res.measured() or res.outcomes, env.spec)
+        # TGRL-style teacher weight: compare greedy student and teacher on the same fresh episode
+        env_t = env_factory(ep_seed(seed, 1000 + it))
+        jt = tier_success_rates((lambda r: r.measured() or r.outcomes)(env_t.run(teacher)), env_t.spec)
+        margin_scale = max(0.05, margin_scale * 0.9) if float(w @ j) >= float(w @ jt) else min(1.0, margin_scale / 0.9)
         lam = dual_update(lam, j, etas, lambda_lr)
-        history.append(dict(iter=it, lambdas=lam.tolist(), tier_success=j.tolist(), loss=h[-1]["loss"]))
+        rec = dict(iter=it, lambdas=lam.tolist(), tier_success=j.tolist(), teacher_success=jt.tolist(),
+                   margin_scale=margin_scale, loss=h[-1]["loss"])
+        if it % 10 == 9 or it == iters - 1:        # keep the best checkpoint on the held-out episodes
+            sc = score(dqn.DQNPolicy(model), held)
+            rec["heldout_score"] = sc
+            if sc > best[0]:
+                best = (sc, copy.deepcopy(model.state_dict()), it)
+        history.append(rec)
+    if best[1] is not None:
+        model.load_state_dict(best[1])
+        history.append(dict(best_iter=best[2], best_heldout_score=best[0]))
     return model, history
 
 

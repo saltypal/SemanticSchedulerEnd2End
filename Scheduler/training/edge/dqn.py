@@ -177,15 +177,21 @@ class DQNPolicy(Policy):
 def train_dqn(env_factory, episodes, teacher=None, model=None, hidden=64, gamma=0.95, lr=1e-3,
               batch_size=32, updates_per_episode=20, target_sync=10, eps_start=1.0, eps_end=0.05, eps_decay_frac=0.4,
               margin_weight=0.0, margin=0.8, beta0=1.0, beta_k=None, lambdas=(0, 0, 0, 0),
-              reward_scale=1.0, buffer_size=50000, seed=0, value_fn=None):
-    """Train a DQN. ``env_factory(episode) -> EdgeEnv``. Returns (model, history list of dicts)."""
+              reward_scale=1.0, buffer_size=50000, seed=0, value_fn=None, state=None):
+    """Train a DQN. ``env_factory(episode) -> EdgeEnv``. Returns (model, history list of dicts).
+    ``state``: a dict reused across calls (SCOPE-DQN outer iterations) so the target net, optimizer, replay
+    buffer and step count persist; without it every call started from an empty buffer (2026-11-14 fix)."""
     import torch
     torch.manual_seed(seed)
     model = model or make_qnet(hidden)
-    target = make_qnet(hidden)
-    sync_target(model, target)
-    opt = torch.optim.Adam(model.parameters(), lr=lr)
-    buf, hist, step = ReplayBuffer(buffer_size, seed), [], 0
+    st = state if state is not None else {}
+    if "target" not in st:
+        st["target"] = make_qnet(hidden)
+        sync_target(model, st["target"])
+        st["opt"] = torch.optim.Adam(model.parameters(), lr=lr)
+        st["buf"] = ReplayBuffer(buffer_size, seed)
+        st["step"] = 0
+    target, opt, buf, step, hist = st["target"], st["opt"], st["buf"], st["step"], []
     for ep in range(int(episodes)):
         # linear decay over the first eps_decay_frac of training, then eps_end (was: over all episodes,
         # which left eps = 0.15 at the end of a 1950-episode run)
@@ -203,6 +209,7 @@ def train_dqn(env_factory, episodes, teacher=None, model=None, hidden=64, gamma=
             loss = dqn_loss(model, target, buf.sample(batch_size), gamma, coef, margin)
             opt.zero_grad()
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 10.0)
             opt.step()
             step += 1
             losses.append(float(loss.detach()))
@@ -210,4 +217,5 @@ def train_dqn(env_factory, episodes, teacher=None, model=None, hidden=64, gamma=
                 sync_target(model, target)
         hist.append({"episode": ep, "epsilon": eps, "return": float(rew.sum()),
                      "loss": float(np.mean(losses)) if losses else None, "decisions": len(rew)})
+    st["step"] = step
     return model, hist
