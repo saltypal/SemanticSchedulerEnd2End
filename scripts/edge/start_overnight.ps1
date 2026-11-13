@@ -14,5 +14,5 @@ if ($Parallel -gt 0) { $args_ += " --parallel $Parallel" }
 if ($DryRun) { $args_ += " --dry-run" }
 $log = Join-Path $Out "overnight.log"
 $p = Start-Process -FilePath "cmd.exe" -WindowStyle Hidden -WorkingDirectory $Repo -PassThru `
-    -ArgumentList "/c", "`"$Python`" $args_ >> `"$log`" 2>&1"
+    -ArgumentList "/s /c `"$Python $args_ >> `"$log`" 2>&1`""
 "started cmd pid $($p.Id); log $log; status $(Join-Path $Out 'STATUS.md')"
