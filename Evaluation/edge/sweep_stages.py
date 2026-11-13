@@ -58,7 +58,8 @@ def stage_tune(rows, latency, a, shard, tables):
     rows_, spec, mb = rs._setup(rows, latency, "val", spec, a.max_batch)
     grid = take_shard([(v, h) for v in V_GRID for h in HPP_GRID], shard)
     points = [rs.run_cell(rows_, latency, spec, "sv_dpp", dict(V=v, hard_purge_prob=h), 2, 1.0,
-                          a.realisations, a.seed, mb, None, 0.0, a.n_boot, tables) for v, h in grid]
+                          a.realisations, a.seed, mb, None, 0.0, a.n_boot, tables,
+                          sts_fusion=_fusion(a)) for v, h in grid]
     ok = [p for p in points if p["ctr_ungated"] == p["ctr_ungated"]]
     best = max(ok, key=lambda p: p["ctr_ungated"]) if ok else None
     out = dict(stage="tune", shard=list(shard), sv_dpp_grid=points, best_kwargs=best and best["kwargs"], learners=[])
