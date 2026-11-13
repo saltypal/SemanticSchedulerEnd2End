@@ -81,13 +81,15 @@ def check_limits(entries):
 # Training budget per seed (2026-11-13): the smoke defaults of train_cli (5 iters, 2 episodes, 200 jobs) are not results.
 # rate 3.0/s with 2 workers ~ rho 1.2 at the true v1 decode latency (0.74 s at B=1).
 TRAIN_BUDGET = ("--iters", "30", "--episodes", "4", "--n-jobs", "500", "--workers", "2", "--rate", "3.0")
+BUDGETS = {"default": TRAIN_BUDGET,      # --budget big: retrain learners whose curves had not converged
+           "big": ("--iters", "120", "--episodes", "6", "--n-jobs", "800", "--workers", "2", "--rate", "3.0")}
 
 
-def build_entry(e, out_dir, cfg, branch="main", seeds=3):
+def build_entry(e, out_dir, cfg, branch="main", seeds=3, budget="default"):
     """Write the notebook + metadata for one entry (owner = its account); returns the metadata dict."""
     if e.kind == "train":
         nb, meta = tr.build(e.algo, e.account, branch, seeds, e.ranker or "lambdamart", step=e.step,
-                             sts_fusion=e.variant == "fusion", extra=TRAIN_BUDGET)
+                             sts_fusion=e.variant == "fusion", extra=BUDGETS[budget])
     else:
         nb, meta = sw.build(e.algo, e.account, branch, e.shard, step=e.step, sts_fusion=e.variant == "fusion")
     meta["enable_gpu"] = e.gpu
@@ -112,9 +114,9 @@ class Launcher:
         kw = {"log_path": log_path} if log_path else {}
         self.ops = {a: Ops(cfg, a, runner, dry_run, out, stage_root=self.out_dir, **kw) for a in ACCOUNTS}
 
-    def build_all(self, entries, branch="main", seeds=3):
+    def build_all(self, entries, branch="main", seeds=3, budget="default"):
         check_limits(entries)
-        return {e.step: build_entry(e, self.out_dir, self.cfg, branch, seeds) for e in entries}
+        return {e.step: build_entry(e, self.out_dir, self.cfg, branch, seeds, budget) for e in entries}
 
     def push_all(self, entries):
         rcs = {}
@@ -160,6 +162,8 @@ def main(argv=None, runner=real_runner, cfg=None, out=print, sleep=time.sleep):
     ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--variants", default=",".join(VARIANTS),
                     help="comma list of nofusion,fusion (default both; fusion passes --sts-fusion, slug suffix -fusion)")
+    ap.add_argument("--budget", default="default", choices=sorted(BUDGETS),
+                    help="training budget of the learner notebooks (big: 120 iters, 6 episodes, 800 jobs)")
     ap.add_argument("--only", nargs="+", default=None, help="restrict to these notebook slugs")
     ap.add_argument("--out-dir", default=str(bn.OUT_DIR))
     a = ap.parse_args(argv)
@@ -174,7 +178,7 @@ def main(argv=None, runner=real_runner, cfg=None, out=print, sleep=time.sleep):
         return la.status_all(entries)
     if a.collect:
         return la.collect_all(entries, a.collect)
-    la.build_all(entries, a.branch, a.seeds)
+    la.build_all(entries, a.branch, a.seeds, a.budget)
     return la.push_all(entries)
 
 

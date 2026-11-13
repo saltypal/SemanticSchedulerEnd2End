@@ -21,6 +21,7 @@ import os, subprocess
 OUT = "/kaggle/working/runs/" + {step!r}
 os.makedirs(OUT, exist_ok=True)
 EXTRA, STS = {extra!r}, {sts!r}
+TUNED = {tuned!r}
 
 
 def _resolve(a):
@@ -34,6 +35,10 @@ def _resolve(a):
 
 
 EXTRA = [_resolve(x) for x in EXTRA] + (["--sts-fusion", find_input("sts_fusion.json")] if STS else [])
+if TUNED:   # tuned SV-DPP kwargs travel inside the notebook (no extra dataset)
+    import json
+    json.dump(TUNED, open(OUT + "/tuned_in.json", "w"))
+    EXTRA += ["--tuned", OUT + "/tuned_in.json"]
 ARGV = ["python", "-u", "-m", {entry!r}, "--stage", {stage!r}, "--table", TABLE, "--profile", PROFILE,
         "--out-dir", OUT] + EXTRA
 print("$", " ".join(ARGV[3:]), flush=True)
@@ -64,10 +69,10 @@ def stage_args(stage, shard="", policies=(), final_test=False):
 
 
 def build(stage="compare", account=None, branch="main", shard="", policies=(), final_test=False, step=None,
-          sts_fusion=False, kernel_sources=()):
+          sts_fusion=False, kernel_sources=(), extra_args=(), tuned=None):
     if stage not in STAGES:
         raise ValueError("unknown stage %r" % stage)
-    extra = stage_args(stage, shard, policies, final_test)
+    extra = stage_args(stage, shard, policies, final_test) + [str(x) for x in extra_args]
     step = step or STEP
     title = TITLE if step == STEP else bn.title_for_slug(step)
     cfg = bn.load_kaggle_config()
@@ -75,7 +80,7 @@ def build(stage="compare", account=None, branch="main", shard="", policies=(), f
                            ("scikit-learn", "PyYAML"), False)
     nb["cells"][0] = bn._md(f"# {title}\n\nStep `{step}`, stage `{stage}`{', shard ' + shard if shard else ''}. "
                             f"Logic lives in `{ENTRY}`.\n\n{nc.PRIVATE_NOTE}")
-    nb["cells"][4:5] = [nc.discover_cell(), bn._code(RUN.format(step=step, entry=ENTRY, stage=stage, extra=extra, sts=bool(sts_fusion)))]
+    nb["cells"][4:5] = [nc.discover_cell(), bn._code(RUN.format(step=step, entry=ENTRY, stage=stage, extra=extra, sts=bool(sts_fusion), tuned=tuned))]
     meta = bn.build_metadata(cfg, account or cfg.get("default_account", "wsl"), step, title, False, DATASET_SOURCES, kernel_sources)
     return nc.finish(nb, meta)
 
