@@ -69,7 +69,7 @@ def test_sweep_learned_spec_and_sts_fusion_passthrough():
 
 
 def test_launch_plan_split_and_limits():
-    entries = lp.plan()
+    entries = lp.plan(variants=("nofusion",))
     assert [e.step for e in entries if e.kind == "train"] == [
         "edge-train-ppo", "edge-train-scope-ppo", "edge-train-bc", "edge-train-dagger", "edge-train-dqn",
         "edge-train-scope-dqn", "edge-train-ltr-lambdamart", "edge-train-ltr-ranknet", "edge-train-scope-ltr",
@@ -89,12 +89,12 @@ def test_launch_dry_run_builds_and_never_pushes(tmp_path):
 
     lines = []
     cfg = lp.bn.load_kaggle_config()
-    res = lp.main(["--out-dir", str(tmp_path)], runner=runner, cfg=cfg, out=lines.append)
+    res = lp.main(["--variants", "nofusion", "--out-dir", str(tmp_path)], runner=runner, cfg=cfg, out=lines.append)
     assert cmds == [] and len(res) == 13                      # dry run: nothing executed
     pushes = [l for l in lines if "kernels push" in l]
     assert len(pushes) == 13 and sum(l.startswith("$ wsl ") for l in pushes) == 7
     assert sum(l.startswith("$ kaggle ") for l in pushes) == 6
-    for e in lp.plan():
+    for e in lp.plan(variants=("nofusion",)):
         meta = json.loads((tmp_path / (e.step + ".kernel-metadata.json")).read_text())
         user = cfg["accounts"][e.account]["username"]
         assert meta["id"] == user + "/" + e.step and meta["enable_gpu"] is False
@@ -107,7 +107,7 @@ def test_launch_dry_run_builds_and_never_pushes(tmp_path):
 def test_status_and_collect_dry_and_429(tmp_path):
     lines, sleeps = [], []
     cfg = lp.bn.load_kaggle_config()
-    st = lp.main(["--status", "--dry-run", "--out-dir", str(tmp_path)], cfg=cfg, out=lines.append)
+    st = lp.main(["--status", "--dry-run", "--variants", "nofusion", "--out-dir", str(tmp_path)], cfg=cfg, out=lines.append)
     assert len(st) == 13 and sum("kernels status" in l for l in lines) == 13
     calls = []
 
@@ -124,3 +124,21 @@ def test_status_and_collect_dry_and_429(tmp_path):
     assert la.collect_all(one, tmp_path / "got") == {"edge-train-ppo": 0}
     assert sleeps == [60] and len(calls) == 2 and "--file-pattern" in calls[0]
     assert (folder / "a.json").exists() and not (folder / "big.log").exists()
+
+
+def test_fusion_variants_slugs_flags_and_balance(tmp_path):
+    entries = lp.plan()
+    assert len(entries) == 26 and sum(e.account == "wsl" for e in entries) == 13
+    lp.check_limits(entries)
+    fus = [e for e in entries if e.variant == "fusion"]
+    assert len(fus) == 13 and all(e.step.endswith("-fusion") for e in fus)
+    assert [e.step for e in lp.plan(variants=("fusion",))][0] == "edge-train-ppo-fusion"
+    cfg = lp.bn.load_kaggle_config()
+    lines = []
+    res = lp.main(["--out-dir", str(tmp_path)], runner=lambda *a, **k: (0, ""), cfg=cfg, out=lines.append)
+    assert len(res) == 26 and sum("kernels push" in l for l in lines) == 26
+    for e in entries:
+        meta = json.loads((tmp_path / (e.step + ".kernel-metadata.json")).read_text())
+        assert re.sub(r"[^a-z0-9]+", "-", meta["title"].lower()).strip("-") == e.step
+        src = _src(json.loads((tmp_path / (e.step + ".ipynb")).read_text()))
+        assert re.search(r"STS = .*, %s\s*$" % (e.variant == "fusion"), src, re.M)

@@ -25,6 +25,7 @@ TRAIN_ALGOS = (("ppo", None), ("scope_ppo", None), ("bc", None), ("dagger", None
                ("scope_dqn", None), ("ltr", "lambdamart"), ("ltr", "ranknet"), ("scope_ltr", None),
                ("semcover", None), ("bcedge", None))
 TUNE_SHARDS = 2
+VARIANTS = ("nofusion", "fusion")     # fusion = pass --sts-fusion; slug gets the suffix -fusion
 MAX_GPU_PER_ACCOUNT = 2
 COLLECT_PATTERN = r".*\.(json|csv|pt|pkl|bin)$"
 COLLECT_EXT = (".json", ".csv", ".pt", ".pkl", ".bin")
@@ -41,6 +42,7 @@ class Entry:
     gpu: bool = False
     ranker: str = None
     shard: str = ""
+    variant: str = "nofusion"
 
     @property
     def machine(self):
@@ -51,15 +53,19 @@ def train_step(algo, ranker):
     return "edge-train-" + algo.replace("_", "-") + ("-" + ranker if ranker else "")
 
 
-def plan(accounts=ACCOUNTS[::-1]):
+def plan(accounts=ACCOUNTS[::-1], variants=VARIANTS):
     """Ordered entries, dealt alternately to the accounts (wsl first); tune shards interleaved."""
     items = [("train", a, r, "") for a, r in TRAIN_ALGOS] + \
             [("sweep", "tune", None, "%d/%d" % (i, TUNE_SHARDS)) for i in range(TUNE_SHARDS)]
     items.sort(key=lambda it: it[0] == "sweep")           # trainers first, then tune
     entries = []
-    for n, (kind, algo, ranker, shard) in enumerate(items):
-        step = train_step(algo, ranker) if kind == "train" else "edge-sweep-%s-%sof%s" % (algo, *shard.split("/"))
-        entries.append(Entry(step, kind, algo, accounts[n % len(accounts)], False, ranker, shard))
+    n = 0
+    for kind, algo, ranker, shard in items:
+        base = train_step(algo, ranker) if kind == "train" else "edge-sweep-%s-%sof%s" % (algo, *shard.split("/"))
+        for v in variants:
+            entries.append(Entry(base + ("-fusion" if v == "fusion" else ""), kind, algo,
+                                 accounts[n % len(accounts)], False, ranker, shard, v))
+            n += 1
     return entries
 
 
@@ -75,9 +81,10 @@ def check_limits(entries):
 def build_entry(e, out_dir, cfg, branch="main", seeds=5):
     """Write the notebook + metadata for one entry (owner = its account); returns the metadata dict."""
     if e.kind == "train":
-        nb, meta = tr.build(e.algo, e.account, branch, seeds, e.ranker or "lambdamart", step=e.step)
+        nb, meta = tr.build(e.algo, e.account, branch, seeds, e.ranker or "lambdamart", step=e.step,
+                             sts_fusion=e.variant == "fusion")
     else:
-        nb, meta = sw.build(e.algo, e.account, branch, e.shard, step=e.step)
+        nb, meta = sw.build(e.algo, e.account, branch, e.shard, step=e.step, sts_fusion=e.variant == "fusion")
     meta["enable_gpu"] = e.gpu
     if not re.fullmatch(r"[a-z0-9-]+", meta["id"].split("/")[1]) or \
             re.sub(r"[^a-z0-9]+", "-", meta["title"].lower()).strip("-") != meta["id"].split("/")[1]:
@@ -146,11 +153,16 @@ def main(argv=None, runner=real_runner, cfg=None, out=print, sleep=time.sleep):
     ap.add_argument("--dry-run", action="store_true", help="with --status/--collect: print commands only")
     ap.add_argument("--branch", default="main")
     ap.add_argument("--seeds", type=int, default=5)
+    ap.add_argument("--variants", default=",".join(VARIANTS),
+                    help="comma list of nofusion,fusion (default both; fusion passes --sts-fusion, slug suffix -fusion)")
     ap.add_argument("--only", nargs="+", default=None, help="restrict to these notebook slugs")
     ap.add_argument("--out-dir", default=str(bn.OUT_DIR))
     a = ap.parse_args(argv)
     cfg = cfg or bn.load_kaggle_config()
-    entries = [e for e in plan() if not a.only or e.step in a.only]
+    variants = tuple(v for v in a.variants.split(",") if v)
+    if not variants or set(variants) - set(VARIANTS):
+        ap.error("--variants must be a subset of %s" % ",".join(VARIANTS))
+    entries = [e for e in plan(variants=variants) if not a.only or e.step in a.only]
     dry = not (a.go or a.status or a.collect) or a.dry_run
     la = Launcher(cfg, runner, dry, out, a.out_dir, sleep)
     if a.status:

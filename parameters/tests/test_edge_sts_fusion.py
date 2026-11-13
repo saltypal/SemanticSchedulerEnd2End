@@ -91,3 +91,22 @@ def test_sweep_with_and_without_fusion(tmp_path):
     p = tmp_path / "f.json"
     p.write_text(json.dumps(_fusion().to_dict()))
     assert run_sweep._load_fusion(str(p)) is not None and run_sweep._load_fusion(None) is None
+
+
+def test_candidates_selection_rule_and_model_roundtrip():
+    rows = toy_rows()
+    fus = sf.fit(rows)
+    assert {c["name"] for c in fus.candidates} == {"logreg", "logreg_inter", "hgb", "mlp"}
+    spi = fus.spi_val
+    ok = [c for c in fus.candidates if c["critical_recall"] >= spi["critical_recall"] - 1e-12
+          and c["ece"] <= spi["ece"] + sf.ECE_SLACK]
+    if fus.constraint_met:
+        assert max(c["macro_f1"] for c in ok) == max(
+            c["macro_f1"] for c in fus.candidates if (c["name"], c["bias"]) == (fus.chosen["name"], fus.chosen["bias"]))
+    best, met = sf.select([dict(macro_f1=.9, critical_recall=.5, ece=.0), dict(macro_f1=.1, critical_recall=.7, ece=.0)],
+                          dict(critical_recall=.99, ece=0.0))
+    assert not met and best["critical_recall"] == .7
+    hgb = sf.fit(rows, names=("hgb",), biases=(0.0, 1.0))
+    h2 = sf.StsFusion.from_dict(json.loads(json.dumps(hgb.to_dict())))
+    r = rows[450]
+    assert np.allclose(hgb(r["tier_probs"], r["sts"]), h2(r["tier_probs"], r["sts"]))
