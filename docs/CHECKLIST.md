@@ -142,3 +142,7 @@ Critical images before their deadline (CTR@D) than every baseline, close to the 
 4. `report results` / `report header-proofs` -> fill paper placeholders
 ## Accounts
 - plus `satyapaladuguplus`: WSL CLI. second `satyapaladugu`: native Windows `kaggle` CLI (login works). Max 2 GPU batch sessions each.
+
+## Locked inputs (2026-11-13)
+- Sim table `simtable_v1.jsonl` sha256 prefix `bd679b9e0e13ae82` (27,044 rows, STS + payload filled, true latency `latency_v1.json`, Critical-safe `sts_fusion.json`) — dataset `satyapaladuguplus/scheduler-dataset-v1-simtable` latest version. Do not regenerate.
+- Header layout v2 (D20). Splits `splits_v1.json` (dataset B).
