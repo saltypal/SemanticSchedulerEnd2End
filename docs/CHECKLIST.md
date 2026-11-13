@@ -146,3 +146,22 @@ Critical images before their deadline (CTR@D) than every baseline, close to the 
 ## Locked inputs (2026-11-13)
 - Sim table `simtable_v1.jsonl` sha256 prefix `bd679b9e0e13ae82` (27,044 rows, STS + payload filled, true latency `latency_v1.json`, Critical-safe `sts_fusion.json`) — dataset `satyapaladuguplus/scheduler-dataset-v1-simtable` latest version. Do not regenerate.
 - Header layout v2 (D20). Splits `splits_v1.json` (dataset B).
+
+# FINAL PLAN (2026-11-13 afternoon) — finish the project with semantic verification
+"Important" = TRUE tier from human CrisisMMD labels (Critical > High > Medium > Low) and its deadline. Policies never see it;
+it is used only to score and audit. Learner reward (training only) = sum of true value of decoded images
+(w_tier x time-utility x duplicate factor) minus a penalty per true-tier hard-deadline miss.
+
+| # | Step | Where | Status |
+|---|---|---|---|
+| 1 | Download all 26 phase-2 outputs (checkpoints, curves, tune shards) | laptop | running |
+| 2 | Download full image dataset A (2.5 GB) to D:\Bunker\BaseCamp\_claude_scratch\dsA for visual audit | laptop | running |
+| 3 | Decision-trace logger + replay (txt + HTML timeline per policy) + semantic metrics (semantic precision, inversions, Kendall tau, Critical vs Low wait) | W-TRACE (Sonnet low) | running |
+| 4 | Learning curves of all 22 runs; retrain with a bigger budget where not converged | laptop / Kaggle | next |
+| 5 | Semantic audit: traces for all policies on val; Haiku reviews traces + sampled images -> verdict per policy "orders semantically or not" | laptop CPU + Haiku | after 1-4 |
+| 6 | Compare sweep (val), c in {1,2,4,6,8}, with and without fusion. Kaggle (priority): SV-DPP, SemCover x2, SCOPE-PPO/DQN/LTR, EDF, SPI-first-EDF, Whittle, gen-cmu/h, EdgeServing, MPC, BCEdge, FIFO, genie, MILP bound. Laptop CPU: extended + equivalence policies | Kaggle x2 + laptop | after 5 |
+| 7 | Header proofs (val): field drop-out, equal-bytes baseline, STS fusion on/off | laptop CPU | with 6 |
+| 8 | TEST run once, frozen (Maria + Mexico) | Kaggle | after 6-7 |
+| 9 | Live 2xT4 check (COMPULSORY): real decode on 2 GPUs, 3 policies, KS latency test, CTR@D live vs sim | Kaggle GPU | with 8 |
+| 10 | Reports (tables/figures) -> fill paper placeholders | laptop | last |
+Kaggle limits: 5 CPU + 2 GPU sessions per account (2 accounts). Laptop CPU used in parallel.
