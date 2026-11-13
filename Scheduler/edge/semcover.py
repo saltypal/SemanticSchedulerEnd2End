@@ -50,8 +50,19 @@ def pair_components(headers):
 
 
 def psd_project(S):
-    w, v = torch.linalg.eigh((S + S.T) / 2)
-    return (v * w.clamp(min=0)) @ v.T
+    """Symmetric PSD projection. eigh can fail on ill-conditioned kernels (many near-duplicate rows with repeated
+    eigenvalues): retry with an escalating diagonal jitter, which also perturbs the repeated eigenvalues apart."""
+    S = torch.nan_to_num((S + S.T) / 2)
+    eye = torch.eye(S.shape[-1], dtype=S.dtype, device=S.device)
+    scale = float(S.diagonal().abs().mean()) or 1.0
+    err = None
+    for jit in (0.0, 1e-6, 1e-4, 1e-2):
+        try:
+            w, v = torch.linalg.eigh(S + jit * scale * eye)
+            return (v * w.clamp(min=0)) @ v.T
+        except RuntimeError as e:   # torch._C._LinAlgError subclasses RuntimeError
+            err = e
+    raise err
 
 
 def build_kernel(comps, crit, w, zeta, eps):

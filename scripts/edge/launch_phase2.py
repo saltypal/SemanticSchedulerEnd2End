@@ -82,6 +82,8 @@ def check_limits(entries):
 # rate 3.0/s with 2 workers ~ rho 1.2 at the true v1 decode latency (0.74 s at B=1).
 TRAIN_BUDGET = ("--iters", "30", "--episodes", "4", "--n-jobs", "500", "--workers", "2", "--rate", "3.0")
 BUDGETS = {"default": TRAIN_BUDGET,      # --budget big: retrain learners whose curves had not converged
+           # fast (2026-11-13, user): 150 iters x 13 episodes = 1950 RL episodes, run with --seeds 1
+           "fast": ("--iters", "150", "--episodes", "13", "--n-jobs", "500", "--workers", "2", "--rate", "3.0"),
            "big": ("--iters", "120", "--episodes", "6", "--n-jobs", "800", "--workers", "2", "--rate", "3.0")}
 
 
