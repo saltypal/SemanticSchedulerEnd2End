@@ -15,7 +15,10 @@ dup:
 sv_dpp:
   V: 1.0
   debt_init: 0.0
-  tie_tol_frac: 0.1            # sec. 6.3 tie rule: scores below this fraction of max E[v] count as ties (ranked by E[v])
+  # sec. 6.3 tie rule: scores below this fraction of max E[v] count as ties (ranked by E[v]).
+  # 0.3 = val-tuned (1000 val rows, trace arrivals, TRUE v1 latency, 5 realisations, workers 1/2):
+  # sum of CTR@D over rho 1.2/1.5 x workers 1/2 = 1.048 (0.3) vs 1.004 (0.1) vs 0.981 (0.2); rho 0.8 also best (0.379/0.511).
+  tie_tol_frac: 0.3
   relevance_beta: 0.5          # D18; 0 = plan v3 exactly (no relevance); tuned on val in S7
   # per mission id [lo, hi] for r_tilde = clip((relevance - lo) / (hi - lo), 0, 1).
   # [0.52, 0.68] = observed min/max of relevance in the sim table; replace with per-mission

@@ -138,3 +138,10 @@ def test_negligible_debt_credit_does_not_outrank_confident_critical():
     pol.Z = [15.0, 2.4, 2.0, 0.0]
     d = pol.select(state(low + [crit], lat=lat, max_batch=8, workers=2, rate=1.8))
     assert 0 in d.batch
+
+
+def test_tie_tol_frac_default_is_val_tuned():
+    # val-tuned on true v1 latency (config/edge/sim.yaml comment); 0.1 trailed EDF at rho 1.2 / 2 workers
+    pol = make()
+    assert pol.tie_tol_frac == 0.3
+    assert make(tie_tol_frac=0.1).tie_tol_frac == 0.1
