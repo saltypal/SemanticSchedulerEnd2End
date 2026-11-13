@@ -167,3 +167,5 @@ it is used only to score and audit. Learner reward (training only) = sum of true
 Kaggle limits: 5 CPU + 2 GPU sessions per account (2 accounts). Laptop CPU used in parallel.
 - [ ] **RE-RUN header proofs (required, decisive):** the only direct evidence (drop SPI: CTR@D 0.65 -> 0.54) predates the SV-DPP fixes and used synthetic latency, and in it "no header" scored HIGHER than the full header. Re-run on val with true latency and fixed SV-DPP, with and without fusion. Pass: full header > SPI-only > no header by clear margins; else the semantic claim must be reworked before writing results.
 - [ ] Overnight orchestrator `scripts/edge/run_overnight.py` runs steps 1-10 unattended (status: `D:\Bunker\BaseCamp\_claude_scratch\overnight\STATUS.md`).
+
+- [ ] **SemCover fusion fix:** seed 1 of `edge-train-semcover-fusion` crashed (`linalg.eigh` ill-conditioned kernel). Add diagonal jitter (escalating fallback) before eigh, retrain all 3 seeds; also give SemCover a larger training budget (more SemCover runs).
