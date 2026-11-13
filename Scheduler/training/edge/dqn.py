@@ -173,7 +173,7 @@ class DQNPolicy(Policy):
 
 
 def train_dqn(env_factory, episodes, teacher=None, model=None, hidden=64, gamma=0.95, lr=1e-3,
-              batch_size=32, updates_per_episode=20, target_sync=10, eps_start=1.0, eps_end=0.05,
+              batch_size=32, updates_per_episode=20, target_sync=10, eps_start=1.0, eps_end=0.05, eps_decay_frac=0.4,
               margin_weight=0.0, margin=0.8, beta0=1.0, beta_k=None, lambdas=(0, 0, 0, 0),
               reward_scale=1.0, buffer_size=50000, seed=0, value_fn=None):
     """Train a DQN. ``env_factory(episode) -> EdgeEnv``. Returns (model, history list of dicts)."""
@@ -185,7 +185,10 @@ def train_dqn(env_factory, episodes, teacher=None, model=None, hidden=64, gamma=
     opt = torch.optim.Adam(model.parameters(), lr=lr)
     buf, hist, step = ReplayBuffer(buffer_size, seed), [], 0
     for ep in range(int(episodes)):
-        eps = eps_start + (eps_end - eps_start) * ep / max(episodes - 1, 1)
+        # linear decay over the first eps_decay_frac of training, then eps_end (was: over all episodes,
+        # which left eps = 0.15 at the end of a 1950-episode run)
+        frac = min(1.0, ep / max(eps_decay_frac * (episodes - 1), 1))
+        eps = eps_start + (eps_end - eps_start) * frac
         env = env_factory(ep)
         pol = DQNPolicy(model, eps, teacher, record=True, seed=seed + ep)
         res = env.run(pol)
