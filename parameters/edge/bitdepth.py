@@ -116,21 +116,24 @@ def main(argv=None):
     ap.add_argument("--n", type=int, default=2000, help="val rows used")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--sts-fusion", default=None, help="sts_fusion.json: receiver fuses SPI+STS (D19)")
     a = ap.parse_args(argv)
+    from Evaluation.edge.run_sweep import _load_fusion
+    fusion = _load_fusion(a.sts_fusion)
     rows = [r for r in tables.load_rows(a.table) if r["split"] == "val"]
     rng = np.random.default_rng(a.seed)
     rows = [rows[i] for i in rng.permutation(len(rows))[:a.n]]
     latency = tables.latency_from_profile_json(a.latency)
-    spec = ValueSpec.from_config(load_config("sim")) if hasattr(ValueSpec, "from_config") else ValueSpec()
+    spec = ValueSpec.from_config(load_config("sim"))
     b = max(x for x in latency.batch_sizes if x <= a.max_batch)
     times = arrivals.poisson_times(len(rows), arrivals.rate_for_rho(a.rho, latency, b, a.workers), rng)
     jobs = tables.rows_to_jobs(rows, times, np.random.default_rng(a.seed + 1))
 
     def make_env():
-        return EdgeEnv(jobs, latency, spec, a.workers, a.max_batch, Receiver(), a.seed + 2)
+        return EdgeEnv(jobs, latency, spec, a.workers, a.max_batch, Receiver(fusion=fusion), a.seed + 2)
     fields_list = [tuple(f.split("+")) for f in a.fields.split(";")]
-    res = study(make_env, lambda: registry.make(a.policy), [int(x) for x in a.bits.split(",")], fields_list)
-    out = {"policy": a.policy, "rho": a.rho, "workers": a.workers, "n_rows": len(rows), "target": TARGET,
+    res = study(make_env, lambda: registry.build(a.policy), [int(x) for x in a.bits.split(",")], fields_list)
+    out = {"sts_fusion": bool(a.sts_fusion), "policy": a.policy, "rho": a.rho, "workers": a.workers, "n_rows": len(rows), "target": TARGET,
            "rows": res, "smallest_passing_bits": smallest_passing(res)}
     with open(a.out, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1)
