@@ -54,7 +54,7 @@ def main(argv=None):
     teacher = registry.build(a.teacher) if a.algo not in ("ppo", "dqn", "bcedge") else None
     kw = dict(iters=a.iters, episodes=a.episodes, seed=a.seed)
     if a.algo == "ppo":
-        model, hist = trainers.train_ppo(env_factory, **kw)
+        model, hist = trainers.train_ppo(env_factory, warm_teacher=registry.build(a.teacher), **kw)  # F3: PPO-BC
     elif a.algo == "scope_ppo":
         model, hist = trainers.train_scope_ppo(env_factory, teacher, **kw)
     elif a.algo == "bc":

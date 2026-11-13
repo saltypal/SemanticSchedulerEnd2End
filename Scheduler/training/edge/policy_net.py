@@ -8,6 +8,8 @@ Reuses ``state_features`` (never modified) and the ``contracts`` Policy/Decision
 """
 import numpy as np
 import torch
+
+from Scheduler.edge.batching import rank_alive_first, ratio_batch_size
 from torch import nn
 
 from Evaluation.edge.contracts import Decision, Policy
@@ -127,14 +129,14 @@ class LearnedPolicy(Policy):
         with torch.no_grad():
             logits, value = self.model(job, glob)
         target = teacher_scores(self.teacher, state, self.teacher_eps) if self.teacher is not None else None
-        b = batch_size_for(state)
         lg = logits[0].numpy().astype(float)
         if self.mode == "teacher":
-            order = list(np.argsort(-target, kind="stable")[:b])
+            full = np.argsort(-target, kind="stable")
         elif self.mode == "sample":
-            order = list(np.argsort(-(lg + self.rng.gumbel(size=n)), kind="stable")[:b])
+            full = rank_alive_first(lg + self.rng.gumbel(size=n), state)
         else:
-            order = list(np.argsort(-lg, kind="stable")[:b])
+            full = rank_alive_first(lg, state)
+        order = list(full[:ratio_batch_size(state, full)])      # F2: shared batch rule, was max B
         ch = torch.as_tensor(order, dtype=torch.long)[None]
         with torch.no_grad():
             lp = float(plackett_luce_logp(logits, torch.ones(1, n, dtype=torch.bool), ch)[0])

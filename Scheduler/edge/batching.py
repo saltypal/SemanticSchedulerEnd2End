@@ -126,4 +126,89 @@ class ShepherdNexus(Policy):
         return Decision(top_batch([j.id for j in prio], state, b))
 
 
-POLICIES = {"clipper_aimd": ClipperAimd, "clockwork": Clockwork, "shepherd_nexus": ShepherdNexus}
+UNIFORM4 = (0.25, 0.25, 0.25, 0.25)
+
+
+def dead_mask(state):
+    """F3: True for jobs that cannot finish before the hard deadline of any likely tier (p > 0.05) even as a
+    batch of one - the same test SV-DPP uses to purge. Learners rank these last (queueing analogue of the
+    work-conserving parametrisation of Che et al., arXiv:2409.03740)."""
+    sp, lat = state.spec, state.latency
+    b1 = lat.batch_sizes[0]
+    out = []
+    for j in state.queue:
+        p = j.header.tier_probs
+        live = [k for k in range(4) if p[k] > 0.05] or [int(np.argmax(p))]
+        out.append(all(lat.cdf(b1, sp.hard_deadline(k) - j.age) == 0.0 for k in live))
+    return np.asarray(out, dtype=bool)
+
+
+def rank_alive_first(scores, state):
+    """Stable descending order of ``scores`` with dead jobs (``dead_mask``) moved to the end."""
+    s = np.asarray(scores, dtype=float).copy()
+    s[dead_mask(state)] = -1e18
+    return np.argsort(-s, kind="stable")
+
+
+def ratio_batch_size(state, order, use_header=True):
+    """Shared batch-size rule (fix plan F2): given a ranking ``order`` (indices into ``state.queue``), pick the
+    profiled B maximising expected on-time value per second of decoding,
+    sum_{i in top-B} sum_k p_ik w_k P(S_B <= H_k - age_i) / E[S_B]  (renewal-ratio rule, Neely 2013).
+    ``use_header=False`` uses the uniform tier prior (no semantics) for the batching-only control."""
+    ok = sizes(state, len(order))
+    if not ok:
+        return batch_size(state)
+    if len(ok) == 1:
+        return ok[0]
+    sp, lat = state.spec, state.latency
+    best = None
+    for b in ok:
+        tot = 0.0
+        for i in order[:b]:
+            j = state.queue[int(i)]
+            p = j.header.tier_probs if use_header else UNIFORM4
+            tot += sum(p[k] * sp.weights[k] * lat.cdf(b, sp.hard_deadline(k) - j.age) for k in range(4))
+        r = tot / lat.mean(b)
+        if best is None or r > best[0] + 1e-12:
+            best = (r, b)
+    return best[1]
+
+
+class RatioBatched(Policy):
+    """Control policies for the semantics-vs-batching question: an order rule plus ``ratio_batch_size``.
+    ``edf_ratio``: EDF on the uniform-prior deadline (no header) + header-free batch rule (batching only).
+    ``spi_edf_ratio``: SPI-first-EDF order + header batch rule (semantics through the order and the rule)."""
+    def __init__(self, use_header):
+        self.use_header = use_header
+
+    def select(self, state):
+        if not state.queue:
+            return Decision()
+        q = state.queue
+        if self.use_header:
+            key = [(-(j.header.tier_probs[0]), state.spec.soft_deadline[pred_tier(j)] - j.age, j.header.arrival_time)
+                   for j in q]
+        else:
+            dbar = float(np.mean(state.spec.soft_deadline))
+            key = [(0.0, dbar - j.age, j.header.arrival_time) for j in q]
+        order = sorted(range(len(q)), key=lambda i: key[i])
+        b = ratio_batch_size(state, order, self.use_header)
+        return Decision(batch=tuple(q[i].id for i in order[:b]))
+
+
+class EdfRatio(RatioBatched):
+    name = "edf_ratio"
+
+    def __init__(self):
+        super().__init__(False)
+
+
+class SpiEdfRatio(RatioBatched):
+    name = "spi_edf_ratio"
+
+    def __init__(self):
+        super().__init__(True)
+
+
+POLICIES = {"clipper_aimd": ClipperAimd, "clockwork": Clockwork, "shepherd_nexus": ShepherdNexus,
+            "edf_ratio": EdfRatio, "spi_edf_ratio": SpiEdfRatio}

@@ -164,8 +164,10 @@ class DQNPolicy(Policy):
         else:
             with torch.no_grad():
                 q = self.model(_t(job_features(state)), _t(global_features(state))).numpy()
-            order = list(np.argsort(-q, kind="stable"))
-        dec = Decision(tuple(ids[i] for i in order[:self._size(state)]))
+            from Scheduler.edge.batching import rank_alive_first
+            order = list(rank_alive_first(q, state))
+        from Scheduler.edge.batching import ratio_batch_size
+        dec = Decision(tuple(ids[i] for i in order[:ratio_batch_size(state, order)]))   # F2: was max B
         if self.record:
             tb = self.teacher.select(state).batch if self.teacher is not None else ()
             self.records.append(make_record(state, dec, tb))

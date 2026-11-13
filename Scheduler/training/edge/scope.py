@@ -57,7 +57,7 @@ def build_batch(decisions, returns, ret_scale=1.0):
     return b
 
 
-def scope_ppo_update(model, optimizer, batch, cfg, lambdas, n_live=0.0):
+def scope_ppo_update(model, optimizer, batch, cfg, lambdas, n_live=0.0, beta=None):
     """One PPO epoch on ``batch``. ``lambdas`` is reported only (already inside the returns)."""
     logits, value = model(batch["job"], batch["glob"], batch["mask"])
     new_logp = plackett_luce_logp(logits, batch["mask"], batch["chosen"])
@@ -67,7 +67,7 @@ def scope_ppo_update(model, optimizer, batch, cfg, lambdas, n_live=0.0):
     vf = ((value - batch["ret"]) ** 2).mean()
     logp1 = torch.log_softmax(logits, dim=-1)
     ent = -(logp1.exp() * logp1.masked_fill(~batch["mask"], 0.0)).sum(-1).mean()
-    beta = imitation_weight(n_live, cfg.beta0, cfg.beta_decay_k)
+    beta = imitation_weight(n_live, cfg.beta0, cfg.beta_decay_k) if beta is None else float(beta)
     kl = torch.zeros(())
     if beta > 0 and bool(batch["has_teacher"].any()):
         t = batch["teacher"].clamp(min=1e-8)

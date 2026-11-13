@@ -24,6 +24,7 @@ def _ppo_loop(env_factory, model, cfg, iters, episodes, seed, teacher, use_dual)
     torch.manual_seed(seed)
     opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
     lambdas, n_live, history, ret_scale = None, 0.0, [], None
+    beta_scale = 1.0     # F4 (TGRL-style, arXiv:2307.03186): teacher weight adapts to student-vs-teacher return
     for it in range(iters):
         decisions, returns, rewards, succ = [], [], [], []
         for e in range(episodes):
@@ -42,9 +43,16 @@ def _ppo_loop(env_factory, model, cfg, iters, episodes, seed, teacher, use_dual)
         sd = float(r.std()) or 1.0
         ret_scale = sd if ret_scale is None else 0.9 * ret_scale + 0.1 * sd    # running return scale
         batch = build_batch(decisions, r, ret_scale)
+        beta_now = None
+        if teacher is not None and use_dual:
+            # same episode seed as the student's first episode of this iteration
+            t_ret = float(collect_episode(env_factory, LearnedPolicy(model, "teacher", teacher, teacher_eps=0.0),
+                                          seed=ep_seed(seed, it * episodes), lambdas=lambdas).rewards.sum())
+            beta_scale = max(0.05, beta_scale * 0.9) if rewards[0] >= t_ret else min(1.0, beta_scale / 0.9)
+            beta_now = cfg.beta0 * beta_scale
         stats = {}
         for _ in range(cfg.epochs):
-            stats = scope_ppo_update(model, opt, batch, cfg, lambdas, n_live)
+            stats = scope_ppo_update(model, opt, batch, cfg, lambdas, n_live, beta=beta_now)
         j = np.mean(succ, axis=0)
         history.append(dict(iter=it, mean_reward=float(np.mean(rewards)), tier_success=j.tolist(),
                             lambdas=[float(x) for x in lambdas], beta=stats["beta"], loss=stats["loss"]))
@@ -53,8 +61,11 @@ def _ppo_loop(env_factory, model, cfg, iters, episodes, seed, teacher, use_dual)
     return model, history
 
 
-def train_ppo(env_factory, iters=5, episodes=2, cfg=None, model=None, seed=0):
-    """Plain PPO: beta = 0, lambdas fixed at 0, no teacher."""
+def train_ppo(env_factory, iters=5, episodes=2, cfg=None, model=None, seed=0, warm_teacher=None, warm_episodes=4):
+    """Plain PPO. ``warm_teacher``: behaviour-clone it first (PPO-BC, Dai & Gluzman 2022; F3), then PPO without
+    any teacher term."""
+    if warm_teacher is not None and model is None:
+        model, _ = train_bc(env_factory, warm_teacher, episodes=warm_episodes, seed=seed)
     cfg = replace(cfg or ScopeConfig(), beta0=0.0)
     return _ppo_loop(env_factory, model or SetPolicy(), cfg, iters, episodes, seed, None, False)
 

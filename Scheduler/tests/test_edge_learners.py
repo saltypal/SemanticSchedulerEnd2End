@@ -51,7 +51,9 @@ def test_ppo_and_scope_run_with_valid_probs():
     _, hist = trainers.train_ppo(factory, iters=2, episodes=1)
     assert len(hist) == 2
     model, hist = trainers.train_scope_ppo(factory, SVDPP(), iters=2, episodes=1)
-    assert len(hist[0]["lambdas"]) == 4 and hist[1]["beta"] < hist[0]["beta"]
+    assert len(hist[0]["lambdas"]) == 4
+    # F4: the teacher weight adapts (TGRL-style) within [0.05, 1] x beta0 instead of a fixed decay
+    assert all(0.0 < h["beta"] <= 1.0 for h in hist) and hist[1]["beta"] != hist[0]["beta"]
     lg, _ = model(torch.randn(1, 5, JOB_DIM), torch.randn(1, GLOBAL_DIM))
     p = torch.softmax(lg, -1)
     assert torch.isfinite(p).all() and abs(float(p.sum()) - 1) < 1e-5

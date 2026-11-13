@@ -20,7 +20,8 @@ import torch
 from Evaluation.edge.contracts import Decision, Policy
 from Scheduler.training.edge.dqn import DQNPolicy, make_qnet
 from Scheduler.training.edge.ltr import LTRPolicy, RankNet, TreeRanker
-from Scheduler.training.edge.policy_net import batch_size_for, load_model
+from Scheduler.edge.batching import rank_alive_first, ratio_batch_size
+from Scheduler.training.edge.policy_net import load_model
 from Scheduler.training.edge.state_features import global_features, job_features
 
 PREFIX = "learned:"
@@ -69,7 +70,8 @@ class SetGreedyPolicy(Policy):
             logits, _ = self.model(job, glob)
         lg = logits[0].numpy().astype(float)
         self.last_scores = {j.id: float(v) for j, v in zip(state.queue, lg)}   # trace only
-        order = np.argsort(-lg, kind="stable")[:batch_size_for(state)]
+        full = rank_alive_first(lg, state)
+        order = full[:ratio_batch_size(state, full)]          # F2: shared batch rule, was max B
         return Decision(tuple(state.queue[int(i)].id for i in order))
 
 

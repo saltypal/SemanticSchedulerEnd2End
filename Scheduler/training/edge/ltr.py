@@ -157,11 +157,9 @@ class LTRPolicy(Policy):
             return Decision()
         s = self.ranker.score(_x(job_features(state), global_features(state)))
         ids = [j.id for j in state.queue]
-        order = np.argsort(-s, kind="stable")
-        cap = min(state.max_batch, len(ids))
-        ok = [b for b in state.latency.batch_sizes if b <= cap]
-        b = max(ok) if ok else cap
-        return Decision(tuple(ids[i] for i in order[:b]))
+        from Scheduler.edge.batching import rank_alive_first, ratio_batch_size
+        order = rank_alive_first(s, state)
+        return Decision(tuple(ids[i] for i in order[:ratio_batch_size(state, order)]))   # F2: was max B
 
 
 def listwise_distill_loss(scores, teacher_scores, lambdas_by_tier, tier_probs):
