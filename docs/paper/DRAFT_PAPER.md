@@ -1,7 +1,7 @@
 # Semantic-Aware Decoder Scheduling at the O-RAN Edge: Stateless Semantic Headers, Receiver-Side Novelty, and Semantic-Coverage Learning for One-Shot Generative Image Communication
 
 *Living draft. IEEE journal structure in single-column Markdown. Target: IEEE TCCN / TWC / IoT-J.*
-*Methods synced to FINAL_PLAN_V3 v3.1 plus decisions D1-D19 of `docs/CHECKLIST.md` (2026-11-13). Status: **no final results yet**.
+*Methods synced to FINAL_PLAN_V3 v3.1, decisions D1-D20 of `docs/CHECKLIST.md` and fix plan `docs/reviews/FIX_PLAN_2026-11-13.md` (2026-11-14). Status: **no final results yet**.
 Every `[RESULT PENDING: ...]` marks a number that has not been computed; nothing in brackets is a result.
 The only measured numbers in this draft are dataset counts, the SPI validation report, and the batched decode-latency
 measurement of codec v1 (Sec. VII-B). Cross-references: `docs/reviews/FINAL_PLAN_V3.md`, `docs/CHECKLIST.md`,
@@ -264,7 +264,11 @@ the semantic key is near-identical (d <= 3).
   Whittle-AoI, CVaR-SPI, LinUCB (full list in `Scheduler/ALGORITHMS.md`).
 - *Learners:* LambdaMART, RankNet, DQN, PPO, BC-only, DAgger, and the SCOPE instances.
 - *Proposed:* SV-DPP, SCOPE-PPO / DQN / LTR, **SemCover**.
-- *BCEdge-style SAC batching baseline* [85] [RESULT PENDING: not yet implemented].
+- *BCEdge-style batching baseline* [85]: entropy-regularised actor-critic over the batch size (implemented).
+- *Batching controls (semantics vs batching):* every ranking policy and learner chooses its batch size with one shared
+  renewal-ratio rule [61]: B* = argmax_B sum_{i in top-B} sum_k q_ik w_k P(S_B <= H_k - a_i) / E[S_B], over its own order.
+  `spi_edf_ratio` (SPI-first-EDF order + the rule) and `edf_ratio` (header-blind EDF order + the rule with a uniform
+  tier prior) isolate the value of the header from the value of adaptive batching.
 - SCOPE-AIF (RLAIF) is parked by the user and is not part of this paper's result set.
 
 **B. SV-DPP (FINAL_PLAN_V3 Sec. 6).** SV-DPP extends completion-aware Lyapunov scheduling [60] and semantic DPP [14]
@@ -285,9 +289,9 @@ on validation, and beta = 0 recovers plan v3.
 
 *Two specification fixes found during implementation.* (i) Deferring the top-ranked job looked free; the defer-wait
 estimate is now at least one service round. (ii) The all-or-nothing tie rule is replaced by a per-job tie tolerance
-`tie_tol_frac`, a parameter added beyond plan v3. Smoke test (300 validation rows, synthetic latency, **indicative
-only, not a result**): CTR@D at rho = 0.8 is 0.994 for both SV-DPP and EDF; at rho = 1.2 SV-DPP 0.920 versus EDF 0.981,
-i.e. SV-DPP did not beat EDF in this smoke test. Final numbers come from the full validation and test sweeps.
+`tie_tol_frac`, a parameter added beyond plan v3. V and the purge threshold are tuned on validation; beta (D18) and
+`tie_tol_frac` are tuned on a 3 x 3 validation grid [RESULT PENDING]. Final numbers come from the full validation and
+test sweeps.
 
 *Claims.* Debt stability is verified empirically (no O(1/V) theorem for non-stationary traces). In the degenerate
 case SV-DPP reduces to expected-weight priority. Proposition [PLACEHOLDER]: relation to gen-c-mu/h [62] and to Whittle
@@ -349,9 +353,21 @@ space, with soft geometry-based redundancy handling and a learned kernel; no cla
 **D. SCOPE: a training recipe for learners.** The objective is
 min_theta max_lambda -J_v + sum_k lambda_k (eta_k - J_k) + beta(n) L_imit(theta; pi_SV-DPP).
 - Constraint costs enter only through returns; teacher and student share the four tier constraints.
-- Imitation queries the analytic teacher at the states the learner visits [63]-[66]; beta(n) decays with live
-  experience [67]. Claimed novelty is only the composition and its application.
-- Instances: SCOPE-PPO (set-attention actor), SCOPE-DQN (DQfD-style margin loss [68]), SCOPE-LTR (listwise distillation).
+- Imitation queries the analytic teacher at the states the learner visits [63]-[66]. The imitation weight is
+  **adaptive** (TGRL-style [96]): each iteration the greedy student and the teacher run the same episode; the weight
+  shrinks (x0.9, floor 0.05) when the student matches or beats the teacher and grows (/0.9, cap 1) otherwise. A fixed
+  decay schedule let the student drift below the teacher once imitation faded. Claimed novelty is only the
+  composition and its application.
+- Instances: SCOPE-PPO (set-attention actor), SCOPE-DQN (DQfD-style margin loss [68]; replay buffer, optimizer and
+  target network persist across outer iterations; best checkpoint kept on held-out training episodes), SCOPE-LTR
+  (listwise distillation). All ranking learners share the batch-size rule of Sec. VI-A and rank jobs that cannot meet
+  any likely hard deadline last (a queueing analogue of the work-conserving parametrisation of [97]). Plain PPO is
+  warm-started by behaviour cloning of SV-DPP (PPO-BC [101]); value targets use scaled returns so the value loss
+  does not swamp the clipped policy gradient.
+- *Training protocol:* train split only; bursty MMPP arrivals at rate 4.5 /s on c = 2 workers, B <= 8, 150 iterations x
+  13 episodes (about 1,950 episodes); two independent seeds for proposed learners (each seed has its own episode
+  stream), one for baselines. Following [98], learners are evaluated on both steady and bursty load, since RL tends to
+  help only on the latter.
 - A proof-of-value experiment compares SCOPE with the teacher, BC-only, DAgger and plain RL at equal budgets in regimes
   where the teacher is misspecified (wrong sigma_W, noisy SPI, MMPP bursts). SCOPE is claimed only if it beats the
   teacher there. SemCover is trained with this recipe but is not a SCOPE variant.
@@ -458,6 +474,12 @@ calibrated SPI, relevance per mission, keys, 760 duplicate groups over 1,965 ima
 
 ## VIII. Results
 All entries below are placeholders; no sweep has been run.
+
+*Internal preliminary checks (not results, not for the paper; 300-500 validation images, c = 2, rho = 1.2, one
+realisation, no CIs; recorded only to guide the sweeps):* with the shared batch rule, SPI-first ordering reached CTR@D
+0.44-0.50 while the header-blind order reached 0.00, so the header carries the ordering signal; SCOPE-PPO (2 seeds) 0.51-0.52,
+LambdaMART 0.51, SV-DPP 0.49, SCOPE-LTR 0.43-0.45, SCOPE-DQN 0.28-0.33, DQN 0.32. A quick SV-DPP header drop-out gave the
+same CTR@D with and without the header (0.49); the decisive full header proofs with CIs are pending.
 - **Fig. 5 [RESULT PENDING]:** CTR@D vs. load for all policies.
 - **Table VII [RESULT PENDING: main CTR@D table at rho = 1.2, c = 2, validation-tuned, test-evaluated].**
 - **Fig. 6 [RESULT PENDING]:** normalised value vs. load; Pareto front of CTR@D vs. Low starvation.
@@ -484,6 +506,9 @@ All entries below are placeholders; no sweep has been run.
 - DPP guarantees hold on time-averages, not per image; the (1 - 1/e) guarantee applies per decision to the
   facility-location variant only. c >= 4 is idealised.
 - The Qwen label audit and SCOPE-AIF (RLAIF) were parked and are not evaluated.
+- The uplink is not modelled: images reach the edge queue at their arrival time without channel delay or loss (a loss
+  sensitivity row only); the study is about decoder-side compute scheduling.
+- DQN-family learners were unstable across seeds; they are reported as baselines.
 
 ## X. Conclusion
 [PLACEHOLDER]
@@ -590,6 +615,13 @@ from their abstracts.*
 [93] M. Kountouris, N. Pappas, "Semantics-empowered communication for networked intelligent systems," IEEE Commun. Mag., 2021. <!-- TODO-verify: from memory -->
 [94] G. L. Nemhauser, L. A. Wolsey, M. L. Fisher, "An analysis of approximations for maximizing submodular set functions I," Math. Programming, 1978. <!-- TODO-verify: added by the paper writer as the (1-1/e) source; the design note cites it only via SAVER/MASCOT -->
 [95] T.-Y. Lin et al., "Microsoft COCO: Common objects in context," ECCV, 2014. <!-- TODO-verify -->
+
+[96] I. Shenfeld, Z.-W. Hong, A. Tamar, P. Agrawal, "TGRL: An algorithm for teacher guided reinforcement learning," ICML, 2023, arXiv:2307.03186.
+[97] E. Che, J. Dong, H. Namkoong, "Differentiable discrete event simulation for queuing network control," arXiv:2409.03740, 2024.
+[98] G. Zhang et al., "When does deep RL beat calibrated baselines? A benchmark study on adaptive resource control," arXiv:2605.26418, 2026.
+[99] R. Sharifullin, "Adaptive inference batching using policy gradients," arXiv:2607.05272, 2026.
+[100] D. Wang, Q. Zhang, L. Ying, "Zeroth-order policy optimization for scheduling in queueing networks," arXiv:2611.01186, 2026.
+[101] J. G. Dai, M. Gluzman, "Queueing network controls via deep reinforcement learning," Stochastic Systems, vol. 12, no. 1, 2022.
 
 [59] is superseded by [95] (COCO people replaced Open Images, D1); [78] (DINOv2 judge) is unused after D5 and can be dropped.
 
