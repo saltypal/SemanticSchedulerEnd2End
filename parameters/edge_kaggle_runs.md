@@ -101,3 +101,11 @@
 | edge-train-ppo | wsl | satyapaladuguplus/edge-train-ppo | 4 | aa659d6a85855e0a294daa3072bb46f060f8d463 | 2026-11-14T07:21:54Z |
 | edge-train-bc | wsl | satyapaladuguplus/edge-train-bc | 3 | aa659d6a85855e0a294daa3072bb46f060f8d463 | 2026-11-14T07:21:59Z |
 | edge-train-ltr-ranknet | wsl | satyapaladuguplus/edge-train-ltr-ranknet | 3 | aa659d6a85855e0a294daa3072bb46f060f8d463 | 2026-11-14T07:22:04Z |
+| edge-sweep-val-svdpp | wsl | satyapaladuguplus/edge-sweep-val-svdpp | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:53:27Z |
+| edge-sweep-val-genie | wsl | satyapaladuguplus/edge-sweep-val-genie | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:53:35Z |
+| edge-sweep-val-order | wsl | satyapaladuguplus/edge-sweep-val-order | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:53:42Z |
+| edge-sweep-val-ctrl | wsl | satyapaladuguplus/edge-sweep-val-ctrl | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:53:52Z |
+| edge-sweep-test-svdpp | win | satyapaladugu/edge-sweep-test-svdpp | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:20Z |
+| edge-sweep-test-genie | win | satyapaladugu/edge-sweep-test-genie | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:31Z |
+| edge-sweep-test-order | win | satyapaladugu/edge-sweep-test-order | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:40Z |
+| edge-sweep-test-ctrl | win | satyapaladugu/edge-sweep-test-ctrl | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:50Z |

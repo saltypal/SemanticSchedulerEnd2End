@@ -125,7 +125,7 @@ def test_at_risk_critical_beats_safe_critical_when_debt_high():
 def test_deferring_top_ranked_job_is_not_free():
     """Deferral costs at least one service round (sec. 6.2): the critical about to cross D_C goes first."""
     aged, fresh = qj(0, ONE[0], age=4.5), qj(1, ONE[0], age=0.0)
-    d = make(tie_tol_frac=0.1).select(state([fresh, aged], lat=LatencyProfile({1: [1.0, 1.0], 2: [1.5, 1.5]})))
+    d = make(V=1.0, tie_tol_frac=0.1).select(state([fresh, aged], lat=LatencyProfile({1: [1.0, 1.0], 2: [1.5, 1.5]})))
     assert d.batch == (0,)
 
 
