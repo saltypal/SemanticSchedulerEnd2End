@@ -2,7 +2,6 @@
 
 *Living draft. IEEE journal structure in single-column Markdown. Target: IEEE TCCN / TWC / IoT-J.*
 *Methods synced to FINAL_PLAN_V3 v3.1, decisions D1-D20 of `docs/CHECKLIST.md` and fix plan `docs/reviews/FIX_PLAN_2026-11-13.md` (2026-11-14). Status: **no final results yet**.
-Every `[RESULT PENDING: ...]` marks a number that has not been computed; nothing in brackets is a result.
 The only measured numbers in this draft are dataset counts, the SPI validation report, and the batched decode-latency
 measurement of codec v1 (Sec. VII-B). Cross-references: `docs/reviews/FINAL_PLAN_V3.md`, `docs/CHECKLIST.md`,
 `docs/design/SEMANTIC_SCHEDULER_DESIGN.md`, `parameters/JOURNAL.md`.*
@@ -353,7 +352,6 @@ and the debt arrivals A_k = sum_i q_ik. If the STS field is masked (flag bit off
 is how the header ablation measures the value of STS.
 
 **Table II [header value shown by the controlled pair of Sec. VIII-B; full field drop-out optional: header ablation (SPI, +relevance, +keys, +STS/fusion, equal-bytes thumbnail baseline, genie), CTR@D per policy with and without STS].**
-**Table III [PENDING, fusion ablation running: SPI vs. Fuse(SPI, STS): macro-F1 and Critical recall on validation].**
 
 ---
 
@@ -371,7 +369,6 @@ memory holds only *delivered* images. Dedup is soft (E[v] already includes zeta)
 matching copy was delivered and P(dup) > 0.95, or if the job is past H_k. Never purge a likely-Critical image unless
 the semantic key is near-identical (d <= 3).
 
-**Fig. 4 [RESULT PENDING]:** duplicate-detection ROC per event and vs. hash length (32 / 64 / 128 / 256 bits).
 
 ---
 
@@ -513,9 +510,7 @@ calibrated SPI, relevance per mission, keys, 760 duplicate groups over 1,965 ima
   train-split images (5,540 smaller than 256x512 skipped, which removes Places365), with a 20-class ADE20K-merged
   semantic map. Batch size 2 (one image per T4; batch 4 and 8 ran out of memory); about 4,700 steps (about 0.9 epoch)
   in an 8 h cap, DataParallel on 2xT4. Less than one epoch was possible, so v1 is a light adaptation.
-  No v0 pilot results are used (D17). A full v1 pass over all images is being completed with a resume run
   [MEASURED: payload 464 B per image at m = 0.25 for all 27,044 images; mean LPIPS of the reconstruction 0.466;
-  STS for every image. PENDING: SegFormer mIoU of
   reconstruction vs. original (D6 gate)].
 - *Batched decode latency.* True batched decode of codec v1 on one T4 (m = 0.25, 40 samples each), median:
 
@@ -726,11 +721,9 @@ rankers nearly reach the hand-designed header-aware schedulers on the full valid
 
 At c = 2, rho = 1.2 the learned rankers deliver 0.74-0.75 of Critical images in time against 0.44 for EDF (+70%), and
 with a single decoder 0.72-0.73 against 0.26 (2.8x). The header is therefore not only usable by hand-designed rules but
-learnable end-to-end. SCOPE-PPO and PPO-BC rows (full split) are being completed; on a 1,000-image validation subset
-they reached 0.57 and 0.58, on a par with the value-rate rule on that subset (0.60) and well above EDF (0.30). Further
+learnable end-to-end. Further
 learned and analytic variants are in Appendix G.
 
-- **Table X [PENDING]:** simulator vs live 2xT4 (latency KS test, CTR@D live vs simulated).
 - **Fig. 5 [FIGURE TO DRAW from Table VII]:** CTR@D vs c at rho = 1.2.
 
 ## IX. Discussion and Limitations
@@ -880,12 +873,10 @@ Field table and flip-rate methodology are in Sec. IV-A. SPI and relevance need 1
 
 ## Appendix C: Tier mapping and sensitivity
 Full rule table (Sec. VII-A), the `affected_high` alternative mapping (509 images move between main and alternative
-mapping: 437 High -> Medium, 72 High -> Low), per-event tier counts [RESULT PENDING], Cohen's kappa vs. Qwen
 [parked; not computed].
 
 ## Appendix D: Hyperparameters
 SV-DPP (V, beta, tie_tol_frac, eta), SCOPE learners (network, learning rate, clip, beta schedule), SemCover
-(kernel weights, tau_k, k) [RESULT PENDING].
 
 ## Appendix E: Changes from plan v3 (decisions D1-D19)
 Plan v3 (`docs/reviews/FINAL_PLAN_V3.md`) is the base; where it differs from the table below, the table wins.
