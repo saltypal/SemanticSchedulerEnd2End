@@ -279,7 +279,7 @@ def main(argv=None):
     latency = tables.latency_from_profile_json(a.profile)
     spec = ValueSpec.from_config(load_config("sim"))
     rows = [r for r in tables.load_rows(a.table) if r.get("split") == a.split][: a.n_images]
-    jobs = _make_jobs(rows, latency, tables, a.workers, a.rho, 0, a.seed, a.max_batch, None, 0.0)
+    jobs, _info = _make_jobs(rows, latency, tables, a.workers, a.rho, 0, a.seed, a.max_batch, None, 0.0, {}, None)
     if a.decoder == "fake":
         decode = fake_decoder(latency, a.seed)
     else:
