@@ -115,3 +115,21 @@
 | edge-sweep-test-genie-tuned | win | satyapaladugu/edge-sweep-test-genie-tuned |  | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:54Z |
 | edge-train-bcedge | wsl | satyapaladuguplus/edge-train-bcedge | 4 | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:57Z |
 | edge-live-t4 | wsl | satyapaladuguplus/edge-live-t4 | 2 | 485d6808418def78386e90703216e0682888bd14 | 2026-11-14T11:41:40Z |
+| edge-live-t4 | wsl | satyapaladuguplus/edge-live-t4 | 3 | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T12:40:43Z |
+| edge-sweep-val-scopeppo | wsl | satyapaladuguplus/edge-sweep-val-scopeppo | 1 | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:15:44Z |
+| edge-sweep-val-lambdamart | wsl | satyapaladuguplus/edge-sweep-val-lambdamart | 1 | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:15:48Z |
+| edge-sweep-val-ranknet | wsl | satyapaladuguplus/edge-sweep-val-ranknet | 1 | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:15:52Z |
+| edge-sweep-val-fusion | wsl | satyapaladuguplus/edge-sweep-val-fusion | 1 | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:15:55Z |
+| edge-sweep-test-scopeppo | wsl | satyapaladuguplus/edge-sweep-test-scopeppo | 1 | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:15:58Z |
+| edge-sweep-test-lambdamart | wsl | satyapaladuguplus/edge-sweep-test-lambdamart |  | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:16:00Z |
+| edge-sweep-test-ranknet | wsl | satyapaladuguplus/edge-sweep-test-ranknet |  | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:16:02Z |
+| edge-sweep-test-fusion | wsl | satyapaladuguplus/edge-sweep-test-fusion |  | c0b5c365d5e6696bfc390e94552d064cb9fb36ae | 2026-11-14T13:16:05Z |
+| edge-sweep-test-lambdamart | wsl | satyapaladuguplus/edge-sweep-test-lambdamart |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T13:56:58Z |
+| edge-sweep-test-ranknet | wsl | satyapaladuguplus/edge-sweep-test-ranknet |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T13:57:03Z |
+| edge-sweep-test-fusion | wsl | satyapaladuguplus/edge-sweep-test-fusion |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T13:57:10Z |
+| edge-sweep-test-lambdamart | wsl | satyapaladuguplus/edge-sweep-test-lambdamart |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T14:02:18Z |
+| edge-sweep-test-ranknet | wsl | satyapaladuguplus/edge-sweep-test-ranknet |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T14:02:23Z |
+| edge-sweep-test-fusion | wsl | satyapaladuguplus/edge-sweep-test-fusion |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T14:02:27Z |
+| edge-sweep-test-lambdamart | wsl | satyapaladuguplus/edge-sweep-test-lambdamart |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T14:07:37Z |
+| edge-sweep-test-ranknet | wsl | satyapaladuguplus/edge-sweep-test-ranknet |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T14:07:42Z |
+| edge-sweep-test-fusion | wsl | satyapaladuguplus/edge-sweep-test-fusion |  | 0d819fc685d12b0a6c6297de382adb1ac9e9d5f5 | 2026-11-14T14:07:46Z |

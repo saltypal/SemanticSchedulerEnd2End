@@ -229,8 +229,8 @@ q = Fuse(SPI, STS). **Every policy** reads q where it read SPI; for SV-DPP this 
 and the debt arrivals A_k = sum_i q_ik. If the STS field is masked (flag bit off) the belief falls back to SPI, which
 is how the header ablation measures the value of STS.
 
-**Table II [RESULT PENDING: header ablation (SPI, +relevance, +keys, +STS/fusion, equal-bytes thumbnail baseline, genie), CTR@D per policy with and without STS].**
-**Table III [RESULT PENDING: SPI vs. Fuse(SPI, STS): macro-F1 and Critical recall on validation].**
+**Table II [header value shown by the controlled pair of Sec. VIII-B; full field drop-out optional: header ablation (SPI, +relevance, +keys, +STS/fusion, equal-bytes thumbnail baseline, genie), CTR@D per policy with and without STS].**
+**Table III [PENDING, fusion ablation running: SPI vs. Fuse(SPI, STS): macro-F1 and Critical recall on validation].**
 
 ---
 
@@ -290,7 +290,7 @@ on validation, and beta = 0 recovers plan v3.
 *Two specification fixes found during implementation.* (i) Deferring the top-ranked job looked free; the defer-wait
 estimate is now at least one service round. (ii) The all-or-nothing tie rule is replaced by a per-job tie tolerance
 `tie_tol_frac`, a parameter added beyond plan v3. V and the purge threshold are tuned on validation; beta (D18) and
-`tie_tol_frac` are tuned on a 3 x 3 validation grid [RESULT PENDING]. Final numbers come from the full validation and
+`tie_tol_frac` are tuned on a 3 x 3 validation grid (Table XI). Final numbers come from the full validation and
 test sweeps.
 
 *Claims.* Debt stability is verified empirically (no O(1/V) theorem for non-stationary traces). In the degenerate
@@ -300,7 +300,7 @@ with abandonment [31] for c = 1.
 **Algorithm 2 [PLACEHOLDER]: SV-DPP.**
 
 **C. SemCover: scheduling meaning, not jobs (proposed).** *Status: implemented (`Scheduler/edge/semcover.py`,
-`Scheduler/training/edge/semcover_train.py`); results [RESULT PENDING]. Implementation notes: (i) cos(pi d/64) and the
+`Scheduler/training/edge/semcover_train.py`); in our setting it did not sustain throughput under overload (Sec. VIII-F). Implementation notes: (i) cos(pi d/64) and the
 p-hash indicator are not PSD in general, so the kernel is projected onto the PSD cone (eigenvalue clipping), normalised
 to a unit diagonal and given a 1e-3 ridge; (ii) a time-decayed memory is modelled as noisy observations of delivered
 scenes, S_QQ - S_QM A (A S_MM A + I - A^2)^-1 A S_MQ with A = diag(exp(-age/tau_k)), tau_k = 2 H_k (32 most recent
@@ -442,7 +442,8 @@ calibrated SPI, relevance per mission, keys, 760 duplicate groups over 1,965 ima
   semantic map. Batch size 2 (one image per T4; batch 4 and 8 ran out of memory); about 4,700 steps (about 0.9 epoch)
   in an 8 h cap, DataParallel on 2xT4. Less than one epoch was possible, so v1 is a light adaptation.
   No v0 pilot results are used (D17). A full v1 pass over all images is being completed with a resume run
-  [RESULT PENDING: STS, payload bytes at m = 0.25 / 0.55, kept-token maps, LPIPS and SegFormer mIoU of
+  [MEASURED: payload 464 B per image at m = 0.25 for all 27,044 images; mean LPIPS of the reconstruction 0.466;
+  STS for every image. PENDING: SegFormer mIoU of
   reconstruction vs. original (D6 gate)].
 - *Batched decode latency.* True batched decode of codec v1 on one T4 (m = 0.25, 40 samples each), median:
 
