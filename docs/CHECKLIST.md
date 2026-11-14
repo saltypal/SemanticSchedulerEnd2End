@@ -171,3 +171,4 @@ Kaggle limits: 5 CPU + 2 GPU sessions per account (2 accounts). Laptop CPU used 
 - [ ] **SemCover fusion fix:** seed 1 of `edge-train-semcover-fusion` crashed (`linalg.eigh` ill-conditioned kernel). Add diagonal jitter (escalating fallback) before eigh, retrain all 3 seeds; also give SemCover a larger training budget (more SemCover runs).
 
 - [ ] **Fix plan after learner wave:** `docs/reviews/FIX_PLAN_2026-11-13.md` (F1 header proofs + batching control first, then F2-F8).
+- [x] DROPPED by user (2026-11-14): explainability section; AWGN link model.
