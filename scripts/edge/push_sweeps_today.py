@@ -9,9 +9,8 @@ from scripts.edge import kaggle_ops as ko
 from scripts.edge import make_scheduler_sweeps_notebook as sw
 from scripts.edge.build_notebook import OUT_DIR, load_kaggle_config
 
-GROUPS = {"svdpp": ["sv_dpp"], "genie": ["genie_sv_dpp"], "order": ["fifo", "edf", "spi_first_edf"],
-          "ctrl": ["spi_edf_ratio", "edf_ratio", "whittle_abandon", "gen_cmu_h"]}
-VAL_DONE = True   # val shards already pushed 2026-11-14 13:2x
+GROUPS = {"svdpp-tuned": ["sv_dpp"], "genie-tuned": ["genie_sv_dpp"]}   # 2026-11-14 15:00: tuned SV-DPP config
+VAL_DONE = False   # val shards already pushed 2026-11-14 13:2x
 GRID = ["--workers", "1", "2", "4", "8", "--rhos", "0.8", "1.2", "1.5", "--realisations", "5"]
 
 
