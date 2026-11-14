@@ -71,3 +71,29 @@
 | edge-train-bcedge | wsl | satyapaladuguplus/edge-train-bcedge |  | 779a1869d2ac665df62370b36c60e9de8f65fbbb | 2026-11-13T13:15:53Z |
 | edge-train-bcedge-fusion | win | satyapaladugu/edge-train-bcedge-fusion |  | 779a1869d2ac665df62370b36c60e9de8f65fbbb | 2026-11-13T13:15:55Z |
 | edge-train-bcedge | wsl | satyapaladuguplus/edge-train-bcedge | 3 | 779a1869d2ac665df62370b36c60e9de8f65fbbb | 2026-11-13T13:26:08Z |
+| edge-sweep-tune-0of2-fusion | win | satyapaladugu/edge-sweep-tune-0of2-fusion | 2 | ee09bae2d9840c4e7701b3cfdd6f23f63b824977 | 2026-11-13T15:49:28Z |
+| edge-sweep-tune-1of2-fusion | win | satyapaladugu/edge-sweep-tune-1of2-fusion | 2 | ee09bae2d9840c4e7701b3cfdd6f23f63b824977 | 2026-11-13T15:49:34Z |
+| edge-train-scope-dqn | wsl | satyapaladuguplus/edge-train-scope-dqn | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:26:36Z |
+| edge-train-scope-ltr | wsl | satyapaladuguplus/edge-train-scope-ltr | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:26:47Z |
+| edge-train-semcover | wsl | satyapaladuguplus/edge-train-semcover | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:26:59Z |
+| edge-train-scope-dqn-fusion | win | satyapaladugu/edge-train-scope-dqn-fusion | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:27:14Z |
+| edge-train-scope-ltr-fusion | win | satyapaladugu/edge-train-scope-ltr-fusion | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:27:28Z |
+| edge-train-semcover-fusion | win | satyapaladugu/edge-train-semcover-fusion | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:27:36Z |
+| edge-train-dqn | wsl | satyapaladuguplus/edge-train-dqn | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:05Z |
+| edge-train-ltr-lambdamart | wsl | satyapaladuguplus/edge-train-ltr-lambdamart | 3 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:14Z |
+| edge-train-ltr-ranknet | wsl | satyapaladuguplus/edge-train-ltr-ranknet |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:24Z |
+| edge-train-bc | wsl | satyapaladuguplus/edge-train-bc |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:31Z |
+| edge-train-dagger | wsl | satyapaladuguplus/edge-train-dagger |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:41Z |
+| edge-train-bcedge | wsl | satyapaladuguplus/edge-train-bcedge |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:49Z |
+| edge-train-dqn-fusion | win | satyapaladugu/edge-train-dqn-fusion | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:28:58Z |
+| edge-train-bcedge-fusion | win | satyapaladugu/edge-train-bcedge-fusion | 3 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:29:07Z |
+| edge-train-ltr-lambdamart-fusion | win | satyapaladugu/edge-train-ltr-lambdamart-fusion |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:29:15Z |
+| edge-train-ltr-ranknet-fusion | win | satyapaladugu/edge-train-ltr-ranknet-fusion |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:29:24Z |
+| edge-train-bc-fusion | win | satyapaladugu/edge-train-bc-fusion |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:29:31Z |
+| edge-train-dagger-fusion | win | satyapaladugu/edge-train-dagger-fusion |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:29:40Z |
+| edge-train-scope-ppo | wsl | satyapaladuguplus/edge-train-scope-ppo | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:30:09Z |
+| edge-train-scope-ppo-fusion | win | satyapaladugu/edge-train-scope-ppo-fusion | 4 | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:30:18Z |
+| edge-train-ppo | wsl | satyapaladuguplus/edge-train-ppo |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:30:26Z |
+| edge-train-ppo-fusion | win | satyapaladugu/edge-train-ppo-fusion |  | 07802490049e3c2b779173e20e3f8abe54edb5a0 | 2026-11-13T17:30:33Z |
+| edge-train-scope-dqn | wsl | satyapaladuguplus/edge-train-scope-dqn | 5 | c7680534255a0e0fd8df6f944315e2d6276c45d6 | 2026-11-14T00:08:23Z |
+| edge-train-scope-dqn-fusion | win | satyapaladugu/edge-train-scope-dqn-fusion | 5 | c7680534255a0e0fd8df6f944315e2d6276c45d6 | 2026-11-14T00:08:32Z |

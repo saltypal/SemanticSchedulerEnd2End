@@ -33,7 +33,7 @@ CUMULATIVE = (("none", ()), ("spi", ("spi",)), ("spi+relevance", ("spi", "releva
 METRICS = ("ctr_ungated", "value", "value_per_gpu_s", "low_starvation", "redundant_per_100")
 THRESHOLDS = (0.5, 0.95)
 UNIFORM = (0.25, 0.25, 0.25, 0.25)
-CONST_RELEVANCE = 0.5
+CONST_RELEVANCE = 0.60   # mission midpoint of relevance_range (0.52-0.68): neutral factor 1, not a rescale
 
 
 def _rng(job_id, salt):
