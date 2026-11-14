@@ -47,3 +47,9 @@ scenarios:
   loss_5pct: {loss: 0.05}
   capture_jitter_30s: {capture_jitter_s: 30.0}
   capture_jitter_120s: {capture_jitter_s: 120.0}
+  # digital uplink sensitivity (narrowband disaster link, 10 kHz; regimes.apply_link)
+  awgn_snr10: {link: {model: awgn, snr_db: 10, bandwidth_hz: 10000}}
+  awgn_snr0: {link: {model: awgn, snr_db: 0, bandwidth_hz: 10000}}
+  rayleigh_snr20: {link: {model: rayleigh, snr_db: 20, bandwidth_hz: 10000}}
+  rayleigh_snr10: {link: {model: rayleigh, snr_db: 10, bandwidth_hz: 10000}}
+  rayleigh_snr0: {link: {model: rayleigh, snr_db: 0, bandwidth_hz: 10000}}

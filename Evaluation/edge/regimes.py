@@ -19,7 +19,7 @@ from Evaluation.edge.contracts import LatencyProfile
 from Evaluation.edge.edge_config import load_config
 
 KNOBS = ("arrival", "mmpp", "spi_noise", "sigma_w_scale", "tier_key", "critical_share",
-         "weights_scale", "loss", "capture_jitter_s")
+         "weights_scale", "loss", "capture_jitter_s", "link")
 
 
 def resolve_scenarios(names):
@@ -86,6 +86,46 @@ def drop_arrivals(jobs, p, rng):
         return list(jobs)
     keep = [j for j in jobs if rng.random() >= p]
     return keep or [jobs[0]]
+
+
+HEADER_BYTES = 64
+
+
+def apply_link(jobs, link, rng):
+    """Digital uplink (SQ-GAN is source coding only, so any digital link applies). Each image sends
+    8 * (payload + 64 B header) bits. ``link``: {model: awgn|rayleigh, snr_db, bandwidth_hz, rate_frac (0.7),
+    max_attempts (3), rtt_s (0.01), payload_bytes (464)}.
+    AWGN: one attempt, delay = bits / (B log2(1 + snr)).
+    Rayleigh block fading: fixed rate R0 = rate_frac * B log2(1 + snr); attempt k succeeds iff
+    B log2(1 + snr |h_k|^2) >= R0 with |h_k|^2 ~ Exp(1); each attempt costs bits / R0 + rtt; lost after
+    max_attempts failures. Delay moves the capture time earlier (the job reaches the edge later in its life).
+    Returns (jobs, n_lost)."""
+    if not link:
+        return list(jobs), 0
+    import math
+    snr = 10 ** (float(link.get("snr_db", 10.0)) / 10.0)
+    bw = float(link.get("bandwidth_hz", 10e3))
+    bits = 8.0 * (float(link.get("payload_bytes", 464)) + HEADER_BYTES)
+    cap = bw * math.log2(1.0 + snr)
+    out, lost = [], 0
+    for j in jobs:
+        if link.get("model", "awgn") == "awgn":
+            delay = bits / cap
+        else:
+            r0 = float(link.get("rate_frac", 0.7)) * cap
+            per = bits / r0 + float(link.get("rtt_s", 0.01))
+            delay = None
+            for k in range(int(link.get("max_attempts", 3))):
+                if bw * math.log2(1.0 + snr * float(rng.exponential(1.0))) >= r0:
+                    delay = (k + 1) * per
+                    break
+            if delay is None:
+                lost += 1
+                continue
+        out.append(replace(j, header=replace(j.header, capture_time=j.header.capture_time - delay)))
+    if not out:
+        out = [jobs[0]]
+    return out, lost
 
 
 def jitter_capture(jobs, sigma, rng):

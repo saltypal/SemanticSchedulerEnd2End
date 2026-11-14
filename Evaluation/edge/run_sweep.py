@@ -109,6 +109,7 @@ def _make_jobs(rows, latency, tables, workers, rho, rep, base_seed, max_batch, m
     jobs = regimes.drop_arrivals(jobs, scen.get("loss", 0.0), rrng)
     info["n_lost"] = n0 - len(jobs)
     jobs = regimes.jitter_capture(jobs, scen.get("capture_jitter_s", 0.0), rrng)
+    jobs, info["n_link_lost"] = regimes.apply_link(jobs, scen.get("link"), rrng)
     if header_mask is not None:   # I9 field drop-out: header_mask(header, job_id) -> header
         jobs = [dataclasses.replace(j, header=header_mask(j.header, j.id)) for j in jobs]
     return jobs, info
