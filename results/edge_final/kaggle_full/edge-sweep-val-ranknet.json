@@ -1,0 +1,873 @@
+{
+ "config": {
+  "split": "val",
+  "policies": [
+   "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt"
+  ],
+  "workers": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "rhos": [
+   0.8,
+   1.2,
+   1.5
+  ],
+  "realisations": 5,
+  "base_seed": 0,
+  "max_batch": 8,
+  "mmpp": null,
+  "network_delay": 0.0,
+  "n_boot": 200,
+  "n_images": 2485,
+  "scenario_names": [],
+  "scenario": {}
+ },
+ "git_sha": "c0b5c365d5e6696bfc390e94552d064cb9fb36ae",
+ "seconds": 2871.2528712910002,
+ "cells": [
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8388218543857471,
+   "value": 5388.713507310369,
+   "value_per_gpu_s": 3.6407779629831674,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.304425569959767,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9888978092252391,
+    "1": 0.9968122936245873,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 808.8010288107645,
+   "ci95": {
+    "ctr_ungated": [
+     0.8243438239818618,
+     0.8517125845454783
+    ],
+    "value_per_image": [
+     2.3643233239440455,
+     2.4563420022254
+    ]
+   },
+   "seconds": 18.161199182999894
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6520006616481934,
+   "value": 5081.907275906114,
+   "value_per_gpu_s": 3.445539145293688,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.304425569959767,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9231197930012515,
+    "1": 0.9745572768521571,
+    "2": 0.9989782869669608,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 611.0769488240155,
+   "ci95": {
+    "ctr_ungated": [
+     0.6323497347941394,
+     0.6705365327566033
+    ],
+    "value_per_image": [
+     2.231730313637839,
+     2.3114541506487987
+    ]
+   },
+   "seconds": 11.382446931000004
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.7327953850203052,
+   "value": 4784.951511724414,
+   "value_per_gpu_s": 4.079244171700211,
+   "low_starvation": 0.24389404174433044,
+   "redundant_per_100": 8.285495281986151,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9679419893471699,
+    "1": 0.9585265800896912,
+    "2": 0.9744817652588484,
+    "3": 0.7548592339547883
+   },
+   "decision_time_mean_us": 6184.795138118076,
+   "ci95": {
+    "ctr_ungated": [
+     0.7170646182151761,
+     0.7519150158099375
+    ],
+    "value_per_image": [
+     2.0982187094286946,
+     2.176964976185784
+    ]
+   },
+   "seconds": 181.29115166499992
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.2719371106448748,
+   "value": 3490.9866012744606,
+   "value_per_gpu_s": 2.8547159888412708,
+   "low_starvation": 0.05874923173977549,
+   "redundant_per_100": 7.054571847622182,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.5522228418414589,
+    "1": 0.8518743439781776,
+    "2": 0.9046193146930565,
+    "3": 0.9409388716858581
+   },
+   "decision_time_mean_us": 5648.314749750023,
+   "ci95": {
+    "ctr_ungated": [
+     0.25608510877598895,
+     0.29247195383983593
+    ],
+    "value_per_image": [
+     1.5272842593281448,
+     1.592038871494705
+    ]
+   },
+   "seconds": 110.71215893299996
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6286551981660207,
+   "value": 4416.6265855065885,
+   "value_per_gpu_s": 4.137677804643574,
+   "low_starvation": 0.31620754016769037,
+   "redundant_per_100": 8.281854135121646,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9433958651788259,
+    "1": 0.8653764019153318,
+    "2": 0.918909552641441,
+    "3": 0.6808219026855286
+   },
+   "decision_time_mean_us": 9325.275371439688,
+   "ci95": {
+    "ctr_ungated": [
+     0.612010907408716,
+     0.6484592300951878
+    ],
+    "value_per_image": [
+     1.9270752723236382,
+     2.0203358558492694
+    ]
+   },
+   "seconds": 229.0728369200001
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.21925027220641002,
+   "value": 3135.8942779276886,
+   "value_per_gpu_s": 2.8376827693804803,
+   "low_starvation": 0.15557591782127803,
+   "redundant_per_100": 7.0022935666138535,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.4918163551979774,
+    "1": 0.814958769783866,
+    "2": 0.855916514996023,
+    "3": 0.8427059936397218
+   },
+   "decision_time_mean_us": 8415.646822271528,
+   "ci95": {
+    "ctr_ungated": [
+     0.20140258669992378,
+     0.2373836530982629
+    ],
+    "value_per_image": [
+     1.372477545351828,
+     1.4375406932431425
+    ]
+   },
+   "seconds": 144.05369292399996
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9128888549766057,
+   "value": 5474.5078133248535,
+   "value_per_gpu_s": 3.7041978490530147,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.322306660706303,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9991051409352979,
+    "1": 0.9983606557377049,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 680.185572602609,
+   "ci95": {
+    "ctr_ungated": [
+     0.9008552444695607,
+     0.924946959224189
+    ],
+    "value_per_image": [
+     2.406893920101586,
+     2.4880067041275145
+    ]
+   },
+   "seconds": 15.274299658000018
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8790388038893784,
+   "value": 5455.911623539016,
+   "value_per_gpu_s": 3.69254465990437,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.322306660706303,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.995535572867525,
+    "1": 0.9968253968253968,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 657.9580334524718,
+   "ci95": {
+    "ctr_ungated": [
+     0.8649246627159248,
+     0.8926114893275313
+    ],
+    "value_per_image": [
+     2.394384709784546,
+     2.4912300714290834
+    ]
+   },
+   "seconds": 13.63764433900019
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.745028127249086,
+   "value": 5137.3484193001905,
+   "value_per_gpu_s": 3.9055506307478716,
+   "low_starvation": 0.00046912164717075494,
+   "redundant_per_100": 7.3421435791661995,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9839542548898468,
+    "1": 0.9824976284838008,
+    "2": 0.9838918560697719,
+    "3": 0.9990610265632502
+   },
+   "decision_time_mean_us": 6812.509484161505,
+   "ci95": {
+    "ctr_ungated": [
+     0.7284542111063521,
+     0.7596991002445341
+    ],
+    "value_per_image": [
+     2.2515415347682612,
+     2.336432937790199
+    ]
+   },
+   "seconds": 192.9253737649999
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6823020196544304,
+   "value": 5134.437977027412,
+   "value_per_gpu_s": 3.9223494120619358,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.322306660706303,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9584894747851861,
+    "1": 0.9396273082272698,
+    "2": 0.9739956336417148,
+    "3": 0.9998432601880879
+   },
+   "decision_time_mean_us": 6954.167648302359,
+   "ci95": {
+    "ctr_ungated": [
+     0.665117888593178,
+     0.7022561458550782
+    ],
+    "value_per_image": [
+     2.239940142053318,
+     2.3383184687077954
+    ]
+   },
+   "seconds": 163.12819471099988
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6650196917195553,
+   "value": 4947.6026033860735,
+   "value_per_gpu_s": 3.850194395482621,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.223960661600357,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9636337207647298,
+    "1": 0.8760330559706325,
+    "2": 0.9374378027277963,
+    "3": 0.999683787352619
+   },
+   "decision_time_mean_us": 10803.497996090995,
+   "ci95": {
+    "ctr_ungated": [
+     0.6459148877120634,
+     0.6847860334826068
+    ],
+    "value_per_image": [
+     2.1554430832562956,
+     2.2517998048769687
+    ]
+   },
+   "seconds": 254.67636109799992
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6484574206718229,
+   "value": 5058.399486101491,
+   "value_per_gpu_s": 3.9737735649507484,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.304425569959767,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9707453567864903,
+    "1": 0.9236183782121467,
+    "2": 0.9324011847030507,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 10394.29405222597,
+   "ci95": {
+    "ctr_ungated": [
+     0.6282682050013672,
+     0.6680241683261364
+    ],
+    "value_per_image": [
+     2.218642405107046,
+     2.3033624574082974
+    ]
+   },
+   "seconds": 208.18285322600013
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9464486266378284,
+   "value": 5513.057921436538,
+   "value_per_gpu_s": 3.6912128928815244,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.313366115333035,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9991140544518027,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 691.362004838759,
+   "ci95": {
+    "ctr_ungated": [
+     0.9358759921591311,
+     0.9541202672605791
+    ],
+    "value_per_image": [
+     2.4170673854069555,
+     2.508368825488852
+    ]
+   },
+   "seconds": 16.218441023000196
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8366705129448292,
+   "value": 5432.44889365837,
+   "value_per_gpu_s": 3.645913933701048,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.313366115333035,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9911600976359269,
+    "1": 0.9983193277310924,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 530.13619866375,
+   "ci95": {
+    "ctr_ungated": [
+     0.8206036642838253,
+     0.851882219373899
+    ],
+    "value_per_image": [
+     2.375150118654085,
+     2.4743325601608808
+    ]
+   },
+   "seconds": 9.007968757000071
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8428110187666611,
+   "value": 5407.666644265222,
+   "value_per_gpu_s": 4.085564066659046,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.223960661600357,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9937228861177193,
+    "1": 0.9644030649091416,
+    "2": 0.9912766106827432,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7074.096150403098,
+   "ci95": {
+    "ctr_ungated": [
+     0.8288005847449101,
+     0.8582495968705207
+    ],
+    "value_per_image": [
+     2.372915609075594,
+     2.462636397739146
+    ]
+   },
+   "seconds": 185.21990230499978
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.2310100436608999,
+   "value": 3174.68292947919,
+   "value_per_gpu_s": 2.546131285342531,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.21502011622709,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.37117033488856477,
+    "1": 0.5899612816372158,
+    "2": 0.84185651101279,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5934.199283533529,
+   "ci95": {
+    "ctr_ungated": [
+     0.2158445383794593,
+     0.24843770951645952
+    ],
+    "value_per_image": [
+     1.3909948693692944,
+     1.448748275855063
+    ]
+   },
+   "seconds": 90.46793353700014
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.7940550994641031,
+   "value": 5315.21676142856,
+   "value_per_gpu_s": 4.126440371287392,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.2507822977201615,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9770012928871108,
+    "1": 0.8969241542770956,
+    "2": 0.9710561887856649,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 10202.562472484009,
+   "ci95": {
+    "ctr_ungated": [
+     0.7756382754484323,
+     0.8080529948902758
+    ],
+    "value_per_image": [
+     2.3302732159737,
+     2.4259305782696736
+    ]
+   },
+   "seconds": 237.74927454499993
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.08699794119552398,
+   "value": 2199.276889952954,
+   "value_per_gpu_s": 1.7651685339833048,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.1971390254805545,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.12319838197388051,
+    "1": 0.35493320405085116,
+    "2": 0.6775625574743159,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 9878.326266645043,
+   "ci95": {
+    "ctr_ungated": [
+     0.07535147862580518,
+     0.09966081359393844
+    ],
+    "value_per_image": [
+     0.9581649699629974,
+     1.0056185793728476
+    ]
+   },
+   "seconds": 160.75432894100004
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9840843949444371,
+   "value": 5543.963543015505,
+   "value_per_gpu_s": 3.6965381904607653,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.349128296826106,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 681.489164666624,
+   "ci95": {
+    "ctr_ungated": [
+     0.978432623549668,
+     0.9893894358160271
+    ],
+    "value_per_image": [
+     2.4263797635799627,
+     2.5384641252528564
+    ]
+   },
+   "seconds": 15.977215719000014
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9438847681051492,
+   "value": 5523.6074821281745,
+   "value_per_gpu_s": 3.68908662323498,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.349128296826106,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 510.6017028618784,
+   "ci95": {
+    "ctr_ungated": [
+     0.9335420474927082,
+     0.9538189714199771
+    ],
+    "value_per_image": [
+     2.417433732707115,
+     2.514440775349603
+    ]
+   },
+   "seconds": 8.791181801999755
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9414793477550327,
+   "value": 5494.661030099677,
+   "value_per_gpu_s": 4.162512189357139,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.304425569959767,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9938211939241481,
+    "1": 0.9809112045996496,
+    "2": 0.9973915629369052,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7051.330725781336,
+   "ci95": {
+    "ctr_ungated": [
+     0.9324734152125779,
+     0.9510618069732997
+    ],
+    "value_per_image": [
+     2.408053435434903,
+     2.503262090541227
+    ]
+   },
+   "seconds": 180.56147677599984
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.21535747285149737,
+   "value": 3384.305575514907,
+   "value_per_gpu_s": 2.7491836963538523,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.206079570853822,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.443387235234537,
+    "1": 0.6628695448991643,
+    "2": 0.9822823867815972,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5442.315104030264,
+   "ci95": {
+    "ctr_ungated": [
+     0.19900039452468352,
+     0.23598026697241076
+    ],
+    "value_per_image": [
+     1.4865377909130966,
+     1.5524767440388538
+    ]
+   },
+   "seconds": 76.56554310299998
+  },
+  {
+   "policy": "learned:ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ltr-ranknet/runs/edge-train-ltr-ranknet/ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9111826280623608,
+   "value": 5402.800167923043,
+   "value_per_gpu_s": 4.230061009601768,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.3580688421993745,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9821746340585497,
+    "1": 0.9243772943059471,
+    "2": 0.9932297956095381,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 9823.618817810624,
+   "ci95": {
+    "ctr_ungated": [
+     0.9009331432963805,
+     0.9230467359963612
+    ],
+    "value_per_image": [
+     2.3664285994906264,
+     2.4636218068605227
+    ]
+   },
+   "seconds": 213.775349732
+  },
+  {
+   "policy": "learned:scope_ltr:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ltr/runs/edge-train-scope-ltr/scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.06121003121551767,
+   "value": 2262.5507990389406,
+   "value_per_gpu_s": 1.843657707744909,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.152436298614215,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.1018403234913094,
+    "1": 0.37279164352409133,
+    "2": 0.9735894668268636,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 9035.392490440037,
+   "ci95": {
+    "ctr_ungated": [
+     0.05080988307574601,
+     0.07124735265095906
+    ],
+    "value_per_image": [
+     0.991233345869767,
+     1.0295598844493836
+    ]
+   },
+   "seconds": 133.44067652500007
+  }
+ ]
+}

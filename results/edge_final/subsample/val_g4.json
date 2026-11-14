@@ -1,0 +1,808 @@
+{
+ "config": {
+  "split": "val",
+  "policies": [
+   "semcover",
+   "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt"
+  ],
+  "workers": [
+   1,
+   2,
+   4
+  ],
+  "rhos": [
+   0.8,
+   1.2,
+   1.5
+  ],
+  "realisations": 5,
+  "base_seed": 0,
+  "max_batch": 8,
+  "mmpp": null,
+  "network_delay": 0.0,
+  "n_boot": 200,
+  "n_images": 1000,
+  "scenario_names": [],
+  "scenario": {
+   "arrival": "trace"
+  }
+ },
+ "git_sha": "77ed63f933ee6287ddad04d0e0cff2b59926f255",
+ "seconds": 4112.6540423000115,
+ "cells": [
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.33767481529524074,
+   "value": 1964.6137938626166,
+   "value_per_gpu_s": 3.6213091661708936,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9435153806161288,
+    "1": 0.9962962962962962,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 245377.55905690696,
+   "ci95": {
+    "ctr_ungated": [
+     0.2990300837407425,
+     0.3696135785560556
+    ],
+    "value_per_image": [
+     2.1256539595112116,
+     2.230995910509628
+    ]
+   },
+   "seconds": 387.2173580999952
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.135777863945318,
+   "value": 1067.1456967428037,
+   "value_per_gpu_s": 2.0288868716035324,
+   "low_starvation": 0.0022966949568812983,
+   "redundant_per_100": 3.046455888083025,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.18150465913299613,
+    "1": 0.5373165618448638,
+    "2": 0.9645569620253165,
+    "3": 0.9977033050431189
+   },
+   "decision_time_mean_us": 545403.1837588074,
+   "ci95": {
+    "ctr_ungated": [
+     0.11402722659553705,
+     0.1556372549019608
+    ],
+    "value_per_image": [
+     1.151706701767121,
+     1.2196511580349794
+    ]
+   },
+   "seconds": 941.638621799997
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.24271636194001073,
+   "value": 1817.6785811275458,
+   "value_per_gpu_s": 3.7823191730564822,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2294002655754026,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8701820501808071,
+    "1": 0.8872816212438852,
+    "2": 0.9708860759493672,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1325318.1030142778,
+   "ci95": {
+    "ctr_ungated": [
+     0.21193737206782184,
+     0.2723405975445726
+    ],
+    "value_per_image": [
+     1.9633335095140145,
+     2.081513593559396
+    ]
+   },
+   "seconds": 926.8081169999787
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.0012048192771084338,
+   "value": 804.3131255958303,
+   "value_per_gpu_s": 1.8184258554475918,
+   "low_starvation": 0.003446139946410259,
+   "redundant_per_100": 2.552274750352016,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.02037578597175333,
+    "1": 0.06771488469601676,
+    "2": 0.9417721518987342,
+    "3": 0.9965538600535897
+   },
+   "decision_time_mean_us": 422678.6439839431,
+   "ci95": {
+    "ctr_ungated": [
+     0.0,
+     0.004790706701842414
+    ],
+    "value_per_image": [
+     0.8777801515439583,
+     0.9121967170732581
+    ]
+   },
+   "seconds": 311.3935632999928
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.22180000177927398,
+   "value": 1727.609892191178,
+   "value_per_gpu_s": 3.6136925149732293,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.234442188246536,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8369456898084259,
+    "1": 0.8566037735849058,
+    "2": 0.9189873417721518,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 308923.6032391775,
+   "ci95": {
+    "ctr_ungated": [
+     0.1975545492587279,
+     0.247197532547202
+    ],
+    "value_per_image": [
+     1.8603114447714153,
+     1.9696031789572777
+    ]
+   },
+   "seconds": 298.01802660000976
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.0,
+   "value": 689.1431533905136,
+   "value_per_gpu_s": 1.5738153846859644,
+   "low_starvation": 0.0038299861700049342,
+   "redundant_per_100": 2.5748173327204733,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.0,
+    "1": 0.03018867924528302,
+    "2": 0.8987341772151899,
+    "3": 0.9961700138299949
+   },
+   "decision_time_mean_us": 321814.808928045,
+   "ci95": {
+    "ctr_ungated": [
+     0.0,
+     0.0
+    ],
+    "value_per_image": [
+     0.749295013972936,
+     0.7817217020993069
+    ]
+   },
+   "seconds": 271.4762569000013
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.4819170977193519,
+   "value": 2087.507363900102,
+   "value_per_gpu_s": 3.812729315164784,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9711021383783196,
+    "1": 0.992522711390636,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 14179.75219487751,
+   "ci95": {
+    "ctr_ungated": [
+     0.45059780339997985,
+     0.5158389626875822
+    ],
+    "value_per_image": [
+     2.2591643980963445,
+     2.38032198174454
+    ]
+   },
+   "seconds": 36.811195099988254
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.16997827938100057,
+   "value": 1209.9178166536117,
+   "value_per_gpu_s": 2.2355656044355694,
+   "low_starvation": 0.001912814921188098,
+   "redundant_per_100": 3.1510250407888205,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.24954954162167392,
+    "1": 0.9812019566736547,
+    "2": 0.9873417721518989,
+    "3": 0.998087185078812
+   },
+   "decision_time_mean_us": 13662.069145011428,
+   "ci95": {
+    "ctr_ungated": [
+     0.14687415422089906,
+     0.1932720574828396
+    ],
+    "value_per_image": [
+     1.3045726534195903,
+     1.3881569617136273
+    ]
+   },
+   "seconds": 56.94071709999116
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.44123913733299086,
+   "value": 2010.6604426151675,
+   "value_per_gpu_s": 4.155709030471208,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9012802891049401,
+    "1": 0.9471698113207548,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 72180.81292351529,
+   "ci95": {
+    "ctr_ungated": [
+     0.4026226042538579,
+     0.4741513849965477
+    ],
+    "value_per_image": [
+     2.166983591565533,
+     2.3037833352328576
+    ]
+   },
+   "seconds": 105.74430839999695
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.0,
+   "value": 822.7727037795197,
+   "value_per_gpu_s": 1.7914668668415978,
+   "low_starvation": 0.0026783630805741884,
+   "redundant_per_100": 2.542186435244994,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.0012121212121212121,
+    "1": 0.2339622641509434,
+    "2": 0.9607594936708861,
+    "3": 0.9973216369194258
+   },
+   "decision_time_mean_us": 52291.5067477518,
+   "ci95": {
+    "ctr_ungated": [
+     0.0,
+     0.0
+    ],
+    "value_per_image": [
+     0.8955364043335784,
+     0.935275777949113
+    ]
+   },
+   "seconds": 78.15286709999782
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.35756609610727824,
+   "value": 1849.81617061641,
+   "value_per_gpu_s": 3.857213300026919,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.1479964250792523,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8664610099835164,
+    "1": 0.8943396226415095,
+    "2": 0.9962025316455696,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 88817.12576636733,
+   "ci95": {
+    "ctr_ungated": [
+     0.31993728674333377,
+     0.38418121112892245
+    ],
+    "value_per_image": [
+     2.0071297763518148,
+     2.117690122993902
+    ]
+   },
+   "seconds": 129.02699209999992
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.0,
+   "value": 800.2820803833654,
+   "value_per_gpu_s": 1.772471199530211,
+   "low_starvation": 0.003061502046901747,
+   "redundant_per_100": 2.513781107004698,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.0,
+    "1": 0.11320754716981132,
+    "2": 0.9518987341772152,
+    "3": 0.9969384979530982
+   },
+   "decision_time_mean_us": 121035.73704428563,
+   "ci95": {
+    "ctr_ungated": [
+     0.0,
+     0.0
+    ],
+    "value_per_image": [
+     0.8738647836048745,
+     0.9054571587018114
+    ]
+   },
+   "seconds": 150.7942846000078
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.681695967453867,
+   "value": 2172.4475386599997,
+   "value_per_gpu_s": 3.957324883216441,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9733171329981823,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 11202.620006344274,
+   "ci95": {
+    "ctr_ungated": [
+     0.6521225203001336,
+     0.7120922328829901
+    ],
+    "value_per_image": [
+     2.3518398272311125,
+     2.4898605535638114
+    ]
+   },
+   "seconds": 30.19659160001902
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.1830189459458984,
+   "value": 1360.8499026258783,
+   "value_per_gpu_s": 2.48791618339063,
+   "low_starvation": 0.001908408083129518,
+   "redundant_per_100": 3.217886824983269,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.44033170802092547,
+    "1": 0.9962264150943396,
+    "2": 0.9873417721518989,
+    "3": 0.9980915919168705
+   },
+   "decision_time_mean_us": 8555.431331060514,
+   "ci95": {
+    "ctr_ungated": [
+     0.1601523716398394,
+     0.20998179611650486
+    ],
+    "value_per_image": [
+     1.464124303743303,
+     1.558897134047422
+    ]
+   },
+   "seconds": 38.17948860002798
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.24818546914932454,
+   "value": 1957.4627508117333,
+   "value_per_gpu_s": 4.036092388343185,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9479372033588902,
+    "1": 0.9811320754716981,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 39514.01845019586,
+   "ci95": {
+    "ctr_ungated": [
+     0.2227195379421823,
+     0.27797981544586525
+    ],
+    "value_per_image": [
+     2.1194111511465237,
+     2.23329966021664
+    ]
+   },
+   "seconds": 63.10867449999205
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.0,
+   "value": 941.7539102073955,
+   "value_per_gpu_s": 1.965986147868244,
+   "low_starvation": 0.001909126735072176,
+   "redundant_per_100": 3.000859130430832,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.06414019715224534,
+    "1": 0.9509433962264151,
+    "2": 0.9860759493670888,
+    "3": 0.998090873264928
+   },
+   "decision_time_mean_us": 41178.28310636043,
+   "ci95": {
+    "ctr_ungated": [
+     0.0,
+     0.0
+    ],
+    "value_per_image": [
+     1.02064471158085,
+     1.0661868193988229
+    ]
+   },
+   "seconds": 65.18387780000921
+  },
+  {
+   "policy": "semcover",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.2728978706443161,
+   "value": 1936.7873641065391,
+   "value_per_gpu_s": 3.998985054052406,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9279119189617845,
+    "1": 0.9811320754716981,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 74954.6476118979,
+   "ci95": {
+    "ctr_ungated": [
+     0.2413435713047999,
+     0.30844478505738937
+    ],
+    "value_per_image": [
+     2.0966812891928326,
+     2.216817241885726
+    ]
+   },
+   "seconds": 111.03275620000204
+  },
+  {
+   "policy": "learned:semcover:D:/Bunker/BaseCamp/_claude_scratch/frozen/semcover__semcover_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.0,
+   "value": 860.0476496820905,
+   "value_per_gpu_s": 1.8449663904458646,
+   "low_starvation": 0.002677622059143276,
+   "redundant_per_100": 2.5563637576509723,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.0,
+    "1": 0.4075471698113208,
+    "2": 0.9746835443037976,
+    "3": 0.9973223779408567
+   },
+   "decision_time_mean_us": 79623.04264388102,
+   "ci95": {
+    "ctr_ungated": [
+     0.0,
+     0.0
+    ],
+    "value_per_image": [
+     0.9327695055432246,
+     0.9743111771617604
+    ]
+   },
+   "seconds": 110.7935249999864
+  }
+ ]
+}

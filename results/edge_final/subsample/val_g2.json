@@ -1,0 +1,1196 @@
+{
+ "config": {
+  "split": "val",
+  "policies": [
+   "sv_dpp",
+   "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt"
+  ],
+  "workers": [
+   1,
+   2,
+   4
+  ],
+  "rhos": [
+   0.8,
+   1.2,
+   1.5
+  ],
+  "realisations": 5,
+  "base_seed": 0,
+  "max_batch": 8,
+  "mmpp": null,
+  "network_delay": 0.0,
+  "n_boot": 200,
+  "n_images": 1000,
+  "scenario_names": [],
+  "scenario": {
+   "arrival": "trace"
+  }
+ },
+ "git_sha": "77ed63f933ee6287ddad04d0e0cff2b59926f255",
+ "seconds": 4066.9578891999845,
+ "cells": [
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.3794263502270012,
+   "value": 1967.8245546931364,
+   "value_per_gpu_s": 3.5639488573702622,
+   "low_starvation": 0.007657143116244124,
+   "redundant_per_100": 1.8058690744920995,
+   "false_purge_rate": 0.024042830290711116,
+   "timely": {
+    "0": 0.9026813271269521,
+    "1": 0.8758909853249477,
+    "2": 0.9468354430379747,
+    "3": 0.992342856883756
+   },
+   "decision_time_mean_us": 15471.362328802785,
+   "ci95": {
+    "ctr_ungated": [
+     0.34633586530697685,
+     0.4157711736109024
+    ],
+    "value_per_image": [
+     2.1237584176481286,
+     2.2586300367978356
+    ]
+   },
+   "seconds": 60.19292780000251
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.681741223807048,
+   "value": 2025.5345170320736,
+   "value_per_gpu_s": 3.5845438484659566,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9170842990956466,
+    "1": 0.9361285814116004,
+    "2": 0.9037974683544304,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 19938.443606416648,
+   "ci95": {
+    "ctr_ungated": [
+     0.6500677095965721,
+     0.7123689994342168
+    ],
+    "value_per_image": [
+     2.1863069691806083,
+     2.333582279807359
+    ]
+   },
+   "seconds": 104.9457645000075
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.4242263613553652,
+   "value": 1814.7773722698726,
+   "value_per_gpu_s": 3.2284153826383744,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7261054899349164,
+    "1": 0.9023060796645701,
+    "2": 0.9468354430379747,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 4428.674586389078,
+   "ci95": {
+    "ctr_ungated": [
+     0.39145116228309507,
+     0.4606191776421458
+    ],
+    "value_per_image": [
+     1.9640780072259119,
+     2.083655348713281
+    ]
+   },
+   "seconds": 49.1764127999777
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.2501335054029509,
+   "value": 1778.3733602200846,
+   "value_per_gpu_s": 3.4577934921091007,
+   "low_starvation": 0.007657098248461054,
+   "redundant_per_100": 1.7416477228592413,
+   "false_purge_rate": 0.02404144330996204,
+   "timely": {
+    "0": 0.8280231129510046,
+    "1": 0.8083158630328441,
+    "2": 0.860759493670886,
+    "3": 0.9923429017515388
+   },
+   "decision_time_mean_us": 83766.86497352432,
+   "ci95": {
+    "ctr_ungated": [
+     0.22155640191213774,
+     0.27584544893087853
+    ],
+    "value_per_image": [
+     1.905722696079341,
+     2.037237290574051
+    ]
+   },
+   "seconds": 247.9011901000049
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.5568429648969444,
+   "value": 1820.5279078947915,
+   "value_per_gpu_s": 3.4269493139165483,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8571005538160085,
+    "1": 0.793361285814116,
+    "2": 0.7658227848101266,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 101490.42811915689,
+   "ci95": {
+    "ctr_ungated": [
+     0.5216702792478325,
+     0.5854307072928491
+    ],
+    "value_per_image": [
+     1.952986269642683,
+     2.0882883047862926
+    ]
+   },
+   "seconds": 370.8040212999913
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.21979400742720437,
+   "value": 1485.5015920630117,
+   "value_per_gpu_s": 2.9512715859921372,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.111111111111111,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.49992820342251837,
+    "1": 0.8006988120195666,
+    "2": 0.8886075949367089,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 26502.845470822358,
+   "ci95": {
+    "ctr_ungated": [
+     0.19262185031831025,
+     0.25299164245964456
+    ],
+    "value_per_image": [
+     1.5994539362987186,
+     1.6974792888230434
+    ]
+   },
+   "seconds": 141.9908007000049
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.23864068451125106,
+   "value": 1672.1296957662312,
+   "value_per_gpu_s": 3.343996762086904,
+   "low_starvation": 0.007278292950696891,
+   "redundant_per_100": 1.7499511025839645,
+   "false_purge_rate": 0.02398302143120199,
+   "timely": {
+    "0": 0.8021688468141714,
+    "1": 0.7547169811320755,
+    "2": 0.8367088607594937,
+    "3": 0.9927217070493031
+   },
+   "decision_time_mean_us": 124387.04240662712,
+   "ci95": {
+    "ctr_ungated": [
+     0.2100190730470516,
+     0.26637517874424554
+    ],
+    "value_per_image": [
+     1.8015924629642295,
+     1.9152784063950268
+    ]
+   },
+   "seconds": 309.41556739999214
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.5082697242876884,
+   "value": 1730.9476888801025,
+   "value_per_gpu_s": 3.289453788837497,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8188726151784651,
+    "1": 0.7433962264150944,
+    "2": 0.6518987341772151,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 31148.060150811587,
+   "ci95": {
+    "ctr_ungated": [
+     0.47108897319107856,
+     0.5387392618120067
+    ],
+    "value_per_image": [
+     1.8581659306075715,
+     1.9970280892925827
+    ]
+   },
+   "seconds": 251.2659233000013
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.2551053207501848,
+   "value": 1438.754050741878,
+   "value_per_gpu_s": 2.878517435067382,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.48553275528402196,
+    "1": 0.6603773584905659,
+    "2": 0.839240506329114,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 23215.980925056305,
+   "ci95": {
+    "ctr_ungated": [
+     0.23009288954378665,
+     0.28489749258942537
+    ],
+    "value_per_image": [
+     1.5421496506597747,
+     1.6568625473519318
+    ]
+   },
+   "seconds": 158.13406260000193
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.5110191145457081,
+   "value": 2035.1352784638725,
+   "value_per_gpu_s": 3.6454590702140246,
+   "low_starvation": 0.007651259684752392,
+   "redundant_per_100": 1.7812852311161216,
+   "false_purge_rate": 0.024099884389368817,
+   "timely": {
+    "0": 0.924135878136149,
+    "1": 0.9174004192872118,
+    "2": 0.9810126582278482,
+    "3": 0.9923487403152477
+   },
+   "decision_time_mean_us": 17364.744446789966,
+   "ci95": {
+    "ctr_ungated": [
+     0.4832433236206159,
+     0.5435765512606003
+    ],
+    "value_per_image": [
+     2.193761726965764,
+     2.3285417872936676
+    ]
+   },
+   "seconds": 73.78023129998473
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.6628672303524745,
+   "value": 2118.2732521882654,
+   "value_per_gpu_s": 3.74788876839973,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9518296202958739,
+    "1": 0.9587002096436059,
+    "2": 0.9987341772151899,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 10644.547350617848,
+   "ci95": {
+    "ctr_ungated": [
+     0.6254079511653188,
+     0.697779943335432
+    ],
+    "value_per_image": [
+     2.288529724930085,
+     2.4157059778318577
+    ]
+   },
+   "seconds": 75.95193670000299
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.63382584763244,
+   "value": 2109.0134155243045,
+   "value_per_gpu_s": 3.7388820857987426,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9301169437371776,
+    "1": 0.9662473794549266,
+    "2": 0.9835443037974685,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 4721.24987211231,
+   "ci95": {
+    "ctr_ungated": [
+     0.6024355301936726,
+     0.6679078047061877
+    ],
+    "value_per_image": [
+     2.2785251534507016,
+     2.4161889526644975
+    ]
+   },
+   "seconds": 57.57112520001829
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.29289138408000126,
+   "value": 1825.8705294987576,
+   "value_per_gpu_s": 3.6104071995244267,
+   "low_starvation": 0.007648273226583307,
+   "redundant_per_100": 1.7595007901949653,
+   "false_purge_rate": 0.024099165449785038,
+   "timely": {
+    "0": 0.8795041727510748,
+    "1": 0.8113207547169811,
+    "2": 0.9468354430379746,
+    "3": 0.9923517267734168
+   },
+   "decision_time_mean_us": 112764.22659234756,
+   "ci95": {
+    "ctr_ungated": [
+     0.2616674541674542,
+     0.3214243487473992
+    ],
+    "value_per_image": [
+     1.9727751161334453,
+     2.0798313298507165
+    ]
+   },
+   "seconds": 286.19548930000747
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.5734452306633273,
+   "value": 1917.307451746449,
+   "value_per_gpu_s": 3.711741094031084,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8674410263166707,
+    "1": 0.8188679245283019,
+    "2": 0.9063291139240507,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 24615.52122277554,
+   "ci95": {
+    "ctr_ungated": [
+     0.538346457198094,
+     0.6071563695326792
+    ],
+    "value_per_image": [
+     2.065046255262923,
+     2.199335457780601
+    ]
+   },
+   "seconds": 183.38085130002582
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.5026056353685523,
+   "value": 1954.4226767689172,
+   "value_per_gpu_s": 3.8278902118309786,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8228358533723039,
+    "1": 0.8943396226415095,
+    "2": 0.9278481012658227,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 14277.074833099881,
+   "ci95": {
+    "ctr_ungated": [
+     0.46992984341647637,
+     0.535687471722282
+    ],
+    "value_per_image": [
+     2.106960680076319,
+     2.228028895870286
+    ]
+   },
+   "seconds": 131.41887260001386
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.26594514634413047,
+   "value": 1722.8186812459594,
+   "value_per_gpu_s": 3.4838112113752913,
+   "low_starvation": 0.007651192380612471,
+   "redundant_per_100": 1.736546607150591,
+   "false_purge_rate": 0.02286513843262549,
+   "timely": {
+    "0": 0.8507822765092851,
+    "1": 0.7886792452830189,
+    "2": 0.8835443037974684,
+    "3": 0.9923488076193875
+   },
+   "decision_time_mean_us": 127170.52372993258,
+   "ci95": {
+    "ctr_ungated": [
+     0.24108928896162937,
+     0.29454708764289605
+    ],
+    "value_per_image": [
+     1.8583536636630065,
+     1.9682000297727775
+    ]
+   },
+   "seconds": 280.34885450001457
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.6006662636780614,
+   "value": 1757.4654069789335,
+   "value_per_gpu_s": 3.420496623371592,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7653908490308919,
+    "1": 0.6754716981132075,
+    "2": 0.7177215189873417,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 25037.32801243732,
+   "ci95": {
+    "ctr_ungated": [
+     0.5642091773949981,
+     0.6311584208075092
+    ],
+    "value_per_image": [
+     1.8848468738643476,
+     2.0204194432696956
+    ]
+   },
+   "seconds": 209.44109169999138
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.5907166526445666,
+   "value": 1921.8099849375656,
+   "value_per_gpu_s": 3.7892508267096843,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.155555555555556,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.793037366353434,
+    "1": 0.8415094339622643,
+    "2": 0.9050632911392406,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 19193.923284095916,
+   "ci95": {
+    "ctr_ungated": [
+     0.5600826619472378,
+     0.6239110847398031
+    ],
+    "value_per_image": [
+     2.068154085156306,
+     2.204772248744935
+    ]
+   },
+   "seconds": 167.79492529999698
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.6085201328169403,
+   "value": 2067.203472407481,
+   "value_per_gpu_s": 3.6973433921525447,
+   "low_starvation": 0.005723034867888827,
+   "redundant_per_100": 2.0026804081922194,
+   "false_purge_rate": 0.024243842611573797,
+   "timely": {
+    "0": 0.9490732903866086,
+    "1": 0.9773584905660379,
+    "2": 0.9797468354430381,
+    "3": 0.9942769651321111
+   },
+   "decision_time_mean_us": 18242.76207744956,
+   "ci95": {
+    "ctr_ungated": [
+     0.5754130966952264,
+     0.6385566562995113
+    ],
+    "value_per_image": [
+     2.2384882656035967,
+     2.37492175168661
+    ]
+   },
+   "seconds": 76.44127129999106
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.7479155412360703,
+   "value": 2166.2333363218854,
+   "value_per_gpu_s": 3.855730646572239,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9612318120151115,
+    "1": 0.9849056603773585,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5309.288965357935,
+   "ci95": {
+    "ctr_ungated": [
+     0.7178421050422108,
+     0.772871086200232
+    ],
+    "value_per_image": [
+     2.337314853631094,
+     2.4886223088533836
+    ]
+   },
+   "seconds": 49.9228949000244
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.5831591005470692,
+   "value": 1933.3494493047642,
+   "value_per_gpu_s": 3.4639377759019054,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7989950747931115,
+    "1": 0.9056603773584906,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 2607.4890579572625,
+   "ci95": {
+    "ctr_ungated": [
+     0.549165653431722,
+     0.6153246849705151
+    ],
+    "value_per_image": [
+     2.0824608750337013,
+     2.205461439541277
+    ]
+   },
+   "seconds": 24.934438199998112
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.36197882438846296,
+   "value": 1810.1121467009962,
+   "value_per_gpu_s": 3.592854821501343,
+   "low_starvation": 0.005728109993723819,
+   "redundant_per_100": 2.2665378925435022,
+   "false_purge_rate": 0.01937203358890106,
+   "timely": {
+    "0": 0.9346257758305951,
+    "1": 0.9509433962264151,
+    "2": 0.9835443037974685,
+    "3": 0.9942718900062761
+   },
+   "decision_time_mean_us": 63278.93635118501,
+   "ci95": {
+    "ctr_ungated": [
+     0.3228848298076625,
+     0.3935497498275156
+    ],
+    "value_per_image": [
+     1.9636092408085404,
+     2.0556736219276766
+    ]
+   },
+   "seconds": 146.61956920000375
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.6489156626506024,
+   "value": 1981.0712908492453,
+   "value_per_gpu_s": 3.850327955586267,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8813654618473896,
+    "1": 0.7735849056603774,
+    "2": 0.9620253164556962,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 13616.180236865064,
+   "ci95": {
+    "ctr_ungated": [
+     0.6240915277257661,
+     0.6874330713146503
+    ],
+    "value_per_image": [
+     2.1256753066455474,
+     2.2771755339413233
+    ]
+   },
+   "seconds": 117.81411700000172
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.28571011317999273,
+   "value": 1424.8127646690705,
+   "value_per_gpu_s": 2.8456815714151498,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.4430887185104053,
+    "1": 0.6037735849056604,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 11985.879776964852,
+   "ci95": {
+    "ctr_ungated": [
+     0.25545747413875564,
+     0.3196177715245512
+    ],
+    "value_per_image": [
+     1.5280504834455455,
+     1.6300148869213356
+    ]
+   },
+   "seconds": 86.60703439998906
+  },
+  {
+   "policy": "sv_dpp",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.2947598893266743,
+   "value": 1712.7433059251878,
+   "value_per_gpu_s": 3.3941644332405074,
+   "low_starvation": 0.00688856620247236,
+   "redundant_per_100": 2.35526790757894,
+   "false_purge_rate": 0.01803108248247153,
+   "timely": {
+    "0": 0.8810122956453117,
+    "1": 0.8981132075471697,
+    "2": 0.9886075949367088,
+    "3": 0.9931114337975278
+   },
+   "decision_time_mean_us": 88080.48998464315,
+   "ci95": {
+    "ctr_ungated": [
+     0.2639010989010989,
+     0.3226727161117508
+    ],
+    "value_per_image": [
+     1.8384157999761999,
+     1.9594005907303755
+    ]
+   },
+   "seconds": 196.74084220000077
+  },
+  {
+   "policy": "learned:scope_ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ppo__scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.6430500024324478,
+   "value": 1970.0751373213084,
+   "value_per_gpu_s": 3.884287697532765,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8726931429217875,
+    "1": 0.7584905660377359,
+    "2": 0.9911392405063291,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 14385.854416249344,
+   "ci95": {
+    "ctr_ungated": [
+     0.6119255058609758,
+     0.6778212138606085
+    ],
+    "value_per_image": [
+     2.1211511918277246,
+     2.2687758940975544
+    ]
+   },
+   "seconds": 115.28809029998956
+  },
+  {
+   "policy": "learned:scope_ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/scope-ltr__scope_ltr_seed1.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.2067473028188686,
+   "value": 1291.8848760185203,
+   "value_per_gpu_s": 2.6069248944142855,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.3473447280282878,
+    "1": 0.5018867924528302,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 12862.558584558232,
+   "ci95": {
+    "ctr_ungated": [
+     0.18165774969443996,
+     0.23588024783676959
+    ],
+    "value_per_image": [
+     1.3809509985787305,
+     1.482679207305961
+    ]
+   },
+   "seconds": 92.62973679997958
+  }
+ ]
+}

@@ -1,0 +1,1196 @@
+{
+ "config": {
+  "split": "val",
+  "policies": [
+   "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt"
+  ],
+  "workers": [
+   1,
+   2,
+   4
+  ],
+  "rhos": [
+   0.8,
+   1.2,
+   1.5
+  ],
+  "realisations": 5,
+  "base_seed": 0,
+  "max_batch": 8,
+  "mmpp": null,
+  "network_delay": 0.0,
+  "n_boot": 200,
+  "n_images": 1000,
+  "scenario_names": [],
+  "scenario": {
+   "arrival": "trace"
+  }
+ },
+ "git_sha": "485d6808418def78386e90703216e0682888bd14",
+ "seconds": 1136.5961546000035,
+ "cells": [
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.6188583168001781,
+   "value": 2007.9175195033872,
+   "value_per_gpu_s": 3.5348145200694874,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8881995002669069,
+    "1": 0.9172606568832984,
+    "2": 0.8734177215189873,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 2032.677910251752,
+   "ci95": {
+    "ctr_ungated": [
+     0.5855764016760668,
+     0.6505966378127616
+    ],
+    "value_per_image": [
+     2.1557006635121443,
+     2.304119743225923
+    ]
+   },
+   "seconds": 18.081148900004337
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.5949811948037496,
+   "value": 2035.2435954354974,
+   "value_per_gpu_s": 3.5854754913519242,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9232246347201478,
+    "1": 0.9510831586303284,
+    "2": 0.8822784810126583,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1901.3190426860579,
+   "ci95": {
+    "ctr_ungated": [
+     0.5623498910795027,
+     0.6323130271790065
+    ],
+    "value_per_image": [
+     2.2000496039203465,
+     2.3328406948533895
+    ]
+   },
+   "seconds": 19.05626710000797
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 2370.7760335710946,
+   "kappas": [
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946,
+    2370.7760335710946
+   ],
+   "ctr_ungated": 0.6033587662817528,
+   "value": 1955.7229820859034,
+   "value_per_gpu_s": 3.4674052774946915,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8691429594840614,
+    "1": 0.9248078266946191,
+    "2": 0.9556962025316456,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1071.4896225344721,
+   "ci95": {
+    "ctr_ungated": [
+     0.5706953694536946,
+     0.6441180631104916
+    ],
+    "value_per_image": [
+     2.101386114234787,
+     2.252003801539077
+    ]
+   },
+   "seconds": 12.014920300018275
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.4806793424708613,
+   "value": 1804.5212241252877,
+   "value_per_gpu_s": 3.4710562113568124,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7956193033892576,
+    "1": 0.7856743535988819,
+    "2": 0.7177215189873417,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5745.806809768174,
+   "ci95": {
+    "ctr_ungated": [
+     0.4511142813247591,
+     0.5123214905335186
+    ],
+    "value_per_image": [
+     1.937941981920988,
+     2.073816952194549
+    ]
+   },
+   "seconds": 50.17793309999979
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.5173082422147727,
+   "value": 1837.8615250294356,
+   "value_per_gpu_s": 3.5160935261173463,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.849907279516448,
+    "1": 0.8421383647798744,
+    "2": 0.6924050632911394,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5937.69511238787,
+   "ci95": {
+    "ctr_ungated": [
+     0.48056306520421627,
+     0.5536504122346106
+    ],
+    "value_per_image": [
+     1.9785055364999653,
+     2.117630436094965
+    ]
+   },
+   "seconds": 54.09397929999977
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 3556.1640503566405,
+   "kappas": [
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641,
+    3556.164050356641
+   ],
+   "ctr_ungated": 0.43154957898781215,
+   "value": 1640.230922290771,
+   "value_per_gpu_s": 3.098317489582417,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7139708358957211,
+    "1": 0.7668763102725367,
+    "2": 0.8253164556962025,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5437.192444018061,
+   "ci95": {
+    "ctr_ungated": [
+     0.3948634102474646,
+     0.46795972015112314
+    ],
+    "value_per_image": [
+     1.7608081441319379,
+     1.8864392376625243
+    ]
+   },
+   "seconds": 60.704742600006284
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.4328066099415707,
+   "value": 1700.840476881744,
+   "value_per_gpu_s": 3.317885611038786,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7313889572733424,
+    "1": 0.7471698113207548,
+    "2": 0.6303797468354431,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7767.362963839938,
+   "ci95": {
+    "ctr_ungated": [
+     0.3983094390913262,
+     0.45776957026231824
+    ],
+    "value_per_image": [
+     1.8268780938050617,
+     1.9538234294890395
+    ]
+   },
+   "seconds": 63.044779999996535
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.4568184893564903,
+   "value": 1749.8332455654702,
+   "value_per_gpu_s": 3.3875863753600415,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7997671958012814,
+    "1": 0.7471698113207548,
+    "2": 0.6,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7981.829220529733,
+   "ci95": {
+    "ctr_ungated": [
+     0.42727096273291926,
+     0.48609320643255666
+    ],
+    "value_per_image": [
+     1.8824876515880795,
+     2.0047866987808876
+    ]
+   },
+   "seconds": 67.64223739999579
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4445.205062945802,
+   "kappas": [
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802,
+    4445.205062945802
+   ],
+   "ctr_ungated": 0.39201863927566366,
+   "value": 1497.7016046465997,
+   "value_per_gpu_s": 2.8625556917460577,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.6389773630330977,
+    "1": 0.660377358490566,
+    "2": 0.7822784810126582,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7466.354122741805,
+   "ci95": {
+    "ctr_ungated": [
+     0.3659218332098513,
+     0.42794187927887467
+    ],
+    "value_per_image": [
+     1.6036361172241302,
+     1.7342161099872853
+    ]
+   },
+   "seconds": 75.79994209998404
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.6965595160449274,
+   "value": 2102.670150449897,
+   "value_per_gpu_s": 3.7189711665224885,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9157670049848801,
+    "1": 0.9135569531795946,
+    "2": 0.9924050632911392,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1888.6575324436385,
+   "ci95": {
+    "ctr_ungated": [
+     0.6658566578963286,
+     0.7291071444923675
+    ],
+    "value_per_image": [
+     2.2577250138929164,
+     2.4088609430181074
+    ]
+   },
+   "seconds": 18.165773499989882
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.665217249408218,
+   "value": 2120.0951438252473,
+   "value_per_gpu_s": 3.748931753742427,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.94827132268772,
+    "1": 0.9549266247379455,
+    "2": 0.9759493670886077,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1688.411993854501,
+   "ci95": {
+    "ctr_ungated": [
+     0.6398835200276443,
+     0.6961091073239286
+    ],
+    "value_per_image": [
+     2.2876997713521403,
+     2.4243604467455784
+    ]
+   },
+   "seconds": 16.02330639999127
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 4741.552067142189,
+   "kappas": [
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189,
+    4741.552067142189
+   ],
+   "ctr_ungated": 0.6326663396912996,
+   "value": 2081.926284020038,
+   "value_per_gpu_s": 3.680987322584054,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9240858890005683,
+    "1": 0.9737246680642906,
+    "2": 0.9949367088607595,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 895.2809708972524,
+   "ci95": {
+    "ctr_ungated": [
+     0.605780959683841,
+     0.6679089060158424
+    ],
+    "value_per_image": [
+     2.243460862139825,
+     2.376082467724127
+    ]
+   },
+   "seconds": 10.010275700013153
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.5808470753162982,
+   "value": 1916.2908001538738,
+   "value_per_gpu_s": 3.7340410939606428,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.834928032650112,
+    "1": 0.8113207547169811,
+    "2": 0.7911392405063291,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5874.013514162172,
+   "ci95": {
+    "ctr_ungated": [
+     0.5471506588451605,
+     0.6166256598793364
+    ],
+    "value_per_image": [
+     2.0646211282922295,
+     2.186212887586007
+    ]
+   },
+   "seconds": 48.24887720000697
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.5462081211564983,
+   "value": 1958.5993382791708,
+   "value_per_gpu_s": 3.79832297173783,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8940443292425633,
+    "1": 0.8264150943396226,
+    "2": 0.7746835443037975,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 6038.633078846935,
+   "ci95": {
+    "ctr_ungated": [
+     0.5144145673603505,
+     0.5814717442422481
+    ],
+    "value_per_image": [
+     2.1012954609821795,
+     2.2550536851054974
+    ]
+   },
+   "seconds": 51.898092499992345
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 7112.328100713281,
+   "kappas": [
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282,
+    7112.328100713282
+   ],
+   "ctr_ungated": 0.520489812172975,
+   "value": 1865.5843487196776,
+   "value_per_gpu_s": 3.5960190212720073,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8109074659560556,
+    "1": 0.8490566037735849,
+    "2": 0.9240506329113923,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5198.1305075746695,
+   "ci95": {
+    "ctr_ungated": [
+     0.48583243413661575,
+     0.5550669467313735
+    ],
+    "value_per_image": [
+     2.0082110138548472,
+     2.1427751735981277
+    ]
+   },
+   "seconds": 51.94210519999615
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.5785670760304868,
+   "value": 1853.2620992261466,
+   "value_per_gpu_s": 3.652062096039251,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.177777777777778,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7966024441774238,
+    "1": 0.7849056603773585,
+    "2": 0.6911392405063291,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7588.912412817874,
+   "ci95": {
+    "ctr_ungated": [
+     0.5493583027763227,
+     0.6042429268664684
+    ],
+    "value_per_image": [
+     1.9975405811429094,
+     2.128705180182755
+    ]
+   },
+   "seconds": 59.52683340001386
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.6009105659290792,
+   "value": 1901.5504335896028,
+   "value_per_gpu_s": 3.7386117815933253,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8592804357673517,
+    "1": 0.7849056603773585,
+    "2": 0.7,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7699.209128119987,
+   "ci95": {
+    "ctr_ungated": [
+     0.5698576432426539,
+     0.6328570919675935
+    ],
+    "value_per_image": [
+     2.04542805129107,
+     2.1942597493958433
+    ]
+   },
+   "seconds": 61.38200859999051
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 8890.410125891603,
+   "kappas": [
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603,
+    8890.410125891603
+   ],
+   "ctr_ungated": 0.4680320598578461,
+   "value": 1725.4001711705398,
+   "value_per_gpu_s": 3.3658028127645245,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7256272884326016,
+    "1": 0.7735849056603774,
+    "2": 0.9063291139240507,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 6956.06105625343,
+   "ci95": {
+    "ctr_ungated": [
+     0.4315485702965067,
+     0.504289988757013
+    ],
+    "value_per_image": [
+     1.859467762883254,
+     1.9783316062329424
+    ]
+   },
+   "seconds": 63.55835589999333
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.7467612233657868,
+   "value": 2152.3154609940784,
+   "value_per_gpu_s": 3.83356571244328,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9394342082804711,
+    "1": 0.9471698113207548,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1626.0390674463201,
+   "ci95": {
+    "ctr_ungated": [
+     0.7154794715526054,
+     0.7803539544984611
+    ],
+    "value_per_image": [
+     2.330973572374341,
+     2.4641441691034207
+    ]
+   },
+   "seconds": 14.887589799996931
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.777095676410916,
+   "value": 2179.517528884299,
+   "value_per_gpu_s": 3.886621378473188,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9648318408730585,
+    "1": 0.9924528301886791,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1667.6231420788354,
+   "ci95": {
+    "ctr_ungated": [
+     0.7493663028151212,
+     0.8010198611730998
+    ],
+    "value_per_image": [
+     2.3499146906121764,
+     2.4833393548716085
+    ]
+   },
+   "seconds": 16.038390500005335
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 9483.104134284378,
+   "kappas": [
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378,
+    9483.104134284378
+   ],
+   "ctr_ungated": 0.7686619414711571,
+   "value": 2159.8454589897774,
+   "value_per_gpu_s": 3.8538897849899327,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9491243196827034,
+    "1": 0.9962264150943396,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 870.4147155996131,
+   "ci95": {
+    "ctr_ungated": [
+     0.739707141418211,
+     0.7952650427841111
+    ],
+    "value_per_image": [
+     2.3293078001495604,
+     2.470607194611018
+    ]
+   },
+   "seconds": 9.516299200011417
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.5932311062431544,
+   "value": 2016.7673620429846,
+   "value_per_gpu_s": 3.9785059400786933,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8644249726177436,
+    "1": 0.8528301886792453,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5347.219946934645,
+   "ci95": {
+    "ctr_ungated": [
+     0.5629237288135593,
+     0.6261903534103411
+    ],
+    "value_per_image": [
+     2.1780335803871247,
+     2.318624103320748
+    ]
+   },
+   "seconds": 41.8794964000117
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.6513399050748448,
+   "value": 2062.5732518142518,
+   "value_per_gpu_s": 4.0429073278198615,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9104344651332603,
+    "1": 0.8830188679245283,
+    "2": 0.9911392405063291,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 5309.648854968395,
+   "ci95": {
+    "ctr_ungated": [
+     0.6207063723806252,
+     0.6853663005712431
+    ],
+    "value_per_image": [
+     2.233863782171231,
+     2.3617940912661903
+    ]
+   },
+   "seconds": 44.307376800017664
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 14224.656201426562,
+   "kappas": [
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564,
+    14224.656201426564
+   ],
+   "ctr_ungated": 0.6028769623950347,
+   "value": 2013.4387889426223,
+   "value_per_gpu_s": 3.962641454586449,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8958963125228185,
+    "1": 0.9433962264150944,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 4659.980105540154,
+   "ci95": {
+    "ctr_ungated": [
+     0.565132574769038,
+     0.6358089657526454
+    ],
+    "value_per_image": [
+     2.1799644386037094,
+     2.298961945153743
+    ]
+   },
+   "seconds": 42.97334690002026
+  },
+  {
+   "policy": "learned:ppo:D:/Bunker/BaseCamp/_claude_scratch/frozen/ppo__ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.5731788508439201,
+   "value": 1948.439703748297,
+   "value_per_gpu_s": 3.865519229174507,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8378076264550869,
+    "1": 0.781132075471698,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7208.376046993605,
+   "ci95": {
+    "ctr_ungated": [
+     0.5380982398036024,
+     0.6114056484646895
+    ],
+    "value_per_image": [
+     2.0898089945600855,
+     2.2293442979353597
+    ]
+   },
+   "seconds": 54.5659910000104
+  },
+  {
+   "policy": "learned:bc:D:/Bunker/BaseCamp/_claude_scratch/frozen/bc__bc_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.599684340652378,
+   "value": 2012.6129015474573,
+   "value_per_gpu_s": 3.9896556245568364,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.177777777777778,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8918717457636737,
+    "1": 0.8566037735849058,
+    "2": 0.9759493670886077,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7489.425892806095,
+   "ci95": {
+    "ctr_ungated": [
+     0.5716863952499545,
+     0.6343935822812483
+    ],
+    "value_per_image": [
+     2.17151853866201,
+     2.300686648724842
+    ]
+   },
+   "seconds": 58.46802979998756
+  },
+  {
+   "policy": "learned:ltr:D:/Bunker/BaseCamp/_claude_scratch/frozen/ranknet__ltr_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 4500,
+   "scenario": {
+    "arrival": "trace"
+   },
+   "kappa": 17780.820251783207,
+   "kappas": [
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207,
+    17780.820251783207
+   ],
+   "ctr_ungated": 0.5562232905245859,
+   "value": 1966.6541680302919,
+   "value_per_gpu_s": 3.9114069069832276,
+   "low_starvation": 0.0,
+   "redundant_per_100": 3.2222222222222223,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8678228349556815,
+    "1": 0.9018867924528301,
+    "2": 0.9987341772151899,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 6368.337551590966,
+   "ci95": {
+    "ctr_ungated": [
+     0.5254188736241,
+     0.5890324097885817
+    ],
+    "value_per_image": [
+     2.1178506922526905,
+     2.255657196620061
+    ]
+   },
+   "seconds": 52.512699099985184
+  }
+ ]
+}
