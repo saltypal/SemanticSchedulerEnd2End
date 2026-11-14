@@ -229,8 +229,10 @@ def make_sqgan_decoder(rows_by_id, images_dir, devices):
 
     from Codec.edge import feature_pass_backends as real
     from Evaluation.edge.edge_config import load_config
-    cfg = load_config("feature_pass")
-    backends = [real.RealSQGAN(cfg, d) for d in devices]
+    import json
+    cfg = json.loads(json.dumps(load_config("feature_pass")))
+    cfg["sqgan"]["codec"] = "v1"     # fine-tuned v1 bundle from the kernel output (as edge-v1-latency); base bundle not needed
+    backends = [real.RealSQGAN(cfg, d) for d in devices]          # one decoder per GPU (c = len(devices))
     m_levels = cfg["sqgan"]["m_levels"]
     index = {p.stem: p for p in Path(images_dir).rglob("*") if p.suffix.lower() in (".jpg", ".jpeg", ".png")}
     payloads = {}

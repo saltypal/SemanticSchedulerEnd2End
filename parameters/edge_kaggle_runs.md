@@ -109,3 +109,9 @@
 | edge-sweep-test-genie | win | satyapaladugu/edge-sweep-test-genie | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:31Z |
 | edge-sweep-test-order | win | satyapaladugu/edge-sweep-test-order | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:40Z |
 | edge-sweep-test-ctrl | win | satyapaladugu/edge-sweep-test-ctrl | 1 | 21e09bc93de95a42ed6ebf8baada428293a279ca | 2026-11-14T07:54:50Z |
+| edge-sweep-val-svdpp-tuned | wsl | satyapaladuguplus/edge-sweep-val-svdpp-tuned | 1 | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:43Z |
+| edge-sweep-val-genie-tuned | wsl | satyapaladuguplus/edge-sweep-val-genie-tuned | 1 | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:46Z |
+| edge-sweep-test-svdpp-tuned | win | satyapaladugu/edge-sweep-test-svdpp-tuned | 1 | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:51Z |
+| edge-sweep-test-genie-tuned | win | satyapaladugu/edge-sweep-test-genie-tuned |  | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:54Z |
+| edge-train-bcedge | wsl | satyapaladuguplus/edge-train-bcedge | 4 | 64eaa081b2607869cfb41340b33580719df42a04 | 2026-11-14T09:26:57Z |
+| edge-live-t4 | wsl | satyapaladuguplus/edge-live-t4 | 2 | 485d6808418def78386e90703216e0682888bd14 | 2026-11-14T11:41:40Z |
