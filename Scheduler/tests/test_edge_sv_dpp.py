@@ -59,7 +59,7 @@ def test_past_hard_deadline_is_purged():
 
 
 def test_likely_duplicate_is_purged_but_soft_kept_below_threshold():
-    d = make().select(state([qj(0, ONE[1], dup=0.97), qj(1, ONE[1], dup=0.5)]))
+    d = make().select(state([qj(0, ONE[1], dup=0.995), qj(1, ONE[1], dup=0.5)]))   # above the tuned 0.99 threshold
     assert d.purge == (0,) and d.batch == (1,)
 
 
@@ -125,7 +125,7 @@ def test_at_risk_critical_beats_safe_critical_when_debt_high():
 def test_deferring_top_ranked_job_is_not_free():
     """Deferral costs at least one service round (sec. 6.2): the critical about to cross D_C goes first."""
     aged, fresh = qj(0, ONE[0], age=4.5), qj(1, ONE[0], age=0.0)
-    d = make().select(state([fresh, aged], lat=LatencyProfile({1: [1.0, 1.0], 2: [1.5, 1.5]})))
+    d = make(tie_tol_frac=0.1).select(state([fresh, aged], lat=LatencyProfile({1: [1.0, 1.0], 2: [1.5, 1.5]})))
     assert d.batch == (0,)
 
 
@@ -143,5 +143,5 @@ def test_negligible_debt_credit_does_not_outrank_confident_critical():
 def test_tie_tol_frac_default_is_val_tuned():
     # val-tuned on true v1 latency (config/edge/sim.yaml comment); 0.1 trailed EDF at rho 1.2 / 2 workers
     pol = make()
-    assert pol.tie_tol_frac == 0.3
+    assert pol.tie_tol_frac == 0.5   # F6 2026-11-14
     assert make(tie_tol_frac=0.1).tie_tol_frac == 0.1

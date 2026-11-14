@@ -11,15 +11,15 @@ loads_rho: [0.6, 0.8, 1.0, 1.2, 1.5]
 realisations: 10
 warmup_fraction: 0.10
 dup:
-  hard_purge_prob: 0.95                 # purge only if delivered copy exists and P(dup) above this
+  hard_purge_prob: 0.99                 # purge only if delivered copy exists and P(dup) above this
 sv_dpp:
-  V: 1.0
+  V: 0.1                        # S7 tune grid on val (V x hard_purge_prob): best V = 0.1
   debt_init: 0.0
   # sec. 6.3 tie rule: scores below this fraction of max E[v] count as ties (ranked by E[v]).
   # 0.3 = val-tuned (1000 val rows, trace arrivals, TRUE v1 latency, 5 realisations, workers 1/2):
   # sum of CTR@D over rho 1.2/1.5 x workers 1/2 = 1.048 (0.3) vs 1.004 (0.1) vs 0.981 (0.2); rho 0.8 also best (0.379/0.511).
-  tie_tol_frac: 0.3
-  relevance_beta: 0.5          # D18; 0 = plan v3 exactly (no relevance); tuned on val in S7
+  tie_tol_frac: 0.5            # F6 (2026-11-14, 1000 val, c=2, rho 1.2, 3 runs): 0.5 best at every beta
+  relevance_beta: 1.0          # D18, F6-tuned: beta 1.0 / tie 0.5 -> CTR@D 0.825 (beta 0: 0.787)
   # per mission id [lo, hi] for r_tilde = clip((relevance - lo) / (hi - lo), 0, 1).
   # [0.52, 0.68] = observed min/max of relevance in the sim table; replace with per-mission
   # 5th/95th percentiles from the train split.
