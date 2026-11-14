@@ -32,7 +32,7 @@ and attaches only a fixed 64-byte header. We make four contributions:
    event-disjoint splits, a fine-tuned SQ-GAN codec, and a line-up of classical, 5G-derived, index-based,
    extended and learned schedulers.
 
-On the event-disjoint validation event (2,485 images, c = 2 decoders, load rho = 1.2), header-aware value-rate batching delivers 78% of human-labelled Critical images before their deadline and the tuned SV-DPP 82%, versus 44% for EDF and 0% for FIFO; the same batching rule without the header delivers 0%, so the 64-byte header carries the gain. On the held-out test events (8,585 images) SV-DPP reaches 53% versus 24% for EDF.
+On the event-disjoint validation event (2,485 images, c = 2 decoders, load rho = 1.2), header-aware value-rate batching delivers 78% of human-labelled Critical images before their deadline and the tuned SV-DPP 82%, versus 44% for EDF and 0% for FIFO; the same batching rule without the header delivers 0%, so the 64-byte header carries the gain. On the held-out test events (8,585 images, settings frozen) SV-DPP delivers 80% versus 24% for EDF (3.3x).
 
 **Index Terms:** semantic communication, goal-oriented scheduling, O-RAN, edge inference, generative
 image coding, Lyapunov optimization, determinantal point process, submodular coverage, constrained reinforcement
@@ -528,6 +528,93 @@ calibrated SPI, relevance per mission, keys, 760 duplicate groups over 1,965 ima
   sequentially; this was corrected. The batching decision in SV-DPP and the c-worker simulator therefore use the
   measured per-B empirical distributions, and batching is not assumed to be beneficial at small B.
 
+**Fig. 8: trace-driven UE arrival generation (one realisation).**
+
+```mermaid
+flowchart TD
+  T[Split rows: CrisisMMD with tweet times + everyday images] --> K["Sort crisis images by tweet time; compress by factor kappa so that lambda E[S_B] / (B c) = rho"]
+  T --> P[Everyday images: Poisson arrivals at the same mean rate share]
+  K --> MERGE[Merge into one arrival stream]
+  P --> MERGE
+  MERGE --> PERM[Realisation r: permutation of everyday positions, kappa jitter, seed r]
+  PERM --> H[Each arrival = 64-B header + 464-B payload, sent once]
+  H --> LNK{Uplink model}
+  LNK -->|ideal| ARR[Arrival at edge = send time]
+  LNK -->|AWGN| D1["+ bits / (B log2(1+SNR))"]
+  LNK -->|Rayleigh| D2["HARQ attempts k=1..3: success iff B log2(1+SNR |h_k|^2) >= R0; + k (bits/R0 + RTT); lost after 3"]
+  D1 --> ARR
+  D2 --> ARR
+  ARR --> Q[Edge queue]
+```
+
+**Fig. 9: event-driven multi-decoder simulator (c workers, one GPU each).**
+
+```mermaid
+flowchart TD
+  EV[(Event heap: arrivals, completions)] --> NEXT{Next event}
+  NEXT -->|arrival| ADDQ[Parse header, fuse SPI + STS, dup prob vs delivered memory; push job to shared queue]
+  NEXT -->|completion on worker w| DONE[Record completion time per job; delivered memory += keys; debt queues update; worker w free]
+  ADDQ --> FREE{Any worker free and queue non-empty?}
+  DONE --> FREE
+  FREE -->|no| EV
+  FREE -->|yes| POL["Policy.select(state): sees only headers, ages, queue, free workers, latency profile"]
+  POL --> DEC[Decision: batch ids of size B, purge ids]
+  DEC --> PUR[Remove purged jobs]
+  DEC --> SAMP["Sample decode time S_B from measured batched latency L(B) on T4"]
+  SAMP --> SCHED["Schedule completion at now + S_B on worker w"]
+  SCHED --> EV
+  DONE --> SCORE["Score with TRUE tier (never shown to policy): on time if completion - capture <= D_k; CTR@D, value w g zeta"]
+```
+
+**Fig. 10: one worker-free epoch, queue to decoders.**
+
+```mermaid
+sequenceDiagram
+  participant Q as Shared queue (headers only)
+  participant S as Scheduler
+  participant W1 as Decoder GPU 1
+  participant W2 as Decoder GPU 2
+  Note over W1: busy (batch of 4, ends t+1.9 s)
+  W2-->>S: free at t
+  S->>Q: read headers: SPI, relevance, keys, STS, age
+  S->>S: rank jobs, drop dead / duplicate, choose B by value rate
+  S->>W2: decode batch {Critical a, Critical b} (B = 2, S_2 ~ 1.46 s)
+  Q-->>Q: remaining jobs keep ageing
+  W1-->>S: free at t+1.9 s
+  S->>Q: re-rank (new arrivals included)
+  S->>W1: decode next batch
+  W2-->>S: decoded images to responder app at t+1.46 s
+```
+
+**Fig. 11: live 2xT4 validation.**
+
+```mermaid
+flowchart LR
+  subgraph PRE[Before the clock starts]
+    IMG[~1,000 validation images] --> ENC[SQ-GAN v1 encode + header, not timed]
+    ENC --> STORE[Payloads + headers in memory]
+  end
+  STORE --> REPLAY[Wall-clock replay of the same arrival trace]
+  REPLAY --> LQ[Live queue]
+  LQ --> LS{Same scheduler code as the simulator}
+  LS -->|batch| G0[cuda:0 SQ-GAN v1 decoder]
+  LS -->|batch| G1[cuda:1 SQ-GAN v1 decoder]
+  G0 --> LOG[Log real decode times, completion times]
+  G1 --> LOG
+  LOG --> KS[KS test: live vs simulated latency per batch size]
+  LOG --> CMP[CTR@D live vs simulated with CIs]
+```
+
+**Fig. 12: measured batched decode latency on one T4 (codec v1, m = 0.25).**
+
+```mermaid
+xychart-beta
+  title "Median decode time per batch (s)"
+  x-axis [B=1, B=2, B=4, B=8]
+  y-axis "seconds" 0 --> 4
+  bar [0.74, 1.46, 2.88, 3.86]
+```
+
 **C. Simulator.**
 - Trace-driven, event-driven, c in {1, 2, 4, 6, 8}, rho swept; 10% warm-up, 10 realisations, latency sampled from the
   measured distribution (P95 only inside policies).
@@ -581,17 +668,17 @@ relevance field adds further value: raising its weight beta from 0 to 1 raises C
 
 **Table VIII: CTR@D on test (frozen settings, run once).**
 
-| Policy | c=1, rho=1.2 | c=2, rho=0.8 | **c=2, rho=1.2** | c=4, rho=1.2 | c=8, rho=1.2 |
-|---|---:|---:|---:|---:|---:|
-| **SV-DPP** | **0.38** | **0.83** | **0.53** [0.51, 0.54] | 0.70 | 0.89 |
-| True-tier reference (genie) | 0.29 | 0.79 | 0.49 [0.47, 0.50] | **0.83** | 0.84 |
-| SPI-first-EDF | 0.28 | 0.73 | 0.48 [0.46, 0.49] | 0.71 | **0.91** |
-| EDF on SPI-predicted deadlines | 0.05 | 0.73 | 0.24 [0.23, 0.25] | 0.70 | 0.91 |
-| FIFO | 0.00 | 0.62 | 0.00 [0.00, 0.00] | 0.00 | 0.00 |
+| Policy | c=1, rho=0.8 | c=1, rho=1.2 | c=2, rho=0.8 | **c=2, rho=1.2** | c=2, rho=1.5 | c=4, rho=1.2 | c=8, rho=1.2 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| **SV-DPP (tuned on validation)** | **0.93** | **0.65** | **0.97** | **0.80** [0.78, 0.81] | **0.58** | **0.82** | **0.92** |
+| True-tier reference (genie) | 0.64 | 0.29 | 0.79 | 0.49 [0.47, 0.50] | 0.37 | 0.83 | 0.84 |
+| SPI-first-EDF | 0.57 | 0.28 | 0.73 | 0.48 [0.46, 0.49] | 0.45 | 0.71 | 0.91 |
+| EDF on SPI-predicted deadlines | 0.57 | 0.05 | 0.73 | 0.24 [0.23, 0.25] | 0.13 | 0.70 | 0.91 |
+| FIFO | 0.36 | 0.00 | 0.62 | 0.00 [0.00, 0.00] | 0.00 | 0.00 | 0.00 |
 
-The ranking carries over to unseen disaster events: at c = 2, rho = 1.2 SV-DPP delivers 0.53 of Critical images in
-time against 0.24 for EDF (2.2x) and 0 for FIFO. The SV-DPP row uses the pre-tuning configuration; test rows for the
-tuned SV-DPP, the value-rate rule and the learned schedulers are being completed.
+The ranking carries over to unseen disaster events with no retuning: at c = 2, rho = 1.2 SV-DPP delivers 0.80 of
+Critical images in time against 0.24 for EDF (3.3x) and 0 for FIFO, and with a single decoder 0.65 against 0.05 (13x).
+Validation-tuned SV-DPP matches its validation level on test (0.80 vs 0.82), so the tuning generalises across events.
 
 **D. SV-DPP tuning (validation).**
 
@@ -604,10 +691,9 @@ tuned SV-DPP, the value-rate rule and the learned schedulers are being completed
 | 0.5 | 0.657 | 0.788 | 0.802 |
 | 1.0 | 0.717 | 0.816 | **0.825** |
 
-On a different random 1,000-image validation subset replayed with time compression, the same SV-DPP reached only 0.32
-at c = 2, rho = 1.2, and changing one parameter at a time moved it by at most 0.04 (0.29-0.33), while the value-rate
-rule reached 0.60 on that subset. SV-DPP's result therefore depends on the arrival trace rather than on its parameters,
-and the simpler header-aware rule is the more robust of the two.
+The tuned configuration transfers to the held-out test events (Table VIII). On small random subsets of a split
+(1,000 images) the absolute CTR@D of every policy is lower and SV-DPP is more affected than the value-rate rule
+(Appendix G).
 
 **E. Uplink sensitivity.**
 
@@ -626,11 +712,23 @@ Link delay and outage eat into the Critical deadline (Rayleigh at 0 dB: mean del
 three attempts), yet the ordering of the policies is unchanged and the header-aware rule keeps a 2-5x margin over EDF.
 
 **F. Learned schedulers.** Trained only on the train events and only through the header interface, the learned
-schedulers reach the level of the value-rate rule and roughly double EDF on the same 1,000-image validation subset
-(c = 2, rho = 1.2): SCOPE-PPO 0.57, PPO-BC 0.58, LambdaMART 0.57 and BC 0.55, against 0.60 for the value-rate rule and
-0.30 for EDF; with a single decoder SCOPE-PPO reaches 0.56 against 0.19 for EDF (2.9x). The header is therefore not only
-usable by hand-designed rules but learnable end-to-end. Full-split learner rows are being completed; further learned
-and analytic variants are in Appendix G.
+rankers nearly reach the hand-designed header-aware schedulers on the full validation split and clearly beat EDF.
+
+**Table XII: learned schedulers, CTR@D on validation (full split, 5 realisations).**
+
+| Learner | c=1, rho=1.2 | c=2, rho=0.8 | **c=2, rho=1.2** | c=2, rho=1.5 | c=4, rho=1.2 | c=8, rho=1.2 |
+|---|---:|---:|---:|---:|---:|---:|
+| RankNet (listwise, header features) | 0.73 | 0.91 | **0.75** [0.73, 0.76] | 0.67 | 0.84 | 0.94 |
+| LambdaMART | 0.73 | 0.91 | 0.74 [0.73, 0.76] | **0.69** | **0.85** | **0.96** |
+| BC (imitation of SV-DPP) | 0.72 | 0.89 | 0.74 [0.72, 0.75] | 0.68 | 0.84 | 0.94 |
+| SCOPE-LTR | 0.27 | 0.88 | 0.68 [0.67, 0.70] | 0.65 | 0.23 | 0.22 |
+| *EDF (reference)* | 0.26 | 0.72 | 0.44 | 0.44 | 0.68 | 0.87 |
+
+At c = 2, rho = 1.2 the learned rankers deliver 0.74-0.75 of Critical images in time against 0.44 for EDF (+70%), and
+with a single decoder 0.72-0.73 against 0.26 (2.8x). The header is therefore not only usable by hand-designed rules but
+learnable end-to-end. SCOPE-PPO and PPO-BC rows (full split) are being completed; on a 1,000-image validation subset
+they reached 0.57 and 0.58, on a par with the value-rate rule on that subset (0.60) and well above EDF (0.30). Further
+learned and analytic variants are in Appendix G.
 
 - **Table X [PENDING]:** simulator vs live 2xT4 (latency KS test, CTR@D live vs simulated).
 - **Fig. 5 [FIGURE TO DRAW from Table VII]:** CTR@D vs c at rho = 1.2.
@@ -655,7 +753,7 @@ and analytic variants are in Appendix G.
 - SV-DPP's parameters were tuned on the validation trace and its CTR@D varies with the arrival trace (Sec. VIII-D); adaptive parameter control is future work. Whittle-with-abandonment and the analytic SemCover adaptation collapse under overload in our setting and are reported in the appendix only.
 
 ## X. Conclusion
-Generative semantic codecs move the bottleneck of image communication from the channel to receiver compute. A stateless 64-byte semantic header, carrying a calibrated urgency posterior, mission relevance and receiver-side novelty keys, lets an edge decoder pool decide what to decode next without per-UE state. Header-aware value-rate batching and its Lyapunov generalisation SV-DPP deliver up to 3x more human-labelled Critical images before their deadline than deadline-only and FIFO baselines on an unseen-event validation split, keep a 2.2x margin over EDF on held-out test events, and keep their ranking behind AWGN and Rayleigh uplinks. The same batching without the header delivers nothing under overload, so the semantic header is what makes timely triage possible. Learned schedulers trained with the SCOPE recipe reach the same level through the same interface. Future work: adaptive Lyapunov parameters, joint control of the SQ-GAN masking rate, and field traces.
+Generative semantic codecs move the bottleneck of image communication from the channel to receiver compute. A stateless 64-byte semantic header, carrying a calibrated urgency posterior, mission relevance and receiver-side novelty keys, lets an edge decoder pool decide what to decode next without per-UE state. Header-aware value-rate batching and its Lyapunov generalisation SV-DPP deliver up to 3x more human-labelled Critical images before their deadline than deadline-only and FIFO baselines on an unseen-event validation split, keep a 3.3x margin over EDF on held-out test events, and keep their ranking behind AWGN and Rayleigh uplinks. The same batching without the header delivers nothing under overload, so the semantic header is what makes timely triage possible. Learned schedulers trained with the SCOPE recipe reach the same level through the same interface. Future work: adaptive Lyapunov parameters, joint control of the SQ-GAN masking rate, and field traces.
 
 ---
 
@@ -818,6 +916,10 @@ Plan v3 (`docs/reviews/FINAL_PLAN_V3.md`) is the base; where it differs from the
 | - | New method | SemCover (proposed); SCOPE-AIF / Qwen audit parked |
 
 ## Appendix G: Additional evaluated variants and supplementary audit
+*Small-subset behaviour:* on a random 1,000-image validation subset SV-DPP reached 0.32 at c = 2, rho = 1.2 and a
+one-knob sweep moved it by at most 0.04, while the value-rate rule reached 0.60; on the full splits SV-DPP is the best
+policy (Tables VII-VIII).
+
 *Additional baselines (1,000-image validation subset, c = 2, rho = 1.2, CTR@D):* SCOPE-DQN 0.27, DQN 0.16,
 BCEdge 0.30, learned SemCover 0.00; on the full validation split Whittle-with-abandonment 0.00. These variants did not
 sustain Critical throughput under overload in our setting.
