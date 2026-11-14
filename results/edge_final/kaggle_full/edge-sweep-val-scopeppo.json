@@ -1,0 +1,873 @@
+{
+ "config": {
+  "split": "val",
+  "policies": [
+   "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt"
+  ],
+  "workers": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "rhos": [
+   0.8,
+   1.2,
+   1.5
+  ],
+  "realisations": 5,
+  "base_seed": 0,
+  "max_batch": 8,
+  "mmpp": null,
+  "network_delay": 0.0,
+  "n_boot": 200,
+  "n_images": 2485,
+  "scenario_names": [],
+  "scenario": {}
+ },
+ "git_sha": "c0b5c365d5e6696bfc390e94552d064cb9fb36ae",
+ "seconds": 4084.603318757,
+ "cells": [
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.887976716997415,
+   "value": 5429.846404957155,
+   "value_per_gpu_s": 3.6631165107576593,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.304425569959767,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9893478584394068,
+    "1": 0.9872195990518013,
+    "2": 0.9964033781893219,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1222.9733878381792,
+   "ci95": {
+    "ctr_ungated": [
+     0.8761333961502221,
+     0.9007923510154573
+    ],
+    "value_per_image": [
+     2.3864048044914363,
+     2.4734812016911323
+    ]
+   },
+   "seconds": 23.500043318999985
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8099974471303402,
+   "value": 5320.694424681405,
+   "value_per_gpu_s": 3.6013144820945073,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.304425569959767,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9569305536673391,
+    "1": 0.9665393854289774,
+    "2": 0.9984574536336274,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1084.638942775044,
+   "ci95": {
+    "ctr_ungated": [
+     0.7950109925891523,
+     0.8258365349692444
+    ],
+    "value_per_image": [
+     2.333695302268413,
+     2.421628324261339
+    ]
+   },
+   "seconds": 16.860249332999956
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8226963517130427,
+   "value": 4728.432292885101,
+   "value_per_gpu_s": 3.860257856097904,
+   "low_starvation": 0.22261994039070476,
+   "redundant_per_100": 7.841331711741255,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9723998786976003,
+    "1": 0.9154972003095055,
+    "2": 0.8233502329225786,
+    "3": 0.7742526368940456
+   },
+   "decision_time_mean_us": 7735.681513415664,
+   "ci95": {
+    "ctr_ungated": [
+     0.8082483052634399,
+     0.8363306397904364
+    ],
+    "value_per_image": [
+     2.0681852131636815,
+     2.1651697423716065
+    ]
+   },
+   "seconds": 275.192001442
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.674249646755035,
+   "value": 4678.684623678439,
+   "value_per_gpu_s": 3.9898645377930584,
+   "low_starvation": 0.2011839229597598,
+   "redundant_per_100": 6.347717176937266,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8787167241933694,
+    "1": 0.8583837085984095,
+    "2": 0.8681067600386477,
+    "3": 0.7977219289783571
+   },
+   "decision_time_mean_us": 6886.990733462799,
+   "ci95": {
+    "ctr_ungated": [
+     0.6574723038958311,
+     0.6977529841918485
+    ],
+    "value_per_image": [
+     2.0422574552568373,
+     2.1313732785050616
+    ]
+   },
+   "seconds": 182.82720233499992
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.769934582253034,
+   "value": 4279.027483640749,
+   "value_per_gpu_s": 3.70071403502579,
+   "low_starvation": 0.27472411836671906,
+   "redundant_per_100": 7.889246221253662,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9558973001504445,
+    "1": 0.8477552937209957,
+    "2": 0.6837919505714465,
+    "3": 0.7195036228138788
+   },
+   "decision_time_mean_us": 11348.572497111778,
+   "ci95": {
+    "ctr_ungated": [
+     0.7541365171039225,
+     0.7858420337977384
+    ],
+    "value_per_image": [
+     1.861082055313744,
+     1.9603715027656208
+    ]
+   },
+   "seconds": 377.08952726300004
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 1,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6220221303933412,
+   "value": 4321.9193327670055,
+   "value_per_gpu_s": 4.065359024448235,
+   "low_starvation": 0.28966489824590236,
+   "redundant_per_100": 6.32479212683116,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8497986656384503,
+    "1": 0.7973699146126905,
+    "2": 0.7832450120870917,
+    "3": 0.7081456935902667
+   },
+   "decision_time_mean_us": 10352.61247334553,
+   "ci95": {
+    "ctr_ungated": [
+     0.6017466514191534,
+     0.6435661354465976
+    ],
+    "value_per_image": [
+     1.8829040086570585,
+     1.9748937461422496
+    ]
+   },
+   "seconds": 243.85342023599992
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9124501889510229,
+   "value": 5473.970246182529,
+   "value_per_gpu_s": 3.7030733381235175,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.322306660706303,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9982162166929023,
+    "1": 0.9967733541504034,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1085.1901009446497,
+   "ci95": {
+    "ctr_ungated": [
+     0.901396070486848,
+     0.9244269794739854
+    ],
+    "value_per_image": [
+     2.3973969063454614,
+     2.4932162304631875
+    ]
+   },
+   "seconds": 18.933062285000005
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8617998358532828,
+   "value": 5423.026851233245,
+   "value_per_gpu_s": 3.6737805458193966,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.322306660706303,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9773224993668259,
+    "1": 0.9935079936279456,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1037.1158617261474,
+   "ci95": {
+    "ctr_ungated": [
+     0.8489097351356696,
+     0.875177590283894
+    ],
+    "value_per_image": [
+     2.3816922040924617,
+     2.4720894428265225
+    ]
+   },
+   "seconds": 16.20027112599996
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.7854188771128153,
+   "value": 4978.494707956907,
+   "value_per_gpu_s": 3.6625187911700365,
+   "low_starvation": 0.0006258614590829806,
+   "redundant_per_100": 7.273161651606566,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9710260910265118,
+    "1": 0.8979311067269584,
+    "2": 0.7547087531591627,
+    "3": 0.9992184965175707
+   },
+   "decision_time_mean_us": 7863.843830294378,
+   "ci95": {
+    "ctr_ungated": [
+     0.7702248967582297,
+     0.7993052532748791
+    ],
+    "value_per_image": [
+     2.172355398740951,
+     2.2714166449811124
+    ]
+   },
+   "seconds": 246.674005845
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6872420054825257,
+   "value": 4976.816766890571,
+   "value_per_gpu_s": 3.766893946742713,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.305065322759286,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8871268465030371,
+    "1": 0.87887080910895,
+    "2": 0.8829907187640194,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7405.648730554449,
+   "ci95": {
+    "ctr_ungated": [
+     0.6688379766511955,
+     0.7040297049812455
+    ],
+    "value_per_image": [
+     2.17562533063873,
+     2.261470916542648
+    ]
+   },
+   "seconds": 193.65577901899997
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6281882395837609,
+   "value": 4238.387457804908,
+   "value_per_gpu_s": 3.2140954542807796,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.215675862846597,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.7874763443371294,
+    "1": 0.6659030059217074,
+    "2": 0.4651640324441229,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 11293.889703465353,
+   "ci95": {
+    "ctr_ungated": [
+     0.6107409494730714,
+     0.6487271109870146
+    ],
+    "value_per_image": [
+     1.8505796221326427,
+     1.9353371064426141
+    ]
+   },
+   "seconds": 293.2765364690001
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 2,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.6431057406336349,
+   "value": 4797.4487581046,
+   "value_per_gpu_s": 3.696242985384708,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.215020116227089,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8599063347213793,
+    "1": 0.8016802543795277,
+    "2": 0.820573086801039,
+    "3": 0.9998410174880764
+   },
+   "decision_time_mean_us": 10955.494894601987,
+   "ci95": {
+    "ctr_ungated": [
+     0.6249735758789497,
+     0.6595504219202276
+    ],
+    "value_per_image": [
+     2.0987139814891695,
+     2.1858263719502817
+    ]
+   },
+   "seconds": 276.6156057750004
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9442254058986975,
+   "value": 5504.307561940013,
+   "value_per_gpu_s": 3.686156933580933,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.313366115333035,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9960117474302497,
+    "1": 0.9952424046541694,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1060.4874086003251,
+   "ci95": {
+    "ctr_ungated": [
+     0.9331243070953437,
+     0.9530409677618101
+    ],
+    "value_per_image": [
+     2.410408414700639,
+     2.505224235479022
+    ]
+   },
+   "seconds": 18.99547396800017
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9194149892090756,
+   "value": 5494.728777382399,
+   "value_per_gpu_s": 3.677313625534217,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.313366115333035,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9911414911124024,
+    "1": 0.9984126984126984,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 969.0523203756405,
+   "ci95": {
+    "ctr_ungated": [
+     0.9095670220558314,
+     0.9296752421875645
+    ],
+    "value_per_image": [
+     2.4020732245490435,
+     2.496573292233938
+    ]
+   },
+   "seconds": 15.99069717600014
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.817709558767565,
+   "value": 5030.054067065566,
+   "value_per_gpu_s": 3.7307252819978154,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.152436298614215,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9372963243335042,
+    "1": 0.8178511895352599,
+    "2": 0.7104622837839921,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7668.232624031359,
+   "ci95": {
+    "ctr_ungated": [
+     0.8045969505167966,
+     0.8312648496561132
+    ],
+    "value_per_image": [
+     2.2007544927326474,
+     2.2906594380704273
+    ]
+   },
+   "seconds": 219.17259012199975
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.7903940630214631,
+   "value": 5271.37376094394,
+   "value_per_gpu_s": 3.969995899747855,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.161376843987483,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9207302811412422,
+    "1": 0.8710629347375114,
+    "2": 0.9355558555576909,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7057.016809908751,
+   "ci95": {
+    "ctr_ungated": [
+     0.7754327405707729,
+     0.8074034204033348
+    ],
+    "value_per_image": [
+     2.3079934346348154,
+     2.399588189721894
+    ]
+   },
+   "seconds": 185.15336544499996
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8229475532221976,
+   "value": 4936.847910091907,
+   "value_per_gpu_s": 3.714051126803722,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.188198480107286,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9138437787546572,
+    "1": 0.7773917259211377,
+    "2": 0.6290644546340306,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 11017.478308471513,
+   "ci95": {
+    "ctr_ungated": [
+     0.8060137339139822,
+     0.8378113247793889
+    ],
+    "value_per_image": [
+     2.1614590362084987,
+     2.2497418420774125
+    ]
+   },
+   "seconds": 306.6219968370001
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 4,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.7594162461979945,
+   "value": 5175.316118641742,
+   "value_per_gpu_s": 3.9710674392059673,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.1703173893607515,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8970458721685048,
+    "1": 0.8276948215183509,
+    "2": 0.8726179600336958,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 10309.005354751625,
+   "ci95": {
+    "ctr_ungated": [
+     0.7446090541697503,
+     0.7775492751094987
+    ],
+    "value_per_image": [
+     2.2681685382188532,
+     2.3542730995280747
+    ]
+   },
+   "seconds": 255.1318734690003
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9775169058979489,
+   "value": 5533.085934982277,
+   "value_per_gpu_s": 3.684313453322919,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.349128296826106,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9960416188618103,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 1060.9830357348114,
+   "ci95": {
+    "ctr_ungated": [
+     0.9707777299482576,
+     0.982766863274036
+    ],
+    "value_per_image": [
+     2.423097298032833,
+     2.5272389611151835
+    ]
+   },
+   "seconds": 18.23464064000018
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 0.8,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.9708719502448695,
+   "value": 5533.3096281738035,
+   "value_per_gpu_s": 3.6900124560074388,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.349128296826106,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9969199062065645,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 998.3577391132254,
+   "ci95": {
+    "ctr_ungated": [
+     0.9624313108167967,
+     0.9773919342442614
+    ],
+    "value_per_image": [
+     2.415599741428427,
+     2.5204374599981922
+    ]
+   },
+   "seconds": 16.7308723430001
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8584756931400438,
+   "value": 5138.469523127831,
+   "value_per_gpu_s": 3.820288261407454,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.1703173893607515,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9184613544616193,
+    "1": 0.8784569559698616,
+    "2": 0.8729237290175089,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 7278.475882072043,
+   "ci95": {
+    "ctr_ungated": [
+     0.8447224550229075,
+     0.8738010357968717
+    ],
+    "value_per_image": [
+     2.2487574713735783,
+     2.3437841237294332
+    ]
+   },
+   "seconds": 210.06898934200035
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.2,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8784987471338935,
+   "value": 5388.554114032981,
+   "value_per_gpu_s": 4.061371846264523,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.2507822977201615,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9295325544775503,
+    "1": 0.9135538604598539,
+    "2": 0.9880053023877393,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 6905.280410737413,
+   "ci95": {
+    "ctr_ungated": [
+     0.865083077075687,
+     0.892114568997485
+    ],
+    "value_per_image": [
+     2.3643470912563718,
+     2.4477814628598846
+    ]
+   },
+   "seconds": 181.80447747200014
+  },
+  {
+   "policy": "learned:scope_ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-scope-ppo/runs/edge-train-scope-ppo/scope_ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8263167263926132,
+   "value": 4965.257183071325,
+   "value_per_gpu_s": 3.785746677043142,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.206079570853822,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.8746075481305532,
+    "1": 0.8237211421089979,
+    "2": 0.8477925131527273,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 10080.030947008094,
+   "ci95": {
+    "ctr_ungated": [
+     0.8088549077719159,
+     0.8427794864537635
+    ],
+    "value_per_image": [
+     2.168917349223448,
+     2.2674157007020317
+    ]
+   },
+   "seconds": 262.0482804859994
+  },
+  {
+   "policy": "learned:ppo:/kaggle/input/notebooks/satyapaladuguplus/edge-train-ppo/runs/edge-train-ppo/ppo_seed0.pt",
+   "kwargs": {},
+   "workers": 8,
+   "rho": 1.5,
+   "realisations": 5,
+   "n_measured": 11185,
+   "scenario": {},
+   "kappa": null,
+   "kappas": [],
+   "ctr_ungated": 0.8456156255366967,
+   "value": 5276.3397946766345,
+   "value_per_gpu_s": 4.0954681276121905,
+   "low_starvation": 0.0,
+   "redundant_per_100": 7.2954850245865,
+   "false_purge_rate": 0.0,
+   "timely": {
+    "0": 0.9036319778808236,
+    "1": 0.8599996683898011,
+    "2": 0.9881331209189839,
+    "3": 1.0
+   },
+   "decision_time_mean_us": 9748.21727732311,
+   "ci95": {
+    "ctr_ungated": [
+     0.8294010059442158,
+     0.8604784994389367
+    ],
+    "value_per_image": [
+     2.3118855401468013,
+     2.3998290155024136
+    ]
+   },
+   "seconds": 229.79338556200037
+  }
+ ]
+}
