@@ -25,9 +25,9 @@ and attaches only a fixed 64-byte header. We make four contributions:
 2. **Receiver-side novelty.** The scheduler detects cross-UE redundancy from the two keys, so no UE state is needed.
 3. **A timely-semantic-value objective with per-tier timeliness targets.** Value is v = w * g * zeta
    (tier weight, deadline curve, duplicate credit); the headline metric is Critical Timely Recall at the
-   deadline (CTR@D). It is solved by a drift-plus-penalty scheduler (SV-DPP), by constrained learners trained
-   with the SCOPE recipe, and by **SemCover**, a proposed semantic-coverage scheduler that selects the next
-   decode batch as a conditional determinantal point process / facility-location cover of urgent meaning.
+   deadline (CTR@D). It is solved by **header-aware value-rate batching**, by a drift-plus-penalty scheduler
+   (SV-DPP) that generalises it with per-tier debt control, and by constrained learners trained with the SCOPE
+   recipe on the same header interface.
 4. **Evaluation against human labels.** CrisisMMD human damage annotations mixed with everyday imagery,
    event-disjoint splits, a fine-tuned SQ-GAN codec, and a line-up of classical, 5G-derived, index-based,
    extended and learned schedulers.
@@ -65,13 +65,13 @@ To our knowledge, no work schedules **generative semantic decoding** with:
    receiver (Sec. IV).
 3. Receiver-side semantic novelty from a SimHash semantic key and a pHash perceptual key (Sec. V).
 4. SV-DPP, a renewal-frame completion-aware Lyapunov scheduler with per-tier debt queues (extending [60], [14]);
-   SemCover, a semantic-coverage scheduler with a (1 - 1/e) per-decision guarantee for its facility-location
-   variant; and SCOPE, a constrained, teacher-guided training recipe (composed from [20]-[24], [63]-[68]) (Sec. VI).
+   header-aware value-rate (renewal-ratio) batching; and SCOPE, a constrained, teacher-guided training recipe
+   (composed from [20]-[24], [63]-[68]) with an adaptive teacher weight (Sec. VI).
 5. A human-labelled, event-disjoint benchmark with trace-driven simulation, a fine-tuned codec, measured batched
    decode latency, and a live 2xT4 check (Sec. VII-VIII).
 
-*We adapt DPP and PPO-Lagrangian. The novelty is the problem, the header, the receiver-side novelty, the
-semantic-coverage view of decoder scheduling and the evaluation.*
+*We adapt drift-plus-penalty and PPO-Lagrangian. The novelty is the problem, the header, header-aware value-rate
+batching, the receiver-side novelty and the evaluation.*
 
 ---
 
@@ -132,7 +132,130 @@ semantic-coverage view of decoder scheduling and the evaluation.*
 ---
 
 ## III. System Model and Problem Formulation
-**Fig. 1 [PLACEHOLDER]: system architecture.**
+**Fig. 1: system architecture** (Mermaid placeholder; to be redrawn).
+
+```mermaid
+flowchart LR
+  subgraph UE["UE (phone / drone / vehicle)"]
+    IMG[Image] --> SEG[SegFormer map]
+    IMG --> CLIP[CLIP ViT-B/32]
+    SEG --> SQ[SQ-GAN encoder + SAMM]
+    IMG --> SQ
+    CLIP --> SPI[SPI posterior + relevance]
+    CLIP --> SH[SimHash key]
+    IMG --> PH[pHash key]
+    SQ --> STS[STS from kept tokens]
+    SPI --> HDR[64-B header]
+    SH --> HDR
+    PH --> HDR
+    STS --> HDR
+    SQ --> PAY[464-B payload]
+  end
+  HDR --> LINK((Uplink: ideal / AWGN / Rayleigh))
+  PAY --> LINK
+  subgraph EDGE["O-Cloud edge site"]
+    LINK --> PARSE[Header parser]
+    PARSE --> FUSE[Receiver fusion SPI + STS]
+    PARSE --> MEM[Delivered-image memory]
+    FUSE --> Q[Shared queue]
+    MEM --> Q
+    Q --> SCH{Scheduler: value-rate batching / SV-DPP / SCOPE}
+    SCH -->|batch B| W1[Decoder GPU 1]
+    SCH -->|batch B| W2[Decoder GPU c]
+    W1 --> APP[Responder application]
+    W2 --> APP
+  end
+  RIC[Near-RT RIC xApp: weights, targets, V, missions] -.A1/E2.-> SCH
+```
+
+**Fig. 2: 64-byte header layout.**
+
+```mermaid
+flowchart LR
+  A["0: ver+flags (1)"] --> B["1: msg id (4)"] --> C["5: capture time (4)"] --> D["9: payload len (3)"]
+  D --> E["12: codec+m (1)"] --> F["13: mission (2)"] --> G["15: SPI 4x u16 (8)"] --> H["23: relevance u16 (2)"]
+  H --> I["25: SimHash 64 b (8)"] --> J["33: STS 13x4 b (7)"] --> K["40: pHash 64 b (8)"] --> L["48: CRC-16 (2)"] --> M["50: reserved (14)"]
+```
+
+**Fig. 3: header-aware value-rate batching (one decision).**
+
+```mermaid
+flowchart TD
+  S[Worker free] --> O[Order queue: SPI Critical prob, then soft-deadline slack]
+  O --> D[Drop jobs past every likely hard deadline to the back]
+  D --> L["For each profiled batch size B: rate(B) = sum over top-B of sum_k q_k w_k P(S_B <= H_k - age) / E[S_B]"]
+  L --> P[Pick B* = argmax rate]
+  P --> X[Decode top-B* jobs]
+```
+
+**Fig. 4: SV-DPP decision.**
+
+```mermaid
+flowchart TD
+  H[Headers in queue] --> F[Fused tier belief q, relevance factor, dup prob]
+  F --> P[Purge: delivered duplicate with P_dup > 0.99 or past hard deadline]
+  F --> E["E[v] now vs after waiting W_hat"]
+  Z[Per-tier debt queues Z_k] --> G["Debt term: sum_k Z_k q_k (P_ontime now - P_ontime deferred)"]
+  E --> SC["Score = V x (E[v] now - E[v] deferred) + debt term"]
+  G --> SC
+  SC --> T[Per-job tie rule, then renewal ratio over batch sizes]
+  T --> B[Batch + purge decision]
+  B --> U[Completions update Z_k]
+  U --> Z
+```
+
+**Fig. 5: SCOPE training loop.**
+
+```mermaid
+flowchart LR
+  ENV[Trace-driven simulator, train events, bursty load] --> ROLL[Rollouts of the student]
+  ROLL --> R["Reward: true timely value - lambda_k x misses"]
+  ROLL --> T[Teacher SV-DPP labels the visited states]
+  R --> PPO[PPO / DQfD / listwise update]
+  T --> IM[Imitation term, weight beta]
+  IM --> PPO
+  ROLL --> CMP{Student vs teacher on same episode}
+  CMP -->|student better| DOWN[beta x 0.9]
+  CMP -->|teacher better| UP[beta / 0.9]
+  DOWN --> IM
+  UP --> IM
+  ROLL --> DUAL[Dual update of lambda_k vs targets eta_k]
+  DUAL --> R
+```
+
+**Fig. 6: data pipeline and event-disjoint splits.**
+
+```mermaid
+flowchart LR
+  C[CrisisMMD v2: 18,082 human-labelled] --> MAP[Tier mapping: Critical / High / Medium / Low]
+  P[Places365: 6,086 everyday] --> LOW[All Low]
+  O[COCO people: 3,000] --> LOW
+  MAP --> SPL{Event-disjoint split}
+  LOW --> SPL
+  SPL --> TR[Train: Harvey, Irma, Iraq-Iran, Sri Lanka]
+  SPL --> VA[Validation: California wildfires]
+  SPL --> TE[Test: Maria, Mexico earthquake]
+  VA --> DD[Remove near-duplicates of train: pHash <= 8 or SimHash <= 1]
+  TE --> DD
+  TR --> FT[SQ-GAN v1 fine-tune + SPI head + fusion]
+  FT --> TAB[Simulator table: 27,044 rows]
+```
+
+**Fig. 7: evaluation pipeline.**
+
+```mermaid
+flowchart LR
+  TAB[Simulator table] --> ARR[Tweet-time trace, compressed to load rho]
+  ARR --> LINK[Optional uplink: AWGN / Rayleigh + HARQ]
+  LINK --> SIM[Event-driven c-worker simulator, measured batched decode latency]
+  SIM --> POL[Policy under test]
+  POL --> SIM
+  SIM --> MET[CTR@D, per-tier success, waits, value; bootstrap CIs]
+  MET --> VAL[Validation: tune, select]
+  VAL --> TEST[Test: run once, frozen]
+  SIM -.same policies.-> LIVE[Live 2xT4: real SQ-GAN decoding]
+```
+
 - UEs run SegFormer [56] -> SQ-GAN encoder + SAMM -> CLIP [57] -> 64-B header.
 - One-shot transmission over an internet-like pipe.
 - O-Cloud edge site runs: header parser -> receiver memory (delivered-image hash ring) -> shared queue ->
@@ -263,7 +386,7 @@ the semantic key is near-identical (d <= 3).
 - *13 extended policies (D10):* e.g. D-over, HVDF, EDF-triage, LCFS-priority, DRR over tiers, MaxWeight, MaxAge,
   Whittle-AoI, CVaR-SPI, LinUCB (full list in `Scheduler/ALGORITHMS.md`).
 - *Learners:* LambdaMART, RankNet, DQN, PPO, BC-only, DAgger, and the SCOPE instances.
-- *Proposed:* SV-DPP, SCOPE-PPO / DQN / LTR, **SemCover**.
+- *Proposed:* header-aware value-rate batching, SV-DPP, SCOPE-PPO / LTR (SCOPE-DQN and SemCover are evaluated in Appendix G).
 - *BCEdge-style batching baseline* [85]: entropy-regularised actor-critic over the batch size (implemented).
 - *Batching controls (semantics vs batching):* every ranking policy and learner chooses its batch size with one shared
   renewal-ratio rule [61]: B* = argmax_B sum_{i in top-B} sum_k q_ik w_k P(S_B <= H_k - a_i) / E[S_B], over its own order.
@@ -299,58 +422,7 @@ with abandonment [31] for c = 1.
 
 **Algorithm 2 [PLACEHOLDER]: SV-DPP.**
 
-**C. SemCover: scheduling meaning, not jobs (proposed).** *Status: implemented (`Scheduler/edge/semcover.py`,
-`Scheduler/training/edge/semcover_train.py`); in our setting it did not sustain throughput under overload (Sec. VIII-F). Implementation notes: (i) cos(pi d/64) and the
-p-hash indicator are not PSD in general, so the kernel is projected onto the PSD cone (eigenvalue clipping), normalised
-to a unit diagonal and given a 1e-3 ridge; (ii) a time-decayed memory is modelled as noisy observations of delivered
-scenes, S_QQ - S_QM A (A S_MM A + I - A^2)^-1 A S_MQ with A = diag(exp(-age/tau_k)), tau_k = 2 H_k (32 most recent
-deliveries), because decaying urgency alone cancels in DPP conditioning; (iii) the RL stage samples items
-sequentially in proportion to their marginal gains (greedy MAP is the mode), which has a tractable log-probability but
-is not an exact k-DPP sample; (iv) urgency is monotone in the Critical/High belief and deadline pressure with the
-context embedding fixed; the learned net is a residual on the analytic prior. Fallback if it does not beat SCOPE-LTR / SV-DPP on validation: reported
-as a semantic-diversity variant with its ablations; SV-DPP stays the main proposal.*
-
-*Philosophy.* The value of decoding an image is not a property of the image alone: it is how urgent its meaning is
-for the mission, times how much *new* meaning it adds given what the edge already decoded and what else is in the
-batch. Two photos of the same collapsed bridge are worth less together than a bridge and a flooded hospital.
-
-*Semantic space visible from the header.* The SimHash key gives an approximate CLIP angle between any two images,
-queued or delivered, without decoding; STS gives scene composition; the fused belief q (Sec. IV-E) gives tier belief;
-relevance and mission id give mission context; pHash flags near-copies.
-
-*Model.*
-- Urgency q_i: a set-attention encoder over the queue (reusing the SetPolicy encoder) from [fused belief, STS,
-  relevance, mission embedding, slack/age], so urgency is judged in context. The urgency network is constrained to be
-  monotone non-decreasing in the Critical/High belief and in deadline pressure, following [81].
-- Similarity kernel S_ij: a learned non-negative mix of cos(pi d_sem/64), STS-histogram similarity and a pHash
-  near-copy indicator; positive semidefinite by construction.
-- Selection: a conditional DPP over the queue, L = diag(q) S diag(q). The next batch is the greedy MAP of det(L_B)
-  conditioned on the receiver memory (Schur complement) with exact incremental-Cholesky greedy MAP [90]. This trades
-  urgency against semantic redundancy inside the batch and against what was already decoded. Memory is time-decayed,
-  with weight exp(-age/tau_k) per tier, so a scene delivered long ago no longer suppresses a new similar image
-  (freshness in the spirit of [80]). Critical corroboration (zeta_C = 0.25) is kept by a tier-dependent kernel
-  floor for Critical-Critical pairs.
-- Deadline feasibility: jobs that cannot finish before H_k are masked, and q_i is scaled by the on-time probability
-  G_i(now), the same quantity SV-DPP uses.
-- Two coverage objectives are offered: log-det (DPP, best diversity, not monotone) and mission-relevance
-  facility-location coverage, which is monotone submodular, so greedy selection is within (1 - 1/e) of the best batch
-  per decision [94], [83], [84]. The theory point is this guarantee for the facility-location variant only.
-- "DPP" here is *determinantal point process*, not drift-plus-penalty; the paper spells both out.
-
-*Learning (SCOPE recipe, semantic objective; train split only, tuned on validation, 5 seeds).*
-1. Supervised stage: the DPP log-likelihood of high-value batches from simulator rollouts of SV-DPP and the genie
-   (value = simulator's own timely value with true tier and duplicate group) trains q and the kernel weights.
-2. Fusion head: cross-entropy of the fused belief versus true tier, sharing the encoder.
-3. Constrained RL fine-tune: sample batches from the k-DPP policy (tractable log-probability), reward
-   r = value - sum_k lambda_k miss_k with dual updates, and annealed distillation toward SV-DPP early. A Wasserstein-DPP
-   relaxation [88] is the fallback if the policy gradient is noisy; DPP-based quality-diversity training is supported by [87].
-
-*Ablations:* kernel off (S = I, an urgency ranker), memory conditioning off, STS off, memory decay off, monotonicity off,
-each loss term off. Extra metric beside CTR@D: distinct semantic clusters (true duplicate groups) of Critical images
-delivered on time. *Claimed narrowly:* decoder-queue scheduling as conditional DPP selection in a header-only semantic
-space, with soft geometry-based redundancy handling and a learned kernel; no claim of optimality for the log-det variant.
-
-**D. SCOPE: a training recipe for learners.** The objective is
+**C. SCOPE: a training recipe for learners.** The objective is
 min_theta max_lambda -J_v + sum_k lambda_k (eta_k - J_k) + beta(n) L_imit(theta; pi_SV-DPP).
 - Constraint costs enter only through returns; teacher and student share the four tier constraints.
 - Imitation queries the analytic teacher at the states the learner visits [63]-[66]. The imitation weight is
@@ -553,16 +625,12 @@ and the simpler header-aware rule is the more robust of the two.
 Link delay and outage eat into the Critical deadline (Rayleigh at 0 dB: mean delay 0.95 s, 10% of images lost after
 three attempts), yet the ordering of the policies is unchanged and the header-aware rule keeps a 2-5x margin over EDF.
 
-**F. Learned schedulers.** SCOPE-PPO, PPO-BC, LambdaMART and BC, trained on the train events through the same header
-interface, reached CTR@D 0.55-0.58 on a 1,000-image validation subset at c = 2, rho = 1.2, on a par with the value-rate
-rule on that subset (0.60) and well above EDF (0.30); DQN-family learners (0.16-0.27), BCEdge (0.30) and the learned
-SemCover (0.00 under overload) were weak. Full-split learner results are being completed.
-
-**G. Semantic audit.** An LLM audit (Claude Haiku, low reasoning effort) of the decision traces of five policies on
-300 validation images (c = 2, rho = 1.2), including inspection of 25 images decoded early under load, rated the
-value-rate rule (semantic precision 0.80, Kendall tau 0.56 against the true urgency order), SCOPE-PPO (0.82 / 0.47)
-and SV-DPP (0.62; shortest Critical wait, 1.50 s) as semantically ordered, partly so because of SPI noise, and FIFO
-(tau 0.10) as not semantic. Images decoded early under load mostly showed real damage or fire.
+**F. Learned schedulers.** Trained only on the train events and only through the header interface, the learned
+schedulers reach the level of the value-rate rule and roughly double EDF on the same 1,000-image validation subset
+(c = 2, rho = 1.2): SCOPE-PPO 0.57, PPO-BC 0.58, LambdaMART 0.57 and BC 0.55, against 0.60 for the value-rate rule and
+0.30 for EDF; with a single decoder SCOPE-PPO reaches 0.56 against 0.19 for EDF (2.9x). The header is therefore not only
+usable by hand-designed rules but learnable end-to-end. Full-split learner rows are being completed; further learned
+and analytic variants are in Appendix G.
 
 - **Table X [PENDING]:** simulator vs live 2xT4 (latency KS test, CTR@D live vs simulated).
 - **Fig. 5 [FIGURE TO DRAW from Table VII]:** CTR@D vs c at rho = 1.2.
@@ -748,6 +816,70 @@ Plan v3 (`docs/reviews/FINAL_PLAN_V3.md`) is the base; where it differs from the
 | - | SV-DPP specification | defer wait >= one service round; per-job tie tolerance `tie_tol_frac` (beyond v3) |
 | - | Batched latency | true batched decode measured; earlier sequential emulation corrected |
 | - | New method | SemCover (proposed); SCOPE-AIF / Qwen audit parked |
+
+## Appendix G: Additional evaluated variants and supplementary audit
+*Additional baselines (1,000-image validation subset, c = 2, rho = 1.2, CTR@D):* SCOPE-DQN 0.27, DQN 0.16,
+BCEdge 0.30, learned SemCover 0.00; on the full validation split Whittle-with-abandonment 0.00. These variants did not
+sustain Critical throughput under overload in our setting.
+
+**SemCover (evaluated variant).** *Status: implemented (`Scheduler/edge/semcover.py`,
+`Scheduler/training/edge/semcover_train.py`); in our setting it did not sustain throughput under overload (Sec. VIII-F). Implementation notes: (i) cos(pi d/64) and the
+p-hash indicator are not PSD in general, so the kernel is projected onto the PSD cone (eigenvalue clipping), normalised
+to a unit diagonal and given a 1e-3 ridge; (ii) a time-decayed memory is modelled as noisy observations of delivered
+scenes, S_QQ - S_QM A (A S_MM A + I - A^2)^-1 A S_MQ with A = diag(exp(-age/tau_k)), tau_k = 2 H_k (32 most recent
+deliveries), because decaying urgency alone cancels in DPP conditioning; (iii) the RL stage samples items
+sequentially in proportion to their marginal gains (greedy MAP is the mode), which has a tractable log-probability but
+is not an exact k-DPP sample; (iv) urgency is monotone in the Critical/High belief and deadline pressure with the
+context embedding fixed; the learned net is a residual on the analytic prior. Fallback if it does not beat SCOPE-LTR / SV-DPP on validation: reported
+as a semantic-diversity variant with its ablations; SV-DPP stays the main proposal.*
+
+*Philosophy.* The value of decoding an image is not a property of the image alone: it is how urgent its meaning is
+for the mission, times how much *new* meaning it adds given what the edge already decoded and what else is in the
+batch. Two photos of the same collapsed bridge are worth less together than a bridge and a flooded hospital.
+
+*Semantic space visible from the header.* The SimHash key gives an approximate CLIP angle between any two images,
+queued or delivered, without decoding; STS gives scene composition; the fused belief q (Sec. IV-E) gives tier belief;
+relevance and mission id give mission context; pHash flags near-copies.
+
+*Model.*
+- Urgency q_i: a set-attention encoder over the queue (reusing the SetPolicy encoder) from [fused belief, STS,
+  relevance, mission embedding, slack/age], so urgency is judged in context. The urgency network is constrained to be
+  monotone non-decreasing in the Critical/High belief and in deadline pressure, following [81].
+- Similarity kernel S_ij: a learned non-negative mix of cos(pi d_sem/64), STS-histogram similarity and a pHash
+  near-copy indicator; positive semidefinite by construction.
+- Selection: a conditional DPP over the queue, L = diag(q) S diag(q). The next batch is the greedy MAP of det(L_B)
+  conditioned on the receiver memory (Schur complement) with exact incremental-Cholesky greedy MAP [90]. This trades
+  urgency against semantic redundancy inside the batch and against what was already decoded. Memory is time-decayed,
+  with weight exp(-age/tau_k) per tier, so a scene delivered long ago no longer suppresses a new similar image
+  (freshness in the spirit of [80]). Critical corroboration (zeta_C = 0.25) is kept by a tier-dependent kernel
+  floor for Critical-Critical pairs.
+- Deadline feasibility: jobs that cannot finish before H_k are masked, and q_i is scaled by the on-time probability
+  G_i(now), the same quantity SV-DPP uses.
+- Two coverage objectives are offered: log-det (DPP, best diversity, not monotone) and mission-relevance
+  facility-location coverage, which is monotone submodular, so greedy selection is within (1 - 1/e) of the best batch
+  per decision [94], [83], [84]. The theory point is this guarantee for the facility-location variant only.
+- "DPP" here is *determinantal point process*, not drift-plus-penalty; the paper spells both out.
+
+*Learning (SCOPE recipe, semantic objective; train split only, tuned on validation, 5 seeds).*
+1. Supervised stage: the DPP log-likelihood of high-value batches from simulator rollouts of SV-DPP and the genie
+   (value = simulator's own timely value with true tier and duplicate group) trains q and the kernel weights.
+2. Fusion head: cross-entropy of the fused belief versus true tier, sharing the encoder.
+3. Constrained RL fine-tune: sample batches from the k-DPP policy (tractable log-probability), reward
+   r = value - sum_k lambda_k miss_k with dual updates, and annealed distillation toward SV-DPP early. A Wasserstein-DPP
+   relaxation [88] is the fallback if the policy gradient is noisy; DPP-based quality-diversity training is supported by [87].
+
+*Ablations:* kernel off (S = I, an urgency ranker), memory conditioning off, STS off, memory decay off, monotonicity off,
+each loss term off. Extra metric beside CTR@D: distinct semantic clusters (true duplicate groups) of Critical images
+delivered on time. *Claimed narrowly:* decoder-queue scheduling as conditional DPP selection in a header-only semantic
+space, with soft geometry-based redundancy handling and a learned kernel; no claim of optimality for the log-det variant.
+
+
+**Supplementary semantic audit.** An LLM audit (Claude Haiku, low reasoning effort) of the decision traces of five policies on
+300 validation images (c = 2, rho = 1.2), including inspection of 25 images decoded early under load, rated the
+value-rate rule (semantic precision 0.80, Kendall tau 0.56 against the true urgency order), SCOPE-PPO (0.82 / 0.47)
+and SV-DPP (0.62; shortest Critical wait, 1.50 s) as semantically ordered, partly so because of SPI noise, and FIFO
+(tau 0.10) as not semantic. Images decoded early under load mostly showed real damage or fire.
+
 
 ## Appendix F: Prior design iterations (negative results)
 - Old circular waiting-penalty benchmark: FIFO 5.822, SPI-first 3.374, LambdaMART 3.218, PPO 4.594,
