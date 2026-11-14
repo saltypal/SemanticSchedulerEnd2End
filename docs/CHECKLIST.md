@@ -172,3 +172,4 @@ Kaggle limits: 5 CPU + 2 GPU sessions per account (2 accounts). Laptop CPU used 
 
 - [ ] **Fix plan after learner wave:** `docs/reviews/FIX_PLAN_2026-11-13.md` (F1 header proofs + batching control first, then F2-F8).
 - [x] DROPPED by user (2026-11-14): explainability section; AWGN link model.
+- [ ] **Plan to 8 pm (2026-11-14):** `docs/reviews/PLAN_2026-11-14_TO_8PM.md` (tuned SV-DPP freeze, reruns, frozen model set, DAgger dropped).
