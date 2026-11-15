@@ -1,5 +1,9 @@
 # Handover: writing the paper (for the teammate and Codex)
 
+> **Update, 2026-11-15:** `DRAFT_PAPER.md` was rewritten from scratch. Section numbers and figure numbers in the
+> task list below refer to the previous draft. Work from the current file, and use `docs/RESULTS_ALL.md` for every
+> number. Test results are now complete for all learners except the live hardware check, which is not reported.
+
 **Your job: write and polish the paper only. Do not run code, notebooks, training, sweeps or Kaggle. Do not
 change any file outside `docs/paper/`.** Every number you write must come from a file listed in Section 9. If a
 number is not in those files, do not write it.

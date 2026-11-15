@@ -11,7 +11,9 @@ which to purge, using only the header. Design and status:
 | [docs/CHECKLIST.md](docs/CHECKLIST.md) | Step-by-step run order, who does what, what is ready |
 | [docs/reviews/FINAL_PLAN_V3.md](docs/reviews/FINAL_PLAN_V3.md) | Locked design (objective, SV-DPP, SCOPE, simulator, build order S0-S12) |
 | [docs/IMPLEMENTATION_GUIDE.md](docs/IMPLEMENTATION_GUIDE.md) | House rules, package layout, task cards, Kaggle protocol |
-| [docs/paper/DRAFT_PAPER.md](docs/paper/DRAFT_PAPER.md) | Living IEEE-style draft (results are placeholders) |
+| [docs/EDGE_GUIDE.md](docs/EDGE_GUIDE.md) | Start here: system, schedulers, how runs work, reproduction, result index |
+| [docs/RESULTS_ALL.md](docs/RESULTS_ALL.md) | Every result, as tables |
+| [docs/paper/DRAFT_PAPER.md](docs/paper/DRAFT_PAPER.md) | IEEE-style paper draft |
 | [parameters/JOURNAL.md](parameters/JOURNAL.md) | Dated record of what was done and measured |
 
 New code lives under an `edge/` sub-package of each owner: `parameters/edge` (labels, features, header,
@@ -22,7 +24,8 @@ Kaggle notebooks are thin: they clone the latest `main`, install, and call a pac
 
 Quick check (CPU, no downloads): `python -m pytest -q Scheduler/tests/test_edge_*.py parameters/tests/test_edge_*.py Evaluation/tests/test_edge_*.py`
 
-Status: code and unit tests only. No Kaggle or GPU run has happened yet, so there are no results.
+Results: all Kaggle sweeps and the learner runs are final. See [docs/RESULTS_ALL.md](docs/RESULTS_ALL.md)
+and [docs/EDGE_GUIDE.md](docs/EDGE_GUIDE.md) for the complete guide.
 Two old tests (`test_handoff_tools`, `test_paired_notebook_capsules_include_live_implementation`) fail
 because preserved notebooks embed CRLF copies of sources; they are left untouched by design.
 
